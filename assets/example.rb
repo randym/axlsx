@@ -12,6 +12,45 @@ p = Axlsx::Package.new do |package|
   package.serialize("example1.xlsx")
 end
 
+p = Axlsx::Package.new do |package|
+  header_style = package.workbook.styles.add_style :bg_color => "FF000000", :fg_color => "FFFFFFFF", :sz=>14, :alignment => {:horizontal => :center }
+  package.workbook.add_worksheet do |sheet|
+    sheet.add_row ["First", "Second", "Third"], :style => header_style
+    sheet.add_row [1, 2, 3], :style => Axlsx::STYLE_THIN_BORDER
+    sheet.add_chart(Axlsx::Pie3DChart, :start_at => [0,2], :end_at => [5, 15], :title=>"example 2: Pie Chart") do |chart|
+      chart.add_series :data=>sheet.rows.last.cells, :labels=> sheet.rows.first.cells
+    end
+  end
+  package.serialize("example3.xlsx")
+end  
+
+p = Axlsx::Package.new do |package|
+  black_cell_spec = { :bg_color => "FF000000", :fg_color => "FFFFFFFF", :sz=>14, :alignment => { :horizontal=> :center } }
+  blue_cell_spec = { :bg_color => "FF0000FF", :fg_color => "FFFFFFFF", :sz=>14, :alignment => { :horizontal=> :center } }
+  
+  black_cell = package.workbook.styles.add_style black_cell_spec
+  blue_cell = package.workbook.styles.add_style blue_cell_spec
+  
+  package.workbook.add_worksheet do |sheet|
+    sheet.add_row ["Text Autowidth", "Second", "Third"], :style => [black_cell, blue_cell, black_cell]
+    sheet.add_row [1, 2, 3], :style => Axlsx::STYLE_THIN_BORDER
+  end
+  package.serialize("example4.xlsx")
+end  
+# example 5
+     p = Axlsx::Package.new do |package|
+       date = package.workbook.styles.add_style :format_code=>"yyyy-mm-dd", :border => Axlsx::STYLE_THIN_BORDER
+       padded = package.workbook.styles.add_style :format_code=>"00#", :border => Axlsx::STYLE_THIN_BORDER
+       percent = package.workbook.styles.add_style :format_code=>"0%", :border => Axlsx::STYLE_THIN_BORDER
+       package.workbook.date1904 = true
+       package.workbook.add_worksheet do |sheet|
+         sheet.add_row
+         sheet.add_row ["Custom Formatted Date", "Percent Formatted Float", "Padded Numbers"], :style => Axlsx::STYLE_THIN_BORDER
+         sheet.add_row [Time.now, 0.2, 32], :style => [date, percent, padded]
+       end
+       package.serialize("example5.xlsx")
+     end  
+
 p = Axlsx::Package.new
 wb = p.workbook
 

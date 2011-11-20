@@ -19,19 +19,15 @@ class TestPackage < Test::Unit::TestCase
   def test_serialization
     fname = 'test_serialization.xlsx'
     assert_nothing_raised do
-      if File.writable? fname
-        f = File.open(fname, 'w')      
-        z= @package.serialize(f)      
-        
-        zf = Zip::ZipFile.open(f.path)
+      if File.writable?(fname)
+        z= @package.serialize(fname)              
+        zf = Zip::ZipFile.open(fname)
         @package.send(:parts).each{ |part| zf.get_entry(part[:entry]) }
-        File.delete(f.path)
-        
+        File.delete(fname)        
       else
         puts "Skipping write to disk as write permission is not granted to this user"
       end
-    end
-    
+    end    
   end
   
   def test_validation

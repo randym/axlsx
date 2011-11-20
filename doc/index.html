@@ -61,7 +61,7 @@
 <strong>Author</strong>:       Randy Morgan
 <strong>Copyright</strong>:    2011  <br/>
 <strong>License</strong>:      MIT License  <br/>
-<strong>Latest Version</strong>: 1.0.0
+<strong>Latest Version</strong>: 1.0.2
 <strong>Release Date</strong>: November 20th 2011</p>
 
 <h2>Synopsis</h2>
@@ -79,6 +79,10 @@ It enables the you to generate 100% valid xlsx files that include customised sty
 
 <p>**4. Automatic type support: Axlsx will automatically determine the type of data you are generating. In this release Float, Integer, String and Time types are automatically identified and serialized to your spreadsheet.</p>
 
+<p>**5. Automatic column widths: Axlsx will automatically determine the appropriate width for your columns based on the content in the worksheet.</p>
+
+<p>**6. Support for both 1904 and 1900 epocs configurable in the workbook.</p>
+
 <h2>Installing</h2>
 
 <p>To install Axlsx, use the following command:</p>
@@ -88,20 +92,57 @@ It enables the you to generate 100% valid xlsx files that include customised sty
 
 <h2>Usage</h2>
 
-<p>Generating a workbook with styles and a chart:
-  p = Axlsx::Package.new do |package|</p>
+<p>Simple Workbook</p>
 
-<pre class="code"><span class='package identifier id'>package</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='add_worksheet identifier id'>add_worksheet</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='sheet identifier id'>sheet</span><span class='bitor op'>|</span>
-  <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='lbrack token'>[</span><span class='string val'>&quot;First&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Second&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Third&quot;</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:style</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='STYLE_THIN_BORDER constant id'>STYLE_THIN_BORDER</span>
-  <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='lbrack token'>[</span><span class='integer val'>1</span><span class='comma token'>,</span> <span class='integer val'>2</span><span class='comma token'>,</span> <span class='integer val'>3</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:style</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='STYLE_THIN_BORDER constant id'>STYLE_THIN_BORDER</span>
-  <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_chart identifier id'>add_chart</span><span class='lparen token'>(</span><span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Bar3DChart constant id'>Bar3DChart</span><span class='comma token'>,</span> <span class='symbol val'>:start_at</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='integer val'>2</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:end_at</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='integer val'>5</span><span class='comma token'>,</span> <span class='integer val'>15</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:title=</span><span class='gt op'>&gt;</span><span class='string val'>&quot;example 1: Chart&quot;</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='chart identifier id'>chart</span><span class='bitor op'>|</span>
-    <span class='chart identifier id'>chart</span><span class='dot token'>.</span><span class='add_series identifier id'>add_series</span> <span class='symbol val'>:data=</span><span class='gt op'>&gt;</span><span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span><span class='dot token'>.</span><span class='last identifier id'>last</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span><span class='comma token'>,</span> <span class='symbol val'>:labels=</span><span class='gt op'>&gt;</span> <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span><span class='dot token'>.</span><span class='first identifier id'>first</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span>
-  <span class='end end kw'>end</span>
-<span class='end end kw'>end</span>
-<span class='package identifier id'>package</span><span class='dot token'>.</span><span class='serialize identifier id'>serialize</span><span class='lparen token'>(</span><span class='string val'>&quot;example1.xlsx&quot;</span><span class='rparen token'>)</span>
+<pre class="code"> <span class='p identifier id'>p</span> <span class='assign token'>=</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='package identifier id'>package</span><span class='bitor op'>|</span>
+   <span class='package identifier id'>package</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='add_worksheet identifier id'>add_worksheet</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='sheet identifier id'>sheet</span><span class='bitor op'>|</span>
+     <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='lbrack token'>[</span><span class='string val'>&quot;First&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Second&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Third&quot;</span><span class='rbrack token'>]</span>
+     <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='lbrack token'>[</span><span class='integer val'>1</span><span class='comma token'>,</span> <span class='integer val'>2</span><span class='comma token'>,</span> <span class='integer val'>3</span><span class='rbrack token'>]</span>
+   <span class='end end kw'>end</span>
+   <span class='package identifier id'>package</span><span class='dot token'>.</span><span class='serialize identifier id'>serialize</span><span class='lparen token'>(</span><span class='string val'>&quot;example1.xlsx&quot;</span><span class='rparen token'>)</span>
+ <span class='end end kw'>end</span>  
 </pre>
 
-<p>  end</p>
+<p>Generating A Bar Chart</p>
+
+<pre class="code"> <span class='p identifier id'>p</span> <span class='assign token'>=</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='package identifier id'>package</span><span class='bitor op'>|</span>
+   <span class='package identifier id'>package</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='add_worksheet identifier id'>add_worksheet</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='sheet identifier id'>sheet</span><span class='bitor op'>|</span>
+     <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='lbrack token'>[</span><span class='string val'>&quot;First&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Second&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Third&quot;</span><span class='rbrack token'>]</span>
+     <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='lbrack token'>[</span><span class='integer val'>1</span><span class='comma token'>,</span> <span class='integer val'>2</span><span class='comma token'>,</span> <span class='integer val'>3</span><span class='rbrack token'>]</span>
+     <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_chart identifier id'>add_chart</span><span class='lparen token'>(</span><span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Bar3DChart constant id'>Bar3DChart</span><span class='comma token'>,</span> <span class='symbol val'>:start_at</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='integer val'>2</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:end_at</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='integer val'>5</span><span class='comma token'>,</span> <span class='integer val'>15</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:title=</span><span class='gt op'>&gt;</span><span class='string val'>&quot;example 1: Chart&quot;</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='chart identifier id'>chart</span><span class='bitor op'>|</span>
+       <span class='chart identifier id'>chart</span><span class='dot token'>.</span><span class='add_series identifier id'>add_series</span> <span class='symbol val'>:data=</span><span class='gt op'>&gt;</span><span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span><span class='dot token'>.</span><span class='last identifier id'>last</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span><span class='comma token'>,</span> <span class='symbol val'>:labels=</span><span class='gt op'>&gt;</span> <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span><span class='dot token'>.</span><span class='first identifier id'>first</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span>
+     <span class='end end kw'>end</span>
+   <span class='end end kw'>end</span>
+   <span class='package identifier id'>package</span><span class='dot token'>.</span><span class='serialize identifier id'>serialize</span><span class='lparen token'>(</span><span class='string val'>&quot;example1.xlsx&quot;</span><span class='rparen token'>)</span>
+ <span class='end end kw'>end</span>  
+</pre>
+
+<p>Generating A Pie Chart</p>
+
+<pre class="code"> <span class='p identifier id'>p</span> <span class='assign token'>=</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='package identifier id'>package</span><span class='bitor op'>|</span>
+   <span class='package identifier id'>package</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='add_worksheet identifier id'>add_worksheet</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='sheet identifier id'>sheet</span><span class='bitor op'>|</span>
+     <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='lbrack token'>[</span><span class='string val'>&quot;First&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Second&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Third&quot;</span><span class='rbrack token'>]</span>
+     <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='lbrack token'>[</span><span class='integer val'>1</span><span class='comma token'>,</span> <span class='integer val'>2</span><span class='comma token'>,</span> <span class='integer val'>3</span><span class='rbrack token'>]</span>
+     <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_chart identifier id'>add_chart</span><span class='lparen token'>(</span><span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Pie3DChart constant id'>Pie3DChart</span><span class='comma token'>,</span> <span class='symbol val'>:start_at</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='integer val'>2</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:end_at</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='integer val'>5</span><span class='comma token'>,</span> <span class='integer val'>15</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:title=</span><span class='gt op'>&gt;</span><span class='string val'>&quot;example 2: Pie Chart&quot;</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='chart identifier id'>chart</span><span class='bitor op'>|</span>
+       <span class='chart identifier id'>chart</span><span class='dot token'>.</span><span class='add_series identifier id'>add_series</span> <span class='symbol val'>:data=</span><span class='gt op'>&gt;</span><span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span><span class='dot token'>.</span><span class='last identifier id'>last</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span><span class='comma token'>,</span> <span class='symbol val'>:labels=</span><span class='gt op'>&gt;</span> <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span><span class='dot token'>.</span><span class='first identifier id'>first</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span>
+     <span class='end end kw'>end</span>
+   <span class='end end kw'>end</span>
+   <span class='package identifier id'>package</span><span class='dot token'>.</span><span class='serialize identifier id'>serialize</span><span class='lparen token'>(</span><span class='string val'>&quot;example3.xlsx&quot;</span><span class='rparen token'>)</span>
+ <span class='end end kw'>end</span>  
+</pre>
+
+<p>Using Custom Styles</p>
+
+<pre class="code"> <span class='p identifier id'>p</span> <span class='assign token'>=</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='package identifier id'>package</span><span class='bitor op'>|</span>
+   <span class='style_options identifier id'>style_options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span> <span class='symbol val'>:bg_color</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;FF000000&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:fg_color</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;FFFFFFFF&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:sz=</span><span class='gt op'>&gt;</span><span class='integer val'>14</span><span class='comma token'>,</span> <span class='symbol val'>:alignment</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrace token'>{</span> <span class='symbol val'>:horizontal=</span><span class='gt op'>&gt;</span> <span class='symbol val'>:center</span> <span class='rbrace token'>}</span> <span class='rbrace token'>}</span>
+   <span class='header_style identifier id'>header_style</span> <span class='assign token'>=</span> <span class='package identifier id'>package</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='styles identifier id'>styles</span><span class='dot token'>.</span><span class='add_style identifier id'>add_style</span> <span class='style_options identifier id'>style_options</span>
+   <span class='package identifier id'>package</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='add_worksheet identifier id'>add_worksheet</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='sheet identifier id'>sheet</span><span class='bitor op'>|</span>
+     <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='lbrack token'>[</span><span class='string val'>&quot;Text Autowidth&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Second&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Third&quot;</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:style</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='header_style identifier id'>header_style</span>
+     <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='lbrack token'>[</span><span class='integer val'>1</span><span class='comma token'>,</span> <span class='integer val'>2</span><span class='comma token'>,</span> <span class='integer val'>3</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:style</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='STYLE_THIN_BORDER constant id'>STYLE_THIN_BORDER</span>
+   <span class='end end kw'>end</span>
+   <span class='package identifier id'>package</span><span class='dot token'>.</span><span class='serialize identifier id'>serialize</span><span class='lparen token'>(</span><span class='string val'>&quot;example3.xlsx&quot;</span><span class='rparen token'>)</span>
+ <span class='end end kw'>end</span>  
+</pre>
 
 <h3>Documentation</h3>
 
@@ -116,18 +157,27 @@ It enables the you to generate 100% valid xlsx files that include customised sty
 <h2>Changelog</h2>
 
 <ul>
-<li><strong>October.10.11</strong>: 0.1.0 release</li>
+<li><strong>October.20.11</strong>: 0.1.0 release</li>
+<li><strong>October.21.11</strong>: 1.0.3 release
+
+<ul>
+<li>Updated documentation</li>
+<li>altered package to accept a filename string for serialization instead of a File object.</li>
+<li>Updated specs to conform
+Copyright</li>
+</ul>
+</li>
 </ul>
 
 
-<h2>Copyright</h2>
+<hr />
 
 <p>Axlsx &copy; 2011 by <a href="mailto:digial.ipseity@gmail.com">Randy Morgan</a>. Axlsx is
 licensed under the MIT license. Please see the <a href="file.LICENSE.html" title="LICENSE">LICENSE</a> document for more information.</p>
 </div></div>
     
     <div id="footer">
-  Generated on Sun Nov 20 23:48:12 2011 by 
+  Generated on Mon Nov 21 08:39:44 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>
