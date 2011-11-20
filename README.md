@@ -6,7 +6,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 **Author**:       Randy Morgan
 **Copyright**:    2011    
 **License**:      MIT License    
-**Latest Version**: 1.0.0
+**Latest Version**: 1.0.2
 **Release Date**: November 20th 2011    
 
 Synopsis
