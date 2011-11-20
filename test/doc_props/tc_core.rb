@@ -1,0 +1,34 @@
+require 'test/unit'
+require 'axlsx.rb'
+
+class TestCore < Test::Unit::TestCase
+  
+  def setup    
+    @core = Axlsx::Core.new
+    @doc = Nokogiri::XML(@core.to_xml)
+  end
+
+  def test_valid_document
+    schema = Nokogiri::XML::Schema(File.open(Axlsx::CORE_XSD))
+    errors = []
+    schema.validate(@doc).each do |error|
+      puts error.message
+      errors << error
+    end
+    assert_equal(errors.size, 0, "core.xml Invalid" + errors.map{ |e| e.message }.to_s)
+  end
+
+  def test_populates_created
+    assert_equal(@doc.xpath('//dcterms:created').text, Time.now.strftime('%Y-%m-%dT%H:%M:%S'), "dcterms:created incorrect")
+  end
+ 
+  def test_populates_default_name
+    assert_equal(@doc.xpath('//dc:creator').text, "axlsx", "Default name not populated")
+  end
+
+  def test_creator_as_option
+    c = Axlsx::Core.new :creator => "some guy"
+    doc = Nokogiri::XML(c.to_xml)
+    assert(doc.xpath('//dc:creator').text == "some guy")
+  end
+end

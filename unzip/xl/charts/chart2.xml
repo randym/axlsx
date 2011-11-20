@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<c:chartSpace xmlns:c="http://schemas.openxmlformats.org/drawingml/2006/chart" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+  <c:chart>
+    <c:title>
+      <c:tx>
+        <c:strRef>
+          <c:f></c:f>
+          <c:strCache>
+            <c:ptCount val="1"/>
+            <c:pt idx="0">
+              <c:v>Pie in the Face</c:v>
+            </c:pt>
+          </c:strCache>
+        </c:strRef>
+      </c:tx>
+    </c:title>
+    <c:view3D>
+      <c:rotX val="30"/>
+      <c:rotY val="30"/>
+    </c:view3D>
+    <c:plotArea>
+      <c:layout/>
+      <c:pie3DChart>
+        <c:varyColors val="1"/>
+        <c:ser>
+          <c:idx val="0"/>
+          <c:order val="0"/>
+          <c:tx>
+            <c:v></c:v>
+          </c:tx>
+          <c:cat>
+            <c:strRef>
+              <c:f>Face Pie!$A$2:$C$2</c:f>
+              <c:strCache>
+                <c:ptCount val="3"/>
+                <c:pt idx="0">
+                  <c:v>Rich kids</c:v>
+                </c:pt>
+                <c:pt idx="1">
+                  <c:v>Poor kids</c:v>
+                </c:pt>
+                <c:pt idx="2">
+                  <c:v>Red-headed Stepchildren</c:v>
+                </c:pt>
+              </c:strCache>
+            </c:strRef>
+          </c:cat>
+          <c:val>
+            <c:numRef>
+              <c:f>Face Pie!$A$3:$C$3</c:f>
+              <c:numCache>
+                <c:formatCode>General</c:formatCode>
+                <c:ptCount val="3"/>
+                <c:pt idx="0">
+                  <c:v>0.5</c:v>
+                </c:pt>
+                <c:pt idx="1">
+                  <c:v>0.3</c:v>
+                </c:pt>
+                <c:pt idx="2">
+                  <c:v>0.02</c:v>
+                </c:pt>
+              </c:numCache>
+            </c:numRef>
+          </c:val>
+        </c:ser>
+      </c:pie3DChart>
+    </c:plotArea>
+    <c:legend>
+      <c:legendPos val="r"/>
+      <c:layout/>
+    </c:legend>
+  </c:chart>
+</c:chartSpace>

@@ -1,0 +1,71 @@
+require 'test/unit'
+require 'axlsx.rb'
+
+class TestDrawing < Test::Unit::TestCase
+  def setup    
+    p = Axlsx::Package.new
+    @ws = p.workbook.add_worksheet
+
+  end
+
+  def test_initialization
+    assert(@ws.workbook.drawings.empty?)
+    assert_equal(@ws.drawing, @ws.workbook.drawings.last, "drawing is added to workbook")
+    assert(@ws.drawing.anchors.is_a?(Axlsx::SimpleTypedList) && @ws.drawing.anchors.empty?, "anchor list is created and empty")
+  end
+
+  def test_add_chart
+    chart = @ws.add_chart(Axlsx::Pie3DChart, :title=>"bob", :start_at=>[0,0], :end_at=>[1,1])
+    assert(chart.is_a?(Axlsx::Pie3DChart), "must create a chart")
+    assert_equal(@ws.workbook.charts.last, chart, "must be added to workbook charts collection")
+    assert_equal(@ws.drawing.anchors.last.graphic_frame.chart, chart, "an anchor has been created and holds a reference to this chart")
+    anchor = @ws.drawing.anchors.last
+    assert_equal([anchor.from.row, anchor.from.col], [0,0], "options for start at are applied")
+    assert_equal([anchor.to.row, anchor.to.col], [1,1], "options for start at are applied")
+    assert_equal(chart.title.text, "bob", "option for title is applied")
+  end
+  
+  def test_charts
+    assert(@ws.drawing.charts.empty?)
+    chart = @ws.add_chart(Axlsx::Pie3DChart, :title=>"bob", :start_at=>[0,0], :end_at=>[1,1])
+    assert_equal(@ws.drawing.charts.last, chart, "add chart is returned")
+    chart = @ws.add_chart(Axlsx::Pie3DChart, :title=>"nancy", :start_at=>[1,5], :end_at=>[5,10])
+    assert_equal(@ws.drawing.charts.last, chart, "add chart is returned")   
+  end
+
+  def test_pn
+    assert_equal(@ws.drawing.pn, "drawings/drawing1.xml")
+  end
+
+  def test_rels_pn
+    assert_equal(@ws.drawing.rels_pn, "drawings/_rels/drawing1.xml.rels")
+  end
+
+  def test_rId
+    assert_equal(@ws.drawing.rId, "rId1")
+  end
+  
+  def test_index
+    assert_equal(@ws.drawing.index, @ws.workbook.drawings.index(@ws.drawing))
+  end
+
+  def test_relationships
+    assert(@ws.drawing.relationships.empty?)
+    chart = @ws.add_chart(Axlsx::Pie3DChart, :title=>"bob", :start_at=>[0,0], :end_at=>[1,1])
+    assert_equal(@ws.drawing.relationships.size, 1, "adding a chart adds a relationship")
+    chart = @ws.add_chart(Axlsx::Pie3DChart, :title=>"nancy", :start_at=>[1,5], :end_at=>[5,10])
+    assert_equal(@ws.drawing.relationships.size, 2, "adding a chart adds a relationship")
+  end
+
+  def test_to_xml
+    schema = Nokogiri::XML::Schema(File.open(Axlsx::DRAWING_XSD))
+    doc = Nokogiri::XML(@ws.drawing.to_xml)
+    errors = []
+    schema.validate(doc).each do |error|
+      errors.push error
+      puts error.message
+    end
+    assert(errors.empty?, "error free validation")
+  end
+
+end

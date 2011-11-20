@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<c:chartSpace xmlns:c="http://schemas.openxmlformats.org/drawingml/2006/chart" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+  <c:chart>
+    <c:title>
+      <c:tx>
+        <c:strRef>
+          <c:f></c:f>
+          <c:strCache>
+            <c:ptCount val="1"/>
+            <c:pt idx="0">
+              <c:v>Candy Bar Consumption Per Age Group</c:v>
+            </c:pt>
+          </c:strCache>
+        </c:strRef>
+      </c:tx>
+    </c:title>
+    <c:view3D>
+      <c:rAngAx val="1"/>
+    </c:view3D>
+    <c:plotArea>
+      <c:layout/>
+      <c:bar3DChart>
+        <c:barDir val="bar"/>
+        <c:grouping val="clustered"/>
+        <c:varyColors val="1"/>
+        <c:ser>
+          <c:idx val="0"/>
+          <c:order val="0"/>
+          <c:tx>
+            <c:v></c:v>
+          </c:tx>
+          <c:cat>
+            <c:strRef>
+              <c:f>Candy Bar!$A$5:$C$5</c:f>
+              <c:strCache>
+                <c:ptCount val="3"/>
+                <c:pt idx="0">
+                  <c:v>0 ~ 10</c:v>
+                </c:pt>
+                <c:pt idx="1">
+                  <c:v>11 ~ 20</c:v>
+                </c:pt>
+                <c:pt idx="2">
+                  <c:v>21 ~ 60</c:v>
+                </c:pt>
+              </c:strCache>
+            </c:strRef>
+          </c:cat>
+          <c:val>
+            <c:numRef>
+              <c:f>Candy Bar!$A$6:$C$6</c:f>
+              <c:numCache>
+                <c:formatCode>General</c:formatCode>
+                <c:ptCount val="3"/>
+                <c:pt idx="0">
+                  <c:v>12</c:v>
+                </c:pt>
+                <c:pt idx="1">
+                  <c:v>60</c:v>
+                </c:pt>
+                <c:pt idx="2">
+                  <c:v>25</c:v>
+                </c:pt>
+              </c:numCache>
+            </c:numRef>
+          </c:val>
+        </c:ser>
+        <c:axId val="1760623"/>
+        <c:axId val="223337"/>
+        <c:axId val="0"/>
+      </c:bar3DChart>
+      <c:catAx>
+        <c:axId val="1760623"/>
+        <c:scaling>
+          <c:orientation val="minMax"/>
+        </c:scaling>
+        <c:axPos val="l"/>
+        <c:majorGridlines/>
+        <c:numFmt sourceLinked="1" formatCode=""/>
+        <c:tickLblPos val="nextTo"/>
+        <c:crossAx val="223337"/>
+        <c:crosses val="autoZero"/>
+        <c:auto val="true"/>
+        <c:lblAlgn val="ctr"/>
+        <c:lblOffset val="100%"/>
+      </c:catAx>
+      <c:valAx>
+        <c:axId val="223337"/>
+        <c:scaling>
+          <c:orientation val="minMax"/>
+        </c:scaling>
+        <c:axPos val="l"/>
+        <c:majorGridlines/>
+        <c:numFmt sourceLinked="1" formatCode=""/>
+        <c:tickLblPos val="nextTo"/>
+        <c:crossAx val="1760623"/>
+        <c:crosses val="autoZero"/>
+        <c:crossBetween val="between"/>
+      </c:valAx>
+    </c:plotArea>
+    <c:legend>
+      <c:legendPos val="r"/>
+      <c:layout/>
+    </c:legend>
+  </c:chart>
+</c:chartSpace>

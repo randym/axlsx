@@ -1,0 +1,38 @@
+require 'test/unit'
+require 'axlsx.rb'
+
+class TestPatternFill < Test::Unit::TestCase
+
+  def setup
+    @item = Axlsx::PatternFill.new
+  end
+
+  def teardown
+  end
+
+
+  def test_initialiation
+    assert_equal(@item.patternType, :none)
+    assert_equal(@item.bgColor, nil)
+    assert_equal(@item.fgColor, nil)
+  end
+
+  def test_bgColor    
+    assert_raise(ArgumentError) { @item.bgColor = -1.1 }
+    assert_nothing_raised { @item.bgColor = Axlsx::Color.new }
+    assert_equal(@item.bgColor.rgb, "FF000000")
+  end
+
+  def test_fgColor    
+    assert_raise(ArgumentError) { @item.fgColor = -1.1 }
+    assert_nothing_raised { @item.fgColor = Axlsx::Color.new }
+    assert_equal(@item.fgColor.rgb, "FF000000")
+  end
+
+  def test_pattern_type
+    assert_raise(ArgumentError) { @item.patternType = -1.1 }
+    assert_nothing_raised { @item.patternType = :lightUp }
+    assert_equal(@item.patternType, :lightUp)
+  end
+
+end
