@@ -37,6 +37,7 @@ Usage
 -----
 
 Generating a workbook with styles and a chart:
+`
   p = Axlsx::Package.new do |package|
     package.workbook.add_worksheet do |sheet|
       sheet.add_row ["First", "Second", "Third"], :style => Axlsx::STYLE_THIN_BORDER
@@ -47,7 +48,7 @@ Generating a workbook with styles and a chart:
     end
     package.serialize("example1.xlsx")
   end  
-
+`
 
 ### Documentation
 This gem is 100% documented with YARD, an exceptional documentation library. To see documentation for this, and all the gems installed on your system use:
