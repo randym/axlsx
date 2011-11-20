@@ -38,16 +38,16 @@ Usage
 
 Generating a workbook with styles and a chart:
 	   
-	   p = Axlsx::Package.new do |package|
-	     package.workbook.add_worksheet do |sheet|
-      	       sheet.add_row ["First", "Second", "Third"], :style => Axlsx::STYLE_THIN_BORDER
-      	       sheet.add_row [1, 2, 3], :style => Axlsx::STYLE_THIN_BORDER
-	       sheet.add_chart(Axlsx::Bar3DChart, :start_at => [0,2], :end_at => [5, 15], :title=>"example 1: Chart") do |chart|
-                 chart.add_series :data=>sheet.rows.last.cells, :labels=> sheet.rows.first.cells
-	       end
-             end
-             package.serialize("example1.xlsx")
-           end  
+  p = Axlsx::Package.new do |package|
+    package.workbook.add_worksheet do |sheet|
+      sheet.add_row ["First", "Second", "Third"], :style => Axlsx::STYLE_THIN_BORDER
+      sheet.add_row [1, 2, 3], :style => Axlsx::STYLE_THIN_BORDER
+      sheet.add_chart(Axlsx::Bar3DChart, :start_at => [0,2], :end_at => [5, 15], :title=>"example 1: Chart") do |chart|
+        chart.add_series :data=>sheet.rows.last.cells, :labels=> sheet.rows.first.cells
+      end
+    end
+    package.serialize("example1.xlsx")
+  end  
 
 
 ### Documentation
