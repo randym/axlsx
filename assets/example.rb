@@ -12,9 +12,8 @@ p = Axlsx::Package.new do |package|
   package.serialize("example1.xlsx")
 end
 
-
-wb =Axlsx::Workbook.new(:date1904=>true)
-p = Axlsx::Package.new(:workbook=>wb)
+p = Axlsx::Package.new
+wb = p.workbook
 
 styles = wb.styles
 
