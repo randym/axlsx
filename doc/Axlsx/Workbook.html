@@ -1,0 +1,1347 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Axlsx::Workbook
+  
+    &mdash; Documentation by YARD 0.7.3
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (W)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../Axlsx.html" title="Axlsx (module)">Axlsx</a></span></span>
+     &raquo; 
+    <span class="title">Workbook</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Axlsx::Workbook
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Axlsx::Workbook</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/axlsx/workbook/workbook.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+The Workbook class is an xlsx workbook that manages worksheets, charts,
+drawings and styles. The following parts of the Office Open XML spreadsheet
+specification are not implimented in this version.
+</p>
+<pre class="code">
+  <span class='bookViews identifier id'>bookViews</span>
+  <span class='calcPr identifier id'>calcPr</span>
+  <span class='customWorkbookViews identifier id'>customWorkbookViews</span>
+  <span class='definedNames identifier id'>definedNames</span>
+  <span class='externalReferences identifier id'>externalReferences</span>
+  <span class='extLst identifier id'>extLst</span>
+  <span class='fileRecoveryPr identifier id'>fileRecoveryPr</span>
+  <span class='fileSharing identifier id'>fileSharing</span>
+  <span class='fileVersion identifier id'>fileVersion</span>
+  <span class='functionGroups identifier id'>functionGroups</span>
+  <span class='oleSize identifier id'>oleSize</span>
+  <span class='pivotCaches identifier id'>pivotCaches</span>
+  <span class='smartTagPr identifier id'>smartTagPr</span>
+  <span class='smartTagTypes identifier id'>smartTagTypes</span>
+  <span class='webPublishing identifier id'>webPublishing</span>
+  <span class='webPublishObjects identifier id'>webPublishObjects</span>
+  <span class='workbookProtection identifier id'>workbookProtection</span>
+  <span class='workbookPr identifier id'>workbookPr</span><span class='mult op'>*</span>
+
+  <span class='mult op'>*</span><span class='workbookPr identifier id'>workbookPr</span> <span class='is identifier id'>is</span> <span class='only identifier id'>only</span> <span class='supported identifier id'>supported</span> <span class='to identifier id'>to</span> <span class='the identifier id'>the</span> <span class='extend identifier id'>extend</span> <span class='of identifier id'>of</span> <span class='date1904 identifier id'>date1904</span>
+</pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="date1904-classvariable" class="">@@date1904 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>
+Indicates if the epoc date for serialization should be 1904. If false, 1900
+is used.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='false false kw'>false</span>
+</pre></dd>
+      
+    </dl>
+  
+
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#charts-instance_method" title="#charts (instance method)">- (SimpleTypedList) <strong>charts</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+A colllection of charts associated with this workbook.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#date1904-instance_method" title="#date1904 (instance method)">- (Boolean) <strong>date1904</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Instance level access to the class variable 1904.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#drawings-instance_method" title="#drawings (instance method)">- (SimpleTypedList) <strong>drawings</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+A colllection of drawings associated with this workbook.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#relationships-instance_method" title="#relationships (instance method)">- (Relationships) <strong>relationships</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The workbook relationships.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#styles-instance_method" title="#styles (instance method)">- (Styles) <strong>styles</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The styles associated with this workbook.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#worksheets-instance_method" title="#worksheets (instance method)">- (SimpleTypedList) <strong>worksheets</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+A collection of worksheets associated with this workbook.
+</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#date1904-class_method" title="date1904 (class method)">+ (Boolean) <strong>date1904</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+retrieves the date1904 attribute.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#date1904%3D-class_method" title="date1904= (class method)">+ (Boolean) <strong>date1904=</strong>(v) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Sets the date1904 attribute to the provided boolean.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_worksheet-instance_method" title="#add_worksheet (instance method)">- (Worksheet) <strong>add_worksheet</strong>(options = {}) {|worksheet| ... }</a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Adds a worksheet to this workbook.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Workbook) <strong>initialize</strong>(options = {}) {|_self| ... }</a>
+    
+
+    
+  </span>
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Creates a new Workbook.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_xml-instance_method" title="#to_xml (instance method)">- (String) <strong>to_xml</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Serializes the workbook document.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <p class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Axlsx::Workbook (class)">Workbook</a></span></tt>) <strong>initialize</strong>(options = {}) {|_self| ... }
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Creates a new Workbook
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+a customizable set of options
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    <h3>Options Hash (<tt>options</tt>):</h3>
+    <ul class="option">
+      
+        <li>
+          <span class="name">date1904</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+    </ul>
+  
+
+<h3>Yields:</h3>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>_self</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Yield Parameters:</h3>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>_self</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Axlsx::Workbook (class)">Axlsx::Workbook</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the object that the method was called on
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+75
+76
+77
+78
+79
+80
+81
+82</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/workbook.rb', line 75</span>
+
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='@styles ivar id'>@styles</span> <span class='assign token'>=</span> <span class='Styles constant id'>Styles</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+  <span class='@worksheets ivar id'>@worksheets</span> <span class='assign token'>=</span> <span class='SimpleTypedList constant id'>SimpleTypedList</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='Worksheet constant id'>Worksheet</span>
+  <span class='@drawings ivar id'>@drawings</span> <span class='assign token'>=</span> <span class='SimpleTypedList constant id'>SimpleTypedList</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='Drawing constant id'>Drawing</span>
+  <span class='@charts ivar id'>@charts</span> <span class='assign token'>=</span> <span class='SimpleTypedList constant id'>SimpleTypedList</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='Chart constant id'>Chart</span>
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='date1904 identifier id'>date1904</span><span class='assign token'>=</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:date1904</span><span class='rbrack token'>]</span> <span class='unless unless_mod kw'>unless</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:date1904</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+  <span class='yield yield kw'>yield</span> <span class='self self kw'>self</span> <span class='if if_mod kw'>if</span> <span class='block_given? fid id'>block_given?</span>      
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <span id="charts-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="charts-instance_method">
+  
+    - (<tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>) <strong>charts</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+The recommended way to manage charts is Worksheet#add_chart
+</p>
+</div>
+  </div>
+
+<p>
+A colllection of charts associated with this workbook
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="Worksheet.html#add_chart-instance_method" title="Axlsx::Worksheet#add_chart (method)">Axlsx::Worksheet#add_chart</a></span></li>
+    
+      <li><span class='object_link'><a href="Chart.html" title="Axlsx::Chart (class)">Chart</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+45
+46
+47</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/workbook.rb', line 45</span>
+
+<span class='def def kw'>def</span> <span class='charts identifier id'>charts</span>
+  <span class='@charts ivar id'>@charts</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="date1904=-instance_method"></span>
+      <span id="date1904-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="date1904-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>date1904</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Instance level access to the class variable 1904
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+67</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/workbook.rb', line 67</span>
+
+<span class='def def kw'>def</span> <span class='date1904 identifier id'>date1904</span><span class='lparen token'>(</span><span class='rparen token'>)</span> <span class='@@date1904 ivar id'>@@date1904</span><span class='semicolon token'>;</span> <span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="drawings-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="drawings-instance_method">
+  
+    - (<tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>) <strong>drawings</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+The recommended way to manage drawings is Worksheet#add_chart
+</p>
+</div>
+  </div>
+
+<p>
+A colllection of drawings associated with this workbook
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="Worksheet.html#add_chart-instance_method" title="Axlsx::Worksheet#add_chart (method)">Axlsx::Worksheet#add_chart</a></span></li>
+    
+      <li><span class='object_link'><a href="Drawing.html" title="Axlsx::Drawing (class)">Drawing</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+52
+53
+54</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/workbook.rb', line 52</span>
+
+<span class='def def kw'>def</span> <span class='drawings identifier id'>drawings</span>
+  <span class='@drawings ivar id'>@drawings</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="relationships-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="relationships-instance_method">
+  
+    - (<tt><span class='object_link'><a href="Relationships.html" title="Axlsx::Relationships (class)">Relationships</a></span></tt>) <strong>relationships</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+The workbook relationships. This is managed automatically by the workbook
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Relationships.html" title="Axlsx::Relationships (class)">Relationships</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+63
+64
+65
+66
+67
+68
+69
+70</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/workbook.rb', line 63</span>
+
+<span class='def def kw'>def</span> <span class='relationships identifier id'>relationships</span>
+  <span class='r identifier id'>r</span> <span class='assign token'>=</span> <span class='Relationships constant id'>Relationships</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+  <span class='@worksheets ivar id'>@worksheets</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='sheet identifier id'>sheet</span><span class='bitor op'>|</span>
+    <span class='r identifier id'>r</span> <span class='lshft op'>&lt;&lt;</span> <span class='Relationship constant id'>Relationship</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='WORKSHEET_R constant id'>WORKSHEET_R</span><span class='comma token'>,</span> <span class='WORKSHEET_PN constant id'>WORKSHEET_PN</span> <span class='mod op'>%</span> <span class='lparen token'>(</span><span class='r identifier id'>r</span><span class='dot token'>.</span><span class='size identifier id'>size</span><span class='plus op'>+</span><span class='integer val'>1</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
+  <span class='end end kw'>end</span> 
+  <span class='r identifier id'>r</span> <span class='lshft op'>&lt;&lt;</span> <span class='Relationship constant id'>Relationship</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='STYLES_R constant id'>STYLES_R</span><span class='comma token'>,</span>  <span class='STYLES_PN constant id'>STYLES_PN</span><span class='rparen token'>)</span>
+  <span class='r identifier id'>r</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="styles-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="styles-instance_method">
+  
+    - (<tt><span class='object_link'><a href="Styles.html" title="Axlsx::Styles (class)">Styles</a></span></tt>) <strong>styles</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+The recommended way to manage styles is Styles#add_style
+</p>
+</div>
+  </div>
+
+<p>
+The styles associated with this workbook
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Styles.html" title="Axlsx::Styles (class)">Styles</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>Style#add_style</li>
+    
+      <li>Style</li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+59
+60
+61</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/workbook.rb', line 59</span>
+
+<span class='def def kw'>def</span> <span class='styles identifier id'>styles</span>
+  <span class='@styles ivar id'>@styles</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="worksheets-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="worksheets-instance_method">
+  
+    - (<tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>) <strong>worksheets</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+The recommended way to manage worksheets is add_worksheet
+</p>
+</div>
+  </div>
+
+<p>
+A collection of worksheets associated with this workbook.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#add_worksheet-instance_method" title="Axlsx::Workbook#add_worksheet (method)">#add_worksheet</a></span></li>
+    
+      <li><span class='object_link'><a href="Worksheet.html" title="Axlsx::Worksheet (class)">Axlsx::Worksheet</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+38
+39
+40</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/workbook.rb', line 38</span>
+
+<span class='def def kw'>def</span> <span class='worksheets identifier id'>worksheets</span>
+  <span class='@worksheets ivar id'>@worksheets</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="date1904-class_method">
+  
+    + (<tt>Boolean</tt>) <strong>date1904</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+retrieves the date1904 attribute
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+93</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/workbook.rb', line 93</span>
+
+<span class='def def kw'>def</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='date1904 identifier id'>date1904</span><span class='lparen token'>(</span><span class='rparen token'>)</span> <span class='@@date1904 ivar id'>@@date1904</span><span class='semicolon token'>;</span> <span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="date1904=-class_method">
+  
+    + (<tt>Boolean</tt>) <strong>date1904=</strong>(v) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Sets the date1904 attribute to the provided boolean
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+89</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/workbook.rb', line 89</span>
+
+<span class='def def kw'>def</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='date1904 identifier id'>date1904</span><span class='assign token'>=</span><span class='lparen token'>(</span><span class='v identifier id'>v</span><span class='rparen token'>)</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='validate_boolean identifier id'>validate_boolean</span> <span class='v identifier id'>v</span><span class='semicolon token'>;</span> <span class='@@date1904 ivar id'>@@date1904</span> <span class='assign token'>=</span> <span class='v identifier id'>v</span> <span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="add_worksheet-instance_method">
+  
+    - (<tt><span class='object_link'><a href="Worksheet.html" title="Axlsx::Worksheet (class)">Worksheet</a></span></tt>) <strong>add_worksheet</strong>(options = {}) {|worksheet| ... }
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Adds a worksheet to this workbook
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+a customizable set of options
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    <h3>Options Hash (<tt>options</tt>):</h3>
+    <ul class="option">
+      
+        <li>
+          <span class="name">name</span>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+The name of the worksheet.
+</p>
+</div>
+        </li>
+      
+    </ul>
+  
+
+<h3>Yields:</h3>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>worksheet</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Worksheet.html" title="Axlsx::Worksheet (class)">Worksheet</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="Worksheet.html#initialize-instance_method" title="Axlsx::Worksheet#initialize (method)">Axlsx::Worksheet#initialize</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+99
+100
+101
+102
+103</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/workbook.rb', line 99</span>
+
+<span class='def def kw'>def</span> <span class='add_worksheet identifier id'>add_worksheet</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='worksheet identifier id'>worksheet</span> <span class='assign token'>=</span> <span class='Worksheet constant id'>Worksheet</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
+  <span class='yield yield kw'>yield</span> <span class='worksheet identifier id'>worksheet</span> <span class='if if_mod kw'>if</span> <span class='block_given? fid id'>block_given?</span>
+  <span class='worksheet identifier id'>worksheet</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="to_xml-instance_method">
+  
+    - (<tt>String</tt>) <strong>to_xml</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Serializes the workbook document
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/workbook.rb', line 116</span>
+
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='rparen token'>)</span>
+  <span class='add_worksheet identifier id'>add_worksheet</span> <span class='unless unless_mod kw'>unless</span> <span class='worksheets identifier id'>worksheets</span><span class='dot token'>.</span><span class='size identifier id'>size</span> <span class='gt op'>&gt;</span> <span class='integer val'>0</span>
+  <span class='builder identifier id'>builder</span> <span class='assign token'>=</span> <span class='Nokogiri constant id'>Nokogiri</span><span class='colon2 op'>::</span><span class='XML constant id'>XML</span><span class='colon2 op'>::</span><span class='Builder constant id'>Builder</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:encoding</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='ENCODING constant id'>ENCODING</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='xml identifier id'>xml</span><span class='bitor op'>|</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='lparen token'>(</span><span class='symbol val'>:xmlns</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='XML_NS constant id'>XML_NS</span><span class='comma token'>,</span> <span class='symbol val'>:'xmlns:r'</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='XML_NS_R constant id'>XML_NS_R</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='workbookPr identifier id'>workbookPr</span><span class='lparen token'>(</span><span class='symbol val'>:date1904=</span><span class='gt op'>&gt;</span><span class='@@date1904 ivar id'>@@date1904</span><span class='rparen token'>)</span>
+      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='sheets identifier id'>sheets</span> <span class='lbrace token'>{</span>
+        <span class='@worksheets ivar id'>@worksheets</span><span class='dot token'>.</span><span class='each_with_index identifier id'>each_with_index</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='sheet identifier id'>sheet</span><span class='comma token'>,</span> <span class='index identifier id'>index</span><span class='bitor op'>|</span>              
+          <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='sheet identifier id'>sheet</span><span class='lparen token'>(</span><span class='symbol val'>:name=</span><span class='gt op'>&gt;</span><span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='name identifier id'>name</span><span class='comma token'>,</span> <span class='symbol val'>:sheetId=</span><span class='gt op'>&gt;</span><span class='index identifier id'>index</span><span class='plus op'>+</span><span class='integer val'>1</span><span class='comma token'>,</span> <span class='symbol val'>:&quot;r:id&quot;</span><span class='assign token'>=</span><span class='gt op'>&gt;</span><span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='rId identifier id'>rId</span><span class='rparen token'>)</span>
+        <span class='end end kw'>end</span>
+      <span class='rbrace token'>}</span>
+    <span class='rbrace token'>}</span>
+  <span class='end end kw'>end</span>      
+  <span class='builder identifier id'>builder</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='symbol val'>:indent=</span><span class='gt op'>&gt;</span><span class='integer val'>0</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Sun Nov 20 23:43:53 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.3 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>

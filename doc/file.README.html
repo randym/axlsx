@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.7.3
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html" title="Index">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><div id='filecontents'><h1>Axlsx: Office Open XML Spreadsheet Generation</h1>
+
+<p><strong>IRC</strong>:          <a href="irc://irc.freenode.net/axlsx">irc.freenode.net / #axlsx</a>  <br/>
+<strong>Git</strong>:          <a href="http://github.com/randym/axlsx">http://github.com/randym/axlsx</a> <br/>
+<strong>Author</strong>:       Randy Morgan
+<strong>Copyright</strong>:    2011  <br/>
+<strong>License</strong>:      MIT License  <br/>
+<strong>Latest Version</strong>: 1.0.0
+<strong>Release Date</strong>: November 20th 2011</p>
+
+<h2>Synopsis</h2>
+
+<p>Axlsx is an Office Open XML Spreadsheet generator for the Ruby programming language.
+It enables the you to generate 100% valid xlsx files that include customised styling 3D pie, bar and line charts. Below is a summary of salient features.</p>
+
+<h2>Feature List</h2>
+
+<p>**1. Author xlsx documents: Axlsx is made to let you easily and quickly generate profesional xlsx based reports that can be validated before serialiation.</p>
+
+<p>**2. Generate 3D Pie and Bar Charts: With Axlsx chart generation and management is as easy as a few lines of code. You can build charts based off data in your worksheet or generate charts without any data in your sheet at all.</p>
+
+<p>**3. Custom Styles: With guaranteed document validity, you can style borders, alignment, fills, fonts, and number formats in a single line of code. Those styles can be applied to an entire row, or a single cell anywhere in your workbook.</p>
+
+<p>**4. Automatic type support: Axlsx will automatically determine the type of data you are generating. In this release Float, Integer, String and Time types are automatically identified and serialized to your spreadsheet.</p>
+
+<h2>Installing</h2>
+
+<p>To install Axlsx, use the following command:</p>
+
+<pre class="code">$ <span class='gem identifier id'>gem</span> <span class='install identifier id'>install</span> <span class='axlsx identifier id'>axlsx</span>
+</pre>
+
+<h2>Usage</h2>
+
+<p>Generating a workbook with styles and a chart:
+  p = Axlsx::Package.new do |package|</p>
+
+<pre class="code"><span class='package identifier id'>package</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='add_worksheet identifier id'>add_worksheet</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='sheet identifier id'>sheet</span><span class='bitor op'>|</span>
+  <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='lbrack token'>[</span><span class='string val'>&quot;First&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Second&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Third&quot;</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:style</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='STYLE_THIN_BORDER constant id'>STYLE_THIN_BORDER</span>
+  <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='lbrack token'>[</span><span class='integer val'>1</span><span class='comma token'>,</span> <span class='integer val'>2</span><span class='comma token'>,</span> <span class='integer val'>3</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:style</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='STYLE_THIN_BORDER constant id'>STYLE_THIN_BORDER</span>
+  <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_chart identifier id'>add_chart</span><span class='lparen token'>(</span><span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Bar3DChart constant id'>Bar3DChart</span><span class='comma token'>,</span> <span class='symbol val'>:start_at</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='integer val'>2</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:end_at</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='integer val'>5</span><span class='comma token'>,</span> <span class='integer val'>15</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:title=</span><span class='gt op'>&gt;</span><span class='string val'>&quot;example 1: Chart&quot;</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='chart identifier id'>chart</span><span class='bitor op'>|</span>
+    <span class='chart identifier id'>chart</span><span class='dot token'>.</span><span class='add_series identifier id'>add_series</span> <span class='symbol val'>:data=</span><span class='gt op'>&gt;</span><span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span><span class='dot token'>.</span><span class='last identifier id'>last</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span><span class='comma token'>,</span> <span class='symbol val'>:labels=</span><span class='gt op'>&gt;</span> <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span><span class='dot token'>.</span><span class='first identifier id'>first</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+<span class='package identifier id'>package</span><span class='dot token'>.</span><span class='serialize identifier id'>serialize</span><span class='lparen token'>(</span><span class='string val'>&quot;example1.xlsx&quot;</span><span class='rparen token'>)</span>
+</pre>
+
+<p>  end</p>
+
+<h3>Documentation</h3>
+
+<p>This gem is 100% documented with YARD, an exceptional documentation library. To see documentation for this, and all the gems installed on your system use:</p>
+
+<p>  yard server -g</p>
+
+<h3>Specs</h3>
+
+<p>This gem has 100% test coverage. To execute tests for this gem, simply run rake in the gem directory.</p>
+
+<h2>Changelog</h2>
+
+<ul>
+<li><strong>October.10.11</strong>: 0.1.0 release</li>
+</ul>
+
+
+<h2>Copyright</h2>
+
+<p>Axlsx &copy; 2011 by <a href="mailto:digial.ipseity@gmail.com">Randy Morgan</a>. Axlsx is
+licensed under the MIT license. Please see the <a href="file.LICENSE.html" title="LICENSE">LICENSE</a> document for more information.</p>
+</div></div>
+    
+    <div id="footer">
+  Generated on Sun Nov 20 23:43:46 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.3 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>

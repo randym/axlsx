@@ -17,5 +17,4 @@ EOF
   s.add_runtime_dependency 'active_support', '~> 3'
   s.add_runtime_dependency 'rmagick', '~> 2.12'
   s.add_runtime_dependency 'rubyzip', '~> 0.9.4'
-
 end

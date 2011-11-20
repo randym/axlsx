@@ -1,0 +1,1154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Axlsx::Drawing
+  
+    &mdash; Documentation by YARD 0.7.3
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (D)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../Axlsx.html" title="Axlsx (module)">Axlsx</a></span></span>
+     &raquo; 
+    <span class="title">Drawing</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Axlsx::Drawing
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Axlsx::Drawing</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/axlsx/drawing/drawing.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+The recommended way to manage drawings is to use the Worksheet.add_chart
+method, specifying the chart class, start and end marker locations.
+</p>
+</div>
+  </div>
+
+<p>
+A Drawing is a canvas for charts. Each worksheet has a single drawing that
+can specify multiple anchors which reference charts.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="Worksheet.html#add_chart-instance_method" title="Axlsx::Worksheet#add_chart (method)">Worksheet#add_chart</a></span></li>
+    
+      <li><span class='object_link'><a href="TwoCellAnchor.html" title="Axlsx::TwoCellAnchor (class)">TwoCellAnchor</a></span></li>
+    
+      <li><span class='object_link'><a href="Chart.html" title="Axlsx::Chart (class)">Chart</a></span></li>
+    
+  </ul>
+
+</div>
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#anchors-instance_method" title="#anchors (instance method)">- (SimpleTypedList) <strong>anchors</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+A collection of anchors for this drawing.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#charts-instance_method" title="#charts (instance method)">- (Array) <strong>charts</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+An array of charts that are associated with this drawing&#8217;s anchors.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#index-instance_method" title="#index (instance method)">- (Integer) <strong>index</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The index of this drawing in the owning workbooks&#8217;s drawings
+collection.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pn-instance_method" title="#pn (instance method)">- (String) <strong>pn</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The part name for this drawing.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#relationships-instance_method" title="#relationships (instance method)">- (Relationships) <strong>relationships</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The drawing&#8217;s relationships.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rels_pn-instance_method" title="#rels_pn (instance method)">- (String) <strong>rels_pn</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The relational part name for this drawing.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rId-instance_method" title="#rId (instance method)">- (String) <strong>rId</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The relation reference id for this drawing.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#worksheet-instance_method" title="#worksheet (instance method)">- (Worksheet) <strong>worksheet</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The worksheet that owns the drawing.
+</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_chart-instance_method" title="#add_chart (instance method)">- (Object) <strong>add_chart</strong>(chart_type, options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Adds a chart to the drawing.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Drawing) <strong>initialize</strong>(worksheet) </a>
+    
+
+    
+  </span>
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Creates a new Drawing object.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_xml-instance_method" title="#to_xml (instance method)">- (String) <strong>to_xml</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Serializes the drawing.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <p class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Axlsx::Drawing (class)">Drawing</a></span></tt>) <strong>initialize</strong>(worksheet) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Creates a new Drawing object
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>worksheet</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Worksheet.html" title="Axlsx::Worksheet (class)">Worksheet</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The worksheet that owns this drawing
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+63
+64
+65
+66
+67
+68</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 63</span>
+
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='worksheet identifier id'>worksheet</span><span class='rparen token'>)</span>
+  <span class='DataTypeValidator constant id'>DataTypeValidator</span><span class='dot token'>.</span><span class='validate identifier id'>validate</span> <span class='string val'>&quot;Drawing.worksheet&quot;</span><span class='comma token'>,</span> <span class='Worksheet constant id'>Worksheet</span><span class='comma token'>,</span> <span class='worksheet identifier id'>worksheet</span>
+  <span class='@worksheet ivar id'>@worksheet</span> <span class='assign token'>=</span> <span class='worksheet identifier id'>worksheet</span>
+  <span class='@worksheet ivar id'>@worksheet</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='drawings identifier id'>drawings</span> <span class='lshft op'>&lt;&lt;</span> <span class='self self kw'>self</span>
+  <span class='@anchors ivar id'>@anchors</span> <span class='assign token'>=</span> <span class='SimpleTypedList constant id'>SimpleTypedList</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='TwoCellAnchor constant id'>TwoCellAnchor</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <span id="anchors-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="anchors-instance_method">
+  
+    - (<tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>) <strong>anchors</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+A collection of anchors for this drawing
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+35
+36
+37</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 35</span>
+
+<span class='def def kw'>def</span> <span class='anchors identifier id'>anchors</span>
+  <span class='@anchors ivar id'>@anchors</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="charts-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="charts-instance_method">
+  
+    - (<tt>Array</tt>) <strong>charts</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+An array of charts that are associated with this drawing&#8217;s anchors
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+39
+40
+41</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 39</span>
+
+<span class='def def kw'>def</span> <span class='charts identifier id'>charts</span>
+  <span class='@anchors ivar id'>@anchors</span><span class='dot token'>.</span><span class='map identifier id'>map</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='a identifier id'>a</span><span class='bitor op'>|</span> <span class='a identifier id'>a</span><span class='dot token'>.</span><span class='graphic_frame identifier id'>graphic_frame</span><span class='dot token'>.</span><span class='chart identifier id'>chart</span> <span class='rbrace token'>}</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="index-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="index-instance_method">
+  
+    - (<tt>Integer</tt>) <strong>index</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+The index of this drawing in the owning workbooks&#8217;s drawings
+collection.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+43
+44
+45</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 43</span>
+
+<span class='def def kw'>def</span> <span class='index identifier id'>index</span>
+  <span class='@worksheet ivar id'>@worksheet</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='drawings identifier id'>drawings</span><span class='dot token'>.</span><span class='index identifier id'>index</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="pn-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="pn-instance_method">
+  
+    - (<tt>String</tt>) <strong>pn</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+The part name for this drawing
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+51
+52
+53</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 51</span>
+
+<span class='def def kw'>def</span> <span class='pn identifier id'>pn</span>
+  <span class='dstring node'>&quot;#{DRAWING_PN % (index+1)}&quot;</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="relationships-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="relationships-instance_method">
+  
+    - (<tt><span class='object_link'><a href="Relationships.html" title="Axlsx::Relationships (class)">Relationships</a></span></tt>) <strong>relationships</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+The drawing&#8217;s relationships.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Relationships.html" title="Axlsx::Relationships (class)">Relationships</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+59
+60
+61
+62
+63
+64
+65
+66</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 59</span>
+
+<span class='def def kw'>def</span> <span class='relationships identifier id'>relationships</span>
+  <span class='r identifier id'>r</span> <span class='assign token'>=</span> <span class='Relationships constant id'>Relationships</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+  <span class='@anchors ivar id'>@anchors</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='anchor identifier id'>anchor</span><span class='bitor op'>|</span>
+    <span class='chart identifier id'>chart</span> <span class='assign token'>=</span> <span class='anchor identifier id'>anchor</span><span class='dot token'>.</span><span class='graphic_frame identifier id'>graphic_frame</span><span class='dot token'>.</span><span class='chart identifier id'>chart</span>
+    <span class='r identifier id'>r</span> <span class='lshft op'>&lt;&lt;</span> <span class='Relationship constant id'>Relationship</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='CHART_R constant id'>CHART_R</span><span class='comma token'>,</span> <span class='dstring node'>&quot;../#{chart.pn}&quot;</span><span class='rparen token'>)</span>
+  <span class='end end kw'>end</span>
+  <span class='r identifier id'>r</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="rels_pn-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="rels_pn-instance_method">
+  
+    - (<tt>String</tt>) <strong>rels_pn</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+The relational part name for this drawing
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+55
+56
+57</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 55</span>
+
+<span class='def def kw'>def</span> <span class='rels_pn identifier id'>rels_pn</span>
+  <span class='dstring node'>&quot;#{DRAWING_RELS_PN % (index+1)}&quot;</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="rId-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="rId-instance_method">
+  
+    - (<tt>String</tt>) <strong>rId</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+The relation reference id for this drawing
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+47
+48
+49</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 47</span>
+
+<span class='def def kw'>def</span> <span class='rId identifier id'>rId</span>
+  <span class='dstring node'>&quot;rId#{index+1}&quot;</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="worksheet-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="worksheet-instance_method">
+  
+    - (<tt><span class='object_link'><a href="Worksheet.html" title="Axlsx::Worksheet (class)">Worksheet</a></span></tt>) <strong>worksheet</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+The worksheet that owns the drawing
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Worksheet.html" title="Axlsx::Worksheet (class)">Worksheet</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+30
+31
+32</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 30</span>
+
+<span class='def def kw'>def</span> <span class='worksheet identifier id'>worksheet</span>
+  <span class='@worksheet ivar id'>@worksheet</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="add_chart-instance_method">
+  
+    - (<tt>Object</tt>) <strong>add_chart</strong>(chart_type, options = {}) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+The recommended way to manage charts is to use Worksheet.add_chart.
+</p>
+</div>
+  </div>
+
+<p>
+Adds a chart to the drawing.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>chart_type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Chart.html" title="Axlsx::Chart (class)">Chart</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The class of the chart to be added to the drawing
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+75
+76
+77
+78
+79</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 75</span>
+
+<span class='def def kw'>def</span> <span class='add_chart identifier id'>add_chart</span><span class='lparen token'>(</span><span class='chart_type identifier id'>chart_type</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='DataTypeValidator constant id'>DataTypeValidator</span><span class='dot token'>.</span><span class='validate identifier id'>validate</span> <span class='string val'>&quot;Drawing.chart_type&quot;</span><span class='comma token'>,</span> <span class='Chart constant id'>Chart</span><span class='comma token'>,</span> <span class='chart_type identifier id'>chart_type</span> 
+  <span class='TwoCellAnchor constant id'>TwoCellAnchor</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='comma token'>,</span> <span class='chart_type identifier id'>chart_type</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
+  <span class='@anchors ivar id'>@anchors</span><span class='dot token'>.</span><span class='last identifier id'>last</span><span class='dot token'>.</span><span class='graphic_frame identifier id'>graphic_frame</span><span class='dot token'>.</span><span class='chart identifier id'>chart</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="to_xml-instance_method">
+  
+    - (<tt>String</tt>) <strong>to_xml</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Serializes the drawing
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+112
+113
+114
+115
+116
+117
+118
+119</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 112</span>
+
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span>
+  <span class='builder identifier id'>builder</span> <span class='assign token'>=</span> <span class='Nokogiri constant id'>Nokogiri</span><span class='colon2 op'>::</span><span class='XML constant id'>XML</span><span class='colon2 op'>::</span><span class='Builder constant id'>Builder</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:encoding</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='ENCODING constant id'>ENCODING</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='xml identifier id'>xml</span><span class='bitor op'>|</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'xdr:wsDr'</span><span class='comma token'>,</span> <span class='symbol val'>:'xmlns:xdr'</span><span class='assign token'>=</span><span class='gt op'>&gt;</span><span class='XML_NS_XDR constant id'>XML_NS_XDR</span><span class='comma token'>,</span> <span class='symbol val'>:'xmlns:a'</span><span class='assign token'>=</span><span class='gt op'>&gt;</span><span class='XML_NS_A constant id'>XML_NS_A</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+      <span class='anchors identifier id'>anchors</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='lbrace token'>{</span><span class='bitor op'>|</span><span class='anchor identifier id'>anchor</span><span class='bitor op'>|</span> <span class='anchor identifier id'>anchor</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span> <span class='rbrace token'>}</span>
+    <span class='rbrace token'>}</span>        
+  <span class='end end kw'>end</span>
+  <span class='builder identifier id'>builder</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Sun Nov 20 23:44:03 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.3 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>

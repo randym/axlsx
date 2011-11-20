@@ -1,0 +1,971 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Axlsx::View3D
+  
+    &mdash; Documentation by YARD 0.7.3
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (V)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../Axlsx.html" title="Axlsx (module)">Axlsx</a></span></span>
+     &raquo; 
+    <span class="title">View3D</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Axlsx::View3D
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Axlsx::View3D</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/axlsx/drawing/view_3D.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+3D attributes for a chart.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="H_PERCENT_REGEX-constant" class="">H_PERCENT_REGEX =
+          <div class="docstring">
+  <div class="discussion">
+    <p>
+Validation for hPercent
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='regexp val'>/0*(([5-9])|([1-9][0-9])|([1-4][0-9][0-9])|500)%/</span>
+</pre></dd>
+      
+        <dt id="DEPTH_PERCENT_REGEX-constant" class="">DEPTH_PERCENT_REGEX =
+          <div class="docstring">
+  <div class="discussion">
+    <p>
+validation for depthPercent
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='regexp val'>/0*(([2-9][0-9])|([1-9][0-9][0-9])|(1[0-9][0-9][0-9])|2000)%/</span>
+</pre></dd>
+      
+    </dl>
+  
+
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#depthPercent-instance_method" title="#depthPercent (instance method)">- (String) <strong>depthPercent</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+depth or chart as % of chart width must be between 20% and 2000%.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#hPercent-instance_method" title="#hPercent (instance method)">- (String) <strong>hPercent</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+height of chart as % of chart must be between 5% and 500%.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#perspective-instance_method" title="#perspective (instance method)">- (Integer) <strong>perspective</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+field of view angle.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rAngAx-instance_method" title="#rAngAx (instance method)">- (Boolean) <strong>rAngAx</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Chart axis are at right angles.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rotX-instance_method" title="#rotX (instance method)">- (Integer) <strong>rotX</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+x rotation for the chart must be between -90 and 90.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rotY-instance_method" title="#rotY (instance method)">- (Integer) <strong>rotY</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+y rotation for the chart must be between 0 and 360.
+</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (View3D) <strong>initialize</strong>(options = {}) </a>
+    
+
+    
+  </span>
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Creates a new View3D for charts.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_xml-instance_method" title="#to_xml (instance method)">- (String) <strong>to_xml</strong>(xml) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Serializes the view3D properties.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <p class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Axlsx::View3D (class)">View3D</a></span></tt>) <strong>initialize</strong>(options = {}) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Creates a new View3D for charts
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+a customizable set of options
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    <h3>Options Hash (<tt>options</tt>):</h3>
+    <ul class="option">
+      
+        <li>
+          <span class="name">rotX</span>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">hPercent</span>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">rotY</span>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">depthPercent</span>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">rAngAx</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">perspective</span>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+    </ul>
+  
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+39
+40
+41
+42
+43</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 39</span>
+
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='o identifier id'>o</span><span class='bitor op'>|</span>
+    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='dstring node'>&quot;#{o[0]}=&quot;</span><span class='comma token'>,</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span> <span class='dstring node'>&quot;#{o[0]}=&quot;</span>
+  <span class='end end kw'>end</span>    
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="depthPercent=-instance_method"></span>
+      <span id="depthPercent-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="depthPercent-instance_method">
+  
+    - (<tt>String</tt>) <strong>depthPercent</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+depth or chart as % of chart width must be between 20% and 2000%
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+22
+23
+24</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 22</span>
+
+<span class='def def kw'>def</span> <span class='depthPercent identifier id'>depthPercent</span>
+  <span class='@depthPercent ivar id'>@depthPercent</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="hPercent=-instance_method"></span>
+      <span id="hPercent-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="hPercent-instance_method">
+  
+    - (<tt>String</tt>) <strong>hPercent</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+height of chart as % of chart must be between 5% and 500%
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+12
+13
+14</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 12</span>
+
+<span class='def def kw'>def</span> <span class='hPercent identifier id'>hPercent</span>
+  <span class='@hPercent ivar id'>@hPercent</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="perspective=-instance_method"></span>
+      <span id="perspective-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="perspective-instance_method">
+  
+    - (<tt>Integer</tt>) <strong>perspective</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+field of view angle
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+30
+31
+32</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 30</span>
+
+<span class='def def kw'>def</span> <span class='perspective identifier id'>perspective</span>
+  <span class='@perspective ivar id'>@perspective</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="rAngAx=-instance_method"></span>
+      <span id="rAngAx-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="rAngAx-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>rAngAx</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Chart axis are at right angles
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+26
+27
+28</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 26</span>
+
+<span class='def def kw'>def</span> <span class='rAngAx identifier id'>rAngAx</span>
+  <span class='@rAngAx ivar id'>@rAngAx</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="rotX=-instance_method"></span>
+      <span id="rotX-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="rotX-instance_method">
+  
+    - (<tt>Integer</tt>) <strong>rotX</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+x rotation for the chart must be between -90 and 90
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+7
+8
+9</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 7</span>
+
+<span class='def def kw'>def</span> <span class='rotX identifier id'>rotX</span>
+  <span class='@rotX ivar id'>@rotX</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="rotY=-instance_method"></span>
+      <span id="rotY-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="rotY-instance_method">
+  
+    - (<tt>Integer</tt>) <strong>rotY</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+y rotation for the chart must be between 0 and 360
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+17
+18
+19</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 17</span>
+
+<span class='def def kw'>def</span> <span class='rotY identifier id'>rotY</span>
+  <span class='@rotY ivar id'>@rotY</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="to_xml-instance_method">
+  
+    - (<tt>String</tt>) <strong>to_xml</strong>(xml) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Serializes the view3D properties
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>xml</span>
+      
+      
+        <span class='type'>(<tt>Nokogiri::XML::Builder</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The document builder instance this objects xml will be added to.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 61</span>
+
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:view3D'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:rotX'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@rotX ivar id'>@rotX</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='@rotX ivar id'>@rotX</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:hPercent'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@hPercent ivar id'>@hPercent</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='@hPercent ivar id'>@hPercent</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:rotY'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@rotY ivar id'>@rotY</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='@rotY ivar id'>@rotY</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:depthPercent'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@depthPercent ivar id'>@depthPercent</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='@depthPercent ivar id'>@depthPercent</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:rAngAx'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@rAngAx ivar id'>@rAngAx</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='@rAngAx ivar id'>@rAngAx</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:perspective'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@perspective ivar id'>@perspective</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='@perspective ivar id'>@perspective</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+  <span class='rbrace token'>}</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Sun Nov 20 23:44:04 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.3 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>

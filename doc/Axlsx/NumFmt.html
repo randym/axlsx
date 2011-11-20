@@ -1,0 +1,562 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Axlsx::NumFmt
+  
+    &mdash; Documentation by YARD 0.7.3
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (N)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../Axlsx.html" title="Axlsx (module)">Axlsx</a></span></span>
+     &raquo; 
+    <span class="title">NumFmt</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Axlsx::NumFmt
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Axlsx::NumFmt</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/axlsx/stylesheet/num_fmt.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+The recommended way to manage styles is Styles#add_style
+</p>
+</div>
+  </div>
+
+<p>
+A NumFmt object defines an identifier and formatting code for data in
+cells.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#formatCode-instance_method" title="#formatCode (instance method)">- (String) <strong>formatCode</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The formatting to use for this number format.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#numFmtId-instance_method" title="#numFmtId (instance method)">- (Integer) <strong>numFmtId</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+An unsinged integer referencing a standard or custom number format.
+</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (NumFmt) <strong>initialize</strong>(options = {}) </a>
+    
+
+    
+  </span>
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+A new instance of NumFmt.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_xml-instance_method" title="#to_xml (instance method)">- (Object) <strong>to_xml</strong>(xml) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Creates a numFmt element applying the instance values of this object as
+attributes.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <p class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Axlsx::NumFmt (class)">NumFmt</a></span></tt>) <strong>initialize</strong>(options = {}) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+A new instance of NumFmt
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+45
+46
+47
+48
+49
+50
+51</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/num_fmt.rb', line 45</span>
+
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='@numFmtId ivar id'>@numFmtId</span> <span class='assign token'>=</span> <span class='integer val'>0</span>
+  <span class='@formatCode ivar id'>@formatCode</span> <span class='assign token'>=</span> <span class='string val'>&quot;&quot;</span>
+  <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='o identifier id'>o</span><span class='bitor op'>|</span>
+    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='dstring node'>&quot;#{o[0]}=&quot;</span><span class='comma token'>,</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>0</span><span class='rbrack token'>]</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="formatCode=-instance_method"></span>
+      <span id="formatCode-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="formatCode-instance_method">
+  
+    - (<tt>String</tt>) <strong>formatCode</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+The formatting to use for this number format.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The formatting to use for this number format.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><a href="http://support.microsoft.com/kb/264372" target="_parent" title="http://support.microsoft.com/kb/264372">http://support.microsoft.com/kb/264372</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+44
+45
+46</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/num_fmt.rb', line 44</span>
+
+<span class='def def kw'>def</span> <span class='formatCode identifier id'>formatCode</span>
+  <span class='@formatCode ivar id'>@formatCode</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="numFmtId=-instance_method"></span>
+      <span id="numFmtId-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="numFmtId-instance_method">
+  
+    - (<tt>Integer</tt>) <strong>numFmtId</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+These are the known formats I can dig up. The constant NUM_FMT_PERCENT is
+9, and uses the default % formatting. Axlsx also defines a few formats for
+date and time that are commonly used in asia as NUM_FMT_YYYYMMDD and
+NUM_FRM_YYYYMMDDHHMMSS.
+</p>
+<pre class="code">
+ <span class='integer val'>1</span> <span class='integer val'>0</span>
+ <span class='integer val'>2</span> <span class='integer val'>0</span><span class='integer val'>.00</span>
+ <span class='integer val'>3</span> <span class='comment val'>#,##0</span>
+ <span class='integer val'>4</span> <span class='comment val'>#,##0.00</span>
+ <span class='integer val'>5</span> $<span class='comment val'>#,##0_);($#,##0)</span>
+ <span class='integer val'>6</span> $<span class='comment val'>#,##0_);[Red]($#,##0)</span>
+ <span class='integer val'>7</span> $<span class='comment val'>#,##0.00_);($#,##0.00)</span>
+ <span class='integer val'>8</span> $<span class='comment val'>#,##0.00_);[Red]($#,##0.00)</span>
+ <span class='integer val'>9</span> <span class='integer val'>0</span><span class='mod op'>%</span>
+ <span class='integer val'>10</span> <span class='integer val'>0</span><span class='integer val'>.00</span><span class='mod op'>%</span>
+ <span class='integer val'>11</span> <span class='integer val'>0</span><span class='float val'>.00E+00</span>
+ <span class='integer val'>12</span> <span class='comment val'># ?/?</span>
+ <span class='integer val'>13</span> <span class='comment val'># ??/??</span>
+ <span class='integer val'>14</span> <span class='m identifier id'>m</span><span class='div op'>/</span><span class='d identifier id'>d</span><span class='div op'>/</span><span class='yyyy identifier id'>yyyy</span>
+ <span class='integer val'>15</span> <span class='d identifier id'>d</span><span class='minus op'>-</span><span class='mmm identifier id'>mmm</span><span class='minus op'>-</span><span class='yy identifier id'>yy</span>
+ <span class='integer val'>16</span> <span class='d identifier id'>d</span><span class='minus op'>-</span><span class='mmm identifier id'>mmm</span>
+ <span class='integer val'>17</span> <span class='mmm identifier id'>mmm</span><span class='minus op'>-</span><span class='yy identifier id'>yy</span>
+ <span class='integer val'>18</span> <span class='h identifier id'>h</span><span class='symbol val'>:mm</span> <span class='AM constant id'>AM</span><span class='div op'>/</span><span class='PM constant id'>PM</span>
+ <span class='integer val'>19</span> <span class='h identifier id'>h</span><span class='symbol val'>:mm</span><span class='symbol val'>:ss</span> <span class='AM constant id'>AM</span><span class='div op'>/</span><span class='PM constant id'>PM</span>
+ <span class='integer val'>20</span> <span class='h identifier id'>h</span><span class='symbol val'>:mm</span>
+ <span class='integer val'>21</span> <span class='h identifier id'>h</span><span class='symbol val'>:mm</span><span class='symbol val'>:ss</span>
+ <span class='integer val'>22</span> <span class='m identifier id'>m</span><span class='div op'>/</span><span class='d identifier id'>d</span><span class='div op'>/</span><span class='yyyy identifier id'>yyyy</span> <span class='h identifier id'>h</span><span class='symbol val'>:mm</span>
+ <span class='integer val'>37</span> <span class='comment val'>#,##0_);(#,##0)</span>
+ <span class='integer val'>38</span> <span class='comment val'>#,##0_);[Red](#,##0)</span>
+ <span class='integer val'>39</span> <span class='comment val'>#,##0.00_);(#,##0.00)</span>
+ <span class='integer val'>40</span> <span class='comment val'>#,##0.00_);[Red](#,##0.00)</span>
+ <span class='integer val'>45</span> <span class='mm identifier id'>mm</span><span class='symbol val'>:ss</span>
+ <span class='integer val'>46</span> <span class='lbrack token'>[</span><span class='h identifier id'>h</span><span class='rbrack token'>]</span><span class='symbol val'>:mm</span><span class='symbol val'>:ss</span>
+ <span class='integer val'>47</span> <span class='mm identifier id'>mm</span><span class='symbol val'>:ss</span><span class='integer val'>.0</span>
+ <span class='integer val'>48</span> <span class='comment val'>##0.0E+0</span>
+ <span class='integer val'>49</span> @
+</pre>
+</div>
+  </div>
+
+<p>
+An unsinged integer referencing a standard or custom number format.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+An unsinged integer referencing a standard or custom number format.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="../Axlsx.html" title="Axlsx (module)">Axlsx</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+40
+41
+42</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/num_fmt.rb', line 40</span>
+
+<span class='def def kw'>def</span> <span class='numFmtId identifier id'>numFmtId</span>
+  <span class='@numFmtId ivar id'>@numFmtId</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="to_xml-instance_method">
+  
+    - (<tt>Object</tt>) <strong>to_xml</strong>(xml) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Creates a numFmt element applying the instance values of this object as
+attributes.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>xml</span>
+      
+      
+        <span class='type'>(<tt>Nokogiri::XML::Builder</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The document builder instance this objects xml will be added to.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+58</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/num_fmt.rb', line 58</span>
+
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span> <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='numFmt identifier id'>numFmt</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='dot token'>.</span><span class='instance_values identifier id'>instance_values</span><span class='rparen token'>)</span> <span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Sun Nov 20 23:44:00 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.3 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>

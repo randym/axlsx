@@ -1,0 +1,677 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Axlsx::TableStyleElement
+  
+    &mdash; Documentation by YARD 0.7.3
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (T)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../Axlsx.html" title="Axlsx (module)">Axlsx</a></span></span>
+     &raquo; 
+    <span class="title">TableStyleElement</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Axlsx::TableStyleElement
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Axlsx::TableStyleElement</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/axlsx/stylesheet/table_style_element.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+tables and table styles are not supported in this version. This class
+exists in preparation for that support.
+</p>
+</div>
+  </div>
+
+<p>
+an element of style that belongs to a table style.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#dxfId-instance_method" title="#dxfId (instance method)">- (Integer) <strong>dxfId</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The dxfId this style element points to.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#size-instance_method" title="#size (instance method)">- (Integer) <strong>size</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Number of rows or columns used in striping when the type is firstRowStripe,
+secondRowStripe, firstColumnStripe, or secondColumnStripe.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#type-instance_method" title="#type (instance method)">- (Symbol) <strong>type</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The type of style element.
+</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (TableStyleElement) <strong>initialize</strong>(options = {}) </a>
+    
+
+    
+  </span>
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+creates a new TableStyleElement object.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_xml-instance_method" title="#to_xml (instance method)">- (String) <strong>to_xml</strong>(xml) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Serializes the table style element.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <p class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Axlsx::TableStyleElement (class)">TableStyleElement</a></span></tt>) <strong>initialize</strong>(options = {}) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+creates a new TableStyleElement object
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+a customizable set of options
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    <h3>Options Hash (<tt>options</tt>):</h3>
+    <ul class="option">
+      
+        <li>
+          <span class="name">type</span>
+          <span class="type">(<tt>Symbol</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">size</span>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">dxfId</span>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+    </ul>
+  
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+49
+50
+51
+52
+53</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/table_style_element.rb', line 49</span>
+
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='o identifier id'>o</span><span class='bitor op'>|</span>
+    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='dstring node'>&quot;#{o[0]}=&quot;</span><span class='comma token'>,</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>0</span><span class='rbrack token'>]</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="dxfId=-instance_method"></span>
+      <span id="dxfId-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="dxfId-instance_method">
+  
+    - (<tt>Integer</tt>) <strong>dxfId</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+The dxfId this style element points to
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+43
+44
+45</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/table_style_element.rb', line 43</span>
+
+<span class='def def kw'>def</span> <span class='dxfId identifier id'>dxfId</span>
+  <span class='@dxfId ivar id'>@dxfId</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="size=-instance_method"></span>
+      <span id="size-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="size-instance_method">
+  
+    - (<tt>Integer</tt>) <strong>size</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Number of rows or columns used in striping when the type is firstRowStripe,
+secondRowStripe, firstColumnStripe, or secondColumnStripe.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+39
+40
+41</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/table_style_element.rb', line 39</span>
+
+<span class='def def kw'>def</span> <span class='size identifier id'>size</span>
+  <span class='@size ivar id'>@size</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="type=-instance_method"></span>
+      <span id="type-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="type-instance_method">
+  
+    - (<tt>Symbol</tt>) <strong>type</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+The type of style element. The following type are allowed
+</p>
+<pre class="code">
+  <span class='symbol val'>:wholeTable</span>
+  <span class='symbol val'>:headerRow</span>
+  <span class='symbol val'>:totalRow</span>
+  <span class='symbol val'>:firstColumn</span>
+  <span class='symbol val'>:lastColumn</span>
+  <span class='symbol val'>:firstRowStripe</span>
+  <span class='symbol val'>:secondRowStripe</span>
+  <span class='symbol val'>:firstColumnStripe</span>
+  <span class='symbol val'>:secondColumnStripe</span>
+  <span class='symbol val'>:firstHeaderCell</span>
+  <span class='symbol val'>:lastHeaderCell</span>
+  <span class='symbol val'>:firstTotalCell</span>
+  <span class='symbol val'>:lastTotalCell</span>
+  <span class='symbol val'>:firstSubtotalColumn</span>
+  <span class='symbol val'>:secondSubtotalColumn</span>
+  <span class='symbol val'>:thirdSubtotalColumn</span>
+  <span class='symbol val'>:firstSubtotalRow</span>
+  <span class='symbol val'>:secondSubtotalRow</span>
+  <span class='symbol val'>:thirdSubtotalRow</span>
+  <span class='symbol val'>:blankRow</span>
+  <span class='symbol val'>:firstColumnSubheading</span>
+  <span class='symbol val'>:secondColumnSubheading</span>
+  <span class='symbol val'>:thirdColumnSubheading</span>
+  <span class='symbol val'>:firstRowSubheading</span>
+  <span class='symbol val'>:secondRowSubheading</span>
+  <span class='symbol val'>:thirdRowSubheading</span>
+  <span class='symbol val'>:pageFieldLabels</span>
+  <span class='symbol val'>:pageFieldValues</span>
+</pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+35
+36
+37</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/table_style_element.rb', line 35</span>
+
+<span class='def def kw'>def</span> <span class='type identifier id'>type</span>
+  <span class='@type ivar id'>@type</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="to_xml-instance_method">
+  
+    - (<tt>String</tt>) <strong>to_xml</strong>(xml) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Serializes the table style element
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>xml</span>
+      
+      
+        <span class='type'>(<tt>Nokogiri::XML::Builder</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The document builder instance this objects xml will be added to.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+62
+63
+64</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/table_style_element.rb', line 62</span>
+
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='tableStyleElement identifier id'>tableStyleElement</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='instance_values identifier id'>instance_values</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Sun Nov 20 23:44:00 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.3 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>

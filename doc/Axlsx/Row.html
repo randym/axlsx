@@ -1,0 +1,771 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Axlsx::Row
+  
+    &mdash; Documentation by YARD 0.7.3
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (R)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../Axlsx.html" title="Axlsx (module)">Axlsx</a></span></span>
+     &raquo; 
+    <span class="title">Row</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Axlsx::Row
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Axlsx::Row</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/axlsx/workbook/worksheet/row.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+The recommended way to manage rows and cells is to use Worksheet#add_row
+</p>
+</div>
+  </div>
+
+<p>
+A Row is a single row in a worksheet.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="Worksheet.html#add_row-instance_method" title="Axlsx::Worksheet#add_row (method)">Worksheet#add_row</a></span></li>
+    
+  </ul>
+
+</div>
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cells-instance_method" title="#cells (instance method)">- (SimpleTypedList) <strong>cells</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The cells this row holds.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#index-instance_method" title="#index (instance method)">- (Integer) <strong>index</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The index of this row in the worksheet.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#worksheet-instance_method" title="#worksheet (instance method)">- (Worksheet) <strong>worksheet</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The worksheet this row belongs to.
+</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_cell-instance_method" title="#add_cell (instance method)">- (Cell) <strong>add_cell</strong>(value = &quot;&quot;, options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Adds a singel sell to the row based on the data provided and updates the
+worksheet&#8217;s autofit data.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Row) <strong>initialize</strong>(worksheet, values = [], options = {}) </a>
+    
+
+    
+  </span>
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Creates a new row.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_xml-instance_method" title="#to_xml (instance method)">- (String) <strong>to_xml</strong>(xml) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Serializes the row.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <p class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Axlsx::Row (class)">Row</a></span></tt>) <strong>initialize</strong>(worksheet, values = [], options = {}) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Creates a new row. New Cell objects are created based on the values, types
+and style options. A new cell is created for each item in the values array.
+style and types options are applied as follows:
+</p>
+<pre class="code">
+  <span class='If constant id'>If</span> <span class='the identifier id'>the</span> <span class='types identifier id'>types</span> <span class='option identifier id'>option</span> <span class='is identifier id'>is</span> <span class='defined identifier id'>defined</span> <span class='and and kw'>and</span> <span class='is identifier id'>is</span> <span class='a identifier id'>a</span> <span class='symbol identifier id'>symbol</span> <span class='it identifier id'>it</span> <span class='is identifier id'>is</span> <span class='applied identifier id'>applied</span> <span class='to identifier id'>to</span> <span class='all identifier id'>all</span> <span class='the identifier id'>the</span> <span class='cells identifier id'>cells</span> <span class='created identifier id'>created</span><span class='dot token'>.</span>
+  <span class='If constant id'>If</span> <span class='the identifier id'>the</span> <span class='types identifier id'>types</span> <span class='option identifier id'>option</span> <span class='is identifier id'>is</span> <span class='an identifier id'>an</span> <span class='array identifier id'>array</span><span class='comma token'>,</span> <span class='cell identifier id'>cell</span> <span class='types identifier id'>types</span> <span class='are identifier id'>are</span> <span class='applied identifier id'>applied</span> <span class='by identifier id'>by</span> <span class='index identifier id'>index</span> <span class='for for kw'>for</span> <span class='each identifier id'>each</span> <span class='cell identifier id'>cell</span>
+  <span class='If constant id'>If</span> <span class='the identifier id'>the</span> <span class='types identifier id'>types</span> <span class='option identifier id'>option</span> <span class='is identifier id'>is</span> <span class='not not kw'>not</span> <span class='set identifier id'>set</span><span class='comma token'>,</span> <span class='the identifier id'>the</span> <span class='cell identifier id'>cell</span> <span class='will identifier id'>will</span> <span class='automatically identifier id'>automatically</span> <span class='determine identifier id'>determine</span> <span class='its identifier id'>its</span> <span class='type identifier id'>type</span><span class='dot token'>.</span>
+  <span class='If constant id'>If</span> <span class='the identifier id'>the</span> <span class='style identifier id'>style</span> <span class='option identifier id'>option</span> <span class='is identifier id'>is</span> <span class='defined identifier id'>defined</span> <span class='and and kw'>and</span> <span class='is identifier id'>is</span> <span class='an identifier id'>an</span> <span class='Integer constant id'>Integer</span><span class='comma token'>,</span> <span class='it identifier id'>it</span> <span class='is identifier id'>is</span> <span class='applied identifier id'>applied</span> <span class='to identifier id'>to</span> <span class='all identifier id'>all</span> <span class='cells identifier id'>cells</span> <span class='created identifier id'>created</span><span class='dot token'>.</span>
+  <span class='If constant id'>If</span> <span class='the identifier id'>the</span> <span class='style identifier id'>style</span> <span class='option identifier id'>option</span> <span class='is identifier id'>is</span> <span class='an identifier id'>an</span> <span class='array identifier id'>array</span><span class='comma token'>,</span> <span class='style identifier id'>style</span> <span class='is identifier id'>is</span> <span class='applied identifier id'>applied</span> <span class='by identifier id'>by</span> <span class='index identifier id'>index</span> <span class='for for kw'>for</span> <span class='each identifier id'>each</span> <span class='cell identifier id'>cell</span><span class='dot token'>.</span>
+  <span class='If constant id'>If</span> <span class='the identifier id'>the</span> <span class='style identifier id'>style</span> <span class='option identifier id'>option</span> <span class='is identifier id'>is</span> <span class='not not kw'>not</span> <span class='defined identifier id'>defined</span><span class='comma token'>,</span> <span class='the identifier id'>the</span> <span class='default identifier id'>default</span> <span class='style identifier id'>style</span> <span class='lparen token'>(</span><span class='integer val'>0</span><span class='rparen token'>)</span> <span class='is identifier id'>is</span> <span class='applied identifier id'>applied</span> <span class='to identifier id'>to</span> <span class='each identifier id'>each</span> <span class='cell identifier id'>cell</span><span class='dot token'>.</span>
+</pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>worksheet</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Worksheet.html" title="Axlsx::Worksheet (class)">Worksheet</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+a customizable set of options
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    
+    
+    
+    
+    <h3>Options Hash (<tt>options</tt>):</h3>
+    <ul class="option">
+      
+        <li>
+          <span class="name">values</span>
+          <span class="type">(<tt>Array</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">types</span>
+          <span class="type">(<tt>Array</tt>, <tt>Symbol</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">style</span>
+          <span class="type">(<tt>Array</tt>, <tt>Integer</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+    </ul>
+  
+
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#array_to_cells-instance_method" title="Axlsx::Row#array_to_cells (method)">#array_to_cells</a></span></li>
+    
+      <li><span class='object_link'><a href="Cell.html" title="Axlsx::Cell (class)">Cell</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+33
+34
+35
+36
+37
+38</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/row.rb', line 33</span>
+
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='worksheet identifier id'>worksheet</span><span class='comma token'>,</span> <span class='values identifier id'>values</span><span class='assign token'>=</span><span class='lbrack token'>[</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='worksheet identifier id'>worksheet</span> <span class='assign token'>=</span> <span class='worksheet identifier id'>worksheet</span>
+  <span class='@cells ivar id'>@cells</span> <span class='assign token'>=</span> <span class='SimpleTypedList constant id'>SimpleTypedList</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='Cell constant id'>Cell</span>
+  <span class='@worksheet ivar id'>@worksheet</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span> <span class='lshft op'>&lt;&lt;</span> <span class='self self kw'>self</span>
+  <span class='array_to_cells identifier id'>array_to_cells</span><span class='lparen token'>(</span><span class='values identifier id'>values</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <span id="cells-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="cells-instance_method">
+  
+    - (<tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>) <strong>cells</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+The cells this row holds
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+13
+14
+15</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/row.rb', line 13</span>
+
+<span class='def def kw'>def</span> <span class='cells identifier id'>cells</span>
+  <span class='@cells ivar id'>@cells</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="index-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="index-instance_method">
+  
+    - (<tt>Integer</tt>) <strong>index</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+The index of this row in the worksheet
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+17
+18
+19</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/row.rb', line 17</span>
+
+<span class='def def kw'>def</span> <span class='index identifier id'>index</span> 
+  <span class='worksheet identifier id'>worksheet</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span><span class='dot token'>.</span><span class='index identifier id'>index</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="worksheet=-instance_method"></span>
+      <span id="worksheet-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="worksheet-instance_method">
+  
+    - (<tt><span class='object_link'><a href="Worksheet.html" title="Axlsx::Worksheet (class)">Worksheet</a></span></tt>) <strong>worksheet</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+The worksheet this row belongs to
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Worksheet.html" title="Axlsx::Worksheet (class)">Worksheet</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+9
+10
+11</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/row.rb', line 9</span>
+
+<span class='def def kw'>def</span> <span class='worksheet identifier id'>worksheet</span>
+  <span class='@worksheet ivar id'>@worksheet</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="add_cell-instance_method">
+  
+    - (<tt><span class='object_link'><a href="Cell.html" title="Axlsx::Cell (class)">Cell</a></span></tt>) <strong>add_cell</strong>(value = &quot;&quot;, options = {}) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Adds a singel sell to the row based on the data provided and updates the
+worksheet&#8217;s autofit data.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cell.html" title="Axlsx::Cell (class)">Cell</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+53
+54
+55
+56
+57</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/row.rb', line 53</span>
+
+<span class='def def kw'>def</span> <span class='add_cell identifier id'>add_cell</span><span class='lparen token'>(</span><span class='value identifier id'>value</span><span class='assign token'>=</span><span class='string val'>&quot;&quot;</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='c identifier id'>c</span> <span class='assign token'>=</span> <span class='Cell constant id'>Cell</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='comma token'>,</span> <span class='value identifier id'>value</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
+  <span class='update_auto_fit_data identifier id'>update_auto_fit_data</span>
+  <span class='c identifier id'>c</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="to_xml-instance_method">
+  
+    - (<tt>String</tt>) <strong>to_xml</strong>(xml) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Serializes the row
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>xml</span>
+      
+      
+        <span class='type'>(<tt>Nokogiri::XML::Builder</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The document builder instance this objects xml will be added to.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+47
+48
+49</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/row.rb', line 47</span>
+
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='row identifier id'>row</span><span class='lparen token'>(</span><span class='symbol val'>:r</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='index identifier id'>index</span><span class='plus op'>+</span><span class='integer val'>1</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span> <span class='@cells ivar id'>@cells</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='cell identifier id'>cell</span><span class='bitor op'>|</span> <span class='cell identifier id'>cell</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span> <span class='rbrace token'>}</span> <span class='rbrace token'>}</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Sun Nov 20 23:44:01 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.3 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>

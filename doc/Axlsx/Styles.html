@@ -1,0 +1,1754 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Axlsx::Styles
+  
+    &mdash; Documentation by YARD 0.7.3
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (S)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../Axlsx.html" title="Axlsx (module)">Axlsx</a></span></span>
+     &raquo; 
+    <span class="title">Styles</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Axlsx::Styles
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Axlsx::Styles</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/axlsx/stylesheet/styles.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+The recommended way to manage styles is with add_style
+</p>
+</div>
+  </div>
+
+<p>
+The Styles class manages worksheet styles In addition to creating the
+require style objects for a valid xlsx package, this class provides the key
+mechanism for adding styles to your workbook, and safely applying them to
+the cells of your worksheet. All portions of the stylesheet are implemented
+here exception colors, which specify legacy and modified pallete colors,
+and exLst, whic is used as a future feature data storage area.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>Open XML Part 1 18.8.11 for gory details on how this stuff gets put together</li>
+    
+      <li><span class='object_link'><a href="#add_style-instance_method" title="Axlsx::Styles#add_style (method)">#add_style</a></span></li>
+    
+  </ul>
+
+</div>
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#borders-instance_method" title="#borders (instance method)">- (SimpleTypedList) <strong>borders</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The collection of borders used in this workbook Axlsx predefines
+THIN_BORDER which can be used to put a border around all of your cells.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cellStyles-instance_method" title="#cellStyles (instance method)">- (SimpleTypedList) <strong>cellStyles</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The collection of named styles, referencing cellStyleXfs items in the
+workbook.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cellStyleXfs-instance_method" title="#cellStyleXfs (instance method)">- (SimpleTypedList) <strong>cellStyleXfs</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The collection of master formatting records for named cell styles, which
+means records defined in cellStyles, in the workbook.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cellXfs-instance_method" title="#cellXfs (instance method)">- (SimpleTypedList) <strong>cellXfs</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The collection of master formatting records.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#dxfs-instance_method" title="#dxfs (instance method)">- (SimpleTypedList) <strong>dxfs</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The collection of non-cell formatting records used in the worksheet.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fills-instance_method" title="#fills (instance method)">- (SimpleTypedList) <strong>fills</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The collection of fills used in this workbook.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fonts-instance_method" title="#fonts (instance method)">- (SimpleTypedList) <strong>fonts</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The collection of fonts used in this workbook.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#numFmts-instance_method" title="#numFmts (instance method)">- (SimpleTypedList) <strong>numFmts</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+numFmts for your styles.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tableStyles-instance_method" title="#tableStyles (instance method)">- (SimpleTypedList) <strong>tableStyles</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The collection of table styles that will be available to the user in the
+excel UI.
+</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_style-instance_method" title="#add_style (instance method)">- (Integer) <strong>add_style</strong>(options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Drastically simplifies style creation and management.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Styles) <strong>initialize</strong> </a>
+    
+
+    
+  </span>
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Creates a new Styles object and prepopulates it with the requires objects
+to generate a valid package style part.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_xml-instance_method" title="#to_xml (instance method)">- (String) <strong>to_xml</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Serializes the styles document.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <p class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Axlsx::Styles (class)">Styles</a></span></tt>) <strong>initialize</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Creates a new Styles object and prepopulates it with the requires objects
+to generate a valid package style part.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+118
+119
+120</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/styles.rb', line 118</span>
+
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='rparen token'>)</span>
+  <span class='load_default_styles identifier id'>load_default_styles</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <span id="borders-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="borders-instance_method">
+  
+    - (<tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>) <strong>borders</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+The recommended way to manage styles is with add_style
+</p>
+</div>
+  </div>
+
+<p>
+The collection of borders used in this workbook Axlsx predefines
+THIN_BORDER which can be used to put a border around all of your cells.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#add_style-instance_method" title="Axlsx::Styles#add_style (method)">#add_style</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+85
+86
+87</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/styles.rb', line 85</span>
+
+<span class='def def kw'>def</span> <span class='borders identifier id'>borders</span>
+  <span class='@borders ivar id'>@borders</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="cellStyles-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="cellStyles-instance_method">
+  
+    - (<tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>) <strong>cellStyles</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+The recommended way to manage styles is with add_style
+</p>
+</div>
+  </div>
+
+<p>
+The collection of named styles, referencing cellStyleXfs items in the
+workbook.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#add_style-instance_method" title="Axlsx::Styles#add_style (method)">#add_style</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+97
+98
+99</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/styles.rb', line 97</span>
+
+<span class='def def kw'>def</span> <span class='cellStyles identifier id'>cellStyles</span>
+  <span class='@cellStyles ivar id'>@cellStyles</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="cellStyleXfs-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="cellStyleXfs-instance_method">
+  
+    - (<tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>) <strong>cellStyleXfs</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+The recommended way to manage styles is with add_style
+</p>
+</div>
+  </div>
+
+<p>
+The collection of master formatting records for named cell styles, which
+means records defined in cellStyles, in the workbook
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#add_style-instance_method" title="Axlsx::Styles#add_style (method)">#add_style</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+91
+92
+93</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/styles.rb', line 91</span>
+
+<span class='def def kw'>def</span> <span class='cellStyleXfs identifier id'>cellStyleXfs</span>
+  <span class='@cellStyleXfs ivar id'>@cellStyleXfs</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="cellXfs-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="cellXfs-instance_method">
+  
+    - (<tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>) <strong>cellXfs</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+The recommended way to manage styles is with add_style
+</p>
+</div>
+  </div>
+
+<p>
+The collection of master formatting records. This is the list that you will
+actually use in styling a workbook.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#add_style-instance_method" title="Axlsx::Styles#add_style (method)">#add_style</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+103
+104
+105</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/styles.rb', line 103</span>
+
+<span class='def def kw'>def</span> <span class='cellXfs identifier id'>cellXfs</span>
+  <span class='@cellXfs ivar id'>@cellXfs</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="dxfs-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="dxfs-instance_method">
+  
+    - (<tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>) <strong>dxfs</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+The recommended way to manage styles is with add_style
+</p>
+</div>
+  </div>
+
+<p>
+The collection of non-cell formatting records used in the worksheet.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#add_style-instance_method" title="Axlsx::Styles#add_style (method)">#add_style</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+109
+110
+111</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/styles.rb', line 109</span>
+
+<span class='def def kw'>def</span> <span class='dxfs identifier id'>dxfs</span>
+  <span class='@dxfs ivar id'>@dxfs</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="fills-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="fills-instance_method">
+  
+    - (<tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>) <strong>fills</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+The recommended way to manage styles is with add_style
+</p>
+</div>
+  </div>
+
+<p>
+The collection of fills used in this workbook
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#add_style-instance_method" title="Axlsx::Styles#add_style (method)">#add_style</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+78
+79
+80</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/styles.rb', line 78</span>
+
+<span class='def def kw'>def</span> <span class='fills identifier id'>fills</span>
+  <span class='@fills ivar id'>@fills</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="fonts-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="fonts-instance_method">
+  
+    - (<tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>) <strong>fonts</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+The recommended way to manage styles is with add_style
+</p>
+</div>
+  </div>
+
+<p>
+The collection of fonts used in this workbook
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#add_style-instance_method" title="Axlsx::Styles#add_style (method)">#add_style</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+72
+73
+74</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/styles.rb', line 72</span>
+
+<span class='def def kw'>def</span> <span class='fonts identifier id'>fonts</span>
+  <span class='@fonts ivar id'>@fonts</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="numFmts-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="numFmts-instance_method">
+  
+    - (<tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>) <strong>numFmts</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+The recommended way to manage styles is with add_style
+</p>
+</div>
+  </div>
+
+<p>
+numFmts for your styles.
+</p>
+<pre class="code">
+ <span class='The constant id'>The</span> <span class='default identifier id'>default</span> <span class='styles identifier id'>styles</span><span class='comma token'>,</span> <span class='which identifier id'>which</span> <span class='change identifier id'>change</span> <span class='based identifier id'>based</span> <span class='on identifier id'>on</span> <span class='the identifier id'>the</span> <span class='system identifier id'>system</span> <span class='local identifier id'>local</span><span class='comma token'>,</span> <span class='are identifier id'>are</span> <span class='as identifier id'>as</span> <span class='follows identifier id'>follows</span><span class='dot token'>.</span>
+ <span class='id identifier id'>id</span> <span class='formatCode identifier id'>formatCode</span>
+  <span class='integer val'>0</span> <span class='General constant id'>General</span>
+  <span class='integer val'>1</span> <span class='integer val'>0</span>
+  <span class='integer val'>2</span> <span class='integer val'>0</span><span class='integer val'>.00</span>
+  <span class='integer val'>3</span> <span class='comment val'>#,##0</span>
+  <span class='integer val'>4</span> <span class='comment val'>#,##0.00</span>
+  <span class='integer val'>9</span> <span class='integer val'>0</span><span class='mod op'>%</span>
+  <span class='integer val'>10</span> <span class='integer val'>0</span><span class='integer val'>.00</span><span class='mod op'>%</span>
+  <span class='integer val'>11</span> <span class='integer val'>0</span><span class='float val'>.00E+00</span>
+  <span class='integer val'>12</span> <span class='comment val'>#   ?/?</span>
+  <span class='integer val'>13</span> <span class='comment val'>#   ??/??</span>
+  <span class='integer val'>14</span> <span class='mm identifier id'>mm</span><span class='minus op'>-</span><span class='dd identifier id'>dd</span><span class='minus op'>-</span><span class='yy identifier id'>yy</span>
+  <span class='integer val'>15</span> <span class='d identifier id'>d</span><span class='minus op'>-</span><span class='mmm identifier id'>mmm</span><span class='minus op'>-</span><span class='yy identifier id'>yy</span>
+  <span class='integer val'>16</span> <span class='d identifier id'>d</span><span class='minus op'>-</span><span class='mmm identifier id'>mmm</span>
+  <span class='integer val'>17</span> <span class='mmm identifier id'>mmm</span><span class='minus op'>-</span><span class='yy identifier id'>yy</span>
+  <span class='integer val'>18</span> <span class='h identifier id'>h</span><span class='symbol val'>:mm</span> <span class='AM constant id'>AM</span><span class='div op'>/</span><span class='PM constant id'>PM</span>
+  <span class='integer val'>19</span> <span class='h identifier id'>h</span><span class='symbol val'>:mm</span><span class='symbol val'>:ss</span> <span class='AM constant id'>AM</span><span class='div op'>/</span><span class='PM constant id'>PM</span>
+  <span class='integer val'>20</span> <span class='h identifier id'>h</span><span class='symbol val'>:mm</span>
+  <span class='integer val'>21</span> <span class='h identifier id'>h</span><span class='symbol val'>:mm</span><span class='symbol val'>:ss</span>
+  <span class='integer val'>22</span> <span class='m identifier id'>m</span><span class='div op'>/</span><span class='d identifier id'>d</span><span class='div op'>/</span><span class='yy identifier id'>yy</span> <span class='h identifier id'>h</span><span class='symbol val'>:mm</span>
+  <span class='integer val'>37</span> <span class='comment val'>#,##0 ;(#,##0)</span>
+  <span class='integer val'>38</span> <span class='comment val'>#,##0 ;[Red](#,##0)</span>
+  <span class='integer val'>39</span> <span class='comment val'>#,##0.00;(#,##0.00)</span>
+  <span class='integer val'>40</span> <span class='comment val'>#,##0.00;[Red](#,##0.00)</span>
+  <span class='integer val'>45</span> <span class='mm identifier id'>mm</span><span class='symbol val'>:ss</span>
+  <span class='integer val'>46</span> <span class='lbrack token'>[</span><span class='h identifier id'>h</span><span class='rbrack token'>]</span><span class='symbol val'>:mm</span><span class='symbol val'>:ss</span>
+  <span class='integer val'>47</span> <span class='mmss identifier id'>mmss</span><span class='integer val'>.0</span>
+  <span class='integer val'>48</span> <span class='comment val'>##0.0E+0</span>
+  <span class='integer val'>49</span> @
+ <span class='Axlsx constant id'>Axlsx</span> <span class='also identifier id'>also</span> <span class='defines identifier id'>defines</span> <span class='the identifier id'>the</span> <span class='following identifier id'>following</span> <span class='constants identifier id'>constants</span> <span class='which identifier id'>which</span> <span class='you identifier id'>you</span> <span class='can identifier id'>can</span> <span class='use identifier id'>use</span> <span class='in in kw'>in</span> <span class='add_style identifier id'>add_style</span><span class='dot token'>.</span>
+    <span class='NUM_FMT_PERCENT constant id'>NUM_FMT_PERCENT</span> <span class='formats identifier id'>formats</span> <span class='to identifier id'>to</span> <span class='string val'>&quot;0%&quot;</span>
+    <span class='NUM_FMT_YYYYMMDD constant id'>NUM_FMT_YYYYMMDD</span> <span class='formats identifier id'>formats</span> <span class='to identifier id'>to</span> <span class='string val'>&quot;yyyy/mm/dd&quot;</span>
+    <span class='NUM_FMT_YYYYMMDDHHMMSS constant id'>NUM_FMT_YYYYMMDDHHMMSS</span>  <span class='formats identifier id'>formats</span> <span class='to identifier id'>to</span> <span class='string val'>&quot;yyyy/mm/dd hh:mm:ss&quot;</span>
+</pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>Open XML Part 1 - 18.8.31 for more information on creating number formats</li>
+    
+      <li><span class='object_link'><a href="#add_style-instance_method" title="Axlsx::Styles#add_style (method)">#add_style</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+66
+67
+68</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/styles.rb', line 66</span>
+
+<span class='def def kw'>def</span> <span class='numFmts identifier id'>numFmts</span>
+  <span class='@numFmts ivar id'>@numFmts</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="tableStyles-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="tableStyles-instance_method">
+  
+    - (<tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>) <strong>tableStyles</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+The recommended way to manage styles is with add_style
+</p>
+</div>
+  </div>
+
+<p>
+The collection of table styles that will be available to the user in the
+excel UI
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#add_style-instance_method" title="Axlsx::Styles#add_style (method)">#add_style</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+115
+116
+117</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/styles.rb', line 115</span>
+
+<span class='def def kw'>def</span> <span class='tableStyles identifier id'>tableStyles</span>
+  <span class='@tableStyles ivar id'>@tableStyles</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="add_style-instance_method">
+  
+    - (<tt>Integer</tt>) <strong>add_style</strong>(options = {}) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Drastically simplifies style creation and management.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'><p>
+You Got Style
+</p>
+</div></h4>
+      <pre class="example code"><span class='require identifier id'>require</span> <span class='string val'>&quot;rubygems&quot;</span> <span class='comment val'># if that is your preferred way to manage gems!</span>
+<span class='require identifier id'>require</span> <span class='string val'>&quot;axlsx&quot;</span>
+
+<span class='p identifier id'>p</span> <span class='assign token'>=</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+<span class='ws identifier id'>ws</span> <span class='assign token'>=</span> <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='add_worksheet identifier id'>add_worksheet</span>
+
+<span class='comment val'># black text on a white background at 14pt with thin borders!</span>
+<span class='title identifier id'>title</span> <span class='assign token'>=</span> <span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='style identifier id'>style</span><span class='dot token'>.</span><span class='add_style identifier id'>add_style</span><span class='lparen token'>(</span><span class='symbol val'>:bg_color</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;FFFF0000&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:fg_color=</span><span class='gt op'>&gt;</span><span class='string val'>&quot;#FF000000&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:sz=</span><span class='gt op'>&gt;</span><span class='integer val'>14</span><span class='comma token'>,</span>  <span class='symbol val'>:border=</span><span class='gt op'>&gt;</span><span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='STYLE_THIN_BORDER constant id'>STYLE_THIN_BORDER</span>
+
+<span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='symbol val'>:values</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;Least Popular Pets&quot;</span><span class='rbrack token'>]</span>
+<span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='symbol val'>:values</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Dry Skinned Reptiles&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Bald Cats&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Violent Parrots&quot;</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:style=</span><span class='gt op'>&gt;</span><span class='title identifier id'>title</span>
+<span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='symbol val'>:values</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;Votes&quot;</span><span class='comma token'>,</span> <span class='integer val'>6</span><span class='comma token'>,</span> <span class='integer val'>4</span><span class='comma token'>,</span> <span class='integer val'>1</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:style=</span><span class='gt op'>&gt;</span><span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='STYLE_THIN_BORDER constant id'>STYLE_THIN_BORDER</span>
+<span class='f identifier id'>f</span> <span class='assign token'>=</span> <span class='File constant id'>File</span><span class='dot token'>.</span><span class='open identifier id'>open</span><span class='lparen token'>(</span><span class='string val'>'example_you_got_style.xlsx'</span><span class='comma token'>,</span> <span class='string val'>'w'</span><span class='rparen token'>)</span>
+<span class='p identifier id'>p</span><span class='dot token'>.</span><span class='serialize identifier id'>serialize</span><span class='lparen token'>(</span><span class='f identifier id'>f</span><span class='rparen token'>)</span>
+</pre>
+    
+      <h4><div class='inline'><p>
+Styling specifically
+</p>
+</div></h4>
+      <pre class="example code"><span class='comment val'># an example of applying specific styles to specific cells</span>
+<span class='require identifier id'>require</span> <span class='string val'>&quot;rubygems&quot;</span> <span class='comment val'># if that is your preferred way to manage gems!</span>
+<span class='require identifier id'>require</span> <span class='string val'>&quot;axlsx&quot;</span>
+
+<span class='p identifier id'>p</span> <span class='assign token'>=</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+<span class='ws identifier id'>ws</span> <span class='assign token'>=</span> <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='add_worksheet identifier id'>add_worksheet</span>
+
+<span class='comment val'># define your styles</span>
+<span class='title identifier id'>title</span> <span class='assign token'>=</span> <span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='style identifier id'>style</span><span class='dot token'>.</span><span class='add_style identifier id'>add_style</span><span class='lparen token'>(</span><span class='symbol val'>:bg_color</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;FFFF0000&quot;</span><span class='comma token'>,</span> 
+                           <span class='symbol val'>:fg_color=</span><span class='gt op'>&gt;</span><span class='string val'>&quot;#FF000000&quot;</span><span class='comma token'>,</span>
+                           <span class='symbol val'>:border=</span><span class='gt op'>&gt;</span><span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='STYLE_THIN_BORDER constant id'>STYLE_THIN_BORDER</span><span class='comma token'>,</span> 
+                           <span class='symbol val'>:alignment=</span><span class='gt op'>&gt;</span><span class='lbrace token'>{</span><span class='symbol val'>:horizontal</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='symbol val'>:center</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+
+<span class='date_time identifier id'>date_time</span> <span class='assign token'>=</span> <span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='style identifier id'>style</span><span class='dot token'>.</span><span class='add_style identifier id'>add_style</span><span class='lparen token'>(</span><span class='symbol val'>:num_fmt</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='NUM_FMT_YYYYMMDDHHMMSS constant id'>NUM_FMT_YYYYMMDDHHMMSS</span><span class='comma token'>,</span>
+                               <span class='symbol val'>:border=</span><span class='gt op'>&gt;</span><span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='STYLE_THIN_BORDER constant id'>STYLE_THIN_BORDER</span><span class='rparen token'>)</span>
+
+<span class='percent identifier id'>percent</span> <span class='assign token'>=</span> <span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='style identifier id'>style</span><span class='dot token'>.</span><span class='add_style identifier id'>add_style</span><span class='lparen token'>(</span><span class='symbol val'>:num_fmt</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='NUM_FMT_PERCENT constant id'>NUM_FMT_PERCENT</span><span class='comma token'>,</span> 
+                             <span class='symbol val'>:border=</span><span class='gt op'>&gt;</span><span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='STYLE_THIN_BORDER constant id'>STYLE_THIN_BORDER</span><span class='rparen token'>)</span>
+
+<span class='currency identifier id'>currency</span> <span class='assign token'>=</span> <span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='style identifier id'>style</span><span class='dot token'>.</span><span class='add_style identifier id'>add_style</span><span class='lparen token'>(</span><span class='symbol val'>:format_code=</span><span class='gt op'>&gt;</span><span class='string val'>&quot;¥#,##0;[Red]¥-#,##0&quot;</span><span class='comma token'>,</span>
+                              <span class='symbol val'>:border=</span><span class='gt op'>&gt;</span><span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='STYLE_THIN_BORDER constant id'>STYLE_THIN_BORDER</span><span class='rparen token'>)</span>
+
+<span class='comment val'># build your rows</span>
+<span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='symbol val'>:values</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;Genreated At:&quot;</span><span class='comma token'>,</span> <span class='Time constant id'>Time</span><span class='dot token'>.</span><span class='now identifier id'>now</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:styles=</span><span class='gt op'>&gt;</span><span class='lbrack token'>[</span><span class='nil nil kw'>nil</span><span class='comma token'>,</span> <span class='date_time identifier id'>date_time</span><span class='rbrack token'>]</span>
+<span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='symbol val'>:values</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;Previous Year Quarterly Profits (JPY)&quot;</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:style=</span><span class='gt op'>&gt;</span><span class='title identifier id'>title</span>
+<span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='symbol val'>:values</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;Quarter&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Profit&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;% of Total&quot;</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:style=</span><span class='gt op'>&gt;</span><span class='title identifier id'>title</span>
+<span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='symbol val'>:values</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;Q1&quot;</span><span class='comma token'>,</span> <span class='integer val'>4000</span><span class='comma token'>,</span> <span class='integer val'>40</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:style=</span><span class='gt op'>&gt;</span><span class='lbrack token'>[</span><span class='title identifier id'>title</span><span class='comma token'>,</span> <span class='currency identifier id'>currency</span><span class='comma token'>,</span> <span class='percent identifier id'>percent</span><span class='rbrack token'>]</span>
+<span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='symbol val'>:values</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;Q2&quot;</span><span class='comma token'>,</span> <span class='integer val'>3000</span><span class='comma token'>,</span> <span class='integer val'>30</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:style=</span><span class='gt op'>&gt;</span><span class='lbrack token'>[</span><span class='title identifier id'>title</span><span class='comma token'>,</span> <span class='currency identifier id'>currency</span><span class='comma token'>,</span> <span class='percent identifier id'>percent</span><span class='rbrack token'>]</span>
+<span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='symbol val'>:values</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;Q3&quot;</span><span class='comma token'>,</span> <span class='integer val'>1000</span><span class='comma token'>,</span> <span class='integer val'>10</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:style=</span><span class='gt op'>&gt;</span><span class='lbrack token'>[</span><span class='title identifier id'>title</span><span class='comma token'>,</span> <span class='currency identifier id'>currency</span><span class='comma token'>,</span> <span class='percent identifier id'>percent</span><span class='rbrack token'>]</span>
+<span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='symbol val'>:values</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;Q4&quot;</span><span class='comma token'>,</span> <span class='integer val'>2000</span><span class='comma token'>,</span> <span class='integer val'>20</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:style=</span><span class='gt op'>&gt;</span><span class='lbrack token'>[</span><span class='title identifier id'>title</span><span class='comma token'>,</span> <span class='currency identifier id'>currency</span><span class='comma token'>,</span> <span class='percent identifier id'>percent</span><span class='rbrack token'>]</span>
+<span class='f identifier id'>f</span> <span class='assign token'>=</span> <span class='File constant id'>File</span><span class='dot token'>.</span><span class='open identifier id'>open</span><span class='lparen token'>(</span><span class='string val'>'example_you_got_style.xlsx'</span><span class='comma token'>,</span> <span class='string val'>'w'</span><span class='rparen token'>)</span>
+<span class='p identifier id'>p</span><span class='dot token'>.</span><span class='serialize identifier id'>serialize</span><span class='lparen token'>(</span><span class='f identifier id'>f</span><span class='rparen token'>)</span>
+</pre>
+    
+  </div>
+<h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+a customizable set of options
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    <h3>Options Hash (<tt>options</tt>):</h3>
+    <ul class="option">
+      
+        <li>
+          <span class="name">fg_color</span>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+The text color
+</p>
+</div>
+        </li>
+      
+        <li>
+          <span class="name">sz</span>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+The text size
+</p>
+</div>
+        </li>
+      
+        <li>
+          <span class="name">b</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+Indicates if the text should be bold
+</p>
+</div>
+        </li>
+      
+        <li>
+          <span class="name">i</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+Indicates if the text should be italicised
+</p>
+</div>
+        </li>
+      
+        <li>
+          <span class="name">strike</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+Indicates if the text should be rendered with a strikethrough
+</p>
+</div>
+        </li>
+      
+        <li>
+          <span class="name">strike</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+Indicates if the text should be rendered with a shadow
+</p>
+</div>
+        </li>
+      
+        <li>
+          <span class="name">charset</span>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+The character set to use.
+</p>
+</div>
+        </li>
+      
+        <li>
+          <span class="name">family</span>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+The font family to use.
+</p>
+</div>
+        </li>
+      
+        <li>
+          <span class="name">name</span>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+The name of the font to use
+</p>
+</div>
+        </li>
+      
+        <li>
+          <span class="name">num_fmt</span>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+The number format to apply
+</p>
+</div>
+        </li>
+      
+        <li>
+          <span class="name">format_code</span>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+The formatting to apply. If this is specified, num_fmt is ignored.
+</p>
+</div>
+        </li>
+      
+        <li>
+          <span class="name">border</span>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+The border style to use.
+</p>
+</div>
+        </li>
+      
+        <li>
+          <span class="name">bg_color</span>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+The background color to apply to the cell
+</p>
+</div>
+        </li>
+      
+        <li>
+          <span class="name">hidden</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+Indicates if the cell should be hidden
+</p>
+</div>
+        </li>
+      
+        <li>
+          <span class="name">locked</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+Indicates if the cell should be locked
+</p>
+</div>
+        </li>
+      
+        <li>
+          <span class="name">alignment</span>
+          <span class="type">(<tt>Hash</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+A hash defining any of the attributes used in CellAlignment
+</p>
+</div>
+        </li>
+      
+    </ul>
+  
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Raises:</h3>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ArgumentError</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="CellAlignment.html" title="Axlsx::CellAlignment (class)">CellAlignment</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/styles.rb', line 191</span>
+
+<span class='def def kw'>def</span> <span class='add_style identifier id'>add_style</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+ 
+ <span class='numFmtId identifier id'>numFmtId</span> <span class='assign token'>=</span> <span class='if if kw'>if</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:format_code</span><span class='rbrack token'>]</span>
+              <span class='n identifier id'>n</span> <span class='assign token'>=</span> <span class='@numFmts ivar id'>@numFmts</span><span class='dot token'>.</span><span class='map identifier id'>map</span><span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='f identifier id'>f</span><span class='bitor op'>|</span> <span class='f identifier id'>f</span><span class='dot token'>.</span><span class='numFmtId identifier id'>numFmtId</span> <span class='rbrace token'>}</span><span class='dot token'>.</span><span class='max identifier id'>max</span> <span class='plus op'>+</span> <span class='integer val'>1</span>
+              <span class='numFmts identifier id'>numFmts</span> <span class='lshft op'>&lt;&lt;</span> <span class='NumFmt constant id'>NumFmt</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:numFmtId</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='n identifier id'>n</span><span class='comma token'>,</span> <span class='symbol val'>:formatCode=</span><span class='gt op'>&gt;</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:format_code</span><span class='rbrack token'>]</span><span class='rparen token'>)</span>
+              <span class='n identifier id'>n</span>
+            <span class='else else kw'>else</span>
+              <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:num_fmt</span><span class='rbrack token'>]</span> <span class='orop op'>||</span> <span class='integer val'>0</span>
+            <span class='end end kw'>end</span>
+
+ <span class='borderId identifier id'>borderId</span> <span class='assign token'>=</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:border</span><span class='rbrack token'>]</span> <span class='orop op'>||</span> <span class='integer val'>0</span>
+ <span class='raise identifier id'>raise</span> <span class='ArgumentError constant id'>ArgumentError</span><span class='comma token'>,</span> <span class='string val'>&quot;Invalid borderId&quot;</span> <span class='unless unless_mod kw'>unless</span> <span class='borderId identifier id'>borderId</span> <span class='lt op'>&lt;</span> <span class='borders identifier id'>borders</span><span class='dot token'>.</span><span class='size identifier id'>size</span>
+
+ <span class='fill identifier id'>fill</span> <span class='assign token'>=</span> <span class='if if kw'>if</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:bg_color</span><span class='rbrack token'>]</span>
+          <span class='color identifier id'>color</span> <span class='assign token'>=</span> <span class='Color constant id'>Color</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:rgb=</span><span class='gt op'>&gt;</span><span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:bg_color</span><span class='rbrack token'>]</span><span class='rparen token'>)</span>
+          <span class='pattern identifier id'>pattern</span> <span class='assign token'>=</span> <span class='PatternFill constant id'>PatternFill</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:patternType</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span><span class='symbol val'>:solid</span><span class='comma token'>,</span> <span class='symbol val'>:fgColor=</span><span class='gt op'>&gt;</span><span class='color identifier id'>color</span><span class='rparen token'>)</span>
+          <span class='fills identifier id'>fills</span> <span class='lshft op'>&lt;&lt;</span> <span class='Fill constant id'>Fill</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='pattern identifier id'>pattern</span><span class='rparen token'>)</span>   
+        <span class='else else kw'>else</span>
+          <span class='integer val'>0</span>
+        <span class='end end kw'>end</span>
+
+ <span class='fontId identifier id'>fontId</span> <span class='assign token'>=</span> <span class='if if kw'>if</span> <span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='dot token'>.</span><span class='values_at identifier id'>values_at</span><span class='lparen token'>(</span><span class='symbol val'>:fg_color</span><span class='comma token'>,</span> <span class='symbol val'>:sz</span><span class='comma token'>,</span> <span class='symbol val'>:b</span><span class='comma token'>,</span> <span class='symbol val'>:i</span><span class='comma token'>,</span> <span class='symbol val'>:strike</span><span class='comma token'>,</span> <span class='symbol val'>:outline</span><span class='comma token'>,</span> <span class='symbol val'>:shadow</span><span class='comma token'>,</span> <span class='symbol val'>:charset</span><span class='comma token'>,</span> <span class='symbol val'>:family</span><span class='comma token'>,</span> <span class='symbol val'>:font_name</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='length identifier id'>length</span><span class='rparen token'>)</span>
+            <span class='font identifier id'>font</span> <span class='assign token'>=</span> <span class='Font constant id'>Font</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='rparen token'>)</span>
+            <span class='lbrack token'>[</span><span class='symbol val'>:b</span><span class='comma token'>,</span> <span class='symbol val'>:i</span><span class='comma token'>,</span> <span class='symbol val'>:strike</span><span class='comma token'>,</span> <span class='symbol val'>:outline</span><span class='comma token'>,</span> <span class='symbol val'>:shadow</span><span class='comma token'>,</span> <span class='symbol val'>:charset</span><span class='comma token'>,</span> <span class='symbol val'>:family</span><span class='comma token'>,</span> <span class='symbol val'>:sz</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='k identifier id'>k</span><span class='bitor op'>|</span> <span class='font identifier id'>font</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='dstring node'>&quot;#{k}=&quot;</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='k identifier id'>k</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='k identifier id'>k</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span> <span class='rbrace token'>}</span>
+            <span class='font identifier id'>font</span><span class='dot token'>.</span><span class='color identifier id'>color</span> <span class='assign token'>=</span> <span class='Color constant id'>Color</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:rgb</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:fg_color</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:fg_color</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+            <span class='font identifier id'>font</span><span class='dot token'>.</span><span class='name identifier id'>name</span> <span class='assign token'>=</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:font_name</span><span class='rbrack token'>]</span> <span class='unless unless_mod kw'>unless</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:font_name</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+            <span class='fonts identifier id'>fonts</span> <span class='lshft op'>&lt;&lt;</span> <span class='font identifier id'>font</span>
+          <span class='else else kw'>else</span>
+            <span class='integer val'>0</span> 
+          <span class='end end kw'>end</span>
+
+  <span class='applyProtection identifier id'>applyProtection</span> <span class='assign token'>=</span> <span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:hidden</span><span class='rbrack token'>]</span> <span class='orop op'>||</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:locked</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='question op'>?</span> <span class='integer val'>1</span> <span class='colon op'>:</span> <span class='integer val'>0</span>
+  
+ <span class='xf identifier id'>xf</span> <span class='assign token'>=</span> <span class='Xf constant id'>Xf</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:fillId</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='fill identifier id'>fill</span><span class='comma token'>,</span> <span class='symbol val'>:fontId=</span><span class='gt op'>&gt;</span><span class='fontId identifier id'>fontId</span><span class='comma token'>,</span> <span class='symbol val'>:applyFill=</span><span class='gt op'>&gt;</span><span class='integer val'>1</span><span class='comma token'>,</span> <span class='symbol val'>:applyFont=</span><span class='gt op'>&gt;</span><span class='integer val'>1</span><span class='comma token'>,</span> <span class='symbol val'>:numFmtId=</span><span class='gt op'>&gt;</span><span class='numFmtId identifier id'>numFmtId</span><span class='comma token'>,</span> <span class='symbol val'>:borderId=</span><span class='gt op'>&gt;</span><span class='borderId identifier id'>borderId</span><span class='comma token'>,</span> <span class='symbol val'>:applyProtection=</span><span class='gt op'>&gt;</span><span class='applyProtection identifier id'>applyProtection</span><span class='rparen token'>)</span>
+
+ <span class='if if kw'>if</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:alignment</span><span class='rbrack token'>]</span>
+   <span class='xf identifier id'>xf</span><span class='dot token'>.</span><span class='alignment identifier id'>alignment</span> <span class='assign token'>=</span> <span class='CellAlignment constant id'>CellAlignment</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:alignment</span><span class='rbrack token'>]</span><span class='rparen token'>)</span>
+ <span class='end end kw'>end</span>
+ 
+ <span class='if if kw'>if</span> <span class='applyProtection identifier id'>applyProtection</span>
+   <span class='xf identifier id'>xf</span><span class='dot token'>.</span><span class='protection identifier id'>protection</span> <span class='assign token'>=</span> <span class='CellProtection constant id'>CellProtection</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='rparen token'>)</span>
+ <span class='end end kw'>end</span>
+
+ <span class='cellXfs identifier id'>cellXfs</span> <span class='lshft op'>&lt;&lt;</span> <span class='xf identifier id'>xf</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="to_xml-instance_method">
+  
+    - (<tt>String</tt>) <strong>to_xml</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Serializes the styles document
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/styles.rb', line 239</span>
+
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='rparen token'>)</span>
+  <span class='builder identifier id'>builder</span> <span class='assign token'>=</span> <span class='Nokogiri constant id'>Nokogiri</span><span class='colon2 op'>::</span><span class='XML constant id'>XML</span><span class='colon2 op'>::</span><span class='Builder constant id'>Builder</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:encoding</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='ENCODING constant id'>ENCODING</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='xml identifier id'>xml</span><span class='bitor op'>|</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='styleSheet identifier id'>styleSheet</span><span class='lparen token'>(</span><span class='symbol val'>:xmlns</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='XML_NS constant id'>XML_NS</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+      <span class='lbrack token'>[</span><span class='symbol val'>:numFmts</span><span class='comma token'>,</span> <span class='symbol val'>:fonts</span><span class='comma token'>,</span> <span class='symbol val'>:fills</span><span class='comma token'>,</span> <span class='symbol val'>:borders</span><span class='comma token'>,</span> <span class='symbol val'>:cellStyleXfs</span><span class='comma token'>,</span> <span class='symbol val'>:cellXfs</span><span class='comma token'>,</span> <span class='symbol val'>:dxfs</span><span class='comma token'>,</span> <span class='symbol val'>:tableStyles</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='key identifier id'>key</span><span class='bitor op'>|</span>
+        <span class='self self kw'>self</span><span class='dot token'>.</span><span class='instance_values identifier id'>instance_values</span><span class='lbrack token'>[</span><span class='key identifier id'>key</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+      <span class='end end kw'>end</span>
+    <span class='rbrace token'>}</span>
+  <span class='end end kw'>end</span>
+  <span class='builder identifier id'>builder</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Sun Nov 20 23:44:06 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.3 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>

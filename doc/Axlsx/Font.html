@@ -1,0 +1,1554 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Axlsx::Font
+  
+    &mdash; Documentation by YARD 0.7.3
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (F)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../Axlsx.html" title="Axlsx (module)">Axlsx</a></span></span>
+     &raquo; 
+    <span class="title">Font</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Axlsx::Font
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Axlsx::Font</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/axlsx/stylesheet/font.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+The recommended way to manage fonts, and other styles is Styles#add_style
+</p>
+</div>
+  </div>
+
+<p>
+The Font class details a font instance for use in styling cells.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="Styles.html#add_style-instance_method" title="Axlsx::Styles#add_style (method)">Styles#add_style</a></span></li>
+    
+  </ul>
+
+</div>
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#b-instance_method" title="#b (instance method)">- (Boolean) <strong>b</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Indicates if the font should be rendered in <b>bold</b>.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#charset-instance_method" title="#charset (instance method)">- (Integer) <strong>charset</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The charset of the font.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#color-instance_method" title="#color (instance method)">- (Color) <strong>color</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The color of the font.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#condense-instance_method" title="#condense (instance method)">- (Boolean) <strong>condense</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Indicates if the font should be condensed.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#extend-instance_method" title="#extend (instance method)">- (Boolean) <strong>extend</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The font&#8217;s extend property.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#family-instance_method" title="#family (instance method)">- (Integer) <strong>family</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The font&#8217;s family.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#i-instance_method" title="#i (instance method)">- (Boolean) <strong>i</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Indicates if the font should be rendered italicized.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">- (String) <strong>name</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The name of the font.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#outline-instance_method" title="#outline (instance method)">- (Boolean) <strong>outline</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Indicates if the font should be rendered with an outline.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#shadow-instance_method" title="#shadow (instance method)">- (Boolean) <strong>shadow</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Indicates if the font should be rendered with a shadow.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#strike-instance_method" title="#strike (instance method)">- (Boolean) <strong>strike</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Indicates if the font should be rendered with a strikthrough.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sz-instance_method" title="#sz (instance method)">- (Integer) <strong>sz</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The size of the font.
+</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Font) <strong>initialize</strong>(options = {}) </a>
+    
+
+    
+  </span>
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Creates a new Font.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_xml-instance_method" title="#to_xml (instance method)">- (String) <strong>to_xml</strong>(xml) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Serializes the fill.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <p class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Axlsx::Font (class)">Font</a></span></tt>) <strong>initialize</strong>(options = {}) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Creates a new Font
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+a customizable set of options
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    <h3>Options Hash (<tt>options</tt>):</h3>
+    <ul class="option">
+      
+        <li>
+          <span class="name">name</span>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">charset</span>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">family</span>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">family</span>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">b</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">i</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">strike</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">outline</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">shadow</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">condense</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">extend</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">color</span>
+          <span class="type">(<tt><span class='object_link'><a href="Color.html" title="Axlsx::Color (class)">Color</a></span></tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">sz</span>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+    </ul>
+  
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+98
+99
+100
+101
+102</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/font.rb', line 98</span>
+
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='o identifier id'>o</span><span class='bitor op'>|</span>
+    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='dstring node'>&quot;#{o[0]}=&quot;</span><span class='comma token'>,</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>0</span><span class='rbrack token'>]</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="b=-instance_method"></span>
+      <span id="b-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="b-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>b</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Indicates if the font should be rendered in <b>bold</b>
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+50
+51
+52</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/font.rb', line 50</span>
+
+<span class='def def kw'>def</span> <span class='b identifier id'>b</span>
+  <span class='@b ivar id'>@b</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="charset=-instance_method"></span>
+      <span id="charset-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="charset-instance_method">
+  
+    - (<tt>Integer</tt>) <strong>charset</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+The following values are defined in the OOXML specification and are OS
+dependant values
+</p>
+<pre class="code">
+ <span class='integer val'>0</span>   <span class='ANSI_CHARSET constant id'>ANSI_CHARSET</span>
+ <span class='integer val'>1</span>   <span class='DEFAULT_CHARSET constant id'>DEFAULT_CHARSET</span>
+ <span class='integer val'>2</span>   <span class='SYMBOL_CHARSET constant id'>SYMBOL_CHARSET</span>
+ <span class='integer val'>77</span>  <span class='MAC_CHARSET constant id'>MAC_CHARSET</span>
+ <span class='integer val'>128</span> <span class='SHIFTJIS_CHARSET constant id'>SHIFTJIS_CHARSET</span>
+ <span class='integer val'>129</span> <span class='HANGUL_CHARSET constant id'>HANGUL_CHARSET</span>
+ <span class='integer val'>130</span> <span class='JOHAB_CHARSET constant id'>JOHAB_CHARSET</span>
+ <span class='integer val'>134</span> <span class='GB2312_CHARSET constant id'>GB2312_CHARSET</span>
+ <span class='integer val'>136</span> <span class='CHINESEBIG5_CHARSET constant id'>CHINESEBIG5_CHARSET</span>
+ <span class='integer val'>161</span> <span class='GREEK_CHARSET constant id'>GREEK_CHARSET</span>
+ <span class='integer val'>162</span> <span class='TURKISH_CHARSET constant id'>TURKISH_CHARSET</span>
+ <span class='integer val'>163</span> <span class='VIETNAMESE_CHARSET constant id'>VIETNAMESE_CHARSET</span>
+ <span class='integer val'>177</span> <span class='HEBREW_CHARSET constant id'>HEBREW_CHARSET</span>
+ <span class='integer val'>178</span> <span class='ARABIC_CHARSET constant id'>ARABIC_CHARSET</span>
+ <span class='integer val'>186</span> <span class='BALTIC_CHARSET constant id'>BALTIC_CHARSET</span>
+ <span class='integer val'>204</span> <span class='RUSSIAN_CHARSET constant id'>RUSSIAN_CHARSET</span>
+ <span class='integer val'>222</span> <span class='THAI_CHARSET constant id'>THAI_CHARSET</span>
+ <span class='integer val'>238</span> <span class='EASTEUROPE_CHARSET constant id'>EASTEUROPE_CHARSET</span>
+ <span class='integer val'>255</span> <span class='OEM_CHARSET constant id'>OEM_CHARSET</span>
+</pre>
+</div>
+  </div>
+
+<p>
+The charset of the font
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+33
+34
+35</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/font.rb', line 33</span>
+
+<span class='def def kw'>def</span> <span class='charset identifier id'>charset</span>
+  <span class='@charset ivar id'>@charset</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="color=-instance_method"></span>
+      <span id="color-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="color-instance_method">
+  
+    - (<tt><span class='object_link'><a href="Color.html" title="Axlsx::Color (class)">Color</a></span></tt>) <strong>color</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+The color of the font
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Color.html" title="Axlsx::Color (class)">Color</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+78
+79
+80</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/font.rb', line 78</span>
+
+<span class='def def kw'>def</span> <span class='color identifier id'>color</span>
+  <span class='@color ivar id'>@color</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="condense=-instance_method"></span>
+      <span id="condense-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="condense-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>condense</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Indicates if the font should be condensed
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+70
+71
+72</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/font.rb', line 70</span>
+
+<span class='def def kw'>def</span> <span class='condense identifier id'>condense</span>
+  <span class='@condense ivar id'>@condense</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="extend=-instance_method"></span>
+      <span id="extend-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="extend-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>extend</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+The font&#8217;s extend property
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+74
+75
+76</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/font.rb', line 74</span>
+
+<span class='def def kw'>def</span> <span class='extend identifier id'>extend</span>
+  <span class='@extend ivar id'>@extend</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="family=-instance_method"></span>
+      <span id="family-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="family-instance_method">
+  
+    - (<tt>Integer</tt>) <strong>family</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+The following are defined OOXML specification
+</p>
+<pre class="code">
+ <span class='integer val'>0</span> <span class='Not constant id'>Not</span> <span class='applicable identifier id'>applicable</span><span class='dot token'>.</span>
+ <span class='integer val'>1</span> <span class='Roman constant id'>Roman</span>
+ <span class='integer val'>2</span> <span class='Swiss constant id'>Swiss</span>
+ <span class='integer val'>3</span> <span class='Modern constant id'>Modern</span>
+ <span class='integer val'>4</span> <span class='Script constant id'>Script</span>
+ <span class='integer val'>5</span> <span class='Decorative constant id'>Decorative</span>
+ <span class='float val'>6</span><span class='dot2 op'>..</span><span class='integer val'>14</span> <span class='Reserved constant id'>Reserved</span> <span class='for for kw'>for</span> <span class='future identifier id'>future</span> <span class='use identifier id'>use</span>
+</pre>
+</div>
+  </div>
+
+<p>
+The font&#8217;s family
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+46
+47
+48</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/font.rb', line 46</span>
+
+<span class='def def kw'>def</span> <span class='family identifier id'>family</span>
+  <span class='@family ivar id'>@family</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="i=-instance_method"></span>
+      <span id="i-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="i-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>i</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Indicates if the font should be rendered italicized
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+54
+55
+56</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/font.rb', line 54</span>
+
+<span class='def def kw'>def</span> <span class='i identifier id'>i</span>
+  <span class='@i ivar id'>@i</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="name=-instance_method"></span>
+      <span id="name-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="name-instance_method">
+  
+    - (<tt>String</tt>) <strong>name</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+The name of the font
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+8
+9
+10</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/font.rb', line 8</span>
+
+<span class='def def kw'>def</span> <span class='name identifier id'>name</span>
+  <span class='@name ivar id'>@name</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="outline=-instance_method"></span>
+      <span id="outline-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="outline-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>outline</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Indicates if the font should be rendered with an outline
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+62
+63
+64</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/font.rb', line 62</span>
+
+<span class='def def kw'>def</span> <span class='outline identifier id'>outline</span>
+  <span class='@outline ivar id'>@outline</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="shadow=-instance_method"></span>
+      <span id="shadow-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="shadow-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>shadow</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Indicates if the font should be rendered with a shadow
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+66
+67
+68</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/font.rb', line 66</span>
+
+<span class='def def kw'>def</span> <span class='shadow identifier id'>shadow</span>
+  <span class='@shadow ivar id'>@shadow</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="strike=-instance_method"></span>
+      <span id="strike-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="strike-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>strike</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Indicates if the font should be rendered with a strikthrough
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+58
+59
+60</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/font.rb', line 58</span>
+
+<span class='def def kw'>def</span> <span class='strike identifier id'>strike</span>
+  <span class='@strike ivar id'>@strike</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="sz=-instance_method"></span>
+      <span id="sz-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="sz-instance_method">
+  
+    - (<tt>Integer</tt>) <strong>sz</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+The size of the font.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+82
+83
+84</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/font.rb', line 82</span>
+
+<span class='def def kw'>def</span> <span class='sz identifier id'>sz</span>
+  <span class='@sz ivar id'>@sz</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="to_xml-instance_method">
+  
+    - (<tt>String</tt>) <strong>to_xml</strong>(xml) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Serializes the fill
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>xml</span>
+      
+      
+        <span class='type'>(<tt>Nokogiri::XML::Builder</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The document builder instance this objects xml will be added to.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+120
+121
+122
+123
+124
+125
+126</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/font.rb', line 120</span>
+
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='font identifier id'>font</span> <span class='lbrace token'>{</span>
+    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='instance_values identifier id'>instance_values</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='k identifier id'>k</span><span class='comma token'>,</span> <span class='v identifier id'>v</span><span class='bitor op'>|</span>
+      <span class='v identifier id'>v</span><span class='dot token'>.</span><span class='is_a? fid id'>is_a?</span><span class='lparen token'>(</span><span class='Color constant id'>Color</span><span class='rparen token'>)</span> <span class='question op'>?</span> <span class='v identifier id'>v</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span> <span class='colon op'>:</span> <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='k identifier id'>k</span><span class='comma token'>,</span> <span class='lbrace token'>{</span><span class='symbol val'>:val</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='v identifier id'>v</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>            
+    <span class='end end kw'>end</span>
+  <span class='rbrace token'>}</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Sun Nov 20 23:43:54 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.3 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>

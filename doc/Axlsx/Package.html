@@ -1,0 +1,1293 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Axlsx::Package
+  
+    &mdash; Documentation by YARD 0.7.3
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (P)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../Axlsx.html" title="Axlsx (module)">Axlsx</a></span></span>
+     &raquo; 
+    <span class="title">Package</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Axlsx::Package
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Axlsx::Package</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/axlsx/package.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+Package is responsible for managing all the bits and peices that Open
+Office XML requires to make a valid xlsx document including valdation and
+serialization.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#workbook-instance_method" title="#workbook (instance method)">- (Workbook) <strong>workbook</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The workbook this package will serialize or validate.
+</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#base_content_types-instance_method" title="#base_content_types (instance method)">- (ContentType) <strong>base_content_types</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Creates the minimum content types for generating a valid xlsx document.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#content_types-instance_method" title="#content_types (instance method)">- (ContentType) <strong>content_types</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Appends override objects for drawings, charts, and sheets as they exist in
+your workbook to the default content types.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Package) <strong>initialize</strong>(options = {}) {|_self| ... }</a>
+    
+
+    
+  </span>
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Initializes your package.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parts-instance_method" title="#parts (instance method)">- (Array) <strong>parts</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The parts of a package.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#relationships-instance_method" title="#relationships (instance method)">- (Relationships) <strong>relationships</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Creates the relationships required for a valid xlsx document.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#serialize-instance_method" title="#serialize (instance method)">- (Boolean) <strong>serialize</strong>(output, confirm_valid = false) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Serialize your workbook to disk as an xlsx document.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#validate-instance_method" title="#validate (instance method)">- (Array) <strong>validate</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Validate all parts of the package against xsd schema.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#validate_single_doc-instance_method" title="#validate_single_doc (instance method)">- (Array) <strong>validate_single_doc</strong>(schema, doc) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Performs xsd validation for a signle document.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <p class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Axlsx::Package (class)">Package</a></span></tt>) <strong>initialize</strong>(options = {}) {|_self| ... }
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Initializes your package
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'><p>
+Package.new :author =&gt; &#8216;you!&#8217;, :workbook =&gt; Workbook.new
+</p>
+</div></h4>
+      <pre class="example code">
+</pre>
+    
+  </div>
+<h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+A hash that you can use to specify the author and workbook for this
+package.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    <h3>Options Hash (<tt>options</tt>):</h3>
+    <ul class="option">
+      
+        <li>
+          <span class="name">:author</span>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+The author of the document
+</p>
+</div>
+        </li>
+      
+    </ul>
+  
+
+<h3>Yields:</h3>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>_self</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Yield Parameters:</h3>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>_self</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Axlsx::Package (class)">Axlsx::Package</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the object that the method was called on
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+28
+29
+30
+31
+32</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/package.rb', line 28</span>
+
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='@core ivar id'>@core</span><span class='comma token'>,</span> <span class='@app ivar id'>@app</span> <span class='assign token'>=</span> <span class='Core constant id'>Core</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='comma token'>,</span> <span class='App constant id'>App</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+  <span class='@core ivar id'>@core</span><span class='dot token'>.</span><span class='creator identifier id'>creator</span> <span class='assign token'>=</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:author</span><span class='rbrack token'>]</span> <span class='orop op'>||</span> <span class='@core ivar id'>@core</span><span class='dot token'>.</span><span class='creator identifier id'>creator</span>
+  <span class='yield yield kw'>yield</span> <span class='self self kw'>self</span> <span class='if if_mod kw'>if</span> <span class='block_given? fid id'>block_given?</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="workbook=-instance_method"></span>
+      <span id="workbook-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="workbook-instance_method">
+  
+    - (<tt><span class='object_link'><a href="Workbook.html" title="Axlsx::Workbook (class)">Workbook</a></span></tt>) <strong>workbook</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+As there are multiple ways to instantiate a workbook for the package, here
+are a few examples:
+</p>
+<pre class="code">
+  <span class='comment val'># assign directly during package instanciation</span>
+  <span class='wb identifier id'>wb</span> <span class='assign token'>=</span> <span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:workbook</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='Workbook constant id'>Workbook</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span>
+
+  <span class='comment val'># get a fresh workbook automatically from the package</span>
+  <span class='wb identifier id'>wb</span> <span class='assign token'>=</span> <span class='Pacakge constant id'>Pacakge</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span>
+  <span class='comment val'>#     # set the workbook after creating the package</span>
+  <span class='wb identifier id'>wb</span> <span class='assign token'>=</span> <span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span> <span class='assign token'>=</span> <span class='Workbook constant id'>Workbook</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+</pre>
+</div>
+  </div>
+
+<p>
+The workbook this package will serialize or validate.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Workbook.html" title="Axlsx::Workbook (class)">Workbook</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+If no workbook instance has been assigned with this package a new Workbook
+instance is returned.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Raises:</h3>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'><p>
+ArgumentError if workbook parameter is not a Workbook instance.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+21
+22
+23</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/package.rb', line 21</span>
+
+<span class='def def kw'>def</span> <span class='workbook identifier id'>workbook</span>
+  <span class='@workbook ivar id'>@workbook</span> <span class='orop op'>||</span> <span class='@workbook ivar id'>@workbook</span> <span class='assign token'>=</span> <span class='Workbook constant id'>Workbook</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="base_content_types-instance_method">
+  
+    - (<tt><span class='object_link'><a href="ContentType.html" title="Axlsx::ContentType (class)">ContentType</a></span></tt>) <strong>base_content_types</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Creates the minimum content types for generating a valid xlsx document.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ContentType.html" title="Axlsx::ContentType (class)">ContentType</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/package.rb', line 156</span>
+
+<span class='def def kw'>def</span> <span class='base_content_types identifier id'>base_content_types</span>
+  <span class='c_types identifier id'>c_types</span> <span class='assign token'>=</span> <span class='ContentType constant id'>ContentType</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='rparen token'>)</span>
+  <span class='c_types identifier id'>c_types</span> <span class='lshft op'>&lt;&lt;</span>  <span class='Default constant id'>Default</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:ContentType</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='RELS_CT constant id'>RELS_CT</span><span class='comma token'>,</span> <span class='symbol val'>:Extension</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='RELS_EX constant id'>RELS_EX</span><span class='rparen token'>)</span>
+  <span class='c_types identifier id'>c_types</span> <span class='lshft op'>&lt;&lt;</span>  <span class='Default constant id'>Default</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:Extension</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='XML_EX constant id'>XML_EX</span><span class='comma token'>,</span> <span class='symbol val'>:ContentType</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='XML_CT constant id'>XML_CT</span><span class='rparen token'>)</span>
+  <span class='c_types identifier id'>c_types</span> <span class='lshft op'>&lt;&lt;</span> <span class='Override constant id'>Override</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:PartName</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='dstring node'>&quot;/#{APP_PN}&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:ContentType</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='APP_CT constant id'>APP_CT</span><span class='rparen token'>)</span>
+  <span class='c_types identifier id'>c_types</span> <span class='lshft op'>&lt;&lt;</span> <span class='Override constant id'>Override</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:PartName</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='dstring node'>&quot;/#{CORE_PN}&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:ContentType</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='CORE_CT constant id'>CORE_CT</span><span class='rparen token'>)</span>
+  <span class='c_types identifier id'>c_types</span> <span class='lshft op'>&lt;&lt;</span> <span class='Override constant id'>Override</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:PartName</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='dstring node'>&quot;/xl/#{STYLES_PN}&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:ContentType</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='STYLES_CT constant id'>STYLES_CT</span><span class='rparen token'>)</span>
+  <span class='c_types identifier id'>c_types</span> <span class='lshft op'>&lt;&lt;</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Override constant id'>Override</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:PartName</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='dstring node'>&quot;/#{WORKBOOK_PN}&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:ContentType</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='WORKBOOK_CT constant id'>WORKBOOK_CT</span><span class='rparen token'>)</span>      
+  <span class='c_types identifier id'>c_types</span><span class='dot token'>.</span><span class='lock identifier id'>lock</span>
+  <span class='c_types identifier id'>c_types</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="content_types-instance_method">
+  
+    - (<tt><span class='object_link'><a href="ContentType.html" title="Axlsx::ContentType (class)">ContentType</a></span></tt>) <strong>content_types</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Appends override objects for drawings, charts, and sheets as they exist in
+your workbook to the default content types.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ContentType.html" title="Axlsx::ContentType (class)">ContentType</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/package.rb', line 136</span>
+
+<span class='def def kw'>def</span> <span class='content_types identifier id'>content_types</span>
+  <span class='c_types identifier id'>c_types</span> <span class='assign token'>=</span> <span class='base_content_types identifier id'>base_content_types</span>
+  <span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='drawings identifier id'>drawings</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='drawing identifier id'>drawing</span><span class='bitor op'>|</span>
+    <span class='c_types identifier id'>c_types</span> <span class='lshft op'>&lt;&lt;</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Override constant id'>Override</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:PartName</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='dstring node'>&quot;/xl/#{drawing.pn}&quot;</span><span class='comma token'>,</span> 
+                                   <span class='symbol val'>:ContentType</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='DRAWING_CT constant id'>DRAWING_CT</span><span class='rparen token'>)</span>
+  <span class='end end kw'>end</span>
+  <span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='charts identifier id'>charts</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='chart identifier id'>chart</span><span class='bitor op'>|</span>
+    <span class='c_types identifier id'>c_types</span> <span class='lshft op'>&lt;&lt;</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Override constant id'>Override</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:PartName</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='dstring node'>&quot;/xl/#{chart.pn}&quot;</span><span class='comma token'>,</span> 
+                                   <span class='symbol val'>:ContentType</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='CHART_CT constant id'>CHART_CT</span><span class='rparen token'>)</span>                    
+  <span class='end end kw'>end</span>
+  <span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='worksheets identifier id'>worksheets</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='sheet identifier id'>sheet</span><span class='bitor op'>|</span>
+    <span class='c_types identifier id'>c_types</span> <span class='lshft op'>&lt;&lt;</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Override constant id'>Override</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:PartName</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='dstring node'>&quot;/xl/#{sheet.pn}&quot;</span><span class='comma token'>,</span> 
+                                     <span class='symbol val'>:ContentType</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='WORKSHEET_CT constant id'>WORKSHEET_CT</span><span class='rparen token'>)</span>
+  <span class='end end kw'>end</span>
+  <span class='c_types identifier id'>c_types</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="parts-instance_method">
+  
+    - (<tt>Array</tt>) <strong>parts</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+The parts of a package
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+An array of hashes that define the entry, document and schema for each part
+of the package.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/package.rb', line 90</span>
+
+<span class='def def kw'>def</span> <span class='parts identifier id'>parts</span>
+  <span class='@parts ivar id'>@parts</span> <span class='assign token'>=</span> <span class='lbrack token'>[</span>
+   <span class='lbrace token'>{</span><span class='symbol val'>:entry</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='RELS_PN constant id'>RELS_PN</span><span class='comma token'>,</span> <span class='symbol val'>:doc</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='relationships identifier id'>relationships</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='comma token'>,</span> <span class='symbol val'>:schema</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='RELS_XSD constant id'>RELS_XSD</span><span class='rbrace token'>}</span><span class='comma token'>,</span>
+   <span class='lbrace token'>{</span><span class='symbol val'>:entry</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='CORE_PN constant id'>CORE_PN</span><span class='comma token'>,</span> <span class='symbol val'>:doc</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='@core ivar id'>@core</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='comma token'>,</span> <span class='symbol val'>:schema</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='CORE_XSD constant id'>CORE_XSD</span><span class='rbrace token'>}</span><span class='comma token'>,</span>
+   <span class='lbrace token'>{</span><span class='symbol val'>:entry</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='APP_PN constant id'>APP_PN</span><span class='comma token'>,</span> <span class='symbol val'>:doc</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='@app ivar id'>@app</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='comma token'>,</span> <span class='symbol val'>:schema</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='APP_XSD constant id'>APP_XSD</span><span class='rbrace token'>}</span><span class='comma token'>,</span>
+   <span class='lbrace token'>{</span><span class='symbol val'>:entry</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='WORKBOOK_RELS_PN constant id'>WORKBOOK_RELS_PN</span><span class='comma token'>,</span> <span class='symbol val'>:doc</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='relationships identifier id'>relationships</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='comma token'>,</span> <span class='symbol val'>:schema</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='RELS_XSD constant id'>RELS_XSD</span><span class='rbrace token'>}</span><span class='comma token'>,</span>
+   <span class='lbrace token'>{</span><span class='symbol val'>:entry</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='WORKBOOK_PN constant id'>WORKBOOK_PN</span><span class='comma token'>,</span> <span class='symbol val'>:doc</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='comma token'>,</span> <span class='symbol val'>:schema</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='SML_XSD constant id'>SML_XSD</span><span class='rbrace token'>}</span><span class='comma token'>,</span>
+   <span class='lbrace token'>{</span><span class='symbol val'>:entry</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='CONTENT_TYPES_PN constant id'>CONTENT_TYPES_PN</span><span class='comma token'>,</span> <span class='symbol val'>:doc</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='content_types identifier id'>content_types</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='comma token'>,</span> <span class='symbol val'>:schema</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='CONTENT_TYPES_XSD constant id'>CONTENT_TYPES_XSD</span><span class='rbrace token'>}</span><span class='comma token'>,</span>
+   <span class='lbrace token'>{</span><span class='symbol val'>:entry</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='dstring node'>&quot;xl/#{STYLES_PN}&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:doc</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='styles identifier id'>styles</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='comma token'>,</span> <span class='symbol val'>:schema</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='SML_XSD constant id'>SML_XSD</span><span class='rbrace token'>}</span>
+  <span class='rbrack token'>]</span>
+  <span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='drawings identifier id'>drawings</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='drawing identifier id'>drawing</span><span class='bitor op'>|</span>
+    <span class='@parts ivar id'>@parts</span> <span class='lshft op'>&lt;&lt;</span> <span class='lbrace token'>{</span><span class='symbol val'>:entry</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='dstring node'>&quot;xl/#{drawing.rels_pn}&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:doc</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='drawing identifier id'>drawing</span><span class='dot token'>.</span><span class='relationships identifier id'>relationships</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='comma token'>,</span> <span class='symbol val'>:schema</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='RELS_XSD constant id'>RELS_XSD</span><span class='rbrace token'>}</span>
+    <span class='@parts ivar id'>@parts</span> <span class='lshft op'>&lt;&lt;</span> <span class='lbrace token'>{</span><span class='symbol val'>:entry</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='dstring node'>&quot;xl/#{drawing.pn}&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:doc</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='drawing identifier id'>drawing</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='comma token'>,</span> <span class='symbol val'>:schema</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='DRAWING_XSD constant id'>DRAWING_XSD</span><span class='rbrace token'>}</span>
+  <span class='end end kw'>end</span>
+    
+  <span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='charts identifier id'>charts</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='chart identifier id'>chart</span><span class='bitor op'>|</span>          
+    <span class='@parts ivar id'>@parts</span> <span class='lshft op'>&lt;&lt;</span> <span class='lbrace token'>{</span><span class='symbol val'>:entry</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='dstring node'>&quot;xl/#{chart.pn}&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:doc</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='chart identifier id'>chart</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='comma token'>,</span> <span class='symbol val'>:schema</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='DRAWING_XSD constant id'>DRAWING_XSD</span><span class='rbrace token'>}</span>
+  <span class='end end kw'>end</span>                  
+ 
+  <span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='worksheets identifier id'>worksheets</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='sheet identifier id'>sheet</span><span class='bitor op'>|</span>            
+    <span class='@parts ivar id'>@parts</span> <span class='lshft op'>&lt;&lt;</span> <span class='lbrace token'>{</span><span class='symbol val'>:entry</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='dstring node'>&quot;xl/#{sheet.rels_pn}&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:doc</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='relationships identifier id'>relationships</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='comma token'>,</span> <span class='symbol val'>:schema</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='RELS_XSD constant id'>RELS_XSD</span><span class='rbrace token'>}</span>
+    <span class='@parts ivar id'>@parts</span> <span class='lshft op'>&lt;&lt;</span> <span class='lbrace token'>{</span><span class='symbol val'>:entry</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='dstring node'>&quot;xl/#{sheet.pn}&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:doc</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='comma token'>,</span> <span class='symbol val'>:schema</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='SML_XSD constant id'>SML_XSD</span><span class='rbrace token'>}</span>        
+  <span class='end end kw'>end</span>
+  <span class='@parts ivar id'>@parts</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="relationships-instance_method">
+  
+    - (<tt><span class='object_link'><a href="Relationships.html" title="Axlsx::Relationships (class)">Relationships</a></span></tt>) <strong>relationships</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Creates the relationships required for a valid xlsx document
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Relationships.html" title="Axlsx::Relationships (class)">Relationships</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+171
+172
+173
+174
+175
+176
+177
+178</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/package.rb', line 171</span>
+
+<span class='def def kw'>def</span> <span class='relationships identifier id'>relationships</span>
+  <span class='rels identifier id'>rels</span> <span class='assign token'>=</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Relationships constant id'>Relationships</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+  <span class='rels identifier id'>rels</span> <span class='lshft op'>&lt;&lt;</span> <span class='Relationship constant id'>Relationship</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='WORKBOOK_R constant id'>WORKBOOK_R</span><span class='comma token'>,</span> <span class='WORKBOOK_PN constant id'>WORKBOOK_PN</span><span class='rparen token'>)</span>
+  <span class='rels identifier id'>rels</span> <span class='lshft op'>&lt;&lt;</span> <span class='Relationship constant id'>Relationship</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='CORE_R constant id'>CORE_R</span><span class='comma token'>,</span> <span class='CORE_PN constant id'>CORE_PN</span><span class='rparen token'>)</span>
+  <span class='rels identifier id'>rels</span> <span class='lshft op'>&lt;&lt;</span> <span class='Relationship constant id'>Relationship</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='APP_R constant id'>APP_R</span><span class='comma token'>,</span> <span class='APP_PN constant id'>APP_PN</span><span class='rparen token'>)</span>
+  <span class='rels identifier id'>rels</span><span class='dot token'>.</span><span class='lock identifier id'>lock</span>
+  <span class='rels identifier id'>rels</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="serialize-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>serialize</strong>(output, confirm_valid = false) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+A tremendous amount of effort has gone into ensuring that you cannot create
+invalid xlsx documents. confirm_valid should be used in the rare case that
+you cannot open the serialized file.
+</p>
+</div>
+  </div>
+
+<p>
+Serialize your workbook to disk as an xlsx document.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'></div></h4>
+      <pre class="example code"><span class='comment val'># This is how easy it is to create a valid xlsx file. Of course you might want to add a sheet or two, and maybe some data, styles and charts.</span>
+<span class='comment val'># Take a look at the README for an example of how to do it!</span>
+<span class='f identifier id'>f</span> <span class='assign token'>=</span> <span class='File constant id'>File</span><span class='dot token'>.</span><span class='open identifier id'>open</span><span class='lparen token'>(</span><span class='string val'>'test.xlsx'</span><span class='comma token'>,</span> <span class='string val'>'w'</span><span class='rparen token'>)</span>
+<span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='dot token'>.</span><span class='serialize identifier id'>serialize</span><span class='lparen token'>(</span><span class='f identifier id'>f</span><span class='rparen token'>)</span>
+
+<span class='comment val'># You will find a file called test.xlsx</span>
+</pre>
+    
+  </div>
+<h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>output</span>
+      
+      
+        <span class='type'>(<tt>File</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The file you want to serialize your package to
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>confirm_valid</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+Validate the package prior to serialization.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+False if confirm_valid and validation errors exist. True if the package was
+serialized
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#validate-instance_method" title="Axlsx::Package#validate (method)">#validate</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+55
+56
+57
+58
+59
+60
+61
+62</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/package.rb', line 55</span>
+
+<span class='def def kw'>def</span> <span class='serialize identifier id'>serialize</span><span class='lparen token'>(</span><span class='output identifier id'>output</span><span class='comma token'>,</span> <span class='confirm_valid identifier id'>confirm_valid</span><span class='assign token'>=</span><span class='false false kw'>false</span><span class='rparen token'>)</span>
+  <span class='return return kw'>return</span> <span class='false false kw'>false</span> <span class='unless unless_mod kw'>unless</span> <span class='notop op'>!</span><span class='confirm_valid identifier id'>confirm_valid</span> <span class='orop op'>||</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='validate identifier id'>validate</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
+  <span class='f identifier id'>f</span> <span class='assign token'>=</span> <span class='File constant id'>File</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='output identifier id'>output</span><span class='comma token'>,</span> <span class='string val'>&quot;w&quot;</span><span class='rparen token'>)</span>
+  <span class='Zip constant id'>Zip</span><span class='colon2 op'>::</span><span class='ZipOutputStream constant id'>ZipOutputStream</span><span class='dot token'>.</span><span class='open identifier id'>open</span><span class='lparen token'>(</span><span class='f identifier id'>f</span><span class='dot token'>.</span><span class='path identifier id'>path</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='zip identifier id'>zip</span><span class='bitor op'>|</span>
+    <span class='parts identifier id'>parts</span><span class='dot token'>.</span><span class='each identifier id'>each</span><span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='part identifier id'>part</span><span class='bitor op'>|</span> <span class='zip identifier id'>zip</span><span class='dot token'>.</span><span class='put_next_entry identifier id'>put_next_entry</span><span class='lparen token'>(</span><span class='part identifier id'>part</span><span class='lbrack token'>[</span><span class='symbol val'>:entry</span><span class='rbrack token'>]</span><span class='rparen token'>)</span><span class='semicolon token'>;</span> <span class='zip identifier id'>zip</span><span class='dot token'>.</span><span class='puts identifier id'>puts</span><span class='lparen token'>(</span><span class='part identifier id'>part</span><span class='lbrack token'>[</span><span class='symbol val'>:doc</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='rbrace token'>}</span>
+  <span class='end end kw'>end</span>
+  <span class='true true kw'>true</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="validate-instance_method">
+  
+    - (<tt>Array</tt>) <strong>validate</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+This gem includes all schema from OfficeOpenXML-XMLSchema-Transitional.zip
+and OpenPackagingConventions-XMLSchema.zip as per ECMA-376, Third edition.
+opc schema require an internet connection to import remote schema from
+dublin core for dc, dcterms and xml namespaces. Those remote schema are
+included in this gem, and the original files have been altered to refer to
+the local versions.
+</p>
+<p>
+If by chance you are able to creat a package that does not validate it
+indicates that the internal validation is not robust enough and needs to be
+improved. Please report your errors to the gem author.
+</p>
+</div>
+  </div>
+
+<p>
+Validate all parts of the package against xsd schema.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'></div></h4>
+      <pre class="example code"><span class='comment val'># The following will output any error messages found in serialization.</span>
+<span class='p identifier id'>p</span> <span class='assign token'>=</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+<span class='comment val'># ... code to create sheets, charts, styles etc.</span>
+<span class='p identifier id'>p</span><span class='dot token'>.</span><span class='validate identifier id'>validate</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='error identifier id'>error</span><span class='bitor op'>|</span> <span class='puts identifier id'>puts</span> <span class='error identifier id'>error</span><span class='dot token'>.</span><span class='message identifier id'>message</span> <span class='rbrace token'>}</span>
+</pre>
+    
+  </div>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+An array of all validation errors found.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><a href="http://www.ecma-international.org/publications/standards/Ecma-376.htm" target="_parent" title="http://www.ecma-international.org/publications/standards/Ecma-376.htm">http://www.ecma-international.org/publications/standards/Ecma-376.htm</a></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+79
+80
+81
+82
+83</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/package.rb', line 79</span>
+
+<span class='def def kw'>def</span> <span class='validate identifier id'>validate</span>
+  <span class='errors identifier id'>errors</span> <span class='assign token'>=</span> <span class='lbrack token'>[</span><span class='rbrack token'>]</span>
+  <span class='parts identifier id'>parts</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='part identifier id'>part</span><span class='bitor op'>|</span> <span class='errors identifier id'>errors</span><span class='dot token'>.</span><span class='concat identifier id'>concat</span> <span class='validate_single_doc identifier id'>validate_single_doc</span><span class='lparen token'>(</span><span class='part identifier id'>part</span><span class='lbrack token'>[</span><span class='symbol val'>:schema</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='part identifier id'>part</span><span class='lbrack token'>[</span><span class='symbol val'>:doc</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='rbrace token'>}</span>
+  <span class='errors identifier id'>errors</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="validate_single_doc-instance_method">
+  
+    - (<tt>Array</tt>) <strong>validate_single_doc</strong>(schema, doc) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Performs xsd validation for a signle document
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>schema</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+path to the xsd schema to be used in validation.
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>doc</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The xml text to be validated
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+An array of all validation errors encountered.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/package.rb', line 122</span>
+
+<span class='def def kw'>def</span> <span class='validate_single_doc identifier id'>validate_single_doc</span><span class='lparen token'>(</span><span class='schema identifier id'>schema</span><span class='comma token'>,</span> <span class='doc identifier id'>doc</span><span class='rparen token'>)</span>
+  <span class='schema identifier id'>schema</span> <span class='assign token'>=</span> <span class='Nokogiri constant id'>Nokogiri</span><span class='colon2 op'>::</span><span class='XML constant id'>XML</span><span class='colon2 op'>::</span><span class='Schema constant id'>Schema</span><span class='lparen token'>(</span><span class='File constant id'>File</span><span class='dot token'>.</span><span class='open identifier id'>open</span><span class='lparen token'>(</span><span class='schema identifier id'>schema</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
+  <span class='doc identifier id'>doc</span> <span class='assign token'>=</span> <span class='Nokogiri constant id'>Nokogiri</span><span class='colon2 op'>::</span><span class='XML constant id'>XML</span><span class='lparen token'>(</span><span class='doc identifier id'>doc</span><span class='rparen token'>)</span>
+
+  <span class='errors identifier id'>errors</span> <span class='assign token'>=</span> <span class='lbrack token'>[</span><span class='rbrack token'>]</span>
+  <span class='schema identifier id'>schema</span><span class='dot token'>.</span><span class='validate identifier id'>validate</span><span class='lparen token'>(</span><span class='doc identifier id'>doc</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='error identifier id'>error</span><span class='bitor op'>|</span>
+    <span class='errors identifier id'>errors</span> <span class='lshft op'>&lt;&lt;</span> <span class='error identifier id'>error</span>
+  <span class='end end kw'>end</span>
+  <span class='errors identifier id'>errors</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Sun Nov 20 23:43:57 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.3 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>

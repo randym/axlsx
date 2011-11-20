@@ -1,0 +1,1115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Axlsx::TwoCellAnchor
+  
+    &mdash; Documentation by YARD 0.7.3
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (T)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../Axlsx.html" title="Axlsx (module)">Axlsx</a></span></span>
+     &raquo; 
+    <span class="title">TwoCellAnchor</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Axlsx::TwoCellAnchor
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Axlsx::TwoCellAnchor</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/axlsx/drawing/two_cell_anchor.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+The recommended way to manage drawings and charts is Worksheet#add_chart.
+Anchors are specified by the :start_at and :end_at options to that method.
+</p>
+</div>
+  </div>
+
+<p>
+This class details the anchor points for drawings.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="Worksheet.html#add_chart-instance_method" title="Axlsx::Worksheet#add_chart (method)">Worksheet#add_chart</a></span></li>
+    
+  </ul>
+
+</div>
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#drawing-instance_method" title="#drawing (instance method)">- (Drawing) <strong>drawing</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The drawing that holds this anchor.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#from-instance_method" title="#from (instance method)">- (Marker) <strong>from</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+A marker that defines the from cell anchor.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#graphic_frame-instance_method" title="#graphic_frame (instance method)">- (GraphicFrame) <strong>graphic_frame</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The frame for your chart.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#index-instance_method" title="#index (instance method)">- (Integer) <strong>index</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The index of this anchor in the drawing.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to-instance_method" title="#to (instance method)">- (Marker) <strong>to</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+A marker that returns the to cell anchor.
+</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#end_at-instance_method" title="#end_at (instance method)">- (Marker) <strong>end_at</strong>(x, y) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+This is a short cut method to set the end anchor position.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (TwoCellAnchor) <strong>initialize</strong>(drawing, chart_type, options) </a>
+    
+
+    
+  </span>
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Creates a new TwoCellAnchor object.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#start_at-instance_method" title="#start_at (instance method)">- (Marker) <strong>start_at</strong>(x, y) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+This is a short cut method to set the start anchor position.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_xml-instance_method" title="#to_xml (instance method)">- (String) <strong>to_xml</strong>(xml) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Serializes the two cell anchor.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <p class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Axlsx::TwoCellAnchor (class)">TwoCellAnchor</a></span></tt>) <strong>initialize</strong>(drawing, chart_type, options) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Creates a new TwoCellAnchor object
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>drawing</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Drawing.html" title="Axlsx::Drawing (class)">Drawing</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>chart</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Chart.html" title="Axlsx::Chart (class)">Chart</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+a customizable set of options
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    
+    
+    
+    
+    <h3>Options Hash (<tt>options</tt>):</h3>
+    <ul class="option">
+      
+        <li>
+          <span class="name">start_at</span>
+          <span class="type">(<tt>Array</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">end_at</span>
+          <span class="type">(<tt>Array</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+    </ul>
+  
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/two_cell_anchor.rb', line 31</span>
+
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='drawing identifier id'>drawing</span><span class='comma token'>,</span> <span class='chart_type identifier id'>chart_type</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
+  <span class='@drawing ivar id'>@drawing</span> <span class='assign token'>=</span> <span class='drawing identifier id'>drawing</span>
+  <span class='drawing identifier id'>drawing</span><span class='dot token'>.</span><span class='anchors identifier id'>anchors</span> <span class='lshft op'>&lt;&lt;</span> <span class='self self kw'>self</span>      
+
+  <span class='@from ivar id'>@from</span><span class='comma token'>,</span> <span class='@to ivar id'>@to</span> <span class='assign token'>=</span>  <span class='Marker constant id'>Marker</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='comma token'>,</span> <span class='Marker constant id'>Marker</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:col</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='integer val'>5</span><span class='comma token'>,</span> <span class='symbol val'>:row=</span><span class='gt op'>&gt;</span><span class='integer val'>10</span><span class='rparen token'>)</span>
+  <span class='@graphic_frame ivar id'>@graphic_frame</span> <span class='assign token'>=</span> <span class='GraphicFrame constant id'>GraphicFrame</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='comma token'>,</span> <span class='chart_type identifier id'>chart_type</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
+
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='start_at identifier id'>start_at</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:start_at</span><span class='rbrack token'>]</span><span class='lbrack token'>[</span><span class='integer val'>0</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:start_at</span><span class='rbrack token'>]</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:start_at</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='is_a? fid id'>is_a?</span><span class='lparen token'>(</span><span class='Array constant id'>Array</span><span class='rparen token'>)</span>
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='end_at identifier id'>end_at</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:end_at</span><span class='rbrack token'>]</span><span class='lbrack token'>[</span><span class='integer val'>0</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:end_at</span><span class='rbrack token'>]</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:end_at</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='is_a? fid id'>is_a?</span><span class='lparen token'>(</span><span class='Array constant id'>Array</span><span class='rparen token'>)</span>
+  <span class='comment val'># passing a reference to our start and end markers for convenience</span>
+  <span class='comment val'># this lets us access the markers directly from the chart.</span>
+  <span class='@graphic_frame ivar id'>@graphic_frame</span><span class='dot token'>.</span><span class='chart identifier id'>chart</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='symbol val'>:start_at=</span><span class='comma token'>,</span> <span class='@from ivar id'>@from</span><span class='rparen token'>)</span>
+  <span class='@graphic_frame ivar id'>@graphic_frame</span><span class='dot token'>.</span><span class='chart identifier id'>chart</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='symbol val'>:end_at=</span><span class='comma token'>,</span> <span class='@to ivar id'>@to</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <span id="drawing-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="drawing-instance_method">
+  
+    - (<tt><span class='object_link'><a href="Drawing.html" title="Axlsx::Drawing (class)">Drawing</a></span></tt>) <strong>drawing</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+The drawing that holds this anchor
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Drawing.html" title="Axlsx::Drawing (class)">Drawing</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+20
+21
+22</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/two_cell_anchor.rb', line 20</span>
+
+<span class='def def kw'>def</span> <span class='drawing identifier id'>drawing</span>
+  <span class='@drawing ivar id'>@drawing</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="from-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="from-instance_method">
+  
+    - (<tt><span class='object_link'><a href="Marker.html" title="Axlsx::Marker (class)">Marker</a></span></tt>) <strong>from</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+A marker that defines the from cell anchor. The default from column and row
+are 0 and 0 respectively
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Marker.html" title="Axlsx::Marker (class)">Marker</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+9
+10
+11</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/two_cell_anchor.rb', line 9</span>
+
+<span class='def def kw'>def</span> <span class='from identifier id'>from</span>
+  <span class='@from ivar id'>@from</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="graphic_frame-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="graphic_frame-instance_method">
+  
+    - (<tt><span class='object_link'><a href="GraphicFrame.html" title="Axlsx::GraphicFrame (class)">GraphicFrame</a></span></tt>) <strong>graphic_frame</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+The frame for your chart
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GraphicFrame.html" title="Axlsx::GraphicFrame (class)">GraphicFrame</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+16
+17
+18</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/two_cell_anchor.rb', line 16</span>
+
+<span class='def def kw'>def</span> <span class='graphic_frame identifier id'>graphic_frame</span>
+  <span class='@graphic_frame ivar id'>@graphic_frame</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="index-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="index-instance_method">
+  
+    - (<tt>Integer</tt>) <strong>index</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+The index of this anchor in the drawing
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+24
+25
+26</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/two_cell_anchor.rb', line 24</span>
+
+<span class='def def kw'>def</span> <span class='index identifier id'>index</span>
+  <span class='@drawing ivar id'>@drawing</span><span class='dot token'>.</span><span class='anchors identifier id'>anchors</span><span class='dot token'>.</span><span class='index identifier id'>index</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="to-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="to-instance_method">
+  
+    - (<tt><span class='object_link'><a href="Marker.html" title="Axlsx::Marker (class)">Marker</a></span></tt>) <strong>to</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+A marker that returns the to cell anchor. The default to column and row are
+5 and 10 respectively
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Marker.html" title="Axlsx::Marker (class)">Marker</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+12
+13
+14</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/two_cell_anchor.rb', line 12</span>
+
+<span class='def def kw'>def</span> <span class='to identifier id'>to</span>
+  <span class='@to ivar id'>@to</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="end_at-instance_method">
+  
+    - (<tt><span class='object_link'><a href="Marker.html" title="Axlsx::Marker (class)">Marker</a></span></tt>) <strong>end_at</strong>(x, y) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+This is a short cut method to set the end anchor position
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The column
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The row
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Marker.html" title="Axlsx::Marker (class)">Marker</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+65
+66
+67
+68
+69</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/two_cell_anchor.rb', line 65</span>
+
+<span class='def def kw'>def</span> <span class='end_at identifier id'>end_at</span><span class='lparen token'>(</span><span class='x identifier id'>x</span><span class='comma token'>,</span> <span class='y identifier id'>y</span><span class='rparen token'>)</span>
+  <span class='@to ivar id'>@to</span><span class='dot token'>.</span><span class='col identifier id'>col</span> <span class='assign token'>=</span> <span class='x identifier id'>x</span>
+  <span class='@to ivar id'>@to</span><span class='dot token'>.</span><span class='row identifier id'>row</span> <span class='assign token'>=</span> <span class='y identifier id'>y</span>
+  <span class='@to ivar id'>@to</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="start_at-instance_method">
+  
+    - (<tt><span class='object_link'><a href="Marker.html" title="Axlsx::Marker (class)">Marker</a></span></tt>) <strong>start_at</strong>(x, y) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+This is a short cut method to set the start anchor position
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>x</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The column
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>y</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The row
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Marker.html" title="Axlsx::Marker (class)">Marker</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+55
+56
+57
+58
+59</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/two_cell_anchor.rb', line 55</span>
+
+<span class='def def kw'>def</span> <span class='start_at identifier id'>start_at</span><span class='lparen token'>(</span><span class='x identifier id'>x</span><span class='comma token'>,</span> <span class='y identifier id'>y</span><span class='rparen token'>)</span>
+  <span class='@from ivar id'>@from</span><span class='dot token'>.</span><span class='col identifier id'>col</span> <span class='assign token'>=</span> <span class='x identifier id'>x</span>
+  <span class='@from ivar id'>@from</span><span class='dot token'>.</span><span class='row identifier id'>row</span> <span class='assign token'>=</span> <span class='y identifier id'>y</span>
+  <span class='@from ivar id'>@from</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="to_xml-instance_method">
+  
+    - (<tt>String</tt>) <strong>to_xml</strong>(xml) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Serializes the two cell anchor
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>xml</span>
+      
+      
+        <span class='type'>(<tt>Nokogiri::XML::Builder</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The document builder instance this objects xml will be added to.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/two_cell_anchor.rb', line 74</span>
+
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+  <span class='comment val'>#build it for now, break it down later!</span>
+  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'xdr:twoCellAnchor'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'xdr:from'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+      <span class='from identifier id'>from</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+    <span class='rbrace token'>}</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'xdr:to'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+      <span class='to identifier id'>to</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+    <span class='rbrace token'>}</span>
+    <span class='@graphic_frame ivar id'>@graphic_frame</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'xdr:clientData'</span><span class='rparen token'>)</span>
+  <span class='rbrace token'>}</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Sun Nov 20 23:43:56 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.3 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>
