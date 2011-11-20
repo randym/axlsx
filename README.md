@@ -38,17 +38,16 @@ Usage
 
 Generating a workbook with styles and a chart:
 	   
-  p = Axlsx::Package.new do |package|
-    package.workbook.add_worksheet do |sheet|
-      sheet.add_row ["First", "Second", "Third"], :style => Axlsx::STYLE_THIN_BORDER
-      sheet.add_row [1, 2, 3], :style => Axlsx::STYLE_THIN_BORDER
-      sheet.add_chart(Axlsx::Bar3DChart, :start_at => [0,2], :end_at => [5, 15], :title=>"example 1: Chart") do |chart|
-        chart.add_series :data=>sheet.rows.last.cells, :labels=> sheet.rows.first.cells
+    p = Axlsx::Package.new do |package|
+      package.workbook.add_worksheet do |sheet|
+        sheet.add_row ["First", "Second", "Third"], :style => Axlsx::STYLE_THIN_BORDER
+        sheet.add_row [1, 2, 3], :style => Axlsx::STYLE_THIN_BORDER
+        sheet.add_chart(Axlsx::Bar3DChart, :start_at => [0,2], :end_at => [5, 15], :title=>"example 1: Chart") do |chart|
+          chart.add_series :data=>sheet.rows.last.cells, :labels=> sheet.rows.first.cells
+        end
       end
-    end
-    package.serialize("example1.xlsx")
-  end  
-
+      package.serialize("example1.xlsx")
+    end  
 
 ### Documentation
 This gem is 100% documented with YARD, an exceptional documentation library. To see documentation for this, and all the gems installed on your system use:
