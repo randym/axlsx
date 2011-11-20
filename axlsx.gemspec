@@ -1,6 +1,9 @@
 require File.expand_path(File.dirname(__FILE__) + '/lib/axlsx/util/constants.rb')
 Gem::Specification.new do |s|
   s.name        = 'axlsx'
+  s.homepage 	= 'https://rubyforge.org/projects/axlsx/'
+  s.has_rdoc = 'axlsx'
+  s.rubyforge_project = 'axlsx'
   s.version     = Axlsx::VERSION
   s.date          = Time.now.strftime('%Y-%m-%d')
   s.summary     = "Author fully validated xlsx files with custom charts and styles"	
@@ -11,8 +14,6 @@ EOF
   s.authors     = ["Randy Morgan"]
   s.email       = 'digital.ipeseity@gmail.com'
   s.files = Dir.glob("{docs,lib,test,schema}/**/*") + ['LICENSE', 'README.md', 'Rakefile']
-  s.has_rdoc = 'yard'
-  s.homepage    = ""  
   s.add_runtime_dependency 'nokogiri', '~> 1'
   s.add_runtime_dependency 'active_support', '~> 3'
   s.add_runtime_dependency 'rmagick', '~> 2.12'
