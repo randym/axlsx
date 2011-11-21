@@ -144,6 +144,43 @@ It enables the you to generate 100% valid xlsx files that include customised sty
  <span class='end end kw'>end</span>  
 </pre>
 
+<p>Cell Specifc Styles</p>
+
+<pre class="code"> <span class='p identifier id'>p</span> <span class='assign token'>=</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='package identifier id'>package</span><span class='bitor op'>|</span>
+
+   <span class='black_cell_spec identifier id'>black_cell_spec</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span> <span class='symbol val'>:bg_color</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;FF000000&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:fg_color</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;FFFFFFFF&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:sz=</span><span class='gt op'>&gt;</span><span class='integer val'>14</span><span class='comma token'>,</span> <span class='symbol val'>:alignment</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrace token'>{</span> <span class='symbol val'>:horizontal=</span><span class='gt op'>&gt;</span> <span class='symbol val'>:center</span> <span class='rbrace token'>}</span> <span class='rbrace token'>}</span>
+   <span class='blue_cell_spec identifier id'>blue_cell_spec</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span> <span class='symbol val'>:bg_color</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;FF0000FF&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:fg_color</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;FFFFFFFF&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:sz=</span><span class='gt op'>&gt;</span><span class='integer val'>14</span><span class='comma token'>,</span> <span class='symbol val'>:alignment</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrace token'>{</span> <span class='symbol val'>:horizontal=</span><span class='gt op'>&gt;</span> <span class='symbol val'>:center</span> <span class='rbrace token'>}</span> <span class='rbrace token'>}</span>
+
+   <span class='black_cell identifier id'>black_cell</span> <span class='assign token'>=</span> <span class='package identifier id'>package</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='styles identifier id'>styles</span><span class='dot token'>.</span><span class='add_style identifier id'>add_style</span> <span class='black_cell_spec identifier id'>black_cell_spec</span>
+   <span class='blue_cell identifier id'>blue_cell</span> <span class='assign token'>=</span> <span class='package identifier id'>package</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='styles identifier id'>styles</span><span class='dot token'>.</span><span class='add_style identifier id'>add_style</span> <span class='blue_cell_spec identifier id'>blue_cell_spec</span>
+
+   <span class='comment val'># date1904 support. uncomment the line below if you are working on a mac.</span>
+   <span class='comment val'># package.workbook.date1904 = true </span>
+
+   <span class='package identifier id'>package</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='add_worksheet identifier id'>add_worksheet</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='sheet identifier id'>sheet</span><span class='bitor op'>|</span>
+     <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='lbrack token'>[</span><span class='string val'>&quot;Text Autowidth&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Second&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Third&quot;</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:style</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='black_cell identifier id'>black_cell</span><span class='comma token'>,</span> <span class='blue_cell identifier id'>blue_cell</span><span class='comma token'>,</span> <span class='black_cell identifier id'>black_cell</span><span class='rbrack token'>]</span>
+     <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='lbrack token'>[</span><span class='integer val'>1</span><span class='comma token'>,</span> <span class='integer val'>2</span><span class='comma token'>,</span> <span class='integer val'>3</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:style</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='STYLE_THIN_BORDER constant id'>STYLE_THIN_BORDER</span>
+   <span class='end end kw'>end</span>
+   <span class='package identifier id'>package</span><span class='dot token'>.</span><span class='serialize identifier id'>serialize</span><span class='lparen token'>(</span><span class='string val'>&quot;example3.xlsx&quot;</span><span class='rparen token'>)</span>
+ <span class='end end kw'>end</span>  
+</pre>
+
+<p>Number and Date formatting</p>
+
+<pre class="code"> <span class='p identifier id'>p</span> <span class='assign token'>=</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='package identifier id'>package</span><span class='bitor op'>|</span>
+   <span class='date identifier id'>date</span> <span class='assign token'>=</span> <span class='package identifier id'>package</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='styles identifier id'>styles</span><span class='dot token'>.</span><span class='add_style identifier id'>add_style</span> <span class='symbol val'>:format_code=</span><span class='gt op'>&gt;</span><span class='string val'>&quot;yyyy-mm-dd&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:border</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='STYLE_THIN_BORDER constant id'>STYLE_THIN_BORDER</span>
+   <span class='padded identifier id'>padded</span> <span class='assign token'>=</span> <span class='package identifier id'>package</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='styles identifier id'>styles</span><span class='dot token'>.</span><span class='add_style identifier id'>add_style</span> <span class='symbol val'>:format_code=</span><span class='gt op'>&gt;</span><span class='string val'>&quot;00#&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:border</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='STYLE_THIN_BORDER constant id'>STYLE_THIN_BORDER</span>
+   <span class='percent identifier id'>percent</span> <span class='assign token'>=</span> <span class='package identifier id'>package</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='styles identifier id'>styles</span><span class='dot token'>.</span><span class='add_style identifier id'>add_style</span> <span class='symbol val'>:format_code=</span><span class='gt op'>&gt;</span><span class='string val'>&quot;0%&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:border</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='STYLE_THIN_BORDER constant id'>STYLE_THIN_BORDER</span>
+
+   <span class='package identifier id'>package</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='add_worksheet identifier id'>add_worksheet</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='sheet identifier id'>sheet</span><span class='bitor op'>|</span>
+     <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span>
+     <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='lbrack token'>[</span><span class='string val'>&quot;Custom Formatted Date&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Percent Formatted Float&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Padded Numbers&quot;</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:style</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='STYLE_THIN_BORDER constant id'>STYLE_THIN_BORDER</span>
+     <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='lbrack token'>[</span><span class='Time constant id'>Time</span><span class='dot token'>.</span><span class='now identifier id'>now</span><span class='comma token'>,</span> <span class='integer val'>0</span><span class='integer val'>.2</span><span class='comma token'>,</span> <span class='integer val'>32</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:style</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='date identifier id'>date</span><span class='comma token'>,</span> <span class='percent identifier id'>percent</span><span class='comma token'>,</span> <span class='padded identifier id'>padded</span><span class='rbrack token'>]</span>
+   <span class='end end kw'>end</span>
+   <span class='package identifier id'>package</span><span class='dot token'>.</span><span class='serialize identifier id'>serialize</span><span class='lparen token'>(</span><span class='string val'>&quot;example5.xlsx&quot;</span><span class='rparen token'>)</span>
+ <span class='end end kw'>end</span>  
+</pre>
+
 <h3>Documentation</h3>
 
 <p>This gem is 100% documented with YARD, an exceptional documentation library. To see documentation for this, and all the gems installed on your system use:</p>
@@ -163,21 +200,20 @@ It enables the you to generate 100% valid xlsx files that include customised sty
 <ul>
 <li>Updated documentation</li>
 <li>altered package to accept a filename string for serialization instead of a File object.</li>
-<li>Updated specs to conform
-Copyright</li>
+<li>Updated specs to conform</li>
 </ul>
 </li>
 </ul>
 
 
-<hr />
+<h2>Copyright</h2>
 
 <p>Axlsx &copy; 2011 by <a href="mailto:digial.ipseity@gmail.com">Randy Morgan</a>. Axlsx is
 licensed under the MIT license. Please see the <a href="file.LICENSE.html" title="LICENSE">LICENSE</a> document for more information.</p>
 </div></div>
     
     <div id="footer">
-  Generated on Mon Nov 21 08:39:44 2011 by 
+  Generated on Mon Nov 21 10:10:31 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>

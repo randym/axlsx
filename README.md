@@ -109,6 +109,7 @@ Cell Specifc Styles
      end  
 
 Number and Date formatting
+
      p = Axlsx::Package.new do |package|
        date = package.workbook.styles.add_style :format_code=>"yyyy-mm-dd", :border => Axlsx::STYLE_THIN_BORDER
        padded = package.workbook.styles.add_style :format_code=>"00#", :border => Axlsx::STYLE_THIN_BORDER
@@ -139,6 +140,7 @@ Changelog
   - Updated documentation
   - altered package to accept a filename string for serialization instead of a File object.
   - Updated specs to conform
+
 Copyright
 ---------
 
