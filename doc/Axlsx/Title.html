@@ -104,7 +104,11 @@ A Title stores information about the title of a chart
 <div class="tags">
   
 
+</div><div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="SeriesTitle.html" title="Axlsx::SeriesTitle (class)">SeriesTitle</a></span></p>
 </div>
+
 
   <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
   <ul class="summary">
@@ -490,13 +494,13 @@ Cell object
       <pre class="lines">
 
 
+62
 63
 64
-65
-66</pre>
+65</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/title.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/title.rb', line 62</span>
 
 <span class='def def kw'>def</span> <span class='range identifier id'>range</span>
   <span class='return return kw'>return</span> <span class='string val'>&quot;&quot;</span> <span class='unless unless_mod kw'>unless</span> <span class='@data ivar id'>@data</span><span class='dot token'>.</span><span class='is_a? fid id'>is_a?</span><span class='lparen token'>(</span><span class='Cell constant id'>Cell</span><span class='rparen token'>)</span>
@@ -567,6 +571,7 @@ The document builder instance this objects xml will be added to.
       <pre class="lines">
 
 
+42
 43
 44
 45
@@ -580,11 +585,10 @@ The document builder instance this objects xml will be added to.
 53
 54
 55
-56
-57</pre>
+56</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/title.rb', line 43</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/title.rb', line 42</span>
 
 <span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
   <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:title'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
@@ -612,7 +616,7 @@ The document builder instance this objects xml will be added to.
 </div>
     
     <div id="footer">
-  Generated on Mon Nov 21 19:45:45 2011 by 
+  Generated on Mon Nov 21 23:44:16 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>

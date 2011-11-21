@@ -61,8 +61,8 @@
 <strong>Author</strong>:       Randy Morgan
 <strong>Copyright</strong>:    2011  <br/>
 <strong>License</strong>:      MIT License  <br/>
-<strong>Latest Version</strong>: 1.0.2
-<strong>Release Date</strong>: November 20th 2011</p>
+<strong>Latest Version</strong>: 1.0.5
+<strong>Release Date</strong>: November 21st 2011</p>
 
 <h2>Synopsis</h2>
 
@@ -173,6 +173,20 @@ It enables the you to generate 100% valid xlsx files that include customised sty
  <span class='end end kw'>end</span>
 </pre>
 
+<h1>Generating A Line Chart</h1>
+
+<pre class="code"> <span class='p identifier id'>p</span> <span class='assign token'>=</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+ <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='add_worksheet identifier id'>add_worksheet</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='sheet identifier id'>sheet</span><span class='bitor op'>|</span>
+   <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='lbrack token'>[</span><span class='string val'>&quot;First&quot;</span><span class='comma token'>,</span> <span class='integer val'>1</span><span class='comma token'>,</span> <span class='integer val'>5</span><span class='comma token'>,</span> <span class='integer val'>7</span><span class='comma token'>,</span> <span class='integer val'>9</span><span class='rbrack token'>]</span>
+   <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='lbrack token'>[</span><span class='string val'>&quot;Second&quot;</span><span class='comma token'>,</span> <span class='integer val'>5</span><span class='comma token'>,</span> <span class='integer val'>2</span><span class='comma token'>,</span> <span class='integer val'>14</span><span class='comma token'>,</span> <span class='integer val'>9</span><span class='rbrack token'>]</span>
+   <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_chart identifier id'>add_chart</span><span class='lparen token'>(</span><span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Line3DChart constant id'>Line3DChart</span><span class='comma token'>,</span> <span class='symbol val'>:start_at</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='integer val'>2</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:end_at</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='integer val'>10</span><span class='comma token'>,</span> <span class='integer val'>15</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:title=</span><span class='gt op'>&gt;</span><span class='string val'>&quot;example 6: Line Chart&quot;</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='chart identifier id'>chart</span><span class='bitor op'>|</span>
+     <span class='chart identifier id'>chart</span><span class='dot token'>.</span><span class='add_series identifier id'>add_series</span> <span class='symbol val'>:data=</span><span class='gt op'>&gt;</span><span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span><span class='dot token'>.</span><span class='first identifier id'>first</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span><span class='lbrack token'>[</span><span class='lparen token'>(</span><span class='float val'>1</span><span class='dot2 op'>..</span><span class='integer val'>-1</span><span class='rparen token'>)</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:title=</span><span class='gt op'>&gt;</span> <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span><span class='dot token'>.</span><span class='first identifier id'>first</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span><span class='dot token'>.</span><span class='first identifier id'>first</span>
+     <span class='chart identifier id'>chart</span><span class='dot token'>.</span><span class='add_series identifier id'>add_series</span> <span class='symbol val'>:data=</span><span class='gt op'>&gt;</span><span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span><span class='dot token'>.</span><span class='last identifier id'>last</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span><span class='lbrack token'>[</span><span class='lparen token'>(</span><span class='float val'>1</span><span class='dot2 op'>..</span><span class='integer val'>-1</span><span class='rparen token'>)</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:title=</span><span class='gt op'>&gt;</span> <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span><span class='dot token'>.</span><span class='last identifier id'>last</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span><span class='dot token'>.</span><span class='first identifier id'>first</span>
+   <span class='end end kw'>end</span>
+ <span class='end end kw'>end</span>  
+ <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='serialize identifier id'>serialize</span><span class='lparen token'>(</span><span class='string val'>&quot;example6.xlsx&quot;</span><span class='rparen token'>)</span>
+</pre>
+
 <h3>Documentation</h3>
 
 <p>This gem is 100% documented with YARD, an exceptional documentation library. To see documentation for this, and all the gems installed on your system use:</p>
@@ -191,21 +205,36 @@ It enables the you to generate 100% valid xlsx files that include customised sty
 
 <ul>
 <li>Updated documentation</li>
+</ul>
+</li>
+<li><strong>October.21.11</strong>: 1.0.4
+
+<ul>
 <li>altered package to accept a filename string for serialization instead of a File object.</li>
 <li>Updated specs to conform</li>
+<li>More examples for readme</li>
+</ul>
+</li>
+<li><strong>October.21.11</strong>: 1.05
+
+<ul>
+<li>Added support for line charts</li>
+<li>Updated examples and readme</li>
+<li>Updated series title to be a real title
+Copyright</li>
 </ul>
 </li>
 </ul>
 
 
-<h2>Copyright</h2>
+<hr />
 
 <p>Axlsx &copy; 2011 by <a href="mailto:digial.ipseity@gmail.com">Randy Morgan</a>. Axlsx is
 licensed under the MIT license. Please see the <a href="file.LICENSE.html" title="LICENSE">LICENSE</a> document for more information.</p>
 </div></div>
     
     <div id="footer">
-  Generated on Mon Nov 21 19:45:32 2011 by 
+  Generated on Mon Nov 21 23:44:14 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>

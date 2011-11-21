@@ -124,7 +124,7 @@ A Series defines the title, data and labels for chart data.
 
 </div><div id="subclasses">
   <h2>Direct Known Subclasses</h2>
-  <p class="children"><span class='object_link'><a href="BarSeries.html" title="Axlsx::BarSeries (class)">BarSeries</a></span>, <span class='object_link'><a href="PieSeries.html" title="Axlsx::PieSeries (class)">PieSeries</a></span></p>
+  <p class="children"><span class='object_link'><a href="BarSeries.html" title="Axlsx::BarSeries (class)">BarSeries</a></span>, <span class='object_link'><a href="LineSeries.html" title="Axlsx::LineSeries (class)">LineSeries</a></span>, <span class='object_link'><a href="PieSeries.html" title="Axlsx::PieSeries (class)">PieSeries</a></span></p>
 </div>
 
 
@@ -215,7 +215,7 @@ The order of this series in the chart&#8217;s series.
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#title-instance_method" title="#title (instance method)">- (String) <strong>title</strong> </a>
+      <a href="#title-instance_method" title="#title (instance method)">- (SeriesTitle) <strong>title</strong> </a>
     
 
     
@@ -589,7 +589,7 @@ The order of this series in the chart&#8217;s series.
       <div class="method_details ">
   <p class="signature " id="title-instance_method">
   
-    - (<tt>String</tt>) <strong>title</strong> 
+    - (<tt><span class='object_link'><a href="SeriesTitle.html" title="Axlsx::SeriesTitle (class)">SeriesTitle</a></span></tt>) <strong>title</strong> 
   
 
   
@@ -610,7 +610,7 @@ The title of the series
     <li>
       
       
-        <span class='type'>(<tt>String</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="SeriesTitle.html" title="Axlsx::SeriesTitle (class)">SeriesTitle</a></span></tt>)</span>
       
       
       
@@ -706,27 +706,23 @@ The document builder instance this objects xml will be added to.
       <pre class="lines">
 
 
-57
-58
-59
-60
 61
 62
 63
 64
 65
-66</pre>
+66
+67
+68</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/series.rb', line 57</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/series.rb', line 61</span>
 
 <span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
   <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:ser'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
     <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:idx'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='index identifier id'>index</span><span class='rparen token'>)</span>
-    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:order'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='order identifier id'>order</span> <span class='orop op'>||</span> <span class='index identifier id'>index</span><span class='rparen token'>)</span>
-    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:tx'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
-      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:v'</span><span class='comma token'>,</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='title identifier id'>title</span><span class='rparen token'>)</span>
-    <span class='rbrace token'>}</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:order'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='order identifier id'>order</span> <span class='orop op'>||</span> <span class='index identifier id'>index</span><span class='rparen token'>)</span>        
+    <span class='title identifier id'>title</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='title identifier id'>title</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
     <span class='yield yield kw'>yield</span> <span class='xml identifier id'>xml</span> <span class='if if_mod kw'>if</span> <span class='block_given? fid id'>block_given?</span>
   <span class='rbrace token'>}</span>
 <span class='end end kw'>end</span>
@@ -741,7 +737,7 @@ The document builder instance this objects xml will be added to.
 </div>
     
     <div id="footer">
-  Generated on Mon Nov 21 19:45:50 2011 by 
+  Generated on Mon Nov 21 23:44:25 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>

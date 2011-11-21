@@ -116,7 +116,7 @@ A Chart is the superclass for specific charts
 
 </div><div id="subclasses">
   <h2>Direct Known Subclasses</h2>
-  <p class="children"><span class='object_link'><a href="Bar3DChart.html" title="Axlsx::Bar3DChart (class)">Bar3DChart</a></span>, <span class='object_link'><a href="Pie3DChart.html" title="Axlsx::Pie3DChart (class)">Pie3DChart</a></span></p>
+  <p class="children"><span class='object_link'><a href="Bar3DChart.html" title="Axlsx::Bar3DChart (class)">Bar3DChart</a></span>, <span class='object_link'><a href="Line3DChart.html" title="Axlsx::Line3DChart (class)">Line3DChart</a></span>, <span class='object_link'><a href="Pie3DChart.html" title="Axlsx::Pie3DChart (class)">Pie3DChart</a></span></p>
 </div>
 
 
@@ -333,6 +333,33 @@ Show the legend in the chart.
   
     <span class="summary_desc"><div class='inline'><p>
 The starting marker for this chart.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#style-instance_method" title="#style (instance method)">- (Integer) <strong>style</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+The style for the chart.
 </p>
 </div></span>
   
@@ -614,22 +641,24 @@ the object that the method was called on
       <pre class="lines">
 
 
-52
-53
-54
-55
-56
-57
 58
 59
 60
 61
-62</pre>
+62
+63
+64
+65
+66
+67
+68
+69</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/chart.rb', line 52</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/chart.rb', line 58</span>
 
 <span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='frame identifier id'>frame</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='@style ivar id'>@style</span> <span class='assign token'>=</span> <span class='integer val'>2</span>
   <span class='@graphic_frame ivar id'>@graphic_frame</span><span class='assign token'>=</span><span class='frame identifier id'>frame</span>
   <span class='@graphic_frame ivar id'>@graphic_frame</span><span class='dot token'>.</span><span class='anchor identifier id'>anchor</span><span class='dot token'>.</span><span class='drawing identifier id'>drawing</span><span class='dot token'>.</span><span class='worksheet identifier id'>worksheet</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='charts identifier id'>charts</span> <span class='lshft op'>&lt;&lt;</span> <span class='self self kw'>self</span>
   <span class='@series ivar id'>@series</span> <span class='assign token'>=</span> <span class='SimpleTypedList constant id'>SimpleTypedList</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='Series constant id'>Series</span>
@@ -692,12 +721,12 @@ The ending marker for this chart
       <pre class="lines">
 
 
-42
-43
-44</pre>
+48
+49
+50</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/chart.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/chart.rb', line 48</span>
 
 <span class='def def kw'>def</span> <span class='end_at identifier id'>end_at</span>
   <span class='@end_at ivar id'>@end_at</span>
@@ -749,12 +778,12 @@ A reference to the graphic frame that owns this chart
       <pre class="lines">
 
 
-15
-16
-17</pre>
+21
+22
+23</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/chart.rb', line 15</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/chart.rb', line 21</span>
 
 <span class='def def kw'>def</span> <span class='graphic_frame identifier id'>graphic_frame</span>
   <span class='@graphic_frame ivar id'>@graphic_frame</span>
@@ -806,12 +835,12 @@ The index of this chart in the workbooks charts collection
       <pre class="lines">
 
 
-27
-28
-29</pre>
+33
+34
+35</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/chart.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/chart.rb', line 33</span>
 
 <span class='def def kw'>def</span> <span class='index identifier id'>index</span>
   <span class='@graphic_frame ivar id'>@graphic_frame</span><span class='dot token'>.</span><span class='anchor identifier id'>anchor</span><span class='dot token'>.</span><span class='drawing identifier id'>drawing</span><span class='dot token'>.</span><span class='worksheet identifier id'>worksheet</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='charts identifier id'>charts</span><span class='dot token'>.</span><span class='index identifier id'>index</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='rparen token'>)</span>
@@ -863,12 +892,12 @@ The part name for this chart
       <pre class="lines">
 
 
-31
-32
-33</pre>
+37
+38
+39</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/chart.rb', line 31</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/chart.rb', line 37</span>
 
 <span class='def def kw'>def</span> <span class='pn identifier id'>pn</span>
   <span class='dstring node'>&quot;#{CHART_PN % (index+1)}&quot;</span>
@@ -920,12 +949,12 @@ A collection of series objects that are applied to the chart
       <pre class="lines">
 
 
-19
-20
-21</pre>
+25
+26
+27</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/chart.rb', line 19</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/chart.rb', line 25</span>
 
 <span class='def def kw'>def</span> <span class='series identifier id'>series</span>
   <span class='@series ivar id'>@series</span>
@@ -977,12 +1006,12 @@ The type of series to use for this chart
       <pre class="lines">
 
 
-23
-24
-25</pre>
+29
+30
+31</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/chart.rb', line 23</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/chart.rb', line 29</span>
 
 <span class='def def kw'>def</span> <span class='series_type identifier id'>series_type</span>
   <span class='@series_type ivar id'>@series_type</span>
@@ -1034,12 +1063,12 @@ Show the legend in the chart
       <pre class="lines">
 
 
-46
-47
-48</pre>
+52
+53
+54</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/chart.rb', line 46</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/chart.rb', line 52</span>
 
 <span class='def def kw'>def</span> <span class='show_legend identifier id'>show_legend</span>
   <span class='@show_legend ivar id'>@show_legend</span>
@@ -1091,15 +1120,72 @@ The starting marker for this chart
       <pre class="lines">
 
 
-38
-39
-40</pre>
+44
+45
+46</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/chart.rb', line 38</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/chart.rb', line 44</span>
 
 <span class='def def kw'>def</span> <span class='start_at identifier id'>start_at</span>
   <span class='@start_at ivar id'>@start_at</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="style=-instance_method"></span>
+      <span id="style-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="style-instance_method">
+  
+    - (<tt>Integer</tt>) <strong>style</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+The style for the chart. see ECMA Part 1 §21.2.2.196
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+14
+15
+16</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/chart.rb', line 14</span>
+
+<span class='def def kw'>def</span> <span class='style identifier id'>style</span>
+  <span class='@style ivar id'>@style</span>
 <span class='end end kw'>end</span>
 </pre>
     </td>
@@ -1148,12 +1234,12 @@ The title object for the chart.
       <pre class="lines">
 
 
-8
 9
-10</pre>
+10
+11</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/chart.rb', line 8</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/chart.rb', line 9</span>
 
 <span class='def def kw'>def</span> <span class='title identifier id'>title</span>
   <span class='@title ivar id'>@title</span>
@@ -1192,12 +1278,12 @@ The 3D view properties for the chart
       <pre class="lines">
 
 
-11
-12
-13</pre>
+17
+18
+19</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/chart.rb', line 11</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/chart.rb', line 17</span>
 
 <span class='def def kw'>def</span> <span class='view3D identifier id'>view3D</span>
   <span class='@view3D ivar id'>@view3D</span>
@@ -1260,13 +1346,13 @@ Adds a new series to the chart&#8217;s series collection.
       <pre class="lines">
 
 
-85
-86
-87
-88</pre>
+94
+95
+96
+97</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/chart.rb', line 85</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/chart.rb', line 94</span>
 
 <span class='def def kw'>def</span> <span class='add_series identifier id'>add_series</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
   <span class='@series_type ivar id'>@series_type</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
@@ -1303,15 +1389,6 @@ Chart Serialization serializes the chart
       <pre class="lines">
 
 
-92
-93
-94
-95
-96
-97
-98
-99
-100
 101
 102
 103
@@ -1323,14 +1400,27 @@ Chart Serialization serializes the chart
 109
 110
 111
-112</pre>
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/chart.rb', line 92</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/chart.rb', line 101</span>
 
 <span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span>
   <span class='builder identifier id'>builder</span> <span class='assign token'>=</span> <span class='Nokogiri constant id'>Nokogiri</span><span class='colon2 op'>::</span><span class='XML constant id'>XML</span><span class='colon2 op'>::</span><span class='Builder constant id'>Builder</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:encoding</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='ENCODING constant id'>ENCODING</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='xml identifier id'>xml</span><span class='bitor op'>|</span>
     <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:chartSpace'</span><span class='comma token'>,</span><span class='symbol val'>:'xmlns:c'</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='XML_NS_C constant id'>XML_NS_C</span><span class='comma token'>,</span> <span class='symbol val'>:'xmlns:a'</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='XML_NS_A constant id'>XML_NS_A</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:date1904'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Workbook constant id'>Workbook</span><span class='dot token'>.</span><span class='date1904 identifier id'>date1904</span><span class='rparen token'>)</span>
+      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:style'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='style identifier id'>style</span><span class='rparen token'>)</span>
       <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:chart'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
         <span class='@title ivar id'>@title</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='@title ivar id'>@title</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
         <span class='@view3D ivar id'>@view3D</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='@view3D ivar id'>@view3D</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
@@ -1360,7 +1450,7 @@ Chart Serialization serializes the chart
 </div>
     
     <div id="footer">
-  Generated on Mon Nov 21 19:45:42 2011 by 
+  Generated on Mon Nov 21 23:44:23 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>

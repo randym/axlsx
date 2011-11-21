@@ -170,7 +170,7 @@ Creating a chart
   <h2>Instance Attribute Summary</h2>
   
   <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="Chart.html" title="Axlsx::Chart (class)">Chart</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Chart.html#end_at-instance_method" title="Axlsx::Chart#end_at (method)">end_at</a></span>, <span class='object_link'><a href="Chart.html#graphic_frame-instance_method" title="Axlsx::Chart#graphic_frame (method)">graphic_frame</a></span>, <span class='object_link'><a href="Chart.html#index-instance_method" title="Axlsx::Chart#index (method)">index</a></span>, <span class='object_link'><a href="Chart.html#pn-instance_method" title="Axlsx::Chart#pn (method)">pn</a></span>, <span class='object_link'><a href="Chart.html#series-instance_method" title="Axlsx::Chart#series (method)">series</a></span>, <span class='object_link'><a href="Chart.html#series_type-instance_method" title="Axlsx::Chart#series_type (method)">series_type</a></span>, <span class='object_link'><a href="Chart.html#show_legend-instance_method" title="Axlsx::Chart#show_legend (method)">show_legend</a></span>, <span class='object_link'><a href="Chart.html#start_at-instance_method" title="Axlsx::Chart#start_at (method)">start_at</a></span>, <span class='object_link'><a href="Chart.html#title-instance_method" title="Axlsx::Chart#title (method)">title</a></span>, <span class='object_link'><a href="Chart.html#view3D-instance_method" title="Axlsx::Chart#view3D (method)">view3D</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Chart.html#end_at-instance_method" title="Axlsx::Chart#end_at (method)">end_at</a></span>, <span class='object_link'><a href="Chart.html#graphic_frame-instance_method" title="Axlsx::Chart#graphic_frame (method)">graphic_frame</a></span>, <span class='object_link'><a href="Chart.html#index-instance_method" title="Axlsx::Chart#index (method)">index</a></span>, <span class='object_link'><a href="Chart.html#pn-instance_method" title="Axlsx::Chart#pn (method)">pn</a></span>, <span class='object_link'><a href="Chart.html#series-instance_method" title="Axlsx::Chart#series (method)">series</a></span>, <span class='object_link'><a href="Chart.html#series_type-instance_method" title="Axlsx::Chart#series_type (method)">series_type</a></span>, <span class='object_link'><a href="Chart.html#show_legend-instance_method" title="Axlsx::Chart#show_legend (method)">show_legend</a></span>, <span class='object_link'><a href="Chart.html#start_at-instance_method" title="Axlsx::Chart#start_at (method)">start_at</a></span>, <span class='object_link'><a href="Chart.html#style-instance_method" title="Axlsx::Chart#style (method)">style</a></span>, <span class='object_link'><a href="Chart.html#title-instance_method" title="Axlsx::Chart#title (method)">title</a></span>, <span class='object_link'><a href="Chart.html#view3D-instance_method" title="Axlsx::Chart#view3D (method)">view3D</a></span></p>
 
 
   
@@ -343,8 +343,8 @@ a customizable set of options
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pie_3D_chart.rb', line 41</span>
 
 <span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='workbook identifier id'>workbook</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
-  <span class='super super kw'>super</span><span class='lparen token'>(</span><span class='workbook identifier id'>workbook</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
   <span class='comment val'># this charts series type</span>
+  <span class='super super kw'>super</span><span class='lparen token'>(</span><span class='workbook identifier id'>workbook</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
   <span class='@series_type ivar id'>@series_type</span> <span class='assign token'>=</span> <span class='PieSeries constant id'>PieSeries</span>
   <span class='@view3D ivar id'>@view3D</span> <span class='assign token'>=</span> <span class='View3D constant id'>View3D</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:rotX</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='integer val'>30</span><span class='comma token'>,</span> <span class='symbol val'>:perspective</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='integer val'>30</span><span class='rparen token'>)</span>
 <span class='end end kw'>end</span>
@@ -430,7 +430,7 @@ Serializes the pie chart
 </div>
     
     <div id="footer">
-  Generated on Mon Nov 21 19:45:49 2011 by 
+  Generated on Mon Nov 21 23:44:35 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>
