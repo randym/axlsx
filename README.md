@@ -3,12 +3,12 @@ Axlsx: Office Open XML Spreadsheet Generation
 
 **IRC**:          [irc.freenode.net / #axlsx](irc://irc.freenode.net/axlsx)    
 **Git**:          [http://github.com/randym/axlsx](http://github.com/randym/axlsx)   
-**Author**:       Randy Morgan
-**Copyright**:    2011    
-**License**:      MIT License    
-**Latest Version**: 1.0.5
-**Ruby Version**: 1.8.7
-**Release Date**: November 22nd 2011    
+**Author**:       Randy Morgan   
+**Copyright**:    2011      
+**License**:      MIT License      
+**Latest Version**: 1.0.5   
+**Ruby Version**: 1.8.7   
+**Release Date**: November 22nd 2011     
 
 Synopsis
 --------
