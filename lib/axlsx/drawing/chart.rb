@@ -86,7 +86,7 @@ module Axlsx
 
     def show_legend=(v) Axlsx::validate_boolean(v); @show_legend = v; end
 
-    def style=(v) DataTypeValidator "Chart.style", Integer, v, lambda { |v| v >= 1 && v <= 48 }; @style = v; end
+    def style=(v) DataTypeValidator.validate "Chart.style", Integer, v, lambda { |v| v >= 1 && v <= 48 }; @style = v; end
 
     # Adds a new series to the chart's series collection.
     # @return [Series]
