@@ -1,0 +1,921 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Axlsx::Line3DChart
+  
+    &mdash; Documentation by YARD 0.7.3
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (L)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../Axlsx.html" title="Axlsx (module)">Axlsx</a></span></span>
+     &raquo; 
+    <span class="title">Line3DChart</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Axlsx::Line3DChart
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName"><span class='object_link'><a href="Chart.html" title="Axlsx::Chart (class)">Chart</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="Chart.html" title="Axlsx::Chart (class)">Chart</a></span></li>
+          
+            <li class="next">Axlsx::Line3DChart</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/axlsx/drawing/line_3D_chart.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+The Line3DChart is a three dimentional line chart (who would have guessed?)
+that you can add to your worksheet.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'><p>
+Creating a chart
+</p>
+</div></h4>
+      <pre class="example code"><span class='comment val'># This example creates a line in a single sheet.</span>
+<span class='require identifier id'>require</span> <span class='string val'>&quot;rubygems&quot;</span> <span class='comment val'># if that is your preferred way to manage gems!</span>
+<span class='require identifier id'>require</span> <span class='string val'>&quot;axlsx&quot;</span>
+
+<span class='p identifier id'>p</span> <span class='assign token'>=</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+<span class='ws identifier id'>ws</span> <span class='assign token'>=</span> <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='add_worksheet identifier id'>add_worksheet</span>
+<span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='symbol val'>:values</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;This is a chart with no data in the sheet&quot;</span><span class='rbrack token'>]</span>
+
+<span class='chart identifier id'>chart</span> <span class='assign token'>=</span> <span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_chart identifier id'>add_chart</span><span class='lparen token'>(</span><span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Line3DChart constant id'>Line3DChart</span><span class='comma token'>,</span> <span class='symbol val'>:start_at=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:end_at=</span><span class='gt op'>&gt;</span><span class='lbrack token'>[</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='integer val'>6</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:title=</span><span class='gt op'>&gt;</span><span class='string val'>&quot;Most Popular Pets&quot;</span><span class='rparen token'>)</span>
+<span class='chart identifier id'>chart</span><span class='dot token'>.</span><span class='add_series identifier id'>add_series</span> <span class='symbol val'>:data</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='integer val'>1</span><span class='comma token'>,</span> <span class='integer val'>9</span><span class='comma token'>,</span> <span class='integer val'>10</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:labels</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;Slimy Reptiles&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Fuzzy Bunnies&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Rottweiler&quot;</span><span class='rbrack token'>]</span>
+</pre>
+    
+  </div>
+
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="Worksheet.html#add_chart-instance_method" title="Axlsx::Worksheet#add_chart (method)">Worksheet#add_chart</a></span></li>
+    
+      <li><span class='object_link'><a href="Worksheet.html#add_row-instance_method" title="Axlsx::Worksheet#add_row (method)">Worksheet#add_row</a></span></li>
+    
+      <li><span class='object_link'><a href="Chart.html#add_series-instance_method" title="Axlsx::Chart#add_series (method)">Chart#add_series</a></span></li>
+    
+      <li><span class='object_link'><a href="Series.html" title="Axlsx::Series (class)">Series</a></span></li>
+    
+      <li><span class='object_link'><a href="Package.html#serialize-instance_method" title="Axlsx::Package#serialize (method)">Package#serialize</a></span></li>
+    
+  </ul>
+
+</div>
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="GAP_AMOUNT_PERCENT-constant" class="">GAP_AMOUNT_PERCENT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>
+validation regex for gap amount percent
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='regexp val'>/0*(([0-9])|([1-9][0-9])|([1-4][0-9][0-9])|500)%/</span>
+</pre></dd>
+      
+    </dl>
+  
+
+
+  
+  
+  
+  
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#catAxis-instance_method" title="#catAxis (instance method)">- (CatAxis) <strong>catAxis</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+the category axis.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gapDepth-instance_method" title="#gapDepth (instance method)">- (String) <strong>gapDepth</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+space between bar or column clusters, as a percentage of the bar or column
+width.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#grouping-instance_method" title="#grouping (instance method)">- (Symbol) <strong>grouping</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+grouping for a column, line, or area chart.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#serAxis-instance_method" title="#serAxis (instance method)">- (Axis) <strong>serAxis</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+the category axis.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#valAxis-instance_method" title="#valAxis (instance method)">- (ValAxis) <strong>valAxis</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+the category axis.
+</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+  
+  
+  
+  
+  
+  <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="Chart.html" title="Axlsx::Chart (class)">Chart</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Chart.html#end_at-instance_method" title="Axlsx::Chart#end_at (method)">end_at</a></span>, <span class='object_link'><a href="Chart.html#graphic_frame-instance_method" title="Axlsx::Chart#graphic_frame (method)">graphic_frame</a></span>, <span class='object_link'><a href="Chart.html#index-instance_method" title="Axlsx::Chart#index (method)">index</a></span>, <span class='object_link'><a href="Chart.html#pn-instance_method" title="Axlsx::Chart#pn (method)">pn</a></span>, <span class='object_link'><a href="Chart.html#series-instance_method" title="Axlsx::Chart#series (method)">series</a></span>, <span class='object_link'><a href="Chart.html#series_type-instance_method" title="Axlsx::Chart#series_type (method)">series_type</a></span>, <span class='object_link'><a href="Chart.html#show_legend-instance_method" title="Axlsx::Chart#show_legend (method)">show_legend</a></span>, <span class='object_link'><a href="Chart.html#start_at-instance_method" title="Axlsx::Chart#start_at (method)">start_at</a></span>, <span class='object_link'><a href="Chart.html#style-instance_method" title="Axlsx::Chart#style (method)">style</a></span>, <span class='object_link'><a href="Chart.html#title-instance_method" title="Axlsx::Chart#title (method)">title</a></span>, <span class='object_link'><a href="Chart.html#view3D-instance_method" title="Axlsx::Chart#view3D (method)">view3D</a></span></p>
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Line3DChart) <strong>initialize</strong>(frame, options = {}) </a>
+    
+
+    
+  </span>
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Creates a new line chart object.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_xml-instance_method" title="#to_xml (instance method)">- (String) <strong>to_xml</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Serializes the bar chart.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Chart.html" title="Axlsx::Chart (class)">Chart</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Chart.html#add_series-instance_method" title="Axlsx::Chart#add_series (method)">#add_series</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <p class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Axlsx::Line3DChart (class)">Line3DChart</a></span></tt>) <strong>initialize</strong>(frame, options = {}) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Creates a new line chart object
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>frame</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="GraphicFrame.html" title="Axlsx::GraphicFrame (class)">GraphicFrame</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The workbook that owns this chart.
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+a customizable set of options
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    
+    
+    <h3>Options Hash (<tt>options</tt>):</h3>
+    <ul class="option">
+      
+        <li>
+          <span class="name">grouping</span>
+          <span class="type">(<tt>Symbol</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">gapDepth</span>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+    </ul>
+  
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/line_3D_chart.rb', line 51</span>
+
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='frame identifier id'>frame</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='@grouping ivar id'>@grouping</span> <span class='assign token'>=</span> <span class='symbol val'>:standard</span>
+  <span class='@catAxId ivar id'>@catAxId</span> <span class='assign token'>=</span> <span class='rand identifier id'>rand</span><span class='lparen token'>(</span><span class='integer val'>8</span> <span class='pow op'>**</span> <span class='integer val'>8</span><span class='rparen token'>)</span>
+  <span class='@valAxId ivar id'>@valAxId</span> <span class='assign token'>=</span> <span class='rand identifier id'>rand</span><span class='lparen token'>(</span><span class='integer val'>8</span> <span class='pow op'>**</span> <span class='integer val'>8</span><span class='rparen token'>)</span>
+  <span class='@serAxId ivar id'>@serAxId</span> <span class='assign token'>=</span> <span class='rand identifier id'>rand</span><span class='lparen token'>(</span><span class='integer val'>8</span> <span class='pow op'>**</span> <span class='integer val'>8</span><span class='rparen token'>)</span>
+  <span class='@catAxis ivar id'>@catAxis</span> <span class='assign token'>=</span> <span class='CatAxis constant id'>CatAxis</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='@catAxId ivar id'>@catAxId</span><span class='comma token'>,</span> <span class='@valAxId ivar id'>@valAxId</span><span class='rparen token'>)</span>
+  <span class='@valAxis ivar id'>@valAxis</span> <span class='assign token'>=</span> <span class='ValAxis constant id'>ValAxis</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='@valAxId ivar id'>@valAxId</span><span class='comma token'>,</span> <span class='@catAxId ivar id'>@catAxId</span><span class='rparen token'>)</span>
+  <span class='@serAxis ivar id'>@serAxis</span> <span class='assign token'>=</span> <span class='SerAxis constant id'>SerAxis</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='@serAxId ivar id'>@serAxId</span><span class='comma token'>,</span> <span class='@valAxId ivar id'>@valAxId</span><span class='rparen token'>)</span>
+  <span class='@view3D ivar id'>@view3D</span> <span class='assign token'>=</span> <span class='View3D constant id'>View3D</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:perspective=</span><span class='gt op'>&gt;</span><span class='integer val'>30</span><span class='rparen token'>)</span>
+  <span class='super super kw'>super</span><span class='lparen token'>(</span><span class='frame identifier id'>frame</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>      
+  <span class='@series_type ivar id'>@series_type</span> <span class='assign token'>=</span> <span class='LineSeries constant id'>LineSeries</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <span id="catAxis-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="catAxis-instance_method">
+  
+    - (<tt><span class='object_link'><a href="CatAxis.html" title="Axlsx::CatAxis (class)">CatAxis</a></span></tt>) <strong>catAxis</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+the category axis
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="CatAxis.html" title="Axlsx::CatAxis (class)">CatAxis</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+25
+26
+27</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/line_3D_chart.rb', line 25</span>
+
+<span class='def def kw'>def</span> <span class='catAxis identifier id'>catAxis</span>
+  <span class='@catAxis ivar id'>@catAxis</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="gapDepth=-instance_method"></span>
+      <span id="gapDepth-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="gapDepth-instance_method">
+  
+    - (<tt>String</tt>) <strong>gapDepth</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+space between bar or column clusters, as a percentage of the bar or column
+width.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+37
+38
+39</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/line_3D_chart.rb', line 37</span>
+
+<span class='def def kw'>def</span> <span class='gapDepth identifier id'>gapDepth</span>
+  <span class='@gapDepth ivar id'>@gapDepth</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="grouping=-instance_method"></span>
+      <span id="grouping-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="grouping-instance_method">
+  
+    - (<tt>Symbol</tt>) <strong>grouping</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+grouping for a column, line, or area chart. must be one of
+[:percentStacked, :clustered, :standard, :stacked]
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+42
+43
+44</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/line_3D_chart.rb', line 42</span>
+
+<span class='def def kw'>def</span> <span class='grouping identifier id'>grouping</span>
+  <span class='@grouping ivar id'>@grouping</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="serAxis-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="serAxis-instance_method">
+  
+    - (<tt><span class='object_link'><a href="Axis.html" title="Axlsx::Axis (class)">Axis</a></span></tt>) <strong>serAxis</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+the category axis
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Axis.html" title="Axlsx::Axis (class)">Axis</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+33
+34
+35</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/line_3D_chart.rb', line 33</span>
+
+<span class='def def kw'>def</span> <span class='serAxis identifier id'>serAxis</span>
+  <span class='@serAxis ivar id'>@serAxis</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="valAxis-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="valAxis-instance_method">
+  
+    - (<tt><span class='object_link'><a href="ValAxis.html" title="Axlsx::ValAxis (class)">ValAxis</a></span></tt>) <strong>valAxis</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+the category axis
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ValAxis.html" title="Axlsx::ValAxis (class)">ValAxis</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+29
+30
+31</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/line_3D_chart.rb', line 29</span>
+
+<span class='def def kw'>def</span> <span class='valAxis identifier id'>valAxis</span>
+  <span class='@valAxis ivar id'>@valAxis</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="to_xml-instance_method">
+  
+    - (<tt>String</tt>) <strong>to_xml</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Serializes the bar chart
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/line_3D_chart.rb', line 76</span>
+
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span>
+  <span class='super super kw'>super</span><span class='lparen token'>(</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='xml identifier id'>xml</span><span class='bitor op'>|</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:line3DChart'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:grouping'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='grouping identifier id'>grouping</span><span class='rparen token'>)</span>
+      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:varyColors'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='integer val'>1</span><span class='rparen token'>)</span>
+      <span class='@series ivar id'>@series</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='ser identifier id'>ser</span><span class='bitor op'>|</span> <span class='ser identifier id'>ser</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span> <span class='rbrace token'>}</span>
+      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:gapDepth'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@gapDepth ivar id'>@gapDepth</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='@gapDepth ivar id'>@gapDepth</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:axId'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@catAxId ivar id'>@catAxId</span><span class='rparen token'>)</span>
+      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:axId'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@valAxId ivar id'>@valAxId</span><span class='rparen token'>)</span>
+      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:axId'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@serAxId ivar id'>@serAxId</span><span class='rparen token'>)</span>
+    <span class='rbrace token'>}</span>
+    <span class='@catAxis ivar id'>@catAxis</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+    <span class='@valAxis ivar id'>@valAxis</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+    <span class='@serAxis ivar id'>@serAxis</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Mon Nov 21 23:44:24 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.3 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>
