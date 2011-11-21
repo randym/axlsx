@@ -159,6 +159,7 @@ Changelog
   - Removed serialization write test as it most commonly fails when run from the gem's intalled directory
 - **October.22.11**: 1.0.6 release
   - Bumping version to include docs. Bug in gemspec pointing to incorrect directory.
+
 On Deck
 -------
 
