@@ -18,7 +18,7 @@ module Axlsx
     attr_accessor :order
 
     # The title of the series
-    # @return [String]
+    # @return [SeriesTitle]
     attr_accessor :title
 
     # Creates a new series
@@ -44,8 +44,12 @@ module Axlsx
       @order || index
     end
 
-    def title=(v)  Axlsx::validate_string(v); @title = v; end
-    
+    def title=(v) 
+      v = SeriesTitle.new(v) if v.is_a?(String) || v.is_a?(Cell)
+      DataTypeValidator.validate "#{self.class}.title", SeriesTitle, v
+      @title = v
+    end
+   
     private 
     
     # assigns the chart for this series
@@ -57,10 +61,8 @@ module Axlsx
     def to_xml(xml)
       xml.send('c:ser') {
         xml.send('c:idx', :val=>index)
-        xml.send('c:order', :val=>order || index)
-        xml.send('c:tx') {
-          xml.send('c:v', self.title)
-        }
+        xml.send('c:order', :val=>order || index)        
+        title.to_xml(xml) unless title.nil?
         yield xml if block_given?
       }
     end

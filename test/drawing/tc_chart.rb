@@ -28,19 +28,21 @@ class TestChart < Test::Unit::TestCase
     assert_equal(@chart.title.cell, @row.cells.first)
   end
 
+  def test_style
+    assert_raise(ArgumentError) { @chart.style = 49 }
+    assert_nothing_raised { @chart.style = 2 }
+    assert_equal(@chart.style, 2)
+  end
+
 
   def test_add_series    
     s = @chart.add_series :data=>[0,1,2,3], :labels => ["one", 1, "anything"], :title=>"bob"
     assert_equal(@chart.series.last, s, "series has been added to chart series collection")
-    assert_equal(s.title, "bob", "series title has been applied")
+    assert_equal(s.title.text, "bob", "series title has been applied")
     assert_equal(s.data, [0,1,2,3], "data option applied")
     assert_equal(s.labels, ["one",1,"anything"], "labels option applied")    
   end  
   
-  def test_create_range
-    
-  end
-
   def test_pn
     assert_equal(@chart.pn, "charts/chart1.xml")
   end

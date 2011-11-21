@@ -77,8 +77,6 @@ module Axlsx
     # @option options [String] gapDepth
     # @option options [Symbol] shape
     def initialize(frame, options={})
-      super(frame, options)      
-      @series_type = BarSeries
       @barDir = :bar
       @grouping = :clustered
       @catAxId = rand(8 ** 8)
@@ -86,6 +84,8 @@ module Axlsx
       @catAxis = CatAxis.new(@catAxId, @valAxId)
       @valAxis = ValAxis.new(@valAxId, @catAxId)
       @view3D = View3D.new(:rAngAx=>1)
+      super(frame, options)      
+      @series_type = BarSeries
     end
     
     def barDir=(v) 

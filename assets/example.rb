@@ -31,6 +31,7 @@
      end  
      p.serialize("example3.xlsx")
 
+
 #Using Custom Styles
 
      p = Axlsx::Package.new
@@ -68,3 +69,15 @@
        puts error.inspect
      end
       
+#Generating A Line Chart
+
+     p = Axlsx::Package.new
+     p.workbook.add_worksheet do |sheet|
+       sheet.add_row ["First", 1, 5, 7, 9]
+       sheet.add_row ["Second", 5, 2, 14, 9]
+       sheet.add_chart(Axlsx::Line3DChart, :start_at => [0,2], :end_at => [10, 15], :title=>"example 6: Line Chart") do |chart|
+         chart.add_series :data=>sheet.rows.first.cells[(1..-1)], :title=> sheet.rows.first.cells.first
+         chart.add_series :data=>sheet.rows.last.cells[(1..-1)], :title=> sheet.rows.last.cells.first
+       end
+     end  
+     p.serialize("example6.xlsx")

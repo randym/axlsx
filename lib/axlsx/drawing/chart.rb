@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 module Axlsx
   # A Chart is the superclass for specific charts
   # @note Worksheet#add_chart is the recommended way to create charts for your worksheets.
@@ -6,6 +7,11 @@ module Axlsx
     # The title object for the chart.
     # @return [Title]
     attr_accessor :title
+
+    # The style for the chart. 
+    # see ECMA Part 1 §21.2.2.196
+    # @return [Integer]
+    attr_accessor :style
 
     # The 3D view properties for the chart
     attr_accessor :view3D
@@ -50,6 +56,7 @@ module Axlsx
     # @option options [Cell, String] title
     # @option options [Boolean] show_legend
     def initialize(frame, options={})
+      @style = 2
       @graphic_frame=frame
       @graphic_frame.anchor.drawing.worksheet.workbook.charts << self
       @series = SimpleTypedList.new Series
@@ -79,6 +86,8 @@ module Axlsx
 
     def show_legend=(v) Axlsx::validate_boolean(v); @show_legend = v; end
 
+    def style=(v) DataTypeValidator "Chart.style", Integer, v, lambda { |v| v >= 1 && v <= 48 }; @style = v; end
+
     # Adds a new series to the chart's series collection.
     # @return [Series]
     # @see Series
@@ -92,6 +101,8 @@ module Axlsx
     def to_xml
       builder = Nokogiri::XML::Builder.new(:encoding => ENCODING) do |xml|
         xml.send('c:chartSpace',:'xmlns:c' => XML_NS_C, :'xmlns:a' => XML_NS_A) {
+          xml.send('c:date1904', :val=>Axlsx::Workbook.date1904)
+          xml.send('c:style', :val=>style)
           xml.send('c:chart') {
             @title.to_xml(xml) unless @title.nil?
             @view3D.to_xml(xml) unless @view3D.nil?

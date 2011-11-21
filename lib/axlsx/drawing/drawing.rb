@@ -1,14 +1,17 @@
 module Axlsx
+  require 'axlsx/drawing/title.rb'
+  require 'axlsx/drawing/series_title.rb'
   require 'axlsx/drawing/series.rb'
   require 'axlsx/drawing/pie_series.rb'
   require 'axlsx/drawing/bar_series.rb'  
+  require 'axlsx/drawing/line_series.rb'  
 
   require 'axlsx/drawing/axis.rb'
+  require 'axlsx/drawing/ser_axis.rb'
   require 'axlsx/drawing/cat_axis.rb'
   require 'axlsx/drawing/val_axis.rb'
   require 'axlsx/drawing/view_3D.rb'
   require 'axlsx/drawing/scaling.rb'
-  require 'axlsx/drawing/title.rb'
 
   require 'axlsx/drawing/graphic_frame.rb'
   require 'axlsx/drawing/marker.rb'
@@ -17,6 +20,7 @@ module Axlsx
   require 'axlsx/drawing/chart.rb'
   require 'axlsx/drawing/pie_3D_chart.rb'
   require 'axlsx/drawing/bar_3D_chart.rb'
+  require 'axlsx/drawing/line_3D_chart.rb'
 
   # A Drawing is a canvas for charts. Each worksheet has a single drawing that can specify multiple anchors which reference charts.
   # @note The recommended way to manage drawings is to use the Worksheet.add_chart method, specifying the chart class, start and end marker locations. 

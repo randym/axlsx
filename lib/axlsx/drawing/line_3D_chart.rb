@@ -1,0 +1,93 @@
+module Axlsx
+
+  # The Line3DChart is a three dimentional line chart (who would have guessed?) that you can add to your worksheet.
+  # @example Creating a chart
+  #   # This example creates a line in a single sheet.
+  #   require "rubygems" # if that is your preferred way to manage gems!
+  #   require "axlsx"
+  #
+  #   p = Axlsx::Package.new
+  #   ws = p.workbook.add_worksheet
+  #   ws.add_row :values => ["This is a chart with no data in the sheet"]
+  #
+  #   chart = ws.add_chart(Axlsx::Line3DChart, :start_at=> [0,1], :end_at=>[0,6], :title=>"Most Popular Pets")
+  #   chart.add_series :data => [1, 9, 10], :labels => ["Slimy Reptiles", "Fuzzy Bunnies", "Rottweiler"]
+  #
+  # @see Worksheet#add_chart
+  # @see Worksheet#add_row
+  # @see Chart#add_series
+  # @see Series
+  # @see Package#serialize
+  class Line3DChart < Chart
+
+    # the category axis
+    # @return [CatAxis]
+    attr_reader :catAxis
+
+    # the category axis
+    # @return [ValAxis]
+    attr_reader :valAxis
+
+    # the category axis
+    # @return [Axis]
+    attr_reader :serAxis
+
+    # space between bar or column clusters, as a percentage of the bar or column width.
+    # @return [String]
+    attr_accessor :gapDepth
+
+    #grouping for a column, line, or area chart.
+    # must be one of  [:percentStacked, :clustered, :standard, :stacked]
+    # @return [Symbol]
+    attr_accessor :grouping
+
+    # validation regex for gap amount percent
+    GAP_AMOUNT_PERCENT = /0*(([0-9])|([1-9][0-9])|([1-4][0-9][0-9])|500)%/
+    
+    # Creates a new line chart object
+    # @param [GraphicFrame] frame The workbook that owns this chart.
+    # @option options [Symbol] grouping
+    # @option options [String] gapDepth
+    def initialize(frame, options={})
+      @grouping = :standard
+      @catAxId = rand(8 ** 8)
+      @valAxId = rand(8 ** 8)
+      @serAxId = rand(8 ** 8)
+      @catAxis = CatAxis.new(@catAxId, @valAxId)
+      @valAxis = ValAxis.new(@valAxId, @catAxId)
+      @serAxis = SerAxis.new(@serAxId, @valAxId)
+      @view3D = View3D.new(:perspective=>30)
+      super(frame, options)      
+      @series_type = LineSeries
+    end
+
+    def grouping=(v)
+      RestrictionValidator.validate "Bar3DChart.grouping", [:percentStacked, :standard, :stacked], v
+      @grouping = v
+    end
+
+    def gapDepth=(v)
+      RegexValidator.validate "Bar3DChart.gapWidth", GAP_AMOUNT_PERCENT, v
+      @gapDepth=(v)
+    end
+
+    # Serializes the bar chart
+    # @return [String]
+    def to_xml
+      super() do |xml|
+        xml.send('c:line3DChart') {
+          xml.send('c:grouping', :val=>grouping)
+          xml.send('c:varyColors', :val=>1)
+          @series.each { |ser| ser.to_xml(xml) }
+          xml.send('c:gapDepth', :val=>@gapDepth) unless @gapDepth.nil?
+          xml.send('c:axId', :val=>@catAxId)
+          xml.send('c:axId', :val=>@valAxId)
+          xml.send('c:axId', :val=>@serAxId)
+        }
+        @catAxis.to_xml(xml)
+        @valAxis.to_xml(xml)
+        @serAxis.to_xml(xml)
+      end
+    end    
+  end  
+end

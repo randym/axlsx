@@ -11,7 +11,7 @@ class TestBarSeries < Test::Unit::TestCase
   end
   
   def test_initialize
-    assert_equal(@series.title, "bob", "series title has been applied")
+    assert_equal(@series.title.text, "bob", "series title has been applied")
     assert_equal(@series.data, [0,1,2], "data option applied")
     assert_equal(@series.labels, ["zero", "one","two"], "labels option applied")    
     assert_equal(@series.shape, :box, "series shape has been applied")   

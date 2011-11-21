@@ -32,7 +32,6 @@ module Axlsx
     end
 
     # Not implemented at this time.
-    #def tx=(v) DataTypeValidator.validate 'Title.tx', Tx, v; @tx=v; end
     #def layout=(v) DataTypeValidator.validate 'Title.layout', Layout, v; @layout = v; end
     #def overlay=(v) Axlsx::validate_boolean v; @overlay=v; end
     #def spPr=(v) DataTypeValidator.validate 'Title.spPr', SpPr, v; @spPr = v; end
@@ -55,7 +54,7 @@ module Axlsx
         }
       }      
     end
-
+    
     private 
 
     # returns the excel style abslute reference for the title when title is a Cell object

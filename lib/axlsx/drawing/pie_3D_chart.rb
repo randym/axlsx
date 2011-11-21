@@ -39,8 +39,8 @@ module Axlsx
     # @param [Workbook] workbook The workbook that owns this chart.
     # @option options [Cell, String] title
     def initialize(workbook, options={})
-      super(workbook, options)
       # this charts series type
+      super(workbook, options)
       @series_type = PieSeries
       @view3D = View3D.new(:rotX => 30, :perspective => 30)
     end

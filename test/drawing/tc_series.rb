@@ -11,7 +11,7 @@ class TestSeries < Test::Unit::TestCase
   end
   
   def test_initialize
-    assert_equal(@series.title, "bob", "series title has been applied")
+    assert_equal(@series.title.text, "bob", "series title has been applied")
     assert_equal(@series.order, @series.index, "order is index by default")
     assert_equal(@series.index, @series.chart.series.index(@series), "index is applied")    
   end

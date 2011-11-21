@@ -7,7 +7,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 **Copyright**:    2011    
 **License**:      MIT License    
 **Latest Version**: 1.0.4
-**Release Date**: November 20th 2011    
+**Release Date**: November 21st 2011    
 
 Synopsis
 --------
@@ -115,6 +115,20 @@ Usage
        puts error.inspect
      end
 
+#Generating A Line Chart
+
+     p = Axlsx::Package.new
+     p.workbook.add_worksheet do |sheet|
+       sheet.add_row ["First", 1, 5, 7, 9]
+       sheet.add_row ["Second", 5, 2, 14, 9]
+       sheet.add_chart(Axlsx::Line3DChart, :start_at => [0,2], :end_at => [10, 15], :title=>"example 6: Line Chart") do |chart|
+         chart.add_series :data=>sheet.rows.first.cells[(1..-1)], :title=> sheet.rows.first.cells.first
+         chart.add_series :data=>sheet.rows.last.cells[(1..-1)], :title=> sheet.rows.last.cells.first
+       end
+     end  
+     p.serialize("example6.xlsx")
+
+
 ### Documentation
 This gem is 100% documented with YARD, an exceptional documentation library. To see documentation for this, and all the gems installed on your system use:
 
@@ -134,7 +148,9 @@ Changelog
   - altered package to accept a filename string for serialization instead of a File object.
   - Updated specs to conform
   - More examples for readme
-
+- **October.21.11**: 1.05  
+  - Added support for line charts
+  - Updated examples and readme
 Copyright
 ---------
 
