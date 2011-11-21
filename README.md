@@ -40,88 +40,77 @@ To install Axlsx, use the following command:
     
 Usage
 -----
-Simple Workbook
 
-     p = Axlsx::Package.new do |package|
-       package.workbook.add_worksheet do |sheet|
-         sheet.add_row ["First", "Second", "Third"]
-         sheet.add_row [1, 2, 3]
+     require 'rubygems'
+     require 'axlsx'
+
+##A Simple Workbook
+      p = Axlsx::Package.new
+      p.workbook.add_worksheet do |sheet|
+        sheet.add_row ["First", "Second", "Third"]
+        sheet.add_row [1, 2, 3]
+      end
+      p.serialize("example1.xlsx")
+
+##Generating A Bar Chart
+     p = Axlsx::Package.new
+     p.workbook.add_worksheet do |sheet|
+       sheet.add_row ["First", "Second", "Third"]
+       sheet.add_row [1, 2, 3]
+       sheet.add_chart(Axlsx::Bar3DChart, :start_at => [0,2], :end_at => [5, 15], :title=>"example 1: Chart") do |chart|
+         chart.add_series :data=>sheet.rows.last.cells, :labels=> sheet.rows.first.cells
        end
-       package.serialize("example1.xlsx")
      end  
+     p.serialize("example2.xlsx")
 
-Generating A Bar Chart
-	   
-     p = Axlsx::Package.new do |package|
-       package.workbook.add_worksheet do |sheet|
-         sheet.add_row ["First", "Second", "Third"]
-         sheet.add_row [1, 2, 3]
-         sheet.add_chart(Axlsx::Bar3DChart, :start_at => [0,2], :end_at => [5, 15], :title=>"example 1: Chart") do |chart|
-           chart.add_series :data=>sheet.rows.last.cells, :labels=> sheet.rows.first.cells
-         end
+##Generating A Pie Chart
+     p = Axlsx::Package.new
+     p.workbook.add_worksheet do |sheet|
+       sheet.add_row ["First", "Second", "Third"]
+       sheet.add_row [1, 2, 3]
+       sheet.add_chart(Axlsx::Pie3DChart, :start_at => [0,2], :end_at => [5, 15], :title=>"example 2: Pie Chart") do |chart|
+         chart.add_series :data=>sheet.rows.last.cells, :labels=> sheet.rows.first.cells
        end
-       package.serialize("example1.xlsx")
      end  
+     p.serialize("example3.xlsx")
 
-Generating A Pie Chart
+##Using Custom Styles
 
-     p = Axlsx::Package.new do |package|
-       package.workbook.add_worksheet do |sheet|
-         sheet.add_row ["First", "Second", "Third"]
-         sheet.add_row [1, 2, 3]
-         sheet.add_chart(Axlsx::Pie3DChart, :start_at => [0,2], :end_at => [5, 15], :title=>"example 2: Pie Chart") do |chart|
-           chart.add_series :data=>sheet.rows.last.cells, :labels=> sheet.rows.first.cells
-         end
-       end
-       package.serialize("example3.xlsx")
-     end  
+     p = Axlsx::Package.new
+     wb = p.workbook
+     black_cell = wb.styles.add_style :bg_color => "FF000000", :fg_color => "FFFFFFFF", :sz=>14, :alignment => { :horizontal=> :center }
+     blue_cell = wb.styles.add_style  :bg_color => "FF0000FF", :fg_color => "FFFFFFFF", :sz=>14, :alignment => { :horizontal=> :center }
+     wb.add_worksheet do |sheet|
+       sheet.add_row ["Text Autowidth", "Second", "Third"], :style => [black_cell, blue_cell, black_cell]
+       sheet.add_row [1, 2, 3], :style => Axlsx::STYLE_THIN_BORDER
+     end
+     p.serialize("example4.xlsx")
 
-Using Custom Styles
+##Using Custom Formatting and date1904
 
-     p = Axlsx::Package.new do |package|
-       style_options = { :bg_color => "FF000000", :fg_color => "FFFFFFFF", :sz=>14, :alignment => { :horizontal=> :center } }
-       header_style = package.workbook.styles.add_style style_options
-       package.workbook.add_worksheet do |sheet|
-         sheet.add_row ["Text Autowidth", "Second", "Third"], :style => header_style
-         sheet.add_row [1, 2, 3], :style => Axlsx::STYLE_THIN_BORDER
-       end
-       package.serialize("example3.xlsx")
-     end  
+     p = Axlsx::Package.new
+     wb = p.workbook
+     date = wb.styles.add_style :format_code=>"yyyy-mm-dd", :border => Axlsx::STYLE_THIN_BORDER
+     padded = wb.styles.add_style :format_code=>"00#", :border => Axlsx::STYLE_THIN_BORDER
+     percent = wb.styles.add_style :format_code=>"0%", :border => Axlsx::STYLE_THIN_BORDER
+     wb.date1904 = true # required for generation on mac
+     wb.add_worksheet do |sheet|
+       sheet.add_row ["Custom Formatted Date", "Percent Formatted Float", "Padded Numbers"], :style => Axlsx::STYLE_THIN_BORDER
+       sheet.add_row [Time.now, 0.2, 32], :style => [date, percent, padded]
+     end
+     p.serialize("example5.xlsx")
 
-Cell Specifc Styles
+##Validation
 
-     p = Axlsx::Package.new do |package|
+     p = Axlsx::Package.new
+     p.workbook.add_worksheet do |sheet|
+       sheet.add_row ["First", "Second", "Third"]
+       sheet.add_row [1, 2, 3]
+     end
 
-       black_cell_spec = { :bg_color => "FF000000", :fg_color => "FFFFFFFF", :sz=>14, :alignment => { :horizontal=> :center } }
-       blue_cell_spec = { :bg_color => "FF0000FF", :fg_color => "FFFFFFFF", :sz=>14, :alignment => { :horizontal=> :center } }
-
-       black_cell = package.workbook.styles.add_style black_cell_spec
-       blue_cell = package.workbook.styles.add_style blue_cell_spec
-
-       # date1904 support. uncomment the line below if you are working on a mac.
-       # package.workbook.date1904 = true 
-
-       package.workbook.add_worksheet do |sheet|
-         sheet.add_row ["Text Autowidth", "Second", "Third"], :style => [black_cell, blue_cell, black_cell]
-         sheet.add_row [1, 2, 3], :style => Axlsx::STYLE_THIN_BORDER
-       end
-       package.serialize("example3.xlsx")
-     end  
-
-Number and Date formatting
-
-     p = Axlsx::Package.new do |package|
-       date = package.workbook.styles.add_style :format_code=>"yyyy-mm-dd", :border => Axlsx::STYLE_THIN_BORDER
-       padded = package.workbook.styles.add_style :format_code=>"00#", :border => Axlsx::STYLE_THIN_BORDER
-       percent = package.workbook.styles.add_style :format_code=>"0%", :border => Axlsx::STYLE_THIN_BORDER
-
-       package.workbook.add_worksheet do |sheet|
-         sheet.add_row
-         sheet.add_row ["Custom Formatted Date", "Percent Formatted Float", "Padded Numbers"], :style => Axlsx::STYLE_THIN_BORDER
-         sheet.add_row [Time.now, 0.2, 32], :style => [date, percent, padded]
-       end
-       package.serialize("example5.xlsx")
-     end  
+     p.validate.each do |error|
+       puts error.inspect
+     end
 
 ### Documentation
 This gem is 100% documented with YARD, an exceptional documentation library. To see documentation for this, and all the gems installed on your system use:
