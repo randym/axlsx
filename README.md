@@ -6,7 +6,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 **Author**:       Randy Morgan
 **Copyright**:    2011    
 **License**:      MIT License    
-**Latest Version**: 1.0.2
+**Latest Version**: 1.0.4
 **Release Date**: November 20th 2011    
 
 Synopsis
@@ -127,8 +127,10 @@ Changelog
 - **October.20.11**: 0.1.0 release
 - **October.21.11**: 1.0.3 release
   - Updated documentation
+- **October.21.11**: 1.0.4
   - altered package to accept a filename string for serialization instead of a File object.
   - Updated specs to conform
+  - More examples for readme
 
 Copyright
 ---------
