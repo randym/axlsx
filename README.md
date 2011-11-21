@@ -6,8 +6,9 @@ Axlsx: Office Open XML Spreadsheet Generation
 **Author**:       Randy Morgan
 **Copyright**:    2011    
 **License**:      MIT License    
-**Latest Version**: 1.0.4
-**Release Date**: November 21st 2011    
+**Latest Version**: 1.0.5
+**Ruby Version**: 1.8.7
+**Release Date**: November 22nd 2011    
 
 Synopsis
 --------
@@ -59,7 +60,7 @@ Usage
      p.workbook.add_worksheet do |sheet|
        sheet.add_row ["First", "Second", "Third"]
        sheet.add_row [1, 2, 3]
-       sheet.add_chart(Axlsx::Bar3DChart, :start_at => [0,2], :end_at => [5, 15], :title=>"example 1: Chart") do |chart|
+       sheet.add_chart(Axlsx::Bar3DChart, :start_at => [0,2], :end_at => [5, 15], :title=>"example 2: Chart") do |chart|
          chart.add_series :data=>sheet.rows.last.cells, :labels=> sheet.rows.first.cells
        end
      end  
@@ -71,7 +72,7 @@ Usage
      p.workbook.add_worksheet do |sheet|
        sheet.add_row ["First", "Second", "Third"]
        sheet.add_row [1, 2, 3]
-       sheet.add_chart(Axlsx::Pie3DChart, :start_at => [0,2], :end_at => [5, 15], :title=>"example 2: Pie Chart") do |chart|
+       sheet.add_chart(Axlsx::Pie3DChart, :start_at => [0,2], :end_at => [5, 15], :title=>"example 3: Pie Chart") do |chart|
          chart.add_series :data=>sheet.rows.last.cells, :labels=> sheet.rows.first.cells
        end
      end  
@@ -136,7 +137,7 @@ This gem is 100% documented with YARD, an exceptional documentation library. To 
 
 
 ### Specs
-This gem has 100% test coverage. To execute tests for this gem, simply run rake in the gem directory.
+This gem has 100% test coverage using test/unit. To execute tests for this gem, simply run rake in the gem directory.
  
 Changelog
 ---------
@@ -148,9 +149,21 @@ Changelog
   - altered package to accept a filename string for serialization instead of a File object.
   - Updated specs to conform
   - More examples for readme
-- **October.21.11**: 1.05  
+- **October.22.11**: 1.05  
   - Added support for line charts
   - Updated examples and readme
+  - Updated series title to be a real title ** NOTE ** If you are accessing titles directly you will need to update text assignation to title.text = v
+  - BugFix: shape attribute for bar chart is now properly serialized
+  - BugFix: date1904 property now properly set for charts
+  - Added style property to charts
+  - Removed serialization write test as it most commonly fails when run from the gem's intalled directory
+
+On Deck
+-------
+
+- Verification with ruby 1.9.3
+- Active Record support via package::serialize_ar so you can dump an AR result into a worksheet in one go.
+
 Copyright
 ---------
 

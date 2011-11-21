@@ -4,7 +4,7 @@ lib/axlsx/drawing/pie_3D_chart.rb dd669c8dc9ef1f762d45a9589260c8c17308d944
 lib/axlsx/stylesheet/border_pr.rb 09dcb61ec7b0cf49f2da4c4f8ccba8f7e0df7b07
 lib/axlsx/stylesheet/color.rb 4927aaebe27dda42d78bb7baf9a44edc1753c77f
 lib/axlsx/drawing/marker.rb 3507738522c02a3733a01f115d9ef22fae4ea542
-lib/axlsx/util/constants.rb ebb670bf42bffc225281bcec13e654118603c698
+lib/axlsx/util/constants.rb 7c150ada1be46d42456f1d4c57072e8327cc4dd7
 lib/axlsx/stylesheet/cell_protection.rb ce494f9add6de0a51407ddd9122fffe95759a48a
 lib/axlsx/stylesheet/cell_style.rb 46c6ff183bce5c6b1ab6228823257d638007b03c
 lib/axlsx/drawing/series_title.rb 7ace4ba7c7835db5a7c69d2319cd59ed8c45908a

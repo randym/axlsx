@@ -62,7 +62,8 @@
 <strong>Copyright</strong>:    2011  <br/>
 <strong>License</strong>:      MIT License  <br/>
 <strong>Latest Version</strong>: 1.0.5
-<strong>Release Date</strong>: November 21st 2011</p>
+<strong>Ruby Version</strong>: 1.8.7
+<strong>Release Date</strong>: November 22nd 2011</p>
 
 <h2>Synopsis</h2>
 
@@ -112,7 +113,7 @@ It enables the you to generate 100% valid xlsx files that include customised sty
  <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='add_worksheet identifier id'>add_worksheet</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='sheet identifier id'>sheet</span><span class='bitor op'>|</span>
    <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='lbrack token'>[</span><span class='string val'>&quot;First&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Second&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Third&quot;</span><span class='rbrack token'>]</span>
    <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='lbrack token'>[</span><span class='integer val'>1</span><span class='comma token'>,</span> <span class='integer val'>2</span><span class='comma token'>,</span> <span class='integer val'>3</span><span class='rbrack token'>]</span>
-   <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_chart identifier id'>add_chart</span><span class='lparen token'>(</span><span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Bar3DChart constant id'>Bar3DChart</span><span class='comma token'>,</span> <span class='symbol val'>:start_at</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='integer val'>2</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:end_at</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='integer val'>5</span><span class='comma token'>,</span> <span class='integer val'>15</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:title=</span><span class='gt op'>&gt;</span><span class='string val'>&quot;example 1: Chart&quot;</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='chart identifier id'>chart</span><span class='bitor op'>|</span>
+   <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_chart identifier id'>add_chart</span><span class='lparen token'>(</span><span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Bar3DChart constant id'>Bar3DChart</span><span class='comma token'>,</span> <span class='symbol val'>:start_at</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='integer val'>2</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:end_at</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='integer val'>5</span><span class='comma token'>,</span> <span class='integer val'>15</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:title=</span><span class='gt op'>&gt;</span><span class='string val'>&quot;example 2: Chart&quot;</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='chart identifier id'>chart</span><span class='bitor op'>|</span>
      <span class='chart identifier id'>chart</span><span class='dot token'>.</span><span class='add_series identifier id'>add_series</span> <span class='symbol val'>:data=</span><span class='gt op'>&gt;</span><span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span><span class='dot token'>.</span><span class='last identifier id'>last</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span><span class='comma token'>,</span> <span class='symbol val'>:labels=</span><span class='gt op'>&gt;</span> <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span><span class='dot token'>.</span><span class='first identifier id'>first</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span>
    <span class='end end kw'>end</span>
  <span class='end end kw'>end</span>  
@@ -125,7 +126,7 @@ It enables the you to generate 100% valid xlsx files that include customised sty
  <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='add_worksheet identifier id'>add_worksheet</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='sheet identifier id'>sheet</span><span class='bitor op'>|</span>
    <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='lbrack token'>[</span><span class='string val'>&quot;First&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Second&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Third&quot;</span><span class='rbrack token'>]</span>
    <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='lbrack token'>[</span><span class='integer val'>1</span><span class='comma token'>,</span> <span class='integer val'>2</span><span class='comma token'>,</span> <span class='integer val'>3</span><span class='rbrack token'>]</span>
-   <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_chart identifier id'>add_chart</span><span class='lparen token'>(</span><span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Pie3DChart constant id'>Pie3DChart</span><span class='comma token'>,</span> <span class='symbol val'>:start_at</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='integer val'>2</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:end_at</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='integer val'>5</span><span class='comma token'>,</span> <span class='integer val'>15</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:title=</span><span class='gt op'>&gt;</span><span class='string val'>&quot;example 2: Pie Chart&quot;</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='chart identifier id'>chart</span><span class='bitor op'>|</span>
+   <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_chart identifier id'>add_chart</span><span class='lparen token'>(</span><span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Pie3DChart constant id'>Pie3DChart</span><span class='comma token'>,</span> <span class='symbol val'>:start_at</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='integer val'>2</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:end_at</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='integer val'>5</span><span class='comma token'>,</span> <span class='integer val'>15</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:title=</span><span class='gt op'>&gt;</span><span class='string val'>&quot;example 3: Pie Chart&quot;</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='chart identifier id'>chart</span><span class='bitor op'>|</span>
      <span class='chart identifier id'>chart</span><span class='dot token'>.</span><span class='add_series identifier id'>add_series</span> <span class='symbol val'>:data=</span><span class='gt op'>&gt;</span><span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span><span class='dot token'>.</span><span class='last identifier id'>last</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span><span class='comma token'>,</span> <span class='symbol val'>:labels=</span><span class='gt op'>&gt;</span> <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span><span class='dot token'>.</span><span class='first identifier id'>first</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span>
    <span class='end end kw'>end</span>
  <span class='end end kw'>end</span>  
@@ -195,7 +196,7 @@ It enables the you to generate 100% valid xlsx files that include customised sty
 
 <h3>Specs</h3>
 
-<p>This gem has 100% test coverage. To execute tests for this gem, simply run rake in the gem directory.</p>
+<p>This gem has 100% test coverage using test/unit. To execute tests for this gem, simply run rake in the gem directory.</p>
 
 <h2>Changelog</h2>
 
@@ -215,26 +216,37 @@ It enables the you to generate 100% valid xlsx files that include customised sty
 <li>More examples for readme</li>
 </ul>
 </li>
-<li><strong>October.21.11</strong>: 1.05
+<li><strong>October.22.11</strong>: 1.05
 
 <ul>
 <li>Added support for line charts</li>
 <li>Updated examples and readme</li>
-<li>Updated series title to be a real title
-Copyright</li>
+<li>Updated series title to be a real title <strong> NOTE </strong> If you are accessing titles directly you will need to update text assignation to title.text = v</li>
+<li>BugFix: shape attribute for bar chart is now properly serialized</li>
+<li>BugFix: date1904 property now properly set for charts</li>
+<li>Added style property to charts</li>
+<li>Removed serialization write test as it most commonly fails when run from the gem's intalled directory</li>
 </ul>
 </li>
 </ul>
 
 
-<hr />
+<h2>On Deck</h2>
+
+<ul>
+<li>Verification with ruby 1.9.3</li>
+<li>Active Record support via package::serialize_ar so you can dump an AR result into a worksheet in one go.</li>
+</ul>
+
+
+<h2>Copyright</h2>
 
 <p>Axlsx &copy; 2011 by <a href="mailto:digial.ipseity@gmail.com">Randy Morgan</a>. Axlsx is
 licensed under the MIT license. Please see the <a href="file.LICENSE.html" title="LICENSE">LICENSE</a> document for more information.</p>
 </div></div>
     
     <div id="footer">
-  Generated on Mon Nov 21 23:44:14 2011 by 
+  Generated on Tue Nov 22 00:08:44 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>
