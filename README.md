@@ -6,7 +6,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 **Author**:       Randy Morgan   
 **Copyright**:    2011      
 **License**:      MIT License      
-**Latest Version**: 1.0.5   
+**Latest Version**: 1.0.6   
 **Ruby Version**: 1.8.7   
 **Release Date**: November 22nd 2011     
 
@@ -116,7 +116,7 @@ Usage
        puts error.inspect
      end
 
-#Generating A Line Chart
+##Generating A Line Chart
 
      p = Axlsx::Package.new
      p.workbook.add_worksheet do |sheet|
@@ -157,7 +157,8 @@ Changelog
   - BugFix: date1904 property now properly set for charts
   - Added style property to charts
   - Removed serialization write test as it most commonly fails when run from the gem's intalled directory
-
+- **October.22.11**: 1.0.6 release
+  - Bumping version to include docs. Bug in gemspec pointing to incorrect directory.
 On Deck
 -------
 

@@ -58,11 +58,11 @@
 
 <p><strong>IRC</strong>:          <a href="irc://irc.freenode.net/axlsx">irc.freenode.net / #axlsx</a>  <br/>
 <strong>Git</strong>:          <a href="http://github.com/randym/axlsx">http://github.com/randym/axlsx</a> <br/>
-<strong>Author</strong>:       Randy Morgan
-<strong>Copyright</strong>:    2011  <br/>
-<strong>License</strong>:      MIT License  <br/>
-<strong>Latest Version</strong>: 1.0.5
-<strong>Ruby Version</strong>: 1.8.7
+<strong>Author</strong>:       Randy Morgan <br/>
+<strong>Copyright</strong>:    2011    <br/>
+<strong>License</strong>:      MIT License    <br/>
+<strong>Latest Version</strong>: 1.0.6 <br/>
+<strong>Ruby Version</strong>: 1.8.7 <br/>
 <strong>Release Date</strong>: November 22nd 2011</p>
 
 <h2>Synopsis</h2>
@@ -74,7 +74,7 @@ It enables the you to generate 100% valid xlsx files that include customised sty
 
 <p>**1. Author xlsx documents: Axlsx is made to let you easily and quickly generate profesional xlsx based reports that can be validated before serialiation.</p>
 
-<p>**2. Generate 3D Pie and Bar Charts: With Axlsx chart generation and management is as easy as a few lines of code. You can build charts based off data in your worksheet or generate charts without any data in your sheet at all.</p>
+<p>**2. Generate 3D Pie, Line and Bar Charts: With Axlsx chart generation and management is as easy as a few lines of code. You can build charts based off data in your worksheet or generate charts without any data in your sheet at all.</p>
 
 <p>**3. Custom Styles: With guaranteed document validity, you can style borders, alignment, fills, fonts, and number formats in a single line of code. Those styles can be applied to an entire row, or a single cell anywhere in your workbook.</p>
 
@@ -174,7 +174,7 @@ It enables the you to generate 100% valid xlsx files that include customised sty
  <span class='end end kw'>end</span>
 </pre>
 
-<h1>Generating A Line Chart</h1>
+<h2>Generating A Line Chart</h2>
 
 <pre class="code"> <span class='p identifier id'>p</span> <span class='assign token'>=</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
  <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='add_worksheet identifier id'>add_worksheet</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='sheet identifier id'>sheet</span><span class='bitor op'>|</span>
@@ -228,10 +228,17 @@ It enables the you to generate 100% valid xlsx files that include customised sty
 <li>Removed serialization write test as it most commonly fails when run from the gem's intalled directory</li>
 </ul>
 </li>
+<li><strong>October.22.11</strong>: 1.0.6 release
+
+<ul>
+<li>Bumping version to include docs. Bug in gemspec pointing to incorrect directory.
+On Deck</li>
+</ul>
+</li>
 </ul>
 
 
-<h2>On Deck</h2>
+<hr />
 
 <ul>
 <li>Verification with ruby 1.9.3</li>
@@ -246,7 +253,7 @@ licensed under the MIT license. Please see the <a href="file.LICENSE.html" title
 </div></div>
     
     <div id="footer">
-  Generated on Tue Nov 22 00:08:44 2011 by 
+  Generated on Tue Nov 22 00:27:36 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>
