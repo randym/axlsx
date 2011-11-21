@@ -45,6 +45,7 @@ Usage
      require 'axlsx'
 
 ##A Simple Workbook
+
       p = Axlsx::Package.new
       p.workbook.add_worksheet do |sheet|
         sheet.add_row ["First", "Second", "Third"]
@@ -53,6 +54,7 @@ Usage
       p.serialize("example1.xlsx")
 
 ##Generating A Bar Chart
+
      p = Axlsx::Package.new
      p.workbook.add_worksheet do |sheet|
        sheet.add_row ["First", "Second", "Third"]
@@ -64,6 +66,7 @@ Usage
      p.serialize("example2.xlsx")
 
 ##Generating A Pie Chart
+
      p = Axlsx::Package.new
      p.workbook.add_worksheet do |sheet|
        sheet.add_row ["First", "Second", "Third"]
