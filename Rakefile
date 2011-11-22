@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/lib/axlsx/version.rb')
 
-task :build do
+task :build => :gendoc do
   system "gem build axlsx.gemspec"
 end
 

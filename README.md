@@ -148,7 +148,10 @@ Changelog
 ---------
 
 - **October.22.11**: 1.0.7 release
-  - Updated serialization write test to verify write permissions and warn if it cannot run the test  
+  - Updated serialization write test to verify write permissions and warn if it cannot run the test due to permission restrcitions.
+  - updated rake to include build, genoc and deploy commands.
+  - rebuilt documentation.
+  - moved version constant to its own file
 
 Please see the {file:CHANGELOG.md} document for past release information.
 
