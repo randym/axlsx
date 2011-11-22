@@ -1,8 +1,5 @@
 module Axlsx
 
-  # version
-  VERSION="1.0.6"
-
   # XML Encoding
   ENCODING = "UTF-8"
 

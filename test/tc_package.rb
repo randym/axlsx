@@ -18,19 +18,19 @@ class TestPackage < Test::Unit::TestCase
 
   # TODO this test needs better file access validation!
   # as does serialization!
-  # def test_serialization
-  #   fname = 'test_serialization.xlsx'
-  #   assert_nothing_raised do
-  #     if File::writable?(fname)
-  #       z= @package.serialize(fname)              
-  #       zf = Zip::ZipFile.open(fname)
-  #       @package.send(:parts).each{ |part| zf.get_entry(part[:entry]) }
-  #       File.delete(fname)        
-  #     else
-  #       puts "Skipping write to disk as write permission is not granted to this user"
-  #     end
-  #   end    
-  # end
+  def test_serialization
+    fname = 'axlsx_test_serialization.xlsx'
+    assert_nothing_raised do
+      begin
+         z= @package.serialize(fname)              
+         zf = Zip::ZipFile.open(fname)
+         @package.send(:parts).each{ |part| zf.get_entry(part[:entry]) }
+         File.delete(fname)        
+      rescue Errno::EACCES
+         puts "WARNING:: test_serialization requires write access."
+      end
+     end    
+   end
   
   def test_validation
     assert_equal(@package.validate.size, 0, @package.validate)

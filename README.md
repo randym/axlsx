@@ -6,7 +6,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 **Author**:       Randy Morgan   
 **Copyright**:    2011      
 **License**:      MIT License      
-**Latest Version**: 1.0.6   
+**Latest Version**: 1.0.7   
 **Ruby Version**: 1.8.7   
 **Release Date**: November 22nd 2011     
 
@@ -42,10 +42,12 @@ To install Axlsx, use the following command:
 Usage
 -----
 
+###Examples
+
      require 'rubygems'
      require 'axlsx'
 
-##A Simple Workbook
+A Simple Workbooka
 
       p = Axlsx::Package.new
       p.workbook.add_worksheet do |sheet|
@@ -54,7 +56,7 @@ Usage
       end
       p.serialize("example1.xlsx")
 
-##Generating A Bar Chart
+Generating A Bar Chart
 
      p = Axlsx::Package.new
      p.workbook.add_worksheet do |sheet|
@@ -66,7 +68,7 @@ Usage
      end  
      p.serialize("example2.xlsx")
 
-##Generating A Pie Chart
+Generating A Pie Chart
 
      p = Axlsx::Package.new
      p.workbook.add_worksheet do |sheet|
@@ -78,7 +80,7 @@ Usage
      end  
      p.serialize("example3.xlsx")
 
-##Using Custom Styles
+Using Custom Styles
 
      p = Axlsx::Package.new
      wb = p.workbook
@@ -90,7 +92,7 @@ Usage
      end
      p.serialize("example4.xlsx")
 
-##Using Custom Formatting and date1904
+Using Custom Formatting and date1904
 
      p = Axlsx::Package.new
      wb = p.workbook
@@ -104,7 +106,7 @@ Usage
      end
      p.serialize("example5.xlsx")
 
-##Validation
+Validation
 
      p = Axlsx::Package.new
      p.workbook.add_worksheet do |sheet|
@@ -116,7 +118,7 @@ Usage
        puts error.inspect
      end
 
-##Generating A Line Chart
+Generating A Line Chart
 
      p = Axlsx::Package.new
      p.workbook.add_worksheet do |sheet|
@@ -130,35 +132,25 @@ Usage
      p.serialize("example6.xlsx")
 
 
-### Documentation
+###Documentation
+
 This gem is 100% documented with YARD, an exceptional documentation library. To see documentation for this, and all the gems installed on your system use:
 
-  yard server -g
+      gem install yard
+      yard server -g
 
 
-### Specs
+###Specs
+
 This gem has 100% test coverage using test/unit. To execute tests for this gem, simply run rake in the gem directory.
  
 Changelog
 ---------
 
-- **October.20.11**: 0.1.0 release
-- **October.21.11**: 1.0.3 release
-  - Updated documentation
-- **October.21.11**: 1.0.4
-  - altered package to accept a filename string for serialization instead of a File object.
-  - Updated specs to conform
-  - More examples for readme
-- **October.22.11**: 1.05  
-  - Added support for line charts
-  - Updated examples and readme
-  - Updated series title to be a real title ** NOTE ** If you are accessing titles directly you will need to update text assignation to title.text = v
-  - BugFix: shape attribute for bar chart is now properly serialized
-  - BugFix: date1904 property now properly set for charts
-  - Added style property to charts
-  - Removed serialization write test as it most commonly fails when run from the gem's intalled directory
-- **October.22.11**: 1.0.6 release
-  - Bumping version to include docs. Bug in gemspec pointing to incorrect directory.
+- **October.22.11**: 1.0.7 release
+  - Updated serialization write test to verify write permissions and warn if it cannot run the test  
+
+Please see the {file:CHANGELOG.md} document for past release information.
 
 On Deck
 -------

@@ -61,7 +61,7 @@
 <strong>Author</strong>:       Randy Morgan <br/>
 <strong>Copyright</strong>:    2011    <br/>
 <strong>License</strong>:      MIT License    <br/>
-<strong>Latest Version</strong>: 1.0.6 <br/>
+<strong>Latest Version</strong>: 1.0.7 <br/>
 <strong>Ruby Version</strong>: 1.8.7 <br/>
 <strong>Release Date</strong>: November 22nd 2011</p>
 
@@ -93,11 +93,13 @@ It enables the you to generate 100% valid xlsx files that include customised sty
 
 <h2>Usage</h2>
 
+<h3>Examples</h3>
+
 <pre class="code"> <span class='require identifier id'>require</span> <span class='string val'>'rubygems'</span>
  <span class='require identifier id'>require</span> <span class='string val'>'axlsx'</span>
 </pre>
 
-<h2>A Simple Workbook</h2>
+<p>A Simple Workbooka</p>
 
 <pre class="code">  <span class='p identifier id'>p</span> <span class='assign token'>=</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
   <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='add_worksheet identifier id'>add_worksheet</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='sheet identifier id'>sheet</span><span class='bitor op'>|</span>
@@ -107,7 +109,7 @@ It enables the you to generate 100% valid xlsx files that include customised sty
   <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='serialize identifier id'>serialize</span><span class='lparen token'>(</span><span class='string val'>&quot;example1.xlsx&quot;</span><span class='rparen token'>)</span>
 </pre>
 
-<h2>Generating A Bar Chart</h2>
+<p>Generating A Bar Chart</p>
 
 <pre class="code"> <span class='p identifier id'>p</span> <span class='assign token'>=</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
  <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='add_worksheet identifier id'>add_worksheet</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='sheet identifier id'>sheet</span><span class='bitor op'>|</span>
@@ -120,7 +122,7 @@ It enables the you to generate 100% valid xlsx files that include customised sty
  <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='serialize identifier id'>serialize</span><span class='lparen token'>(</span><span class='string val'>&quot;example2.xlsx&quot;</span><span class='rparen token'>)</span>
 </pre>
 
-<h2>Generating A Pie Chart</h2>
+<p>Generating A Pie Chart</p>
 
 <pre class="code"> <span class='p identifier id'>p</span> <span class='assign token'>=</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
  <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='add_worksheet identifier id'>add_worksheet</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='sheet identifier id'>sheet</span><span class='bitor op'>|</span>
@@ -133,7 +135,7 @@ It enables the you to generate 100% valid xlsx files that include customised sty
  <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='serialize identifier id'>serialize</span><span class='lparen token'>(</span><span class='string val'>&quot;example3.xlsx&quot;</span><span class='rparen token'>)</span>
 </pre>
 
-<h2>Using Custom Styles</h2>
+<p>Using Custom Styles</p>
 
 <pre class="code"> <span class='p identifier id'>p</span> <span class='assign token'>=</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
  <span class='wb identifier id'>wb</span> <span class='assign token'>=</span> <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span>
@@ -146,7 +148,7 @@ It enables the you to generate 100% valid xlsx files that include customised sty
  <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='serialize identifier id'>serialize</span><span class='lparen token'>(</span><span class='string val'>&quot;example4.xlsx&quot;</span><span class='rparen token'>)</span>
 </pre>
 
-<h2>Using Custom Formatting and date1904</h2>
+<p>Using Custom Formatting and date1904</p>
 
 <pre class="code"> <span class='p identifier id'>p</span> <span class='assign token'>=</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
  <span class='wb identifier id'>wb</span> <span class='assign token'>=</span> <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span>
@@ -161,7 +163,7 @@ It enables the you to generate 100% valid xlsx files that include customised sty
  <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='serialize identifier id'>serialize</span><span class='lparen token'>(</span><span class='string val'>&quot;example5.xlsx&quot;</span><span class='rparen token'>)</span>
 </pre>
 
-<h2>Validation</h2>
+<p>Validation</p>
 
 <pre class="code"> <span class='p identifier id'>p</span> <span class='assign token'>=</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
  <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='add_worksheet identifier id'>add_worksheet</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='sheet identifier id'>sheet</span><span class='bitor op'>|</span>
@@ -174,7 +176,7 @@ It enables the you to generate 100% valid xlsx files that include customised sty
  <span class='end end kw'>end</span>
 </pre>
 
-<h2>Generating A Line Chart</h2>
+<p>Generating A Line Chart</p>
 
 <pre class="code"> <span class='p identifier id'>p</span> <span class='assign token'>=</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
  <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='add_worksheet identifier id'>add_worksheet</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='sheet identifier id'>sheet</span><span class='bitor op'>|</span>
@@ -192,7 +194,9 @@ It enables the you to generate 100% valid xlsx files that include customised sty
 
 <p>This gem is 100% documented with YARD, an exceptional documentation library. To see documentation for this, and all the gems installed on your system use:</p>
 
-<p>  yard server -g</p>
+<pre class="code">  <span class='gem identifier id'>gem</span> <span class='install identifier id'>install</span> <span class='yard identifier id'>yard</span>
+  <span class='yard identifier id'>yard</span> <span class='server identifier id'>server</span> <span class='minus op'>-</span><span class='g identifier id'>g</span>
+</pre>
 
 <h3>Specs</h3>
 
@@ -201,44 +205,18 @@ It enables the you to generate 100% valid xlsx files that include customised sty
 <h2>Changelog</h2>
 
 <ul>
-<li><strong>October.20.11</strong>: 0.1.0 release</li>
-<li><strong>October.21.11</strong>: 1.0.3 release
+<li><strong>October.22.11</strong>: 1.0.7 release
 
 <ul>
-<li>Updated documentation</li>
-</ul>
-</li>
-<li><strong>October.21.11</strong>: 1.0.4
-
-<ul>
-<li>altered package to accept a filename string for serialization instead of a File object.</li>
-<li>Updated specs to conform</li>
-<li>More examples for readme</li>
-</ul>
-</li>
-<li><strong>October.22.11</strong>: 1.05
-
-<ul>
-<li>Added support for line charts</li>
-<li>Updated examples and readme</li>
-<li>Updated series title to be a real title <strong> NOTE </strong> If you are accessing titles directly you will need to update text assignation to title.text = v</li>
-<li>BugFix: shape attribute for bar chart is now properly serialized</li>
-<li>BugFix: date1904 property now properly set for charts</li>
-<li>Added style property to charts</li>
-<li>Removed serialization write test as it most commonly fails when run from the gem's intalled directory</li>
-</ul>
-</li>
-<li><strong>October.22.11</strong>: 1.0.6 release
-
-<ul>
-<li>Bumping version to include docs. Bug in gemspec pointing to incorrect directory.
-On Deck</li>
+<li>Updated serialization write test to verify write permissions and warn if it cannot run the test</li>
 </ul>
 </li>
 </ul>
 
 
-<hr />
+<p>Please see the <a href="file.CHANGELOG.html" title="CHANGELOG">CHANGELOG</a> document for past release information.</p>
+
+<h2>On Deck</h2>
 
 <ul>
 <li>Verification with ruby 1.9.3</li>
@@ -253,7 +231,7 @@ licensed under the MIT license. Please see the <a href="file.LICENSE.html" title
 </div></div>
     
     <div id="footer">
-  Generated on Tue Nov 22 00:27:36 2011 by 
+  Generated on Tue Nov 22 20:11:08 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>
