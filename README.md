@@ -6,7 +6,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 **Author**:       Randy Morgan   
 **Copyright**:    2011      
 **License**:      MIT License      
-**Latest Version**: 1.0.7   
+**Latest Version**: 1.0.8   
 **Ruby Version**: 1.8.7   
 **Release Date**: November 23nd 2011     
 
@@ -14,7 +14,7 @@ Synopsis
 --------
 
 Axlsx is an Office Open XML Spreadsheet generator for the Ruby programming language.
-It enables the you to generate 100% valid xlsx files that include customised styling 3D pie, bar and line charts. Below is a summary of salient features.
+It enables the you to generate 100% valid xlsx files that include customised styling, images, 3D pie, bar and line charts and auto-width columns. Below is a summary of salient features.
 
 Feature List
 ------------
@@ -31,6 +31,7 @@ Feature List
 
 **6. Support for both 1904 and 1900 epocs configurable in the workbook.
 
+**7. Add jpg, gif and png images to worksheets
 
 Installing
 ----------
@@ -134,6 +135,17 @@ Generating A Line Chart
      end  
      p.serialize("example6.xlsx")
 
+Adding an Image
+
+     p = Axlsx::Package.new
+     p.workbook.add_worksheet do |sheet|
+       sheet.add_image(:image_src => (File.dirname(__FILE__) + "/image1.png")) do |image|
+         image.width=720
+         image.height=666
+         image.start_at 2, 2
+       end
+     end  
+     p.serialize("example7.xlsx")
 
 ###Documentation
 
@@ -149,6 +161,8 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
  
 Changelog
 ---------
+- **October.23.11**: 1.0.8 release
+  - Added support for images (jpg, gif, png) in worksheets.
 
 - **October.23.11**: 1.0.7 released
   - Added support for 3D options when creating a new chart. This lets you set the persective, rotation and other 3D attributes when using worksheet.add_chart
@@ -163,6 +177,10 @@ Changelog
  
 Please see the {file:CHANGELOG.md} document for past release information.
 
+Help Wanted
+-----------
+
+I'd really like to get rid of the depenency on RMagick in this gem. RMagic is being used to calculate the column widths in a worksheet based on the content the user specified. If there happens to be anyone out there with the background and skill set to write an extenstion that can determine the width of a singel character render with a specific font at a specific size please give me a shout.
 
 Copyright
 ---------

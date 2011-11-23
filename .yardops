@@ -1,4 +1,4 @@
 --protected
 --no-private
-CHANGELOG.md
-LICENSE
+--title "AXLSX"
+LICENSE CHANGELOG.md

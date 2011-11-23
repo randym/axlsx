@@ -12,8 +12,13 @@ module Axlsx
     attr_reader :to
 
     # The frame for your chart
+    # @note this will be discontinued in version 2.0 please use object
     # @return [GraphicFrame]
-    attr_reader :graphic_frame
+    # attr_reader :graphic_frame
+
+    # The object this anchor hosts
+    # @return [Pic, GraphicFrame]
+    attr_reader :object
 
     # The drawing that holds this anchor
     # @return [Drawing]
@@ -27,15 +32,23 @@ module Axlsx
     # graphic_frame's chart. That means that you can do stuff like
     # c = worksheet.add_chart Axlsx::Chart
     # c.start_at 5, 9
+    # @note the chart_type parameter will be replaced with object in v. 2.0.0
     # @param [Drawing] drawing
     # @param [Class] chart_type This is passed to the graphic frame for instantiation. must be Chart or a subclass of Chart
+    # @param object The object this anchor holds.
     # @option options [Array] start_at the col, row to start at
     # @option options [Array] end_at the col, row to end at
-    def initialize(drawing, chart_type, options)
+    def initialize(drawing, options={})
       @drawing = drawing
       drawing.anchors << self      
       @from, @to =  Marker.new, Marker.new(:col => 5, :row=>10)
-      @graphic_frame = GraphicFrame.new(self, chart_type, options)
+    end
+
+    # Creates a graphic frame and chart object associated with this anchor
+    # @return [Chart]
+    def add_chart(chart_type, options)      
+      @object = GraphicFrame.new(self, chart_type, options)
+      @object.chart
     end
 
     def index
@@ -53,7 +66,7 @@ module Axlsx
         xml.send('xdr:to') {
           to.to_xml(xml)
         }
-        @graphic_frame.to_xml(xml)
+        @object.to_xml(xml)
         xml.send('xdr:clientData')
       }
     end    

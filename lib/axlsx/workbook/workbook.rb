@@ -44,6 +44,13 @@ require 'axlsx/workbook/worksheet/worksheet.rb'
     # @return [SimpleTypedList]
     attr_reader :charts
 
+    # A colllection of images associated with this workbook
+    # @note The recommended way to manage images is Worksheet#add_image
+    # @see Worksheet#add_image
+    # @see Pic
+    # @return [SimpleTypedList]
+    attr_reader :images
+
     # A colllection of drawings associated with this workbook
     # @note The recommended way to manage drawings is Worksheet#add_chart
     # @see Worksheet#add_chart
@@ -77,6 +84,7 @@ require 'axlsx/workbook/worksheet/worksheet.rb'
       @worksheets = SimpleTypedList.new Worksheet
       @drawings = SimpleTypedList.new Drawing
       @charts = SimpleTypedList.new Chart
+      @images = SimpleTypedList.new Pic
       self.date1904= options[:date1904] unless options[:date1904].nil?
       yield self if block_given?      
     end

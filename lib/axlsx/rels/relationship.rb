@@ -29,8 +29,7 @@ module Axlsx
     def Target=(v) Axlsx::validate_string v; @Target = v end
     def Type=(v) Axlsx::validate_relationship_type v; @Type = v end
 
-    # Serializes the relationship
-    # TODO: use object.rId to get this infomation
+    # Serializes the relationship    
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @param [String] rId the reference id of the object.
     # @return [String]

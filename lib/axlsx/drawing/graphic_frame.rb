@@ -4,8 +4,6 @@ module Axlsx
   # @see Worksheet#add_chart
   class GraphicFrame
 
-    #TODO add in support for other graphical objects, primarily images.
-    
     # A reference to the chart object associated with this frame
     # @return [Chart]
     attr_reader :chart

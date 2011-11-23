@@ -7,6 +7,7 @@ module Axlsx
     def initialize(data=[])
       super Object
       @list.concat data if data.is_a?(Array)
+      data.each { |i| @list << i } if data.is_a?(SimpleTypedList)
     end
 
     # Serializes the category axis data

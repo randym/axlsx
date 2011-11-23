@@ -26,7 +26,6 @@ module Axlsx
     # Serializes the series
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String]
-    # TODO create series_cat and series_val classes as this serialization is duplicated
     def to_xml(xml)
       super(xml) do |xml|
         @labels.to_xml(xml) unless @labels.nil?

@@ -25,7 +25,6 @@ module Axlsx
       super(frame, options)
       @series_type = PieSeries
       @view3D = View3D.new({:rotX=>30, :perspective=>30}.merge(options))
-
     end
 
     # Serializes the pie chart

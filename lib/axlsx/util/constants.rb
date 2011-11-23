@@ -70,6 +70,9 @@ module Axlsx
   # chart rels namespace
   CHART_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/chart"
 
+  # image rels namespace
+  IMAGE_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
+
   # table content type 
   TABLE_CT = "application/vnd.openxmlformats-officedocument.spreadsheetml.table+xml"
 
@@ -100,11 +103,29 @@ module Axlsx
   # chart content type
   CHART_CT = "application/vnd.openxmlformats-officedocument.drawingml.chart+xml"
 
+  # jpeg content type
+  JPEG_CT = "image/jpeg"
+
+  # gif content type
+  GIF_CT = "image/gif"
+
+  # png content type
+  PNG_CT = "image/png"
+
   #drawing content type
   DRAWING_CT = "application/vnd.openxmlformats-officedocument.drawing+xml"
 
   # xml content type extensions
   XML_EX = "xml"
+
+  # jpeg extension
+  JPEG_EX = "jpeg"
+  
+  # gif extension
+  GIF_EX = "gif"
+
+  # png extension
+  PNG_EX = "png"
 
   # rels content type extension
   RELS_EX = "rels"
@@ -144,6 +165,9 @@ module Axlsx
 
   # chart part
   CHART_PN = "charts/chart%d.xml"
+
+  # chart part
+  IMAGE_PN = "media/image%d.%s"
 
   # App validation schema
   APP_XSD = "lib/schema/shared-documentPropertiesExtended.xsd"

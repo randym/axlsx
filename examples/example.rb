@@ -82,5 +82,18 @@
          chart.add_series :data=>sheet.rows.first.cells[(1..-1)], :title=> sheet.rows.first.cells.first
          chart.add_series :data=>sheet.rows.last.cells[(1..-1)], :title=> sheet.rows.last.cells.first
        end
+       
      end  
      p.serialize("example6.xlsx")
+
+#Add an Image
+
+     p = Axlsx::Package.new
+     p.workbook.add_worksheet do |sheet|
+       sheet.add_image(:image_src => (File.dirname(__FILE__) + "/image1.png")) do |image|
+         image.width=720
+         image.height=666
+         image.start_at 2, 2
+       end
+     end  
+     p.serialize("example7.xlsx")

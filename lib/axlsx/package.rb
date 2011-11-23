@@ -54,10 +54,21 @@ module Axlsx
     #   # You will find a file called test.xlsx
     def serialize(output, confirm_valid=false)
       return false unless !confirm_valid || self.validate.empty?
-      f = File.new(output, "w")
-      Zip::ZipOutputStream.open(f.path) do |zip|
-        parts.each{ |part| zip.put_next_entry(part[:entry]); zip.puts(part[:doc]) }
+      p = parts
+      Zip::ZipOutputStream.open(output) do |zip|
+        p.each do |part| 
+          zip.put_next_entry(part[:entry]); zip.puts(part[:doc]) unless part[:doc].nil?
+        end
       end
+      Zip::ZipFile.open(output) do |zip|
+        p.each do |part|
+          if part[:path]
+            zip.add(part[:entry], part[:path], &proc{ true })
+          end
+        end                  
+      end
+
+
       true
     end
 
@@ -78,7 +89,7 @@ module Axlsx
     #  p.validate.each { |error| puts error.message }
     def validate
       errors = []
-      parts.each { |part| errors.concat validate_single_doc(part[:schema], part[:doc]) }
+      parts.each { |part| errors.concat validate_single_doc(part[:schema], part[:doc]) unless part[:schema].nil? }
       errors
     end
 
@@ -105,7 +116,11 @@ module Axlsx
       workbook.charts.each do |chart|          
         @parts << {:entry => "xl/#{chart.pn}", :doc => chart.to_xml, :schema => DRAWING_XSD}
       end                  
-     
+
+      workbook.images.each do |image|
+        @parts << {:entry => "xl/#{image.pn}", :path => image.image_src}
+      end
+
       workbook.worksheets.each do |sheet|            
         @parts << {:entry => "xl/#{sheet.rels_pn}", :doc => sheet.relationships.to_xml, :schema => RELS_XSD}
         @parts << {:entry => "xl/#{sheet.pn}", :doc => sheet.to_xml, :schema => SML_XSD}        
@@ -146,6 +161,17 @@ module Axlsx
       workbook.worksheets.each do |sheet|
         c_types << Axlsx::Override.new(:PartName => "/xl/#{sheet.pn}", 
                                          :ContentType => WORKSHEET_CT)
+      end
+      exts = workbook.images.map { |image| image.extname }
+      exts.uniq.each do |ext|
+        ct = if  ['jpeg', 'jpg'].include?(ext)
+               JPEG_CT
+             elsif ext == 'gif'
+               GIF_CT
+             elsif ext == 'png'
+               PNG_CT
+             end
+        c_types << Axlsx::Default.new(:ContentType => ct, :Extension => ext )
       end
       c_types
     end

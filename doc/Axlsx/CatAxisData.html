@@ -253,7 +253,8 @@ typed list of cells.
 7
 8
 9
-10</pre>
+10
+11</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/cat_axis_data.rb', line 7</span>
@@ -261,6 +262,7 @@ typed list of cells.
 <span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='data identifier id'>data</span><span class='assign token'>=</span><span class='lbrack token'>[</span><span class='rbrack token'>]</span><span class='rparen token'>)</span>
   <span class='super super kw'>super</span> <span class='Object constant id'>Object</span>
   <span class='@list ivar id'>@list</span><span class='dot token'>.</span><span class='concat identifier id'>concat</span> <span class='data identifier id'>data</span> <span class='if if_mod kw'>if</span> <span class='data identifier id'>data</span><span class='dot token'>.</span><span class='is_a? fid id'>is_a?</span><span class='lparen token'>(</span><span class='Array constant id'>Array</span><span class='rparen token'>)</span>
+  <span class='data identifier id'>data</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='i identifier id'>i</span><span class='bitor op'>|</span> <span class='@list ivar id'>@list</span> <span class='lshft op'>&lt;&lt;</span> <span class='i identifier id'>i</span> <span class='rbrace token'>}</span> <span class='if if_mod kw'>if</span> <span class='data identifier id'>data</span><span class='dot token'>.</span><span class='is_a? fid id'>is_a?</span><span class='lparen token'>(</span><span class='SimpleTypedList constant id'>SimpleTypedList</span><span class='rparen token'>)</span>
 <span class='end end kw'>end</span>
 </pre>
     </td>
@@ -344,7 +346,6 @@ The document builder instance this objects xml will be added to.
       <pre class="lines">
 
 
-15
 16
 17
 18
@@ -359,10 +360,11 @@ The document builder instance this objects xml will be added to.
 27
 28
 29
-30</pre>
+30
+31</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/cat_axis_data.rb', line 15</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/cat_axis_data.rb', line 16</span>
 
 <span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
   <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:cat'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
@@ -391,7 +393,7 @@ The document builder instance this objects xml will be added to.
 </div>
     
     <div id="footer">
-  Generated on Wed Nov 23 12:36:34 2011 by 
+  Generated on Wed Nov 23 21:44:32 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>

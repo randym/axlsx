@@ -16,8 +16,6 @@ class TestPackage < Test::Unit::TestCase
     assert(Axlsx::Package.new.workbook.worksheets.size == 0, 'Workbook should not have sheets by default')
   end
 
-  # TODO this test needs better file access validation!
-  # as does serialization!
   def test_serialization
     fname = 'axlsx_test_serialization.xlsx'
     assert_nothing_raised do

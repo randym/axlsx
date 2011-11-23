@@ -61,14 +61,14 @@
 <strong>Author</strong>:       Randy Morgan <br/>
 <strong>Copyright</strong>:    2011    <br/>
 <strong>License</strong>:      MIT License    <br/>
-<strong>Latest Version</strong>: 1.0.7 <br/>
+<strong>Latest Version</strong>: 1.0.8 <br/>
 <strong>Ruby Version</strong>: 1.8.7 <br/>
 <strong>Release Date</strong>: November 23nd 2011</p>
 
 <h2>Synopsis</h2>
 
 <p>Axlsx is an Office Open XML Spreadsheet generator for the Ruby programming language.
-It enables the you to generate 100% valid xlsx files that include customised styling 3D pie, bar and line charts. Below is a summary of salient features.</p>
+It enables the you to generate 100% valid xlsx files that include customised styling, images, 3D pie, bar and line charts and auto-width columns. Below is a summary of salient features.</p>
 
 <h2>Feature List</h2>
 
@@ -83,6 +83,8 @@ It enables the you to generate 100% valid xlsx files that include customised sty
 <p>**5. Automatic column widths: Axlsx will automatically determine the appropriate width for your columns based on the content in the worksheet.</p>
 
 <p>**6. Support for both 1904 and 1900 epocs configurable in the workbook.</p>
+
+<p>**7. Add jpg, gif and png images to worksheets</p>
 
 <h2>Installing</h2>
 
@@ -193,6 +195,19 @@ It enables the you to generate 100% valid xlsx files that include customised sty
  <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='serialize identifier id'>serialize</span><span class='lparen token'>(</span><span class='string val'>&quot;example6.xlsx&quot;</span><span class='rparen token'>)</span>
 </pre>
 
+<p>Adding an Image</p>
+
+<pre class="code"> <span class='p identifier id'>p</span> <span class='assign token'>=</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+ <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='add_worksheet identifier id'>add_worksheet</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='sheet identifier id'>sheet</span><span class='bitor op'>|</span>
+   <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_image identifier id'>add_image</span><span class='lparen token'>(</span><span class='symbol val'>:image_src</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lparen token'>(</span><span class='File constant id'>File</span><span class='dot token'>.</span><span class='dirname identifier id'>dirname</span><span class='lparen token'>(</span><span class='__FILE__ __file__ kw'>__FILE__</span><span class='rparen token'>)</span> <span class='plus op'>+</span> <span class='string val'>&quot;/image1.png&quot;</span><span class='rparen token'>)</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='image identifier id'>image</span><span class='bitor op'>|</span>
+     <span class='image identifier id'>image</span><span class='dot token'>.</span><span class='width identifier id'>width</span><span class='assign token'>=</span><span class='integer val'>720</span>
+     <span class='image identifier id'>image</span><span class='dot token'>.</span><span class='height identifier id'>height</span><span class='assign token'>=</span><span class='integer val'>666</span>
+     <span class='image identifier id'>image</span><span class='dot token'>.</span><span class='start_at identifier id'>start_at</span> <span class='integer val'>2</span><span class='comma token'>,</span> <span class='integer val'>2</span>
+   <span class='end end kw'>end</span>
+ <span class='end end kw'>end</span>  
+ <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='serialize identifier id'>serialize</span><span class='lparen token'>(</span><span class='string val'>&quot;example7.xlsx&quot;</span><span class='rparen token'>)</span>
+</pre>
+
 <h3>Documentation</h3>
 
 <p>This gem is 100% documented with YARD, an exceptional documentation library. To see documentation for this, and all the gems installed on your system use:</p>
@@ -208,7 +223,13 @@ It enables the you to generate 100% valid xlsx files that include customised sty
 <h2>Changelog</h2>
 
 <ul>
-<li><strong>October.23.11</strong>: 1.0.7 released
+<li><p><strong>October.23.11</strong>: 1.0.8 release</p>
+
+<ul>
+<li>Added support for images (jpg, gif, png) in worksheets.</li>
+</ul>
+</li>
+<li><p><strong>October.23.11</strong>: 1.0.7 released</p>
 
 <ul>
 <li>Added support for 3D options when creating a new chart. This lets you set the persective, rotation and other 3D attributes when using worksheet.add_chart</li>
@@ -227,6 +248,10 @@ It enables the you to generate 100% valid xlsx files that include customised sty
 
 <p>Please see the <a href="file.CHANGELOG.html" title="CHANGELOG">CHANGELOG</a> document for past release information.</p>
 
+<h2>Help Wanted</h2>
+
+<p>I'd really like to get rid of the depenency on RMagick in this gem. RMagic is being used to calculate the column widths in a worksheet based on the content the user specified. If there happens to be anyone out there with the background and skill set to write an extenstion that can determine the width of a singel character render with a specific font at a specific size please give me a shout.</p>
+
 <h2>Copyright</h2>
 
 <p>Axlsx &copy; 2011 by <a href="mailto:digial.ipseity@gmail.com">Randy Morgan</a>. Axlsx is
@@ -234,7 +259,7 @@ licensed under the MIT license. Please see the <a href="file.LICENSE.html" title
 </div></div>
     
     <div id="footer">
-  Generated on Wed Nov 23 12:36:23 2011 by 
+  Generated on Wed Nov 23 21:44:31 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>

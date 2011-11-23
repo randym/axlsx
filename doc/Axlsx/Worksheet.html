@@ -419,6 +419,30 @@ Adds a chart to this worksheets drawing.
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#add_image-instance_method" title="#add_image (instance method)">- (Object) <strong>add_image</strong>(options = {}) {|image| ... }</a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Adds a media item to the worksheets drawing.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#add_row-instance_method" title="#add_row (instance method)">- (Row) <strong>add_row</strong>(values = [], options = {}) {|@rows.last| ... }</a>
     
 
@@ -1454,6 +1478,119 @@ a customizable set of options
 </div>
     
       <div class="method_details ">
+  <p class="signature " id="add_image-instance_method">
+  
+    - (<tt>Object</tt>) <strong>add_image</strong>(options = {}) {|image| ... }
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Adds a media item to the worksheets drawing
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>media_type</span>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+a customizable set of options
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    <h3>Options Hash (<tt>options</tt>):</h3>
+    <ul class="option">
+      
+        <li>
+          <span class="name">[]</span>
+          <span class="type">(<tt>Object</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+unknown
+</p>
+</div>
+        </li>
+      
+    </ul>
+  
+
+<h3>Yields:</h3>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>image</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125
+126
+127
+128
+129</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/worksheet.rb', line 125</span>
+
+<span class='def def kw'>def</span> <span class='add_image identifier id'>add_image</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='image identifier id'>image</span> <span class='assign token'>=</span> <span class='drawing identifier id'>drawing</span><span class='dot token'>.</span><span class='add_image identifier id'>add_image</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='rparen token'>)</span>
+  <span class='yield yield kw'>yield</span> <span class='image identifier id'>image</span> <span class='if if_mod kw'>if</span> <span class='block_given? fid id'>block_given?</span>
+  <span class='image identifier id'>image</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <p class="signature " id="add_row-instance_method">
   
     - (<tt><span class='object_link'><a href="Row.html" title="Axlsx::Row (class)">Row</a></span></tt>) <strong>add_row</strong>(values = [], options = {}) {|@rows.last| ... }
@@ -1660,22 +1797,22 @@ hash of auto_fit_data
       <pre class="lines">
 
 
-190
-191
-192
-193
-194
-195
-196
-197
-198
-199</pre>
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/worksheet.rb', line 190</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/worksheet.rb', line 199</span>
 
 <span class='def def kw'>def</span> <span class='auto_width identifier id'>auto_width</span><span class='lparen token'>(</span><span class='col identifier id'>col</span><span class='rparen token'>)</span>
-  <span class='mdw identifier id'>mdw</span> <span class='assign token'>=</span> <span class='float val'>6.0</span> <span class='comment val'># maximum digit with is always 6.0 in testable fonts so instead of beating RMagick every time, I am hardcoding it here.</span>
+  <span class='mdw identifier id'>mdw</span> <span class='assign token'>=</span> <span class='float val'>6.0</span> <span class='comment val'># maximum digit with is always 6.0 with RMagick's default font</span>
   <span class='mdw_count identifier id'>mdw_count</span> <span class='assign token'>=</span> <span class='integer val'>0</span> 
   <span class='best_guess identifier id'>best_guess</span> <span class='assign token'>=</span> <span class='float val'>1.5</span>  <span class='comment val'>#direct testing shows the results of the documented formula to be a bit too small. This is a best guess scaling</span>
   <span class='font_scale identifier id'>font_scale</span> <span class='assign token'>=</span> <span class='col identifier id'>col</span><span class='lbrack token'>[</span><span class='symbol val'>:sz</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='to_f identifier id'>to_f</span> <span class='div op'>/</span> <span class='lparen token'>(</span><span class='self self kw'>self</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='styles identifier id'>styles</span><span class='dot token'>.</span><span class='fonts identifier id'>fonts</span><span class='lbrack token'>[</span><span class='integer val'>0</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='sz identifier id'>sz</span><span class='dot token'>.</span><span class='to_f identifier id'>to_f</span> <span class='orop op'>||</span> <span class='float val'>11.0</span><span class='rparen token'>)</span>
@@ -1728,15 +1865,6 @@ Serializes the worksheet document
       <pre class="lines">
 
 
-124
-125
-126
-127
-128
-129
-130
-131
-132
 133
 134
 135
@@ -1748,10 +1876,19 @@ Serializes the worksheet document
 141
 142
 143
-144</pre>
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/worksheet.rb', line 124</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/worksheet.rb', line 133</span>
 
 <span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span>
   <span class='builder identifier id'>builder</span> <span class='assign token'>=</span> <span class='Nokogiri constant id'>Nokogiri</span><span class='colon2 op'>::</span><span class='XML constant id'>XML</span><span class='colon2 op'>::</span><span class='Builder constant id'>Builder</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:encoding</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='ENCODING constant id'>ENCODING</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='xml identifier id'>xml</span><span class='bitor op'>|</span>
@@ -1847,15 +1984,6 @@ of Cell objects
       <pre class="lines">
 
 
-162
-163
-164
-165
-166
-167
-168
-169
-170
 171
 172
 173
@@ -1865,10 +1993,19 @@ of Cell objects
 177
 178
 179
-180</pre>
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/worksheet.rb', line 162</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/worksheet.rb', line 171</span>
 
 <span class='def def kw'>def</span> <span class='update_auto_fit_data identifier id'>update_auto_fit_data</span><span class='lparen token'>(</span><span class='cells identifier id'>cells</span><span class='rparen token'>)</span>
   <span class='styles identifier id'>styles</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='styles identifier id'>styles</span>
@@ -1900,7 +2037,7 @@ of Cell objects
 </div>
     
     <div id="footer">
-  Generated on Wed Nov 23 12:36:32 2011 by 
+  Generated on Wed Nov 23 21:44:35 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>

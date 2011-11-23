@@ -18,13 +18,22 @@ class TestDrawing < Test::Unit::TestCase
     chart = @ws.add_chart(Axlsx::Pie3DChart, :title=>"bob", :start_at=>[0,0], :end_at=>[1,1])
     assert(chart.is_a?(Axlsx::Pie3DChart), "must create a chart")
     assert_equal(@ws.workbook.charts.last, chart, "must be added to workbook charts collection")
-    assert_equal(@ws.drawing.anchors.last.graphic_frame.chart, chart, "an anchor has been created and holds a reference to this chart")
+    assert_equal(@ws.drawing.anchors.last.object.chart, chart, "an anchor has been created and holds a reference to this chart")
     anchor = @ws.drawing.anchors.last
     assert_equal([anchor.from.row, anchor.from.col], [0,0], "options for start at are applied")
     assert_equal([anchor.to.row, anchor.to.col], [1,1], "options for start at are applied")
     assert_equal(chart.title.text, "bob", "option for title is applied")
   end
   
+  def test_add_image
+    src = File.dirname(__FILE__) + "/../../examples/image1.jpeg"
+    image = @ws.add_image(:image_src => src, :start_at=>[0,0], :width=>600, :height=>400)
+    assert(@ws.drawing.anchors.last.is_a?(Axlsx::OneCellAnchor))
+    assert(image.is_a?(Axlsx::Pic))
+    assert_equal(600, image.width)
+    assert_equal(400, image.height)        
+  end
+
   def test_charts
     assert(@ws.drawing.charts.empty?)
     chart = @ws.add_chart(Axlsx::Pie3DChart, :title=>"bob", :start_at=>[0,0], :end_at=>[1,1])

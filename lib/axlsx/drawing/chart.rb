@@ -90,7 +90,6 @@ module Axlsx
 
     # backwards compatibility to allow chart.to and chart.from access to anchor markers
     # @note This will be disconinued in version 2.0.0. please use the start_at method
-    #   
     def from
       @graphic_frame.anchor.from
     end

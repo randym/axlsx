@@ -16,6 +16,8 @@ module Axlsx
   require 'axlsx/drawing/val_axis_data.rb'
 
   require 'axlsx/drawing/marker.rb'
+ 
+  require 'axlsx/drawing/one_cell_anchor.rb'
   require 'axlsx/drawing/two_cell_anchor.rb'
   require 'axlsx/drawing/graphic_frame.rb'
 
@@ -24,6 +26,9 @@ module Axlsx
   require 'axlsx/drawing/pie_3D_chart.rb'
   require 'axlsx/drawing/bar_3D_chart.rb'
   require 'axlsx/drawing/line_3D_chart.rb'
+
+
+  require 'axlsx/drawing/pic.rb'
 
   # A Drawing is a canvas for charts. Each worksheet has a single drawing that manages anchors.
   # The anchors reference the charts via graphical frames. This is not a trivial relationship so please do follow the advice in the note.
@@ -45,6 +50,10 @@ module Axlsx
     # An array of charts that are associated with this drawing's anchors
     # @return [Array]
     attr_reader :charts
+
+    # An array of image objects that are associated with this drawing's anchors
+    # @return [Array]
+    attr_reader :images
 
     # The index of this drawing in the owning workbooks's drawings collection.
     # @return [Integer]
@@ -72,20 +81,33 @@ module Axlsx
       DataTypeValidator.validate "Drawing.worksheet", Worksheet, worksheet
       @worksheet = worksheet
       @worksheet.workbook.drawings << self
-      @anchors = SimpleTypedList.new TwoCellAnchor
+      @anchors = SimpleTypedList.new [TwoCellAnchor, OneCellAnchor]
     end
-    
+
+    # Adds an image to the chart
+    # @note The recommended way to manage images is to use Worksheet.add_image. Please refer to that method for documentation.
+    # @see Worksheet#add_image
+    def add_image(options={})
+      OneCellAnchor.new(self, options)
+      @anchors.last.object
+    end
 
     # Adds a chart to the drawing.
     # @note The recommended way to manage charts is to use Worksheet.add_chart. Please refer to that method for documentation.
     # @see Worksheet#add_chart
     def add_chart(chart_type, options={})
-      TwoCellAnchor.new(self, chart_type, options)
-      @anchors.last.graphic_frame.chart
+      TwoCellAnchor.new(self, options)
+      @anchors.last.add_chart(chart_type, options)
     end
     
     def charts
-      @anchors.map { |a| a.graphic_frame.chart }
+      charts = @anchors.select { |a| a.object.is_a?(GraphicFrame) }
+      charts.map { |a| a.object.chart }
+    end
+
+    def images
+      images = @anchors.select { |a| a.object.is_a?(Pic) }
+      images.map { |a| a.object }
     end
 
     def index
@@ -106,9 +128,11 @@ module Axlsx
 
     def relationships
       r = Relationships.new
-      @anchors.each do |anchor|
-        chart = anchor.graphic_frame.chart
+      charts.each do |chart|
         r << Relationship.new(CHART_R, "../#{chart.pn}")
+      end
+      images.each do |image|
+        r << Relationship.new(IMAGE_R, "../#{image.pn}")
       end
       r
     end

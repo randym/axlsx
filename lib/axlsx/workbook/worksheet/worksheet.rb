@@ -119,6 +119,15 @@ module Axlsx
       chart
     end
 
+    # Adds a media item to the worksheets drawing
+    # @param [Class] media_type
+    # @option options [] unknown
+    def add_image(options={})
+      image = drawing.add_image(options)
+      yield image if block_given?
+      image
+    end
+
     # Serializes the worksheet document
     # @return [String]
     def to_xml
@@ -188,7 +197,7 @@ module Axlsx
     # @return [Float]
     # @param [Hash] A hash of auto_fit_data 
     def auto_width(col)
-      mdw = 6.0 # maximum digit with is always 6.0 in testable fonts so instead of beating RMagick every time, I am hardcoding it here.
+      mdw = 6.0 # maximum digit with is always 6.0 with RMagick's default font
       mdw_count = 0 
       best_guess = 1.5  #direct testing shows the results of the documented formula to be a bit too small. This is a best guess scaling
       font_scale = col[:sz].to_f / (self.workbook.styles.fonts[0].sz.to_f || 11.0)
