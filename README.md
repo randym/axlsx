@@ -8,7 +8,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 **License**:      MIT License      
 **Latest Version**: 1.0.7   
 **Ruby Version**: 1.8.7   
-**Release Date**: November 22nd 2011     
+**Release Date**: November 23nd 2011     
 
 Synopsis
 --------
