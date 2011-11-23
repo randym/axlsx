@@ -39,7 +39,7 @@ lib/axlsx/util/validators.rb 11eb309df0232fc1ad36c8c5ab0804d656b2294a
 lib/axlsx/stylesheet/font.rb 8b002d5fcba2fb0979858517f5254aadf96c7e58
 lib/axlsx/doc_props/app.rb 52f01e985a33253987177798d4e79ed208649b30
 lib/axlsx/workbook/worksheet/worksheet.rb c7159356776e5ca1cfb6d0bc288c3acf278226c8
-lib/axlsx/workbook/worksheet/cell.rb 939623ffc2065e9ec26bc56d9e289d9137fe57d3
+lib/axlsx/workbook/worksheet/cell.rb b64976226d09066328cd1ae09763e324c4efada5
 lib/axlsx/rels/relationship.rb 067b924c964a870124d51ea6e39dc1cd8983db21
 lib/axlsx/stylesheet/border.rb 517bfcb43380919ce7abef494d5d3e50911b7c19
 lib/axlsx/drawing/ser_axis.rb 6d15f6cc2092ef5c3baa314ed1af793247418d9b

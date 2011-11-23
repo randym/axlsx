@@ -180,7 +180,7 @@ Please see the {file:CHANGELOG.md} document for past release information.
 Help Wanted
 -----------
 
-I'd really like to get rid of the depenency on RMagick in this gem. RMagic is being used to calculate the column widths in a worksheet based on the content the user specified. If there happens to be anyone out there with the background and skill set to write an extenstion that can determine the width of a singel character render with a specific font at a specific size please give me a shout.
+I'd really like to get rid of the depenency on RMagick in this gem. RMagic is being used to calculate the column widths in a worksheet based on the content the user specified. If there happens to be anyone out there with the background and skill set to write an extenstion that can determine the width of a single character rendered with a specific font at a specific size please give me a shout.
 
 Copyright
 ---------

@@ -110,7 +110,7 @@ module Axlsx
     def to_xml(xml)
       if @type == :string
         #NOTE not sure why, but xml.t @v renders the text as html entities of unicode data
-        xml.c(:r => r, :t=>:inlineStr, :s=>style) { xml.is { xml << "<t>#{value}</t>" } }
+        xml.c(:r => r, :t=>:inlineStr, :s=>style) { xml.is { xml.t value.to_s } }
       else
         xml.c(:r => r, :s => style) { xml.v value }
       end

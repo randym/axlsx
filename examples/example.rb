@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
      require 'rubygems'
      require 'axlsx'
 
@@ -97,3 +98,13 @@
        end
      end  
      p.serialize("example7.xlsx")
+
+
+#Japanese Support
+
+     p = Axlsx::Package.new
+     p.workbook.add_worksheet do |sheet|
+       sheet.add_row ["日本語の表意","ちゃんと出来るかな"]
+       sheet.add_row ["<div>","escaped?"]
+     end  
+     p.serialize("example8.xlsx")
