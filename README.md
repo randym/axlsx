@@ -150,7 +150,7 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 Changelog
 ---------
 
-- **October.23.11**: 1.0.7 release preparation
+- **October.23.11**: 1.0.7 released
   - Added support for 3D options when creating a new chart. This lets you set the persective, rotation and other 3D attributes when using worksheet.add_chart
   - Updated serialization write test to verify write permissions and warn if it cannot run the test due to permission restrcitions.
   - updated rake to include build, genoc and deploy tasks.

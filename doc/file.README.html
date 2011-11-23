@@ -63,7 +63,7 @@
 <strong>License</strong>:      MIT License    <br/>
 <strong>Latest Version</strong>: 1.0.7 <br/>
 <strong>Ruby Version</strong>: 1.8.7 <br/>
-<strong>Release Date</strong>: November 22nd 2011</p>
+<strong>Release Date</strong>: November 23nd 2011</p>
 
 <h2>Synopsis</h2>
 
@@ -182,10 +182,13 @@ It enables the you to generate 100% valid xlsx files that include customised sty
  <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='add_worksheet identifier id'>add_worksheet</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='sheet identifier id'>sheet</span><span class='bitor op'>|</span>
    <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='lbrack token'>[</span><span class='string val'>&quot;First&quot;</span><span class='comma token'>,</span> <span class='integer val'>1</span><span class='comma token'>,</span> <span class='integer val'>5</span><span class='comma token'>,</span> <span class='integer val'>7</span><span class='comma token'>,</span> <span class='integer val'>9</span><span class='rbrack token'>]</span>
    <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='lbrack token'>[</span><span class='string val'>&quot;Second&quot;</span><span class='comma token'>,</span> <span class='integer val'>5</span><span class='comma token'>,</span> <span class='integer val'>2</span><span class='comma token'>,</span> <span class='integer val'>14</span><span class='comma token'>,</span> <span class='integer val'>9</span><span class='rbrack token'>]</span>
-   <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_chart identifier id'>add_chart</span><span class='lparen token'>(</span><span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Line3DChart constant id'>Line3DChart</span><span class='comma token'>,</span> <span class='symbol val'>:start_at</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='integer val'>2</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:end_at</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='integer val'>10</span><span class='comma token'>,</span> <span class='integer val'>15</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:title=</span><span class='gt op'>&gt;</span><span class='string val'>&quot;example 6: Line Chart&quot;</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='chart identifier id'>chart</span><span class='bitor op'>|</span>
+   <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_chart identifier id'>add_chart</span><span class='lparen token'>(</span><span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Line3DChart constant id'>Line3DChart</span><span class='comma token'>,</span> <span class='symbol val'>:title=</span><span class='gt op'>&gt;</span><span class='string val'>&quot;example 6: Line Chart&quot;</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='chart identifier id'>chart</span><span class='bitor op'>|</span>
+     <span class='chart identifier id'>chart</span><span class='dot token'>.</span><span class='start_at identifier id'>start_at</span> <span class='integer val'>0</span><span class='comma token'>,</span> <span class='integer val'>2</span>
+     <span class='chart identifier id'>chart</span><span class='dot token'>.</span><span class='end_at identifier id'>end_at</span> <span class='integer val'>10</span><span class='comma token'>,</span> <span class='integer val'>15</span>
      <span class='chart identifier id'>chart</span><span class='dot token'>.</span><span class='add_series identifier id'>add_series</span> <span class='symbol val'>:data=</span><span class='gt op'>&gt;</span><span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span><span class='dot token'>.</span><span class='first identifier id'>first</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span><span class='lbrack token'>[</span><span class='lparen token'>(</span><span class='float val'>1</span><span class='dot2 op'>..</span><span class='integer val'>-1</span><span class='rparen token'>)</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:title=</span><span class='gt op'>&gt;</span> <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span><span class='dot token'>.</span><span class='first identifier id'>first</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span><span class='dot token'>.</span><span class='first identifier id'>first</span>
      <span class='chart identifier id'>chart</span><span class='dot token'>.</span><span class='add_series identifier id'>add_series</span> <span class='symbol val'>:data=</span><span class='gt op'>&gt;</span><span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span><span class='dot token'>.</span><span class='last identifier id'>last</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span><span class='lbrack token'>[</span><span class='lparen token'>(</span><span class='float val'>1</span><span class='dot2 op'>..</span><span class='integer val'>-1</span><span class='rparen token'>)</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:title=</span><span class='gt op'>&gt;</span> <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span><span class='dot token'>.</span><span class='last identifier id'>last</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span><span class='dot token'>.</span><span class='first identifier id'>first</span>
    <span class='end end kw'>end</span>
+
  <span class='end end kw'>end</span>  
  <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='serialize identifier id'>serialize</span><span class='lparen token'>(</span><span class='string val'>&quot;example6.xlsx&quot;</span><span class='rparen token'>)</span>
 </pre>
@@ -205,9 +208,10 @@ It enables the you to generate 100% valid xlsx files that include customised sty
 <h2>Changelog</h2>
 
 <ul>
-<li><strong>October.?.13</strong>: 1.0.7 release preparation
+<li><strong>October.23.11</strong>: 1.0.7 released
 
 <ul>
+<li>Added support for 3D options when creating a new chart. This lets you set the persective, rotation and other 3D attributes when using worksheet.add_chart</li>
 <li>Updated serialization write test to verify write permissions and warn if it cannot run the test due to permission restrcitions.</li>
 <li>updated rake to include build, genoc and deploy tasks.</li>
 <li>rebuilt documentation.</li>
@@ -215,7 +219,6 @@ It enables the you to generate 100% valid xlsx files that include customised sty
 <li>fixed bug in SerAxis that was requiring tickLblSkip and tickMarkSkip to be boolean. Should be unsigned int.</li>
 <li>Review and improve docs</li>
 <li>rebuild of anchor positioning to remove some spagetti code. Chart now supports a start_at and end_at method that accept an arrar for col/row positioning. See example6 for an example. You can still pass :start_at and :end_at options to worksheet.add_chart.</li>
-<li>Added support for 3D options when creating a new chart. This lets you set the persective, rotation and other 3D attributes when using worksheet.add_chart</li>
 <li>Refactored cat and val axis data to keep series serialization a bit more DRY</li>
 </ul>
 </li>
@@ -231,7 +234,7 @@ licensed under the MIT license. Please see the <a href="file.LICENSE.html" title
 </div></div>
     
     <div id="footer">
-  Generated on Wed Nov 23 12:23:40 2011 by 
+  Generated on Wed Nov 23 12:36:23 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>
