@@ -277,30 +277,6 @@ A marker that returns the to cell anchor.
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#end_at-instance_method" title="#end_at (instance method)">- (Marker) <strong>end_at</strong>(x, y) </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>
-This is a short cut method to set the end anchor position.
-</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
       <a href="#initialize-instance_method" title="#initialize (instance method)">- (TwoCellAnchor) <strong>initialize</strong>(drawing, chart_type, options) </a>
     
 
@@ -317,31 +293,8 @@ This is a short cut method to set the end anchor position.
 
   
     <span class="summary_desc"><div class='inline'><p>
-Creates a new TwoCellAnchor object.
-</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#start_at-instance_method" title="#start_at (instance method)">- (Marker) <strong>start_at</strong>(x, y) </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>
-This is a short cut method to set the start anchor position.
+Creates a new TwoCellAnchor object and sets up a reference to the from and
+to markers in the graphic_frame&#8217;s chart.
 </p>
 </div></span>
   
@@ -388,7 +341,9 @@ Serializes the two cell anchor.
 </p><div class="docstring">
   <div class="discussion">
     <p>
-Creates a new TwoCellAnchor object
+Creates a new TwoCellAnchor object and sets up a reference to the from and
+to markers in the graphic_frame&#8217;s chart. That means that you can do
+stuff like c = worksheet.add_chart Axlsx::Chart c.start_at 5, 9
 </p>
 
 
@@ -411,12 +366,19 @@ Creates a new TwoCellAnchor object
   
     <li>
       
-        <span class='name'>chart</span>
+        <span class='name'>chart_type</span>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="Chart.html" title="Axlsx::Chart (class)">Chart</a></span></tt>)</span>
+        <span class='type'>(<tt>Class</tt>)</span>
       
       
+      
+        &mdash;
+        <div class='inline'><p>
+This is passed to the graphic frame for instantiation. must be Chart or a
+subclass of Chart
+</p>
+</div>
       
     </li>
   
@@ -455,7 +417,10 @@ a customizable set of options
           <span class="default">
             
           </span>
-          
+          &mdash; <div class='inline'><p>
+the col, row to start at
+</p>
+</div>
         </li>
       
         <li>
@@ -464,7 +429,10 @@ a customizable set of options
           <span class="default">
             
           </span>
-          
+          &mdash; <div class='inline'><p>
+the col, row to end at
+</p>
+</div>
         </li>
       
     </ul>
@@ -477,37 +445,21 @@ a customizable set of options
       <pre class="lines">
 
 
-31
-32
-33
 34
 35
 36
 37
 38
-39
-40
-41
-42
-43
-44</pre>
+39</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/two_cell_anchor.rb', line 31</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/two_cell_anchor.rb', line 34</span>
 
 <span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='drawing identifier id'>drawing</span><span class='comma token'>,</span> <span class='chart_type identifier id'>chart_type</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
   <span class='@drawing ivar id'>@drawing</span> <span class='assign token'>=</span> <span class='drawing identifier id'>drawing</span>
   <span class='drawing identifier id'>drawing</span><span class='dot token'>.</span><span class='anchors identifier id'>anchors</span> <span class='lshft op'>&lt;&lt;</span> <span class='self self kw'>self</span>      
-
   <span class='@from ivar id'>@from</span><span class='comma token'>,</span> <span class='@to ivar id'>@to</span> <span class='assign token'>=</span>  <span class='Marker constant id'>Marker</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='comma token'>,</span> <span class='Marker constant id'>Marker</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:col</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='integer val'>5</span><span class='comma token'>,</span> <span class='symbol val'>:row=</span><span class='gt op'>&gt;</span><span class='integer val'>10</span><span class='rparen token'>)</span>
   <span class='@graphic_frame ivar id'>@graphic_frame</span> <span class='assign token'>=</span> <span class='GraphicFrame constant id'>GraphicFrame</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='comma token'>,</span> <span class='chart_type identifier id'>chart_type</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
-
-  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='start_at identifier id'>start_at</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:start_at</span><span class='rbrack token'>]</span><span class='lbrack token'>[</span><span class='integer val'>0</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:start_at</span><span class='rbrack token'>]</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:start_at</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='is_a? fid id'>is_a?</span><span class='lparen token'>(</span><span class='Array constant id'>Array</span><span class='rparen token'>)</span>
-  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='end_at identifier id'>end_at</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:end_at</span><span class='rbrack token'>]</span><span class='lbrack token'>[</span><span class='integer val'>0</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:end_at</span><span class='rbrack token'>]</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:end_at</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='is_a? fid id'>is_a?</span><span class='lparen token'>(</span><span class='Array constant id'>Array</span><span class='rparen token'>)</span>
-  <span class='comment val'># passing a reference to our start and end markers for convenience</span>
-  <span class='comment val'># this lets us access the markers directly from the chart.</span>
-  <span class='@graphic_frame ivar id'>@graphic_frame</span><span class='dot token'>.</span><span class='chart identifier id'>chart</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='symbol val'>:start_at=</span><span class='comma token'>,</span> <span class='@from ivar id'>@from</span><span class='rparen token'>)</span>
-  <span class='@graphic_frame ivar id'>@graphic_frame</span><span class='dot token'>.</span><span class='chart identifier id'>chart</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='symbol val'>:end_at=</span><span class='comma token'>,</span> <span class='@to ivar id'>@to</span><span class='rparen token'>)</span>
 <span class='end end kw'>end</span>
 </pre>
     </td>
@@ -815,199 +767,7 @@ A marker that returns the to cell anchor. The default to column and row are
     
     
       <div class="method_details first">
-  <p class="signature first" id="end_at-instance_method">
-  
-    - (<tt><span class='object_link'><a href="Marker.html" title="Axlsx::Marker (class)">Marker</a></span></tt>) <strong>end_at</strong>(x, y) 
-  
-
-  
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-This is a short cut method to set the end anchor position
-</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  <h3>Parameters:</h3>
-<ul class="param">
-  
-    <li>
-      
-        <span class='name'>x</span>
-      
-      
-        <span class='type'>(<tt>Integer</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>
-The column
-</p>
-</div>
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>y</span>
-      
-      
-        <span class='type'>(<tt>Integer</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>
-The row
-</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-<h3>Returns:</h3>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt><span class='object_link'><a href="Marker.html" title="Axlsx::Marker (class)">Marker</a></span></tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-65
-66
-67
-68
-69</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/two_cell_anchor.rb', line 65</span>
-
-<span class='def def kw'>def</span> <span class='end_at identifier id'>end_at</span><span class='lparen token'>(</span><span class='x identifier id'>x</span><span class='comma token'>,</span> <span class='y identifier id'>y</span><span class='rparen token'>)</span>
-  <span class='@to ivar id'>@to</span><span class='dot token'>.</span><span class='col identifier id'>col</span> <span class='assign token'>=</span> <span class='x identifier id'>x</span>
-  <span class='@to ivar id'>@to</span><span class='dot token'>.</span><span class='row identifier id'>row</span> <span class='assign token'>=</span> <span class='y identifier id'>y</span>
-  <span class='@to ivar id'>@to</span>
-<span class='end end kw'>end</span>
-</pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <p class="signature " id="start_at-instance_method">
-  
-    - (<tt><span class='object_link'><a href="Marker.html" title="Axlsx::Marker (class)">Marker</a></span></tt>) <strong>start_at</strong>(x, y) 
-  
-
-  
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-This is a short cut method to set the start anchor position
-</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  <h3>Parameters:</h3>
-<ul class="param">
-  
-    <li>
-      
-        <span class='name'>x</span>
-      
-      
-        <span class='type'>(<tt>Integer</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>
-The column
-</p>
-</div>
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>y</span>
-      
-      
-        <span class='type'>(<tt>Integer</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>
-The row
-</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-<h3>Returns:</h3>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt><span class='object_link'><a href="Marker.html" title="Axlsx::Marker (class)">Marker</a></span></tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-55
-56
-57
-58
-59</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/two_cell_anchor.rb', line 55</span>
-
-<span class='def def kw'>def</span> <span class='start_at identifier id'>start_at</span><span class='lparen token'>(</span><span class='x identifier id'>x</span><span class='comma token'>,</span> <span class='y identifier id'>y</span><span class='rparen token'>)</span>
-  <span class='@from ivar id'>@from</span><span class='dot token'>.</span><span class='col identifier id'>col</span> <span class='assign token'>=</span> <span class='x identifier id'>x</span>
-  <span class='@from ivar id'>@from</span><span class='dot token'>.</span><span class='row identifier id'>row</span> <span class='assign token'>=</span> <span class='y identifier id'>y</span>
-  <span class='@from ivar id'>@from</span>
-<span class='end end kw'>end</span>
-</pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <p class="signature " id="to_xml-instance_method">
+  <p class="signature first" id="to_xml-instance_method">
   
     - (<tt>String</tt>) <strong>to_xml</strong>(xml) 
   
@@ -1065,22 +825,22 @@ The document builder instance this objects xml will be added to.
       <pre class="lines">
 
 
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86</pre>
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/two_cell_anchor.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/two_cell_anchor.rb', line 47</span>
 
 <span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
   <span class='comment val'>#build it for now, break it down later!</span>
@@ -1106,7 +866,7 @@ The document builder instance this objects xml will be added to.
 </div>
     
     <div id="footer">
-  Generated on Tue Nov 22 23:52:48 2011 by 
+  Generated on Wed Nov 23 12:24:02 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>

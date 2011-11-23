@@ -12,6 +12,11 @@ class TestValAxis < Test::Unit::TestCase
     assert_equal(@axis.crossBetween, :between, "axis crossBetween default incorrect")
   end
 
+  def test_options
+    a = Axlsx::ValAxis.new 2345, 4321, :crossBetween => :midCat
+    assert_equal(a.crossBetween, :midCat)
+  end
+
   def test_crossBetween
     assert_raise(ArgumentError, "requires valid crossBetween") { @axis.crossBetween = :my_eyes }
     assert_nothing_raised("accepts valid crossBetween") { @axis.crossBetween = :midCat }

@@ -106,53 +106,17 @@ that you can add to your worksheet.
 </div>
 <div class="tags">
   
-  <div class="examples">
-    <h3>Examples:</h3>
-    
-      <h4><div class='inline'><p>
-Creating a chart
-</p>
-</div></h4>
-      <pre class="example code"><span class='comment val'># This example creates two charts in a single sheet.</span>
-<span class='comment val'># The first uses data directly fed to the sheet, while the second references cells withing the worksheet for data.</span>
-
-<span class='require identifier id'>require</span> <span class='string val'>&quot;rubygems&quot;</span> <span class='comment val'># if that is your preferred way to manage gems!</span>
-<span class='require identifier id'>require</span> <span class='string val'>&quot;axlsx&quot;</span>
-
-<span class='p identifier id'>p</span> <span class='assign token'>=</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
-<span class='ws identifier id'>ws</span> <span class='assign token'>=</span> <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='add_worksheet identifier id'>add_worksheet</span>
-<span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='symbol val'>:values</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;This is a chart with no data in the sheet&quot;</span><span class='rbrack token'>]</span>
-
-<span class='chart identifier id'>chart</span> <span class='assign token'>=</span> <span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_chart identifier id'>add_chart</span><span class='lparen token'>(</span><span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Bar3DChart constant id'>Bar3DChart</span><span class='comma token'>,</span> <span class='symbol val'>:start_at=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:end_at=</span><span class='gt op'>&gt;</span><span class='lbrack token'>[</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='integer val'>6</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:title=</span><span class='gt op'>&gt;</span><span class='string val'>&quot;Most Popular Pets&quot;</span><span class='rparen token'>)</span>
-<span class='chart identifier id'>chart</span><span class='dot token'>.</span><span class='add_series identifier id'>add_series</span> <span class='symbol val'>:data</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='integer val'>1</span><span class='comma token'>,</span> <span class='integer val'>9</span><span class='comma token'>,</span> <span class='integer val'>10</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:labels</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;Slimy Reptiles&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Fuzzy Bunnies&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Rottweiler&quot;</span><span class='rbrack token'>]</span>
-
-<span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='symbol val'>:values</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;This chart uses the data below&quot;</span><span class='rbrack token'>]</span>
-<span class='title_row identifier id'>title_row</span> <span class='assign token'>=</span> <span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='symbol val'>:values</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;Least Popular Pets&quot;</span><span class='rbrack token'>]</span>
-<span class='label_row identifier id'>label_row</span> <span class='assign token'>=</span> <span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='symbol val'>:values</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Dry Skinned Reptiles&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Bald Cats&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Violent Parrots&quot;</span><span class='rbrack token'>]</span>
-<span class='data_row identifier id'>data_row</span> <span class='assign token'>=</span> <span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='symbol val'>:values</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;Votes&quot;</span><span class='comma token'>,</span> <span class='integer val'>6</span><span class='comma token'>,</span> <span class='integer val'>4</span><span class='comma token'>,</span> <span class='integer val'>1</span><span class='rbrack token'>]</span>
-
-<span class='chart identifier id'>chart</span> <span class='assign token'>=</span> <span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_chart identifier id'>add_chart</span><span class='lparen token'>(</span><span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Pie3DChart constant id'>Pie3DChart</span><span class='comma token'>,</span> <span class='symbol val'>:start_at</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='integer val'>11</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:end_at</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span><span class='lbrack token'>[</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='integer val'>16</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:title</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='title_row identifier id'>title_row</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span><span class='dot token'>.</span><span class='last identifier id'>last</span><span class='rparen token'>)</span>
-<span class='chart identifier id'>chart</span><span class='dot token'>.</span><span class='add_series identifier id'>add_series</span> <span class='symbol val'>:data</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='data_row identifier id'>data_row</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span><span class='lbrack token'>[</span><span class='lparen token'>(</span><span class='float val'>1</span><span class='dot2 op'>..</span><span class='integer val'>-1</span><span class='rparen token'>)</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:labels</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='label_row identifier id'>label_row</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span>  
-
-<span class='f identifier id'>f</span> <span class='assign token'>=</span> <span class='File constant id'>File</span><span class='dot token'>.</span><span class='open identifier id'>open</span><span class='lparen token'>(</span><span class='string val'>'example_pie_3d_chart.xlsx'</span><span class='comma token'>,</span> <span class='string val'>'w'</span><span class='rparen token'>)</span>
-<span class='p identifier id'>p</span><span class='dot token'>.</span><span class='serialize identifier id'>serialize</span><span class='lparen token'>(</span><span class='f identifier id'>f</span><span class='rparen token'>)</span>
-</pre>
-    
-  </div>
-
 
   <h3>See Also:</h3>
   <ul class="see">
     
       <li><span class='object_link'><a href="Worksheet.html#add_chart-instance_method" title="Axlsx::Worksheet#add_chart (method)">Worksheet#add_chart</a></span></li>
     
-      <li><span class='object_link'><a href="Worksheet.html#add_row-instance_method" title="Axlsx::Worksheet#add_row (method)">Worksheet#add_row</a></span></li>
-    
       <li><span class='object_link'><a href="Chart.html#add_series-instance_method" title="Axlsx::Chart#add_series (method)">Chart#add_series</a></span></li>
     
-      <li><span class='object_link'><a href="Series.html" title="Axlsx::Series (class)">Series</a></span></li>
-    
       <li><span class='object_link'><a href="Package.html#serialize-instance_method" title="Axlsx::Package#serialize (method)">Package#serialize</a></span></li>
+    
+      <li>for an example</li>
     
   </ul>
 
@@ -347,8 +311,8 @@ grouping for a column, line, or area chart.
 
   
     <span class="summary_desc"><div class='inline'><p>
-The shabe of the bars or columns must be one of [:percentStacked,
-:clustered, :standard, :stacked].
+The shabe of the bars or columns must be one of [:cone, :coneToMax, :box,
+:cylinder, :pyramid, :pyramidToMax].
 </p>
 </div></span>
   
@@ -375,7 +339,7 @@ The shabe of the bars or columns must be one of [:percentStacked,
 
   
     <span class="summary_desc"><div class='inline'><p>
-the category axis.
+the valueaxis.
 </p>
 </div></span>
   
@@ -392,7 +356,7 @@ the category axis.
   
   
   <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="Chart.html" title="Axlsx::Chart (class)">Chart</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Chart.html#end_at-instance_method" title="Axlsx::Chart#end_at (method)">end_at</a></span>, <span class='object_link'><a href="Chart.html#graphic_frame-instance_method" title="Axlsx::Chart#graphic_frame (method)">graphic_frame</a></span>, <span class='object_link'><a href="Chart.html#index-instance_method" title="Axlsx::Chart#index (method)">index</a></span>, <span class='object_link'><a href="Chart.html#pn-instance_method" title="Axlsx::Chart#pn (method)">pn</a></span>, <span class='object_link'><a href="Chart.html#series-instance_method" title="Axlsx::Chart#series (method)">series</a></span>, <span class='object_link'><a href="Chart.html#series_type-instance_method" title="Axlsx::Chart#series_type (method)">series_type</a></span>, <span class='object_link'><a href="Chart.html#show_legend-instance_method" title="Axlsx::Chart#show_legend (method)">show_legend</a></span>, <span class='object_link'><a href="Chart.html#start_at-instance_method" title="Axlsx::Chart#start_at (method)">start_at</a></span>, <span class='object_link'><a href="Chart.html#style-instance_method" title="Axlsx::Chart#style (method)">style</a></span>, <span class='object_link'><a href="Chart.html#title-instance_method" title="Axlsx::Chart#title (method)">title</a></span>, <span class='object_link'><a href="Chart.html#view3D-instance_method" title="Axlsx::Chart#view3D (method)">view3D</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Chart.html#graphic_frame-instance_method" title="Axlsx::Chart#graphic_frame (method)">graphic_frame</a></span>, <span class='object_link'><a href="Chart.html#index-instance_method" title="Axlsx::Chart#index (method)">index</a></span>, <span class='object_link'><a href="Chart.html#pn-instance_method" title="Axlsx::Chart#pn (method)">pn</a></span>, <span class='object_link'><a href="Chart.html#series-instance_method" title="Axlsx::Chart#series (method)">series</a></span>, <span class='object_link'><a href="Chart.html#series_type-instance_method" title="Axlsx::Chart#series_type (method)">series_type</a></span>, <span class='object_link'><a href="Chart.html#show_legend-instance_method" title="Axlsx::Chart#show_legend (method)">show_legend</a></span>, <span class='object_link'><a href="Chart.html#style-instance_method" title="Axlsx::Chart#style (method)">style</a></span>, <span class='object_link'><a href="Chart.html#title-instance_method" title="Axlsx::Chart#title (method)">title</a></span>, <span class='object_link'><a href="Chart.html#view3D-instance_method" title="Axlsx::Chart#view3D (method)">view3D</a></span></p>
 
 
   
@@ -465,7 +429,7 @@ Serializes the bar chart.
   
   
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Chart.html" title="Axlsx::Chart (class)">Chart</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Chart.html#add_series-instance_method" title="Axlsx::Chart#add_series (method)">#add_series</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Chart.html#add_series-instance_method" title="Axlsx::Chart#add_series (method)">#add_series</a></span>, <span class='object_link'><a href="Chart.html#end_at-instance_method" title="Axlsx::Chart#end_at (method)">#end_at</a></span>, <span class='object_link'><a href="Chart.html#from-instance_method" title="Axlsx::Chart#from (method)">#from</a></span>, <span class='object_link'><a href="Chart.html#start_at-instance_method" title="Axlsx::Chart#start_at (method)">#start_at</a></span>, <span class='object_link'><a href="Chart.html#to-instance_method" title="Axlsx::Chart#to (method)">#to</a></span></p>
 <div id="constructor_details" class="method_details_list">
   <h2>Constructor Details</h2>
   
@@ -598,9 +562,72 @@ a customizable set of options
           
         </li>
       
+        <li>
+          <span class="name">rotX</span>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">hPercent</span>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">rotY</span>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">depthPercent</span>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">rAngAx</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">perspective</span>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
     </ul>
   
 
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="Chart.html" title="Axlsx::Chart (class)">Chart</a></span></li>
+    
+      <li><span class='object_link'><a href="View3D.html" title="Axlsx::View3D (class)">View3D</a></span></li>
+    
+  </ul>
 
 </div><table class="source_code">
   <tr>
@@ -608,20 +635,20 @@ a customizable set of options
       <pre class="lines">
 
 
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89</pre>
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/bar_3D_chart.rb', line 79</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/bar_3D_chart.rb', line 61</span>
 
 <span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='frame identifier id'>frame</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
   <span class='@barDir ivar id'>@barDir</span> <span class='assign token'>=</span> <span class='symbol val'>:bar</span>
@@ -630,9 +657,9 @@ a customizable set of options
   <span class='@valAxId ivar id'>@valAxId</span> <span class='assign token'>=</span> <span class='rand identifier id'>rand</span><span class='lparen token'>(</span><span class='integer val'>8</span> <span class='pow op'>**</span> <span class='integer val'>8</span><span class='rparen token'>)</span>
   <span class='@catAxis ivar id'>@catAxis</span> <span class='assign token'>=</span> <span class='CatAxis constant id'>CatAxis</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='@catAxId ivar id'>@catAxId</span><span class='comma token'>,</span> <span class='@valAxId ivar id'>@valAxId</span><span class='rparen token'>)</span>
   <span class='@valAxis ivar id'>@valAxis</span> <span class='assign token'>=</span> <span class='ValAxis constant id'>ValAxis</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='@valAxId ivar id'>@valAxId</span><span class='comma token'>,</span> <span class='@catAxId ivar id'>@catAxId</span><span class='rparen token'>)</span>
-  <span class='@view3D ivar id'>@view3D</span> <span class='assign token'>=</span> <span class='View3D constant id'>View3D</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:rAngAx=</span><span class='gt op'>&gt;</span><span class='integer val'>1</span><span class='rparen token'>)</span>
   <span class='super super kw'>super</span><span class='lparen token'>(</span><span class='frame identifier id'>frame</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>      
   <span class='@series_type ivar id'>@series_type</span> <span class='assign token'>=</span> <span class='BarSeries constant id'>BarSeries</span>
+  <span class='@view3D ivar id'>@view3D</span> <span class='assign token'>=</span> <span class='View3D constant id'>View3D</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='lbrace token'>{</span><span class='symbol val'>:rAngAx=</span><span class='gt op'>&gt;</span><span class='integer val'>1</span><span class='rbrace token'>}</span><span class='dot token'>.</span><span class='merge identifier id'>merge</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
 <span class='end end kw'>end</span>
 </pre>
     </td>
@@ -686,12 +713,12 @@ The direction of the bars in the chart must be one of [:bar, :col]
       <pre class="lines">
 
 
-47
-48
-49</pre>
+21
+22
+23</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/bar_3D_chart.rb', line 47</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/bar_3D_chart.rb', line 21</span>
 
 <span class='def def kw'>def</span> <span class='barDir identifier id'>barDir</span>
   <span class='@barDir ivar id'>@barDir</span>
@@ -743,12 +770,12 @@ the category axis
       <pre class="lines">
 
 
-38
-39
-40</pre>
+12
+13
+14</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/bar_3D_chart.rb', line 38</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/bar_3D_chart.rb', line 12</span>
 
 <span class='def def kw'>def</span> <span class='catAxis identifier id'>catAxis</span>
   <span class='@catAxis ivar id'>@catAxis</span>
@@ -801,12 +828,12 @@ width.
       <pre class="lines">
 
 
-51
-52
-53</pre>
+25
+26
+27</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/bar_3D_chart.rb', line 51</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/bar_3D_chart.rb', line 25</span>
 
 <span class='def def kw'>def</span> <span class='gapDepth identifier id'>gapDepth</span>
   <span class='@gapDepth ivar id'>@gapDepth</span>
@@ -859,12 +886,12 @@ width.
       <pre class="lines">
 
 
-55
-56
-57</pre>
+29
+30
+31</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/bar_3D_chart.rb', line 55</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/bar_3D_chart.rb', line 29</span>
 
 <span class='def def kw'>def</span> <span class='gapWidth identifier id'>gapWidth</span>
   <span class='@gapWidth ivar id'>@gapWidth</span>
@@ -917,12 +944,12 @@ grouping for a column, line, or area chart. must be one of
       <pre class="lines">
 
 
-60
-61
-62</pre>
+34
+35
+36</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/bar_3D_chart.rb', line 60</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/bar_3D_chart.rb', line 34</span>
 
 <span class='def def kw'>def</span> <span class='grouping identifier id'>grouping</span>
   <span class='@grouping ivar id'>@grouping</span>
@@ -946,8 +973,8 @@ grouping for a column, line, or area chart. must be one of
 </p><div class="docstring">
   <div class="discussion">
     <p>
-The shabe of the bars or columns must be one of [:percentStacked,
-:clustered, :standard, :stacked]
+The shabe of the bars or columns must be one of [:cone, :coneToMax, :box,
+:cylinder, :pyramid, :pyramidToMax]
 </p>
 
 
@@ -975,12 +1002,12 @@ The shabe of the bars or columns must be one of [:percentStacked,
       <pre class="lines">
 
 
-65
-66
-67</pre>
+39
+40
+41</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/bar_3D_chart.rb', line 65</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/bar_3D_chart.rb', line 39</span>
 
 <span class='def def kw'>def</span> <span class='shape identifier id'>shape</span>
   <span class='@shape ivar id'>@shape</span>
@@ -1004,7 +1031,7 @@ The shabe of the bars or columns must be one of [:percentStacked,
 </p><div class="docstring">
   <div class="discussion">
     <p>
-the category axis
+the valueaxis
 </p>
 
 
@@ -1032,12 +1059,12 @@ the category axis
       <pre class="lines">
 
 
-42
-43
-44</pre>
+16
+17
+18</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/bar_3D_chart.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/bar_3D_chart.rb', line 16</span>
 
 <span class='def def kw'>def</span> <span class='valAxis identifier id'>valAxis</span>
   <span class='@valAxis ivar id'>@valAxis</span>
@@ -1093,27 +1120,27 @@ Serializes the bar chart
       <pre class="lines">
 
 
-119
-120
-121
-122
-123
-124
-125
-126
-127
-128
-129
-130
-131
-132
-133
-134
-135
-136</pre>
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/bar_3D_chart.rb', line 119</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/bar_3D_chart.rb', line 101</span>
 
 <span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span>
   <span class='super super kw'>super</span><span class='lparen token'>(</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='xml identifier id'>xml</span><span class='bitor op'>|</span>
@@ -1144,7 +1171,7 @@ Serializes the bar chart
 </div>
     
     <div id="footer">
-  Generated on Tue Nov 22 23:52:38 2011 by 
+  Generated on Wed Nov 23 12:23:50 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>

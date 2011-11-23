@@ -100,6 +100,11 @@ module Axlsx
       index < @locked_at
     end
     
+    # override the equality method so that this object can be compared to a simple array.
+    # if this object's list is equal to the specifiec array, we return true.
+    def ==(v)
+      v == @list
+    end
     # method_mission override to pass allowed methods to the list.
     # @note 
     #  the following methods are not allowed
@@ -123,12 +128,12 @@ module Axlsx
     #   :drop_while
     #   :delete_if
     #   :clear
-    #   :concat
     def method_missing(meth, *args, &block)
-      raise ArgumentError, "#{meth} not supported" if [:replace, :insert, :collect!, :map!, :pop, :delete_if, :reverse!, :shift, :shuffle!, :slice!, :sort!, :uniq!, :unshift, :zip, :flatten!, :fill, :drop, :drop_while, :delete_if, :clear, :concat].include? meth.to_sym        
+      raise ArgumentError, "#{meth} not supported" if [:replace, :insert, :collect!, :map!, :pop, :delete_if, :reverse!, :shift, :shuffle!, :slice!, :sort!, :uniq!, :unshift, :zip, :flatten!, :fill, :drop, :drop_while, :delete_if, :clear].include? meth.to_sym        
       if @list.respond_to? meth
         @list.send(meth, *args, &block)      
       else
+        puts "method:#{meth.inspect}"
         super
       end
     end

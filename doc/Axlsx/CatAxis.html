@@ -336,7 +336,7 @@ Creates a new CatAxis object
       
         &mdash;
         <div class='inline'><p>
-the id of this axis
+the id of this axis. Inherited
 </p>
 </div>
       
@@ -353,7 +353,7 @@ the id of this axis
       
         &mdash;
         <div class='inline'><p>
-the id of the perpendicular axis
+the id of the perpendicular axis. Inherited
 </p>
 </div>
       
@@ -391,30 +391,39 @@ a customizable set of options
     <ul class="option">
       
         <li>
-          <span class="name">axPos</span>
+          <span class="name">axPos.</span>
           <span class="type">(<tt>Symbol</tt>)</span>
           <span class="default">
             
           </span>
-          
+          &mdash; <div class='inline'><p>
+Inherited
+</p>
+</div>
         </li>
       
         <li>
-          <span class="name">tickLblPos</span>
+          <span class="name">tickLblPos.</span>
           <span class="type">(<tt>Symbol</tt>)</span>
           <span class="default">
             
           </span>
-          
+          &mdash; <div class='inline'><p>
+Inherited
+</p>
+</div>
         </li>
       
         <li>
-          <span class="name">crosses</span>
+          <span class="name">crosses.</span>
           <span class="type">(<tt>Symbol</tt>)</span>
           <span class="default">
             
           </span>
-          
+          &mdash; <div class='inline'><p>
+Inherited
+</p>
+</div>
         </li>
       
         <li>
@@ -454,27 +463,21 @@ a customizable set of options
       <pre class="lines">
 
 
-30
 31
 32
 33
 34
 35
-36
-37
-38</pre>
+36</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/cat_axis.rb', line 30</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/cat_axis.rb', line 31</span>
 
 <span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='axId identifier id'>axId</span><span class='comma token'>,</span> <span class='crossAx identifier id'>crossAx</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
-  <span class='super super kw'>super</span><span class='lparen token'>(</span><span class='axId identifier id'>axId</span><span class='comma token'>,</span> <span class='crossAx identifier id'>crossAx</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
   <span class='self self kw'>self</span><span class='dot token'>.</span><span class='auto identifier id'>auto</span> <span class='assign token'>=</span> <span class='true true kw'>true</span>
   <span class='self self kw'>self</span><span class='dot token'>.</span><span class='lblAlgn identifier id'>lblAlgn</span> <span class='assign token'>=</span> <span class='symbol val'>:ctr</span>
   <span class='self self kw'>self</span><span class='dot token'>.</span><span class='lblOffset identifier id'>lblOffset</span> <span class='assign token'>=</span> <span class='string val'>&quot;100%&quot;</span>
-  <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='o identifier id'>o</span><span class='bitor op'>|</span>
-    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='dstring node'>&quot;#{o[0]}=&quot;</span><span class='comma token'>,</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span> <span class='dstring node'>&quot;#{o[0]}=&quot;</span>
-  <span class='end end kw'>end</span>
+  <span class='super super kw'>super</span><span class='lparen token'>(</span><span class='axId identifier id'>axId</span><span class='comma token'>,</span> <span class='crossAx identifier id'>crossAx</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
 <span class='end end kw'>end</span>
 </pre>
     </td>
@@ -529,12 +532,12 @@ based on the data that is used for the axis labels, not a specific choice.
       <pre class="lines">
 
 
-6
 7
-8</pre>
+8
+9</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/cat_axis.rb', line 6</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/cat_axis.rb', line 7</span>
 
 <span class='def def kw'>def</span> <span class='auto identifier id'>auto</span>
   <span class='@auto ivar id'>@auto</span>
@@ -587,12 +590,12 @@ specifies how the perpendicular axis is crossed must be one of [:ctr, :l,
       <pre class="lines">
 
 
-11
 12
-13</pre>
+13
+14</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/cat_axis.rb', line 11</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/cat_axis.rb', line 12</span>
 
 <span class='def def kw'>def</span> <span class='lblAlgn identifier id'>lblAlgn</span>
   <span class='@lblAlgn ivar id'>@lblAlgn</span>
@@ -644,12 +647,12 @@ The offset of the labels must be between a string between 0 and 1000
       <pre class="lines">
 
 
-16
 17
-18</pre>
+18
+19</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/cat_axis.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/cat_axis.rb', line 17</span>
 
 <span class='def def kw'>def</span> <span class='lblOffset identifier id'>lblOffset</span>
   <span class='@lblOffset ivar id'>@lblOffset</span>
@@ -726,17 +729,17 @@ The document builder instance this objects xml will be added to.
       <pre class="lines">
 
 
+45
+46
 47
 48
 49
 50
 51
-52
-53
-54</pre>
+52</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/cat_axis.rb', line 47</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/cat_axis.rb', line 45</span>
 
 <span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
   <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:catAx'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
@@ -757,7 +760,7 @@ The document builder instance this objects xml will be added to.
 </div>
     
     <div id="footer">
-  Generated on Tue Nov 22 23:52:42 2011 by 
+  Generated on Wed Nov 23 12:24:00 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>

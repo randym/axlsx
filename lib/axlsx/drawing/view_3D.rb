@@ -1,6 +1,13 @@
 module Axlsx
   # 3D attributes for a chart.
   class View3D
+
+    # Validation for hPercent
+    H_PERCENT_REGEX = /0*(([5-9])|([1-9][0-9])|([1-4][0-9][0-9])|500)%/
+    
+    # validation for depthPercent
+    DEPTH_PERCENT_REGEX = /0*(([2-9][0-9])|([1-9][0-9][0-9])|(1[0-9][0-9][0-9])|2000)%/
+
     # x rotation for the chart 
     # must be between -90 and 90
     # @return [Integer]
@@ -41,18 +48,17 @@ module Axlsx
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end    
     end
-    
-    # Validation for hPercent
-    H_PERCENT_REGEX = /0*(([5-9])|([1-9][0-9])|([1-4][0-9][0-9])|500)%/
-    
-    # validation for depthPercent
-    DEPTH_PERCENT_REGEX = /0*(([2-9][0-9])|([1-9][0-9][0-9])|(1[0-9][0-9][0-9])|2000)%/
 
     def rotX=(v) DataTypeValidator.validate "#{self.class}.rotX", [Integer, Fixnum], v, lambda {|v| v >= -90 && v <= 90 }; @rotX = v; end
+
     def hPercent=(v) RegexValidator.validate "#{self.class}.rotX", H_PERCENT_REGEX, v; @hPercent = v; end
+
     def rotY=(v) DataTypeValidator.validate "#{self.class}.rotY", [Integer, Fixnum], v, lambda {|v| v >= 0 && v <= 360 }; @rotY = v; end
+
     def depthPercent=(v) RegexValidator.validate "#{self.class}.depthPercent", DEPTH_PERCENT_REGEX, v; @depthPercent = v; end
+
     def rAngAx=(v) Axlsx::validate_boolean(v); @rAngAx = v; end
+
     def perspective=(v) DataTypeValidator.validate "#{self.class}.perspective", [Integer, Fixnum], v, lambda {|v| v >= 0 && v <= 240 }; @perspective = v; end
 
     # Serializes the view3D properties

@@ -104,7 +104,8 @@ The recommended way to manage series is to use Chart#add_series
   </div>
 
 <p>
-A Series defines the title, data and labels for chart data.
+A Series defines the common series attributes and is the super class for
+all concrete series types.
 </p>
 
 
@@ -161,7 +162,7 @@ The chart that owns this series.
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#index-instance_method" title="#index (instance method)">- (Object) <strong>index</strong> </a>
+      <a href="#index-instance_method" title="#index (instance method)">- (Integer) <strong>index</strong> </a>
     
 
     
@@ -178,7 +179,7 @@ The chart that owns this series.
 
   
     <span class="summary_desc"><div class='inline'><p>
-retrieves the series index in the chart&#8217;s series collection.
+The index of this series in the chart&#8217;s series.
 </p>
 </div></span>
   
@@ -488,14 +489,14 @@ The chart that owns this series
       <div class="method_details ">
   <p class="signature " id="index-instance_method">
   
-    - (<tt>Object</tt>) <strong>index</strong>  <span class="extras">(readonly)</span>
+    - (<tt>Integer</tt>) <strong>index</strong>  <span class="extras">(readonly)</span>
   
 
   
 </p><div class="docstring">
   <div class="discussion">
     <p>
-retrieves the series index in the chart&#8217;s series collection
+The index of this series in the chart&#8217;s series.
 </p>
 
 
@@ -503,6 +504,19 @@ retrieves the series index in the chart&#8217;s series collection
 </div>
 <div class="tags">
   
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -539,7 +553,8 @@ retrieves the series index in the chart&#8217;s series collection
 </p><div class="docstring">
   <div class="discussion">
     <p>
-The order of this series in the chart&#8217;s series.
+The order of this series in the chart&#8217;s series. By default the order
+is the index of the series.
 </p>
 
 
@@ -706,17 +721,17 @@ The document builder instance this objects xml will be added to.
       <pre class="lines">
 
 
+60
 61
 62
 63
 64
 65
 66
-67
-68</pre>
+67</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/series.rb', line 61</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/series.rb', line 60</span>
 
 <span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
   <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:ser'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
@@ -737,7 +752,7 @@ The document builder instance this objects xml will be added to.
 </div>
     
     <div id="footer">
-  Generated on Tue Nov 22 23:52:42 2011 by 
+  Generated on Wed Nov 23 12:23:59 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>

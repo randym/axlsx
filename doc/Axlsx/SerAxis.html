@@ -97,7 +97,7 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>
-A SarAxis object defines a series axis
+A SerAxis object defines a series axis
 </p>
 
 
@@ -118,7 +118,7 @@ A SarAxis object defines a series axis
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#tickLblSkip-instance_method" title="#tickLblSkip (instance method)">- (Boolean) <strong>tickLblSkip</strong> </a>
+      <a href="#tickLblSkip-instance_method" title="#tickLblSkip (instance method)">- (Integer) <strong>tickLblSkip</strong> </a>
     
 
     
@@ -134,7 +134,10 @@ A SarAxis object defines a series axis
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><p>
+The number of tick lables to skip between labels.
+</p>
+</div></span>
   
 </li>
 
@@ -158,7 +161,10 @@ A SarAxis object defines a series axis
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><p>
+The number of tickmarks to be skipped before the next one is rendered.
+</p>
+</div></span>
   
 </li>
 
@@ -276,7 +282,7 @@ Creates a new SerAxis object
       
         &mdash;
         <div class='inline'><p>
-the id of this axis
+the id of this axis. Inherited
 </p>
 </div>
       
@@ -293,7 +299,7 @@ the id of this axis
       
         &mdash;
         <div class='inline'><p>
-the id of the perpendicular axis
+the id of the perpendicular axis. Inherited
 </p>
 </div>
       
@@ -331,35 +337,44 @@ a customizable set of options
     <ul class="option">
       
         <li>
-          <span class="name">axPos</span>
+          <span class="name">axPos.</span>
           <span class="type">(<tt>Symbol</tt>)</span>
           <span class="default">
             
           </span>
-          
+          &mdash; <div class='inline'><p>
+Inherited
+</p>
+</div>
         </li>
       
         <li>
-          <span class="name">tickLblPos</span>
+          <span class="name">tickLblPos.</span>
           <span class="type">(<tt>Symbol</tt>)</span>
           <span class="default">
             
           </span>
-          
+          &mdash; <div class='inline'><p>
+Inherited
+</p>
+</div>
         </li>
       
         <li>
-          <span class="name">crosses</span>
+          <span class="name">crosses.</span>
           <span class="type">(<tt>Symbol</tt>)</span>
           <span class="default">
             
           </span>
-          
+          &mdash; <div class='inline'><p>
+Inherited
+</p>
+</div>
         </li>
       
         <li>
           <span class="name">tickLblSkip</span>
-          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="type">(<tt>Integer</tt>)</span>
           <span class="default">
             
           </span>
@@ -368,7 +383,7 @@ a customizable set of options
       
         <li>
           <span class="name">tickMarkSkip</span>
-          <span class="type">(<tt>Symbol</tt>)</span>
+          <span class="type">(<tt>Integer</tt>)</span>
           <span class="default">
             
           </span>
@@ -385,21 +400,15 @@ a customizable set of options
       <pre class="lines">
 
 
-19
-20
 21
 22
-23
-24</pre>
+23</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/ser_axis.rb', line 19</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/ser_axis.rb', line 21</span>
 
 <span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='axId identifier id'>axId</span><span class='comma token'>,</span> <span class='crossAx identifier id'>crossAx</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
   <span class='super super kw'>super</span><span class='lparen token'>(</span><span class='axId identifier id'>axId</span><span class='comma token'>,</span> <span class='crossAx identifier id'>crossAx</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
-  <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='o identifier id'>o</span><span class='bitor op'>|</span>
-    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='dstring node'>&quot;#{o[0]}=&quot;</span><span class='comma token'>,</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span> <span class='dstring node'>&quot;#{o[0]}=&quot;</span>
-  <span class='end end kw'>end</span>
 <span class='end end kw'>end</span>
 </pre>
     </td>
@@ -418,13 +427,16 @@ a customizable set of options
       <div class="method_details first">
   <p class="signature first" id="tickLblSkip-instance_method">
   
-    - (<tt>Boolean</tt>) <strong>tickLblSkip</strong> 
+    - (<tt>Integer</tt>) <strong>tickLblSkip</strong> 
   
 
   
 </p><div class="docstring">
   <div class="discussion">
-    
+    <p>
+The number of tick lables to skip between labels
+</p>
+
 
   </div>
 </div>
@@ -436,7 +448,7 @@ a customizable set of options
     <li>
       
       
-        <span class='type'>(<tt>Boolean</tt>)</span>
+        <span class='type'>(<tt>Integer</tt>)</span>
       
       
       
@@ -450,12 +462,12 @@ a customizable set of options
       <pre class="lines">
 
 
-6
 7
-8</pre>
+8
+9</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/ser_axis.rb', line 6</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/ser_axis.rb', line 7</span>
 
 <span class='def def kw'>def</span> <span class='tickLblSkip identifier id'>tickLblSkip</span>
   <span class='@tickLblSkip ivar id'>@tickLblSkip</span>
@@ -478,7 +490,10 @@ a customizable set of options
   
 </p><div class="docstring">
   <div class="discussion">
-    
+    <p>
+The number of tickmarks to be skipped before the next one is rendered.
+</p>
+
 
   </div>
 </div>
@@ -504,12 +519,12 @@ a customizable set of options
       <pre class="lines">
 
 
-9
-10
-11</pre>
+11
+12
+13</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/ser_axis.rb', line 9</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/ser_axis.rb', line 11</span>
 
 <span class='def def kw'>def</span> <span class='tickMarkSkip identifier id'>tickMarkSkip</span>
   <span class='@tickMarkSkip ivar id'>@tickMarkSkip</span>
@@ -586,16 +601,16 @@ The document builder instance this objects xml will be added to.
       <pre class="lines">
 
 
+31
 32
 33
 34
 35
 36
-37
-38</pre>
+37</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/ser_axis.rb', line 32</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/ser_axis.rb', line 31</span>
 
 <span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
   <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:serAx'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
@@ -615,7 +630,7 @@ The document builder instance this objects xml will be added to.
 </div>
     
     <div id="footer">
-  Generated on Tue Nov 22 23:52:32 2011 by 
+  Generated on Wed Nov 23 12:23:58 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>

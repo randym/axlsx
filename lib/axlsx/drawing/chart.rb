@@ -2,19 +2,12 @@
 module Axlsx
   # A Chart is the superclass for specific charts
   # @note Worksheet#add_chart is the recommended way to create charts for your worksheets.
+  # @see README for examples
   class Chart
 
-    # The title object for the chart.
-    # @return [Title]
-    attr_accessor :title
-
-    # The style for the chart. 
-    # see ECMA Part 1 §21.2.2.196
-    # @return [Integer]
-    attr_accessor :style
 
     # The 3D view properties for the chart
-    attr_accessor :view3D
+    attr_reader :view3D
 
     # A reference to the graphic frame that owns this chart
     # @return [GraphicFrame]
@@ -24,7 +17,7 @@ module Axlsx
     # @return [SimpleTypedList]
     attr_reader :series
 
-    # The type of series to use for this chart
+    # The type of series to use for this chart.
     # @return [Series]
     attr_reader :series_type
 
@@ -39,13 +32,14 @@ module Axlsx
     #TODO data labels!
     #attr_accessor :dLabls
 
-    # The starting marker for this chart
-    # @return [Marker]
-    attr_reader :start_at
+    # The title object for the chart.
+    # @return [Title]
+    attr_accessor :title
 
-    # The ending marker for this chart
-    # @return [Marker]
-    attr_reader :end_at
+    # The style for the chart. 
+    # see ECMA Part 1 §21.2.2.196
+    # @return [Integer]
+    attr_accessor :style
 
     # Show the legend in the chart
     # @return [Boolean]
@@ -65,6 +59,8 @@ module Axlsx
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
+      start_at *options[:start_at] if options[:start_at]
+      end_at *options[:end_at] if options[:start_at]
       yield self if block_given?
     end
 
@@ -76,8 +72,6 @@ module Axlsx
       "#{CHART_PN % (index+1)}"
     end
 
-    def view3D=(v) DataTypeValidator.validate "#{self.class}.view3D", View3D, v; @view3D = v; end
-
     def title=(v) 
       v = Title.new(v) if v.is_a?(String) || v.is_a?(Cell)
       DataTypeValidator.validate "#{self.class}.title", Title, v
@@ -87,6 +81,19 @@ module Axlsx
     def show_legend=(v) Axlsx::validate_boolean(v); @show_legend = v; end
 
     def style=(v) DataTypeValidator.validate "Chart.style", Integer, v, lambda { |v| v >= 1 && v <= 48 }; @style = v; end
+
+    # backwards compatibility to allow chart.to and chart.from access to anchor markers
+    # @note This will be disconinued in version 2.0.0. Please use the end_at method
+    def to
+      @graphic_frame.anchor.to
+    end
+
+    # backwards compatibility to allow chart.to and chart.from access to anchor markers
+    # @note This will be disconinued in version 2.0.0. please use the start_at method
+    #   
+    def from
+      @graphic_frame.anchor.from
+    end
 
     # Adds a new series to the chart's series collection.
     # @return [Series]
@@ -122,10 +129,30 @@ module Axlsx
       builder.to_xml
     end
 
+    # This is a short cut method to set the start anchor position
+    # If you need finer granularity in positioning use
+    # graphic_frame.anchor.from.colOff / rowOff
+    # @param [Integer] x The column
+    # @param [Integer] y The row
+    # @return [Marker]
+    def start_at(x, y)
+      @graphic_frame.anchor.from.col = x
+      @graphic_frame.anchor.from.row = y
+    end
+
+    # This is a short cut method to set the end anchor position
+    # If you need finer granularity in positioning use
+    # graphic_frame.anchor.to.colOff / rowOff
+    # @param [Integer] x The column
+    # @param [Integer] y The row
+    # @return [Marker]
+    def end_at(x, y)
+      @graphic_frame.anchor.to.col = x
+      @graphic_frame.anchor.to.row = y
+    end
+
     private
-    
-    def start_at=(v) DataTypeValidator.validate "#{self.class}.start_at", Marker, v; @start_at = v; end
-    def end_at=(v) DataTypeValidator.validate "#{self.class}.end_at", Marker, v; @end_at = v; end
+    def view3D=(v) DataTypeValidator.validate "#{self.class}.view3D", View3D, v; @view3D = v; end
 
   end
 end

@@ -1,6 +1,7 @@
 module Axlsx
   #A CatAxis object defines a chart category axis
   class CatAxis < Axis
+
     # From the docs: This element specifies that this axis is a date or text axis based on the data that is used for the axis labels, not a specific choice.
     # @return [Boolean]
     attr_accessor :auto
@@ -18,23 +19,20 @@ module Axlsx
     # regex for validating label offset
     LBL_OFFSET_REGEX = /0*(([0-9])|([1-9][0-9])|([1-9][0-9][0-9])|1000)%/
 
-    # Creates a new CatAxis object
-    # @param [Integer] axId the id of this axis
-    # @param [Integer] crossAx the id of the perpendicular axis
-    # @option options [Symbol] axPos
-    # @option options [Symbol] tickLblPos
-    # @option options [Symbol] crosses
+    # Creates a new CatAxis object    
+    # @param [Integer] axId the id of this axis. Inherited
+    # @param [Integer] crossAx the id of the perpendicular axis. Inherited
+    # @option options [Symbol] axPos. Inherited
+    # @option options [Symbol] tickLblPos. Inherited
+    # @option options [Symbol] crosses. Inherited
     # @option options [Boolean] auto
     # @option options [Symbol] lblAlgn
     # @option options [Integer] lblOffset    
     def initialize(axId, crossAx, options={})
-      super(axId, crossAx, options)
       self.auto = true
       self.lblAlgn = :ctr
       self.lblOffset = "100%"
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
+      super(axId, crossAx, options)
     end 
 
     def auto=(v) Axlsx::validate_boolean(v); @auto = v; end

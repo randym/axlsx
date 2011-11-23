@@ -329,12 +329,14 @@ Creates a new GraphicFrame object
 24
 25
 26
-27</pre>
+27
+28</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/graphic_frame.rb', line 24</span>
 
 <span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='anchor identifier id'>anchor</span><span class='comma token'>,</span> <span class='chart_type identifier id'>chart_type</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
+  <span class='DataTypeValidator constant id'>DataTypeValidator</span><span class='dot token'>.</span><span class='validate identifier id'>validate</span> <span class='string val'>&quot;Drawing.chart_type&quot;</span><span class='comma token'>,</span> <span class='Chart constant id'>Chart</span><span class='comma token'>,</span> <span class='chart_type identifier id'>chart_type</span> 
   <span class='@anchor ivar id'>@anchor</span> <span class='assign token'>=</span> <span class='anchor identifier id'>anchor</span>
   <span class='@chart ivar id'>@chart</span> <span class='assign token'>=</span> <span class='chart_type identifier id'>chart_type</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
 <span class='end end kw'>end</span>
@@ -586,7 +588,6 @@ The document builder instance this objects xml will be added to.
       <pre class="lines">
 
 
-36
 37
 38
 39
@@ -603,10 +604,11 @@ The document builder instance this objects xml will be added to.
 50
 51
 52
-53</pre>
+53
+54</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/graphic_frame.rb', line 36</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/graphic_frame.rb', line 37</span>
 
 <span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
   <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'xdr:graphicFrame'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>        
@@ -637,7 +639,7 @@ The document builder instance this objects xml will be added to.
 </div>
     
     <div id="footer">
-  Generated on Tue Nov 22 23:52:56 2011 by 
+  Generated on Wed Nov 23 12:23:47 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>

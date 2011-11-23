@@ -22,6 +22,7 @@ module Axlsx
     # @param [TwoCellAnchor] anchor
     # @param [Class] chart_type
     def initialize(anchor, chart_type, options)
+      DataTypeValidator.validate "Drawing.chart_type", Chart, chart_type 
       @anchor = anchor
       @chart = chart_type.new(self, options)
     end

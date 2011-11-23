@@ -95,7 +95,7 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>
-the access class defines common properties and values for chart axis
+the access class defines common properties and values for a chart axis.
 </p>
 
 
@@ -242,7 +242,7 @@ specifies how the perpendicular axis is crossed must be one of [:autoZero,
 
   
     <span class="summary_desc"><div class='inline'><p>
-The number format format code for this axis.
+The number format format code for this axis default :General.
 </p>
 </div></span>
   
@@ -487,6 +487,25 @@ a customizable set of options
     </ul>
   
 
+<h3>Raises:</h3>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ArgumentError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+If axId or crossAx are not unsigned integers
+</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -494,7 +513,6 @@ a customizable set of options
       <pre class="lines">
 
 
-44
 45
 46
 47
@@ -507,20 +525,21 @@ a customizable set of options
 54
 55
 56
-57</pre>
+57
+58</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/axis.rb', line 44</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/axis.rb', line 45</span>
 
 <span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='axId identifier id'>axId</span><span class='comma token'>,</span> <span class='crossAx identifier id'>crossAx</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
   <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='validate_unsigned_int identifier id'>validate_unsigned_int</span><span class='lparen token'>(</span><span class='axId identifier id'>axId</span><span class='rparen token'>)</span>
   <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='validate_unsigned_int identifier id'>validate_unsigned_int</span><span class='lparen token'>(</span><span class='crossAx identifier id'>crossAx</span><span class='rparen token'>)</span>
   <span class='@axId ivar id'>@axId</span> <span class='assign token'>=</span> <span class='axId identifier id'>axId</span>
   <span class='@crossAx ivar id'>@crossAx</span> <span class='assign token'>=</span> <span class='crossAx identifier id'>crossAx</span>
+  <span class='@scaling ivar id'>@scaling</span> <span class='assign token'>=</span> <span class='Scaling constant id'>Scaling</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:orientation=</span><span class='gt op'>&gt;</span><span class='symbol val'>:minMax</span><span class='rparen token'>)</span>
   <span class='self self kw'>self</span><span class='dot token'>.</span><span class='axPos identifier id'>axPos</span> <span class='assign token'>=</span> <span class='symbol val'>:l</span>
   <span class='self self kw'>self</span><span class='dot token'>.</span><span class='tickLblPos identifier id'>tickLblPos</span> <span class='assign token'>=</span> <span class='symbol val'>:nextTo</span>
-  <span class='@scaling ivar id'>@scaling</span> <span class='assign token'>=</span> <span class='Scaling constant id'>Scaling</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:orientation=</span><span class='gt op'>&gt;</span><span class='symbol val'>:minMax</span><span class='rparen token'>)</span>
-  <span class='@formatCode ivar id'>@formatCode</span> <span class='assign token'>=</span> <span class='string val'>&quot;&quot;</span>
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='format_code identifier id'>format_code</span> <span class='assign token'>=</span> <span class='string val'>&quot;General&quot;</span>
   <span class='self self kw'>self</span><span class='dot token'>.</span><span class='crosses identifier id'>crosses</span> <span class='assign token'>=</span> <span class='symbol val'>:autoZero</span>
   <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='o identifier id'>o</span><span class='bitor op'>|</span>
     <span class='self self kw'>self</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='dstring node'>&quot;#{o[0]}=&quot;</span><span class='comma token'>,</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span> <span class='dstring node'>&quot;#{o[0]}=&quot;</span>
@@ -550,7 +569,7 @@ a customizable set of options
 </p><div class="docstring">
   <div class="discussion">
     <p>
-the id of the axis
+the id of the axis.
 </p>
 
 
@@ -578,12 +597,12 @@ the id of the axis
       <pre class="lines">
 
 
+7
 8
-9
-10</pre>
+9</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/axis.rb', line 8</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/axis.rb', line 7</span>
 
 <span class='def def kw'>def</span> <span class='axId identifier id'>axId</span>
   <span class='@axId ivar id'>@axId</span>
@@ -692,12 +711,12 @@ The perpendicular axis
       <pre class="lines">
 
 
+11
 12
-13
-14</pre>
+13</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/axis.rb', line 12</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/axis.rb', line 11</span>
 
 <span class='def def kw'>def</span> <span class='crossAx identifier id'>crossAx</span>
   <span class='@crossAx ivar id'>@crossAx</span>
@@ -779,7 +798,7 @@ specifies how the perpendicular axis is crossed must be one of [:autoZero,
 </p><div class="docstring">
   <div class="discussion">
     <p>
-The number format format code for this axis
+The number format format code for this axis default :General
 </p>
 
 
@@ -857,6 +876,13 @@ The scaling of the axis
     </li>
   
 </ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="Scaling.html" title="Axlsx::Scaling (class)">Scaling</a></span></li>
+    
+  </ul>
 
 </div><table class="source_code">
   <tr>
@@ -1003,7 +1029,6 @@ The document builder instance this objects xml will be added to.
       <pre class="lines">
 
 
-67
 68
 69
 70
@@ -1012,10 +1037,11 @@ The document builder instance this objects xml will be added to.
 73
 74
 75
-76</pre>
+76
+77</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/axis.rb', line 67</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/axis.rb', line 68</span>
 
 <span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
   <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:axId'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@axId ivar id'>@axId</span><span class='rparen token'>)</span>
@@ -1038,7 +1064,7 @@ The document builder instance this objects xml will be added to.
 </div>
     
     <div id="footer">
-  Generated on Tue Nov 22 23:52:53 2011 by 
+  Generated on Wed Nov 23 12:24:03 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>

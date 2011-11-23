@@ -1287,8 +1287,20 @@ The workbook that owns this worksheet
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Adds a chart to this worksheets drawing.
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+each chart type also specifies additional options
+</p>
+</div>
+  </div>
+
+<p>
+Adds a chart to this worksheets drawing. This is the recommended way to
+create charts for your worksheet. This method wraps the complexity of
+dealing with ooxml drawing, anchors, markers graphic frames chart objects
+and all the other dirty details.
 </p>
 
 
@@ -1365,6 +1377,24 @@ a customizable set of options
           
         </li>
       
+        <li>
+          <span class="name">show_legend</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">style</span>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
     </ul>
   
 
@@ -1382,20 +1412,35 @@ a customizable set of options
   
 </ul>
 
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="Chart.html" title="Axlsx::Chart (class)">Chart</a></span></li>
+    
+      <li><span class='object_link'><a href="Pie3DChart.html" title="Axlsx::Pie3DChart (class)">Pie3DChart</a></span></li>
+    
+      <li><span class='object_link'><a href="Bar3DChart.html" title="Axlsx::Bar3DChart (class)">Bar3DChart</a></span></li>
+    
+      <li><span class='object_link'><a href="Line3DChart.html" title="Axlsx::Line3DChart (class)">Line3DChart</a></span></li>
+    
+      <li>for examples</li>
+    
+  </ul>
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-108
-109
-110
-111
-112</pre>
+116
+117
+118
+119
+120</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/worksheet.rb', line 108</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/worksheet.rb', line 116</span>
 
 <span class='def def kw'>def</span> <span class='add_chart identifier id'>add_chart</span><span class='lparen token'>(</span><span class='chart_type identifier id'>chart_type</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
   <span class='chart identifier id'>chart</span> <span class='assign token'>=</span> <span class='drawing identifier id'>drawing</span><span class='dot token'>.</span><span class='add_chart identifier id'>add_chart</span><span class='lparen token'>(</span><span class='chart_type identifier id'>chart_type</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
@@ -1615,19 +1660,19 @@ hash of auto_fit_data
       <pre class="lines">
 
 
-182
-183
-184
-185
-186
-187
-188
-189
 190
-191</pre>
+191
+192
+193
+194
+195
+196
+197
+198
+199</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/worksheet.rb', line 182</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/worksheet.rb', line 190</span>
 
 <span class='def def kw'>def</span> <span class='auto_width identifier id'>auto_width</span><span class='lparen token'>(</span><span class='col identifier id'>col</span><span class='rparen token'>)</span>
   <span class='mdw identifier id'>mdw</span> <span class='assign token'>=</span> <span class='float val'>6.0</span> <span class='comment val'># maximum digit with is always 6.0 in testable fonts so instead of beating RMagick every time, I am hardcoding it here.</span>
@@ -1683,14 +1728,6 @@ Serializes the worksheet document
       <pre class="lines">
 
 
-116
-117
-118
-119
-120
-121
-122
-123
 124
 125
 126
@@ -1703,10 +1740,18 @@ Serializes the worksheet document
 133
 134
 135
-136</pre>
+136
+137
+138
+139
+140
+141
+142
+143
+144</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/worksheet.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/worksheet.rb', line 124</span>
 
 <span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span>
   <span class='builder identifier id'>builder</span> <span class='assign token'>=</span> <span class='Nokogiri constant id'>Nokogiri</span><span class='colon2 op'>::</span><span class='XML constant id'>XML</span><span class='colon2 op'>::</span><span class='Builder constant id'>Builder</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:encoding</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='ENCODING constant id'>ENCODING</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='xml identifier id'>xml</span><span class='bitor op'>|</span>
@@ -1802,14 +1847,6 @@ of Cell objects
       <pre class="lines">
 
 
-154
-155
-156
-157
-158
-159
-160
-161
 162
 163
 164
@@ -1820,10 +1857,18 @@ of Cell objects
 169
 170
 171
-172</pre>
+172
+173
+174
+175
+176
+177
+178
+179
+180</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/worksheet.rb', line 154</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/worksheet.rb', line 162</span>
 
 <span class='def def kw'>def</span> <span class='update_auto_fit_data identifier id'>update_auto_fit_data</span><span class='lparen token'>(</span><span class='cells identifier id'>cells</span><span class='rparen token'>)</span>
   <span class='styles identifier id'>styles</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='styles identifier id'>styles</span>
@@ -1855,7 +1900,7 @@ of Cell objects
 </div>
     
     <div id="footer">
-  Generated on Tue Nov 22 23:52:47 2011 by 
+  Generated on Wed Nov 23 12:23:49 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>

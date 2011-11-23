@@ -47,7 +47,7 @@ Usage
      require 'rubygems'
      require 'axlsx'
 
-A Simple Workbooka
+A Simple Workbook
 
       p = Axlsx::Package.new
       p.workbook.add_worksheet do |sheet|
@@ -124,10 +124,13 @@ Generating A Line Chart
      p.workbook.add_worksheet do |sheet|
        sheet.add_row ["First", 1, 5, 7, 9]
        sheet.add_row ["Second", 5, 2, 14, 9]
-       sheet.add_chart(Axlsx::Line3DChart, :start_at => [0,2], :end_at => [10, 15], :title=>"example 6: Line Chart") do |chart|
+       sheet.add_chart(Axlsx::Line3DChart, :title=>"example 6: Line Chart") do |chart|
+         chart.start_at 0, 2
+         chart.end_at 10, 15
          chart.add_series :data=>sheet.rows.first.cells[(1..-1)], :title=> sheet.rows.first.cells.first
          chart.add_series :data=>sheet.rows.last.cells[(1..-1)], :title=> sheet.rows.last.cells.first
        end
+       
      end  
      p.serialize("example6.xlsx")
 
@@ -147,19 +150,19 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 Changelog
 ---------
 
-- **October.22.11**: 1.0.7 release
+- **October.23.11**: 1.0.7 release preparation
+  - Added support for 3D options when creating a new chart. This lets you set the persective, rotation and other 3D attributes when using worksheet.add_chart
   - Updated serialization write test to verify write permissions and warn if it cannot run the test due to permission restrcitions.
-  - updated rake to include build, genoc and deploy commands.
+  - updated rake to include build, genoc and deploy tasks.
   - rebuilt documentation.
   - moved version constant to its own file
-
+  - fixed bug in SerAxis that was requiring tickLblSkip and tickMarkSkip to be boolean. Should be unsigned int.
+  - Review and improve docs
+  - rebuild of anchor positioning to remove some spagetti code. Chart now supports a start_at and end_at method that accept an arrar for col/row positioning. See example6 for an example. You can still pass :start_at and :end_at options to worksheet.add_chart.
+  - Refactored cat and val axis data to keep series serialization a bit more DRY
+ 
 Please see the {file:CHANGELOG.md} document for past release information.
 
-On Deck
--------
-
-- Verification with ruby 1.9.3
-- Active Record support via package::serialize_ar so you can dump an AR result into a worksheet in one go.
 
 Copyright
 ---------

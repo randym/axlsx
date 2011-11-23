@@ -100,11 +100,19 @@ module Axlsx
       @rows.last
     end
 
-    # Adds a chart to this worksheets drawing.
+    # Adds a chart to this worksheets drawing. This is the recommended way to create charts for your worksheet. This method wraps the complexity of dealing with ooxml drawing, anchors, markers graphic frames chart objects and all the other dirty details. 
     # @param [Class] chart_type
     # @option options [Array] start_at
     # @option options [Array] end_at
     # @option options [Cell, String] title
+    # @option options [Boolean] show_legend
+    # @option options [Integer] style 
+    # @note each chart type also specifies additional options 
+    # @see Chart
+    # @see Pie3DChart
+    # @see Bar3DChart
+    # @see Line3DChart
+    # @see README for examples
     def add_chart(chart_type, options={})
       chart = drawing.add_chart(chart_type, options)
       yield chart if block_given?

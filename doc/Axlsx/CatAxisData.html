@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>
-  Class: Axlsx::ContentType
+  Class: Axlsx::CatAxisData
   
     &mdash; Documentation by YARD 0.7.3
   
@@ -36,7 +36,7 @@
     <a href="../_index.html">Index (C)</a> &raquo; 
     <span class='title'><span class='object_link'><a href="../Axlsx.html" title="Axlsx (module)">Axlsx</a></span></span>
      &raquo; 
-    <span class="title">ContentType</span>
+    <span class="title">CatAxisData</span>
   
   
   <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
@@ -56,7 +56,7 @@
     
     <iframe id="search_frame"></iframe>
     
-    <div id="content"><h1>Class: Axlsx::ContentType
+    <div id="content"><h1>Class: Axlsx::CatAxisData
   
   
   
@@ -73,7 +73,7 @@
           
             <li class="next"><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></li>
           
-            <li class="next">Axlsx::ContentType</li>
+            <li class="next">Axlsx::CatAxisData</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -89,7 +89,7 @@
   
   
     <dt class="r2 last">Defined in:</dt>
-    <dd class="r2 last">lib/axlsx/content_type/content_type.rb</dd>
+    <dd class="r2 last">lib/axlsx/drawing/cat_axis_data.rb</dd>
   
 </dl>
 <div class="clear"></div>
@@ -97,8 +97,7 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>
-ContentTypes used in the package. This is automatcially managed by the
-package package.
+The CatAxisData class serializes the category axis data for a chart
 </p>
 
 
@@ -107,7 +106,11 @@ package package.
 <div class="tags">
   
 
+</div><div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="ValAxisData.html" title="Axlsx::ValAxisData (class)">ValAxisData</a></span></p>
 </div>
+
 
   
   
@@ -135,7 +138,7 @@ package package.
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">- (ContentType) <strong>initialize</strong> </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (CatAxisData) <strong>initialize</strong>(data = []) </a>
     
 
     
@@ -151,7 +154,7 @@ package package.
 
   
     <span class="summary_desc"><div class='inline'><p>
-A new instance of ContentType.
+Create a new CatAxisData object.
 </p>
 </div></span>
   
@@ -161,7 +164,7 @@ A new instance of ContentType.
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#to_xml-instance_method" title="#to_xml (instance method)">- (String) <strong>to_xml</strong> </a>
+      <a href="#to_xml-instance_method" title="#to_xml (instance method)">- (String) <strong>to_xml</strong>(xml) </a>
     
 
     
@@ -175,7 +178,7 @@ A new instance of ContentType.
 
   
     <span class="summary_desc"><div class='inline'><p>
-Generates the xml document for [Content_Types].xml.
+Serializes the category axis data.
 </p>
 </div></span>
   
@@ -201,21 +204,45 @@ Generates the xml document for [Content_Types].xml.
     <div class="method_details first">
   <p class="signature first" id="initialize-instance_method">
   
-    - (<tt><span class='object_link'><a href="" title="Axlsx::ContentType (class)">ContentType</a></span></tt>) <strong>initialize</strong> 
+    - (<tt><span class='object_link'><a href="" title="Axlsx::CatAxisData (class)">CatAxisData</a></span></tt>) <strong>initialize</strong>(data = []) 
   
 
   
 </p><div class="docstring">
   <div class="discussion">
     <p>
-A new instance of ContentType
+Create a new CatAxisData object
 </p>
 
 
   </div>
 </div>
 <div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>data</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>, <tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>[]</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the data for this category axis. This can be a simple array or a simple
+typed list of cells.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -223,15 +250,17 @@ A new instance of ContentType
       <pre class="lines">
 
 
+7
 8
 9
 10</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/content_type/content_type.rb', line 8</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/cat_axis_data.rb', line 7</span>
 
-<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span>
-  <span class='super super kw'>super</span> <span class='lbrack token'>[</span><span class='Override constant id'>Override</span><span class='comma token'>,</span> <span class='Default constant id'>Default</span><span class='rbrack token'>]</span>
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='data identifier id'>data</span><span class='assign token'>=</span><span class='lbrack token'>[</span><span class='rbrack token'>]</span><span class='rparen token'>)</span>
+  <span class='super super kw'>super</span> <span class='Object constant id'>Object</span>
+  <span class='@list ivar id'>@list</span><span class='dot token'>.</span><span class='concat identifier id'>concat</span> <span class='data identifier id'>data</span> <span class='if if_mod kw'>if</span> <span class='data identifier id'>data</span><span class='dot token'>.</span><span class='is_a? fid id'>is_a?</span><span class='lparen token'>(</span><span class='Array constant id'>Array</span><span class='rparen token'>)</span>
 <span class='end end kw'>end</span>
 </pre>
     </td>
@@ -259,21 +288,42 @@ A new instance of ContentType
       <div class="method_details first">
   <p class="signature first" id="to_xml-instance_method">
   
-    - (<tt>String</tt>) <strong>to_xml</strong> 
+    - (<tt>String</tt>) <strong>to_xml</strong>(xml) 
   
 
   
 </p><div class="docstring">
   <div class="discussion">
     <p>
-Generates the xml document for [Content_Types].xml
+Serializes the category axis data
 </p>
 
 
   </div>
 </div>
 <div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>xml</span>
+      
+      
+        <span class='type'>(<tt>Nokogiri::XML::Builder</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The document builder instance this objects xml will be added to.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
 <h3>Returns:</h3>
 <ul class="return">
   
@@ -283,12 +333,6 @@ Generates the xml document for [Content_Types].xml
         <span class='type'>(<tt>String</tt>)</span>
       
       
-      
-        &mdash;
-        <div class='inline'><p>
-The document as a string.
-</p>
-</div>
       
     </li>
   
@@ -300,25 +344,41 @@ The document as a string.
       <pre class="lines">
 
 
-14
 15
 16
 17
 18
 19
 20
-21</pre>
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/content_type/content_type.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/cat_axis_data.rb', line 15</span>
 
-<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='rparen token'>)</span>
-  <span class='builder identifier id'>builder</span> <span class='assign token'>=</span> <span class='Nokogiri constant id'>Nokogiri</span><span class='colon2 op'>::</span><span class='XML constant id'>XML</span><span class='colon2 op'>::</span><span class='Builder constant id'>Builder</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:encoding</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='ENCODING constant id'>ENCODING</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='xml identifier id'>xml</span><span class='bitor op'>|</span>
-    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='Types constant id'>Types</span><span class='lparen token'>(</span><span class='symbol val'>:xmlns</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='XML_NS_T constant id'>XML_NS_T</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
-      <span class='each identifier id'>each</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='type identifier id'>type</span><span class='bitor op'>|</span> <span class='type identifier id'>type</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span> <span class='rbrace token'>}</span>
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:cat'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:strRef'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:f'</span><span class='comma token'>,</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='cell_range identifier id'>cell_range</span><span class='lparen token'>(</span><span class='@list ivar id'>@list</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
+      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:strCache'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+        <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:ptCount'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='size identifier id'>size</span><span class='rparen token'>)</span>
+        <span class='each_with_index identifier id'>each_with_index</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='item identifier id'>item</span><span class='comma token'>,</span> <span class='index identifier id'>index</span><span class='bitor op'>|</span>
+          <span class='v identifier id'>v</span> <span class='assign token'>=</span> <span class='item identifier id'>item</span><span class='dot token'>.</span><span class='is_a? fid id'>is_a?</span><span class='lparen token'>(</span><span class='Cell constant id'>Cell</span><span class='rparen token'>)</span> <span class='question op'>?</span> <span class='item identifier id'>item</span><span class='dot token'>.</span><span class='value identifier id'>value</span> <span class='colon op'>:</span> <span class='item identifier id'>item</span>
+          <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:pt'</span><span class='comma token'>,</span> <span class='symbol val'>:idx=</span><span class='gt op'>&gt;</span><span class='index identifier id'>index</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+            <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:v'</span><span class='comma token'>,</span> <span class='v identifier id'>v</span><span class='rparen token'>)</span>
+          <span class='rbrace token'>}</span>                          
+        <span class='end end kw'>end</span>
+      <span class='rbrace token'>}</span>
     <span class='rbrace token'>}</span>
-  <span class='end end kw'>end</span>
-  <span class='builder identifier id'>builder</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span>
+  <span class='rbrace token'>}</span>
 <span class='end end kw'>end</span>
 </pre>
     </td>
@@ -331,7 +391,7 @@ The document as a string.
 </div>
     
     <div id="footer">
-  Generated on Wed Nov 23 12:24:05 2011 by 
+  Generated on Wed Nov 23 12:23:51 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>

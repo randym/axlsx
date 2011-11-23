@@ -323,7 +323,7 @@ the category axis.
   
   
   <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="Chart.html" title="Axlsx::Chart (class)">Chart</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Chart.html#end_at-instance_method" title="Axlsx::Chart#end_at (method)">end_at</a></span>, <span class='object_link'><a href="Chart.html#graphic_frame-instance_method" title="Axlsx::Chart#graphic_frame (method)">graphic_frame</a></span>, <span class='object_link'><a href="Chart.html#index-instance_method" title="Axlsx::Chart#index (method)">index</a></span>, <span class='object_link'><a href="Chart.html#pn-instance_method" title="Axlsx::Chart#pn (method)">pn</a></span>, <span class='object_link'><a href="Chart.html#series-instance_method" title="Axlsx::Chart#series (method)">series</a></span>, <span class='object_link'><a href="Chart.html#series_type-instance_method" title="Axlsx::Chart#series_type (method)">series_type</a></span>, <span class='object_link'><a href="Chart.html#show_legend-instance_method" title="Axlsx::Chart#show_legend (method)">show_legend</a></span>, <span class='object_link'><a href="Chart.html#start_at-instance_method" title="Axlsx::Chart#start_at (method)">start_at</a></span>, <span class='object_link'><a href="Chart.html#style-instance_method" title="Axlsx::Chart#style (method)">style</a></span>, <span class='object_link'><a href="Chart.html#title-instance_method" title="Axlsx::Chart#title (method)">title</a></span>, <span class='object_link'><a href="Chart.html#view3D-instance_method" title="Axlsx::Chart#view3D (method)">view3D</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Chart.html#graphic_frame-instance_method" title="Axlsx::Chart#graphic_frame (method)">graphic_frame</a></span>, <span class='object_link'><a href="Chart.html#index-instance_method" title="Axlsx::Chart#index (method)">index</a></span>, <span class='object_link'><a href="Chart.html#pn-instance_method" title="Axlsx::Chart#pn (method)">pn</a></span>, <span class='object_link'><a href="Chart.html#series-instance_method" title="Axlsx::Chart#series (method)">series</a></span>, <span class='object_link'><a href="Chart.html#series_type-instance_method" title="Axlsx::Chart#series_type (method)">series_type</a></span>, <span class='object_link'><a href="Chart.html#show_legend-instance_method" title="Axlsx::Chart#show_legend (method)">show_legend</a></span>, <span class='object_link'><a href="Chart.html#style-instance_method" title="Axlsx::Chart#style (method)">style</a></span>, <span class='object_link'><a href="Chart.html#title-instance_method" title="Axlsx::Chart#title (method)">title</a></span>, <span class='object_link'><a href="Chart.html#view3D-instance_method" title="Axlsx::Chart#view3D (method)">view3D</a></span></p>
 
 
   
@@ -396,7 +396,7 @@ Serializes the bar chart.
   
   
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Chart.html" title="Axlsx::Chart (class)">Chart</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Chart.html#add_series-instance_method" title="Axlsx::Chart#add_series (method)">#add_series</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Chart.html#add_series-instance_method" title="Axlsx::Chart#add_series (method)">#add_series</a></span>, <span class='object_link'><a href="Chart.html#end_at-instance_method" title="Axlsx::Chart#end_at (method)">#end_at</a></span>, <span class='object_link'><a href="Chart.html#from-instance_method" title="Axlsx::Chart#from (method)">#from</a></span>, <span class='object_link'><a href="Chart.html#start_at-instance_method" title="Axlsx::Chart#start_at (method)">#start_at</a></span>, <span class='object_link'><a href="Chart.html#to-instance_method" title="Axlsx::Chart#to (method)">#to</a></span></p>
 <div id="constructor_details" class="method_details_list">
   <h2>Constructor Details</h2>
   
@@ -467,6 +467,24 @@ a customizable set of options
     <ul class="option">
       
         <li>
+          <span class="name">title</span>
+          <span class="type">(<tt><span class='object_link'><a href="Cell.html" title="Axlsx::Cell (class)">Cell</a></span></tt>, <tt>String</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">show_legend</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
           <span class="name">grouping</span>
           <span class="type">(<tt>Symbol</tt>)</span>
           <span class="default">
@@ -484,9 +502,72 @@ a customizable set of options
           
         </li>
       
+        <li>
+          <span class="name">rotX</span>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">hPercent</span>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">rotY</span>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">depthPercent</span>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">rAngAx</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">perspective</span>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
     </ul>
   
 
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="Chart.html" title="Axlsx::Chart (class)">Chart</a></span></li>
+    
+      <li><span class='object_link'><a href="View3D.html" title="Axlsx::View3D (class)">View3D</a></span></li>
+    
+  </ul>
 
 </div><table class="source_code">
   <tr>
@@ -494,21 +575,21 @@ a customizable set of options
       <pre class="lines">
 
 
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
 61
-62</pre>
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/line_3D_chart.rb', line 51</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/line_3D_chart.rb', line 61</span>
 
 <span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='frame identifier id'>frame</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
   <span class='@grouping ivar id'>@grouping</span> <span class='assign token'>=</span> <span class='symbol val'>:standard</span>
@@ -518,9 +599,9 @@ a customizable set of options
   <span class='@catAxis ivar id'>@catAxis</span> <span class='assign token'>=</span> <span class='CatAxis constant id'>CatAxis</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='@catAxId ivar id'>@catAxId</span><span class='comma token'>,</span> <span class='@valAxId ivar id'>@valAxId</span><span class='rparen token'>)</span>
   <span class='@valAxis ivar id'>@valAxis</span> <span class='assign token'>=</span> <span class='ValAxis constant id'>ValAxis</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='@valAxId ivar id'>@valAxId</span><span class='comma token'>,</span> <span class='@catAxId ivar id'>@catAxId</span><span class='rparen token'>)</span>
   <span class='@serAxis ivar id'>@serAxis</span> <span class='assign token'>=</span> <span class='SerAxis constant id'>SerAxis</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='@serAxId ivar id'>@serAxId</span><span class='comma token'>,</span> <span class='@valAxId ivar id'>@valAxId</span><span class='rparen token'>)</span>
-  <span class='@view3D ivar id'>@view3D</span> <span class='assign token'>=</span> <span class='View3D constant id'>View3D</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:perspective=</span><span class='gt op'>&gt;</span><span class='integer val'>30</span><span class='rparen token'>)</span>
   <span class='super super kw'>super</span><span class='lparen token'>(</span><span class='frame identifier id'>frame</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>      
   <span class='@series_type ivar id'>@series_type</span> <span class='assign token'>=</span> <span class='LineSeries constant id'>LineSeries</span>
+  <span class='@view3D ivar id'>@view3D</span> <span class='assign token'>=</span> <span class='View3D constant id'>View3D</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='lbrace token'>{</span><span class='symbol val'>:perspective=</span><span class='gt op'>&gt;</span><span class='integer val'>30</span><span class='rbrace token'>}</span><span class='dot token'>.</span><span class='merge identifier id'>merge</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
 <span class='end end kw'>end</span>
 </pre>
     </td>
@@ -865,25 +946,25 @@ Serializes the bar chart
       <pre class="lines">
 
 
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
 86
 87
 88
 89
 90
-91</pre>
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/line_3D_chart.rb', line 76</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/line_3D_chart.rb', line 86</span>
 
 <span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span>
   <span class='super super kw'>super</span><span class='lparen token'>(</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='xml identifier id'>xml</span><span class='bitor op'>|</span>
@@ -912,7 +993,7 @@ Serializes the bar chart
 </div>
     
     <div id="footer">
-  Generated on Tue Nov 22 23:52:45 2011 by 
+  Generated on Wed Nov 23 12:24:02 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>

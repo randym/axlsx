@@ -99,14 +99,16 @@
     <strong>Note:</strong> 
     <div class='inline'><p>
 The recommended way to manage drawings is to use the Worksheet.add_chart
-method, specifying the chart class, start and end marker locations.
+method.
 </p>
 </div>
   </div>
 
 <p>
 A Drawing is a canvas for charts. Each worksheet has a single drawing that
-can specify multiple anchors which reference charts.
+manages anchors. The anchors reference the charts via graphical frames.
+This is not a trivial relationship so please do follow the advice in the
+note. see README for an example of how to create a chart.
 </p>
 
 
@@ -119,8 +121,6 @@ can specify multiple anchors which reference charts.
   <ul class="see">
     
       <li><span class='object_link'><a href="Worksheet.html#add_chart-instance_method" title="Axlsx::Worksheet#add_chart (method)">Worksheet#add_chart</a></span></li>
-    
-      <li><span class='object_link'><a href="TwoCellAnchor.html" title="Axlsx::TwoCellAnchor (class)">TwoCellAnchor</a></span></li>
     
       <li><span class='object_link'><a href="Chart.html" title="Axlsx::Chart (class)">Chart</a></span></li>
     
@@ -151,7 +151,8 @@ can specify multiple anchors which reference charts.
 
   
     <span class="summary_desc"><div class='inline'><p>
-A collection of anchors for this drawing.
+A collection of anchors for this drawing only TwoCellAnchors are supported
+in this version.
 </p>
 </div></span>
   
@@ -487,15 +488,15 @@ The worksheet that owns this drawing
       <pre class="lines">
 
 
-67
-68
-69
-70
 71
-72</pre>
+72
+73
+74
+75
+76</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 67</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 71</span>
 
 <span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='worksheet identifier id'>worksheet</span><span class='rparen token'>)</span>
   <span class='DataTypeValidator constant id'>DataTypeValidator</span><span class='dot token'>.</span><span class='validate identifier id'>validate</span> <span class='string val'>&quot;Drawing.worksheet&quot;</span><span class='comma token'>,</span> <span class='Worksheet constant id'>Worksheet</span><span class='comma token'>,</span> <span class='worksheet identifier id'>worksheet</span>
@@ -527,7 +528,8 @@ The worksheet that owns this drawing
 </p><div class="docstring">
   <div class="discussion">
     <p>
-A collection of anchors for this drawing
+A collection of anchors for this drawing only TwoCellAnchors are supported
+in this version
 </p>
 
 
@@ -555,12 +557,12 @@ A collection of anchors for this drawing
       <pre class="lines">
 
 
-39
-40
-41</pre>
+43
+44
+45</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 39</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 43</span>
 
 <span class='def def kw'>def</span> <span class='anchors identifier id'>anchors</span>
   <span class='@anchors ivar id'>@anchors</span>
@@ -612,12 +614,12 @@ An array of charts that are associated with this drawing&#8217;s anchors
       <pre class="lines">
 
 
-43
-44
-45</pre>
+47
+48
+49</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 43</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 47</span>
 
 <span class='def def kw'>def</span> <span class='charts identifier id'>charts</span>
   <span class='@anchors ivar id'>@anchors</span><span class='dot token'>.</span><span class='map identifier id'>map</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='a identifier id'>a</span><span class='bitor op'>|</span> <span class='a identifier id'>a</span><span class='dot token'>.</span><span class='graphic_frame identifier id'>graphic_frame</span><span class='dot token'>.</span><span class='chart identifier id'>chart</span> <span class='rbrace token'>}</span>
@@ -670,12 +672,12 @@ collection.
       <pre class="lines">
 
 
-47
-48
-49</pre>
+51
+52
+53</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 47</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 51</span>
 
 <span class='def def kw'>def</span> <span class='index identifier id'>index</span>
   <span class='@worksheet ivar id'>@worksheet</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='drawings identifier id'>drawings</span><span class='dot token'>.</span><span class='index identifier id'>index</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='rparen token'>)</span>
@@ -727,12 +729,12 @@ The part name for this drawing
       <pre class="lines">
 
 
-55
-56
-57</pre>
+59
+60
+61</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 55</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 59</span>
 
 <span class='def def kw'>def</span> <span class='pn identifier id'>pn</span>
   <span class='dstring node'>&quot;#{DRAWING_PN % (index+1)}&quot;</span>
@@ -784,17 +786,17 @@ The drawing&#8217;s relationships.
       <pre class="lines">
 
 
-63
-64
-65
-66
 67
 68
 69
-70</pre>
+70
+71
+72
+73
+74</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 67</span>
 
 <span class='def def kw'>def</span> <span class='relationships identifier id'>relationships</span>
   <span class='r identifier id'>r</span> <span class='assign token'>=</span> <span class='Relationships constant id'>Relationships</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
@@ -851,12 +853,12 @@ The relational part name for this drawing
       <pre class="lines">
 
 
-59
-60
-61</pre>
+63
+64
+65</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 59</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 63</span>
 
 <span class='def def kw'>def</span> <span class='rels_pn identifier id'>rels_pn</span>
   <span class='dstring node'>&quot;#{DRAWING_RELS_PN % (index+1)}&quot;</span>
@@ -908,12 +910,12 @@ The relation reference id for this drawing
       <pre class="lines">
 
 
-51
-52
-53</pre>
+55
+56
+57</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 51</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 55</span>
 
 <span class='def def kw'>def</span> <span class='rId identifier id'>rId</span>
   <span class='dstring node'>&quot;rId#{index+1}&quot;</span>
@@ -965,12 +967,12 @@ The worksheet that owns the drawing
       <pre class="lines">
 
 
-34
-35
-36</pre>
+38
+39
+40</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 34</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 38</span>
 
 <span class='def def kw'>def</span> <span class='worksheet identifier id'>worksheet</span>
   <span class='@worksheet ivar id'>@worksheet</span>
@@ -1001,7 +1003,8 @@ The worksheet that owns the drawing
   <div class="note notetag">
     <strong>Note:</strong> 
     <div class='inline'><p>
-The recommended way to manage charts is to use Worksheet.add_chart.
+The recommended way to manage charts is to use Worksheet.add_chart. Please
+refer to that method for documentation.
 </p>
 </div>
   </div>
@@ -1014,41 +1017,14 @@ Adds a chart to the drawing.
   </div>
 </div>
 <div class="tags">
-  <h3>Parameters:</h3>
-<ul class="param">
   
-    <li>
-      
-        <span class='name'>chart_type</span>
-      
-      
-        <span class='type'>(<tt><span class='object_link'><a href="Chart.html" title="Axlsx::Chart (class)">Chart</a></span></tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'><p>
-The class of the chart to be added to the drawing
-</p>
-</div>
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>options</span>
-      
-      
-        <span class='type'>(<tt>Hash</tt>)</span>
-      
-      
-        <em class="default">(defaults to: <tt>{}</tt>)</em>
-      
-      
-    </li>
-  
-</ul>
 
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="Worksheet.html#add_chart-instance_method" title="Axlsx::Worksheet#add_chart (method)">Worksheet#add_chart</a></span></li>
+    
+  </ul>
 
 </div><table class="source_code">
   <tr>
@@ -1056,17 +1032,15 @@ The class of the chart to be added to the drawing
       <pre class="lines">
 
 
-79
-80
-81
 82
-83</pre>
+83
+84
+85</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 79</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 82</span>
 
 <span class='def def kw'>def</span> <span class='add_chart identifier id'>add_chart</span><span class='lparen token'>(</span><span class='chart_type identifier id'>chart_type</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
-  <span class='DataTypeValidator constant id'>DataTypeValidator</span><span class='dot token'>.</span><span class='validate identifier id'>validate</span> <span class='string val'>&quot;Drawing.chart_type&quot;</span><span class='comma token'>,</span> <span class='Chart constant id'>Chart</span><span class='comma token'>,</span> <span class='chart_type identifier id'>chart_type</span> 
   <span class='TwoCellAnchor constant id'>TwoCellAnchor</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='comma token'>,</span> <span class='chart_type identifier id'>chart_type</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
   <span class='@anchors ivar id'>@anchors</span><span class='dot token'>.</span><span class='last identifier id'>last</span><span class='dot token'>.</span><span class='graphic_frame identifier id'>graphic_frame</span><span class='dot token'>.</span><span class='chart identifier id'>chart</span>
 <span class='end end kw'>end</span>
@@ -1114,17 +1088,17 @@ Serializes the drawing
       <pre class="lines">
 
 
-116
-117
 118
 119
 120
 121
 122
-123</pre>
+123
+124
+125</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 118</span>
 
 <span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span>
   <span class='builder identifier id'>builder</span> <span class='assign token'>=</span> <span class='Nokogiri constant id'>Nokogiri</span><span class='colon2 op'>::</span><span class='XML constant id'>XML</span><span class='colon2 op'>::</span><span class='Builder constant id'>Builder</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:encoding</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='ENCODING constant id'>ENCODING</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='xml identifier id'>xml</span><span class='bitor op'>|</span>
@@ -1145,7 +1119,7 @@ Serializes the drawing
 </div>
     
     <div id="footer">
-  Generated on Tue Nov 22 23:52:33 2011 by 
+  Generated on Wed Nov 23 12:23:49 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>

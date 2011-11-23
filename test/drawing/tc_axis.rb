@@ -14,6 +14,7 @@ class TestAxis < Test::Unit::TestCase
     assert_equal(@axis.tickLblPos, :nextTo, "tick label position default incorrect")
     assert_equal(@axis.crosses, :autoZero, "tick label position default incorrect")
     assert(@axis.scaling.is_a?(Axlsx::Scaling) && @axis.scaling.orientation == :minMax, "scaling default incorrect")
+    assert_raise(ArgumentError) { Axlsx::Axis.new -1234, 'abcd' }
   end
 
   def test_axis_position

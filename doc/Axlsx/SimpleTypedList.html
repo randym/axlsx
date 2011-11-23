@@ -107,7 +107,7 @@ methods from Array and supports basic xml serialization.
 
 </div><div id="subclasses">
   <h2>Direct Known Subclasses</h2>
-  <p class="children"><span class='object_link'><a href="ContentType.html" title="Axlsx::ContentType (class)">ContentType</a></span>, <span class='object_link'><a href="Relationships.html" title="Axlsx::Relationships (class)">Relationships</a></span>, <span class='object_link'><a href="TableStyle.html" title="Axlsx::TableStyle (class)">TableStyle</a></span>, <span class='object_link'><a href="TableStyles.html" title="Axlsx::TableStyles (class)">TableStyles</a></span></p>
+  <p class="children"><span class='object_link'><a href="CatAxisData.html" title="Axlsx::CatAxisData (class)">CatAxisData</a></span>, <span class='object_link'><a href="ContentType.html" title="Axlsx::ContentType (class)">ContentType</a></span>, <span class='object_link'><a href="Relationships.html" title="Axlsx::Relationships (class)">Relationships</a></span>, <span class='object_link'><a href="TableStyle.html" title="Axlsx::TableStyle (class)">TableStyle</a></span>, <span class='object_link'><a href="TableStyles.html" title="Axlsx::TableStyles (class)">TableStyles</a></span></p>
 </div>
 
 
@@ -228,6 +228,31 @@ the first letter in lowercase.
   
     <span class="summary_desc"><div class='inline'><p>
 Concat operator.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#%3D%3D-instance_method" title="#== (instance method)">- (Object) <strong>==</strong>(v) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+override the equality method so that this object can be compared to a
+simple array.
 </p>
 </div></span>
   
@@ -643,7 +668,6 @@ the following methods are not allowed
  <span class='symbol val'>:drop_while</span>
  <span class='symbol val'>:delete_if</span>
  <span class='symbol val'>:clear</span>
- <span class='symbol val'>:concat</span>
 </pre>
 </div>
   </div>
@@ -677,23 +701,25 @@ method_mission override to pass allowed methods to the list.
       <pre class="lines">
 
 
-127
-128
-129
-130
 131
 132
 133
-134</pre>
+134
+135
+136
+137
+138
+139</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/util/simple_typed_list.rb', line 127</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/util/simple_typed_list.rb', line 131</span>
 
 <span class='def def kw'>def</span> <span class='method_missing identifier id'>method_missing</span><span class='lparen token'>(</span><span class='meth identifier id'>meth</span><span class='comma token'>,</span> <span class='mult op'>*</span><span class='args identifier id'>args</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span><span class='rparen token'>)</span>
-  <span class='raise identifier id'>raise</span> <span class='ArgumentError constant id'>ArgumentError</span><span class='comma token'>,</span> <span class='dstring node'>&quot;#{meth} not supported&quot;</span> <span class='if if_mod kw'>if</span> <span class='lbrack token'>[</span><span class='symbol val'>:replace</span><span class='comma token'>,</span> <span class='symbol val'>:insert</span><span class='comma token'>,</span> <span class='symbol val'>:collect!</span><span class='comma token'>,</span> <span class='symbol val'>:map!</span><span class='comma token'>,</span> <span class='symbol val'>:pop</span><span class='comma token'>,</span> <span class='symbol val'>:delete_if</span><span class='comma token'>,</span> <span class='symbol val'>:reverse!</span><span class='comma token'>,</span> <span class='symbol val'>:shift</span><span class='comma token'>,</span> <span class='symbol val'>:shuffle!</span><span class='comma token'>,</span> <span class='symbol val'>:slice!</span><span class='comma token'>,</span> <span class='symbol val'>:sort!</span><span class='comma token'>,</span> <span class='symbol val'>:uniq!</span><span class='comma token'>,</span> <span class='symbol val'>:unshift</span><span class='comma token'>,</span> <span class='symbol val'>:zip</span><span class='comma token'>,</span> <span class='symbol val'>:flatten!</span><span class='comma token'>,</span> <span class='symbol val'>:fill</span><span class='comma token'>,</span> <span class='symbol val'>:drop</span><span class='comma token'>,</span> <span class='symbol val'>:drop_while</span><span class='comma token'>,</span> <span class='symbol val'>:delete_if</span><span class='comma token'>,</span> <span class='symbol val'>:clear</span><span class='comma token'>,</span> <span class='symbol val'>:concat</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='include? fid id'>include?</span> <span class='meth identifier id'>meth</span><span class='dot token'>.</span><span class='to_sym identifier id'>to_sym</span>        
+  <span class='raise identifier id'>raise</span> <span class='ArgumentError constant id'>ArgumentError</span><span class='comma token'>,</span> <span class='dstring node'>&quot;#{meth} not supported&quot;</span> <span class='if if_mod kw'>if</span> <span class='lbrack token'>[</span><span class='symbol val'>:replace</span><span class='comma token'>,</span> <span class='symbol val'>:insert</span><span class='comma token'>,</span> <span class='symbol val'>:collect!</span><span class='comma token'>,</span> <span class='symbol val'>:map!</span><span class='comma token'>,</span> <span class='symbol val'>:pop</span><span class='comma token'>,</span> <span class='symbol val'>:delete_if</span><span class='comma token'>,</span> <span class='symbol val'>:reverse!</span><span class='comma token'>,</span> <span class='symbol val'>:shift</span><span class='comma token'>,</span> <span class='symbol val'>:shuffle!</span><span class='comma token'>,</span> <span class='symbol val'>:slice!</span><span class='comma token'>,</span> <span class='symbol val'>:sort!</span><span class='comma token'>,</span> <span class='symbol val'>:uniq!</span><span class='comma token'>,</span> <span class='symbol val'>:unshift</span><span class='comma token'>,</span> <span class='symbol val'>:zip</span><span class='comma token'>,</span> <span class='symbol val'>:flatten!</span><span class='comma token'>,</span> <span class='symbol val'>:fill</span><span class='comma token'>,</span> <span class='symbol val'>:drop</span><span class='comma token'>,</span> <span class='symbol val'>:drop_while</span><span class='comma token'>,</span> <span class='symbol val'>:delete_if</span><span class='comma token'>,</span> <span class='symbol val'>:clear</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='include? fid id'>include?</span> <span class='meth identifier id'>meth</span><span class='dot token'>.</span><span class='to_sym identifier id'>to_sym</span>        
   <span class='if if kw'>if</span> <span class='@list ivar id'>@list</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span> <span class='meth identifier id'>meth</span>
     <span class='@list ivar id'>@list</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='meth identifier id'>meth</span><span class='comma token'>,</span> <span class='mult op'>*</span><span class='args identifier id'>args</span><span class='comma token'>,</span> <span class='bitand op'>&amp;</span><span class='block identifier id'>block</span><span class='rparen token'>)</span>      
   <span class='else else kw'>else</span>
+    <span class='puts identifier id'>puts</span> <span class='dstring node'>&quot;method:#{meth.inspect}&quot;</span>
     <span class='super super kw'>super</span>
   <span class='end end kw'>end</span>
 <span class='end end kw'>end</span>
@@ -985,6 +1011,49 @@ if the value being added is not one fo the allowed types
   <span class='DataTypeValidator constant id'>DataTypeValidator</span><span class='dot token'>.</span><span class='validate identifier id'>validate</span> <span class='string val'>&quot;SimpleTypedList.&lt;&lt;&quot;</span><span class='comma token'>,</span> <span class='@allowed_types ivar id'>@allowed_types</span><span class='comma token'>,</span> <span class='v identifier id'>v</span>
   <span class='@list ivar id'>@list</span> <span class='lshft op'>&lt;&lt;</span> <span class='v identifier id'>v</span>
   <span class='@list ivar id'>@list</span><span class='dot token'>.</span><span class='size identifier id'>size</span> <span class='minus op'>-</span> <span class='integer val'>1</span>      
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="==-instance_method">
+  
+    - (<tt>Object</tt>) <strong>==</strong>(v) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+override the equality method so that this object can be compared to a
+simple array. if this object&#8217;s list is equal to the specifiec array,
+we return true.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+105
+106
+107</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/util/simple_typed_list.rb', line 105</span>
+
+<span class='def def kw'>def</span> <span class='eq op'>==</span><span class='lparen token'>(</span><span class='v identifier id'>v</span><span class='rparen token'>)</span>
+  <span class='v identifier id'>v</span> <span class='eq op'>==</span> <span class='@list ivar id'>@list</span>
 <span class='end end kw'>end</span>
 </pre>
     </td>
@@ -1523,16 +1592,16 @@ The document builder instance this objects xml will be added to.
       <pre class="lines">
 
 
-141
-142
-143
-144
-145
 146
-147</pre>
+147
+148
+149
+150
+151
+152</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/util/simple_typed_list.rb', line 141</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/util/simple_typed_list.rb', line 146</span>
 
 <span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
   <span class='classname identifier id'>classname</span> <span class='assign token'>=</span> <span class='@allowed_types ivar id'>@allowed_types</span><span class='lbrack token'>[</span><span class='integer val'>0</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='name identifier id'>name</span><span class='dot token'>.</span><span class='split identifier id'>split</span><span class='lparen token'>(</span><span class='string val'>'::'</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='last identifier id'>last</span>
@@ -1608,7 +1677,7 @@ Unlock the list
 </div>
     
     <div id="footer">
-  Generated on Tue Nov 22 23:52:48 2011 by 
+  Generated on Wed Nov 23 12:23:53 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>

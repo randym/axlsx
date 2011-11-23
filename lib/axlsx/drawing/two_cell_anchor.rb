@@ -23,51 +23,24 @@ module Axlsx
     # @return [Integer]
     attr_reader :index
 
-    # Creates a new TwoCellAnchor object
+    # Creates a new TwoCellAnchor object and sets up a reference to the from and to markers in the 
+    # graphic_frame's chart. That means that you can do stuff like
+    # c = worksheet.add_chart Axlsx::Chart
+    # c.start_at 5, 9
     # @param [Drawing] drawing
-    # @param [Chart] chart
-    # @option options [Array] start_at
-    # @option options [Array] end_at
+    # @param [Class] chart_type This is passed to the graphic frame for instantiation. must be Chart or a subclass of Chart
+    # @option options [Array] start_at the col, row to start at
+    # @option options [Array] end_at the col, row to end at
     def initialize(drawing, chart_type, options)
       @drawing = drawing
       drawing.anchors << self      
-
       @from, @to =  Marker.new, Marker.new(:col => 5, :row=>10)
       @graphic_frame = GraphicFrame.new(self, chart_type, options)
-
-      self.start_at(options[:start_at][0], options[:start_at][1]) if options[:start_at].is_a?(Array)
-      self.end_at(options[:end_at][0], options[:end_at][1]) if options[:end_at].is_a?(Array)
-      # passing a reference to our start and end markers for convenience
-      # this lets us access the markers directly from the chart.
-      @graphic_frame.chart.send(:start_at=, @from)
-      @graphic_frame.chart.send(:end_at=, @to)
     end
 
     def index
       @drawing.anchors.index(self)
     end
-    
-   
-    # This is a short cut method to set the start anchor position
-    # @param [Integer] x The column
-    # @param [Integer] y The row
-    # @return [Marker]
-    def start_at(x, y)
-      @from.col = x
-      @from.row = y
-      @from
-    end
-
-    # This is a short cut method to set the end anchor position
-    # @param [Integer] x The column
-    # @param [Integer] y The row
-    # @return [Marker]
-    def end_at(x, y)
-      @to.col = x
-      @to.row = y
-      @to
-    end
-
     # Serializes the two cell anchor
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String]
@@ -84,5 +57,8 @@ module Axlsx
         xml.send('xdr:clientData')
       }
     end    
+
+    private
+
   end
 end

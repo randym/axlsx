@@ -494,14 +494,14 @@ a customizable set of options
       <pre class="lines">
 
 
-39
-40
-41
-42
-43</pre>
+46
+47
+48
+49
+50</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 39</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 46</span>
 
 <span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
   <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='o identifier id'>o</span><span class='bitor op'>|</span>
@@ -560,12 +560,12 @@ depth or chart as % of chart width must be between 20% and 2000%
       <pre class="lines">
 
 
-22
-23
-24</pre>
+29
+30
+31</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 29</span>
 
 <span class='def def kw'>def</span> <span class='depthPercent identifier id'>depthPercent</span>
   <span class='@depthPercent ivar id'>@depthPercent</span>
@@ -617,12 +617,12 @@ height of chart as % of chart must be between 5% and 500%
       <pre class="lines">
 
 
-12
-13
-14</pre>
+19
+20
+21</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 12</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 19</span>
 
 <span class='def def kw'>def</span> <span class='hPercent identifier id'>hPercent</span>
   <span class='@hPercent ivar id'>@hPercent</span>
@@ -674,12 +674,12 @@ field of view angle
       <pre class="lines">
 
 
-30
-31
-32</pre>
+37
+38
+39</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 30</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 37</span>
 
 <span class='def def kw'>def</span> <span class='perspective identifier id'>perspective</span>
   <span class='@perspective ivar id'>@perspective</span>
@@ -731,12 +731,12 @@ Chart axis are at right angles
       <pre class="lines">
 
 
-26
-27
-28</pre>
+33
+34
+35</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 33</span>
 
 <span class='def def kw'>def</span> <span class='rAngAx identifier id'>rAngAx</span>
   <span class='@rAngAx ivar id'>@rAngAx</span>
@@ -788,12 +788,12 @@ x rotation for the chart must be between -90 and 90
       <pre class="lines">
 
 
-7
-8
-9</pre>
+14
+15
+16</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 7</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 14</span>
 
 <span class='def def kw'>def</span> <span class='rotX identifier id'>rotX</span>
   <span class='@rotX ivar id'>@rotX</span>
@@ -845,12 +845,12 @@ y rotation for the chart must be between 0 and 360
       <pre class="lines">
 
 
-17
-18
-19</pre>
+24
+25
+26</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 17</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 24</span>
 
 <span class='def def kw'>def</span> <span class='rotY identifier id'>rotY</span>
   <span class='@rotY ivar id'>@rotY</span>
@@ -927,19 +927,19 @@ The document builder instance this objects xml will be added to.
       <pre class="lines">
 
 
-61
-62
-63
-64
-65
-66
 67
 68
 69
-70</pre>
+70
+71
+72
+73
+74
+75
+76</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 61</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 67</span>
 
 <span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
   <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:view3D'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
@@ -962,7 +962,7 @@ The document builder instance this objects xml will be added to.
 </div>
     
     <div id="footer">
-  Generated on Tue Nov 22 23:52:36 2011 by 
+  Generated on Wed Nov 23 12:23:52 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>

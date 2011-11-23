@@ -46,8 +46,18 @@ module Axlsx
     
     # Creates a new line chart object
     # @param [GraphicFrame] frame The workbook that owns this chart.
+    # @option options [Cell, String] title
+    # @option options [Boolean] show_legend    
     # @option options [Symbol] grouping
     # @option options [String] gapDepth
+    # @option options [Integer] rotX
+    # @option options [String] hPercent
+    # @option options [Integer] rotY
+    # @option options [String] depthPercent
+    # @option options [Boolean] rAngAx
+    # @option options [Integer] perspective
+    # @see Chart
+    # @see View3D
     def initialize(frame, options={})
       @grouping = :standard
       @catAxId = rand(8 ** 8)
@@ -56,9 +66,9 @@ module Axlsx
       @catAxis = CatAxis.new(@catAxId, @valAxId)
       @valAxis = ValAxis.new(@valAxId, @catAxId)
       @serAxis = SerAxis.new(@serAxId, @valAxId)
-      @view3D = View3D.new(:perspective=>30)
       super(frame, options)      
       @series_type = LineSeries
+      @view3D = View3D.new({:perspective=>30}.merge(options))
     end
 
     def grouping=(v)

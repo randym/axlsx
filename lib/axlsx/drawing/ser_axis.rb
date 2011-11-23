@@ -1,30 +1,29 @@
 module Axlsx
-  #A SarAxis object defines a series axis
+  #A SerAxis object defines a series axis
   class SerAxis < Axis
 
-    # @return [Boolean]
+    # The number of tick lables to skip between labels
+    # @return [Integer]
     attr_accessor :tickLblSkip
 
+    # The number of tickmarks to be skipped before the next one is rendered.
     # @return [Boolean]
     attr_accessor :tickMarkSkip
 
     # Creates a new SerAxis object
-    # @param [Integer] axId the id of this axis
-    # @param [Integer] crossAx the id of the perpendicular axis
-    # @option options [Symbol] axPos
-    # @option options [Symbol] tickLblPos
-    # @option options [Symbol] crosses
-    # @option options [Boolean] tickLblSkip
-    # @option options [Symbol] tickMarkSkip
+    # @param [Integer] axId the id of this axis. Inherited
+    # @param [Integer] crossAx the id of the perpendicular axis. Inherited
+    # @option options [Symbol] axPos. Inherited
+    # @option options [Symbol] tickLblPos. Inherited
+    # @option options [Symbol] crosses. Inherited
+    # @option options [Integer] tickLblSkip
+    # @option options [Integer] tickMarkSkip
     def initialize(axId, crossAx, options={})
       super(axId, crossAx, options)
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
     end 
 
-    def tickLblSkip=(v) Axlsx::validate_boolean(v); @tickLblSkip = v; end
-    def tickMarkSkip=(v) Axlsx::validate_boolean(v); @tickMarkSkip = v; end
+    def tickLblSkip=(v) Axlsx::validate_unsigned_int(v); @tickLblSkip = v; end
+    def tickMarkSkip=(v) Axlsx::validate_unsigned_int(v); @tickMarkSkip = v; end
 
     # Serializes the series axis
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.

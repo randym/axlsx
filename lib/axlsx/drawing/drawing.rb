@@ -6,35 +6,39 @@ module Axlsx
   require 'axlsx/drawing/bar_series.rb'  
   require 'axlsx/drawing/line_series.rb'  
 
+  require 'axlsx/drawing/scaling.rb'
   require 'axlsx/drawing/axis.rb'
   require 'axlsx/drawing/ser_axis.rb'
   require 'axlsx/drawing/cat_axis.rb'
   require 'axlsx/drawing/val_axis.rb'
-  require 'axlsx/drawing/view_3D.rb'
-  require 'axlsx/drawing/scaling.rb'
 
-  require 'axlsx/drawing/graphic_frame.rb'
+  require 'axlsx/drawing/cat_axis_data.rb'
+  require 'axlsx/drawing/val_axis_data.rb'
+
   require 'axlsx/drawing/marker.rb'
   require 'axlsx/drawing/two_cell_anchor.rb'
+  require 'axlsx/drawing/graphic_frame.rb'
 
+  require 'axlsx/drawing/view_3D.rb'
   require 'axlsx/drawing/chart.rb'
   require 'axlsx/drawing/pie_3D_chart.rb'
   require 'axlsx/drawing/bar_3D_chart.rb'
   require 'axlsx/drawing/line_3D_chart.rb'
 
-  # A Drawing is a canvas for charts. Each worksheet has a single drawing that can specify multiple anchors which reference charts.
-  # @note The recommended way to manage drawings is to use the Worksheet.add_chart method, specifying the chart class, start and end marker locations. 
+  # A Drawing is a canvas for charts. Each worksheet has a single drawing that manages anchors.
+  # The anchors reference the charts via graphical frames. This is not a trivial relationship so please do follow the advice in the note.
+  # @note The recommended way to manage drawings is to use the Worksheet.add_chart method.
   # @see Worksheet#add_chart
-  # @see TwoCellAnchor
   # @see Chart
+  # see README for an example of how to create a chart.
   class Drawing
 
     # The worksheet that owns the drawing
     # @return [Worksheet]
     attr_reader :worksheet
-
    
     # A collection of anchors for this drawing
+    # only TwoCellAnchors are supported in this version
     # @return [SimpleTypedList]
     attr_reader :anchors
 
@@ -72,12 +76,10 @@ module Axlsx
     end
     
 
-    # Adds a chart to the drawing. 
-    # @note The recommended way to manage charts is to use Worksheet.add_chart.
-    # @param [Chart] chart_type The class of the chart to be added to the drawing
-    # @param [Hash] options
+    # Adds a chart to the drawing.
+    # @note The recommended way to manage charts is to use Worksheet.add_chart. Please refer to that method for documentation.
+    # @see Worksheet#add_chart
     def add_chart(chart_type, options={})
-      DataTypeValidator.validate "Drawing.chart_type", Chart, chart_type 
       TwoCellAnchor.new(self, chart_type, options)
       @anchors.last.graphic_frame.chart
     end

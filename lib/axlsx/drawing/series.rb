@@ -1,5 +1,5 @@
 module Axlsx
-  # A Series defines the title, data and labels for chart data.
+  # A Series defines the common series attributes and is the super class for all concrete series types.
   # @note The recommended way to manage series is to use Chart#add_series
   # @see Worksheet#add_chart
   # @see Chart#add_series
@@ -13,7 +13,7 @@ module Axlsx
     # @return [Integer]
     attr_reader :index
 
-    # The order of this series in the chart's series.
+    # The order of this series in the chart's series. By default the order is the index of the series.
     # @return [Integer]
     attr_accessor :order
 
@@ -33,7 +33,6 @@ module Axlsx
       end
     end    
     
-    # retrieves the series index in the chart's series collection
     def index
       @chart.series.index(self)
     end

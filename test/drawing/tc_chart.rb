@@ -34,6 +34,18 @@ class TestChart < Test::Unit::TestCase
     assert_equal(@chart.style, 2)
   end
 
+  def test_start_at
+    @chart.start_at 15,25
+    assert_equal(@chart.graphic_frame.anchor.from.col, 15)
+    assert_equal(@chart.graphic_frame.anchor.from.row, 25)
+
+  end
+
+  def end_at
+    @chart.end_at 25, 90
+    assert_equal(@chart.graphic_frame.anchor.from.col, 25)
+    assert_equal(@chart.graphic_frame.anchor.to.row, 90)
+  end
 
   def test_add_series    
     s = @chart.add_series :data=>[0,1,2,3], :labels => ["one", 1, "anything"], :title=>"bob"

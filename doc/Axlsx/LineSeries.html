@@ -136,7 +136,7 @@ A LineSeries defines the title, data and labels for line charts
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#data-instance_method" title="#data (instance method)">- (Array, SimpleTypedList) <strong>data</strong> </a>
+      <a href="#data-instance_method" title="#data (instance method)">- (ValAxisData) <strong>data</strong> </a>
     
 
     
@@ -163,7 +163,7 @@ The data for this series.
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#labels-instance_method" title="#labels (instance method)">- (Array, SimpleTypedList) <strong>labels</strong> </a>
+      <a href="#labels-instance_method" title="#labels (instance method)">- (CatAxisData) <strong>labels</strong> </a>
     
 
     
@@ -251,7 +251,8 @@ Creates a new series.
 
   
     <span class="summary_desc"><div class='inline'><p>
-Serializes the series.
+Serializes the series TODO create series_cat and series_val classes as this
+serialization is duplicated.
 </p>
 </div></span>
   
@@ -368,8 +369,8 @@ a customizable set of options
 
 <span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='chart identifier id'>chart</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
   <span class='super super kw'>super</span><span class='lparen token'>(</span><span class='chart identifier id'>chart</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
-  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='data identifier id'>data</span> <span class='assign token'>=</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:data</span><span class='rbrack token'>]</span>  <span class='orop op'>||</span> <span class='lbrack token'>[</span><span class='rbrack token'>]</span>
-  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='labels identifier id'>labels</span> <span class='assign token'>=</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:labels</span><span class='rbrack token'>]</span> <span class='orop op'>||</span> <span class='lbrack token'>[</span><span class='rbrack token'>]</span>
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='labels identifier id'>labels</span> <span class='assign token'>=</span> <span class='CatAxisData constant id'>CatAxisData</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:labels</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:labels</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='data identifier id'>data</span> <span class='assign token'>=</span> <span class='ValAxisData constant id'>ValAxisData</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:data</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:data</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
 <span class='end end kw'>end</span>
 </pre>
     </td>
@@ -388,7 +389,7 @@ a customizable set of options
       <div class="method_details first">
   <p class="signature first" id="data-instance_method">
   
-    - (<tt>Array</tt>, <tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>) <strong>data</strong> 
+    - (<tt><span class='object_link'><a href="ValAxisData.html" title="Axlsx::ValAxisData (class)">ValAxisData</a></span></tt>) <strong>data</strong> 
   
 
   
@@ -409,7 +410,7 @@ The data for this series.
     <li>
       
       
-        <span class='type'>(<tt>Array</tt>, <tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="ValAxisData.html" title="Axlsx::ValAxisData (class)">ValAxisData</a></span></tt>)</span>
       
       
       
@@ -445,7 +446,7 @@ The data for this series.
       <div class="method_details ">
   <p class="signature " id="labels-instance_method">
   
-    - (<tt>Array</tt>, <tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>) <strong>labels</strong> 
+    - (<tt><span class='object_link'><a href="CatAxisData.html" title="Axlsx::CatAxisData (class)">CatAxisData</a></span></tt>) <strong>labels</strong> 
   
 
   
@@ -466,7 +467,7 @@ The labels for this series.
     <li>
       
       
-        <span class='type'>(<tt>Array</tt>, <tt><span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="CatAxisData.html" title="Axlsx::CatAxisData (class)">CatAxisData</a></span></tt>)</span>
       
       
       
@@ -513,7 +514,8 @@ The labels for this series.
 </p><div class="docstring">
   <div class="discussion">
     <p>
-Serializes the series
+Serializes the series TODO create series_cat and series_val classes as this
+serialization is duplicated
 </p>
 
 
@@ -562,78 +564,20 @@ The document builder instance this objects xml will be added to.
       <pre class="lines">
 
 
-29
 30
 31
 32
 33
 34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63</pre>
+35</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/line_series.rb', line 29</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/line_series.rb', line 30</span>
 
 <span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
   <span class='super super kw'>super</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='xml identifier id'>xml</span><span class='bitor op'>|</span>
-    <span class='if if kw'>if</span> <span class='notop op'>!</span><span class='labels identifier id'>labels</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
-      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:cat'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
-        <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:strRef'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
-          <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:f'</span><span class='comma token'>,</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='cell_range identifier id'>cell_range</span><span class='lparen token'>(</span><span class='labels identifier id'>labels</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
-          <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:strCache'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
-            <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:ptCount'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='labels identifier id'>labels</span><span class='dot token'>.</span><span class='size identifier id'>size</span><span class='rparen token'>)</span>
-            <span class='labels identifier id'>labels</span><span class='dot token'>.</span><span class='each_with_index identifier id'>each_with_index</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='cell identifier id'>cell</span><span class='comma token'>,</span> <span class='index identifier id'>index</span><span class='bitor op'>|</span>
-              <span class='v identifier id'>v</span> <span class='assign token'>=</span> <span class='cell identifier id'>cell</span><span class='dot token'>.</span><span class='is_a? fid id'>is_a?</span><span class='lparen token'>(</span><span class='Cell constant id'>Cell</span><span class='rparen token'>)</span> <span class='question op'>?</span> <span class='cell identifier id'>cell</span><span class='dot token'>.</span><span class='value identifier id'>value</span> <span class='colon op'>:</span> <span class='cell identifier id'>cell</span>
-              <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:pt'</span><span class='comma token'>,</span> <span class='symbol val'>:idx=</span><span class='gt op'>&gt;</span><span class='index identifier id'>index</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
-                <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:v'</span><span class='comma token'>,</span> <span class='v identifier id'>v</span><span class='rparen token'>)</span>
-              <span class='rbrace token'>}</span>                          
-            <span class='end end kw'>end</span>
-          <span class='rbrace token'>}</span>
-        <span class='rbrace token'>}</span>
-      <span class='rbrace token'>}</span>
-    <span class='end end kw'>end</span>
-    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:val'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
-      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:numRef'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
-        <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:f'</span><span class='comma token'>,</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='cell_range identifier id'>cell_range</span><span class='lparen token'>(</span><span class='data identifier id'>data</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
-        <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:numCache'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
-          <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:formatCode'</span><span class='comma token'>,</span> <span class='string val'>'General'</span><span class='rparen token'>)</span>
-          <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:ptCount'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='data identifier id'>data</span><span class='dot token'>.</span><span class='size identifier id'>size</span><span class='rparen token'>)</span>
-          <span class='data identifier id'>data</span><span class='dot token'>.</span><span class='each_with_index identifier id'>each_with_index</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='cell identifier id'>cell</span><span class='comma token'>,</span> <span class='index identifier id'>index</span><span class='bitor op'>|</span>
-            <span class='v identifier id'>v</span> <span class='assign token'>=</span> <span class='cell identifier id'>cell</span><span class='dot token'>.</span><span class='is_a? fid id'>is_a?</span><span class='lparen token'>(</span><span class='Cell constant id'>Cell</span><span class='rparen token'>)</span> <span class='question op'>?</span> <span class='cell identifier id'>cell</span><span class='dot token'>.</span><span class='value identifier id'>value</span> <span class='colon op'>:</span> <span class='cell identifier id'>cell</span>
-            <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:pt'</span><span class='comma token'>,</span> <span class='symbol val'>:idx=</span><span class='gt op'>&gt;</span><span class='index identifier id'>index</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
-              <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:v'</span><span class='comma token'>,</span> <span class='v identifier id'>v</span><span class='rparen token'>)</span> 
-            <span class='rbrace token'>}</span>
-          <span class='end end kw'>end</span>
-        <span class='rbrace token'>}</span>                        
-      <span class='rbrace token'>}</span>
-    <span class='rbrace token'>}</span>
+    <span class='@labels ivar id'>@labels</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='@labels ivar id'>@labels</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+    <span class='@data ivar id'>@data</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='@data ivar id'>@data</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
   <span class='end end kw'>end</span>      
 <span class='end end kw'>end</span>
 </pre>
@@ -647,7 +591,7 @@ The document builder instance this objects xml will be added to.
 </div>
     
     <div id="footer">
-  Generated on Tue Nov 22 23:52:41 2011 by 
+  Generated on Wed Nov 23 12:23:58 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>

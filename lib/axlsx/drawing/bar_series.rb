@@ -28,8 +28,8 @@ module Axlsx
     def initialize(chart, options={})
       @shape = :box
       super(chart, options)
-      self.data = options[:data]  || []
-      self.labels = options[:labels] || []
+      self.labels = CatAxisData.new(options[:labels]) unless options[:labels].nil?
+      self.data = ValAxisData.new(options[:data]) unless options[:data].nil?
     end 
 
     def shape=(v) 
@@ -42,37 +42,8 @@ module Axlsx
     # @return [String]
     def to_xml(xml)
       super(xml) do |xml|
-        if !labels.empty?
-          xml.send('c:cat') {
-            xml.send('c:strRef') {
-              xml.send('c:f', Axlsx::cell_range(labels))
-              xml.send('c:strCache') {
-                xml.send('c:ptCount', :val=>labels.size)
-                labels.each_with_index do |cell, index|
-                  v = cell.is_a?(Cell) ? cell.value : cell
-                  xml.send('c:pt', :idx=>index) {
-                    xml.send('c:v', v)
-                  }                          
-                end
-              }
-            }
-          }
-        end
-        xml.send('c:val') {
-          xml.send('c:numRef') {
-            xml.send('c:f', Axlsx::cell_range(data))
-            xml.send('c:numCache') {
-              xml.send('c:formatCode', 'General')
-              xml.send('c:ptCount', :val=>data.size)
-              data.each_with_index do |cell, index|
-                v = cell.is_a?(Cell) ? cell.value : cell
-                xml.send('c:pt', :idx=>index) {
-                  xml.send('c:v', v) 
-                }
-              end
-            }                        
-          }
-        }
+        @labels.to_xml(xml) unless @labels.nil?
+        @data.to_xml(xml) unless @data.nil?
         xml.send('c:shape', :val=>@shape)
       end      
     end
@@ -82,10 +53,10 @@ module Axlsx
 
 
     # assigns the data for this series
-    def data=(v) DataTypeValidator.validate "Series.data", [Array, SimpleTypedList], v; @data = v; end
+    def data=(v) DataTypeValidator.validate "Series.data", [SimpleTypedList], v; @data = v; end
 
     # assigns the labels for this series
-    def labels=(v) DataTypeValidator.validate "Series.labels", [Array, SimpleTypedList], v; @labels = v; end
+    def labels=(v) DataTypeValidator.validate "Series.labels", [SimpleTypedList], v; @labels = v; end
 
   end
 

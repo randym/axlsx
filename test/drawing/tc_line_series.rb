@@ -14,7 +14,6 @@ class TestLineSeries < Test::Unit::TestCase
     assert_equal(@series.title.text, "bob", "series title has been applied")
     assert_equal(@series.data, [0,1,2], "data option applied")
     assert_equal(@series.labels, ["zero", "one","two"], "labels option applied")    
-    assert_equal(@series.shape, :box, "series shape has been applied")   
   end
 
   def test_data
@@ -23,12 +22,6 @@ class TestLineSeries < Test::Unit::TestCase
 
   def test_labels
     assert_equal(@series.labels, ["zero", "one", "two"])
-  end
-
-  def test_shape
-    assert_raise(ArgumentError, "require valid shape") { @series.shape = :teardropt }
-    assert_nothing_raised("allow valid shape") { @series.shape = :cone }
-    assert(@series.shape == :cone)
   end
 
 end

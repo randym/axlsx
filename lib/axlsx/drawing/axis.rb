@@ -1,9 +1,8 @@
 module Axlsx
- # the access class defines common properties and values for chart axis
+ # the access class defines common properties and values for a chart axis.
   class Axis
 
-
-    # the id of the axis
+    # the id of the axis. 
     # @return [Integer]
     attr_reader :axId
 
@@ -12,6 +11,7 @@ module Axlsx
     attr_reader :crossAx
 
     # The scaling of the axis
+    # @see Scaling
     # @return [Scaling]
     attr_reader :scaling
     
@@ -25,8 +25,8 @@ module Axlsx
     # @return [Symbol]
     attr_accessor :tickLblPos
 
-
     # The number format format code for this axis
+    # default :General
     # @return [String]
     attr_accessor :format_code
 
@@ -41,15 +41,16 @@ module Axlsx
     # @option options [Symbol] axPos
     # @option options [Symbol] crosses
     # @option options [Symbol] tickLblPos
+    # @raise [ArgumentError] If axId or crossAx are not unsigned integers
     def initialize(axId, crossAx, options={})
       Axlsx::validate_unsigned_int(axId)
       Axlsx::validate_unsigned_int(crossAx)
       @axId = axId
       @crossAx = crossAx
+      @scaling = Scaling.new(:orientation=>:minMax)
       self.axPos = :l
       self.tickLblPos = :nextTo
-      @scaling = Scaling.new(:orientation=>:minMax)
-      @formatCode = ""
+      self.format_code = "General"
       self.crosses = :autoZero
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="

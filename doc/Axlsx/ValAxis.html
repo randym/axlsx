@@ -135,8 +135,7 @@ the ValAxis class defines a chart value axis.
 
   
     <span class="summary_desc"><div class='inline'><p>
-This element specifies whether the value axis crosses the category axis
-between categories.
+This element specifies how the value axis crosses the category axis.
 </p>
 </div></span>
   
@@ -320,7 +319,7 @@ a customizable set of options
         </li>
       
         <li>
-          <span class="name">crosses</span>
+          <span class="name">tickLblPos</span>
           <span class="type">(<tt>Symbol</tt>)</span>
           <span class="default">
             
@@ -329,7 +328,7 @@ a customizable set of options
         </li>
       
         <li>
-          <span class="name">tickLblPos</span>
+          <span class="name">crosses</span>
           <span class="type">(<tt>Symbol</tt>)</span>
           <span class="default">
             
@@ -365,7 +364,7 @@ a customizable set of options
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/val_axis.rb', line 17</span>
 
 <span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='axId identifier id'>axId</span><span class='comma token'>,</span> <span class='crossAx identifier id'>crossAx</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
-  <span class='@crossBetween ivar id'>@crossBetween</span> <span class='assign token'>=</span> <span class='symbol val'>:between</span>
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='crossBetween identifier id'>crossBetween</span> <span class='assign token'>=</span> <span class='symbol val'>:between</span>
   <span class='super super kw'>super</span><span class='lparen token'>(</span><span class='axId identifier id'>axId</span><span class='comma token'>,</span> <span class='crossAx identifier id'>crossAx</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
 <span class='end end kw'>end</span>
 </pre>
@@ -392,8 +391,8 @@ a customizable set of options
 </p><div class="docstring">
   <div class="discussion">
     <p>
-This element specifies whether the value axis crosses the category axis
-between categories. must be one of [:between, :midCat]
+This element specifies how the value axis crosses the category axis. must
+be one of [:between, :midCat]
 </p>
 
 
@@ -530,7 +529,7 @@ The document builder instance this objects xml will be added to.
 </div>
     
     <div id="footer">
-  Generated on Tue Nov 22 23:52:42 2011 by 
+  Generated on Wed Nov 23 12:24:00 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>
