@@ -30,7 +30,7 @@ class TestOneCellAnchor < Test::Unit::TestCase
   end
 
   def test_index
-    assert(@anchor.index, @anchor.drawing.anchors.index(@anchor))
+    assert_equal(@anchor.index, @anchor.drawing.anchors.index(@anchor))
   end
 
   def test_width

@@ -17,20 +17,15 @@ module Axlsx
     # @return [Drawing]
     attr_reader :drawing
 
-    # The index of this anchor in the drawing
-    # @return [Integer]
-    attr_reader :index
-
-
     # the width of the graphic object in pixels.
     # this is converted to EMU at a 92 ppi resolution
     # @return [Integer]
-    attr_accessor :width
+    attr_reader :width
 
     # the height of the graphic object in pixels
     # this is converted to EMU at a 92 ppi resolution
     # @return [Integer]
-    attr_accessor :height
+    attr_reader :height
 
 
     # Creates a new OneCellAnchor object and an Pic associated with it.
@@ -53,9 +48,14 @@ module Axlsx
       @object = Pic.new(self, options)
     end
 
+    # @see height
     def height=(v) Axlsx::validate_unsigned_int(v); @height = v; end
+
+    # @see width
     def width=(v) Axlsx::validate_unsigned_int(v); @width = v; end
 
+    # The index of this anchor in the drawing
+    # @return [Integer]
     def index
       @drawing.anchors.index(self)
     end

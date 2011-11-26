@@ -18,25 +18,25 @@ module Axlsx
     # The direction of the bars in the chart
     # must be one of [:bar, :col]
     # @return [Symbol]
-    attr_accessor :barDir
+    attr_reader :barDir
 
     # space between bar or column clusters, as a percentage of the bar or column width.
     # @return [String]
-    attr_accessor :gapDepth
+    attr_reader :gapDepth
 
     # space between bar or column clusters, as a percentage of the bar or column width.
     # @return [String]
-    attr_accessor :gapWidth
+    attr_reader :gapWidth
 
     #grouping for a column, line, or area chart.
     # must be one of  [:percentStacked, :clustered, :standard, :stacked]
     # @return [Symbol]
-    attr_accessor :grouping
+    attr_reader :grouping
 
     # The shabe of the bars or columns
     # must be one of  [:cone, :coneToMax, :box, :cylinder, :pyramid, :pyramidToMax]
     # @return [Symbol]
-    attr_accessor :shape
+    attr_reader :shape
 
     # validation regex for gap amount percent
     GAP_AMOUNT_PERCENT = /0*(([0-9])|([1-9][0-9])|([1-4][0-9][0-9])|500)%/
@@ -61,6 +61,7 @@ module Axlsx
     def initialize(frame, options={})
       @barDir = :bar
       @grouping = :clustered
+      @gapWidth, @gapDepth, @shape = nil, nil, nil
       @catAxId = rand(8 ** 8)
       @valAxId = rand(8 ** 8)
       @catAxis = CatAxis.new(@catAxId, @valAxId)
@@ -69,28 +70,35 @@ module Axlsx
       @series_type = BarSeries
       @view3D = View3D.new({:rAngAx=>1}.merge(options))
     end
-    
+
+    # The direction of the bars in the chart
+    # must be one of [:bar, :col]
     def barDir=(v) 
       RestrictionValidator.validate "Bar3DChart.barDir", [:bar, :col], v
       @barDir = v
     end
 
-
+    #grouping for a column, line, or area chart.
+    # must be one of  [:percentStacked, :clustered, :standard, :stacked]
     def grouping=(v)
       RestrictionValidator.validate "Bar3DChart.grouping", [:percentStacked, :clustered, :standard, :stacked], v
       @grouping = v
     end
 
+    # space between bar or column clusters, as a percentage of the bar or column width.
     def gapWidth=(v)
       RegexValidator.validate "Bar3DChart.gapWidth", GAP_AMOUNT_PERCENT, v
       @gapWidth=(v)
     end
 
+    # space between bar or column clusters, as a percentage of the bar or column width.
     def gapDepth=(v)
       RegexValidator.validate "Bar3DChart.gapWidth", GAP_AMOUNT_PERCENT, v
       @gapDepth=(v)
     end
 
+    # The shabe of the bars or columns
+    # must be one of  [:cone, :coneToMax, :box, :cylinder, :pyramid, :pyramidToMax]
     def shape=(v) 
       RestrictionValidator.validate "Bar3DChart.shape", [:cone, :coneToMax, :box, :cylinder, :pyramid, :pyramidToMax], v
       @shape = v

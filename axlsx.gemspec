@@ -1,22 +1,36 @@
+require 'rake'
 require File.expand_path(File.dirname(__FILE__) + '/lib/axlsx/version.rb')
 Gem::Specification.new do |s|
   s.name        = 'axlsx'
-  s.rubyforge_project = 'axlsx'
   s.version     = Axlsx::VERSION
-  s.date        = Time.now.strftime('%Y-%m-%d')
-  s.summary     = "Author fully validated xlsx files with custom charts and styles"	
-  s.platform    = Gem::Platform::RUBY       	     	  
-  s.description = <<-eof
-    axslx allows you to create Office Open XML Spreadsheet documents.
-    It supports automated column widths, multiple worksheets, custom styles, cusomizable charts and allows you to validate your xlsx package before serialization. 
-  eof
   s.author	= "Randy Morgan"
-  s.email       = 'digital.ipeseity@gmail.com'
+  s.email       = 'digital.ipseity@gmail.com'
   s.homepage 	= 'https://github.com/randym/axlsx'
+  s.platform    = Gem::Platform::RUBY       	     	  
+  s.date        = Time.now.strftime('%Y-%m-%d')
+  s.summary     = "OOXML (xlsx) with charts, styles, images and autowidth columns."
   s.has_rdoc    = 'axlsx'
-  s.files 	= Dir.glob("{doc,lib,test,schema,examples}/**/*") + ['LICENSE','README.md','Rakefile','CHANGELOG.md']
-  s.add_runtime_dependency 'nokogiri', '~> 1'
+  s.description = <<-eof
+    xlsx generation with charts, images, automated column width, customizable styles and full schema validation. Axlsx excels at helping you generate beautiful Office Open XML Spreadsheet documents without having to understand the entire ECMA specification. Check out the README for some examples of how easy it is. Best of all, you can validate your xlsx file before serialization so you know for sure that anything generated is going to load on your client's machine.
+  eof
+  # s.files 	= Dir.glob("{doc,lib,test,schema,examples}/**/*") + %w{ LICENSE README.md Rakefile CHANGELOG.md }
+
+  s.files = FileList.new('*', 'lib/**/*', 'doc/**/*', 'test/**/*', 'schema/**/*', 'examples/**/*') do |fl|
+    fl.exclude("*.*~")
+    fl.exclude(".DS_Store")
+    fl.exclude(".gitignore")
+    fl.exclude(".yardops")
+    fl.exclude(".yardops_guide")
+    fl.exclude(".git")
+    fl.exclude(".*")
+    fl.exclude("todo")
+    fl.exclude("*.gem")
+    fl.exclude("*.xlsx")
+  end
+  s.add_runtime_dependency 'nokogiri', '~> 1.4'
   s.add_runtime_dependency 'active_support', '~> 3'
-  s.add_runtime_dependency 'rmagick', '~> 2.12'
-  s.add_runtime_dependency 'rubyzip', '~> 0.9.4'
+  s.add_runtime_dependency 'rmagick', '~> 2'
+  s.add_runtime_dependency 'zip', '~> 2'
+  s.require_path = 'lib'
+  s.required_ruby_version = '>= 1.8.7'
 end

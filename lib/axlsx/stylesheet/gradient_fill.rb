@@ -10,27 +10,27 @@ module Axlsx
     #   :linear
     #   :path
     # @return [Symbol]
-    attr_accessor :type
+    attr_reader :type
 
     # Angle of the linear gradient
     # @return [Float]
-    attr_accessor :degree
+    attr_reader :degree
 
     # Percentage format left
     # @return [Float]
-    attr_accessor :left
+    attr_reader :left
 
     # Percentage format right
     # @return [Float]
-    attr_accessor :right
+    attr_reader :right
 
     # Percentage format top
     # @return [Float]
-    attr_accessor :top 
+    attr_reader :top 
 
     # Percentage format bottom
     # @return [Float]
-    attr_accessor :bottom
+    attr_reader :bottom
 
     # Collection of stop objects
     # @return [SimpleTypedList]
@@ -51,12 +51,18 @@ module Axlsx
       @stop = SimpleTypedList.new GradientStop
     end
 
+    # @see type
     def type=(v) Axlsx::validate_gradient_type v; @type = v end    
+    # @see degree
     def degree=(v) Axlsx::validate_float v; @degree = v end    
-    def left=(v) DataTypeValidator.validate "GradientFill.left", Float, v, lambda { |v| v >= 0.0 && v <= 1.0}; @left = v end    
-    def right=(v) DataTypeValidator.validate "GradientFill.right", Float, v, lambda { |v| v >= 0.0 && v <= 1.0}; @right = v end    
-    def top=(v) DataTypeValidator.validate "GradientFill.top", Float, v, lambda { |v| v >= 0.0 && v <= 1.0}; @top = v end    
-    def bottom=(v) DataTypeValidator.validate "GradientFill.bottom", Float, v, lambda { |v| v >= 0.0 && v <= 1.0}; @bottom= v end    
+    # @see left
+    def left=(v) DataTypeValidator.validate "GradientFill.left", Float, v, lambda { |arg| arg >= 0.0 && arg <= 1.0}; @left = v end    
+    # @see right
+    def right=(v) DataTypeValidator.validate "GradientFill.right", Float, v, lambda { |arg| arg >= 0.0 && arg <= 1.0}; @right = v end    
+    # @see top
+    def top=(v) DataTypeValidator.validate "GradientFill.top", Float, v, lambda { |arg| arg >= 0.0 && arg <= 1.0}; @top = v end    
+    # @see bottom
+    def bottom=(v) DataTypeValidator.validate "GradientFill.bottom", Float, v, lambda { |arg| arg >= 0.0 && arg <= 1.0}; @bottom= v end    
 
     # Serializes the gradientFill
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.

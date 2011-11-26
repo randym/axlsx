@@ -34,12 +34,12 @@ module Axlsx
 
     # space between bar or column clusters, as a percentage of the bar or column width.
     # @return [String]
-    attr_accessor :gapDepth
+    attr_reader :gapDepth
 
     #grouping for a column, line, or area chart.
     # must be one of  [:percentStacked, :clustered, :standard, :stacked]
     # @return [Symbol]
-    attr_accessor :grouping
+    attr_reader :grouping
 
     # validation regex for gap amount percent
     GAP_AMOUNT_PERCENT = /0*(([0-9])|([1-9][0-9])|([1-4][0-9][0-9])|500)%/
@@ -59,6 +59,7 @@ module Axlsx
     # @see Chart
     # @see View3D
     def initialize(frame, options={})
+      @gapDepth = nil
       @grouping = :standard
       @catAxId = rand(8 ** 8)
       @valAxId = rand(8 ** 8)
@@ -71,11 +72,13 @@ module Axlsx
       @view3D = View3D.new({:perspective=>30}.merge(options))
     end
 
+    # @see grouping
     def grouping=(v)
       RestrictionValidator.validate "Bar3DChart.grouping", [:percentStacked, :standard, :stacked], v
       @grouping = v
     end
 
+    # @see gapDepth
     def gapDepth=(v)
       RegexValidator.validate "Bar3DChart.gapWidth", GAP_AMOUNT_PERCENT, v
       @gapDepth=(v)

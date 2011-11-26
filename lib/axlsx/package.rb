@@ -1,12 +1,23 @@
 # -*- coding: utf-8 -*-
-# Create Office Open XML Spreadsheets (xlsx) with safe and full control over cell styles, automatically resized column widths and 3D pie charts.
 module Axlsx
   # Package is responsible for managing all the bits and peices that Open Office XML requires to make a valid
   # xlsx document including valdation and serialization.
   class Package
 
+    # Initializes your package
+    #
+    # @param [Hash] options A hash that you can use to specify the author and workbook for this package.
+    # @option options [String] :author The author of the document
+    # @example Package.new :author => 'you!', :workbook => Workbook.new
+    def initialize(options={})
+      @workbook = nil
+      @core, @app = Core.new, App.new
+      @core.creator = options[:author] || @core.creator
+      yield self if block_given?
+    end
+    
+
     # The workbook this package will serialize or validate.
-    # @attribute
     # @return [Workbook] If no workbook instance has been assigned with this package a new Workbook instance is returned.
     # @raise ArgumentError if workbook parameter is not a Workbook instance.
     # @note As there are multiple ways to instantiate a workbook for the package, 
@@ -18,24 +29,12 @@ module Axlsx
     #     wb = Pacakge.new().workbook
     #     #     # set the workbook after creating the package
     #     wb = Package.new().workbook = Workbook.new
-    attr_accessor :workbook
-
-    # Initializes your package
-    #
-    # @param [Hash] options A hash that you can use to specify the author and workbook for this package.
-    # @option options [String] :author The author of the document
-    # @example Package.new :author => 'you!', :workbook => Workbook.new
-    def initialize(options={})
-      @core, @app = Core.new, App.new
-      @core.creator = options[:author] || @core.creator
-      yield self if block_given?
-    end
-
-    def workbook=(workbook) DataTypeValidator.validate "Package.workbook", Workbook, workbook; @workbook = workbook; end
-
     def workbook
       @workbook || @workbook = Workbook.new
     end
+
+    # @see workbook
+    def workbook=(workbook) DataTypeValidator.validate "Package.workbook", Workbook, workbook; @workbook = workbook; end
 
     # Serialize your workbook to disk as an xlsx document.
     #
@@ -57,18 +56,17 @@ module Axlsx
       p = parts
       Zip::ZipOutputStream.open(output) do |zip|
         p.each do |part| 
-          zip.put_next_entry(part[:entry]); zip.puts(part[:doc]) unless part[:doc].nil?
+          unless part[:doc].nil?
+            zip.put_next_entry(part[:entry]); 
+            zip.puts(part[:doc])
+          end
+          unless part[:path].nil?
+            zip.put_next_entry(part[:entry]); 
+            # binread for 1.9.3
+            zip.write IO.respond_to?(:binread) ? IO.binread(part[:path]) : IO.read(part[:path])
+          end          
         end
       end
-      Zip::ZipFile.open(output) do |zip|
-        p.each do |part|
-          if part[:path]
-            zip.add(part[:entry], part[:path], &proc{ true })
-          end
-        end                  
-      end
-
-
       true
     end
 

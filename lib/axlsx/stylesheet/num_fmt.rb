@@ -37,11 +37,11 @@ module Axlsx
     #   48 ##0.0E+0
     #   49 @
     # @see Axlsx
-    attr_accessor :numFmtId
+    attr_reader :numFmtId
 
     # @return [String] The formatting to use for this number format. 
     # @see http://support.microsoft.com/kb/264372
-    attr_accessor :formatCode
+    attr_reader :formatCode
     def initialize(options={})
       @numFmtId = 0
       @formatCode = ""
@@ -50,7 +50,9 @@ module Axlsx
       end
     end
 
+    # @see numFmtId
     def numFmtId=(v) Axlsx::validate_unsigned_int v; @numFmtId = v end
+    # @see formatCode
     def formatCode=(v) Axlsx::validate_string v; @formatCode = v end
 
     # Creates a numFmt element applying the instance values of this object as attributes.

@@ -5,12 +5,11 @@ module Axlsx
 
     # The default table style. The default value is 'TableStyleMedium9'
     # @return [String]
-    # 
-    attr_accessor :defaultTableStyle
+    attr_reader :defaultTableStyle
 
     # The default pivot table style. The default value is  'PivotStyleLight6'
     # @return [String]
-    attr_accessor :defaultPivotStyle
+    attr_reader :defaultPivotStyle
     
     # Creates a new TableStyles object that is a container for TableStyle objects
     # @option options [String] defaultTableStyle
@@ -20,8 +19,9 @@ module Axlsx
       @defaultPivotStyle = options[:defaultPivotStyle] || "PivotStyleLight16"      
       super TableStyle
     end
-
+    # @see defaultTableStyle
     def defaultTableStyle=(v) Axlsx::validate_string(v); @defaultTableStyle = v; end
+    # @see defaultPivotStyle
     def defaultPivotStyle=(v) Axlsx::validate_string(v); @defaultPivotStyle = v; end
 
     # Serializes the table styles element

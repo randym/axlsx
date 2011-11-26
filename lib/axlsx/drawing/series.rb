@@ -9,40 +9,40 @@ module Axlsx
     # @return [Chart]
     attr_reader :chart
 
-    # The index of this series in the chart's series.
-    # @return [Integer]
-    attr_reader :index
-
-    # The order of this series in the chart's series. By default the order is the index of the series.
-    # @return [Integer]
-    attr_accessor :order
-
     # The title of the series
     # @return [SeriesTitle]
-    attr_accessor :title
+    attr_reader :title
 
     # Creates a new series
     # @param [Chart] chart
     # @option options [Integer] order
     # @option options [String] title
     def initialize(chart, options={})
+      @order = nil
       self.chart = chart
       @chart.series << self
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
     end    
-    
+
+    # The index of this series in the chart's series.
+    # @return [Integer]
     def index
       @chart.series.index(self)
     end
 
-    def order=(v)  Axlsx::validate_unsigned_int(v); @order = v; end
 
+    # The order of this series in the chart's series. By default the order is the index of the series.
+    # @return [Integer]
     def order
       @order || index
     end
 
+    # @see order
+    def order=(v)  Axlsx::validate_unsigned_int(v); @order = v; end
+
+    # @see title
     def title=(v) 
       v = SeriesTitle.new(v) if v.is_a?(String) || v.is_a?(Cell)
       DataTypeValidator.validate "#{self.class}.title", SeriesTitle, v

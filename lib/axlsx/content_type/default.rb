@@ -4,10 +4,11 @@ module Axlsx
 
     # The extension of the content type.
     # @return [String]
-    attr_accessor :Extension
+    attr_reader :Extension
 
-    # @return [String] ContentType The type of content. TABLE_CT, WORKBOOK_CT, APP_CT, RELS_CT, STYLES_CT, XML_CT, WORKSHEET_CT, SHARED_STRINGS_CT, CORE_CT, CHART_CT, DRAWING_CT are allowed
-    attr_accessor :ContentType
+    # The type of content.
+    # @return [String] 
+    attr_reader :ContentType
 
     #Creates a new Default object
     # @option options [String] Extension
@@ -19,7 +20,11 @@ module Axlsx
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end      
     end
+    # Sets the file extension for this content type.
     def Extension=(v) Axlsx::validate_string v; @Extension = v end
+
+    # Sets the content type
+    # @see Axlsx#validate_content_type
     def ContentType=(v) Axlsx::validate_content_type v; @ContentType = v end
 
     # Serializes the object to xml

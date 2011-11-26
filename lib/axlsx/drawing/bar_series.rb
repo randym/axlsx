@@ -17,7 +17,7 @@ module Axlsx
     # The shabe of the bars or columns
     # must be one of  [:percentStacked, :clustered, :standard, :stacked]
     # @return [Symbol]
-    attr_accessor :shape
+    attr_reader :shape
 
     # Creates a new series
     # @option options [Array, SimpleTypedList] data
@@ -32,6 +32,8 @@ module Axlsx
       self.data = ValAxisData.new(options[:data]) unless options[:data].nil?
     end 
 
+    # The shabe of the bars or columns
+    # must be one of  [:percentStacked, :clustered, :standard, :stacked]
     def shape=(v) 
       RestrictionValidator.validate "BarSeries.shape", [:cone, :coneToMax, :box, :cylinder, :pyramid, :pyramidToMax], v
       @shape = v
@@ -41,10 +43,10 @@ module Axlsx
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String]
     def to_xml(xml)
-      super(xml) do |xml|
-        @labels.to_xml(xml) unless @labels.nil?
-        @data.to_xml(xml) unless @data.nil?
-        xml.send('c:shape', :val=>@shape)
+      super(xml) do |xml_inner|
+        @labels.to_xml(xml_inner) unless @labels.nil?
+        @data.to_xml(xml_inner) unless @data.nil?
+        xml_inner.send('c:shape', :val=>@shape)
       end      
     end
 

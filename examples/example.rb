@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
+# encoding: utf-8
      require 'rubygems'
      require 'axlsx'
 
+
 #A Simple Workbook
+
       p = Axlsx::Package.new
       p.workbook.add_worksheet do |sheet|
         sheet.add_row ["First", "Second", "Third"]
@@ -11,6 +14,7 @@
       p.serialize("example1.xlsx")
 
 #Generating A Bar Chart
+
      p = Axlsx::Package.new
      p.workbook.add_worksheet do |sheet|
        sheet.add_row ["First", "Second", "Third"]
@@ -22,6 +26,7 @@
      p.serialize("example2.xlsx")
 
 #Generating A Pie Chart
+
      p = Axlsx::Package.new
      p.workbook.add_worksheet do |sheet|
        sheet.add_row ["First", "Second", "Third"]
@@ -91,7 +96,8 @@
 
      p = Axlsx::Package.new
      p.workbook.add_worksheet do |sheet|
-       sheet.add_image(:image_src => (File.dirname(__FILE__) + "/image1.png")) do |image|
+       img = File.expand_path('examples/image1.jpeg') 
+       sheet.add_image(:image_src => img) do |image|
          image.width=720
          image.height=666
          image.start_at 2, 2
@@ -100,11 +106,13 @@
      p.serialize("example7.xlsx")
 
 
-#Japanese Support
+#Asian Language Support
 
      p = Axlsx::Package.new
      p.workbook.add_worksheet do |sheet|
-       sheet.add_row ["日本語の表意","ちゃんと出来るかな"]
-       sheet.add_row ["<div>","escaped?"]
+       sheet.add_row ["日本語"]
+       sheet.add_row ["华语/華語"]
+       sheet.add_row ["한국어/조선말"]
      end  
      p.serialize("example8.xlsx")
+

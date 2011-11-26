@@ -47,34 +47,6 @@ module Axlsx
     # @return [SimpleTypedList]
     attr_reader :anchors
 
-    # An array of charts that are associated with this drawing's anchors
-    # @return [Array]
-    attr_reader :charts
-
-    # An array of image objects that are associated with this drawing's anchors
-    # @return [Array]
-    attr_reader :images
-
-    # The index of this drawing in the owning workbooks's drawings collection.
-    # @return [Integer]
-    attr_reader :index
-
-    # The relation reference id for this drawing
-    # @return [String]
-    attr_reader :rId
-
-    # The part name for this drawing
-    # @return [String]
-    attr_reader :pn
-
-    # The relational part name for this drawing
-    # @return [String]
-    attr_reader :rels_pn
-
-    # The drawing's relationships.
-    # @return [Relationships]
-    attr_reader :relationships
-
     # Creates a new Drawing object
     # @param [Worksheet] worksheet The worksheet that owns this drawing
     def initialize(worksheet)
@@ -99,33 +71,47 @@ module Axlsx
       TwoCellAnchor.new(self, options)
       @anchors.last.add_chart(chart_type, options)
     end
-    
+
+    # An array of charts that are associated with this drawing's anchors
+    # @return [Array]
     def charts
       charts = @anchors.select { |a| a.object.is_a?(GraphicFrame) }
       charts.map { |a| a.object.chart }
     end
 
+    # An array of image objects that are associated with this drawing's anchors
+    # @return [Array]
     def images
       images = @anchors.select { |a| a.object.is_a?(Pic) }
       images.map { |a| a.object }
     end
 
+    # The index of this drawing in the owning workbooks's drawings collection.
+    # @return [Integer]
     def index
       @worksheet.workbook.drawings.index(self)
     end
 
+    # The relation reference id for this drawing
+    # @return [String]
     def rId
       "rId#{index+1}"
     end
 
+    # The part name for this drawing
+    # @return [String]
     def pn
       "#{DRAWING_PN % (index+1)}"
     end
-    
+
+    # The relational part name for this drawing
+    # @return [String]
     def rels_pn
       "#{DRAWING_RELS_PN % (index+1)}"
     end
 
+    # The drawing's relationships.
+    # @return [Relationships]
     def relationships
       r = Relationships.new
       charts.each do |chart|

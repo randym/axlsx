@@ -6,7 +6,7 @@
 <title>
   Class: Axlsx::Marker
   
-    &mdash; Documentation by YARD 0.7.3
+    &mdash; AXLSX
   
 </title>
 
@@ -97,17 +97,15 @@
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'><p>
-The recommended way to manage markers is Worksheet#add_chart Markers are
-created for a two cell anchor based on the :start and :end options.
-</p>
+    <div class='inline'>
+<p>The recommended way to manage markers is Worksheet#add_chart Markers are
+created for a two cell anchor based on the :start and :end options.</p>
 </div>
   </div>
 
-<p>
-The Marker class defines a point in the worksheet that drawing anchors
-attach to.
-</p>
+
+<p>The Marker class defines a point in the worksheet that drawing anchors
+attach to.</p>
 
 
   </div>
@@ -146,9 +144,8 @@ attach to.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The column this marker anchors to.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The column this marker anchors to.</p>
 </div></span>
   
 </li>
@@ -173,9 +170,8 @@ The column this marker anchors to.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The offset distance from this marker&#8217;s column.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The offset distance from this marker's column.</p>
 </div></span>
   
 </li>
@@ -200,9 +196,8 @@ The offset distance from this marker&#8217;s column.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The row this marker anchors to.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The row this marker anchors to.</p>
 </div></span>
   
 </li>
@@ -227,9 +222,8 @@ The row this marker anchors to.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The offset distance from this marker&#8217;s row.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The offset distance from this marker's row.</p>
 </div></span>
   
 </li>
@@ -264,9 +258,8 @@ The offset distance from this marker&#8217;s row.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-shortcut to set the column, row position for this marker.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>shortcut to set the column, row position for this marker.</p>
 </div></span>
   
 </li>
@@ -290,9 +283,8 @@ shortcut to set the column, row position for this marker.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Creates a new Marker object.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new Marker object.</p>
 </div></span>
   
 </li>
@@ -314,9 +306,8 @@ Creates a new Marker object.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Serializes the marker.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Serializes the marker.</p>
 </div></span>
   
 </li>
@@ -337,9 +328,8 @@ Serializes the marker.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Creates a new Marker object
-</p>
+    
+<p>Creates a new Marker object</p>
 
 
   </div>
@@ -360,9 +350,8 @@ Creates a new Marker object
       
       
         &mdash;
-        <div class='inline'><p>
-a customizable set of options
-</p>
+        <div class='inline'>
+<p>a customizable set of options</p>
 </div>
       
     </li>
@@ -431,13 +420,12 @@ a customizable set of options
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/marker.rb', line 28</span>
 
-<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
-  <span class='@col ivar id'>@col</span><span class='comma token'>,</span> <span class='@colOff ivar id'>@colOff</span><span class='comma token'>,</span> <span class='@row ivar id'>@row</span><span class='comma token'>,</span> <span class='@rowOff ivar id'>@rowOff</span> <span class='assign token'>=</span> <span class='integer val'>0</span><span class='comma token'>,</span> <span class='integer val'>0</span><span class='comma token'>,</span> <span class='integer val'>0</span><span class='comma token'>,</span> <span class='integer val'>0</span>
-  <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='o identifier id'>o</span><span class='bitor op'>|</span>
-    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='dstring node'>&quot;#{o[0]}=&quot;</span><span class='comma token'>,</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>0</span><span class='rbrack token'>]</span>
-  <span class='end end kw'>end</span>      
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='ivar'>@col</span><span class='comma'>,</span> <span class='ivar'>@colOff</span><span class='comma'>,</span> <span class='ivar'>@row</span><span class='comma'>,</span> <span class='ivar'>@rowOff</span> <span class='op'>=</span> <span class='int'>0</span><span class='comma'>,</span> <span class='int'>0</span><span class='comma'>,</span> <span class='int'>0</span><span class='comma'>,</span> <span class='int'>0</span>
+  <span class='id options'>options</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id o'>o</span><span class='op'>|</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span> <span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>      
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -460,9 +448,8 @@ a customizable set of options
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The column this marker anchors to
-</p>
+    
+<p>The column this marker anchors to</p>
 
 
   </div>
@@ -496,10 +483,9 @@ The column this marker anchors to
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/marker.rb', line 9</span>
 
-<span class='def def kw'>def</span> <span class='col identifier id'>col</span>
-  <span class='@col ivar id'>@col</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id col'>col</span>
+  <span class='ivar'>@col</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -517,9 +503,8 @@ The column this marker anchors to
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The offset distance from this marker&#8217;s column
-</p>
+    
+<p>The offset distance from this marker's column</p>
 
 
   </div>
@@ -553,10 +538,9 @@ The offset distance from this marker&#8217;s column
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/marker.rb', line 13</span>
 
-<span class='def def kw'>def</span> <span class='colOff identifier id'>colOff</span>
-  <span class='@colOff ivar id'>@colOff</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id colOff'>colOff</span>
+  <span class='ivar'>@colOff</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -574,9 +558,8 @@ The offset distance from this marker&#8217;s column
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The row this marker anchors to
-</p>
+    
+<p>The row this marker anchors to</p>
 
 
   </div>
@@ -610,10 +593,9 @@ The row this marker anchors to
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/marker.rb', line 17</span>
 
-<span class='def def kw'>def</span> <span class='row identifier id'>row</span>
-  <span class='@row ivar id'>@row</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id row'>row</span>
+  <span class='ivar'>@row</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -631,9 +613,8 @@ The row this marker anchors to
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The offset distance from this marker&#8217;s row
-</p>
+    
+<p>The offset distance from this marker's row</p>
 
 
   </div>
@@ -667,10 +648,9 @@ The offset distance from this marker&#8217;s row
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/marker.rb', line 21</span>
 
-<span class='def def kw'>def</span> <span class='rowOff identifier id'>rowOff</span>
-  <span class='@rowOff ivar id'>@rowOff</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id rowOff'>rowOff</span>
+  <span class='ivar'>@rowOff</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -692,9 +672,8 @@ The offset distance from this marker&#8217;s row
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-shortcut to set the column, row position for this marker
-</p>
+    
+<p>shortcut to set the column, row position for this marker</p>
 
 
   </div>
@@ -713,9 +692,8 @@ shortcut to set the column, row position for this marker
       
       
         &mdash;
-        <div class='inline'><p>
-the column for the marker
-</p>
+        <div class='inline'>
+<p>the column for the marker</p>
 </div>
       
     </li>
@@ -730,9 +708,8 @@ the column for the marker
       
       
         &mdash;
-        <div class='inline'><p>
-the row of the marker
-</p>
+        <div class='inline'>
+<p>the row of the marker</p>
 </div>
       
     </li>
@@ -746,19 +723,18 @@ the row of the marker
       <pre class="lines">
 
 
-43
-44
-45
-46</pre>
+47
+48
+49
+50</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/marker.rb', line 43</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/marker.rb', line 47</span>
 
-<span class='def def kw'>def</span> <span class='coord identifier id'>coord</span><span class='lparen token'>(</span><span class='col identifier id'>col</span><span class='comma token'>,</span> <span class='row identifier id'>row</span><span class='rparen token'>)</span>
-  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='col identifier id'>col</span> <span class='assign token'>=</span> <span class='col identifier id'>col</span>
-  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='row identifier id'>row</span> <span class='assign token'>=</span> <span class='row identifier id'>row</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id coord'>coord</span><span class='lparen'>(</span><span class='id col'>col</span><span class='comma'>,</span> <span class='id row'>row</span><span class='rparen'>)</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id col'>col</span> <span class='op'>=</span> <span class='id col'>col</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id row'>row</span> <span class='op'>=</span> <span class='id row'>row</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -773,9 +749,8 @@ the row of the marker
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Serializes the marker
-</p>
+    
+<p>Serializes the marker</p>
 
 
   </div>
@@ -794,9 +769,8 @@ Serializes the marker
       
       
         &mdash;
-        <div class='inline'><p>
-The document builder instance this objects xml will be added to.
-</p>
+        <div class='inline'>
+<p>The document builder instance this objects xml will be added to.</p>
 </div>
       
     </li>
@@ -823,21 +797,20 @@ The document builder instance this objects xml will be added to.
       <pre class="lines">
 
 
-50
-51
-52
-53
-54</pre>
+54
+55
+56
+57
+58</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/marker.rb', line 50</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/marker.rb', line 54</span>
 
-<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
-  <span class='lbrack token'>[</span><span class='symbol val'>:col</span><span class='comma token'>,</span> <span class='symbol val'>:colOff</span><span class='comma token'>,</span> <span class='symbol val'>:row</span><span class='comma token'>,</span> <span class='symbol val'>:rowOff</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='k identifier id'>k</span><span class='bitor op'>|</span>
-    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='dstring node'>&quot;xdr:#{k.to_s}&quot;</span><span class='comma token'>,</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='k identifier id'>k</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
-  <span class='end end kw'>end</span>      
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
+  <span class='lbracket'>[</span><span class='symbol'>:col</span><span class='comma'>,</span> <span class='symbol'>:colOff</span><span class='comma'>,</span> <span class='symbol'>:row</span><span class='comma'>,</span> <span class='symbol'>:rowOff</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id k'>k</span><span class='op'>|</span>
+    <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>xdr:</span><span class='embexpr_beg'>#{</span><span class='id k'>k</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='kw'>self</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='id k'>k</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>      
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -848,9 +821,9 @@ The document builder instance this objects xml will be added to.
 </div>
     
     <div id="footer">
-  Generated on Wed Nov 23 22:21:03 2011 by 
+  Generated on Sat Nov 26 13:16:37 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.8.7).
+  0.7.3 (ruby-1.9.3).
 </div>
 
   </body>

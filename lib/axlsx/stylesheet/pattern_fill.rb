@@ -6,11 +6,11 @@ module Axlsx
 
     # The color to use for the the background in solid fills.
     # @return [Color]
-    attr_accessor :fgColor 
+    attr_reader :fgColor 
 
     # The color to use for the background of the fill when the type is not solid.
     # @return [Color]
-    attr_accessor :bgColor
+    attr_reader :bgColor
 
     # The pattern type to use
     # @note 
@@ -35,7 +35,7 @@ module Axlsx
     #   :gray125
     #   :gray0625
     # @see Office Open XML Part 1 18.18.55
-    attr_accessor :patternType
+    attr_reader :patternType
 
     # Creates a new PatternFill Object
     # @option options [Symbol] patternType
@@ -47,9 +47,11 @@ module Axlsx
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
     end
-
+    # @see fgColor
     def fgColor=(v) DataTypeValidator.validate "PatternFill.fgColor", Color, v; @fgColor=v end
+    # @see bgColor
     def bgColor=(v) DataTypeValidator.validate "PatternFill.bgColor", Color, v; @bgColor=v end
+    # @see patternType
     def patternType=(v) Axlsx::validate_pattern_type v; @patternType = v end    
 
     # Serializes the pattern fill

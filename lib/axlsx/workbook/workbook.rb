@@ -65,13 +65,6 @@ require 'axlsx/workbook/worksheet/worksheet.rb'
     # @return [Styles]
     attr_reader :styles
 
-     # The workbook relationships. This is managed automatically by the workbook
-    # @return [Relationships]
-    attr_reader :relationships
-
-    # Instance level access to the class variable 1904
-    # @return [Boolean]
-    attr_accessor :date1904
 
 
     # Indicates if the epoc date for serialization should be 1904. If false, 1900 is used.
@@ -89,8 +82,12 @@ require 'axlsx/workbook/worksheet/worksheet.rb'
       yield self if block_given?      
     end
 
-    def date1904=(v) Axlsx::validate_boolean v; @@date1904 = v; end
+    # Instance level access to the class variable 1904
+    # @return [Boolean]
     def date1904() @@date1904; end    
+
+    # see @date1904
+    def date1904=(v) Axlsx::validate_boolean v; @@date1904 = v; end
 
     # Sets the date1904 attribute to the provided boolean
     # @return [Boolean]
@@ -109,7 +106,9 @@ require 'axlsx/workbook/worksheet/worksheet.rb'
       yield worksheet if block_given?
       worksheet
     end
-    
+
+    # The workbook relationships. This is managed automatically by the workbook
+    # @return [Relationships]
     def relationships
       r = Relationships.new
       @worksheets.each do |sheet|

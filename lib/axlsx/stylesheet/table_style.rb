@@ -5,15 +5,15 @@ module Axlsx
 
     # The name of this table style
     # @return [string]
-    attr_accessor :name
+    attr_reader :name
 
     # indicates if this style should be applied to pivot tables
     # @return [Boolean]
-    attr_accessor :pivot
+    attr_reader :pivot
 
     # indicates if this style should be applied to tables
     # @return [Boolean]
-    attr_accessor :table
+    attr_reader :table
 
     # creates a new TableStyle object
     # @raise [ArgumentError] if name option is not provided.
@@ -28,8 +28,11 @@ module Axlsx
       super TableStyleElement
     end
 
+    # @see name
     def name=(v) Axlsx::validate_string v; @name=v end
+    # @see pivot
     def pivot=(v) Axlsx::validate_boolean v; @pivot=v end
+    # @see table
     def table=(v) Axlsx::validate_boolean v; @table=v end
 
     # Serializes the table style

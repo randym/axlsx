@@ -3,11 +3,11 @@ module Axlsx
   class Color
     # Determines if the color is system color dependant
     # @return [Boolean]
-    attr_accessor :auto
+    attr_reader :auto
     
     # Backwards compatability color index
     # return [Integer]
-    #attr_accessor :indexed
+    #attr_reader :indexed
 
     # The color as defined in rgb terms. 
     # @note 
@@ -16,16 +16,16 @@ module Axlsx
     #  "FF000000" is black
     #  "FFFFFFFF" is white
     # @return [String]
-    attr_accessor :rgb
+    attr_reader :rgb
 
     # no support for theme just yet
     # @return [Integer]
-    #attr_accessor :theme
+    #attr_reader :theme
     
     # The tint value.
     # @note valid values are between -1.0 and 1.0
     # @return [Float]
-    attr_accessor :tint
+    attr_reader :tint
     
     # Creates a new Color object
     # @option options [Boolean] auto
@@ -37,9 +37,11 @@ module Axlsx
         self.send("#{o[0]}=", o[1]) if self.respond_to? o[0]
       end
     end
-    
+    # @see auto
     def auto=(v) Axlsx::validate_boolean v; @auto = v end    
+    # @see rgb
     def rgb=(v) Axlsx::validate_string v; @rgb = v end    
+    # @see tint
     def tint=(v) Axlsx::validate_float v; @tint = v end
 
     # This version does not support themes

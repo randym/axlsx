@@ -15,7 +15,7 @@ module Axlsx
     #   :centerContinuous
     #   :distributed
     # @return [Symbol]
-    attr_accessor :horizontal
+    attr_reader :horizontal
 
     # The vertical alignment of the cell.
     # @note
@@ -26,38 +26,38 @@ module Axlsx
     #   :justify
     #   :distributed
     # @return [Symbol]
-    attr_accessor :vertical
+    attr_reader :vertical
 
     # The textRotation of the cell.
     # @return [Integer]
-    attr_accessor :textRotation
+    attr_reader :textRotation
 
     # Indicate if the text of the cell should wrap
     # @return [Boolean]
-    attr_accessor :wrapText
+    attr_reader :wrapText
     
     # The amount of indent
     # @return [Integer]
-    attr_accessor :indent
+    attr_reader :indent
 
     # The amount of relativeIndent
     # @return [Integer]
-    attr_accessor :relativeIndent
+    attr_reader :relativeIndent
 
     # Indicate if the last line should be justified.
     # @return [Boolean]
-    attr_accessor :justifyLastLine
+    attr_reader :justifyLastLine
 
     # Indicate if the text should be shrunk to the fit in the cell.
     # @return [Boolean]
-    attr_accessor :shrinkToFit
+    attr_reader :shrinkToFit
 
     # The reading order of the text
     # 0 Context Dependent 
     # 1 Left-to-Right
     # 2 Right-to-Left
     # @return [Integer]
-    attr_accessor :readingOrder
+    attr_reader :readingOrder
     
     # Create a new cell_alignment object
     # @option options [Symbol] horizontal
@@ -75,14 +75,23 @@ module Axlsx
       end
     end        
     
+    # @see horizontal
     def horizontal=(v) Axlsx::validate_horizontal_alignment v; @horizontal = v end    
+    # @see vertical
     def vertical=(v) Axlsx::validate_vertical_alignment v; @vertical = v end    
+    # @see textRotation
     def textRotation=(v) Axlsx::validate_unsigned_int v; @textRotation = v end    
+    # @see wrapText
     def wrapText=(v) Axlsx::validate_boolean v; @wrapText = v end    
+    # @see indent
     def indent=(v) Axlsx::validate_unsigned_int v; @indent = v end    
+    # @see relativeIndent
     def relativeIndent=(v) Axlsx::validate_int v; @relativeIndent = v end    
+    # @see justifyLastLine
     def justifyLastLine=(v) Axlsx::validate_boolean v; @justifyLastLine = v end    
+    # @see shrinkToFit
     def shrinkToFit=(v) Axlsx::validate_boolean v; @shrinkToFit = v end    
+    # @see readingOrder
     def readingOrder=(v) Axlsx::validate_unsigned_int v; @readingOrder = v end  
 
     # Serializes the cell alignment

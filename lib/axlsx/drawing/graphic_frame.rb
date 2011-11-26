@@ -12,10 +12,6 @@ module Axlsx
     # @return [TwoCellAnchor]
     attr_reader :anchor
 
-    # The relationship id for this graphic
-    # @return [String]
-    attr_reader :rId
-
     # Creates a new GraphicFrame object
     # @param [TwoCellAnchor] anchor
     # @param [Class] chart_type
@@ -25,6 +21,8 @@ module Axlsx
       @chart = chart_type.new(self, options)
     end
 
+    # The relationship id for this graphic
+    # @return [String]
     def rId 
       "rId#{@anchor.index+1}"
     end

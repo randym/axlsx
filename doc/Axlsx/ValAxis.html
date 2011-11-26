@@ -6,7 +6,7 @@
 <title>
   Class: Axlsx::ValAxis
   
-    &mdash; Documentation by YARD 0.7.3
+    &mdash; AXLSX
   
 </title>
 
@@ -96,9 +96,8 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>
-the ValAxis class defines a chart value axis.
-</p>
+    
+<p>the ValAxis class defines a chart value axis.</p>
 
 
   </div>
@@ -134,9 +133,8 @@ the ValAxis class defines a chart value axis.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-This element specifies how the value axis crosses the category axis.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>This element specifies how the value axis crosses the category axis.</p>
 </div></span>
   
 </li>
@@ -181,9 +179,8 @@ This element specifies how the value axis crosses the category axis.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Creates a new ValAxis object.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new ValAxis object.</p>
 </div></span>
   
 </li>
@@ -205,9 +202,8 @@ Creates a new ValAxis object.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Serializes the value axis.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Serializes the value axis.</p>
 </div></span>
   
 </li>
@@ -233,9 +229,8 @@ Serializes the value axis.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Creates a new ValAxis object
-</p>
+    
+<p>Creates a new ValAxis object</p>
 
 
   </div>
@@ -254,9 +249,8 @@ Creates a new ValAxis object
       
       
         &mdash;
-        <div class='inline'><p>
-the id of this axis
-</p>
+        <div class='inline'>
+<p>the id of this axis</p>
 </div>
       
     </li>
@@ -271,9 +265,8 @@ the id of this axis
       
       
         &mdash;
-        <div class='inline'><p>
-the id of the perpendicular axis
-</p>
+        <div class='inline'>
+<p>the id of the perpendicular axis</p>
 </div>
       
     </li>
@@ -290,9 +283,8 @@ the id of the perpendicular axis
       
       
         &mdash;
-        <div class='inline'><p>
-a customizable set of options
-</p>
+        <div class='inline'>
+<p>a customizable set of options</p>
 </div>
       
     </li>
@@ -363,11 +355,10 @@ a customizable set of options
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/val_axis.rb', line 17</span>
 
-<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='axId identifier id'>axId</span><span class='comma token'>,</span> <span class='crossAx identifier id'>crossAx</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
-  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='crossBetween identifier id'>crossBetween</span> <span class='assign token'>=</span> <span class='symbol val'>:between</span>
-  <span class='super super kw'>super</span><span class='lparen token'>(</span><span class='axId identifier id'>axId</span><span class='comma token'>,</span> <span class='crossAx identifier id'>crossAx</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id axId'>axId</span><span class='comma'>,</span> <span class='id crossAx'>crossAx</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id crossBetween'>crossBetween</span> <span class='op'>=</span> <span class='symbol'>:between</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='id axId'>axId</span><span class='comma'>,</span> <span class='id crossAx'>crossAx</span><span class='comma'>,</span> <span class='id options'>options</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -390,10 +381,9 @@ a customizable set of options
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-This element specifies how the value axis crosses the category axis. must
-be one of [:between, :midCat]
-</p>
+    
+<p>This element specifies how the value axis crosses the category axis. must
+be one of [:between, :midCat]</p>
 
 
   </div>
@@ -427,10 +417,9 @@ be one of [:between, :midCat]
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/val_axis.rb', line 8</span>
 
-<span class='def def kw'>def</span> <span class='crossBetween identifier id'>crossBetween</span>
-  <span class='@crossBetween ivar id'>@crossBetween</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id crossBetween'>crossBetween</span>
+  <span class='ivar'>@crossBetween</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -452,9 +441,8 @@ be one of [:between, :midCat]
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Serializes the value axis
-</p>
+    
+<p>Serializes the value axis</p>
 
 
   </div>
@@ -473,9 +461,8 @@ Serializes the value axis
       
       
         &mdash;
-        <div class='inline'><p>
-The document builder instance this objects xml will be added to.
-</p>
+        <div class='inline'>
+<p>The document builder instance this objects xml will be added to.</p>
 </div>
       
     </li>
@@ -512,13 +499,12 @@ The document builder instance this objects xml will be added to.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/val_axis.rb', line 27</span>
 
-<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
-  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:valAx'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
-    <span class='super super kw'>super</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
-    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:crossBetween'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@crossBetween ivar id'>@crossBetween</span><span class='rparen token'>)</span>
-  <span class='rbrace token'>}</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
+  <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:valAx</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span>
+    <span class='kw'>super</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
+    <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:crossBetween</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span><span class='op'>=&gt;</span><span class='ivar'>@crossBetween</span><span class='rparen'>)</span>
+  <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -529,9 +515,9 @@ The document builder instance this objects xml will be added to.
 </div>
     
     <div id="footer">
-  Generated on Wed Nov 23 22:20:45 2011 by 
+  Generated on Sat Nov 26 13:16:37 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.8.7).
+  0.7.3 (ruby-1.9.3).
 </div>
 
   </body>

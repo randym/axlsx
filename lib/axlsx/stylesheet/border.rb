@@ -3,13 +3,13 @@ module Axlsx
   class Border
 
     # @return [Boolean] The diagonal up property for the border that indicates if the border should include a diagonal line from the bottom left to the top right of the cell. 
-    attr_accessor :diagonalUp
+    attr_reader :diagonalUp
     
     # @return [Boolean] The diagonal down property for the border that indicates if the border should include a diagonal line from the top left to the top right of the cell.
-    attr_accessor :diagonalDown
+    attr_reader :diagonalDown
 
     # @return [Boolean] The outline property for the border indicating that top, left, right and bottom borders should only be applied to the outside border of a range of cells.
-    attr_accessor :outline
+    attr_reader :outline
 
     # @return [SimpleTypedList] A list of BorderPr objects for this border. 
     attr_reader :prs
@@ -35,8 +35,11 @@ module Axlsx
       end
     end        
 
+    # @see diagonalUp
     def diagonalUp=(v) Axlsx::validate_boolean v; @diagonalUp = v end
+    # @see diagonalDown
     def diagonalDown=(v) Axlsx::validate_boolean v; @diagonalDown = v end
+    # @see outline
     def outline=(v) Axlsx::validate_boolean v; @outline = v end
 
     # Serializes the border element
@@ -44,7 +47,9 @@ module Axlsx
     def to_xml(xml)
       xml.border(self.instance_values.select{ |k,v| [:diagonalUp, :diagonalDown, :outline].include? k }) {
         [:start, :end, :left, :right, :top, :bottom, :diagonal, :vertical, :horizontal].each do |k|
-          @prs.select { |pr| pr.name == k }.each { |pr| pr.to_xml(xml) }
+          @prs.select { |pr| pr.name == k }.each do |part| 
+            part.to_xml(xml) 
+          end
         end
       }
     end

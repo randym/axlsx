@@ -6,11 +6,11 @@ module Axlsx
     
     # specifies locking for cells that have the style containing this protection
     # @return [Boolean]
-    attr_accessor :hidden
+    attr_reader :hidden
 
     # specifies if the cells that have the style containing this protection
     # @return [Boolean]
-    attr_accessor :locked
+    attr_reader :locked
 
     # Creates a new CellProtection
     # @option options [Boolean] hidden value for hidden protection
@@ -20,7 +20,10 @@ module Axlsx
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
     end
+
+    # @see hidden
     def hidden=(v) Axlsx::validate_boolean v; @hidden = v end    
+    # @see locked
     def locked=(v) Axlsx::validate_boolean v; @locked = v end    
 
     # Serializes the cell protection

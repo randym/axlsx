@@ -8,7 +8,7 @@ module Axlsx
 
     # The type of fill
     # @return [PatternFill, GradientFill]
-    attr_accessor :fill_type
+    attr_reader :fill_type
 
     # Creates a new Fill object
     # @param [PatternFill, GradientFill] fill_type 
@@ -24,6 +24,7 @@ module Axlsx
       xml.fill { @fill_type.to_xml(xml) }
     end
 
+    # @see fill_type
     def fill_type=(v) DataTypeValidator.validate "Fill.fill_type", [PatternFill, GradientFill], v; @fill_type = v; end
 
 

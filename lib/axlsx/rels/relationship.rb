@@ -5,7 +5,7 @@ module Axlsx
 
     # The location of the relationship target
     # @return [String]
-    attr_accessor :Target
+    attr_reader :Target
 
     # The type of relationship
     # @note Supported types are defined as constants in Axlsx:
@@ -20,13 +20,15 @@ module Axlsx
     # @see CHART_R
     # @see DRAWING_R
     # @return [String]
-    attr_accessor :Type
+    attr_reader :Type
     def initialize(type, target)
       self.Target=target
       self.Type=type
     end
 
+    # @see Target
     def Target=(v) Axlsx::validate_string v; @Target = v end
+    # @see Type
     def Type=(v) Axlsx::validate_relationship_type v; @Type = v end
 
     # Serializes the relationship    

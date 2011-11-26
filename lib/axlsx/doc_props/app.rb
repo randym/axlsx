@@ -11,73 +11,73 @@ module Axlsx
   class App
 
     # @return [String] The name of the document template.
-    attr_accessor :Template
+    attr_reader :Template
 
     # @return [String] The name of the manager for the document.
-    attr_accessor :Manager
+    attr_reader :Manager
 
     # @return [String] The name of the company generating the document.
-    attr_accessor :Company 
+    attr_reader :Company 
 
     # @return [Integer] The number of pages in the document.
-    attr_accessor :Pages
+    attr_reader :Pages
 
     # @return [Integer] The number of words in the document.
-    attr_accessor :Words
+    attr_reader :Words
 
     # @return [Integer] The number of characters in the document.
-    attr_accessor :Characters
+    attr_reader :Characters
 
     # @return [String] The intended format of the presentation.
-    attr_accessor :PresentationFormat
+    attr_reader :PresentationFormat
 
     # @return [Integer] The number of lines in the document.
-    attr_accessor :Lines
+    attr_reader :Lines
 
     # @return [Integer] The number of paragraphs in the document
-    attr_accessor :Paragraphs
+    attr_reader :Paragraphs
 
     # @return [Intger] The number of slides in the document.
-    attr_accessor :Slides
+    attr_reader :Slides
 
     # @return [Integer] The number of slides that have notes.
-    attr_accessor :Notes
+    attr_reader :Notes
 
     # @return [Integer] The total amount of time spent editing.   
-    attr_accessor :TotalTime
+    attr_reader :TotalTime
 
     # @return [Integer] The number of hidden slides.
-    attr_accessor :HiddenSlides
+    attr_reader :HiddenSlides
 
     # @return [Integer] The total number multimedia clips
-    attr_accessor :MMClips
+    attr_reader :MMClips
 
     # @return [Boolean] The display mode for the document thumbnail.
-    attr_accessor :ScaleCrop
+    attr_reader :ScaleCrop
 
     # @return [Boolean] The links in the document are up to date.
-    attr_accessor :LinksUpToDate
+    attr_reader :LinksUpToDate
 
     # @return [Integer] The number of characters in the document including spaces.
-    attr_accessor :CharactersWithSpaces
+    attr_reader :CharactersWithSpaces
     
     # @return [Boolean] Indicates if the document is shared.
-    attr_accessor :ShareDoc
+    attr_reader :ShareDoc
 
     # @return [String] The base for hyper links in the document. 
-    attr_accessor :HyperLinkBase
+    attr_reader :HyperLinkBase
 
     # @return [Boolean] Indicates that the hyper links in the document have been changed.
-    attr_accessor :HyperlinksChanged
+    attr_reader :HyperlinksChanged
 
     # @return [String] The name of the application
-    attr_accessor :Application
+    attr_reader :Application
 
     # @return [String] The version of the application.
-    attr_accessor :AppVersion
+    attr_reader :AppVersion
 
     # @return [Integer] Document security
-    attr_accessor :DocSecurity
+    attr_reader :DocSecurity
 
     # Creates an App object
     # @option options [String] Template
@@ -108,28 +108,58 @@ module Axlsx
       end
     end
 
+    # Sets the Template property of your app.xml file
     def Template=(v) Axlsx::validate_string v; @Template = v; end 
+
+    # Sets the Manager property of your app.xml file
     def Manager=(v) Axlsx::validate_string v; @Manager = v; end 
+
+    # Sets the Company property of your app.xml file
     def Company=(v) Axlsx::validate_string v; @Company = v; end 
+
+    # Sets the Pages property of your app.xml file
     def Pages=(v) Axlsx::validate_int v; @Pages = v; end 
+
+    # Sets the Words property of your app.xml file
     def Words=(v) Axlsx::validate_int v; @Words = v; end 
+
+    # Sets the Characters property of your app.xml file
     def Characters=(v) Axlsx::validate_int v; @Characters = v; end 
+
+
+    # Sets the PresentationFormat property of your app.xml file
     def PresentationFormat=(v) Axlsx::validate_string v; @PresentationFormat = v; end 
+    # Sets the Lines property of your app.xml file
     def Lines=(v) Axlsx::validate_int v; @Lines = v; end 
+    # Sets the Paragraphs property of your app.xml file
     def Paragraphs=(v) Axlsx::validate_int v; @Paragraphs = v; end 
+    # Sets the Slides property of your app.xml file
     def Slides=(v) Axlsx::validate_int v; @Slides = v; end 
+    # Sets the Notes property of your app.xml file
     def Notes=(v) Axlsx::validate_int v; @Notes = v; end 
+    # Sets the TotalTime property of your app.xml file
     def TotalTime=(v) Axlsx::validate_int v; @TotalTime = v; end 
+    # Sets the HiddenSlides property of your app.xml file
     def HiddenSlides=(v) Axlsx::validate_int v; @HiddenSlides = v; end 
+    # Sets the MMClips property of your app.xml file
     def MMClips=(v) Axlsx::validate_int v; @MMClips = v; end 
+    # Sets the ScaleCrop property of your app.xml file
     def ScaleCrop=(v) Axlsx::validate_boolean v; @ScaleCrop = v; end 
+    # Sets the LinksUpToDate property of your app.xml file
     def LinksUpToDate=(v) Axlsx::validate_boolean v; @LinksUpToDate = v; end 
+    # Sets the CharactersWithSpaces property of your app.xml file
     def CharactersWithSpaces=(v) Axlsx::validate_int v; @CharactersWithSpaces = v; end 
+    # Sets the ShareDoc property of your app.xml file
     def ShareDoc=(v) Axlsx::validate_boolean v; @ShareDoc = v; end 
+    # Sets the HyperLinkBase property of your app.xml file
     def HyperLinkBase=(v) Axlsx::validate_string v; @HyperLinkBase = v; end 
+    # Sets the HyperLinksChanged property of your app.xml file
     def HyperlinksChanged=(v) Axlsx::validate_boolean v; @HyperlinksChanged = v; end 
+    # Sets the Application property of your app.xml file
     def Application=(v) Axlsx::validate_string v; @Application = v; end 
+    # Sets the AppVersion property of your app.xml file
     def AppVersion=(v) Axlsx::validate_string v; @AppVersion = v; end 
+    # Sets the DocSecurity property of your app.xml file
     def DocSecurity=(v) Axlsx::validate_int v; @DocSecurity = v; end 
 
     # Generate an app.xml document

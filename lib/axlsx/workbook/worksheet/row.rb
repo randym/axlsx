@@ -12,10 +12,6 @@ module Axlsx
     # @return [SimpleTypedList]
     attr_reader :cells
 
-    # The index of this row in the worksheet
-    # @return [Integer]
-    attr_reader :index
-
     # Creates a new row. New Cell objects are created based on the values, types and style options.
     # A new cell is created for each item in the values array. style and types options are applied as follows:
     #   If the types option is defined and is a symbol it is applied to all the cells created.
@@ -37,6 +33,8 @@ module Axlsx
       array_to_cells(values, options)
     end
 
+    # The index of this row in the worksheet
+    # @return [Integer]
     def index 
       worksheet.rows.index(self)
     end

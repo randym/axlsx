@@ -6,48 +6,23 @@ module Axlsx
     
     # The name of the worksheet
     # @return [String]
-    attr_accessor :name
+    attr_reader :name
 
     # The workbook that owns this worksheet
     # @return [Workbook]
     attr_reader :workbook
 
-    # The worksheet relationships. This is managed automatically by the worksheet
-    # @return [Relationships]
-    attr_reader :relationships
 
     # The rows in this worksheet
     # @note The recommended way to manage rows is Worksheet#add_row
     # @return [SimpleTypedList]
     # @see Worksheet#add_row
     attr_reader :rows
-    
-    # The drawing associated with this worksheet.
-    # @note the recommended way to work with drawings and charts is Worksheet#add_chart
-    # @return [Drawing]
-    # @see Worksheet#add_chart
-    attr_reader :drawing
 
     # An array of content based calculated column widths.
     # @note a single auto fit data item is a hash with :longest => [String] and :sz=> [Integer] members.
     # @return [Array] of Hash 
     attr_reader :auto_fit_data
-
-    # The part name of this worksheet
-    # @return [String]
-    attr_reader :pn
-
-    # The relationship part name of this worksheet
-    # @return [String]
-    attr_reader :rels_pn
-
-    # The relationship Id of thiw worksheet
-    # @return [String]
-    attr_reader :rId
-
-    # The index of this worksheet in the owning Workbook's worksheets list.
-    # @return [Integer]
-    attr_reader :index
 
     # TODO Merge Cells
     # attr_reader :merge_cells
@@ -57,6 +32,7 @@ module Axlsx
     # @see Workbook#add_worksheet
     # @option options [String] name The name of this sheet.
     def initialize(wb, options={})
+      @drawing = nil
       @rows = SimpleTypedList.new Row
       self.workbook = wb
       @workbook.worksheets << self
@@ -65,25 +41,38 @@ module Axlsx
       @magick_draw = Magick::Draw.new
     end
 
-    
+    # The name of the worksheet
+    # @param [String] v
     def name=(v) DataTypeValidator.validate "Worksheet.name", String, v; @name=v end
-    
+
+    # The part name of this worksheet
+    # @return [String]
     def pn
       "#{WORKSHEET_PN % (index+1)}"
     end
 
+    # The relationship part name of this worksheet
+    # @return [String]
     def rels_pn
       "#{WORKSHEET_RELS_PN % (index+1)}"
     end
 
+    # The relationship Id of thiw worksheet
+    # @return [String]
     def rId
       "rId#{index+1}"
     end
-    
+
+    # The index of this worksheet in the owning Workbook's worksheets list.
+    # @return [Integer]
     def index
       @workbook.worksheets.index(self)
     end
 
+    # The drawing associated with this worksheet.
+    # @note the recommended way to work with drawings and charts is Worksheet#add_chart
+    # @return [Drawing]
+    # @see Worksheet#add_chart
     def drawing
       @drawing || @drawing = Axlsx::Drawing.new(self)
     end
@@ -149,10 +138,11 @@ module Axlsx
           xml.drawing :"r:id"=>"rId1" if @drawing          
         }
       end
-      builder.to_xml(:indent=>0, :save_with=>0)
+      builder.to_xml
     end
 
-    # The worksheet's relationships.
+    # The worksheet relationships. This is managed automatically by the worksheet
+    # @return [Relationships]
     def relationships
         r = Relationships.new
         r << Relationship.new(DRAWING_R, "../#{@drawing.pn}") if @drawing
@@ -193,7 +183,7 @@ module Axlsx
     #  From ECMA docs
     #   Column width measured as the number of characters of the maximum digit width of the numbers 0 .. 9 as 
     #   rendered in the normal style's font. There are 4 pixels of margin padding (two on each side), plus 1 pixel padding for the gridlines.
-    #   width = Truncate([{Number of Characters} * {Maximum Digit Width} + {5 pixel padding}]/{Maximum Digit Width}*256)/256
+    #   width = Truncate([!{Number of Characters} * !{Maximum Digit Width} + !{5 pixel padding}]/!{Maximum Digit Width}*256)/256
     # @return [Float]
     # @param [Hash] A hash of auto_fit_data 
     def auto_width(col)
@@ -201,6 +191,7 @@ module Axlsx
       mdw_count = 0 
       best_guess = 1.5  #direct testing shows the results of the documented formula to be a bit too small. This is a best guess scaling
       font_scale = col[:sz].to_f / (self.workbook.styles.fonts[0].sz.to_f || 11.0)
+      
       col[:longest].scan(/./mu).each do |i|
         mdw_count +=1 if @magick_draw.get_type_metrics(i).width >= mdw 
       end

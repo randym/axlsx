@@ -2,11 +2,13 @@ module Axlsx
   # An override content part. These parts are automatically created by for you based on the content of your package.
   class Override
 
-    # @return [String] ContentType The type of content. TABLE_CT, WORKBOOK_CT, APP_CT, RELS_CT, STYLES_CT, XML_CT, WORKSHEET_CT, SHARED_STRINGS_CT, CORE_CT, CHART_CT, DRAWING_CT are allowed
-    attr_accessor :ContentType
+    # The type of content.
+    # @return [String] 
+    attr_reader :ContentType
 
-    # @return [String] PartName The name and location of the part.
-    attr_accessor :PartName
+    # The name and location of the part.
+    # @return [String] 
+    attr_reader :PartName
 
     #Creates a new Override object
     # @option options [String] PartName
@@ -18,7 +20,12 @@ module Axlsx
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end      
     end
+
+    # The name and location of the part.
     def PartName=(v) Axlsx::validate_string v; @PartName = v end
+
+    # The content type. 
+    # @see Axlsx#validate_content_type
     def ContentType=(v) Axlsx::validate_content_type v; @ContentType = v end
 
     # Serializes the Override object to xml

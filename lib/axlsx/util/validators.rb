@@ -31,7 +31,7 @@ module Axlsx
     # @raise [ArugumentError] Raised if the class of the value provided is not in the specified array of types or the block passed returns false
     # @return [Boolean] true if validation succeeds.
     # @see validate_boolean
-    def self.validate(name, types, v, other= lambda{|v| true })
+    def self.validate(name, types, v, other= lambda{|arg| true })
       types = [types] unless types.is_a? Array
       valid_type = false
       if v.class == Class
@@ -49,7 +49,7 @@ module Axlsx
   # @raise [ArgumentError] raised if the value is not a Fixnum or Integer value greater or equal to 0
   # @return [Boolean] true if the data is valid
   def self.validate_unsigned_int(v)
-    DataTypeValidator.validate(:unsigned_int, [Fixnum, Integer], v, lambda { |v| v.respond_to?(:>=) && v >= 0 })
+    DataTypeValidator.validate(:unsigned_int, [Fixnum, Integer], v, lambda { |arg| arg.respond_to?(:>=) && arg >= 0 })
   end
 
   # Requires that the value is a Fixnum or Integer
@@ -63,7 +63,7 @@ module Axlsx
   # it must be one of 0, 1, "true", "false", :true, :false, true, false, "0", or "1"
   # @param [Any] v The value validated
   def self.validate_boolean(v)
-    DataTypeValidator.validate(:boolean, [Fixnum, String, Integer, Symbol, TrueClass, FalseClass], v, lambda { |v| [0, 1, "true", "false", :true, :false, true, false, "0", "1"].include?(v) })
+    DataTypeValidator.validate(:boolean, [Fixnum, String, Integer, Symbol, TrueClass, FalseClass], v, lambda { |arg| [0, 1, "true", "false", :true, :false, true, false, "0", "1"].include?(arg) })
   end
 
   # Requires that the value is a String

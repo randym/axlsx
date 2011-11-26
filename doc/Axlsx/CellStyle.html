@@ -6,7 +6,7 @@
 <title>
   Class: Axlsx::CellStyle
   
-    &mdash; Documentation by YARD 0.7.3
+    &mdash; AXLSX
   
 </title>
 
@@ -97,16 +97,14 @@
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'><p>
-Using Styles#add_style is the recommended way to manage cell styling.
-</p>
+    <div class='inline'>
+<p>Using Styles#add_style is the recommended way to manage cell styling.</p>
 </div>
   </div>
 
-<p>
-CellStyle defines named styles that reference defined formatting records
-and can be used in your worksheet.
-</p>
+
+<p>CellStyle defines named styles that reference defined formatting records
+and can be used in your worksheet.</p>
 
 
   </div>
@@ -145,9 +143,8 @@ and can be used in your worksheet.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The buildinId to use when this named style is applied.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The buildinId to use when this named style is applied.</p>
 </div></span>
   
 </li>
@@ -172,9 +169,8 @@ The buildinId to use when this named style is applied.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Indicates that the build in style reference has been customized.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Indicates that the build in style reference has been customized.</p>
 </div></span>
   
 </li>
@@ -199,10 +195,9 @@ Indicates that the build in style reference has been customized.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Determines if this named style should show in the list of styles when using
-excel.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Determines if this named style should show in the list of styles when using
+excel.</p>
 </div></span>
   
 </li>
@@ -227,10 +222,9 @@ excel.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Determines if this formatting is for an outline style, and what level of
-the outline it is to be applied to.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Determines if this formatting is for an outline style, and what level of
+the outline it is to be applied to.</p>
 </div></span>
   
 </li>
@@ -255,9 +249,8 @@ the outline it is to be applied to.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The name of this cell style.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The name of this cell style.</p>
 </div></span>
   
 </li>
@@ -282,9 +275,8 @@ The name of this cell style.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The formatting record id this named style utilizes.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The formatting record id this named style utilizes.</p>
 </div></span>
   
 </li>
@@ -321,9 +313,8 @@ The formatting record id this named style utilizes.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Creats a new CellStyle object.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Creats a new CellStyle object.</p>
 </div></span>
   
 </li>
@@ -345,9 +336,8 @@ Creats a new CellStyle object.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Serializes the cell style.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Serializes the cell style.</p>
 </div></span>
   
 </li>
@@ -368,9 +358,8 @@ Serializes the cell style.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Creats a new CellStyle object
-</p>
+    
+<p>Creats a new CellStyle object</p>
 
 
   </div>
@@ -391,9 +380,8 @@ Creats a new CellStyle object
       
       
         &mdash;
-        <div class='inline'><p>
-a customizable set of options
-</p>
+        <div class='inline'>
+<p>a customizable set of options</p>
 </div>
       
     </li>
@@ -479,12 +467,11 @@ a customizable set of options
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/cell_style.rb', line 39</span>
 
-<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
-  <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='o identifier id'>o</span><span class='bitor op'>|</span>
-    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='dstring node'>&quot;#{o[0]}=&quot;</span><span class='comma token'>,</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>0</span><span class='rbrack token'>]</span>
-  <span class='end end kw'>end</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id options'>options</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id o'>o</span><span class='op'>|</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span> <span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -507,9 +494,8 @@ a customizable set of options
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The buildinId to use when this named style is applied
-</p>
+    
+<p>The buildinId to use when this named style is applied</p>
 
 
   </div>
@@ -550,10 +536,9 @@ The buildinId to use when this named style is applied
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/cell_style.rb', line 18</span>
 
-<span class='def def kw'>def</span> <span class='builtinId identifier id'>builtinId</span>
-  <span class='@builtinId ivar id'>@builtinId</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id builtinId'>builtinId</span>
+  <span class='ivar'>@builtinId</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -571,9 +556,8 @@ The buildinId to use when this named style is applied
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Indicates that the build in style reference has been customized.
-</p>
+    
+<p>Indicates that the build in style reference has been customized.</p>
 
 
   </div>
@@ -607,10 +591,9 @@ Indicates that the build in style reference has been customized.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/cell_style.rb', line 30</span>
 
-<span class='def def kw'>def</span> <span class='customBuiltin identifier id'>customBuiltin</span>
-  <span class='@customBuiltin ivar id'>@customBuiltin</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id customBuiltin'>customBuiltin</span>
+  <span class='ivar'>@customBuiltin</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -628,10 +611,9 @@ Indicates that the build in style reference has been customized.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Determines if this named style should show in the list of styles when using
-excel
-</p>
+    
+<p>Determines if this named style should show in the list of styles when using
+excel</p>
 
 
   </div>
@@ -665,10 +647,9 @@ excel
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/cell_style.rb', line 26</span>
 
-<span class='def def kw'>def</span> <span class='hidden identifier id'>hidden</span>
-  <span class='@hidden ivar id'>@hidden</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id hidden'>hidden</span>
+  <span class='ivar'>@hidden</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -686,10 +667,9 @@ excel
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Determines if this formatting is for an outline style, and what level of
-the outline it is to be applied to.
-</p>
+    
+<p>Determines if this formatting is for an outline style, and what level of
+the outline it is to be applied to.</p>
 
 
   </div>
@@ -723,10 +703,9 @@ the outline it is to be applied to.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/cell_style.rb', line 22</span>
 
-<span class='def def kw'>def</span> <span class='iLevel identifier id'>iLevel</span>
-  <span class='@iLevel ivar id'>@iLevel</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id iLevel'>iLevel</span>
+  <span class='ivar'>@iLevel</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -744,9 +723,8 @@ the outline it is to be applied to.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The name of this cell style
-</p>
+    
+<p>The name of this cell style</p>
 
 
   </div>
@@ -780,10 +758,9 @@ The name of this cell style
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/cell_style.rb', line 8</span>
 
-<span class='def def kw'>def</span> <span class='name identifier id'>name</span>
-  <span class='@name ivar id'>@name</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id name'>name</span>
+  <span class='ivar'>@name</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -801,9 +778,8 @@ The name of this cell style
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The formatting record id this named style utilizes
-</p>
+    
+<p>The formatting record id this named style utilizes</p>
 
 
   </div>
@@ -844,10 +820,9 @@ The formatting record id this named style utilizes
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/cell_style.rb', line 13</span>
 
-<span class='def def kw'>def</span> <span class='xfId identifier id'>xfId</span>
-  <span class='@xfId ivar id'>@xfId</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id xfId'>xfId</span>
+  <span class='ivar'>@xfId</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -869,9 +844,8 @@ The formatting record id this named style utilizes
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Serializes the cell style
-</p>
+    
+<p>Serializes the cell style</p>
 
 
   </div>
@@ -890,9 +864,8 @@ Serializes the cell style
       
       
         &mdash;
-        <div class='inline'><p>
-The document builder instance this objects xml will be added to.
-</p>
+        <div class='inline'>
+<p>The document builder instance this objects xml will be added to.</p>
 </div>
       
     </li>
@@ -919,17 +892,16 @@ The document builder instance this objects xml will be added to.
       <pre class="lines">
 
 
-55
-56
-57</pre>
+60
+61
+62</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/cell_style.rb', line 55</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/cell_style.rb', line 60</span>
 
-<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
-  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='cellStyle identifier id'>cellStyle</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='dot token'>.</span><span class='instance_values identifier id'>instance_values</span><span class='rparen token'>)</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
+  <span class='id xml'>xml</span><span class='period'>.</span><span class='id cellStyle'>cellStyle</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id instance_values'>instance_values</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -940,9 +912,9 @@ The document builder instance this objects xml will be added to.
 </div>
     
     <div id="footer">
-  Generated on Wed Nov 23 22:20:53 2011 by 
+  Generated on Sat Nov 26 13:16:39 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.8.7).
+  0.7.3 (ruby-1.9.3).
 </div>
 
   </body>

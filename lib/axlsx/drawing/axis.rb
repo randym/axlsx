@@ -18,22 +18,22 @@ module Axlsx
     # The position of the axis
     # must be one of [:l, :r, :t, :b]
     # @return [Symbol]
-    attr_accessor :axPos
+    attr_reader :axPos
 
     # the position of the tick labels
     # must be one of [:nextTo, :high, :low]
     # @return [Symbol]
-    attr_accessor :tickLblPos
+    attr_reader :tickLblPos
 
     # The number format format code for this axis
     # default :General
     # @return [String]
-    attr_accessor :format_code
+    attr_reader :format_code
 
     # specifies how the perpendicular axis is crossed
     # must be one of [:autoZero, :min, :max]
     # @return [Symbol]
-    attr_accessor :crosses 
+    attr_reader :crosses 
 
     # Creates an Axis object
     # @param [Integer] axId the id of this axis
@@ -47,6 +47,7 @@ module Axlsx
       Axlsx::validate_unsigned_int(crossAx)
       @axId = axId
       @crossAx = crossAx
+      @format_code = "General"
       @scaling = Scaling.new(:orientation=>:minMax)
       self.axPos = :l
       self.tickLblPos = :nextTo
@@ -56,10 +57,20 @@ module Axlsx
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
     end
-
+    # The position of the axis
+    # must be one of [:l, :r, :t, :b]
     def axPos=(v) RestrictionValidator.validate "#{self.class}.axPos", [:l, :r, :b, :t], v; @axPos = v; end
+
+    # the position of the tick labels
+    # must be one of [:nextTo, :high, :low1]
     def tickLblPos=(v) RestrictionValidator.validate "#{self.class}.tickLblPos", [:nextTo, :high, :low], v; @tickLblPos = v; end
+
+    # The number format format code for this axis
+    # default :General
     def format_code=(v) Axlsx::validate_string(v); @formatCode = v; end
+
+    # specifies how the perpendicular axis is crossed
+    # must be one of [:autoZero, :min, :max]
     def crosses=(v) RestrictionValidator.validate "#{self.class}.crosses", [:autoZero, :min, :max], v; @crosses = v; end
 
     # Serializes the common axis

@@ -24,9 +24,6 @@ module Axlsx
     # @return [Drawing]
     attr_reader :drawing
 
-    # The index of this anchor in the drawing
-    # @return [Integer]
-    attr_reader :index
 
     # Creates a new TwoCellAnchor object and sets up a reference to the from and to markers in the 
     # graphic_frame's chart. That means that you can do stuff like
@@ -51,6 +48,8 @@ module Axlsx
       @object.chart
     end
 
+    # The index of this anchor in the drawing
+    # @return [Integer]
     def index
       @drawing.anchors.index(self)
     end

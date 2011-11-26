@@ -4,11 +4,11 @@ module Axlsx
 
     # The number of tick lables to skip between labels
     # @return [Integer]
-    attr_accessor :tickLblSkip
+    attr_reader :tickLblSkip
 
     # The number of tickmarks to be skipped before the next one is rendered.
     # @return [Boolean]
-    attr_accessor :tickMarkSkip
+    attr_reader :tickMarkSkip
 
     # Creates a new SerAxis object
     # @param [Integer] axId the id of this axis. Inherited
@@ -19,10 +19,14 @@ module Axlsx
     # @option options [Integer] tickLblSkip
     # @option options [Integer] tickMarkSkip
     def initialize(axId, crossAx, options={})
+      @tickLblSkip, @tickMarkSkip = nil, nil
       super(axId, crossAx, options)
     end 
 
+    # @see tickLblSkip
     def tickLblSkip=(v) Axlsx::validate_unsigned_int(v); @tickLblSkip = v; end
+
+    # @see tickMarkSkip
     def tickMarkSkip=(v) Axlsx::validate_unsigned_int(v); @tickMarkSkip = v; end
 
     # Serializes the series axis

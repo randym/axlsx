@@ -197,10 +197,10 @@ module Axlsx
                  else
                    options[:num_fmt] || 0
                  end
-
+      
       borderId = options[:border] || 0
       raise ArgumentError, "Invalid borderId" unless borderId < borders.size
-
+      
       fill = if options[:bg_color]
                color = Color.new(:rgb=>options[:bg_color])
                pattern = PatternFill.new(:patternType =>:solid, :fgColor=>color)
@@ -208,7 +208,7 @@ module Axlsx
              else
                0
              end
-
+      
       fontId = if (options.values_at(:fg_color, :sz, :b, :i, :strike, :outline, :shadow, :charset, :family, :font_name).length)
                  font = Font.new()
                  [:b, :i, :strike, :outline, :shadow, :charset, :family, :sz].each { |k| font.send("#{k}=", options[k]) unless options[k].nil? }
@@ -218,11 +218,11 @@ module Axlsx
                else
                  0 
                end
-
-       applyProtection = (options[:hidden] || options[:locked]) ? 1 : 0
-       
+      
+      applyProtection = (options[:hidden] || options[:locked]) ? 1 : 0
+      
       xf = Xf.new(:fillId => fill, :fontId=>fontId, :applyFill=>1, :applyFont=>1, :numFmtId=>numFmtId, :borderId=>borderId, :applyProtection=>applyProtection)
-
+      
       if options[:alignment]
         xf.alignment = CellAlignment.new(options[:alignment])
       end
@@ -230,16 +230,16 @@ module Axlsx
       if applyProtection
         xf.protection = CellProtection.new(options)
       end
-
+      
       cellXfs << xf
-     end
-
+    end
+    
     # Serializes the styles document
     # @return [String]
     def to_xml()
       builder = Nokogiri::XML::Builder.new(:encoding => ENCODING) do |xml|
         xml.styleSheet(:xmlns => XML_NS) {
-          [:numFmts, :fonts, :fills, :borders, :cellStyleXfs, :cellXfs, :dxfs, :tableStyles].each do |key|
+          [:numFmts, :fonts, :fills, :borders, :cellStyleXfs, :cellXfs, :cellStyles, :dxfs, :tableStyles].each do |key|
             self.instance_values[key.to_s].to_xml(xml)
           end
         }
@@ -280,7 +280,7 @@ module Axlsx
       @cellStyleXfs.lock
 
       @cellStyles = SimpleTypedList.new CellStyle
-      @cellStyles << CellStyle.new(:name =>"標準", :builtinId =>0, :xfId=>0)
+      @cellStyles << CellStyle.new(:name =>"Normal", :builtinId =>0, :xfId=>0)
       @cellStyles.lock
 
       @cellXfs = SimpleTypedList.new Xf, "cellXfs"

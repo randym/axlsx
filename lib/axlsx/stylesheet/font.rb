@@ -5,7 +5,7 @@ module Axlsx
   class Font
     # The name of the font
     # @return [String]
-    attr_accessor :name
+    attr_reader :name
     
     # The charset of the font
     # @return [Integer]
@@ -30,7 +30,7 @@ module Axlsx
     #   222 THAI_CHARSET
     #   238 EASTEUROPE_CHARSET
     #   255 OEM_CHARSET
-    attr_accessor :charset
+    attr_reader :charset
     
     # The font's family
     # @note 
@@ -43,43 +43,43 @@ module Axlsx
     #   5 Decorative
     #   6..14 Reserved for future use
     # @return [Integer]
-    attr_accessor :family
+    attr_reader :family
 
     # Indicates if the font should be rendered in *bold*
     # @return [Boolean]
-    attr_accessor :b
+    attr_reader :b
 
     # Indicates if the font should be rendered italicized
     # @return [Boolean]
-    attr_accessor :i
+    attr_reader :i
 
     # Indicates if the font should be rendered with a strikthrough
     # @return [Boolean]
-    attr_accessor :strike
+    attr_reader :strike
 
     # Indicates if the font should be rendered with an outline
     # @return [Boolean]
-    attr_accessor :outline
+    attr_reader :outline
 
     # Indicates if the font should be rendered with a shadow
     # @return [Boolean]
-    attr_accessor :shadow
+    attr_reader :shadow
 
     # Indicates if the font should be condensed
     # @return [Boolean]
-    attr_accessor :condense
+    attr_reader :condense
 
     # The font's extend property
     # @return [Boolean]
-    attr_accessor  :extend
+    attr_reader  :extend
 
     # The color of the font
     # @return [Color]
-    attr_accessor :color
+    attr_reader :color
 
     # The size of the font.
     # @return [Integer]
-    attr_accessor :sz
+    attr_reader :sz
 
     # Creates a new Font
     # @option options [String] name
@@ -100,18 +100,29 @@ module Axlsx
         self.send("#{o[0]}=", o[1]) if self.respond_to? o[0]
       end
     end
-
+    # @see name
     def name=(v) Axlsx::validate_string v; @name = v end    
+    # @see charset
     def charset=(v) Axlsx::validate_unsigned_int v; @charset = v end
+    # @see family
     def family=(v) Axlsx::validate_unsigned_int v; @family = v end
+    # @see b
     def b=(v) Axlsx::validate_boolean v; @b = v end    
+    # @see i
     def i=(v) Axlsx::validate_boolean v; @i = v end
+    # @see strike
     def strike=(v) Axlsx::validate_boolean v; @strike = v end
+    # @see outline
     def outline=(v) Axlsx::validate_boolean v; @outline = v end
+    # @see shadow
     def shadow=(v) Axlsx::validate_boolean v; @shadow = v end    
+    # @see condense
     def condense=(v) Axlsx::validate_boolean v; @condense = v end
+    # @see extend
     def extend=(v) Axlsx::validate_boolean v; @extend = v end
+    # @see color
     def color=(v) DataTypeValidator.validate "Font.color", Color, v; @color=v end
+    # @see sz
     def sz=(v) Axlsx::validate_unsigned_int v; @sz=v end
 
     # Serializes the fill

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 module Axlsx
   # A cell in a worksheet. 
   # Cell stores inforamation requried to serialize a single worksheet cell to xml. You must provde the Row that the cell belongs to and the cells value. The data type will automatically be determed if you do not specify the :type option. The default style will be applied if you do not supply the :style option. Changing the cell's type will recast the value to the type specified. Altering the cell's value via the property accessor will also automatically cast the provided value to the cell's type.
@@ -25,7 +26,7 @@ module Axlsx
     # The index of the cellXfs item to be applied to this cell.
     # @return [Integer] 
     # @see Axlsx::Styles
-    attr_accessor :style
+    attr_reader :style
 
     # The row this cell belongs to.
     # @return [Row]
@@ -42,12 +43,24 @@ module Axlsx
     #   :string to :integer or :float, type coversions always return 0 or 0.0    
     #   :string, :integer, or :float to :time conversions always return the original value as a string and set the cells type to :string.
     #  No support is currently implemented for parsing time strings.
-    #
-    attr_accessor :type
+    attr_reader :type
+    # @see type
+    def type=(v) 
+      RestrictionValidator.validate "Cell.type", [:time, :float, :integer, :string], v      
+      @type=v 
+      self.value = @value
+    end
+
 
     # The value of this cell.
     # @return casted value based on cell's type attribute.
-    attr_accessor :value
+    attr_reader :value
+    # @see value
+    def value=(v)
+      #TODO: consider doing value based type determination first?
+      @value = cast_value(v)
+    end
+
 
     # @param [Row] row The row this cell belongs to.
     # @param [Any] value The value associated with this cell. 
@@ -91,16 +104,7 @@ module Axlsx
       @style = v
     end
 
-    def type=(v) 
-      RestrictionValidator.validate "Cell.type", [:time, :float, :integer, :string], v      
-      @type=v 
-      self.value = @value
-    end
 
-    def value=(v)
-      #TODO: consider doing value based type determination first?
-      @value = cast_value(v)
-    end
 
     # Serializes the cell
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
@@ -108,13 +112,18 @@ module Axlsx
     # @note
     #   Shared Strings are not used in this library. All values are set directly in the each sheet.
     def to_xml(xml)
-      if @type == :string
-        #NOTE not sure why, but xml.t @v renders the text as html entities of unicode data
-        xml.c(:r => r, :t=>:inlineStr, :s=>style) { xml.is { xml.t value.to_s } }
+      # Both 1.8 and 1.9 return the same 'fast_xf'
+      # &#12491;&#12507;&#12531;&#12468;
+      # &#12491;&#12507;&#12531;&#12468;
+      
+      # however nokogiri does a nice 'force_encoding' which we shall remove!
+      if @type == :string 
+        xml.c(:r => r, :t=>:inlineStr, :s=>style) { xml.is { xml.t @value.to_s } }
       else
         xml.c(:r => r, :s => style) { xml.v value }
       end
     end
+
 
     private 
 

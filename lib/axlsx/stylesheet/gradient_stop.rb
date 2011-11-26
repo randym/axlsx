@@ -6,11 +6,11 @@ module Axlsx
     # The color for this gradient stop
     # @return [Color]
     # @see Color
-    attr_accessor :color
+    attr_reader :color
 
     # The position of the color
     # @return [Float]
-    attr_accessor :position
+    attr_reader :position
 
     # Creates a new GradientStop object
     # @param [Color] color
@@ -20,8 +20,10 @@ module Axlsx
       self.position = position
     end
 
+    # @see color
     def color=(v) DataTypeValidator.validate "GradientStop.color", Color, v; @color=v end
-    def position=(v) DataTypeValidator.validate "GradientStop.position", Float, v, lambda { |v| v >= 0 && v <= 1}; @position = v end    
+    # @see position
+    def position=(v) DataTypeValidator.validate "GradientStop.position", Float, v, lambda { |arg| arg >= 0 && arg <= 1}; @position = v end    
 
     # Serializes the gradientStop
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.

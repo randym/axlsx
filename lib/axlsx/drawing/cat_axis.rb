@@ -4,17 +4,17 @@ module Axlsx
 
     # From the docs: This element specifies that this axis is a date or text axis based on the data that is used for the axis labels, not a specific choice.
     # @return [Boolean]
-    attr_accessor :auto
+    attr_reader :auto
 
     # specifies how the perpendicular axis is crossed
     # must be one of [:ctr, :l, :r]
     # @return [Symbol]
-    attr_accessor :lblAlgn 
+    attr_reader :lblAlgn 
 
     # The offset of the labels
     # must be between a string between 0 and 1000
     # @return [Integer]
-    attr_accessor :lblOffset
+    attr_reader :lblOffset
 
     # regex for validating label offset
     LBL_OFFSET_REGEX = /0*(([0-9])|([1-9][0-9])|([1-9][0-9][0-9])|1000)%/
@@ -35,8 +35,15 @@ module Axlsx
       super(axId, crossAx, options)
     end 
 
+    # From the docs: This element specifies that this axis is a date or text axis based on the data that is used for the axis labels, not a specific choice.
     def auto=(v) Axlsx::validate_boolean(v); @auto = v; end
+
+    # specifies how the perpendicular axis is crossed
+    # must be one of [:ctr, :l, :r]
     def lblAlgn=(v) RestrictionValidator.validate "#{self.class}.lblAlgn", [:ctr, :l, :r], v; @lblAlgn = v; end
+
+    # The offset of the labels
+    # must be between a string between 0 and 1000
     def lblOffset=(v) RegexValidator.validate "#{self.class}.lblOffset", LBL_OFFSET_REGEX, v; @lblOffset = v; end
 
     # Serializes the category axis

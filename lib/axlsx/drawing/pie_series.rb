@@ -15,7 +15,7 @@ module Axlsx
 
     # The explosion for this series
     # @return [Integert]
-    attr_accessor :explosion
+    attr_reader :explosion
 
     # Creates a new series
     # @option options [Array, SimpleTypedList] data
@@ -24,21 +24,23 @@ module Axlsx
     # @option options [Integer] explosion
     # @param [Chart] chart
     def initialize(chart, options={})
+      @explosion = nil
       super(chart, options)
       self.labels = CatAxisData.new(options[:labels]) unless options[:labels].nil?
       self.data = ValAxisData.new(options[:data]) unless options[:data].nil?
     end 
     
+    # @see explosion
     def explosion=(v) Axlsx::validate_unsigned_int(v); @explosion = v; end
 
     # Serializes the series
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String]
     def to_xml(xml)
-      super(xml) do  |xml|
-        xml.send('c:explosion', :val=>@explosion) unless @explosion.nil?
-        @labels.to_xml(xml) unless @labels.nil?
-        @data.to_xml(xml) unless @data.nil?
+      super(xml) do  |xml_inner|
+        xml_inner.send('c:explosion', :val=>@explosion) unless @explosion.nil?
+        @labels.to_xml(xml_inner) unless @labels.nil?
+        @data.to_xml(xml_inner) unless @data.nil?
       end      
     end
     private 

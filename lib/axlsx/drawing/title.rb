@@ -4,11 +4,11 @@ module Axlsx
     
     # The text to be shown. Setting this property directly with a string will remove the cell reference.
     # @return [String]
-    attr_accessor :text
+    attr_reader :text
 
     # The cell that holds the text for the title. Setting this property will automatically update the text attribute.
     # @return [Cell]
-    attr_accessor :cell
+    attr_reader :cell
 
     # Creates a new Title object
     # @param [String, Cell] title The cell or string to be used for the chart's title
@@ -17,6 +17,7 @@ module Axlsx
       self.text = title.to_s unless title.is_a?(Cell)
     end
     
+    # @see text
     def text=(v) 
       DataTypeValidator.validate 'Title.text', String, v
       @text = v
@@ -24,6 +25,7 @@ module Axlsx
       v
     end
 
+    # @see cell
     def cell=(v)
       DataTypeValidator.validate 'Title.text', Cell, v
       @cell = v
@@ -43,7 +45,7 @@ module Axlsx
       xml.send('c:title') {
         xml.send('c:tx') {
           xml.send('c:strRef') {
-            xml.send('c:f', range)
+            xml.send('c:f', Axlsx::cell_range([@cell]))
             xml.send('c:strCache') {
               xml.send('c:ptCount', :val=>1)
               xml.send('c:pt', :idx=>0) {
@@ -55,14 +57,5 @@ module Axlsx
       }      
     end
     
-    private 
-
-    # returns the excel style abslute reference for the title when title is a Cell object
-    # @return [String]
-    def range
-      return "" unless @data.is_a?(Cell)
-      "#{@data.row.worksheet.name}!#{data.row.r_abs}"
-    end
-
   end
 end

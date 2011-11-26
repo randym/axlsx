@@ -6,15 +6,20 @@ Axlsx: Office Open XML Spreadsheet Generation
 **Author**:       Randy Morgan   
 **Copyright**:    2011      
 **License**:      MIT License      
-**Latest Version**: 1.0.8   
-**Ruby Version**: 1.8.7   
-**Release Date**: November 23nd 2011     
+**Latest Version**: 1.0.9   
+**Ruby Version**: 1.8.7 - 1.9.3   
+**Release Date**: November 26th 2011     
 
 Synopsis
 --------
 
 Axlsx is an Office Open XML Spreadsheet generator for the Ruby programming language.
-It enables the you to generate 100% valid xlsx files that include customised styling, images, 3D pie, bar and line charts and auto-width columns. Below is a summary of salient features.
+With Axlsx you can create worksheets with charts, images, automated column width, customizable styles and full schema validation. Axlsx excels at helping you generate beautiful Office Open XML Spreadsheet documents without having to understand the entire ECMA specification. Check out the README for some examples of how easy it is. Best of all, you can validate your xlsx file before serialization so you know for sure that anything generated is going to load on your client's machine.
+
+Help Wanted
+-----------
+
+I'd really like to get rid of the depenency on RMagick in this gem. RMagic is being used to calculate the column widths in a worksheet based on the content the user specified. If there happens to be anyone out there with the background and c skills to write an extenstion that can determine the width of a single character rendered with a specific font at a specific font size please give me a shout.
 
 Feature List
 ------------
@@ -147,6 +152,16 @@ Adding an Image
      end  
      p.serialize("example7.xlsx")
 
+Asian Language Support
+
+     p = Axlsx::Package.new
+     p.workbook.add_worksheet do |sheet|
+       sheet.add_row ["日本語"]
+       sheet.add_row ["华语/華語"]
+       sheet.add_row ["한국어/조선말"]
+     end  
+     p.serialize("example8.xlsx")
+
 ###Documentation
 
 This gem is 100% documented with YARD, an exceptional documentation library. To see documentation for this, and all the gems installed on your system use:
@@ -161,26 +176,12 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
  
 Changelog
 ---------
-- **October.23.11**: 1.0.8 release
-  - Added support for images (jpg, gif, png) in worksheets.
-
-- **October.23.11**: 1.0.7 released
-  - Added support for 3D options when creating a new chart. This lets you set the persective, rotation and other 3D attributes when using worksheet.add_chart
-  - Updated serialization write test to verify write permissions and warn if it cannot run the test due to permission restrcitions.
-  - updated rake to include build, genoc and deploy tasks.
-  - rebuilt documentation.
-  - moved version constant to its own file
-  - fixed bug in SerAxis that was requiring tickLblSkip and tickMarkSkip to be boolean. Should be unsigned int.
-  - Review and improve docs
-  - rebuild of anchor positioning to remove some spagetti code. Chart now supports a start_at and end_at method that accept an arrar for col/row positioning. See example6 for an example. You can still pass :start_at and :end_at options to worksheet.add_chart.
-  - Refactored cat and val axis data to keep series serialization a bit more DRY
+- **October.26.11**: 1.0.9 release
+  - Updated to support ruby 1.9.3
+  - Updated to eliminate all warnings originating in this gem
  
 Please see the {file:CHANGELOG.md} document for past release information.
 
-Help Wanted
------------
-
-I'd really like to get rid of the depenency on RMagick in this gem. RMagic is being used to calculate the column widths in a worksheet based on the content the user specified. If there happens to be anyone out there with the background and skill set to write an extenstion that can determine the width of a single character rendered with a specific font at a specific size please give me a shout.
 
 Copyright
 ---------

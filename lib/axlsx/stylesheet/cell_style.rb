@@ -5,29 +5,29 @@ module Axlsx
   class CellStyle
     # The name of this cell style
     # @return [String]
-    attr_accessor :name
+    attr_reader :name
     
     # The formatting record id this named style utilizes
     # @return [Integer]
     # @see Axlsx::Xf
-    attr_accessor :xfId
+    attr_reader :xfId
 
     # The buildinId to use when this named style is applied
     # @return [Integer]
     # @see Axlsx::NumFmt
-    attr_accessor :builtinId
+    attr_reader :builtinId
 
     # Determines if this formatting is for an outline style, and what level of the outline it is to be applied to.
     # @return [Integer]
-    attr_accessor :iLevel
+    attr_reader :iLevel
 
     # Determines if this named style should show in the list of styles when using excel
     # @return [Boolean]
-    attr_accessor :hidden
+    attr_reader :hidden
 
     # Indicates that the build in style reference has been customized.
     # @return [Boolean]
-    attr_accessor :customBuiltin
+    attr_reader :customBuiltin
 
     # Creats a new CellStyle object
     # @option options [String] name
@@ -41,12 +41,17 @@ module Axlsx
         self.send("#{o[0]}=", o[1]) if self.respond_to? o[0]
       end
     end
-
+    # @see name
     def name=(v)  Axlsx::validate_string v; @name = v end
+    # @see xfId
     def xfId=(v) Axlsx::validate_unsigned_int v; @xfId = v end
+    # @see builtinId
     def builtinId=(v) Axlsx::validate_unsigned_int v; @builtinId = v end
+    # @see iLivel
     def iLevel=(v) Axlsx::validate_unsigned_int v; @iLevel = v end
+    # @see hidden
     def hidden=(v) Axlsx::validate_boolean v; @hidden = v end
+    # @see customBuiltin
     def customBuiltin=(v) Axlsx::validate_boolean v; @customBuiltin = v end
 
     # Serializes the cell style

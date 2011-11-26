@@ -21,29 +21,21 @@ module Axlsx
     # @return [Series]
     attr_reader :series_type
 
-    # The index of this chart in the workbooks charts collection
-    # @return [Integer]
-    attr_reader :index
-
-    # The part name for this chart
-    # @return [String]
-    attr_reader :pn
-
     #TODO data labels!
-    #attr_accessor :dLabls
+    #attr_reader :dLabls
 
     # The title object for the chart.
     # @return [Title]
-    attr_accessor :title
+    attr_reader :title
 
     # The style for the chart. 
     # see ECMA Part 1 §21.2.2.196
     # @return [Integer]
-    attr_accessor :style
+    attr_reader :style
 
     # Show the legend in the chart
     # @return [Boolean]
-    attr_accessor :show_legend
+    attr_reader :show_legend
    
     # Creates a new chart object
     # @param [GraphicalFrame] frame The frame that holds this chart.
@@ -59,28 +51,42 @@ module Axlsx
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
-      start_at *options[:start_at] if options[:start_at]
-      end_at *options[:end_at] if options[:start_at]
+      start_at(*options[:start_at]) if options[:start_at]
+      end_at(*options[:end_at]) if options[:start_at]
       yield self if block_given?
     end
 
+    # The index of this chart in the workbooks charts collection
+    # @return [Integer]
     def index
       @graphic_frame.anchor.drawing.worksheet.workbook.charts.index(self)
     end
 
+    # The part name for this chart
+    # @return [String]
     def pn
       "#{CHART_PN % (index+1)}"
     end
 
+    # The title object for the chart.
+    # @param [String, Cell] v
+    # @return [Title]
     def title=(v) 
       v = Title.new(v) if v.is_a?(String) || v.is_a?(Cell)
       DataTypeValidator.validate "#{self.class}.title", Title, v
       @title = v
     end
 
+    # Show the legend in the chart
+    # @param [Boolean] v
+    # @return [Boolean]
     def show_legend=(v) Axlsx::validate_boolean(v); @show_legend = v; end
 
-    def style=(v) DataTypeValidator.validate "Chart.style", Integer, v, lambda { |v| v >= 1 && v <= 48 }; @style = v; end
+
+    # The style for the chart. 
+    # see ECMA Part 1 §21.2.2.196
+    # @param [Integer] v must be between 1 and 48
+    def style=(v) DataTypeValidator.validate "Chart.style", Integer, v, lambda { |arg| arg >= 1 && arg <= 48 }; @style = v; end
 
     # backwards compatibility to allow chart.to and chart.from access to anchor markers
     # @note This will be disconinued in version 2.0.0. Please use the end_at method

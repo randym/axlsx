@@ -32,15 +32,15 @@ module Axlsx
     #   :pageFieldLabels
     #   :pageFieldValues
     # @return [Symbol]
-    attr_accessor :type
+    attr_reader :type
 
     # Number of rows or columns used in striping when the type is firstRowStripe, secondRowStripe, firstColumnStripe, or secondColumnStripe.
     # @return [Integer]
-    attr_accessor :size
+    attr_reader :size
 
     # The dxfId this style element points to 
     # @return [Integer]
-    attr_accessor :dxfId
+    attr_reader :dxfId
 
     # creates a new TableStyleElement object
     # @option options [Symbol] type
@@ -51,9 +51,14 @@ module Axlsx
         self.send("#{o[0]}=", o[1]) if self.respond_to? o[0]
       end
     end
-    
+
+    # @see type
     def type=(v) Axlsx::validate_table_element_type v; @type = v end
+
+    # @see size
     def size=(v) Axlsx::validate_unsigned_int v; @size = v end
+
+    # @see dxfId
     def dxfId=(v) Axlsx::validate_unsigned_int v; @dxfId = v end
 
     # Serializes the table style element

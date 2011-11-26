@@ -6,7 +6,7 @@
 <title>
   Class: Axlsx::ContentType
   
-    &mdash; Documentation by YARD 0.7.3
+    &mdash; AXLSX
   
 </title>
 
@@ -96,10 +96,9 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>
-ContentTypes used in the package. This is automatcially managed by the
-package package.
-</p>
+    
+<p>ContentTypes used in the package. This is automatcially managed by the
+package package.</p>
 
 
   </div>
@@ -150,9 +149,8 @@ package package.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-A new instance of ContentType.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of ContentType.</p>
 </div></span>
   
 </li>
@@ -174,9 +172,8 @@ A new instance of ContentType.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Generates the xml document for [Content_Types].xml.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Generates the xml document for [Content_Types].xml.</p>
 </div></span>
   
 </li>
@@ -190,12 +187,7 @@ Generates the xml document for [Content_Types].xml.
   
   
   
-  
-  
-  
-  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="SimpleTypedList.html" title="Axlsx::SimpleTypedList (class)">SimpleTypedList</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="SimpleTypedList.html#%3C%3C-instance_method" title="Axlsx::SimpleTypedList#&lt;&lt; (method)">#<<</a></span>, <span class='object_link'><a href="SimpleTypedList.html#%3D%3D-instance_method" title="Axlsx::SimpleTypedList#== (method)">#==</a></span>, <span class='object_link'><a href="SimpleTypedList.html#%5B%5D%3D-instance_method" title="Axlsx::SimpleTypedList#[]= (method)">#[]=</a></span>, <span class='object_link'><a href="SimpleTypedList.html#delete-instance_method" title="Axlsx::SimpleTypedList#delete (method)">#delete</a></span>, <span class='object_link'><a href="SimpleTypedList.html#delete_at-instance_method" title="Axlsx::SimpleTypedList#delete_at (method)">#delete_at</a></span>, <span class='object_link'><a href="SimpleTypedList.html#lock-instance_method" title="Axlsx::SimpleTypedList#lock (method)">#lock</a></span>, <span class='object_link'><a href="SimpleTypedList.html#method_missing-instance_method" title="Axlsx::SimpleTypedList#method_missing (method)">#method_missing</a></span>, <span class='object_link'><a href="SimpleTypedList.html#protected%3F-instance_method" title="Axlsx::SimpleTypedList#protected? (method)">#protected?</a></span>, <span class='object_link'><a href="SimpleTypedList.html#push-instance_method" title="Axlsx::SimpleTypedList#push (method)">#push</a></span>, <span class='object_link'><a href="SimpleTypedList.html#unlock-instance_method" title="Axlsx::SimpleTypedList#unlock (method)">#unlock</a></span></p>
-<div id="constructor_details" class="method_details_list">
+  <div id="constructor_details" class="method_details_list">
   <h2>Constructor Details</h2>
   
     <div class="method_details first">
@@ -207,9 +199,8 @@ Generates the xml document for [Content_Types].xml.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-A new instance of ContentType
-</p>
+    
+<p>A new instance of ContentType</p>
 
 
   </div>
@@ -230,10 +221,9 @@ A new instance of ContentType
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/content_type/content_type.rb', line 8</span>
 
-<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span>
-  <span class='super super kw'>super</span> <span class='lbrack token'>[</span><span class='Override constant id'>Override</span><span class='comma token'>,</span> <span class='Default constant id'>Default</span><span class='rbrack token'>]</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id initialize'>initialize</span>
+  <span class='kw'>super</span> <span class='lbracket'>[</span><span class='const'>Override</span><span class='comma'>,</span> <span class='const'>Default</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -265,9 +255,8 @@ A new instance of ContentType
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Generates the xml document for [Content_Types].xml
-</p>
+    
+<p>Generates the xml document for [Content_Types].xml</p>
 
 
   </div>
@@ -285,9 +274,8 @@ Generates the xml document for [Content_Types].xml
       
       
         &mdash;
-        <div class='inline'><p>
-The document as a string.
-</p>
+        <div class='inline'>
+<p>The document as a string.</p>
 </div>
       
     </li>
@@ -312,15 +300,14 @@ The document as a string.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/content_type/content_type.rb', line 14</span>
 
-<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='rparen token'>)</span>
-  <span class='builder identifier id'>builder</span> <span class='assign token'>=</span> <span class='Nokogiri constant id'>Nokogiri</span><span class='colon2 op'>::</span><span class='XML constant id'>XML</span><span class='colon2 op'>::</span><span class='Builder constant id'>Builder</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:encoding</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='ENCODING constant id'>ENCODING</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='xml identifier id'>xml</span><span class='bitor op'>|</span>
-    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='Types constant id'>Types</span><span class='lparen token'>(</span><span class='symbol val'>:xmlns</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='XML_NS_T constant id'>XML_NS_T</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
-      <span class='each identifier id'>each</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='type identifier id'>type</span><span class='bitor op'>|</span> <span class='type identifier id'>type</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span> <span class='rbrace token'>}</span>
-    <span class='rbrace token'>}</span>
-  <span class='end end kw'>end</span>
-  <span class='builder identifier id'>builder</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='id builder'>builder</span> <span class='op'>=</span> <span class='const'>Nokogiri</span><span class='op'>::</span><span class='const'>XML</span><span class='op'>::</span><span class='const'>Builder</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='symbol'>:encoding</span> <span class='op'>=&gt;</span> <span class='const'>ENCODING</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id xml'>xml</span><span class='op'>|</span>
+    <span class='id xml'>xml</span><span class='period'>.</span><span class='const'>Types</span><span class='lparen'>(</span><span class='symbol'>:xmlns</span> <span class='op'>=&gt;</span> <span class='const'>Axlsx</span><span class='op'>::</span><span class='const'>XML_NS_T</span><span class='rparen'>)</span> <span class='lbrace'>{</span>
+      <span class='id each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id type'>type</span><span class='op'>|</span> <span class='id type'>type</span><span class='period'>.</span><span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+    <span class='rbrace'>}</span>
+  <span class='kw'>end</span>
+  <span class='id builder'>builder</span><span class='period'>.</span><span class='id to_xml'>to_xml</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -331,9 +318,9 @@ The document as a string.
 </div>
     
     <div id="footer">
-  Generated on Wed Nov 23 22:20:51 2011 by 
+  Generated on Sat Nov 26 13:16:40 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.8.7).
+  0.7.3 (ruby-1.9.3).
 </div>
 
   </body>

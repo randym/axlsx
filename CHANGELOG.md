@@ -1,6 +1,20 @@
 CHANGELOG
 ---------
 
+- **October.23.11**: 1.0.8 release
+  - Added support for images (jpg, gif, png) in worksheets.
+
+- **October.23.11**: 1.0.7 released
+  - Added support for 3D options when creating a new chart. This lets you set the persective, rotation and other 3D attributes when using worksheet.add_chart
+  - Updated serialization write test to verify write permissions and warn if it cannot run the test due to permission restrcitions.
+  - updated rake to include build, genoc and deploy tasks.
+  - rebuilt documentation.
+  - moved version constant to its own file
+  - fixed bug in SerAxis that was requiring tickLblSkip and tickMarkSkip to be boolean. Should be unsigned int.
+  - Review and improve docs
+  - rebuild of anchor positioning to remove some spagetti code. Chart now supports a start_at and end_at method that accept an arrar for col/row positioning. See example6 for an example. You can still pass :start_at and :end_at options to worksheet.add_chart.
+  - Refactored cat and val axis data to keep series serialization a bit more DRY
+
 ##October.22.11: 1.0.6 release
   - Bumping version to include docs. Bug in gemspec pointing to incorrect directory.
 

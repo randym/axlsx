@@ -6,7 +6,7 @@
 <title>
   Class: Axlsx::Pic
   
-    &mdash; Documentation by YARD 0.7.3
+    &mdash; AXLSX
   
 </title>
 
@@ -94,10 +94,9 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>
-a Pic object represents an image in your worksheet Worksheet#add_image is
-the recommended way to manage images in your sheets
-</p>
+    
+<p>a Pic object represents an image in your worksheet Worksheet#add_image is
+the recommended way to manage images in your sheets</p>
 
 
   </div>
@@ -120,9 +119,8 @@ the recommended way to manage images in your sheets
         <dt id="ALLOWED_EXTENSIONS-constant" class="">ALLOWED_EXTENSIONS =
           <div class="docstring">
   <div class="discussion">
-    <p>
-allowed file extenstions
-</p>
+    
+<p>allowed file extenstions</p>
 
 
   </div>
@@ -132,8 +130,7 @@ allowed file extenstions
 
 </div>
         </dt>
-        <dd><pre class="code"><span class='lbrack token'>[</span><span class='string val'>'gif'</span><span class='comma token'>,</span> <span class='string val'>'jpeg'</span><span class='comma token'>,</span> <span class='string val'>'png'</span><span class='comma token'>,</span> <span class='string val'>'jpg'</span><span class='rbrack token'>]</span>
-</pre></dd>
+        <dd><pre class="code"><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>gif</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>jpeg</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>png</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>jpg</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span></pre></dd>
       
     </dl>
   
@@ -161,9 +158,8 @@ allowed file extenstions
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The anchor for this image.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The anchor for this image.</p>
 </div></span>
   
 </li>
@@ -188,90 +184,8 @@ The anchor for this image.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-A description of the picture.
-</p>
-</div></span>
-  
-</li>
-
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#extname-instance_method" title="#extname (instance method)">- (String) <strong>extname</strong> </a>
-    
-
-    
-  </span>
-  
-  
-    <span class="note title readonly">readonly</span>
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>
-returns the extension of image_src without the preceeding &#8217;.&#8217;.
-</p>
-</div></span>
-  
-</li>
-
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#file_name-instance_method" title="#file_name (instance method)">- (String) <strong>file_name</strong> </a>
-    
-
-    
-  </span>
-  
-  
-    <span class="note title readonly">readonly</span>
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>
-The name of the image file, sans directory info.
-</p>
-</div></span>
-  
-</li>
-
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#height-instance_method" title="#height (instance method)">- (Object) <strong>height</strong> </a>
-    
-
-    
-  </span>
-  
-  
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>
-providing access to update the anchor&#8217;s height attribute.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>A description of the picture.</p>
 </div></span>
   
 </li>
@@ -296,37 +210,9 @@ providing access to update the anchor&#8217;s height attribute.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The path to the image you want to include Only local images are supported
-at this time and only jpg support.
-</p>
-</div></span>
-  
-</li>
-
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#index-instance_method" title="#index (instance method)">- (Index) <strong>index</strong> </a>
-    
-
-    
-  </span>
-  
-  
-    <span class="note title readonly">readonly</span>
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>
-The index of this image in the workbooks images collections.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The path to the image you want to include Only local images are supported
+at this time and only jpg support.</p>
 </div></span>
   
 </li>
@@ -351,64 +237,8 @@ The index of this image in the workbooks images collections.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The name to use for this picture.
-</p>
-</div></span>
-  
-</li>
-
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#pn-instance_method" title="#pn (instance method)">- (String) <strong>pn</strong> </a>
-    
-
-    
-  </span>
-  
-  
-    <span class="note title readonly">readonly</span>
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>
-The part name for this image used in serialization and relationship
-building.
-</p>
-</div></span>
-  
-</li>
-
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#width-instance_method" title="#width (instance method)">- (Object) <strong>width</strong> </a>
-    
-
-    
-  </span>
-  
-  
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>
-providing access to the anchor&#8217;s width attribute.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The name to use for this picture.</p>
 </div></span>
   
 </li>
@@ -430,6 +260,119 @@ providing access to the anchor&#8217;s width attribute.
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#extname-instance_method" title="#extname (instance method)">- (String) <strong>extname</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>returns the extension of image_src without the preceeding '.'.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#file_name-instance_method" title="#file_name (instance method)">- (String) <strong>file_name</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The file name of image_src without any path information.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#height-instance_method" title="#height (instance method)">- (Object) <strong>height</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>providing access to update the anchor's height attribute.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#height%3D-instance_method" title="#height= (instance method)">- (Object) <strong>height=</strong>(v) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#index-instance_method" title="#index (instance method)">- (Index) <strong>index</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The index of this image in the workbooks images collections.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#initialize-instance_method" title="#initialize (instance method)">- (Pic) <strong>initialize</strong>(anchor, options = {}) {|_self| ... }</a>
     
 
@@ -445,9 +388,32 @@ providing access to the anchor&#8217;s width attribute.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Creates a new Pic(ture) object.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new Pic(ture) object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pn-instance_method" title="#pn (instance method)">- (String) <strong>pn</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The part name for this image used in serialization and relationship
+building.</p>
 </div></span>
   
 </li>
@@ -469,11 +435,10 @@ Creates a new Pic(ture) object.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-This is a short cut method to set the start anchor position If you need
+    <span class="summary_desc"><div class='inline'>
+<p>This is a short cut method to set the start anchor position If you need
 finer granularity in positioning use graphic_frame.anchor.from.colOff /
-rowOff.
-</p>
+rowOff.</p>
 </div></span>
   
 </li>
@@ -495,10 +460,53 @@ rowOff.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Serializes the picture.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Serializes the picture.</p>
 </div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#width-instance_method" title="#width (instance method)">- (Object) <strong>width</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>providing access to the anchor's width attribute.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#width%3D-instance_method" title="#width= (instance method)">- (Object) <strong>width=</strong>(v) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -518,9 +526,8 @@ Serializes the picture.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Creates a new Pic(ture) object
-</p>
+    
+<p>Creates a new Pic(ture) object</p>
 
 
   </div>
@@ -539,9 +546,8 @@ Creates a new Pic(ture) object
       
       
         &mdash;
-        <div class='inline'><p>
-the anchor that holds this image
-</p>
+        <div class='inline'>
+<p>the anchor that holds this image</p>
 </div>
       
     </li>
@@ -558,9 +564,8 @@ the anchor that holds this image
       
       
         &mdash;
-        <div class='inline'><p>
-a customizable set of options
-</p>
+        <div class='inline'>
+<p>a customizable set of options</p>
 </div>
       
     </li>
@@ -658,9 +663,8 @@ a customizable set of options
       
       
         &mdash;
-        <div class='inline'><p>
-the object that the method was called on
-</p>
+        <div class='inline'>
+<p>the object that the method was called on</p>
 </div>
       
     </li>
@@ -673,29 +677,28 @@ the object that the method was called on
       <pre class="lines">
 
 
-66
-67
-68
-69
-70
-71
-72
-73
-74</pre>
+38
+39
+40
+41
+42
+43
+44
+45
+46</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pic.rb', line 66</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pic.rb', line 38</span>
 
-<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='anchor identifier id'>anchor</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
-  <span class='@anchor ivar id'>@anchor</span> <span class='assign token'>=</span> <span class='anchor identifier id'>anchor</span>
-  <span class='@anchor ivar id'>@anchor</span><span class='dot token'>.</span><span class='drawing identifier id'>drawing</span><span class='dot token'>.</span><span class='worksheet identifier id'>worksheet</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='images identifier id'>images</span> <span class='lshft op'>&lt;&lt;</span> <span class='self self kw'>self</span>
-  <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='o identifier id'>o</span><span class='bitor op'>|</span>
-    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='dstring node'>&quot;#{o[0]}=&quot;</span><span class='comma token'>,</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span> <span class='dstring node'>&quot;#{o[0]}=&quot;</span>
-  <span class='end end kw'>end</span>
-  <span class='start_at identifier id'>start_at</span> <span class='mult op'>*</span><span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:start_at</span><span class='rbrack token'>]</span> <span class='if if_mod kw'>if</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:start_at</span><span class='rbrack token'>]</span>
-  <span class='yield yield kw'>yield</span> <span class='self self kw'>self</span> <span class='if if_mod kw'>if</span> <span class='block_given? fid id'>block_given?</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id anchor'>anchor</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='ivar'>@anchor</span> <span class='op'>=</span> <span class='id anchor'>anchor</span>
+  <span class='ivar'>@anchor</span><span class='period'>.</span><span class='id drawing'>drawing</span><span class='period'>.</span><span class='id worksheet'>worksheet</span><span class='period'>.</span><span class='id workbook'>workbook</span><span class='period'>.</span><span class='id images'>images</span> <span class='op'>&lt;&lt;</span> <span class='kw'>self</span>
+  <span class='id options'>options</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id o'>o</span><span class='op'>|</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  <span class='id start_at'>start_at</span><span class='lparen'>(</span><span class='op'>*</span><span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:start_at</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:start_at</span><span class='rbracket'>]</span>
+  <span class='kw'>yield</span> <span class='kw'>self</span> <span class='kw'>if</span> <span class='id block_given?'>block_given?</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -718,9 +721,8 @@ the object that the method was called on
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The anchor for this image
-</p>
+    
+<p>The anchor for this image</p>
 
 
   </div>
@@ -747,17 +749,16 @@ The anchor for this image
       <pre class="lines">
 
 
-36
-37
-38</pre>
+27
+28
+29</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pic.rb', line 36</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pic.rb', line 27</span>
 
-<span class='def def kw'>def</span> <span class='anchor identifier id'>anchor</span>
-  <span class='@anchor ivar id'>@anchor</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id anchor'>anchor</span>
+  <span class='ivar'>@anchor</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -775,9 +776,8 @@ The anchor for this image
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-A description of the picture
-</p>
+    
+<p>A description of the picture</p>
 
 
   </div>
@@ -804,197 +804,16 @@ A description of the picture
       <pre class="lines">
 
 
-27
-28
-29</pre>
+18
+19
+20</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pic.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pic.rb', line 18</span>
 
-<span class='def def kw'>def</span> <span class='descr identifier id'>descr</span>
-  <span class='@descr ivar id'>@descr</span>
-<span class='end end kw'>end</span>
-</pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id=""></span>
-      <span id="extname-instance_method"></span>
-      <div class="method_details ">
-  <p class="signature " id="extname-instance_method">
-  
-    - (<tt>String</tt>) <strong>extname</strong>  <span class="extras">(readonly)</span>
-  
-
-  
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-returns the extension of image_src without the preceeding &#8217;.&#8217;
-</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-<h3>Returns:</h3>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>String</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-40
-41
-42</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pic.rb', line 40</span>
-
-<span class='def def kw'>def</span> <span class='extname identifier id'>extname</span>
-  <span class='File constant id'>File</span><span class='dot token'>.</span><span class='extname identifier id'>extname</span><span class='lparen token'>(</span><span class='image_src identifier id'>image_src</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='delete identifier id'>delete</span><span class='lparen token'>(</span><span class='string val'>'.'</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='image_src identifier id'>image_src</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
-<span class='end end kw'>end</span>
-</pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id=""></span>
-      <span id="file_name-instance_method"></span>
-      <div class="method_details ">
-  <p class="signature " id="file_name-instance_method">
-  
-    - (<tt>String</tt>) <strong>file_name</strong>  <span class="extras">(readonly)</span>
-  
-
-  
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-The name of the image file, sans directory info
-</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-<h3>Returns:</h3>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>String</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-44
-45
-46</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pic.rb', line 44</span>
-
-<span class='def def kw'>def</span> <span class='file_name identifier id'>file_name</span>
-  <span class='File constant id'>File</span><span class='dot token'>.</span><span class='basename identifier id'>basename</span><span class='lparen token'>(</span><span class='image_src identifier id'>image_src</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='image_src identifier id'>image_src</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
-<span class='end end kw'>end</span>
-</pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id="height=-instance_method"></span>
-      <span id="height-instance_method"></span>
-      <div class="method_details ">
-  <p class="signature " id="height-instance_method">
-  
-    - (<tt>Object</tt>) <strong>height</strong> 
-  
-
-  
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-providing access to update the anchor&#8217;s height attribute
-</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  <h3>Parameters:</h3>
-<ul class="param">
-  
-    <li>
-      
-        <span class='name'>v</span>
-      
-      
-        <span class='type'>(<tt>Integer</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-
-  <h3>See Also:</h3>
-  <ul class="see">
-    
-      <li>OneCellAnchor.width</li>
-    
-  </ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-23
-24
-25</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pic.rb', line 23</span>
-
-<span class='def def kw'>def</span> <span class='height identifier id'>height</span>
-  <span class='@anchor ivar id'>@anchor</span><span class='dot token'>.</span><span class='height identifier id'>height</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id descr'>descr</span>
+  <span class='ivar'>@descr</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1012,10 +831,9 @@ providing access to update the anchor&#8217;s height attribute
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The path to the image you want to include Only local images are supported
-at this time and only jpg support
-</p>
+    
+<p>The path to the image you want to include Only local images are supported
+at this time and only jpg support</p>
 
 
   </div>
@@ -1042,74 +860,16 @@ at this time and only jpg support
       <pre class="lines">
 
 
-32
-33
-34</pre>
+23
+24
+25</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pic.rb', line 32</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pic.rb', line 23</span>
 
-<span class='def def kw'>def</span> <span class='image_src identifier id'>image_src</span>
-  <span class='@image_src ivar id'>@image_src</span>
-<span class='end end kw'>end</span>
-</pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id=""></span>
-      <span id="index-instance_method"></span>
-      <div class="method_details ">
-  <p class="signature " id="index-instance_method">
-  
-    - (<tt>Index</tt>) <strong>index</strong>  <span class="extras">(readonly)</span>
-  
-
-  
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-The index of this image in the workbooks images collections
-</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-<h3>Returns:</h3>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>Index</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-52
-53
-54</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pic.rb', line 52</span>
-
-<span class='def def kw'>def</span> <span class='index identifier id'>index</span>
-  <span class='@anchor ivar id'>@anchor</span><span class='dot token'>.</span><span class='drawing identifier id'>drawing</span><span class='dot token'>.</span><span class='worksheet identifier id'>worksheet</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='images identifier id'>images</span><span class='dot token'>.</span><span class='index identifier id'>index</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='rparen token'>)</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id image_src'>image_src</span>
+  <span class='ivar'>@image_src</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1127,9 +887,8 @@ The index of this image in the workbooks images collections
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The name to use for this picture
-</p>
+    
+<p>The name to use for this picture</p>
 
 
   </div>
@@ -1163,31 +922,32 @@ The name to use for this picture
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pic.rb', line 13</span>
 
-<span class='def def kw'>def</span> <span class='name identifier id'>name</span>
-  <span class='@name ivar id'>@name</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id name'>name</span>
+  <span class='ivar'>@name</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
 </div>
     
-      
-      <span id=""></span>
-      <span id="pn-instance_method"></span>
-      <div class="method_details ">
-  <p class="signature " id="pn-instance_method">
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="extname-instance_method">
   
-    - (<tt>String</tt>) <strong>pn</strong>  <span class="extras">(readonly)</span>
+    - (<tt>String</tt>) <strong>extname</strong> 
   
 
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The part name for this image used in serialization and relationship
-building
-</p>
+    
+<p>returns the extension of image_src without the preceeding '.'</p>
 
 
   </div>
@@ -1214,37 +974,84 @@ building
       <pre class="lines">
 
 
-48
-49
-50</pre>
+70
+71
+72</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pic.rb', line 48</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pic.rb', line 70</span>
 
-<span class='def def kw'>def</span> <span class='pn identifier id'>pn</span>
-  <span class='dstring node'>&quot;#{IMAGE_PN % [(index+1), extname]}&quot;</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id extname'>extname</span>
+  <span class='const'>File</span><span class='period'>.</span><span class='id extname'>extname</span><span class='lparen'>(</span><span class='id image_src'>image_src</span><span class='rparen'>)</span><span class='period'>.</span><span class='id delete'>delete</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>.</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id image_src'>image_src</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
 </div>
     
-      
-      <span id="width=-instance_method"></span>
-      <span id="width-instance_method"></span>
       <div class="method_details ">
-  <p class="signature " id="width-instance_method">
+  <p class="signature " id="file_name-instance_method">
   
-    - (<tt>Object</tt>) <strong>width</strong> 
+    - (<tt>String</tt>) <strong>file_name</strong> 
   
 
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-providing access to the anchor&#8217;s width attribute
-</p>
+    
+<p>The file name of image_src without any path information</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+64
+65
+66</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pic.rb', line 64</span>
+
+<span class='kw'>def</span> <span class='id file_name'>file_name</span>
+  <span class='const'>File</span><span class='period'>.</span><span class='id basename'>basename</span><span class='lparen'>(</span><span class='id image_src'>image_src</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id image_src'>image_src</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="height-instance_method">
+  
+    - (<tt>Object</tt>) <strong>height</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>providing access to update the anchor's height attribute</p>
 
 
   </div>
@@ -1280,31 +1087,172 @@ providing access to the anchor&#8217;s width attribute
       <pre class="lines">
 
 
-18
-19
-20</pre>
+101
+102
+103</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pic.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pic.rb', line 101</span>
 
-<span class='def def kw'>def</span> <span class='width identifier id'>width</span>
-  <span class='@anchor ivar id'>@anchor</span><span class='dot token'>.</span><span class='width identifier id'>width</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id height'>height</span>
+  <span class='ivar'>@anchor</span><span class='period'>.</span><span class='id height'>height</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
 </div>
     
+      <div class="method_details ">
+  <p class="signature " id="height=-instance_method">
+  
+    - (<tt>Object</tt>) <strong>height=</strong>(v) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+
   </div>
+</div>
+<div class="tags">
+  
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>height</li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
 
 
-  <div id="instance_method_details" class="method_details_list">
-    <h2>Instance Method Details</h2>
+106
+107
+108</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pic.rb', line 106</span>
+
+<span class='kw'>def</span> <span class='id height='>height=</span><span class='lparen'>(</span><span class='id v'>v</span><span class='rparen'>)</span>
+  <span class='ivar'>@anchor</span><span class='period'>.</span><span class='id height'>height</span> <span class='op'>=</span> <span class='id v'>v</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
     
+      <div class="method_details ">
+  <p class="signature " id="index-instance_method">
+  
+    - (<tt>Index</tt>) <strong>index</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
     
-      <div class="method_details first">
-  <p class="signature first" id="start_at-instance_method">
+<p>The index of this image in the workbooks images collections</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Index</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+76
+77
+78</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pic.rb', line 76</span>
+
+<span class='kw'>def</span> <span class='id index'>index</span>
+  <span class='ivar'>@anchor</span><span class='period'>.</span><span class='id drawing'>drawing</span><span class='period'>.</span><span class='id worksheet'>worksheet</span><span class='period'>.</span><span class='id workbook'>workbook</span><span class='period'>.</span><span class='id images'>images</span><span class='period'>.</span><span class='id index'>index</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="pn-instance_method">
+  
+    - (<tt>String</tt>) <strong>pn</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>The part name for this image used in serialization and relationship
+building</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+82
+83
+84</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pic.rb', line 82</span>
+
+<span class='kw'>def</span> <span class='id pn'>pn</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='const'>IMAGE_PN</span> <span class='op'>%</span> <span class='lbracket'>[</span><span class='lparen'>(</span><span class='id index'>index</span><span class='op'>+</span><span class='int'>1</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id extname'>extname</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="start_at-instance_method">
   
     - (<tt><span class='object_link'><a href="Marker.html" title="Axlsx::Marker (class)">Marker</a></span></tt>) <strong>start_at</strong>(x, y) 
   
@@ -1312,11 +1260,10 @@ providing access to the anchor&#8217;s width attribute
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-This is a short cut method to set the start anchor position If you need
+    
+<p>This is a short cut method to set the start anchor position If you need
 finer granularity in positioning use graphic_frame.anchor.from.colOff /
-rowOff
-</p>
+rowOff</p>
 
 
   </div>
@@ -1335,9 +1282,8 @@ rowOff
       
       
         &mdash;
-        <div class='inline'><p>
-The column
-</p>
+        <div class='inline'>
+<p>The column</p>
 </div>
       
     </li>
@@ -1352,9 +1298,8 @@ The column
       
       
         &mdash;
-        <div class='inline'><p>
-The row
-</p>
+        <div class='inline'>
+<p>The row</p>
 </div>
       
     </li>
@@ -1381,19 +1326,18 @@ The row
       <pre class="lines">
 
 
-124
-125
-126
-127</pre>
+116
+117
+118
+119</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pic.rb', line 124</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pic.rb', line 116</span>
 
-<span class='def def kw'>def</span> <span class='start_at identifier id'>start_at</span><span class='lparen token'>(</span><span class='x identifier id'>x</span><span class='comma token'>,</span> <span class='y identifier id'>y</span><span class='rparen token'>)</span>
-  <span class='@anchor ivar id'>@anchor</span><span class='dot token'>.</span><span class='from identifier id'>from</span><span class='dot token'>.</span><span class='col identifier id'>col</span> <span class='assign token'>=</span> <span class='x identifier id'>x</span>
-  <span class='@anchor ivar id'>@anchor</span><span class='dot token'>.</span><span class='from identifier id'>from</span><span class='dot token'>.</span><span class='row identifier id'>row</span> <span class='assign token'>=</span> <span class='y identifier id'>y</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id start_at'>start_at</span><span class='lparen'>(</span><span class='id x'>x</span><span class='comma'>,</span> <span class='id y'>y</span><span class='rparen'>)</span>
+  <span class='ivar'>@anchor</span><span class='period'>.</span><span class='id from'>from</span><span class='period'>.</span><span class='id col'>col</span> <span class='op'>=</span> <span class='id x'>x</span>
+  <span class='ivar'>@anchor</span><span class='period'>.</span><span class='id from'>from</span><span class='period'>.</span><span class='id row'>row</span> <span class='op'>=</span> <span class='id y'>y</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1408,9 +1352,8 @@ The row
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Serializes the picture
-</p>
+    
+<p>Serializes the picture</p>
 
 
   </div>
@@ -1429,9 +1372,8 @@ Serializes the picture
       
       
         &mdash;
-        <div class='inline'><p>
-The document builder instance this objects xml will be added to.
-</p>
+        <div class='inline'>
+<p>The document builder instance this objects xml will be added to.</p>
 </div>
       
     </li>
@@ -1458,6 +1400,14 @@ The document builder instance this objects xml will be added to.
       <pre class="lines">
 
 
+124
+125
+126
+127
+128
+129
+130
+131
 132
 133
 134
@@ -1474,45 +1424,141 @@ The document builder instance this objects xml will be added to.
 145
 146
 147
-148
-149
-150
-151
-152
-153
-154
-155
-156</pre>
+148</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pic.rb', line 132</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pic.rb', line 124</span>
 
-<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
-  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'xdr:pic'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
-    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'xdr:nvPicPr'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
-      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'xdr:cNvPr'</span><span class='comma token'>,</span> <span class='symbol val'>:id=</span><span class='gt op'>&gt;</span><span class='string val'>&quot;2&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:name=</span><span class='gt op'>&gt;</span><span class='name identifier id'>name</span><span class='comma token'>,</span> <span class='symbol val'>:descr=</span><span class='gt op'>&gt;</span><span class='descr identifier id'>descr</span><span class='rparen token'>)</span>
-      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'xdr:cNvPicPr'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
-        <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'a:picLocks'</span><span class='comma token'>,</span> <span class='symbol val'>:noChangeAspect=</span><span class='gt op'>&gt;</span><span class='integer val'>1</span><span class='rparen token'>)</span>
-      <span class='rbrace token'>}</span>
-    <span class='rbrace token'>}</span>
-    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'xdr:blipFill'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
-      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'a:blip'</span><span class='comma token'>,</span> <span class='symbol val'>:'xmlns:r'</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='XML_NS_R constant id'>XML_NS_R</span><span class='comma token'>,</span> <span class='symbol val'>:'r:embed'</span><span class='assign token'>=</span><span class='gt op'>&gt;</span><span class='string val'>&quot;rId1&quot;</span><span class='rparen token'>)</span>
-      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'a:stretch'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
-        <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'a:fillRect'</span><span class='rparen token'>)</span>
-      <span class='rbrace token'>}</span>
-    <span class='rbrace token'>}</span>
-    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'xdr:spPr'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
-      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'a:xfrm'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
-        <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'a:off'</span><span class='comma token'>,</span> <span class='symbol val'>:x=</span><span class='gt op'>&gt;</span><span class='integer val'>0</span><span class='comma token'>,</span> <span class='symbol val'>:y=</span><span class='gt op'>&gt;</span><span class='integer val'>0</span><span class='rparen token'>)</span>
-        <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'a:ext'</span><span class='comma token'>,</span> <span class='symbol val'>:cx=</span><span class='gt op'>&gt;</span><span class='integer val'>2336800</span><span class='comma token'>,</span> <span class='symbol val'>:cy=</span><span class='gt op'>&gt;</span><span class='integer val'>2161540</span><span class='rparen token'>)</span>
-      <span class='rbrace token'>}</span>
-      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'a:prstGeom'</span><span class='comma token'>,</span> <span class='symbol val'>:prst=</span><span class='gt op'>&gt;</span><span class='symbol val'>:rect</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
-        <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'a:avLst'</span><span class='rparen token'>)</span>
-      <span class='rbrace token'>}</span>
-    <span class='rbrace token'>}</span>
-  <span class='rbrace token'>}</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
+  <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>xdr:pic</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span>
+    <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>xdr:nvPicPr</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span>
+      <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>xdr:cNvPr</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:id</span><span class='op'>=&gt;</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>2</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:name</span><span class='op'>=&gt;</span><span class='id name'>name</span><span class='comma'>,</span> <span class='symbol'>:descr</span><span class='op'>=&gt;</span><span class='id descr'>descr</span><span class='rparen'>)</span>
+      <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>xdr:cNvPicPr</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span>
+        <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>a:picLocks</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:noChangeAspect</span><span class='op'>=&gt;</span><span class='int'>1</span><span class='rparen'>)</span>
+      <span class='rbrace'>}</span>
+    <span class='rbrace'>}</span>
+    <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>xdr:blipFill</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span>
+      <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>a:blip</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:xmlns:r</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='const'>XML_NS_R</span><span class='comma'>,</span> <span class='symbol'>:r:embed</span><span class='tstring_end'>'</span></span><span class='op'>=&gt;</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>rId1</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+      <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>a:stretch</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span>
+        <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>a:fillRect</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+      <span class='rbrace'>}</span>
+    <span class='rbrace'>}</span>
+    <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>xdr:spPr</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span>
+      <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>a:xfrm</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span>
+        <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>a:off</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:x</span><span class='op'>=&gt;</span><span class='int'>0</span><span class='comma'>,</span> <span class='symbol'>:y</span><span class='op'>=&gt;</span><span class='int'>0</span><span class='rparen'>)</span>
+        <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>a:ext</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:cx</span><span class='op'>=&gt;</span><span class='int'>2336800</span><span class='comma'>,</span> <span class='symbol'>:cy</span><span class='op'>=&gt;</span><span class='int'>2161540</span><span class='rparen'>)</span>
+      <span class='rbrace'>}</span>
+      <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>a:prstGeom</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:prst</span><span class='op'>=&gt;</span><span class='symbol'>:rect</span><span class='rparen'>)</span> <span class='lbrace'>{</span>
+        <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>a:avLst</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+      <span class='rbrace'>}</span>
+    <span class='rbrace'>}</span>
+  <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="width-instance_method">
+  
+    - (<tt>Object</tt>) <strong>width</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>providing access to the anchor's width attribute</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>v</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>OneCellAnchor.width</li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+89
+90
+91</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pic.rb', line 89</span>
+
+<span class='kw'>def</span> <span class='id width'>width</span>
+  <span class='ivar'>@anchor</span><span class='period'>.</span><span class='id width'>width</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="width=-instance_method">
+  
+    - (<tt>Object</tt>) <strong>width=</strong>(v) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>width</li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+94
+95
+96</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pic.rb', line 94</span>
+
+<span class='kw'>def</span> <span class='id width='>width=</span><span class='lparen'>(</span><span class='id v'>v</span><span class='rparen'>)</span>
+  <span class='ivar'>@anchor</span><span class='period'>.</span><span class='id width'>width</span> <span class='op'>=</span> <span class='id v'>v</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1523,9 +1569,9 @@ The document builder instance this objects xml will be added to.
 </div>
     
     <div id="footer">
-  Generated on Wed Nov 23 22:21:04 2011 by 
+  Generated on Sat Nov 26 13:16:36 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.8.7).
+  0.7.3 (ruby-1.9.3).
 </div>
 
   </body>

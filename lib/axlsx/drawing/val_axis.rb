@@ -5,7 +5,7 @@ module Axlsx
     # This element specifies how the value axis crosses the category axis.
     # must be one of [:between, :midCat]
     # @return [Symbol]
-    attr_accessor :crossBetween
+    attr_reader :crossBetween
 
     # Creates a new ValAxis object
     # @param [Integer] axId the id of this axis
@@ -18,7 +18,7 @@ module Axlsx
       self.crossBetween = :between
       super(axId, crossAx, options)
     end
-    
+    # @see crossBetween
     def crossBetween=(v) RestrictionValidator.validate "ValAxis.crossBetween", [:between, :midCat], v; @crossBetween = v; end
 
     # Serializes the value axis

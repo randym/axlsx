@@ -18,18 +18,19 @@ module Axlsx
     # @option options [Array, SimpleTypedList] labels
     # @param [Chart] chart
     def initialize(chart, options={})
+      @labels, @data = nil, nil
       super(chart, options)
-      self.labels = CatAxisData.new(options[:labels]) unless options[:labels].nil?
-      self.data = ValAxisData.new(options[:data]) unless options[:data].nil?
+      @labels = CatAxisData.new(options[:labels]) unless options[:labels].nil?
+      @data = ValAxisData.new(options[:data]) unless options[:data].nil?
     end 
 
     # Serializes the series
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String]
     def to_xml(xml)
-      super(xml) do |xml|
-        @labels.to_xml(xml) unless @labels.nil?
-        @data.to_xml(xml) unless @data.nil?
+      super(xml) do |xml_inner|
+        @labels.to_xml(xml_inner) unless @labels.nil?
+        @data.to_xml(xml_inner) unless @data.nil?
       end      
     end
 

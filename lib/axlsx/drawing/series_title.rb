@@ -8,7 +8,7 @@ module Axlsx
     def to_xml(xml)
       xml.send('c:tx') {
         xml.send('c:strRef') {
-          xml.send('c:f', range)
+          xml.send('c:f', Axlsx::cell_range([@cell]))
           xml.send('c:strCache') {
             xml.send('c:ptCount', :val=>1)
             xml.send('c:pt', :idx=>0) {

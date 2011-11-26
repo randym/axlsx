@@ -4,7 +4,7 @@ task :build => :gendoc do
   system "gem build axlsx.gemspec"
 end
 
-task :gendoc do     
+task :gendoc do   
   system "yardoc"
 end
 
