@@ -79,9 +79,8 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>
-Singleton methods for the mixin
-</p>
+    
+<p>Singleton methods for the mixin</p>
 
 
   </div>
@@ -118,9 +117,8 @@ Singleton methods for the mixin
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Maps the AR class to an Axlsx package options are passed into AR find.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Maps the AR class to an Axlsx package options are passed into AR find.</p>
 </div></span>
   
 </li>
@@ -144,9 +142,8 @@ Maps the AR class to an Axlsx package options are passed into AR find.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Maps the AR class to an Axlsx package options are passed into AR find
-</p>
+    
+<p>Maps the AR class to an Axlsx package options are passed into AR find</p>
 
 
   </div>
@@ -154,6 +151,22 @@ Maps the AR class to an Axlsx package options are passed into AR find
 <div class="tags">
   <h3>Parameters:</h3>
 <ul class="param">
+  
+    <li>
+      
+        <span class='name'>Symbol,</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>:all</tt>, <tt>etc.</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>:all, etc.</p>
+</div>
+      
+    </li>
   
     <li>
       
@@ -167,9 +180,8 @@ Maps the AR class to an Axlsx package options are passed into AR find
       
       
         &mdash;
-        <div class='inline'><p>
-a customizable set of options
-</p>
+        <div class='inline'>
+<p>a customizable set of options</p>
 </div>
       
     </li>
@@ -190,9 +202,8 @@ a customizable set of options
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'><p>
-to apply to the first row of field names
-</p>
+          &mdash; <div class='inline'>
+<p>to apply to the first row of field names</p>
 </div>
         </li>
       
@@ -202,10 +213,9 @@ to apply to the first row of field names
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'><p>
-array of Axlsx types for each cell in data rows or a single type that will
-be applied to all types.
-</p>
+          &mdash; <div class='inline'>
+<p>array of Axlsx types for each cell in data rows or a single type that will
+be applied to all types.</p>
 </div>
         </li>
       
@@ -215,9 +225,8 @@ be applied to all types.
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'><p>
-The style to pass to Worksheet#add_row
-</p>
+          &mdash; <div class='inline'>
+<p>The style to pass to Worksheet#add_row</p>
 </div>
         </li>
       
@@ -238,7 +247,6 @@ The style to pass to Worksheet#add_row
       <pre class="lines">
 
 
-31
 32
 33
 34
@@ -258,33 +266,33 @@ The style to pass to Worksheet#add_row
 48
 49
 50
-51</pre>
+51
+52</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/ar.rb', line 31</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/ar.rb', line 32</span>
 
-<span class='def def kw'>def</span> <span class='to_xlsx identifier id'>to_xlsx</span><span class='lparen token'>(</span><span class='number identifier id'>number</span> <span class='assign token'>=</span> <span class='symbol val'>:all</span><span class='comma token'>,</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
-  <span class='row_style identifier id'>row_style</span> <span class='assign token'>=</span> <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='delete identifier id'>delete</span><span class='lparen token'>(</span><span class='symbol val'>:style</span><span class='rparen token'>)</span>
-  <span class='header_style identifier id'>header_style</span> <span class='assign token'>=</span> <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='delete identifier id'>delete</span><span class='lparen token'>(</span><span class='symbol val'>:header_style</span><span class='rparen token'>)</span> <span class='orop op'>||</span> <span class='row_style identifier id'>row_style</span>
-  <span class='types identifier id'>types</span> <span class='assign token'>=</span> <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='delete identifier id'>delete</span><span class='lparen token'>(</span><span class='symbol val'>:types</span><span class='rparen token'>)</span>
+<span class='kw'>def</span> <span class='id to_xlsx'>to_xlsx</span><span class='lparen'>(</span><span class='id number'>number</span> <span class='op'>=</span> <span class='symbol'>:all</span><span class='comma'>,</span> <span class='id options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id row_style'>row_style</span> <span class='op'>=</span> <span class='id options'>options</span><span class='period'>.</span><span class='id delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:style</span><span class='rparen'>)</span>
+  <span class='id header_style'>header_style</span> <span class='op'>=</span> <span class='id options'>options</span><span class='period'>.</span><span class='id delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:header_style</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id row_style'>row_style</span>
+  <span class='id types'>types</span> <span class='op'>=</span> <span class='id options'>options</span><span class='period'>.</span><span class='id delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:types</span><span class='rparen'>)</span>
 
-  <span class='data identifier id'>data</span> <span class='assign token'>=</span> <span class='lbrack token'>[</span><span class='mult op'>*</span><span class='find identifier id'>find</span><span class='lparen token'>(</span><span class='number identifier id'>number</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span><span class='rbrack token'>]</span>
-  <span class='data identifier id'>data</span><span class='dot token'>.</span><span class='compact! fid id'>compact!</span>
-  <span class='data identifier id'>data</span><span class='dot token'>.</span><span class='flatten! fid id'>flatten!</span>
-  <span class='columns identifier id'>columns</span> <span class='assign token'>=</span> <span class='data identifier id'>data</span><span class='dot token'>.</span><span class='first identifier id'>first</span><span class='dot token'>.</span><span class='attributes identifier id'>attributes</span><span class='dot token'>.</span><span class='keys identifier id'>keys</span>
-  <span class='p identifier id'>p</span> <span class='assign token'>=</span> <span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
-  <span class='row_style identifier id'>row_style</span> <span class='assign token'>=</span> <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='styles identifier id'>styles</span><span class='dot token'>.</span><span class='add_style identifier id'>add_style</span><span class='lparen token'>(</span><span class='row_style identifier id'>row_style</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='row_style identifier id'>row_style</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
-  <span class='header_style identifier id'>header_style</span> <span class='assign token'>=</span> <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='styles identifier id'>styles</span><span class='dot token'>.</span><span class='add_style identifier id'>add_style</span><span class='lparen token'>(</span><span class='header_style identifier id'>header_style</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='header_style identifier id'>header_style</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+  <span class='id data'>data</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='op'>*</span><span class='id find'>find</span><span class='lparen'>(</span><span class='id number'>number</span><span class='comma'>,</span> <span class='id options'>options</span><span class='rparen'>)</span><span class='rbracket'>]</span>
+  <span class='id data'>data</span><span class='period'>.</span><span class='id compact!'>compact!</span>
+  <span class='id data'>data</span><span class='period'>.</span><span class='id flatten!'>flatten!</span>
+  <span class='id columns'>columns</span> <span class='op'>=</span> <span class='id data'>data</span><span class='period'>.</span><span class='id first'>first</span><span class='period'>.</span><span class='id attributes'>attributes</span><span class='period'>.</span><span class='id keys'>keys</span>
+  <span class='id p'>p</span> <span class='op'>=</span> <span class='const'>Package</span><span class='period'>.</span><span class='id new'>new</span>
+  <span class='id row_style'>row_style</span> <span class='op'>=</span> <span class='id p'>p</span><span class='period'>.</span><span class='id workbook'>workbook</span><span class='period'>.</span><span class='id styles'>styles</span><span class='period'>.</span><span class='id add_style'>add_style</span><span class='lparen'>(</span><span class='id row_style'>row_style</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id row_style'>row_style</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+  <span class='id header_style'>header_style</span> <span class='op'>=</span> <span class='id p'>p</span><span class='period'>.</span><span class='id workbook'>workbook</span><span class='period'>.</span><span class='id styles'>styles</span><span class='period'>.</span><span class='id add_style'>add_style</span><span class='lparen'>(</span><span class='id header_style'>header_style</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id header_style'>header_style</span><span class='period'>.</span><span class='id nil?'>nil?</span>
   
-  <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='add_worksheet identifier id'>add_worksheet</span><span class='lparen token'>(</span><span class='symbol val'>:name=</span><span class='gt op'>&gt;</span><span class='table_name identifier id'>table_name</span><span class='dot token'>.</span><span class='humanize identifier id'>humanize</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='sheet identifier id'>sheet</span><span class='bitor op'>|</span>
-    <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='columns identifier id'>columns</span><span class='comma token'>,</span> <span class='symbol val'>:style=</span><span class='gt op'>&gt;</span><span class='header_style identifier id'>header_style</span>
-    <span class='data identifier id'>data</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='r identifier id'>r</span><span class='bitor op'>|</span>
-      <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='r identifier id'>r</span><span class='dot token'>.</span><span class='attributes identifier id'>attributes</span><span class='dot token'>.</span><span class='values identifier id'>values</span><span class='comma token'>,</span> <span class='symbol val'>:style=</span><span class='gt op'>&gt;</span><span class='row_style identifier id'>row_style</span><span class='comma token'>,</span> <span class='symbol val'>:types=</span><span class='gt op'>&gt;</span><span class='types identifier id'>types</span>
-    <span class='end end kw'>end</span>
-  <span class='end end kw'>end</span>
-  <span class='p identifier id'>p</span>
-<span class='end end kw'>end</span>
-</pre>
+  <span class='id p'>p</span><span class='period'>.</span><span class='id workbook'>workbook</span><span class='period'>.</span><span class='id add_worksheet'>add_worksheet</span><span class='lparen'>(</span><span class='symbol'>:name</span><span class='op'>=&gt;</span><span class='id table_name'>table_name</span><span class='period'>.</span><span class='id humanize'>humanize</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id sheet'>sheet</span><span class='op'>|</span>
+    <span class='id sheet'>sheet</span><span class='period'>.</span><span class='id add_row'>add_row</span> <span class='id columns'>columns</span><span class='comma'>,</span> <span class='symbol'>:style</span><span class='op'>=&gt;</span><span class='id header_style'>header_style</span>
+    <span class='id data'>data</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id r'>r</span><span class='op'>|</span>
+      <span class='id sheet'>sheet</span><span class='period'>.</span><span class='id add_row'>add_row</span> <span class='id r'>r</span><span class='period'>.</span><span class='id attributes'>attributes</span><span class='period'>.</span><span class='id values'>values</span><span class='comma'>,</span> <span class='symbol'>:style</span><span class='op'>=&gt;</span><span class='id row_style'>row_style</span><span class='comma'>,</span> <span class='symbol'>:types</span><span class='op'>=&gt;</span><span class='id types'>types</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='id p'>p</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -295,9 +303,9 @@ The style to pass to Worksheet#add_row
 </div>
     
     <div id="footer">
-  Generated on Sun Nov 27 21:52:44 2011 by 
+  Generated on Sun Nov 27 22:08:36 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.8.7).
+  0.7.3 (ruby-1.9.3).
 </div>
 
   </body>

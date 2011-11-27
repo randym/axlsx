@@ -97,20 +97,18 @@
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'><p>
-The recommended way to manage styles is with add_style
-</p>
+    <div class='inline'>
+<p>The recommended way to manage styles is with add_style</p>
 </div>
   </div>
 
-<p>
-The Styles class manages worksheet styles In addition to creating the
+
+<p>The Styles class manages worksheet styles In addition to creating the
 require style objects for a valid xlsx package, this class provides the key
 mechanism for adding styles to your workbook, and safely applying them to
 the cells of your worksheet. All portions of the stylesheet are implemented
 here exception colors, which specify legacy and modified pallete colors,
-and exLst, whic is used as a future feature data storage area.
-</p>
+and exLst, whic is used as a future feature data storage area.</p>
 
 
   </div>
@@ -151,10 +149,9 @@ and exLst, whic is used as a future feature data storage area.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The collection of borders used in this workbook Axlsx predefines
-THIN_BORDER which can be used to put a border around all of your cells.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The collection of borders used in this workbook Axlsx predefines
+THIN_BORDER which can be used to put a border around all of your cells.</p>
 </div></span>
   
 </li>
@@ -179,10 +176,9 @@ THIN_BORDER which can be used to put a border around all of your cells.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The collection of named styles, referencing cellStyleXfs items in the
-workbook.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The collection of named styles, referencing cellStyleXfs items in the
+workbook.</p>
 </div></span>
   
 </li>
@@ -207,10 +203,9 @@ workbook.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The collection of master formatting records for named cell styles, which
-means records defined in cellStyles, in the workbook.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The collection of master formatting records for named cell styles, which
+means records defined in cellStyles, in the workbook.</p>
 </div></span>
   
 </li>
@@ -235,9 +230,8 @@ means records defined in cellStyles, in the workbook.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The collection of master formatting records.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The collection of master formatting records.</p>
 </div></span>
   
 </li>
@@ -262,9 +256,8 @@ The collection of master formatting records.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The collection of non-cell formatting records used in the worksheet.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The collection of non-cell formatting records used in the worksheet.</p>
 </div></span>
   
 </li>
@@ -289,9 +282,8 @@ The collection of non-cell formatting records used in the worksheet.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The collection of fills used in this workbook.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The collection of fills used in this workbook.</p>
 </div></span>
   
 </li>
@@ -316,9 +308,8 @@ The collection of fills used in this workbook.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The collection of fonts used in this workbook.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The collection of fonts used in this workbook.</p>
 </div></span>
   
 </li>
@@ -343,9 +334,8 @@ The collection of fonts used in this workbook.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-numFmts for your styles.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>numFmts for your styles.</p>
 </div></span>
   
 </li>
@@ -370,10 +360,9 @@ numFmts for your styles.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The collection of table styles that will be available to the user in the
-excel UI.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The collection of table styles that will be available to the user in the
+excel UI.</p>
 </div></span>
   
 </li>
@@ -408,9 +397,8 @@ excel UI.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Drastically simplifies style creation and management.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Drastically simplifies style creation and management.</p>
 </div></span>
   
 </li>
@@ -434,10 +422,9 @@ Drastically simplifies style creation and management.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Creates a new Styles object and prepopulates it with the requires objects
-to generate a valid package style part.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new Styles object and prepopulates it with the requires objects
+to generate a valid package style part.</p>
 </div></span>
   
 </li>
@@ -459,9 +446,8 @@ to generate a valid package style part.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Serializes the styles document.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Serializes the styles document.</p>
 </div></span>
   
 </li>
@@ -482,10 +468,9 @@ Serializes the styles document.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Creates a new Styles object and prepopulates it with the requires objects
-to generate a valid package style part.
-</p>
+    
+<p>Creates a new Styles object and prepopulates it with the requires objects
+to generate a valid package style part.</p>
 
 
   </div>
@@ -506,10 +491,9 @@ to generate a valid package style part.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/styles.rb', line 118</span>
 
-<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='rparen token'>)</span>
-  <span class='load_default_styles identifier id'>load_default_styles</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='id load_default_styles'>load_default_styles</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -535,16 +519,14 @@ to generate a valid package style part.
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'><p>
-The recommended way to manage styles is with add_style
-</p>
+    <div class='inline'>
+<p>The recommended way to manage styles is with add_style</p>
 </div>
   </div>
 
-<p>
-The collection of borders used in this workbook Axlsx predefines
-THIN_BORDER which can be used to put a border around all of your cells.
-</p>
+
+<p>The collection of borders used in this workbook Axlsx predefines
+THIN_BORDER which can be used to put a border around all of your cells.</p>
 
 
   </div>
@@ -585,10 +567,9 @@ THIN_BORDER which can be used to put a border around all of your cells.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/styles.rb', line 85</span>
 
-<span class='def def kw'>def</span> <span class='borders identifier id'>borders</span>
-  <span class='@borders ivar id'>@borders</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id borders'>borders</span>
+  <span class='ivar'>@borders</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -609,16 +590,14 @@ THIN_BORDER which can be used to put a border around all of your cells.
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'><p>
-The recommended way to manage styles is with add_style
-</p>
+    <div class='inline'>
+<p>The recommended way to manage styles is with add_style</p>
 </div>
   </div>
 
-<p>
-The collection of named styles, referencing cellStyleXfs items in the
-workbook.
-</p>
+
+<p>The collection of named styles, referencing cellStyleXfs items in the
+workbook.</p>
 
 
   </div>
@@ -659,10 +638,9 @@ workbook.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/styles.rb', line 97</span>
 
-<span class='def def kw'>def</span> <span class='cellStyles identifier id'>cellStyles</span>
-  <span class='@cellStyles ivar id'>@cellStyles</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id cellStyles'>cellStyles</span>
+  <span class='ivar'>@cellStyles</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -683,16 +661,14 @@ workbook.
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'><p>
-The recommended way to manage styles is with add_style
-</p>
+    <div class='inline'>
+<p>The recommended way to manage styles is with add_style</p>
 </div>
   </div>
 
-<p>
-The collection of master formatting records for named cell styles, which
-means records defined in cellStyles, in the workbook
-</p>
+
+<p>The collection of master formatting records for named cell styles, which
+means records defined in cellStyles, in the workbook</p>
 
 
   </div>
@@ -733,10 +709,9 @@ means records defined in cellStyles, in the workbook
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/styles.rb', line 91</span>
 
-<span class='def def kw'>def</span> <span class='cellStyleXfs identifier id'>cellStyleXfs</span>
-  <span class='@cellStyleXfs ivar id'>@cellStyleXfs</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id cellStyleXfs'>cellStyleXfs</span>
+  <span class='ivar'>@cellStyleXfs</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -757,16 +732,14 @@ means records defined in cellStyles, in the workbook
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'><p>
-The recommended way to manage styles is with add_style
-</p>
+    <div class='inline'>
+<p>The recommended way to manage styles is with add_style</p>
 </div>
   </div>
 
-<p>
-The collection of master formatting records. This is the list that you will
-actually use in styling a workbook.
-</p>
+
+<p>The collection of master formatting records. This is the list that you will
+actually use in styling a workbook.</p>
 
 
   </div>
@@ -807,10 +780,9 @@ actually use in styling a workbook.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/styles.rb', line 103</span>
 
-<span class='def def kw'>def</span> <span class='cellXfs identifier id'>cellXfs</span>
-  <span class='@cellXfs ivar id'>@cellXfs</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id cellXfs'>cellXfs</span>
+  <span class='ivar'>@cellXfs</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -831,15 +803,13 @@ actually use in styling a workbook.
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'><p>
-The recommended way to manage styles is with add_style
-</p>
+    <div class='inline'>
+<p>The recommended way to manage styles is with add_style</p>
 </div>
   </div>
 
-<p>
-The collection of non-cell formatting records used in the worksheet.
-</p>
+
+<p>The collection of non-cell formatting records used in the worksheet.</p>
 
 
   </div>
@@ -880,10 +850,9 @@ The collection of non-cell formatting records used in the worksheet.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/styles.rb', line 109</span>
 
-<span class='def def kw'>def</span> <span class='dxfs identifier id'>dxfs</span>
-  <span class='@dxfs ivar id'>@dxfs</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id dxfs'>dxfs</span>
+  <span class='ivar'>@dxfs</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -904,15 +873,13 @@ The collection of non-cell formatting records used in the worksheet.
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'><p>
-The recommended way to manage styles is with add_style
-</p>
+    <div class='inline'>
+<p>The recommended way to manage styles is with add_style</p>
 </div>
   </div>
 
-<p>
-The collection of fills used in this workbook
-</p>
+
+<p>The collection of fills used in this workbook</p>
 
 
   </div>
@@ -953,10 +920,9 @@ The collection of fills used in this workbook
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/styles.rb', line 78</span>
 
-<span class='def def kw'>def</span> <span class='fills identifier id'>fills</span>
-  <span class='@fills ivar id'>@fills</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id fills'>fills</span>
+  <span class='ivar'>@fills</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -977,15 +943,13 @@ The collection of fills used in this workbook
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'><p>
-The recommended way to manage styles is with add_style
-</p>
+    <div class='inline'>
+<p>The recommended way to manage styles is with add_style</p>
 </div>
   </div>
 
-<p>
-The collection of fonts used in this workbook
-</p>
+
+<p>The collection of fonts used in this workbook</p>
 
 
   </div>
@@ -1026,10 +990,9 @@ The collection of fonts used in this workbook
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/styles.rb', line 72</span>
 
-<span class='def def kw'>def</span> <span class='fonts identifier id'>fonts</span>
-  <span class='@fonts ivar id'>@fonts</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id fonts'>fonts</span>
+  <span class='ivar'>@fonts</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1050,51 +1013,48 @@ The collection of fonts used in this workbook
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'><p>
-The recommended way to manage styles is with add_style
-</p>
+    <div class='inline'>
+<p>The recommended way to manage styles is with add_style</p>
 </div>
   </div>
 
-<p>
-numFmts for your styles.
-</p>
-<pre class="code">
- <span class='The constant id'>The</span> <span class='default identifier id'>default</span> <span class='styles identifier id'>styles</span><span class='comma token'>,</span> <span class='which identifier id'>which</span> <span class='change identifier id'>change</span> <span class='based identifier id'>based</span> <span class='on identifier id'>on</span> <span class='the identifier id'>the</span> <span class='system identifier id'>system</span> <span class='local identifier id'>local</span><span class='comma token'>,</span> <span class='are identifier id'>are</span> <span class='as identifier id'>as</span> <span class='follows identifier id'>follows</span><span class='dot token'>.</span>
- <span class='id identifier id'>id</span> <span class='formatCode identifier id'>formatCode</span>
-  <span class='integer val'>0</span> <span class='General constant id'>General</span>
-  <span class='integer val'>1</span> <span class='integer val'>0</span>
-  <span class='integer val'>2</span> <span class='integer val'>0</span><span class='integer val'>.00</span>
-  <span class='integer val'>3</span> <span class='comment val'>#,##0</span>
-  <span class='integer val'>4</span> <span class='comment val'>#,##0.00</span>
-  <span class='integer val'>9</span> <span class='integer val'>0</span><span class='mod op'>%</span>
-  <span class='integer val'>10</span> <span class='integer val'>0</span><span class='integer val'>.00</span><span class='mod op'>%</span>
-  <span class='integer val'>11</span> <span class='integer val'>0</span><span class='float val'>.00E+00</span>
-  <span class='integer val'>12</span> <span class='comment val'>#   ?/?</span>
-  <span class='integer val'>13</span> <span class='comment val'>#   ??/??</span>
-  <span class='integer val'>14</span> <span class='mm identifier id'>mm</span><span class='minus op'>-</span><span class='dd identifier id'>dd</span><span class='minus op'>-</span><span class='yy identifier id'>yy</span>
-  <span class='integer val'>15</span> <span class='d identifier id'>d</span><span class='minus op'>-</span><span class='mmm identifier id'>mmm</span><span class='minus op'>-</span><span class='yy identifier id'>yy</span>
-  <span class='integer val'>16</span> <span class='d identifier id'>d</span><span class='minus op'>-</span><span class='mmm identifier id'>mmm</span>
-  <span class='integer val'>17</span> <span class='mmm identifier id'>mmm</span><span class='minus op'>-</span><span class='yy identifier id'>yy</span>
-  <span class='integer val'>18</span> <span class='h identifier id'>h</span><span class='symbol val'>:mm</span> <span class='AM constant id'>AM</span><span class='div op'>/</span><span class='PM constant id'>PM</span>
-  <span class='integer val'>19</span> <span class='h identifier id'>h</span><span class='symbol val'>:mm</span><span class='symbol val'>:ss</span> <span class='AM constant id'>AM</span><span class='div op'>/</span><span class='PM constant id'>PM</span>
-  <span class='integer val'>20</span> <span class='h identifier id'>h</span><span class='symbol val'>:mm</span>
-  <span class='integer val'>21</span> <span class='h identifier id'>h</span><span class='symbol val'>:mm</span><span class='symbol val'>:ss</span>
-  <span class='integer val'>22</span> <span class='m identifier id'>m</span><span class='div op'>/</span><span class='d identifier id'>d</span><span class='div op'>/</span><span class='yy identifier id'>yy</span> <span class='h identifier id'>h</span><span class='symbol val'>:mm</span>
-  <span class='integer val'>37</span> <span class='comment val'>#,##0 ;(#,##0)</span>
-  <span class='integer val'>38</span> <span class='comment val'>#,##0 ;[Red](#,##0)</span>
-  <span class='integer val'>39</span> <span class='comment val'>#,##0.00;(#,##0.00)</span>
-  <span class='integer val'>40</span> <span class='comment val'>#,##0.00;[Red](#,##0.00)</span>
-  <span class='integer val'>45</span> <span class='mm identifier id'>mm</span><span class='symbol val'>:ss</span>
-  <span class='integer val'>46</span> <span class='lbrack token'>[</span><span class='h identifier id'>h</span><span class='rbrack token'>]</span><span class='symbol val'>:mm</span><span class='symbol val'>:ss</span>
-  <span class='integer val'>47</span> <span class='mmss identifier id'>mmss</span><span class='integer val'>.0</span>
-  <span class='integer val'>48</span> <span class='comment val'>##0.0E+0</span>
-  <span class='integer val'>49</span> @
- <span class='Axlsx constant id'>Axlsx</span> <span class='also identifier id'>also</span> <span class='defines identifier id'>defines</span> <span class='the identifier id'>the</span> <span class='following identifier id'>following</span> <span class='constants identifier id'>constants</span> <span class='which identifier id'>which</span> <span class='you identifier id'>you</span> <span class='can identifier id'>can</span> <span class='use identifier id'>use</span> <span class='in in kw'>in</span> <span class='add_style identifier id'>add_style</span><span class='dot token'>.</span>
-    <span class='NUM_FMT_PERCENT constant id'>NUM_FMT_PERCENT</span> <span class='formats identifier id'>formats</span> <span class='to identifier id'>to</span> <span class='string val'>&quot;0%&quot;</span>
-    <span class='NUM_FMT_YYYYMMDD constant id'>NUM_FMT_YYYYMMDD</span> <span class='formats identifier id'>formats</span> <span class='to identifier id'>to</span> <span class='string val'>&quot;yyyy/mm/dd&quot;</span>
-    <span class='NUM_FMT_YYYYMMDDHHMMSS constant id'>NUM_FMT_YYYYMMDDHHMMSS</span>  <span class='formats identifier id'>formats</span> <span class='to identifier id'>to</span> <span class='string val'>&quot;yyyy/mm/dd hh:mm:ss&quot;</span>
-</pre>
+
+<p>numFmts for your styles.</p>
+
+<pre class="code">The default styles, which change based on the system local, are as follows.
+id formatCode
+ 0 General
+ 1 0
+ 2 0.00
+ 3 #,##0
+ 4 #,##0.00
+ 9 0%
+ 10 0.00%
+ 11 0.00E+00
+ 12 #   ?/?
+ 13 #   ??/??
+ 14 mm-dd-yy
+ 15 d-mmm-yy
+ 16 d-mmm
+ 17 mmm-yy
+ 18 h:mm AM/PM
+ 19 h:mm:ss AM/PM
+ 20 h:mm
+ 21 h:mm:ss
+ 22 m/d/yy h:mm
+ 37 #,##0 ;(#,##0)
+ 38 #,##0 ;[Red](#,##0)
+ 39 #,##0.00;(#,##0.00)
+ 40 #,##0.00;[Red](#,##0.00)
+ 45 mm:ss
+ 46 [h]:mm:ss
+ 47 mmss.0
+ 48 ##0.0E+0
+ 49 @
+Axlsx also defines the following constants which you can use in add_style.
+   NUM_FMT_PERCENT formats to &quot;0%&quot;
+   NUM_FMT_YYYYMMDD formats to &quot;yyyy/mm/dd&quot;
+   NUM_FMT_YYYYMMDDHHMMSS  formats to &quot;yyyy/mm/dd hh:mm:ss&quot;</pre>
 
 
   </div>
@@ -1137,10 +1097,9 @@ numFmts for your styles.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/styles.rb', line 66</span>
 
-<span class='def def kw'>def</span> <span class='numFmts identifier id'>numFmts</span>
-  <span class='@numFmts ivar id'>@numFmts</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id numFmts'>numFmts</span>
+  <span class='ivar'>@numFmts</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1161,16 +1120,14 @@ numFmts for your styles.
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'><p>
-The recommended way to manage styles is with add_style
-</p>
+    <div class='inline'>
+<p>The recommended way to manage styles is with add_style</p>
 </div>
   </div>
 
-<p>
-The collection of table styles that will be available to the user in the
-excel UI
-</p>
+
+<p>The collection of table styles that will be available to the user in the
+excel UI</p>
 
 
   </div>
@@ -1211,10 +1168,9 @@ excel UI
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/styles.rb', line 115</span>
 
-<span class='def def kw'>def</span> <span class='tableStyles identifier id'>tableStyles</span>
-  <span class='@tableStyles ivar id'>@tableStyles</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id tableStyles'>tableStyles</span>
+  <span class='ivar'>@tableStyles</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1236,9 +1192,8 @@ excel UI
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Drastically simplifies style creation and management.
-</p>
+    
+<p>Drastically simplifies style creation and management.</p>
 
 
   </div>
@@ -1248,63 +1203,59 @@ Drastically simplifies style creation and management.
   <div class="examples">
     <h3>Examples:</h3>
     
-      <h4><div class='inline'><p>
-You Got Style
-</p>
+      <h4><div class='inline'>
+<p>You Got Style</p>
 </div></h4>
-      <pre class="example code"><span class='require identifier id'>require</span> <span class='string val'>&quot;rubygems&quot;</span> <span class='comment val'># if that is your preferred way to manage gems!</span>
-<span class='require identifier id'>require</span> <span class='string val'>&quot;axlsx&quot;</span>
+      <pre class="example code">require &quot;rubygems&quot; # if that is your preferred way to manage gems!
+require &quot;axlsx&quot;
 
-<span class='p identifier id'>p</span> <span class='assign token'>=</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
-<span class='ws identifier id'>ws</span> <span class='assign token'>=</span> <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='add_worksheet identifier id'>add_worksheet</span>
+p = Axlsx::Package.new
+ws = p.workbook.add_worksheet
 
-<span class='comment val'># black text on a white background at 14pt with thin borders!</span>
-<span class='title identifier id'>title</span> <span class='assign token'>=</span> <span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='style identifier id'>style</span><span class='dot token'>.</span><span class='add_style identifier id'>add_style</span><span class='lparen token'>(</span><span class='symbol val'>:bg_color</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;FFFF0000&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:fg_color=</span><span class='gt op'>&gt;</span><span class='string val'>&quot;#FF000000&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:sz=</span><span class='gt op'>&gt;</span><span class='integer val'>14</span><span class='comma token'>,</span>  <span class='symbol val'>:border=</span><span class='gt op'>&gt;</span><span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='STYLE_THIN_BORDER constant id'>STYLE_THIN_BORDER</span>
+# black text on a white background at 14pt with thin borders!
+title = ws.style.add_style(:bg_color =&gt; &quot;FFFF0000&quot;, :fg_color=&gt;&quot;#FF000000&quot;, :sz=&gt;14,  :border=&gt;Axlsx::STYLE_THIN_BORDER
 
-<span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='symbol val'>:values</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;Least Popular Pets&quot;</span><span class='rbrack token'>]</span>
-<span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='symbol val'>:values</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Dry Skinned Reptiles&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Bald Cats&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Violent Parrots&quot;</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:style=</span><span class='gt op'>&gt;</span><span class='title identifier id'>title</span>
-<span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='symbol val'>:values</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;Votes&quot;</span><span class='comma token'>,</span> <span class='integer val'>6</span><span class='comma token'>,</span> <span class='integer val'>4</span><span class='comma token'>,</span> <span class='integer val'>1</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:style=</span><span class='gt op'>&gt;</span><span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='STYLE_THIN_BORDER constant id'>STYLE_THIN_BORDER</span>
-<span class='f identifier id'>f</span> <span class='assign token'>=</span> <span class='File constant id'>File</span><span class='dot token'>.</span><span class='open identifier id'>open</span><span class='lparen token'>(</span><span class='string val'>'example_you_got_style.xlsx'</span><span class='comma token'>,</span> <span class='string val'>'w'</span><span class='rparen token'>)</span>
-<span class='p identifier id'>p</span><span class='dot token'>.</span><span class='serialize identifier id'>serialize</span><span class='lparen token'>(</span><span class='f identifier id'>f</span><span class='rparen token'>)</span>
-</pre>
+ws.add_row :values =&gt; [&quot;Least Popular Pets&quot;]
+ws.add_row :values =&gt; [&quot;&quot;, &quot;Dry Skinned Reptiles&quot;, &quot;Bald Cats&quot;, &quot;Violent Parrots&quot;], :style=&gt;title
+ws.add_row :values =&gt; [&quot;Votes&quot;, 6, 4, 1], :style=&gt;Axlsx::STYLE_THIN_BORDER
+f = File.open('example_you_got_style.xlsx', 'w')
+p.serialize(f)</pre>
     
-      <h4><div class='inline'><p>
-Styling specifically
-</p>
+      <h4><div class='inline'>
+<p>Styling specifically</p>
 </div></h4>
-      <pre class="example code"><span class='comment val'># an example of applying specific styles to specific cells</span>
-<span class='require identifier id'>require</span> <span class='string val'>&quot;rubygems&quot;</span> <span class='comment val'># if that is your preferred way to manage gems!</span>
-<span class='require identifier id'>require</span> <span class='string val'>&quot;axlsx&quot;</span>
+      <pre class="example code"><span class='comment'># an example of applying specific styles to specific cells
+</span><span class='id require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>rubygems</span><span class='tstring_end'>&quot;</span></span> <span class='comment'># if that is your preferred way to manage gems!
+</span><span class='id require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>axlsx</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='p identifier id'>p</span> <span class='assign token'>=</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
-<span class='ws identifier id'>ws</span> <span class='assign token'>=</span> <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='add_worksheet identifier id'>add_worksheet</span>
+<span class='id p'>p</span> <span class='op'>=</span> <span class='const'>Axlsx</span><span class='op'>::</span><span class='const'>Package</span><span class='period'>.</span><span class='id new'>new</span>
+<span class='id ws'>ws</span> <span class='op'>=</span> <span class='id p'>p</span><span class='period'>.</span><span class='id workbook'>workbook</span><span class='period'>.</span><span class='id add_worksheet'>add_worksheet</span>
 
-<span class='comment val'># define your styles</span>
-<span class='title identifier id'>title</span> <span class='assign token'>=</span> <span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='style identifier id'>style</span><span class='dot token'>.</span><span class='add_style identifier id'>add_style</span><span class='lparen token'>(</span><span class='symbol val'>:bg_color</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;FFFF0000&quot;</span><span class='comma token'>,</span> 
-                           <span class='symbol val'>:fg_color=</span><span class='gt op'>&gt;</span><span class='string val'>&quot;#FF000000&quot;</span><span class='comma token'>,</span>
-                           <span class='symbol val'>:border=</span><span class='gt op'>&gt;</span><span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='STYLE_THIN_BORDER constant id'>STYLE_THIN_BORDER</span><span class='comma token'>,</span> 
-                           <span class='symbol val'>:alignment=</span><span class='gt op'>&gt;</span><span class='lbrace token'>{</span><span class='symbol val'>:horizontal</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='symbol val'>:center</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+<span class='comment'># define your styles
+</span><span class='id title'>title</span> <span class='op'>=</span> <span class='id ws'>ws</span><span class='period'>.</span><span class='id style'>style</span><span class='period'>.</span><span class='id add_style'>add_style</span><span class='lparen'>(</span><span class='symbol'>:bg_color</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>FFFF0000</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> 
+                           <span class='symbol'>:fg_color</span><span class='op'>=&gt;</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>#FF000000</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                           <span class='symbol'>:border</span><span class='op'>=&gt;</span><span class='const'>Axlsx</span><span class='op'>::</span><span class='const'>STYLE_THIN_BORDER</span><span class='comma'>,</span> 
+                           <span class='symbol'>:alignment</span><span class='op'>=&gt;</span><span class='lbrace'>{</span><span class='symbol'>:horizontal</span> <span class='op'>=&gt;</span> <span class='symbol'>:center</span><span class='rbrace'>}</span><span class='rparen'>)</span>
 
-<span class='date_time identifier id'>date_time</span> <span class='assign token'>=</span> <span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='style identifier id'>style</span><span class='dot token'>.</span><span class='add_style identifier id'>add_style</span><span class='lparen token'>(</span><span class='symbol val'>:num_fmt</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='NUM_FMT_YYYYMMDDHHMMSS constant id'>NUM_FMT_YYYYMMDDHHMMSS</span><span class='comma token'>,</span>
-                               <span class='symbol val'>:border=</span><span class='gt op'>&gt;</span><span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='STYLE_THIN_BORDER constant id'>STYLE_THIN_BORDER</span><span class='rparen token'>)</span>
+<span class='id date_time'>date_time</span> <span class='op'>=</span> <span class='id ws'>ws</span><span class='period'>.</span><span class='id style'>style</span><span class='period'>.</span><span class='id add_style'>add_style</span><span class='lparen'>(</span><span class='symbol'>:num_fmt</span> <span class='op'>=&gt;</span> <span class='const'>Axlsx</span><span class='op'>::</span><span class='const'>NUM_FMT_YYYYMMDDHHMMSS</span><span class='comma'>,</span>
+                               <span class='symbol'>:border</span><span class='op'>=&gt;</span><span class='const'>Axlsx</span><span class='op'>::</span><span class='const'>STYLE_THIN_BORDER</span><span class='rparen'>)</span>
 
-<span class='percent identifier id'>percent</span> <span class='assign token'>=</span> <span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='style identifier id'>style</span><span class='dot token'>.</span><span class='add_style identifier id'>add_style</span><span class='lparen token'>(</span><span class='symbol val'>:num_fmt</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='NUM_FMT_PERCENT constant id'>NUM_FMT_PERCENT</span><span class='comma token'>,</span> 
-                             <span class='symbol val'>:border=</span><span class='gt op'>&gt;</span><span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='STYLE_THIN_BORDER constant id'>STYLE_THIN_BORDER</span><span class='rparen token'>)</span>
+<span class='id percent'>percent</span> <span class='op'>=</span> <span class='id ws'>ws</span><span class='period'>.</span><span class='id style'>style</span><span class='period'>.</span><span class='id add_style'>add_style</span><span class='lparen'>(</span><span class='symbol'>:num_fmt</span> <span class='op'>=&gt;</span> <span class='const'>Axlsx</span><span class='op'>::</span><span class='const'>NUM_FMT_PERCENT</span><span class='comma'>,</span> 
+                             <span class='symbol'>:border</span><span class='op'>=&gt;</span><span class='const'>Axlsx</span><span class='op'>::</span><span class='const'>STYLE_THIN_BORDER</span><span class='rparen'>)</span>
 
-<span class='currency identifier id'>currency</span> <span class='assign token'>=</span> <span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='style identifier id'>style</span><span class='dot token'>.</span><span class='add_style identifier id'>add_style</span><span class='lparen token'>(</span><span class='symbol val'>:format_code=</span><span class='gt op'>&gt;</span><span class='string val'>&quot;¥#,##0;[Red]¥-#,##0&quot;</span><span class='comma token'>,</span>
-                              <span class='symbol val'>:border=</span><span class='gt op'>&gt;</span><span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='STYLE_THIN_BORDER constant id'>STYLE_THIN_BORDER</span><span class='rparen token'>)</span>
+<span class='id currency'>currency</span> <span class='op'>=</span> <span class='id ws'>ws</span><span class='period'>.</span><span class='id style'>style</span><span class='period'>.</span><span class='id add_style'>add_style</span><span class='lparen'>(</span><span class='symbol'>:format_code</span><span class='op'>=&gt;</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>¥#,##0;[Red]¥-#,##0</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+                              <span class='symbol'>:border</span><span class='op'>=&gt;</span><span class='const'>Axlsx</span><span class='op'>::</span><span class='const'>STYLE_THIN_BORDER</span><span class='rparen'>)</span>
 
-<span class='comment val'># build your rows</span>
-<span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='symbol val'>:values</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;Genreated At:&quot;</span><span class='comma token'>,</span> <span class='Time constant id'>Time</span><span class='dot token'>.</span><span class='now identifier id'>now</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:styles=</span><span class='gt op'>&gt;</span><span class='lbrack token'>[</span><span class='nil nil kw'>nil</span><span class='comma token'>,</span> <span class='date_time identifier id'>date_time</span><span class='rbrack token'>]</span>
-<span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='symbol val'>:values</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;Previous Year Quarterly Profits (JPY)&quot;</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:style=</span><span class='gt op'>&gt;</span><span class='title identifier id'>title</span>
-<span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='symbol val'>:values</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;Quarter&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;Profit&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;% of Total&quot;</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:style=</span><span class='gt op'>&gt;</span><span class='title identifier id'>title</span>
-<span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='symbol val'>:values</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;Q1&quot;</span><span class='comma token'>,</span> <span class='integer val'>4000</span><span class='comma token'>,</span> <span class='integer val'>40</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:style=</span><span class='gt op'>&gt;</span><span class='lbrack token'>[</span><span class='title identifier id'>title</span><span class='comma token'>,</span> <span class='currency identifier id'>currency</span><span class='comma token'>,</span> <span class='percent identifier id'>percent</span><span class='rbrack token'>]</span>
-<span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='symbol val'>:values</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;Q2&quot;</span><span class='comma token'>,</span> <span class='integer val'>3000</span><span class='comma token'>,</span> <span class='integer val'>30</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:style=</span><span class='gt op'>&gt;</span><span class='lbrack token'>[</span><span class='title identifier id'>title</span><span class='comma token'>,</span> <span class='currency identifier id'>currency</span><span class='comma token'>,</span> <span class='percent identifier id'>percent</span><span class='rbrack token'>]</span>
-<span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='symbol val'>:values</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;Q3&quot;</span><span class='comma token'>,</span> <span class='integer val'>1000</span><span class='comma token'>,</span> <span class='integer val'>10</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:style=</span><span class='gt op'>&gt;</span><span class='lbrack token'>[</span><span class='title identifier id'>title</span><span class='comma token'>,</span> <span class='currency identifier id'>currency</span><span class='comma token'>,</span> <span class='percent identifier id'>percent</span><span class='rbrack token'>]</span>
-<span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='symbol val'>:values</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;Q4&quot;</span><span class='comma token'>,</span> <span class='integer val'>2000</span><span class='comma token'>,</span> <span class='integer val'>20</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='symbol val'>:style=</span><span class='gt op'>&gt;</span><span class='lbrack token'>[</span><span class='title identifier id'>title</span><span class='comma token'>,</span> <span class='currency identifier id'>currency</span><span class='comma token'>,</span> <span class='percent identifier id'>percent</span><span class='rbrack token'>]</span>
-<span class='f identifier id'>f</span> <span class='assign token'>=</span> <span class='File constant id'>File</span><span class='dot token'>.</span><span class='open identifier id'>open</span><span class='lparen token'>(</span><span class='string val'>'example_you_got_style.xlsx'</span><span class='comma token'>,</span> <span class='string val'>'w'</span><span class='rparen token'>)</span>
-<span class='p identifier id'>p</span><span class='dot token'>.</span><span class='serialize identifier id'>serialize</span><span class='lparen token'>(</span><span class='f identifier id'>f</span><span class='rparen token'>)</span>
-</pre>
+<span class='comment'># build your rows
+</span><span class='id ws'>ws</span><span class='period'>.</span><span class='id add_row'>add_row</span> <span class='symbol'>:values</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Genreated At:</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='const'>Time</span><span class='period'>.</span><span class='id now'>now</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='symbol'>:styles</span><span class='op'>=&gt;</span><span class='lbracket'>[</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id date_time'>date_time</span><span class='rbracket'>]</span>
+<span class='id ws'>ws</span><span class='period'>.</span><span class='id add_row'>add_row</span> <span class='symbol'>:values</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Previous Year Quarterly Profits (JPY)</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='symbol'>:style</span><span class='op'>=&gt;</span><span class='id title'>title</span>
+<span class='id ws'>ws</span><span class='period'>.</span><span class='id add_row'>add_row</span> <span class='symbol'>:values</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Quarter</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Profit</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>% of Total</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='symbol'>:style</span><span class='op'>=&gt;</span><span class='id title'>title</span>
+<span class='id ws'>ws</span><span class='period'>.</span><span class='id add_row'>add_row</span> <span class='symbol'>:values</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Q1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>4000</span><span class='comma'>,</span> <span class='int'>40</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='symbol'>:style</span><span class='op'>=&gt;</span><span class='lbracket'>[</span><span class='id title'>title</span><span class='comma'>,</span> <span class='id currency'>currency</span><span class='comma'>,</span> <span class='id percent'>percent</span><span class='rbracket'>]</span>
+<span class='id ws'>ws</span><span class='period'>.</span><span class='id add_row'>add_row</span> <span class='symbol'>:values</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Q2</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>3000</span><span class='comma'>,</span> <span class='int'>30</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='symbol'>:style</span><span class='op'>=&gt;</span><span class='lbracket'>[</span><span class='id title'>title</span><span class='comma'>,</span> <span class='id currency'>currency</span><span class='comma'>,</span> <span class='id percent'>percent</span><span class='rbracket'>]</span>
+<span class='id ws'>ws</span><span class='period'>.</span><span class='id add_row'>add_row</span> <span class='symbol'>:values</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Q3</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>1000</span><span class='comma'>,</span> <span class='int'>10</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='symbol'>:style</span><span class='op'>=&gt;</span><span class='lbracket'>[</span><span class='id title'>title</span><span class='comma'>,</span> <span class='id currency'>currency</span><span class='comma'>,</span> <span class='id percent'>percent</span><span class='rbracket'>]</span>
+<span class='id ws'>ws</span><span class='period'>.</span><span class='id add_row'>add_row</span> <span class='symbol'>:values</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Q4</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>2000</span><span class='comma'>,</span> <span class='int'>20</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='symbol'>:style</span><span class='op'>=&gt;</span><span class='lbracket'>[</span><span class='id title'>title</span><span class='comma'>,</span> <span class='id currency'>currency</span><span class='comma'>,</span> <span class='id percent'>percent</span><span class='rbracket'>]</span>
+<span class='id f'>f</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id open'>open</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>example_you_got_style.xlsx</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>w</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+<span class='id p'>p</span><span class='period'>.</span><span class='id serialize'>serialize</span><span class='lparen'>(</span><span class='id f'>f</span><span class='rparen'>)</span></pre>
     
   </div>
 <h3>Parameters:</h3>
@@ -1322,9 +1273,8 @@ Styling specifically
       
       
         &mdash;
-        <div class='inline'><p>
-a customizable set of options
-</p>
+        <div class='inline'>
+<p>a customizable set of options</p>
 </div>
       
     </li>
@@ -1343,9 +1293,8 @@ a customizable set of options
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'><p>
-The text color
-</p>
+          &mdash; <div class='inline'>
+<p>The text color</p>
 </div>
         </li>
       
@@ -1355,9 +1304,8 @@ The text color
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'><p>
-The text size
-</p>
+          &mdash; <div class='inline'>
+<p>The text size</p>
 </div>
         </li>
       
@@ -1367,9 +1315,8 @@ The text size
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'><p>
-Indicates if the text should be bold
-</p>
+          &mdash; <div class='inline'>
+<p>Indicates if the text should be bold</p>
 </div>
         </li>
       
@@ -1379,9 +1326,8 @@ Indicates if the text should be bold
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'><p>
-Indicates if the text should be italicised
-</p>
+          &mdash; <div class='inline'>
+<p>Indicates if the text should be italicised</p>
 </div>
         </li>
       
@@ -1391,9 +1337,8 @@ Indicates if the text should be italicised
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'><p>
-Indicates if the text should be rendered with a strikethrough
-</p>
+          &mdash; <div class='inline'>
+<p>Indicates if the text should be rendered with a strikethrough</p>
 </div>
         </li>
       
@@ -1403,9 +1348,8 @@ Indicates if the text should be rendered with a strikethrough
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'><p>
-Indicates if the text should be rendered with a shadow
-</p>
+          &mdash; <div class='inline'>
+<p>Indicates if the text should be rendered with a shadow</p>
 </div>
         </li>
       
@@ -1415,9 +1359,8 @@ Indicates if the text should be rendered with a shadow
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'><p>
-The character set to use.
-</p>
+          &mdash; <div class='inline'>
+<p>The character set to use.</p>
 </div>
         </li>
       
@@ -1427,9 +1370,8 @@ The character set to use.
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'><p>
-The font family to use.
-</p>
+          &mdash; <div class='inline'>
+<p>The font family to use.</p>
 </div>
         </li>
       
@@ -1439,9 +1381,8 @@ The font family to use.
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'><p>
-The name of the font to use
-</p>
+          &mdash; <div class='inline'>
+<p>The name of the font to use</p>
 </div>
         </li>
       
@@ -1451,9 +1392,8 @@ The name of the font to use
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'><p>
-The number format to apply
-</p>
+          &mdash; <div class='inline'>
+<p>The number format to apply</p>
 </div>
         </li>
       
@@ -1463,9 +1403,8 @@ The number format to apply
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'><p>
-The formatting to apply. If this is specified, num_fmt is ignored.
-</p>
+          &mdash; <div class='inline'>
+<p>The formatting to apply. If this is specified, num_fmt is ignored.</p>
 </div>
         </li>
       
@@ -1475,9 +1414,8 @@ The formatting to apply. If this is specified, num_fmt is ignored.
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'><p>
-The border style to use.
-</p>
+          &mdash; <div class='inline'>
+<p>The border style to use.</p>
 </div>
         </li>
       
@@ -1487,9 +1425,8 @@ The border style to use.
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'><p>
-The background color to apply to the cell
-</p>
+          &mdash; <div class='inline'>
+<p>The background color to apply to the cell</p>
 </div>
         </li>
       
@@ -1499,9 +1436,8 @@ The background color to apply to the cell
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'><p>
-Indicates if the cell should be hidden
-</p>
+          &mdash; <div class='inline'>
+<p>Indicates if the cell should be hidden</p>
 </div>
         </li>
       
@@ -1511,9 +1447,8 @@ Indicates if the cell should be hidden
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'><p>
-Indicates if the cell should be locked
-</p>
+          &mdash; <div class='inline'>
+<p>Indicates if the cell should be locked</p>
 </div>
         </li>
       
@@ -1523,9 +1458,8 @@ Indicates if the cell should be locked
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'><p>
-A hash defining any of the attributes used in CellAlignment
-</p>
+          &mdash; <div class='inline'>
+<p>A hash defining any of the attributes used in CellAlignment</p>
 </div>
         </li>
       
@@ -1621,52 +1555,51 @@ A hash defining any of the attributes used in CellAlignment
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/styles.rb', line 191</span>
 
-<span class='def def kw'>def</span> <span class='add_style identifier id'>add_style</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+<span class='kw'>def</span> <span class='id add_style'>add_style</span><span class='lparen'>(</span><span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   
-  <span class='numFmtId identifier id'>numFmtId</span> <span class='assign token'>=</span> <span class='if if kw'>if</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:format_code</span><span class='rbrack token'>]</span>
-               <span class='n identifier id'>n</span> <span class='assign token'>=</span> <span class='@numFmts ivar id'>@numFmts</span><span class='dot token'>.</span><span class='map identifier id'>map</span><span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='f identifier id'>f</span><span class='bitor op'>|</span> <span class='f identifier id'>f</span><span class='dot token'>.</span><span class='numFmtId identifier id'>numFmtId</span> <span class='rbrace token'>}</span><span class='dot token'>.</span><span class='max identifier id'>max</span> <span class='plus op'>+</span> <span class='integer val'>1</span>
-               <span class='numFmts identifier id'>numFmts</span> <span class='lshft op'>&lt;&lt;</span> <span class='NumFmt constant id'>NumFmt</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:numFmtId</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='n identifier id'>n</span><span class='comma token'>,</span> <span class='symbol val'>:formatCode=</span><span class='gt op'>&gt;</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:format_code</span><span class='rbrack token'>]</span><span class='rparen token'>)</span>
-               <span class='n identifier id'>n</span>
-             <span class='else else kw'>else</span>
-               <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:num_fmt</span><span class='rbrack token'>]</span> <span class='orop op'>||</span> <span class='integer val'>0</span>
-             <span class='end end kw'>end</span>
+  <span class='id numFmtId'>numFmtId</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:format_code</span><span class='rbracket'>]</span>
+               <span class='id n'>n</span> <span class='op'>=</span> <span class='ivar'>@numFmts</span><span class='period'>.</span><span class='id map'>map</span><span class='lbrace'>{</span> <span class='op'>|</span><span class='id f'>f</span><span class='op'>|</span> <span class='id f'>f</span><span class='period'>.</span><span class='id numFmtId'>numFmtId</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id max'>max</span> <span class='op'>+</span> <span class='int'>1</span>
+               <span class='id numFmts'>numFmts</span> <span class='op'>&lt;&lt;</span> <span class='const'>NumFmt</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='symbol'>:numFmtId</span> <span class='op'>=&gt;</span> <span class='id n'>n</span><span class='comma'>,</span> <span class='symbol'>:formatCode</span><span class='op'>=&gt;</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:format_code</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+               <span class='id n'>n</span>
+             <span class='kw'>else</span>
+               <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:num_fmt</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='int'>0</span>
+             <span class='kw'>end</span>
   
-  <span class='borderId identifier id'>borderId</span> <span class='assign token'>=</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:border</span><span class='rbrack token'>]</span> <span class='orop op'>||</span> <span class='integer val'>0</span>
-  <span class='raise identifier id'>raise</span> <span class='ArgumentError constant id'>ArgumentError</span><span class='comma token'>,</span> <span class='string val'>&quot;Invalid borderId&quot;</span> <span class='unless unless_mod kw'>unless</span> <span class='borderId identifier id'>borderId</span> <span class='lt op'>&lt;</span> <span class='borders identifier id'>borders</span><span class='dot token'>.</span><span class='size identifier id'>size</span>
+  <span class='id borderId'>borderId</span> <span class='op'>=</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:border</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='int'>0</span>
+  <span class='id raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Invalid borderId</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='id borderId'>borderId</span> <span class='op'>&lt;</span> <span class='id borders'>borders</span><span class='period'>.</span><span class='id size'>size</span>
   
-  <span class='fill identifier id'>fill</span> <span class='assign token'>=</span> <span class='if if kw'>if</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:bg_color</span><span class='rbrack token'>]</span>
-           <span class='color identifier id'>color</span> <span class='assign token'>=</span> <span class='Color constant id'>Color</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:rgb=</span><span class='gt op'>&gt;</span><span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:bg_color</span><span class='rbrack token'>]</span><span class='rparen token'>)</span>
-           <span class='pattern identifier id'>pattern</span> <span class='assign token'>=</span> <span class='PatternFill constant id'>PatternFill</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:patternType</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span><span class='symbol val'>:solid</span><span class='comma token'>,</span> <span class='symbol val'>:fgColor=</span><span class='gt op'>&gt;</span><span class='color identifier id'>color</span><span class='rparen token'>)</span>
-           <span class='fills identifier id'>fills</span> <span class='lshft op'>&lt;&lt;</span> <span class='Fill constant id'>Fill</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='pattern identifier id'>pattern</span><span class='rparen token'>)</span>   
-         <span class='else else kw'>else</span>
-           <span class='integer val'>0</span>
-         <span class='end end kw'>end</span>
+  <span class='id fill'>fill</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:bg_color</span><span class='rbracket'>]</span>
+           <span class='id color'>color</span> <span class='op'>=</span> <span class='const'>Color</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='symbol'>:rgb</span><span class='op'>=&gt;</span><span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:bg_color</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+           <span class='id pattern'>pattern</span> <span class='op'>=</span> <span class='const'>PatternFill</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='symbol'>:patternType</span> <span class='op'>=&gt;</span><span class='symbol'>:solid</span><span class='comma'>,</span> <span class='symbol'>:fgColor</span><span class='op'>=&gt;</span><span class='id color'>color</span><span class='rparen'>)</span>
+           <span class='id fills'>fills</span> <span class='op'>&lt;&lt;</span> <span class='const'>Fill</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id pattern'>pattern</span><span class='rparen'>)</span>   
+         <span class='kw'>else</span>
+           <span class='int'>0</span>
+         <span class='kw'>end</span>
   
-  <span class='fontId identifier id'>fontId</span> <span class='assign token'>=</span> <span class='if if kw'>if</span> <span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='dot token'>.</span><span class='values_at identifier id'>values_at</span><span class='lparen token'>(</span><span class='symbol val'>:fg_color</span><span class='comma token'>,</span> <span class='symbol val'>:sz</span><span class='comma token'>,</span> <span class='symbol val'>:b</span><span class='comma token'>,</span> <span class='symbol val'>:i</span><span class='comma token'>,</span> <span class='symbol val'>:strike</span><span class='comma token'>,</span> <span class='symbol val'>:outline</span><span class='comma token'>,</span> <span class='symbol val'>:shadow</span><span class='comma token'>,</span> <span class='symbol val'>:charset</span><span class='comma token'>,</span> <span class='symbol val'>:family</span><span class='comma token'>,</span> <span class='symbol val'>:font_name</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='length identifier id'>length</span><span class='rparen token'>)</span>
-             <span class='font identifier id'>font</span> <span class='assign token'>=</span> <span class='Font constant id'>Font</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='rparen token'>)</span>
-             <span class='lbrack token'>[</span><span class='symbol val'>:b</span><span class='comma token'>,</span> <span class='symbol val'>:i</span><span class='comma token'>,</span> <span class='symbol val'>:strike</span><span class='comma token'>,</span> <span class='symbol val'>:outline</span><span class='comma token'>,</span> <span class='symbol val'>:shadow</span><span class='comma token'>,</span> <span class='symbol val'>:charset</span><span class='comma token'>,</span> <span class='symbol val'>:family</span><span class='comma token'>,</span> <span class='symbol val'>:sz</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='k identifier id'>k</span><span class='bitor op'>|</span> <span class='font identifier id'>font</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='dstring node'>&quot;#{k}=&quot;</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='k identifier id'>k</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='k identifier id'>k</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span> <span class='rbrace token'>}</span>
-             <span class='font identifier id'>font</span><span class='dot token'>.</span><span class='color identifier id'>color</span> <span class='assign token'>=</span> <span class='Color constant id'>Color</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:rgb</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:fg_color</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:fg_color</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
-             <span class='font identifier id'>font</span><span class='dot token'>.</span><span class='name identifier id'>name</span> <span class='assign token'>=</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:font_name</span><span class='rbrack token'>]</span> <span class='unless unless_mod kw'>unless</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:font_name</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
-             <span class='fonts identifier id'>fonts</span> <span class='lshft op'>&lt;&lt;</span> <span class='font identifier id'>font</span>
-           <span class='else else kw'>else</span>
-             <span class='integer val'>0</span> 
-           <span class='end end kw'>end</span>
+  <span class='id fontId'>fontId</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='lparen'>(</span><span class='id options'>options</span><span class='period'>.</span><span class='id values_at'>values_at</span><span class='lparen'>(</span><span class='symbol'>:fg_color</span><span class='comma'>,</span> <span class='symbol'>:sz</span><span class='comma'>,</span> <span class='symbol'>:b</span><span class='comma'>,</span> <span class='symbol'>:i</span><span class='comma'>,</span> <span class='symbol'>:strike</span><span class='comma'>,</span> <span class='symbol'>:outline</span><span class='comma'>,</span> <span class='symbol'>:shadow</span><span class='comma'>,</span> <span class='symbol'>:charset</span><span class='comma'>,</span> <span class='symbol'>:family</span><span class='comma'>,</span> <span class='symbol'>:font_name</span><span class='rparen'>)</span><span class='period'>.</span><span class='id length'>length</span><span class='rparen'>)</span>
+             <span class='id font'>font</span> <span class='op'>=</span> <span class='const'>Font</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='rparen'>)</span>
+             <span class='lbracket'>[</span><span class='symbol'>:b</span><span class='comma'>,</span> <span class='symbol'>:i</span><span class='comma'>,</span> <span class='symbol'>:strike</span><span class='comma'>,</span> <span class='symbol'>:outline</span><span class='comma'>,</span> <span class='symbol'>:shadow</span><span class='comma'>,</span> <span class='symbol'>:charset</span><span class='comma'>,</span> <span class='symbol'>:family</span><span class='comma'>,</span> <span class='symbol'>:sz</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id k'>k</span><span class='op'>|</span> <span class='id font'>font</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id k'>k</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='id k'>k</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='id k'>k</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id nil?'>nil?</span> <span class='rbrace'>}</span>
+             <span class='id font'>font</span><span class='period'>.</span><span class='id color'>color</span> <span class='op'>=</span> <span class='const'>Color</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='symbol'>:rgb</span> <span class='op'>=&gt;</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:fg_color</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:fg_color</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+             <span class='id font'>font</span><span class='period'>.</span><span class='id name'>name</span> <span class='op'>=</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:font_name</span><span class='rbracket'>]</span> <span class='kw'>unless</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:font_name</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+             <span class='id fonts'>fonts</span> <span class='op'>&lt;&lt;</span> <span class='id font'>font</span>
+           <span class='kw'>else</span>
+             <span class='int'>0</span> 
+           <span class='kw'>end</span>
   
-  <span class='applyProtection identifier id'>applyProtection</span> <span class='assign token'>=</span> <span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:hidden</span><span class='rbrack token'>]</span> <span class='orop op'>||</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:locked</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='question op'>?</span> <span class='integer val'>1</span> <span class='colon op'>:</span> <span class='integer val'>0</span>
+  <span class='id applyProtection'>applyProtection</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:hidden</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:locked</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='int'>1</span> <span class='op'>:</span> <span class='int'>0</span>
   
-  <span class='xf identifier id'>xf</span> <span class='assign token'>=</span> <span class='Xf constant id'>Xf</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:fillId</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='fill identifier id'>fill</span><span class='comma token'>,</span> <span class='symbol val'>:fontId=</span><span class='gt op'>&gt;</span><span class='fontId identifier id'>fontId</span><span class='comma token'>,</span> <span class='symbol val'>:applyFill=</span><span class='gt op'>&gt;</span><span class='integer val'>1</span><span class='comma token'>,</span> <span class='symbol val'>:applyFont=</span><span class='gt op'>&gt;</span><span class='integer val'>1</span><span class='comma token'>,</span> <span class='symbol val'>:numFmtId=</span><span class='gt op'>&gt;</span><span class='numFmtId identifier id'>numFmtId</span><span class='comma token'>,</span> <span class='symbol val'>:borderId=</span><span class='gt op'>&gt;</span><span class='borderId identifier id'>borderId</span><span class='comma token'>,</span> <span class='symbol val'>:applyProtection=</span><span class='gt op'>&gt;</span><span class='applyProtection identifier id'>applyProtection</span><span class='rparen token'>)</span>
+  <span class='id xf'>xf</span> <span class='op'>=</span> <span class='const'>Xf</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='symbol'>:fillId</span> <span class='op'>=&gt;</span> <span class='id fill'>fill</span><span class='comma'>,</span> <span class='symbol'>:fontId</span><span class='op'>=&gt;</span><span class='id fontId'>fontId</span><span class='comma'>,</span> <span class='symbol'>:applyFill</span><span class='op'>=&gt;</span><span class='int'>1</span><span class='comma'>,</span> <span class='symbol'>:applyFont</span><span class='op'>=&gt;</span><span class='int'>1</span><span class='comma'>,</span> <span class='symbol'>:numFmtId</span><span class='op'>=&gt;</span><span class='id numFmtId'>numFmtId</span><span class='comma'>,</span> <span class='symbol'>:borderId</span><span class='op'>=&gt;</span><span class='id borderId'>borderId</span><span class='comma'>,</span> <span class='symbol'>:applyProtection</span><span class='op'>=&gt;</span><span class='id applyProtection'>applyProtection</span><span class='rparen'>)</span>
   
-  <span class='if if kw'>if</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:alignment</span><span class='rbrack token'>]</span>
-    <span class='xf identifier id'>xf</span><span class='dot token'>.</span><span class='alignment identifier id'>alignment</span> <span class='assign token'>=</span> <span class='CellAlignment constant id'>CellAlignment</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:alignment</span><span class='rbrack token'>]</span><span class='rparen token'>)</span>
-  <span class='end end kw'>end</span>
+  <span class='kw'>if</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:alignment</span><span class='rbracket'>]</span>
+    <span class='id xf'>xf</span><span class='period'>.</span><span class='id alignment'>alignment</span> <span class='op'>=</span> <span class='const'>CellAlignment</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:alignment</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
   
-  <span class='if if kw'>if</span> <span class='applyProtection identifier id'>applyProtection</span>
-    <span class='xf identifier id'>xf</span><span class='dot token'>.</span><span class='protection identifier id'>protection</span> <span class='assign token'>=</span> <span class='CellProtection constant id'>CellProtection</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='rparen token'>)</span>
-  <span class='end end kw'>end</span>
+  <span class='kw'>if</span> <span class='id applyProtection'>applyProtection</span>
+    <span class='id xf'>xf</span><span class='period'>.</span><span class='id protection'>protection</span> <span class='op'>=</span> <span class='const'>CellProtection</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id options'>options</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
   
-  <span class='cellXfs identifier id'>cellXfs</span> <span class='lshft op'>&lt;&lt;</span> <span class='xf identifier id'>xf</span>
-<span class='end end kw'>end</span>
-</pre>
+  <span class='id cellXfs'>cellXfs</span> <span class='op'>&lt;&lt;</span> <span class='id xf'>xf</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1681,9 +1614,8 @@ A hash defining any of the attributes used in CellAlignment
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Serializes the styles document
-</p>
+    
+<p>Serializes the styles document</p>
 
 
   </div>
@@ -1724,17 +1656,16 @@ Serializes the styles document
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/styles.rb', line 239</span>
 
-<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='rparen token'>)</span>
-  <span class='builder identifier id'>builder</span> <span class='assign token'>=</span> <span class='Nokogiri constant id'>Nokogiri</span><span class='colon2 op'>::</span><span class='XML constant id'>XML</span><span class='colon2 op'>::</span><span class='Builder constant id'>Builder</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:encoding</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='ENCODING constant id'>ENCODING</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='xml identifier id'>xml</span><span class='bitor op'>|</span>
-    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='styleSheet identifier id'>styleSheet</span><span class='lparen token'>(</span><span class='symbol val'>:xmlns</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='XML_NS constant id'>XML_NS</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
-      <span class='lbrack token'>[</span><span class='symbol val'>:numFmts</span><span class='comma token'>,</span> <span class='symbol val'>:fonts</span><span class='comma token'>,</span> <span class='symbol val'>:fills</span><span class='comma token'>,</span> <span class='symbol val'>:borders</span><span class='comma token'>,</span> <span class='symbol val'>:cellStyleXfs</span><span class='comma token'>,</span> <span class='symbol val'>:cellXfs</span><span class='comma token'>,</span> <span class='symbol val'>:cellStyles</span><span class='comma token'>,</span> <span class='symbol val'>:dxfs</span><span class='comma token'>,</span> <span class='symbol val'>:tableStyles</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='key identifier id'>key</span><span class='bitor op'>|</span>
-        <span class='self self kw'>self</span><span class='dot token'>.</span><span class='instance_values identifier id'>instance_values</span><span class='lbrack token'>[</span><span class='key identifier id'>key</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
-      <span class='end end kw'>end</span>
-    <span class='rbrace token'>}</span>
-  <span class='end end kw'>end</span>
-  <span class='builder identifier id'>builder</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='id builder'>builder</span> <span class='op'>=</span> <span class='const'>Nokogiri</span><span class='op'>::</span><span class='const'>XML</span><span class='op'>::</span><span class='const'>Builder</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='symbol'>:encoding</span> <span class='op'>=&gt;</span> <span class='const'>ENCODING</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id xml'>xml</span><span class='op'>|</span>
+    <span class='id xml'>xml</span><span class='period'>.</span><span class='id styleSheet'>styleSheet</span><span class='lparen'>(</span><span class='symbol'>:xmlns</span> <span class='op'>=&gt;</span> <span class='const'>XML_NS</span><span class='rparen'>)</span> <span class='lbrace'>{</span>
+      <span class='lbracket'>[</span><span class='symbol'>:numFmts</span><span class='comma'>,</span> <span class='symbol'>:fonts</span><span class='comma'>,</span> <span class='symbol'>:fills</span><span class='comma'>,</span> <span class='symbol'>:borders</span><span class='comma'>,</span> <span class='symbol'>:cellStyleXfs</span><span class='comma'>,</span> <span class='symbol'>:cellXfs</span><span class='comma'>,</span> <span class='symbol'>:cellStyles</span><span class='comma'>,</span> <span class='symbol'>:dxfs</span><span class='comma'>,</span> <span class='symbol'>:tableStyles</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id key'>key</span><span class='op'>|</span>
+        <span class='kw'>self</span><span class='period'>.</span><span class='id instance_values'>instance_values</span><span class='lbracket'>[</span><span class='id key'>key</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
+      <span class='kw'>end</span>
+    <span class='rbrace'>}</span>
+  <span class='kw'>end</span>
+  <span class='id builder'>builder</span><span class='period'>.</span><span class='id to_xml'>to_xml</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1745,9 +1676,9 @@ Serializes the styles document
 </div>
     
     <div id="footer">
-  Generated on Sun Nov 27 21:52:32 2011 by 
+  Generated on Sun Nov 27 22:08:38 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.8.7).
+  0.7.3 (ruby-1.9.3).
 </div>
 
   </body>

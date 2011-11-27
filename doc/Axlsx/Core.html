@@ -97,15 +97,13 @@
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'><p>
-Packages manage their own core object.
-</p>
+    <div class='inline'>
+<p>Packages manage their own core object.</p>
 </div>
   </div>
 
-<p>
-The core object for the package.
-</p>
+
+<p>The core object for the package.</p>
 
 
   </div>
@@ -144,9 +142,8 @@ The core object for the package.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The author of the document.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The author of the document.</p>
 </div></span>
   
 </li>
@@ -183,9 +180,8 @@ The author of the document.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Creates a new Core object.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new Core object.</p>
 </div></span>
   
 </li>
@@ -207,9 +203,8 @@ Creates a new Core object.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Serializes the core object.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Serializes the core object.</p>
 </div></span>
   
 </li>
@@ -230,9 +225,8 @@ Serializes the core object.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Creates a new Core object.
-</p>
+    
+<p>Creates a new Core object.</p>
 
 
   </div>
@@ -253,9 +247,8 @@ Creates a new Core object.
       
       
         &mdash;
-        <div class='inline'><p>
-a customizable set of options
-</p>
+        <div class='inline'>
+<p>a customizable set of options</p>
 </div>
       
     </li>
@@ -294,10 +287,9 @@ a customizable set of options
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/doc_props/core.rb', line 12</span>
 
-<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
-  <span class='@creator ivar id'>@creator</span> <span class='assign token'>=</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:creator</span><span class='rbrack token'>]</span> <span class='orop op'>||</span> <span class='string val'>'axlsx'</span>      
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='ivar'>@creator</span> <span class='op'>=</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:creator</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>axlsx</span><span class='tstring_end'>'</span></span>      
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -320,9 +312,8 @@ a customizable set of options
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The author of the document. By default this is &#8216;axlsx&#8217;
-</p>
+    
+<p>The author of the document. By default this is 'axlsx'</p>
 
 
   </div>
@@ -356,10 +347,9 @@ The author of the document. By default this is &#8216;axlsx&#8217;
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/doc_props/core.rb', line 8</span>
 
-<span class='def def kw'>def</span> <span class='creator identifier id'>creator</span>
-  <span class='@creator ivar id'>@creator</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id creator'>creator</span>
+  <span class='ivar'>@creator</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -381,10 +371,9 @@ The author of the document. By default this is &#8216;axlsx&#8217;
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Serializes the core object. The created dcterms item is set to the current
-time when this method is called.
-</p>
+    
+<p>Serializes the core object. The created dcterms item is set to the current
+time when this method is called.</p>
 
 
   </div>
@@ -430,22 +419,21 @@ time when this method is called.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/doc_props/core.rb', line 18</span>
 
-<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='rparen token'>)</span>
-  <span class='builder identifier id'>builder</span> <span class='assign token'>=</span> <span class='Nokogiri constant id'>Nokogiri</span><span class='colon2 op'>::</span><span class='XML constant id'>XML</span><span class='colon2 op'>::</span><span class='Builder constant id'>Builder</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:encoding</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='ENCODING constant id'>ENCODING</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='xml identifier id'>xml</span><span class='bitor op'>|</span>
-    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'cp:coreProperties'</span><span class='comma token'>,</span> 
-             <span class='symbol val'>:&quot;xmlns:cp&quot;</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='CORE_NS constant id'>CORE_NS</span><span class='comma token'>,</span> 
-             <span class='symbol val'>:'xmlns:dc'</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='CORE_NS_DC constant id'>CORE_NS_DC</span><span class='comma token'>,</span> 
-             <span class='symbol val'>:'xmlns:dcmitype'</span><span class='assign token'>=</span><span class='gt op'>&gt;</span><span class='CORE_NS_DCMIT constant id'>CORE_NS_DCMIT</span><span class='comma token'>,</span> 
-             <span class='symbol val'>:'xmlns:dcterms'</span><span class='assign token'>=</span><span class='gt op'>&gt;</span><span class='CORE_NS_DCT constant id'>CORE_NS_DCT</span><span class='comma token'>,</span> 
-             <span class='symbol val'>:'xmlns:xsi'</span><span class='assign token'>=</span><span class='gt op'>&gt;</span><span class='CORE_NS_XSI constant id'>CORE_NS_XSI</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
-      <span class='xml identifier id'>xml</span><span class='lbrack token'>[</span><span class='string val'>'dc'</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='creator identifier id'>creator</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='creator identifier id'>creator</span>
-      <span class='xml identifier id'>xml</span><span class='lbrack token'>[</span><span class='string val'>'dcterms'</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='created identifier id'>created</span> <span class='Time constant id'>Time</span><span class='dot token'>.</span><span class='now identifier id'>now</span><span class='dot token'>.</span><span class='strftime identifier id'>strftime</span><span class='lparen token'>(</span><span class='string val'>'%Y-%m-%dT%H:%M:%S'</span><span class='rparen token'>)</span><span class='comma token'>,</span> <span class='symbol val'>:'xsi:type'</span><span class='assign token'>=</span><span class='gt op'>&gt;</span><span class='string val'>&quot;dcterms:W3CDTF&quot;</span>
-      <span class='xml identifier id'>xml</span><span class='lbrack token'>[</span><span class='string val'>'cp'</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='revision identifier id'>revision</span> <span class='integer val'>0</span>
-    <span class='rbrace token'>}</span>
-  <span class='end end kw'>end</span>  
-  <span class='builder identifier id'>builder</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='id builder'>builder</span> <span class='op'>=</span> <span class='const'>Nokogiri</span><span class='op'>::</span><span class='const'>XML</span><span class='op'>::</span><span class='const'>Builder</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='symbol'>:encoding</span> <span class='op'>=&gt;</span> <span class='const'>ENCODING</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id xml'>xml</span><span class='op'>|</span>
+    <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>cp:coreProperties</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> 
+             <span class='symbol'>:xmlns:cp</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='const'>CORE_NS</span><span class='comma'>,</span> 
+             <span class='symbol'>:xmlns:dc</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='const'>CORE_NS_DC</span><span class='comma'>,</span> 
+             <span class='symbol'>:xmlns:dcmitype</span><span class='tstring_end'>'</span></span><span class='op'>=&gt;</span><span class='const'>CORE_NS_DCMIT</span><span class='comma'>,</span> 
+             <span class='symbol'>:xmlns:dcterms</span><span class='tstring_end'>'</span></span><span class='op'>=&gt;</span><span class='const'>CORE_NS_DCT</span><span class='comma'>,</span> 
+             <span class='symbol'>:xmlns:xsi</span><span class='tstring_end'>'</span></span><span class='op'>=&gt;</span><span class='const'>CORE_NS_XSI</span><span class='rparen'>)</span> <span class='lbrace'>{</span>
+      <span class='id xml'>xml</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>dc</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id creator'>creator</span> <span class='kw'>self</span><span class='period'>.</span><span class='id creator'>creator</span>
+      <span class='id xml'>xml</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>dcterms</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id created'>created</span> <span class='const'>Time</span><span class='period'>.</span><span class='id now'>now</span><span class='period'>.</span><span class='id strftime'>strftime</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>%Y-%m-%dT%H:%M:%S</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='comma'>,</span> <span class='symbol'>:xsi:type</span><span class='tstring_end'>'</span></span><span class='op'>=&gt;</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>dcterms:W3CDTF</span><span class='tstring_end'>&quot;</span></span>
+      <span class='id xml'>xml</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>cp</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id revision'>revision</span> <span class='int'>0</span>
+    <span class='rbrace'>}</span>
+  <span class='kw'>end</span>  
+  <span class='id builder'>builder</span><span class='period'>.</span><span class='id to_xml'>to_xml</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -456,9 +444,9 @@ time when this method is called.
 </div>
     
     <div id="footer">
-  Generated on Sun Nov 27 21:52:48 2011 by 
+  Generated on Sun Nov 27 22:08:37 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.8.7).
+  0.7.3 (ruby-1.9.3).
 </div>
 
   </body>

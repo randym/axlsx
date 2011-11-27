@@ -99,16 +99,14 @@
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'><p>
-The recommended way to manage series is to use Chart#add_series
-</p>
+    <div class='inline'>
+<p>The recommended way to manage series is to use Chart#add_series</p>
 </div>
   </div>
 
-<p>
-A PieSeries defines the data and labels and explosion for pie charts
-series.
-</p>
+
+<p>A PieSeries defines the data and labels and explosion for pie charts
+series.</p>
 
 
   </div>
@@ -153,9 +151,8 @@ series.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The data for this series.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The data for this series.</p>
 </div></span>
   
 </li>
@@ -180,9 +177,8 @@ The data for this series.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The explosion for this series.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The explosion for this series.</p>
 </div></span>
   
 </li>
@@ -207,9 +203,8 @@ The explosion for this series.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The labels for this series.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The labels for this series.</p>
 </div></span>
   
 </li>
@@ -254,9 +249,8 @@ The labels for this series.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Creates a new series.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new series.</p>
 </div></span>
   
 </li>
@@ -278,9 +272,8 @@ Creates a new series.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Serializes the series.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Serializes the series.</p>
 </div></span>
   
 </li>
@@ -311,9 +304,8 @@ Serializes the series.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Creates a new series
-</p>
+    
+<p>Creates a new series</p>
 
 
   </div>
@@ -345,9 +337,8 @@ Creates a new series
       
       
         &mdash;
-        <div class='inline'><p>
-a customizable set of options
-</p>
+        <div class='inline'>
+<p>a customizable set of options</p>
 </div>
       
     </li>
@@ -418,13 +409,12 @@ a customizable set of options
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pie_series.rb', line 26</span>
 
-<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='chart identifier id'>chart</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
-  <span class='@explosion ivar id'>@explosion</span> <span class='assign token'>=</span> <span class='nil nil kw'>nil</span>
-  <span class='super super kw'>super</span><span class='lparen token'>(</span><span class='chart identifier id'>chart</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
-  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='labels identifier id'>labels</span> <span class='assign token'>=</span> <span class='CatAxisData constant id'>CatAxisData</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:labels</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:labels</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
-  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='data identifier id'>data</span> <span class='assign token'>=</span> <span class='ValAxisData constant id'>ValAxisData</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:data</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:data</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id chart'>chart</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='ivar'>@explosion</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='id chart'>chart</span><span class='comma'>,</span> <span class='id options'>options</span><span class='rparen'>)</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id labels'>labels</span> <span class='op'>=</span> <span class='const'>CatAxisData</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:labels</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:labels</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id data'>data</span> <span class='op'>=</span> <span class='const'>ValAxisData</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:data</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:data</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -447,9 +437,8 @@ a customizable set of options
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The data for this series.
-</p>
+    
+<p>The data for this series.</p>
 
 
   </div>
@@ -483,10 +472,9 @@ The data for this series.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pie_series.rb', line 10</span>
 
-<span class='def def kw'>def</span> <span class='data identifier id'>data</span>
-  <span class='@data ivar id'>@data</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id data'>data</span>
+  <span class='ivar'>@data</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -504,9 +492,8 @@ The data for this series.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The explosion for this series
-</p>
+    
+<p>The explosion for this series</p>
 
 
   </div>
@@ -540,10 +527,9 @@ The explosion for this series
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pie_series.rb', line 18</span>
 
-<span class='def def kw'>def</span> <span class='explosion identifier id'>explosion</span>
-  <span class='@explosion ivar id'>@explosion</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id explosion'>explosion</span>
+  <span class='ivar'>@explosion</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -561,9 +547,8 @@ The explosion for this series
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The labels for this series.
-</p>
+    
+<p>The labels for this series.</p>
 
 
   </div>
@@ -597,10 +582,9 @@ The labels for this series.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pie_series.rb', line 14</span>
 
-<span class='def def kw'>def</span> <span class='labels identifier id'>labels</span>
-  <span class='@labels ivar id'>@labels</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id labels'>labels</span>
+  <span class='ivar'>@labels</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -622,9 +606,8 @@ The labels for this series.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Serializes the series
-</p>
+    
+<p>Serializes the series</p>
 
 
   </div>
@@ -643,9 +626,8 @@ Serializes the series
       
       
         &mdash;
-        <div class='inline'><p>
-The document builder instance this objects xml will be added to.
-</p>
+        <div class='inline'>
+<p>The document builder instance this objects xml will be added to.</p>
 </div>
       
     </li>
@@ -683,14 +665,13 @@ The document builder instance this objects xml will be added to.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/pie_series.rb', line 39</span>
 
-<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
-  <span class='super super kw'>super</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span> <span class='do do kw'>do</span>  <span class='bitor op'>|</span><span class='xml_inner identifier id'>xml_inner</span><span class='bitor op'>|</span>
-    <span class='xml_inner identifier id'>xml_inner</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:explosion'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@explosion ivar id'>@explosion</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='@explosion ivar id'>@explosion</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
-    <span class='@labels ivar id'>@labels</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml_inner identifier id'>xml_inner</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='@labels ivar id'>@labels</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
-    <span class='@data ivar id'>@data</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml_inner identifier id'>xml_inner</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='@data ivar id'>@data</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
-  <span class='end end kw'>end</span>      
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span> <span class='kw'>do</span>  <span class='op'>|</span><span class='id xml_inner'>xml_inner</span><span class='op'>|</span>
+    <span class='id xml_inner'>xml_inner</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:explosion</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span><span class='op'>=&gt;</span><span class='ivar'>@explosion</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='ivar'>@explosion</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+    <span class='ivar'>@labels</span><span class='period'>.</span><span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml_inner'>xml_inner</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='ivar'>@labels</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+    <span class='ivar'>@data</span><span class='period'>.</span><span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml_inner'>xml_inner</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='ivar'>@data</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+  <span class='kw'>end</span>      
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -701,9 +682,9 @@ The document builder instance this objects xml will be added to.
 </div>
     
     <div id="footer">
-  Generated on Sun Nov 27 21:52:44 2011 by 
+  Generated on Sun Nov 27 22:08:39 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.8.7).
+  0.7.3 (ruby-1.9.3).
 </div>
 
   </body>

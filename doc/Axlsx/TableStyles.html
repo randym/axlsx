@@ -99,18 +99,16 @@
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'><p>
-Support for custom table styles does not exist in this version. Many of the
+    <div class='inline'>
+<p>Support for custom table styles does not exist in this version. Many of the
 classes required are defined in preparation for future release. Please do
-not attempt to add custom table styles.
-</p>
+not attempt to add custom table styles.</p>
 </div>
   </div>
 
-<p>
-TableStyles represents a collection of style definitions for table styles
-and pivot table styles.
-</p>
+
+<p>TableStyles represents a collection of style definitions for table styles
+and pivot table styles.</p>
 
 
   </div>
@@ -146,9 +144,8 @@ and pivot table styles.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The default pivot table style.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The default pivot table style.</p>
 </div></span>
   
 </li>
@@ -173,9 +170,8 @@ The default pivot table style.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The default table style.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The default table style.</p>
 </div></span>
   
 </li>
@@ -220,10 +216,9 @@ The default table style.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Creates a new TableStyles object that is a container for TableStyle
-objects.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new TableStyles object that is a container for TableStyle
+objects.</p>
 </div></span>
   
 </li>
@@ -245,9 +240,8 @@ objects.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Serializes the table styles element.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Serializes the table styles element.</p>
 </div></span>
   
 </li>
@@ -273,9 +267,8 @@ Serializes the table styles element.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Creates a new TableStyles object that is a container for TableStyle objects
-</p>
+    
+<p>Creates a new TableStyles object that is a container for TableStyle objects</p>
 
 
   </div>
@@ -296,9 +289,8 @@ Creates a new TableStyles object that is a container for TableStyle objects
       
       
         &mdash;
-        <div class='inline'><p>
-a customizable set of options
-</p>
+        <div class='inline'>
+<p>a customizable set of options</p>
 </div>
       
     </li>
@@ -348,12 +340,11 @@ a customizable set of options
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/table_styles.rb', line 17</span>
 
-<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
-  <span class='@defaultTableStyle ivar id'>@defaultTableStyle</span> <span class='assign token'>=</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:defaultTableStyle</span><span class='rbrack token'>]</span> <span class='orop op'>||</span> <span class='string val'>&quot;TableStyleMedium9&quot;</span>
-  <span class='@defaultPivotStyle ivar id'>@defaultPivotStyle</span> <span class='assign token'>=</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:defaultPivotStyle</span><span class='rbrack token'>]</span> <span class='orop op'>||</span> <span class='string val'>&quot;PivotStyleLight16&quot;</span>      
-  <span class='super super kw'>super</span> <span class='TableStyle constant id'>TableStyle</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='ivar'>@defaultTableStyle</span> <span class='op'>=</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:defaultTableStyle</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TableStyleMedium9</span><span class='tstring_end'>&quot;</span></span>
+  <span class='ivar'>@defaultPivotStyle</span> <span class='op'>=</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:defaultPivotStyle</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>PivotStyleLight16</span><span class='tstring_end'>&quot;</span></span>      
+  <span class='kw'>super</span> <span class='const'>TableStyle</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -386,10 +377,8 @@ a customizable set of options
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The default pivot table style. The default value is
-&#8216;PivotStyleLight6&#8217;
-</p>
+    
+<p>The default pivot table style. The default value is  'PivotStyleLight6'</p>
 
 
   </div>
@@ -423,10 +412,9 @@ The default pivot table style. The default value is
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/table_styles.rb', line 12</span>
 
-<span class='def def kw'>def</span> <span class='defaultPivotStyle identifier id'>defaultPivotStyle</span>
-  <span class='@defaultPivotStyle ivar id'>@defaultPivotStyle</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id defaultPivotStyle'>defaultPivotStyle</span>
+  <span class='ivar'>@defaultPivotStyle</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -444,10 +432,8 @@ The default pivot table style. The default value is
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The default table style. The default value is
-&#8216;TableStyleMedium9&#8217;
-</p>
+    
+<p>The default table style. The default value is 'TableStyleMedium9'</p>
 
 
   </div>
@@ -481,10 +467,9 @@ The default table style. The default value is
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/table_styles.rb', line 8</span>
 
-<span class='def def kw'>def</span> <span class='defaultTableStyle identifier id'>defaultTableStyle</span>
-  <span class='@defaultTableStyle ivar id'>@defaultTableStyle</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id defaultTableStyle'>defaultTableStyle</span>
+  <span class='ivar'>@defaultTableStyle</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -506,9 +491,8 @@ The default table style. The default value is
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Serializes the table styles element
-</p>
+    
+<p>Serializes the table styles element</p>
 
 
   </div>
@@ -527,9 +511,8 @@ Serializes the table styles element
       
       
         &mdash;
-        <div class='inline'><p>
-The document builder instance this objects xml will be added to.
-</p>
+        <div class='inline'>
+<p>The document builder instance this objects xml will be added to.</p>
 </div>
       
     </li>
@@ -567,14 +550,13 @@ The document builder instance this objects xml will be added to.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/table_styles.rb', line 30</span>
 
-<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
-  <span class='attr identifier id'>attr</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='instance_values identifier id'>instance_values</span><span class='dot token'>.</span><span class='reject identifier id'>reject</span> <span class='lbrace token'>{</span><span class='bitor op'>|</span><span class='k identifier id'>k</span><span class='comma token'>,</span> <span class='v identifier id'>v</span><span class='bitor op'>|</span> <span class='notop op'>!</span><span class='lbrack token'>[</span><span class='symbol val'>:defaultTableStyle</span><span class='comma token'>,</span> <span class='symbol val'>:defaultPivotStyle</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='include? fid id'>include?</span><span class='lparen token'>(</span><span class='k identifier id'>k</span><span class='dot token'>.</span><span class='to_sym identifier id'>to_sym</span><span class='rparen token'>)</span> <span class='rbrace token'>}</span>
-  <span class='attr identifier id'>attr</span><span class='lbrack token'>[</span><span class='symbol val'>:count</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='size identifier id'>size</span>
-  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='tableStyles identifier id'>tableStyles</span><span class='lparen token'>(</span><span class='attr identifier id'>attr</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
-    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='table_style identifier id'>table_style</span><span class='bitor op'>|</span> <span class='table_style identifier id'>table_style</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span> <span class='rbrace token'>}</span>
-  <span class='rbrace token'>}</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
+  <span class='id attr'>attr</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id instance_values'>instance_values</span><span class='period'>.</span><span class='id reject'>reject</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id k'>k</span><span class='comma'>,</span> <span class='id v'>v</span><span class='op'>|</span> <span class='op'>!</span><span class='lbracket'>[</span><span class='symbol'>:defaultTableStyle</span><span class='comma'>,</span> <span class='symbol'>:defaultPivotStyle</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id include?'>include?</span><span class='lparen'>(</span><span class='id k'>k</span><span class='period'>.</span><span class='id to_sym'>to_sym</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+  <span class='id attr'>attr</span><span class='lbracket'>[</span><span class='symbol'>:count</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id size'>size</span>
+  <span class='id xml'>xml</span><span class='period'>.</span><span class='id tableStyles'>tableStyles</span><span class='lparen'>(</span><span class='id attr'>attr</span><span class='rparen'>)</span> <span class='lbrace'>{</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id table_style'>table_style</span><span class='op'>|</span> <span class='id table_style'>table_style</span><span class='period'>.</span><span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+  <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -585,9 +567,9 @@ The document builder instance this objects xml will be added to.
 </div>
     
     <div id="footer">
-  Generated on Sun Nov 27 21:52:44 2011 by 
+  Generated on Sun Nov 27 22:08:40 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.8.7).
+  0.7.3 (ruby-1.9.3).
 </div>
 
   </body>

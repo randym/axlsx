@@ -8,7 +8,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 **License**:      MIT License      
 **Latest Version**: 1.0.10.a   
 **Ruby Version**: 1.8.7 - 1.9.3   
-**Release Date**: November 26th 2011     
+**Release Date**: November 27th 2011     
 
 Synopsis
 --------
@@ -210,13 +210,13 @@ Rails 3
        def report
          # First generate your package from the model
          # scopes, conditions etc are allowed but must be before the to_xlsx call.
-         p = Post.to_xlsx
+         p = Post.to_xlsx(:all, :style => {:border => Axlsx::STYLE_THIN_BORDER})
 
          # Add in some basic styles and formats
          percent, date, header = nil, nil, nil
          p.workbook.styles do |s|
-           percent = s.add_style :num_fmt=>9
-           date = s.add_style :format_code => 'yyyy/mm/dd'
+           percent = s.add_style :num_fmt=>9, :border => STYLE_THIN_BORDER
+           date = s.add_style :format_code => 'yyyy/mm/dd', :border => STYLE_THIN_BORDER
            header = s.add_style :bg_color => "FF000000", :fg_color => "FFFFFFFF", :alignment => {:horizontal=>:center}, :sz=>14
          end
 
@@ -260,6 +260,7 @@ Changelog
   - Added acts_as_xlsx mixin for rails3 See Examples
   - Added row.style assignation for updating the cell style for an entire row
   - Added col_style method to worksheet upate a the style for a column of cells
+  - Added cols for an easy reference to columns in a worksheet.
 
 - **October.26.11**: 1.0.9 release
   - Updated to support ruby 1.9.3

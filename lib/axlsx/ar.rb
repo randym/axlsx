@@ -24,6 +24,7 @@ module Axlsx
 
       # Maps the AR class to an Axlsx package
       # options are passed into AR find
+      # @param [Symbol, :all, etc.
       # @option options [Integer] header_style to apply to the first row of field names
       # @option options [Array, Symbol] an array of Axlsx types for each cell in data rows or a single type that will be applied to all types.
       # @option options [Integer, Array] style The style to pass to Worksheet#add_row
@@ -53,7 +54,7 @@ module Axlsx
     end
 
     # Empty module - I really like ruports way of allowing :include, :only, :exclude 
-    # and am looking to add something like that in later
+    # and am looking to add something like that in the next release
     module InstanceMethods
     end
     
@@ -62,7 +63,6 @@ module Axlsx
 
 end
 begin
-
 require 'active_record'
 ActiveRecord::Base.send :include, Axlsx::Ar
 rescue Exception=>e

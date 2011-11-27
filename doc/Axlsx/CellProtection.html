@@ -97,16 +97,14 @@
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'><p>
-Using Styles#add_style is the recommended way to manage cell protection.
-</p>
+    <div class='inline'>
+<p>Using Styles#add_style is the recommended way to manage cell protection.</p>
 </div>
   </div>
 
-<p>
-CellProtection stores information about locking or hiding cells in
-spreadsheet.
-</p>
+
+<p>CellProtection stores information about locking or hiding cells in
+spreadsheet.</p>
 
 
   </div>
@@ -145,9 +143,8 @@ spreadsheet.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-specifies locking for cells that have the style containing this protection.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>specifies locking for cells that have the style containing this protection.</p>
 </div></span>
   
 </li>
@@ -172,9 +169,8 @@ specifies locking for cells that have the style containing this protection.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-specifies if the cells that have the style containing this protection.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>specifies if the cells that have the style containing this protection.</p>
 </div></span>
   
 </li>
@@ -211,9 +207,8 @@ specifies if the cells that have the style containing this protection.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Creates a new CellProtection.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new CellProtection.</p>
 </div></span>
   
 </li>
@@ -235,9 +230,8 @@ Creates a new CellProtection.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Serializes the cell protection.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Serializes the cell protection.</p>
 </div></span>
   
 </li>
@@ -258,9 +252,8 @@ Serializes the cell protection.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Creates a new CellProtection
-</p>
+    
+<p>Creates a new CellProtection</p>
 
 
   </div>
@@ -281,9 +274,8 @@ Creates a new CellProtection
       
       
         &mdash;
-        <div class='inline'><p>
-a customizable set of options
-</p>
+        <div class='inline'>
+<p>a customizable set of options</p>
 </div>
       
     </li>
@@ -302,9 +294,8 @@ a customizable set of options
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'><p>
-value for hidden protection
-</p>
+          &mdash; <div class='inline'>
+<p>value for hidden protection</p>
 </div>
         </li>
       
@@ -314,9 +305,8 @@ value for hidden protection
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'><p>
-value for locked protection
-</p>
+          &mdash; <div class='inline'>
+<p>value for locked protection</p>
 </div>
         </li>
       
@@ -339,12 +329,11 @@ value for locked protection
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/cell_protection.rb', line 18</span>
 
-<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
-  <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='o identifier id'>o</span><span class='bitor op'>|</span>
-    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='dstring node'>&quot;#{o[0]}=&quot;</span><span class='comma token'>,</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span> <span class='dstring node'>&quot;#{o[0]}=&quot;</span>
-  <span class='end end kw'>end</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id options'>options</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id o'>o</span><span class='op'>|</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -367,9 +356,8 @@ value for locked protection
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-specifies locking for cells that have the style containing this protection
-</p>
+    
+<p>specifies locking for cells that have the style containing this protection</p>
 
 
   </div>
@@ -403,10 +391,9 @@ specifies locking for cells that have the style containing this protection
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/cell_protection.rb', line 9</span>
 
-<span class='def def kw'>def</span> <span class='hidden identifier id'>hidden</span>
-  <span class='@hidden ivar id'>@hidden</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id hidden'>hidden</span>
+  <span class='ivar'>@hidden</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -424,9 +411,8 @@ specifies locking for cells that have the style containing this protection
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-specifies if the cells that have the style containing this protection
-</p>
+    
+<p>specifies if the cells that have the style containing this protection</p>
 
 
   </div>
@@ -460,10 +446,9 @@ specifies if the cells that have the style containing this protection
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/cell_protection.rb', line 13</span>
 
-<span class='def def kw'>def</span> <span class='locked identifier id'>locked</span>
-  <span class='@locked ivar id'>@locked</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id locked'>locked</span>
+  <span class='ivar'>@locked</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -485,9 +470,8 @@ specifies if the cells that have the style containing this protection
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Serializes the cell protection
-</p>
+    
+<p>Serializes the cell protection</p>
 
 
   </div>
@@ -506,9 +490,8 @@ Serializes the cell protection
       
       
         &mdash;
-        <div class='inline'><p>
-The document builder instance this objects xml will be added to.
-</p>
+        <div class='inline'>
+<p>The document builder instance this objects xml will be added to.</p>
 </div>
       
     </li>
@@ -542,10 +525,9 @@ The document builder instance this objects xml will be added to.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/cell_protection.rb', line 32</span>
 
-<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
-  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='protection identifier id'>protection</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='dot token'>.</span><span class='instance_values identifier id'>instance_values</span><span class='rparen token'>)</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
+  <span class='id xml'>xml</span><span class='period'>.</span><span class='id protection'>protection</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id instance_values'>instance_values</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -556,9 +538,9 @@ The document builder instance this objects xml will be added to.
 </div>
     
     <div id="footer">
-  Generated on Sun Nov 27 21:52:48 2011 by 
+  Generated on Sun Nov 27 22:08:40 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.8.7).
+  0.7.3 (ruby-1.9.3).
 </div>
 
   </body>

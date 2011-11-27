@@ -94,9 +94,8 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>
-This class details a border used in Office Open XML spreadsheet styles.
-</p>
+    
+<p>This class details a border used in Office Open XML spreadsheet styles.</p>
 
 
   </div>
@@ -128,11 +127,10 @@ This class details a border used in Office Open XML spreadsheet styles.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The diagonal down property for the border that indicates if the border
+    <span class="summary_desc"><div class='inline'>
+<p>The diagonal down property for the border that indicates if the border
 should include a diagonal line from the top left to the top right of the
-cell.
-</p>
+cell.</p>
 </div></span>
   
 </li>
@@ -157,10 +155,9 @@ cell.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The diagonal up property for the border that indicates if the border should
-include a diagonal line from the bottom left to the top right of the cell.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The diagonal up property for the border that indicates if the border should
+include a diagonal line from the bottom left to the top right of the cell.</p>
 </div></span>
   
 </li>
@@ -185,11 +182,10 @@ include a diagonal line from the bottom left to the top right of the cell.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The outline property for the border indicating that top, left, right and
+    <span class="summary_desc"><div class='inline'>
+<p>The outline property for the border indicating that top, left, right and
 bottom borders should only be applied to the outside border of a range of
-cells.
-</p>
+cells.</p>
 </div></span>
   
 </li>
@@ -214,9 +210,8 @@ cells.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-A list of BorderPr objects for this border.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>A list of BorderPr objects for this border.</p>
 </div></span>
   
 </li>
@@ -253,9 +248,8 @@ A list of BorderPr objects for this border.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Creates a new Border object.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new Border object.</p>
 </div></span>
   
 </li>
@@ -277,9 +271,8 @@ Creates a new Border object.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Serializes the border element.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Serializes the border element.</p>
 </div></span>
   
 </li>
@@ -300,9 +293,8 @@ Serializes the border element.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Creates a new Border object
-</p>
+    
+<p>Creates a new Border object</p>
 
 
   </div>
@@ -312,20 +304,18 @@ Creates a new Border object
   <div class="examples">
     <h3>Examples:</h3>
     
-      <h4><div class='inline'><p>
-Making a border
-</p>
+      <h4><div class='inline'>
+<p>Making a border</p>
 </div></h4>
-      <pre class="example code"><span class='p identifier id'>p</span> <span class='assign token'>=</span> <span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
-<span class='red_border identifier id'>red_border</span> <span class='assign token'>=</span> <span class='Border constant id'>Border</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
-<span class='lbrack token'>[</span><span class='symbol val'>:left</span><span class='comma token'>,</span> <span class='symbol val'>:right</span><span class='comma token'>,</span> <span class='symbol val'>:top</span><span class='comma token'>,</span> <span class='symbol val'>:bottom</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='item identifier id'>item</span><span class='bitor op'>|</span> 
-  <span class='red_border identifier id'>red_border</span><span class='dot token'>.</span><span class='prs identifier id'>prs</span> <span class='lshft op'>&lt;&lt;</span> <span class='BorderPr constant id'>BorderPr</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:name=</span><span class='gt op'>&gt;</span><span class='item identifier id'>item</span><span class='comma token'>,</span> <span class='symbol val'>:style=</span><span class='gt op'>&gt;</span><span class='symbol val'>:thin</span><span class='comma token'>,</span> <span class='symbol val'>:color=</span><span class='gt op'>&gt;</span><span class='Color constant id'>Color</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:rgb=</span><span class='gt op'>&gt;</span><span class='string val'>&quot;FFFF0000&quot;</span><span class='rparen token'>)</span><span class='rparen token'>)</span>     <span class='comment val'>#   </span>
-<span class='end end kw'>end</span>
-<span class='comment val'># this sets red_border to be the index for the created border.</span>
-<span class='red_border identifier id'>red_border</span> <span class='assign token'>=</span> <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='styles identifier id'>styles</span><span class='dot token'>.</span><span class='@borders ivar id'>@borders</span> <span class='lshft op'>&lt;&lt;</span> <span class='red_border identifier id'>red_border</span>
-<span class='comment val'>#used in row creation as follows. This will add a red border to each of the cells in the row.</span>
-<span class='p identifier id'>p</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='add_worksheet identifier id'>add_worksheet</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span> <span class='lshft op'>&lt;&lt;</span> <span class='symbol val'>:values=</span><span class='gt op'>&gt;</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='comma token'>,</span><span class='integer val'>2</span><span class='comma token'>,</span><span class='integer val'>3</span><span class='rbrack token'>]</span> <span class='symbol val'>:style=</span><span class='gt op'>&gt;</span><span class='red_border identifier id'>red_border</span>
-</pre>
+      <pre class="example code">p = Package.new
+red_border = Border.new
+[:left, :right, :top, :bottom].each do |item| 
+  red_border.prs &lt;&lt; BorderPr.new(:name=&gt;item, :style=&gt;:thin, :color=&gt;Color.new(:rgb=&gt;&quot;FFFF0000&quot;))     #   
+end
+# this sets red_border to be the index for the created border.
+red_border = p.workbook.styles.@borders &lt;&lt; red_border
+#used in row creation as follows. This will add a red border to each of the cells in the row.
+p.workbook.add_worksheet.rows &lt;&lt; :values=&gt;[1,2,3] :style=&gt;red_border</pre>
     
   </div>
 <h3>Parameters:</h3>
@@ -343,9 +333,8 @@ Making a border
       
       
         &mdash;
-        <div class='inline'><p>
-a customizable set of options
-</p>
+        <div class='inline'>
+<p>a customizable set of options</p>
 </div>
       
     </li>
@@ -405,13 +394,12 @@ a customizable set of options
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/border.rb', line 31</span>
 
-<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
-  <span class='@prs ivar id'>@prs</span> <span class='assign token'>=</span> <span class='SimpleTypedList constant id'>SimpleTypedList</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='BorderPr constant id'>BorderPr</span>
-  <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='o identifier id'>o</span><span class='bitor op'>|</span>
-    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='dstring node'>&quot;#{o[0]}=&quot;</span><span class='comma token'>,</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span> <span class='dstring node'>&quot;#{o[0]}=&quot;</span>
-  <span class='end end kw'>end</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='ivar'>@prs</span> <span class='op'>=</span> <span class='const'>SimpleTypedList</span><span class='period'>.</span><span class='id new'>new</span> <span class='const'>BorderPr</span>
+  <span class='id options'>options</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id o'>o</span><span class='op'>|</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -434,11 +422,10 @@ a customizable set of options
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The diagonal down property for the border that indicates if the border
+    
+<p>The diagonal down property for the border that indicates if the border
 should include a diagonal line from the top left to the top right of the
-cell.
-</p>
+cell.</p>
 
 
   </div>
@@ -456,11 +443,10 @@ cell.
       
       
         &mdash;
-        <div class='inline'><p>
-The diagonal down property for the border that indicates if the border
+        <div class='inline'>
+<p>The diagonal down property for the border that indicates if the border
 should include a diagonal line from the top left to the top right of the
-cell.
-</p>
+cell.</p>
 </div>
       
     </li>
@@ -480,10 +466,9 @@ cell.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/border.rb', line 9</span>
 
-<span class='def def kw'>def</span> <span class='diagonalDown identifier id'>diagonalDown</span>
-  <span class='@diagonalDown ivar id'>@diagonalDown</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id diagonalDown'>diagonalDown</span>
+  <span class='ivar'>@diagonalDown</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -501,10 +486,9 @@ cell.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The diagonal up property for the border that indicates if the border should
-include a diagonal line from the bottom left to the top right of the cell.
-</p>
+    
+<p>The diagonal up property for the border that indicates if the border should
+include a diagonal line from the bottom left to the top right of the cell.</p>
 
 
   </div>
@@ -522,10 +506,9 @@ include a diagonal line from the bottom left to the top right of the cell.
       
       
         &mdash;
-        <div class='inline'><p>
-The diagonal up property for the border that indicates if the border should
-include a diagonal line from the bottom left to the top right of the cell.
-</p>
+        <div class='inline'>
+<p>The diagonal up property for the border that indicates if the border should
+include a diagonal line from the bottom left to the top right of the cell.</p>
 </div>
       
     </li>
@@ -545,10 +528,9 @@ include a diagonal line from the bottom left to the top right of the cell.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/border.rb', line 6</span>
 
-<span class='def def kw'>def</span> <span class='diagonalUp identifier id'>diagonalUp</span>
-  <span class='@diagonalUp ivar id'>@diagonalUp</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id diagonalUp'>diagonalUp</span>
+  <span class='ivar'>@diagonalUp</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -566,11 +548,10 @@ include a diagonal line from the bottom left to the top right of the cell.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The outline property for the border indicating that top, left, right and
+    
+<p>The outline property for the border indicating that top, left, right and
 bottom borders should only be applied to the outside border of a range of
-cells.
-</p>
+cells.</p>
 
 
   </div>
@@ -588,11 +569,10 @@ cells.
       
       
         &mdash;
-        <div class='inline'><p>
-The outline property for the border indicating that top, left, right and
+        <div class='inline'>
+<p>The outline property for the border indicating that top, left, right and
 bottom borders should only be applied to the outside border of a range of
-cells.
-</p>
+cells.</p>
 </div>
       
     </li>
@@ -612,10 +592,9 @@ cells.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/border.rb', line 12</span>
 
-<span class='def def kw'>def</span> <span class='outline identifier id'>outline</span>
-  <span class='@outline ivar id'>@outline</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id outline'>outline</span>
+  <span class='ivar'>@outline</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -633,9 +612,8 @@ cells.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-A list of BorderPr objects for this border.
-</p>
+    
+<p>A list of BorderPr objects for this border.</p>
 
 
   </div>
@@ -653,9 +631,8 @@ A list of BorderPr objects for this border.
       
       
         &mdash;
-        <div class='inline'><p>
-A list of BorderPr objects for this border.
-</p>
+        <div class='inline'>
+<p>A list of BorderPr objects for this border.</p>
 </div>
       
     </li>
@@ -675,10 +652,9 @@ A list of BorderPr objects for this border.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/border.rb', line 15</span>
 
-<span class='def def kw'>def</span> <span class='prs identifier id'>prs</span>
-  <span class='@prs ivar id'>@prs</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id prs'>prs</span>
+  <span class='ivar'>@prs</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -700,9 +676,8 @@ A list of BorderPr objects for this border.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Serializes the border element
-</p>
+    
+<p>Serializes the border element</p>
 
 
   </div>
@@ -721,9 +696,8 @@ Serializes the border element
       
       
         &mdash;
-        <div class='inline'><p>
-The document builder instance this objects xml will be added to.
-</p>
+        <div class='inline'>
+<p>The document builder instance this objects xml will be added to.</p>
 </div>
       
     </li>
@@ -750,16 +724,15 @@ The document builder instance this objects xml will be added to.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/border.rb', line 47</span>
 
-<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
-  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='border identifier id'>border</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='dot token'>.</span><span class='instance_values identifier id'>instance_values</span><span class='dot token'>.</span><span class='select identifier id'>select</span><span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='k identifier id'>k</span><span class='comma token'>,</span><span class='v identifier id'>v</span><span class='bitor op'>|</span> <span class='lbrack token'>[</span><span class='symbol val'>:diagonalUp</span><span class='comma token'>,</span> <span class='symbol val'>:diagonalDown</span><span class='comma token'>,</span> <span class='symbol val'>:outline</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='include? fid id'>include?</span> <span class='k identifier id'>k</span> <span class='rbrace token'>}</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
-    <span class='lbrack token'>[</span><span class='symbol val'>:start</span><span class='comma token'>,</span> <span class='symbol val'>:end</span><span class='comma token'>,</span> <span class='symbol val'>:left</span><span class='comma token'>,</span> <span class='symbol val'>:right</span><span class='comma token'>,</span> <span class='symbol val'>:top</span><span class='comma token'>,</span> <span class='symbol val'>:bottom</span><span class='comma token'>,</span> <span class='symbol val'>:diagonal</span><span class='comma token'>,</span> <span class='symbol val'>:vertical</span><span class='comma token'>,</span> <span class='symbol val'>:horizontal</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='k identifier id'>k</span><span class='bitor op'>|</span>
-      <span class='@prs ivar id'>@prs</span><span class='dot token'>.</span><span class='select identifier id'>select</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='pr identifier id'>pr</span><span class='bitor op'>|</span> <span class='pr identifier id'>pr</span><span class='dot token'>.</span><span class='name identifier id'>name</span> <span class='eq op'>==</span> <span class='k identifier id'>k</span> <span class='rbrace token'>}</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='part identifier id'>part</span><span class='bitor op'>|</span> 
-        <span class='part identifier id'>part</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span> 
-      <span class='end end kw'>end</span>
-    <span class='end end kw'>end</span>
-  <span class='rbrace token'>}</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
+  <span class='id xml'>xml</span><span class='period'>.</span><span class='id border'>border</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id instance_values'>instance_values</span><span class='period'>.</span><span class='id select'>select</span><span class='lbrace'>{</span> <span class='op'>|</span><span class='id k'>k</span><span class='comma'>,</span><span class='id v'>v</span><span class='op'>|</span> <span class='lbracket'>[</span><span class='symbol'>:diagonalUp</span><span class='comma'>,</span> <span class='symbol'>:diagonalDown</span><span class='comma'>,</span> <span class='symbol'>:outline</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id include?'>include?</span> <span class='id k'>k</span> <span class='rbrace'>}</span><span class='rparen'>)</span> <span class='lbrace'>{</span>
+    <span class='lbracket'>[</span><span class='symbol'>:start</span><span class='comma'>,</span> <span class='symbol'>:end</span><span class='comma'>,</span> <span class='symbol'>:left</span><span class='comma'>,</span> <span class='symbol'>:right</span><span class='comma'>,</span> <span class='symbol'>:top</span><span class='comma'>,</span> <span class='symbol'>:bottom</span><span class='comma'>,</span> <span class='symbol'>:diagonal</span><span class='comma'>,</span> <span class='symbol'>:vertical</span><span class='comma'>,</span> <span class='symbol'>:horizontal</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id k'>k</span><span class='op'>|</span>
+      <span class='ivar'>@prs</span><span class='period'>.</span><span class='id select'>select</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id pr'>pr</span><span class='op'>|</span> <span class='id pr'>pr</span><span class='period'>.</span><span class='id name'>name</span> <span class='op'>==</span> <span class='id k'>k</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id part'>part</span><span class='op'>|</span> 
+        <span class='id part'>part</span><span class='period'>.</span><span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span> 
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+  <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -770,9 +743,9 @@ The document builder instance this objects xml will be added to.
 </div>
     
     <div id="footer">
-  Generated on Sun Nov 27 21:52:42 2011 by 
+  Generated on Sun Nov 27 22:08:38 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.8.7).
+  0.7.3 (ruby-1.9.3).
 </div>
 
   </body>
