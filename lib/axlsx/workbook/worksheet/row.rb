@@ -54,6 +54,13 @@ module Axlsx
       c
     end
     
+    # sets the style for every cell in this row
+    def style=(style)
+      cells.each_with_index do | cell, index |
+        s = style.is_a?(Array) ? style[index] : style
+        cell.style = s
+      end
+    end
 
     private
 

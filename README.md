@@ -6,7 +6,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 **Author**:       Randy Morgan   
 **Copyright**:    2011      
 **License**:      MIT License      
-**Latest Version**: 1.0.9   
+**Latest Version**: 1.0.10   
 **Ruby Version**: 1.8.7 - 1.9.3   
 **Release Date**: November 26th 2011     
 
@@ -37,6 +37,8 @@ Feature List
 **6. Support for both 1904 and 1900 epocs configurable in the workbook.
 
 **7. Add jpg, gif and png images to worksheets
+
+**8. Build in mixin with Active record. simply add acts_as_xlsx to you models and they will support to_xlsx
 
 Installing
 ----------
@@ -162,6 +164,58 @@ Asian Language Support
      end  
      p.serialize("example8.xlsx")
 
+Styling Columns
+
+     p = Axlsx::Package.new
+     percent = p.workbook.styles.add_style :num_fmt => 9
+     p.workbook.add_worksheet do |sheet|
+       sheet.add_row ['col 1', 'col 2', 'col 3', 'col 4']
+       sheet.add_row [1, 2, 0.3, 4]
+       sheet.add_row [1, 2, 0.2, 4]
+       sheet.add_row [1, 2, 0.1, 4]
+     end
+     p.workbook.worksheets.first.col_style 2, percent, :row_offset=>1
+     p.serialize("example10.xlsx")
+
+Styling Rows
+
+     p = Axlsx::Package.new
+     p.workbook.add_worksheet do |sheet|
+       sheet.add_row ['col 1', 'col 2', 'col 3', 'col 4']
+       sheet.add_row [1, 2, 0.3, 4]
+       sheet.add_row [1, 2, 0.2, 4]
+       sheet.add_row [1, 2, 0.1, 4]
+     end
+     head = p.workbook.styles.add_style :bg_color => "FF000000", :fg_color=>"FFFFFFFF"
+     percent = p.workbook.styles.add_style :num_fmt => 9
+     p.workbook.worksheets.first.col_style 2, percent, :row_offset=>1
+     p.workbook.worksheets.first.row_style 0, head
+     p.serialize("example11.xlsx")
+
+
+Rails 3
+     # 1. Add the gem to your Gemfile and bundle install
+
+     gem 'axlsx'
+
+     # 2. Add 'acts_as_axslx' to your model
+
+     class MyModel < ActiveRecord::Base
+       acts_as_axlsx
+     end
+     
+     # 3. In your controlle, simply call to_xlsx against the class
+
+     class MyModelController < ApplicationController
+
+       #GET /posts/xlsx
+       def xlsx
+         p = MyModel.since(Time.now - 5.days).to_xlsx
+         p.serialize('my_model.xlsx')
+         send_file 'my_model.xlsx', :type=>"application/xlsx", :x_sendfile=>true
+       end
+     end
+
 ###Documentation
 
 This gem is 100% documented with YARD, an exceptional documentation library. To see documentation for this, and all the gems installed on your system use:
@@ -176,6 +230,12 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
  
 Changelog
 ---------
+- **October.27.11**: 1.0.10 release
+  - Updating gemspec to be compatible with rails3 requirements
+  - Added acts_as_xlsx mixin for rails3 See Examples
+  - Added row.style assignation for updating the cell style for an entire row
+  - Added col_style method to worksheet upate a the style for a column of cells
+
 - **October.26.11**: 1.0.9 release
   - Updated to support ruby 1.9.3
   - Updated to eliminate all warnings originating in this gem

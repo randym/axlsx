@@ -94,8 +94,9 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>A Title stores information about the title of a chart</p>
+    <p>
+A Title stores information about the title of a chart
+</p>
 
 
   </div>
@@ -131,8 +132,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The cell that holds the text for the title.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The cell that holds the text for the title.
+</p>
 </div></span>
   
 </li>
@@ -157,8 +159,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The text to be shown.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The text to be shown.
+</p>
 </div></span>
   
 </li>
@@ -195,8 +198,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Creates a new Title object.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Creates a new Title object.
+</p>
 </div></span>
   
 </li>
@@ -218,8 +222,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Serializes the chart title.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Serializes the chart title.
+</p>
 </div></span>
   
 </li>
@@ -240,8 +245,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Creates a new Title object</p>
+    <p>
+Creates a new Title object
+</p>
 
 
   </div>
@@ -262,8 +268,9 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The cell or string to be used for the chart's title</p>
+        <div class='inline'><p>
+The cell or string to be used for the chart&#8217;s title
+</p>
 </div>
       
     </li>
@@ -285,10 +292,11 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/title.rb', line 15</span>
 
-<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id title'>title</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='id cell'>cell</span> <span class='op'>=</span> <span class='id title'>title</span> <span class='kw'>if</span> <span class='id title'>title</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Cell</span><span class='rparen'>)</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='id text'>text</span> <span class='op'>=</span> <span class='id title'>title</span><span class='period'>.</span><span class='id to_s'>to_s</span> <span class='kw'>unless</span> <span class='id title'>title</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Cell</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='title identifier id'>title</span><span class='assign token'>=</span><span class='string val'>&quot;&quot;</span><span class='rparen token'>)</span>
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='cell identifier id'>cell</span> <span class='assign token'>=</span> <span class='title identifier id'>title</span> <span class='if if_mod kw'>if</span> <span class='title identifier id'>title</span><span class='dot token'>.</span><span class='is_a? fid id'>is_a?</span><span class='lparen token'>(</span><span class='Cell constant id'>Cell</span><span class='rparen token'>)</span>
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='text identifier id'>text</span> <span class='assign token'>=</span> <span class='title identifier id'>title</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span> <span class='unless unless_mod kw'>unless</span> <span class='title identifier id'>title</span><span class='dot token'>.</span><span class='is_a? fid id'>is_a?</span><span class='lparen token'>(</span><span class='Cell constant id'>Cell</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -311,9 +319,10 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The cell that holds the text for the title. Setting this property will
-automatically update the text attribute.</p>
+    <p>
+The cell that holds the text for the title. Setting this property will
+automatically update the text attribute.
+</p>
 
 
   </div>
@@ -347,9 +356,10 @@ automatically update the text attribute.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/title.rb', line 11</span>
 
-<span class='kw'>def</span> <span class='id cell'>cell</span>
-  <span class='ivar'>@cell</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='cell identifier id'>cell</span>
+  <span class='@cell ivar id'>@cell</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -367,9 +377,10 @@ automatically update the text attribute.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The text to be shown. Setting this property directly with a string will
-remove the cell reference.</p>
+    <p>
+The text to be shown. Setting this property directly with a string will
+remove the cell reference.
+</p>
 
 
   </div>
@@ -403,9 +414,10 @@ remove the cell reference.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/title.rb', line 7</span>
 
-<span class='kw'>def</span> <span class='id text'>text</span>
-  <span class='ivar'>@text</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='text identifier id'>text</span>
+  <span class='@text ivar id'>@text</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -427,8 +439,9 @@ remove the cell reference.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Serializes the chart title</p>
+    <p>
+Serializes the chart title
+</p>
 
 
   </div>
@@ -447,8 +460,9 @@ remove the cell reference.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>The document builder instance this objects xml will be added to.</p>
+        <div class='inline'><p>
+The document builder instance this objects xml will be added to.
+</p>
 </div>
       
     </li>
@@ -494,21 +508,22 @@ remove the cell reference.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/title.rb', line 44</span>
 
-<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
-  <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:title</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span>
-    <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:tx</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span>
-      <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:strRef</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span>
-        <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:f</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='const'>Axlsx</span><span class='op'>::</span><span class='id cell_range'>cell_range</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='ivar'>@cell</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='rparen'>)</span>
-        <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:strCache</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span>
-          <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:ptCount</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span><span class='op'>=&gt;</span><span class='int'>1</span><span class='rparen'>)</span>
-          <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:pt</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:idx</span><span class='op'>=&gt;</span><span class='int'>0</span><span class='rparen'>)</span> <span class='lbrace'>{</span>
-            <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:v</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='ivar'>@text</span><span class='rparen'>)</span>
-          <span class='rbrace'>}</span>
-        <span class='rbrace'>}</span>
-      <span class='rbrace'>}</span>
-    <span class='rbrace'>}</span>
-  <span class='rbrace'>}</span>      
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:title'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:tx'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:strRef'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+        <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:f'</span><span class='comma token'>,</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='cell_range identifier id'>cell_range</span><span class='lparen token'>(</span><span class='lbrack token'>[</span><span class='@cell ivar id'>@cell</span><span class='rbrack token'>]</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
+        <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:strCache'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+          <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:ptCount'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='integer val'>1</span><span class='rparen token'>)</span>
+          <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:pt'</span><span class='comma token'>,</span> <span class='symbol val'>:idx=</span><span class='gt op'>&gt;</span><span class='integer val'>0</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+            <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:v'</span><span class='comma token'>,</span> <span class='@text ivar id'>@text</span><span class='rparen token'>)</span>
+          <span class='rbrace token'>}</span>
+        <span class='rbrace token'>}</span>
+      <span class='rbrace token'>}</span>
+    <span class='rbrace token'>}</span>
+  <span class='rbrace token'>}</span>      
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -519,9 +534,9 @@ remove the cell reference.</p>
 </div>
     
     <div id="footer">
-  Generated on Sat Nov 26 13:16:36 2011 by 
+  Generated on Sun Nov 27 18:05:13 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.9.3).
+  0.7.3 (ruby-1.8.7).
 </div>
 
   </body>

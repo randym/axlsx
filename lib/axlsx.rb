@@ -16,6 +16,7 @@ require 'axlsx/drawing/drawing.rb'
 require 'axlsx/workbook/workbook.rb'
 require 'axlsx/package.rb'
 
+require 'axlsx/ar.rb'
 
 
 #required gems

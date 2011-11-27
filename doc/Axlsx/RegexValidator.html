@@ -94,8 +94,9 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>Validates the value against the regular expression provided.</p>
+    <p>
+Validates the value against the regular expression provided.
+</p>
 
 
   </div>
@@ -173,9 +174,10 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The name of what is being validated. This is included in the output when
-the value is invalid</p>
+        <div class='inline'><p>
+The name of what is being validated. This is included in the output when
+the value is invalid
+</p>
 </div>
       
     </li>
@@ -190,8 +192,9 @@ the value is invalid</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>The regular expression to evaluate</p>
+        <div class='inline'><p>
+The regular expression to evaluate
+</p>
 </div>
       
     </li>
@@ -206,8 +209,9 @@ the value is invalid</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>The value to validate.</p>
+        <div class='inline'><p>
+The value to validate.
+</p>
 </div>
       
     </li>
@@ -241,9 +245,10 @@ the value is invalid</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/util/validators.rb', line 21</span>
 
-<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id validate'>validate</span><span class='lparen'>(</span><span class='id name'>name</span><span class='comma'>,</span> <span class='id regex'>regex</span><span class='comma'>,</span> <span class='id v'>v</span><span class='rparen'>)</span>
-  <span class='id raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='lparen'>(</span><span class='const'>ERR_REGEX</span> <span class='op'>%</span> <span class='lbracket'>[</span><span class='id v'>v</span><span class='period'>.</span><span class='id inspect'>inspect</span><span class='comma'>,</span> <span class='id regex'>regex</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='lparen'>(</span><span class='id v'>v</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:=~</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id v'>v</span> <span class='op'>=~</span> <span class='id regex'>regex</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='validate identifier id'>validate</span><span class='lparen token'>(</span><span class='name identifier id'>name</span><span class='comma token'>,</span> <span class='regex identifier id'>regex</span><span class='comma token'>,</span> <span class='v identifier id'>v</span><span class='rparen token'>)</span>
+  <span class='raise identifier id'>raise</span> <span class='ArgumentError constant id'>ArgumentError</span><span class='comma token'>,</span> <span class='lparen token'>(</span><span class='ERR_REGEX constant id'>ERR_REGEX</span> <span class='mod op'>%</span> <span class='lbrack token'>[</span><span class='v identifier id'>v</span><span class='dot token'>.</span><span class='inspect identifier id'>inspect</span><span class='comma token'>,</span> <span class='regex identifier id'>regex</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='lparen token'>(</span><span class='v identifier id'>v</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span><span class='lparen token'>(</span><span class='symbol val'>:=~</span><span class='rparen token'>)</span> <span class='andop op'>&amp;&amp;</span> <span class='v identifier id'>v</span> <span class='match op'>=~</span> <span class='regex identifier id'>regex</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -254,9 +259,9 @@ the value is invalid</p>
 </div>
     
     <div id="footer">
-  Generated on Sat Nov 26 13:16:37 2011 by 
+  Generated on Sun Nov 27 18:05:06 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.9.3).
+  0.7.3 (ruby-1.8.7).
 </div>
 
   </body>

@@ -46,6 +46,31 @@ class TestWorksheet < Test::Unit::TestCase
     assert @ws.drawing.is_a? Axlsx::Drawing
   end
 
+  def test_col_style
+    @ws.add_row [1,2,3,4]
+    @ws.add_row [1,2,3,4]
+    @ws.add_row [1,2,3,4]
+    @ws.add_row [1,2,3,4]
+    @ws.col_style 1, 1, :row_offset=>1
+    @ws.rows[(1..-1)].each do | r | 
+      assert_equal(r.cells[1].style, 1)
+    end
+    assert_equal(@ws.rows.first.cells[1].style, 0)
+    assert_equal(@ws.rows.first.cells[0].style, 0)
+  end
+
+  def test_row_style
+    @ws.add_row [1,2,3,4]
+    @ws.add_row [1,2,3,4]
+    @ws.add_row [1,2,3,4]
+    @ws.add_row [1,2,3,4]
+    @ws.row_style 1, 1, :col_offset=>1
+    @ws.rows[1].cells[(1..-1)].each do | c | 
+      assert_equal(c.style, 1)
+    end
+    assert_equal(@ws.rows[1].cells[0].style, 0)
+    assert_equal(@ws.rows[2].cells[1].style, 0)
+  end
   
   def test_to_xml
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))

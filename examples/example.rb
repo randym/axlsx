@@ -1,19 +1,20 @@
+#!/usr/bin/env ruby
 # -*- coding: utf-8 -*-
-# encoding: utf-8
      require 'rubygems'
      require 'axlsx'
 
 
 #A Simple Workbook
-
+if ARGV.size == 0 || ARGV.include?("1")
       p = Axlsx::Package.new
       p.workbook.add_worksheet do |sheet|
         sheet.add_row ["First", "Second", "Third"]
         sheet.add_row [1, 2, 3]
       end
       p.serialize("example1.xlsx")
-
+end
 #Generating A Bar Chart
+if ARGV.size==0 || ARGV.include?("2")
 
      p = Axlsx::Package.new
      p.workbook.add_worksheet do |sheet|
@@ -24,8 +25,9 @@
        end
      end  
      p.serialize("example2.xlsx")
-
+end
 #Generating A Pie Chart
+if ARGV.size==0 || ARGV.include?("3")
 
      p = Axlsx::Package.new
      p.workbook.add_worksheet do |sheet|
@@ -36,9 +38,10 @@
        end
      end  
      p.serialize("example3.xlsx")
-
+end
 
 #Using Custom Styles
+if ARGV.size==0 || ARGV.include?("4")
 
      p = Axlsx::Package.new
      wb = p.workbook
@@ -49,8 +52,9 @@
        sheet.add_row [1, 2, 3], :style => Axlsx::STYLE_THIN_BORDER
      end
      p.serialize("example4.xlsx")
-
+end
 #Using Custom Formatting and date1904
+if ARGV.size==0 || ARGV.include?("5")
 
      p = Axlsx::Package.new
      wb = p.workbook
@@ -63,8 +67,9 @@
        sheet.add_row [Time.now, 0.2, 32], :style => [date, percent, padded]
      end
      p.serialize("example5.xlsx")
-
+end
 #Validation
+if ARGV.size==0 || ARGV.include?("6")
 
      p = Axlsx::Package.new
      p.workbook.add_worksheet do |sheet|
@@ -75,8 +80,9 @@
      p.validate.each do |error|
        puts error.inspect
      end
-      
+end      
 #Generating A Line Chart
+if ARGV.size==0 || ARGV.include?("7")
 
      p = Axlsx::Package.new
      p.workbook.add_worksheet do |sheet|
@@ -90,9 +96,10 @@
        end
        
      end  
-     p.serialize("example6.xlsx")
-
+     p.serialize("example7.xlsx")
+end
 #Add an Image
+if ARGV.size==0 || ARGV.include?("8")
 
      p = Axlsx::Package.new
      p.workbook.add_worksheet do |sheet|
@@ -103,10 +110,11 @@
          image.start_at 2, 2
        end
      end  
-     p.serialize("example7.xlsx")
-
+     p.serialize("example8.xlsx")
+end
 
 #Asian Language Support
+if ARGV.size==0 || ARGV.include?("9")
 
      p = Axlsx::Package.new
      p.workbook.add_worksheet do |sheet|
@@ -114,5 +122,54 @@
        sheet.add_row ["华语/華語"]
        sheet.add_row ["한국어/조선말"]
      end  
-     p.serialize("example8.xlsx")
+     p.serialize("example9.xlsx")
+end
+
+
+#Styling Columns
+if ARGV.size==0 || ARGV.include?("10")
+     p = Axlsx::Package.new
+     percent = p.workbook.styles.add_style :num_fmt => 9
+     p.workbook.add_worksheet do |sheet|
+       sheet.add_row ['col 1', 'col 2', 'col 3', 'col 4']
+       sheet.add_row [1, 2, 0.3, 4]
+       sheet.add_row [1, 2, 0.2, 4]
+       sheet.add_row [1, 2, 0.1, 4]
+     end
+     p.workbook.worksheets.first.col_style 2, percent, :row_offset=>1
+     p.serialize("example10.xlsx")
+end
+
+#Styling Rows
+if ARGV.size==0 || ARGV.include?("11")
+     p = Axlsx::Package.new
+     p.workbook.add_worksheet do |sheet|
+       sheet.add_row ['col 1', 'col 2', 'col 3', 'col 4']
+       sheet.add_row [1, 2, 0.3, 4]
+       sheet.add_row [1, 2, 0.2, 4]
+       sheet.add_row [1, 2, 0.1, 4]
+     end
+     head = p.workbook.styles.add_style :bg_color => "FF000000", :fg_color=>"FFFFFFFF"
+     percent = p.workbook.styles.add_style :num_fmt => 9
+     p.workbook.worksheets.first.col_style 2, percent, :row_offset=>1
+     p.workbook.worksheets.first.row_style 0, head
+     p.serialize("example11.xlsx")
+end
+
+#Rails 3
+      
+     #  class MyModel < ActiveRecord::Base
+     #    acts_as_axlsx
+     #  end
+     #
+     # class MyModelController <  ApplicationController
+     #
+     #   GET /posts/xlsx
+     #   def xlsx
+     #     p = Post.to_xlsx
+     #     p.serialize('posts.xlsx')
+     #     send_file 'posts.xlsx', :type=>"application/xlsx", :x_sendfile=>true
+     #   end
+
+     
 

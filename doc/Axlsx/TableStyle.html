@@ -99,14 +99,16 @@
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'>
-<p>Table are not supported in this version and only the defaults required for
-a valid workbook are created.</p>
+    <div class='inline'><p>
+Table are not supported in this version and only the defaults required for
+a valid workbook are created.
+</p>
 </div>
   </div>
 
-
-<p>A single table style definition and is a collection for tableStyleElements</p>
+<p>
+A single table style definition and is a collection for tableStyleElements
+</p>
 
 
   </div>
@@ -142,8 +144,9 @@ a valid workbook are created.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The name of this table style.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The name of this table style.
+</p>
 </div></span>
   
 </li>
@@ -168,8 +171,9 @@ a valid workbook are created.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>indicates if this style should be applied to pivot tables.</p>
+    <span class="summary_desc"><div class='inline'><p>
+indicates if this style should be applied to pivot tables.
+</p>
 </div></span>
   
 </li>
@@ -194,8 +198,9 @@ a valid workbook are created.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>indicates if this style should be applied to tables.</p>
+    <span class="summary_desc"><div class='inline'><p>
+indicates if this style should be applied to tables.
+</p>
 </div></span>
   
 </li>
@@ -240,8 +245,9 @@ a valid workbook are created.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>creates a new TableStyle object.</p>
+    <span class="summary_desc"><div class='inline'><p>
+creates a new TableStyle object.
+</p>
 </div></span>
   
 </li>
@@ -263,8 +269,9 @@ a valid workbook are created.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Serializes the table style.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Serializes the table style.
+</p>
 </div></span>
   
 </li>
@@ -290,8 +297,9 @@ a valid workbook are created.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>creates a new TableStyle object</p>
+    <p>
+creates a new TableStyle object
+</p>
 
 
   </div>
@@ -323,8 +331,9 @@ a valid workbook are created.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>a customizable set of options</p>
+        <div class='inline'><p>
+a customizable set of options
+</p>
 </div>
       
     </li>
@@ -371,8 +380,9 @@ a valid workbook are created.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>if name option is not provided.</p>
+        <div class='inline'><p>
+if name option is not provided.
+</p>
 </div>
       
     </li>
@@ -396,13 +406,14 @@ a valid workbook are created.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/table_style.rb', line 23</span>
 
-<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id name'>name</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='id name'>name</span> <span class='op'>=</span> <span class='id name'>name</span>
-  <span class='id options'>options</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id o'>o</span><span class='op'>|</span>
-    <span class='kw'>self</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span> <span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
-  <span class='kw'>end</span>
-  <span class='kw'>super</span> <span class='const'>TableStyleElement</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='name identifier id'>name</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='name identifier id'>name</span> <span class='assign token'>=</span> <span class='name identifier id'>name</span>
+  <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='o identifier id'>o</span><span class='bitor op'>|</span>
+    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='dstring node'>&quot;#{o[0]}=&quot;</span><span class='comma token'>,</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>0</span><span class='rbrack token'>]</span>
+  <span class='end end kw'>end</span>
+  <span class='super super kw'>super</span> <span class='TableStyleElement constant id'>TableStyleElement</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -435,8 +446,9 @@ a valid workbook are created.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The name of this table style</p>
+    <p>
+The name of this table style
+</p>
 
 
   </div>
@@ -470,9 +482,10 @@ a valid workbook are created.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/table_style.rb', line 8</span>
 
-<span class='kw'>def</span> <span class='id name'>name</span>
-  <span class='ivar'>@name</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='name identifier id'>name</span>
+  <span class='@name ivar id'>@name</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -490,8 +503,9 @@ a valid workbook are created.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>indicates if this style should be applied to pivot tables</p>
+    <p>
+indicates if this style should be applied to pivot tables
+</p>
 
 
   </div>
@@ -525,9 +539,10 @@ a valid workbook are created.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/table_style.rb', line 12</span>
 
-<span class='kw'>def</span> <span class='id pivot'>pivot</span>
-  <span class='ivar'>@pivot</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='pivot identifier id'>pivot</span>
+  <span class='@pivot ivar id'>@pivot</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -545,8 +560,9 @@ a valid workbook are created.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>indicates if this style should be applied to tables</p>
+    <p>
+indicates if this style should be applied to tables
+</p>
 
 
   </div>
@@ -580,9 +596,10 @@ a valid workbook are created.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/table_style.rb', line 16</span>
 
-<span class='kw'>def</span> <span class='id table'>table</span>
-  <span class='ivar'>@table</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='table identifier id'>table</span>
+  <span class='@table ivar id'>@table</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -604,8 +621,9 @@ a valid workbook are created.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Serializes the table style</p>
+    <p>
+Serializes the table style
+</p>
 
 
   </div>
@@ -624,8 +642,9 @@ a valid workbook are created.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>The document builder instance this objects xml will be added to.</p>
+        <div class='inline'><p>
+The document builder instance this objects xml will be added to.
+</p>
 </div>
       
     </li>
@@ -661,11 +680,12 @@ a valid workbook are created.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/table_style.rb', line 41</span>
 
-<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
-  <span class='id attr'>attr</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id instance_values'>instance_values</span><span class='period'>.</span><span class='id select'>select</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id k'>k</span><span class='comma'>,</span> <span class='id v'>v</span><span class='op'>|</span> <span class='lbracket'>[</span><span class='symbol'>:name</span><span class='comma'>,</span> <span class='symbol'>:pivot</span><span class='comma'>,</span> <span class='symbol'>:table</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id include?'>include?</span> <span class='id k'>k</span> <span class='rbrace'>}</span>
-  <span class='id attr'>attr</span><span class='lbracket'>[</span><span class='symbol'>:count</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id size'>size</span>
-  <span class='id xml'>xml</span><span class='period'>.</span><span class='id tableStyle'>tableStyle</span><span class='lparen'>(</span><span class='id attr'>attr</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='kw'>self</span><span class='period'>.</span><span class='id each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id table_style_el'>table_style_el</span><span class='op'>|</span> <span class='id table_style_el'>table_style_el</span><span class='period'>.</span><span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='rbrace'>}</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+  <span class='attr identifier id'>attr</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='instance_values identifier id'>instance_values</span><span class='dot token'>.</span><span class='select identifier id'>select</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='k identifier id'>k</span><span class='comma token'>,</span> <span class='v identifier id'>v</span><span class='bitor op'>|</span> <span class='lbrack token'>[</span><span class='symbol val'>:name</span><span class='comma token'>,</span> <span class='symbol val'>:pivot</span><span class='comma token'>,</span> <span class='symbol val'>:table</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='include? fid id'>include?</span> <span class='k identifier id'>k</span> <span class='rbrace token'>}</span>
+  <span class='attr identifier id'>attr</span><span class='lbrack token'>[</span><span class='symbol val'>:count</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='size identifier id'>size</span>
+  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='tableStyle identifier id'>tableStyle</span><span class='lparen token'>(</span><span class='attr identifier id'>attr</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='table_style_el identifier id'>table_style_el</span><span class='bitor op'>|</span> <span class='table_style_el identifier id'>table_style_el</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span> <span class='rbrace token'>}</span> <span class='rbrace token'>}</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -676,9 +696,9 @@ a valid workbook are created.</p>
 </div>
     
     <div id="footer">
-  Generated on Sat Nov 26 13:16:39 2011 by 
+  Generated on Sun Nov 27 18:05:20 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.9.3).
+  0.7.3 (ruby-1.8.7).
 </div>
 
   </body>

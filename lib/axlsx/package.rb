@@ -15,7 +15,12 @@ module Axlsx
       @core.creator = options[:author] || @core.creator
       yield self if block_given?
     end
-    
+
+    # Accepts a ruport table for serialization to xlsx
+    # @param [Table] table a ruport Table object
+    def ruport_table(table)
+      puts table
+    end
 
     # The workbook this package will serialize or validate.
     # @return [Workbook] If no workbook instance has been assigned with this package a new Workbook instance is returned.

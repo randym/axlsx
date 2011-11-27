@@ -94,10 +94,11 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>Package is responsible for managing all the bits and peices that Open
+    <p>
+Package is responsible for managing all the bits and peices that Open
 Office XML requires to make a valid xlsx document including valdation and
-serialization.</p>
+serialization.
+</p>
 
 
   </div>
@@ -136,8 +137,33 @@ serialization.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Initializes your package.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Initializes your package.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ruport_table-instance_method" title="#ruport_table (instance method)">- (Object) <strong>ruport_table</strong>(table) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Accepts a ruport table for serialization to xlsx.
+</p>
 </div></span>
   
 </li>
@@ -159,8 +185,9 @@ serialization.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Serialize your workbook to disk as an xlsx document.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Serialize your workbook to disk as an xlsx document.
+</p>
 </div></span>
   
 </li>
@@ -182,8 +209,9 @@ serialization.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Validate all parts of the package against xsd schema.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Validate all parts of the package against xsd schema.
+</p>
 </div></span>
   
 </li>
@@ -205,8 +233,9 @@ serialization.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The workbook this package will serialize or validate.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The workbook this package will serialize or validate.
+</p>
 </div></span>
   
 </li>
@@ -248,8 +277,9 @@ serialization.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Initializes your package</p>
+    <p>
+Initializes your package
+</p>
 
 
   </div>
@@ -259,10 +289,12 @@ serialization.</p>
   <div class="examples">
     <h3>Examples:</h3>
     
-      <h4><div class='inline'>
-<p>Package.new :author =&gt; ‘you!’, :workbook =&gt; Workbook.new</p>
+      <h4><div class='inline'><p>
+Package.new :author =&gt; &#8216;you!&#8217;, :workbook =&gt; Workbook.new
+</p>
 </div></h4>
-      <pre class="example code"></pre>
+      <pre class="example code">
+</pre>
     
   </div>
 <h3>Parameters:</h3>
@@ -280,9 +312,10 @@ serialization.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>A hash that you can use to specify the author and workbook for this
-package.</p>
+        <div class='inline'><p>
+A hash that you can use to specify the author and workbook for this
+package.
+</p>
 </div>
       
     </li>
@@ -301,8 +334,9 @@ package.</p>
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'>
-<p>The author of the document</p>
+          &mdash; <div class='inline'><p>
+The author of the document
+</p>
 </div>
         </li>
       
@@ -335,8 +369,9 @@ package.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>the object that the method was called on</p>
+        <div class='inline'><p>
+the object that the method was called on
+</p>
 </div>
       
     </li>
@@ -359,12 +394,13 @@ package.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/package.rb', line 12</span>
 
-<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='ivar'>@workbook</span> <span class='op'>=</span> <span class='kw'>nil</span>
-  <span class='ivar'>@core</span><span class='comma'>,</span> <span class='ivar'>@app</span> <span class='op'>=</span> <span class='const'>Core</span><span class='period'>.</span><span class='id new'>new</span><span class='comma'>,</span> <span class='const'>App</span><span class='period'>.</span><span class='id new'>new</span>
-  <span class='ivar'>@core</span><span class='period'>.</span><span class='id creator'>creator</span> <span class='op'>=</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:author</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='ivar'>@core</span><span class='period'>.</span><span class='id creator'>creator</span>
-  <span class='kw'>yield</span> <span class='kw'>self</span> <span class='kw'>if</span> <span class='id block_given?'>block_given?</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='@workbook ivar id'>@workbook</span> <span class='assign token'>=</span> <span class='nil nil kw'>nil</span>
+  <span class='@core ivar id'>@core</span><span class='comma token'>,</span> <span class='@app ivar id'>@app</span> <span class='assign token'>=</span> <span class='Core constant id'>Core</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='comma token'>,</span> <span class='App constant id'>App</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+  <span class='@core ivar id'>@core</span><span class='dot token'>.</span><span class='creator identifier id'>creator</span> <span class='assign token'>=</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:author</span><span class='rbrack token'>]</span> <span class='orop op'>||</span> <span class='@core ivar id'>@core</span><span class='dot token'>.</span><span class='creator identifier id'>creator</span>
+  <span class='yield yield kw'>yield</span> <span class='self self kw'>self</span> <span class='if if_mod kw'>if</span> <span class='block_given? fid id'>block_given?</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -378,7 +414,69 @@ package.</p>
     
     
       <div class="method_details first">
-  <p class="signature first" id="serialize-instance_method">
+  <p class="signature first" id="ruport_table-instance_method">
+  
+    - (<tt>Object</tt>) <strong>ruport_table</strong>(table) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Accepts a ruport table for serialization to xlsx
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>table</span>
+      
+      
+        <span class='type'>(<tt>Table</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+a ruport Table object
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+21
+22
+23</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/package.rb', line 21</span>
+
+<span class='def def kw'>def</span> <span class='ruport_table identifier id'>ruport_table</span><span class='lparen token'>(</span><span class='table identifier id'>table</span><span class='rparen token'>)</span>
+  <span class='puts identifier id'>puts</span> <span class='table identifier id'>table</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="serialize-instance_method">
   
     - (<tt>Boolean</tt>) <strong>serialize</strong>(output, confirm_valid = false) 
   
@@ -389,15 +487,17 @@ package.</p>
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'>
-<p>A tremendous amount of effort has gone into ensuring that you cannot create
+    <div class='inline'><p>
+A tremendous amount of effort has gone into ensuring that you cannot create
 invalid xlsx documents. confirm_valid should be used in the rare case that
-you cannot open the serialized file.</p>
+you cannot open the serialized file.
+</p>
 </div>
   </div>
 
-
-<p>Serialize your workbook to disk as an xlsx document.</p>
+<p>
+Serialize your workbook to disk as an xlsx document.
+</p>
 
 
   </div>
@@ -408,12 +508,13 @@ you cannot open the serialized file.</p>
     <h3>Examples:</h3>
     
       <h4><div class='inline'></div></h4>
-      <pre class="example code"><span class='comment'># This is how easy it is to create a valid xlsx file. Of course you might want to add a sheet or two, and maybe some data, styles and charts.
-</span><span class='comment'># Take a look at the README for an example of how to do it!
-</span><span class='id f'>f</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id open'>open</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>test.xlsx</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>w</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
-<span class='const'>Package</span><span class='period'>.</span><span class='id new'>new</span><span class='period'>.</span><span class='id serialize'>serialize</span><span class='lparen'>(</span><span class='id f'>f</span><span class='rparen'>)</span>
+      <pre class="example code"><span class='comment val'># This is how easy it is to create a valid xlsx file. Of course you might want to add a sheet or two, and maybe some data, styles and charts.</span>
+<span class='comment val'># Take a look at the README for an example of how to do it!</span>
+<span class='f identifier id'>f</span> <span class='assign token'>=</span> <span class='File constant id'>File</span><span class='dot token'>.</span><span class='open identifier id'>open</span><span class='lparen token'>(</span><span class='string val'>'test.xlsx'</span><span class='comma token'>,</span> <span class='string val'>'w'</span><span class='rparen token'>)</span>
+<span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='dot token'>.</span><span class='serialize identifier id'>serialize</span><span class='lparen token'>(</span><span class='f identifier id'>f</span><span class='rparen token'>)</span>
 
-<span class='comment'># You will find a file called test.xlsx</span></pre>
+<span class='comment val'># You will find a file called test.xlsx</span>
+</pre>
     
   </div>
 <h3>Parameters:</h3>
@@ -429,8 +530,9 @@ you cannot open the serialized file.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>The file you want to serialize your package to</p>
+        <div class='inline'><p>
+The file you want to serialize your package to
+</p>
 </div>
       
     </li>
@@ -447,8 +549,9 @@ you cannot open the serialized file.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>Validate the package prior to serialization.</p>
+        <div class='inline'><p>
+Validate the package prior to serialization.
+</p>
 </div>
       
     </li>
@@ -466,9 +569,10 @@ you cannot open the serialized file.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>False if confirm_valid and validation errors exist. True if the package was
-serialized</p>
+        <div class='inline'><p>
+False if confirm_valid and validation errors exist. True if the package was
+serialized
+</p>
 </div>
       
     </li>
@@ -488,11 +592,6 @@ serialized</p>
       <pre class="lines">
 
 
-54
-55
-56
-57
-58
 59
 60
 61
@@ -505,29 +604,35 @@ serialized</p>
 68
 69
 70
-71</pre>
+71
+72
+73
+74
+75
+76</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/package.rb', line 54</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/package.rb', line 59</span>
 
-<span class='kw'>def</span> <span class='id serialize'>serialize</span><span class='lparen'>(</span><span class='id output'>output</span><span class='comma'>,</span> <span class='id confirm_valid'>confirm_valid</span><span class='op'>=</span><span class='kw'>false</span><span class='rparen'>)</span>
-  <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='op'>!</span><span class='id confirm_valid'>confirm_valid</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id validate'>validate</span><span class='period'>.</span><span class='id empty?'>empty?</span>
-  <span class='id p'>p</span> <span class='op'>=</span> <span class='id parts'>parts</span>
-  <span class='const'>Zip</span><span class='op'>::</span><span class='const'>ZipOutputStream</span><span class='period'>.</span><span class='id open'>open</span><span class='lparen'>(</span><span class='id output'>output</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id zip'>zip</span><span class='op'>|</span>
-    <span class='id p'>p</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id part'>part</span><span class='op'>|</span> 
-      <span class='kw'>unless</span> <span class='id part'>part</span><span class='lbracket'>[</span><span class='symbol'>:doc</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id nil?'>nil?</span>
-        <span class='id zip'>zip</span><span class='period'>.</span><span class='id put_next_entry'>put_next_entry</span><span class='lparen'>(</span><span class='id part'>part</span><span class='lbracket'>[</span><span class='symbol'>:entry</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='semicolon'>;</span> 
-        <span class='id zip'>zip</span><span class='period'>.</span><span class='id puts'>puts</span><span class='lparen'>(</span><span class='id part'>part</span><span class='lbracket'>[</span><span class='symbol'>:doc</span><span class='rbracket'>]</span><span class='rparen'>)</span>
-      <span class='kw'>end</span>
-      <span class='kw'>unless</span> <span class='id part'>part</span><span class='lbracket'>[</span><span class='symbol'>:path</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id nil?'>nil?</span>
-        <span class='id zip'>zip</span><span class='period'>.</span><span class='id put_next_entry'>put_next_entry</span><span class='lparen'>(</span><span class='id part'>part</span><span class='lbracket'>[</span><span class='symbol'>:entry</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='semicolon'>;</span> 
-        <span class='comment'># binread for 1.9.3
-</span>        <span class='id zip'>zip</span><span class='period'>.</span><span class='id write'>write</span> <span class='const'>IO</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:binread</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='const'>IO</span><span class='period'>.</span><span class='id binread'>binread</span><span class='lparen'>(</span><span class='id part'>part</span><span class='lbracket'>[</span><span class='symbol'>:path</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='const'>IO</span><span class='period'>.</span><span class='id read'>read</span><span class='lparen'>(</span><span class='id part'>part</span><span class='lbracket'>[</span><span class='symbol'>:path</span><span class='rbracket'>]</span><span class='rparen'>)</span>
-      <span class='kw'>end</span>          
-    <span class='kw'>end</span>
-  <span class='kw'>end</span>
-  <span class='kw'>true</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='serialize identifier id'>serialize</span><span class='lparen token'>(</span><span class='output identifier id'>output</span><span class='comma token'>,</span> <span class='confirm_valid identifier id'>confirm_valid</span><span class='assign token'>=</span><span class='false false kw'>false</span><span class='rparen token'>)</span>
+  <span class='return return kw'>return</span> <span class='false false kw'>false</span> <span class='unless unless_mod kw'>unless</span> <span class='notop op'>!</span><span class='confirm_valid identifier id'>confirm_valid</span> <span class='orop op'>||</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='validate identifier id'>validate</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
+  <span class='p identifier id'>p</span> <span class='assign token'>=</span> <span class='parts identifier id'>parts</span>
+  <span class='Zip constant id'>Zip</span><span class='colon2 op'>::</span><span class='ZipOutputStream constant id'>ZipOutputStream</span><span class='dot token'>.</span><span class='open identifier id'>open</span><span class='lparen token'>(</span><span class='output identifier id'>output</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='zip identifier id'>zip</span><span class='bitor op'>|</span>
+    <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='part identifier id'>part</span><span class='bitor op'>|</span> 
+      <span class='unless unless kw'>unless</span> <span class='part identifier id'>part</span><span class='lbrack token'>[</span><span class='symbol val'>:doc</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+        <span class='zip identifier id'>zip</span><span class='dot token'>.</span><span class='put_next_entry identifier id'>put_next_entry</span><span class='lparen token'>(</span><span class='part identifier id'>part</span><span class='lbrack token'>[</span><span class='symbol val'>:entry</span><span class='rbrack token'>]</span><span class='rparen token'>)</span><span class='semicolon token'>;</span> 
+        <span class='zip identifier id'>zip</span><span class='dot token'>.</span><span class='puts identifier id'>puts</span><span class='lparen token'>(</span><span class='part identifier id'>part</span><span class='lbrack token'>[</span><span class='symbol val'>:doc</span><span class='rbrack token'>]</span><span class='rparen token'>)</span>
+      <span class='end end kw'>end</span>
+      <span class='unless unless kw'>unless</span> <span class='part identifier id'>part</span><span class='lbrack token'>[</span><span class='symbol val'>:path</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+        <span class='zip identifier id'>zip</span><span class='dot token'>.</span><span class='put_next_entry identifier id'>put_next_entry</span><span class='lparen token'>(</span><span class='part identifier id'>part</span><span class='lbrack token'>[</span><span class='symbol val'>:entry</span><span class='rbrack token'>]</span><span class='rparen token'>)</span><span class='semicolon token'>;</span> 
+        <span class='comment val'># binread for 1.9.3</span>
+        <span class='zip identifier id'>zip</span><span class='dot token'>.</span><span class='write identifier id'>write</span> <span class='IO constant id'>IO</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span><span class='lparen token'>(</span><span class='symbol val'>:binread</span><span class='rparen token'>)</span> <span class='question op'>?</span> <span class='IO constant id'>IO</span><span class='dot token'>.</span><span class='binread identifier id'>binread</span><span class='lparen token'>(</span><span class='part identifier id'>part</span><span class='lbrack token'>[</span><span class='symbol val'>:path</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='colon op'>:</span> <span class='IO constant id'>IO</span><span class='dot token'>.</span><span class='read identifier id'>read</span><span class='lparen token'>(</span><span class='part identifier id'>part</span><span class='lbrack token'>[</span><span class='symbol val'>:path</span><span class='rbrack token'>]</span><span class='rparen token'>)</span>
+      <span class='end end kw'>end</span>          
+    <span class='end end kw'>end</span>
+  <span class='end end kw'>end</span>
+  <span class='true true kw'>true</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -545,22 +650,25 @@ serialized</p>
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'>
-<p>This gem includes all schema from OfficeOpenXML-XMLSchema-Transitional.zip
+    <div class='inline'><p>
+This gem includes all schema from OfficeOpenXML-XMLSchema-Transitional.zip
 and OpenPackagingConventions-XMLSchema.zip as per ECMA-376, Third edition.
 opc schema require an internet connection to import remote schema from
 dublin core for dc, dcterms and xml namespaces. Those remote schema are
-included in this gem, and the original files have been altered to  refer to
-the local versions.</p>
-
-<p>If by chance you are able to creat a package that does not validate it
+included in this gem, and the original files have been altered to refer to
+the local versions.
+</p>
+<p>
+If by chance you are able to creat a package that does not validate it
 indicates that the internal validation is not robust enough and needs to be
-improved. Please report your errors to the gem author.</p>
+improved. Please report your errors to the gem author.
+</p>
 </div>
   </div>
 
-
-<p>Validate all parts of the package against xsd schema.</p>
+<p>
+Validate all parts of the package against xsd schema.
+</p>
 
 
   </div>
@@ -571,10 +679,11 @@ improved. Please report your errors to the gem author.</p>
     <h3>Examples:</h3>
     
       <h4><div class='inline'></div></h4>
-      <pre class="example code"><span class='comment'># The following will output any error messages found in serialization.
-</span><span class='id p'>p</span> <span class='op'>=</span> <span class='const'>Axlsx</span><span class='op'>::</span><span class='const'>Package</span><span class='period'>.</span><span class='id new'>new</span>
-<span class='comment'># ... code to create sheets, charts, styles etc.
-</span><span class='id p'>p</span><span class='period'>.</span><span class='id validate'>validate</span><span class='period'>.</span><span class='id each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id error'>error</span><span class='op'>|</span> <span class='id puts'>puts</span> <span class='id error'>error</span><span class='period'>.</span><span class='id message'>message</span> <span class='rbrace'>}</span></pre>
+      <pre class="example code"><span class='comment val'># The following will output any error messages found in serialization.</span>
+<span class='p identifier id'>p</span> <span class='assign token'>=</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+<span class='comment val'># ... code to create sheets, charts, styles etc.</span>
+<span class='p identifier id'>p</span><span class='dot token'>.</span><span class='validate identifier id'>validate</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='error identifier id'>error</span><span class='bitor op'>|</span> <span class='puts identifier id'>puts</span> <span class='error identifier id'>error</span><span class='dot token'>.</span><span class='message identifier id'>message</span> <span class='rbrace token'>}</span>
+</pre>
     
   </div>
 
@@ -589,8 +698,9 @@ improved. Please report your errors to the gem author.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>An array of all validation errors found.</p>
+        <div class='inline'><p>
+An array of all validation errors found.
+</p>
 </div>
       
     </li>
@@ -610,20 +720,21 @@ improved. Please report your errors to the gem author.</p>
       <pre class="lines">
 
 
-88
-89
-90
-91
-92</pre>
+93
+94
+95
+96
+97</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/package.rb', line 88</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/package.rb', line 93</span>
 
-<span class='kw'>def</span> <span class='id validate'>validate</span>
-  <span class='id errors'>errors</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
-  <span class='id parts'>parts</span><span class='period'>.</span><span class='id each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id part'>part</span><span class='op'>|</span> <span class='id errors'>errors</span><span class='period'>.</span><span class='id concat'>concat</span> <span class='id validate_single_doc'>validate_single_doc</span><span class='lparen'>(</span><span class='id part'>part</span><span class='lbracket'>[</span><span class='symbol'>:schema</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id part'>part</span><span class='lbracket'>[</span><span class='symbol'>:doc</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id part'>part</span><span class='lbracket'>[</span><span class='symbol'>:schema</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id nil?'>nil?</span> <span class='rbrace'>}</span>
-  <span class='id errors'>errors</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='validate identifier id'>validate</span>
+  <span class='errors identifier id'>errors</span> <span class='assign token'>=</span> <span class='lbrack token'>[</span><span class='rbrack token'>]</span>
+  <span class='parts identifier id'>parts</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='part identifier id'>part</span><span class='bitor op'>|</span> <span class='errors identifier id'>errors</span><span class='dot token'>.</span><span class='concat identifier id'>concat</span> <span class='validate_single_doc identifier id'>validate_single_doc</span><span class='lparen token'>(</span><span class='part identifier id'>part</span><span class='lbrack token'>[</span><span class='symbol val'>:schema</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='part identifier id'>part</span><span class='lbrack token'>[</span><span class='symbol val'>:doc</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='part identifier id'>part</span><span class='lbrack token'>[</span><span class='symbol val'>:schema</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span> <span class='rbrace token'>}</span>
+  <span class='errors identifier id'>errors</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -641,22 +752,25 @@ improved. Please report your errors to the gem author.</p>
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'>
-<p>As there are multiple ways to instantiate a workbook for the package,  here
-are a few examples:</p>
+    <div class='inline'><p>
+As there are multiple ways to instantiate a workbook for the package, here
+are a few examples:
+</p>
+<pre class="code">
+  <span class='comment val'># assign directly during package instanciation</span>
+  <span class='wb identifier id'>wb</span> <span class='assign token'>=</span> <span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:workbook</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='Workbook constant id'>Workbook</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span>
 
-<pre class="code"><span class='comment'># assign directly during package instanciation
-</span><span class='id wb'>wb</span> <span class='op'>=</span> <span class='const'>Package</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='symbol'>:workbook</span> <span class='op'>=&gt;</span> <span class='const'>Workbook</span><span class='period'>.</span><span class='id new'>new</span><span class='rparen'>)</span><span class='period'>.</span><span class='id workbook'>workbook</span>
-
-<span class='comment'># get a fresh workbook automatically from the package
-</span><span class='id wb'>wb</span> <span class='op'>=</span> <span class='const'>Pacakge</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='id workbook'>workbook</span>
-<span class='comment'>#     # set the workbook after creating the package
-</span><span class='id wb'>wb</span> <span class='op'>=</span> <span class='const'>Package</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='period'>.</span><span class='id workbook'>workbook</span> <span class='op'>=</span> <span class='const'>Workbook</span><span class='period'>.</span><span class='id new'>new</span></pre>
+  <span class='comment val'># get a fresh workbook automatically from the package</span>
+  <span class='wb identifier id'>wb</span> <span class='assign token'>=</span> <span class='Pacakge constant id'>Pacakge</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span>
+  <span class='comment val'>#     # set the workbook after creating the package</span>
+  <span class='wb identifier id'>wb</span> <span class='assign token'>=</span> <span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span> <span class='assign token'>=</span> <span class='Workbook constant id'>Workbook</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+</pre>
 </div>
   </div>
 
-
-<p>The workbook this package will serialize or validate.</p>
+<p>
+The workbook this package will serialize or validate.
+</p>
 
 
   </div>
@@ -674,9 +788,10 @@ are a few examples:</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>If no workbook instance has been assigned with this package a new Workbook
-instance is returned.</p>
+        <div class='inline'><p>
+If no workbook instance has been assigned with this package a new Workbook
+instance is returned.
+</p>
 </div>
       
     </li>
@@ -693,8 +808,9 @@ instance is returned.</p>
       
       
         
-        <div class='inline'>
-<p>ArgumentError if workbook parameter is not a Workbook instance.</p>
+        <div class='inline'><p>
+ArgumentError if workbook parameter is not a Workbook instance.
+</p>
 </div>
       
     </li>
@@ -707,16 +823,17 @@ instance is returned.</p>
       <pre class="lines">
 
 
-32
-33
-34</pre>
+37
+38
+39</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/package.rb', line 32</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/package.rb', line 37</span>
 
-<span class='kw'>def</span> <span class='id workbook'>workbook</span>
-  <span class='ivar'>@workbook</span> <span class='op'>||</span> <span class='ivar'>@workbook</span> <span class='op'>=</span> <span class='const'>Workbook</span><span class='period'>.</span><span class='id new'>new</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='workbook identifier id'>workbook</span>
+  <span class='@workbook ivar id'>@workbook</span> <span class='orop op'>||</span> <span class='@workbook ivar id'>@workbook</span> <span class='assign token'>=</span> <span class='Workbook constant id'>Workbook</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -751,12 +868,13 @@ instance is returned.</p>
       <pre class="lines">
 
 
-37</pre>
+42</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/package.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/package.rb', line 42</span>
 
-<span class='kw'>def</span> <span class='id workbook='>workbook=</span><span class='lparen'>(</span><span class='id workbook'>workbook</span><span class='rparen'>)</span> <span class='const'>DataTypeValidator</span><span class='period'>.</span><span class='id validate'>validate</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Package.workbook</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='const'>Workbook</span><span class='comma'>,</span> <span class='id workbook'>workbook</span><span class='semicolon'>;</span> <span class='ivar'>@workbook</span> <span class='op'>=</span> <span class='id workbook'>workbook</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='workbook= identifier id'>workbook=</span><span class='lparen token'>(</span><span class='workbook identifier id'>workbook</span><span class='rparen token'>)</span> <span class='DataTypeValidator constant id'>DataTypeValidator</span><span class='dot token'>.</span><span class='validate identifier id'>validate</span> <span class='string val'>&quot;Package.workbook&quot;</span><span class='comma token'>,</span> <span class='Workbook constant id'>Workbook</span><span class='comma token'>,</span> <span class='workbook identifier id'>workbook</span><span class='semicolon token'>;</span> <span class='@workbook ivar id'>@workbook</span> <span class='assign token'>=</span> <span class='workbook identifier id'>workbook</span> <span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -767,9 +885,9 @@ instance is returned.</p>
 </div>
     
     <div id="footer">
-  Generated on Sat Nov 26 13:16:36 2011 by 
+  Generated on Sun Nov 27 18:05:16 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.9.3).
+  0.7.3 (ruby-1.8.7).
 </div>
 
   </body>

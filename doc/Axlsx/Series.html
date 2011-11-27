@@ -97,14 +97,16 @@
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'>
-<p>The recommended way to manage series is to use Chart#add_series</p>
+    <div class='inline'><p>
+The recommended way to manage series is to use Chart#add_series
+</p>
 </div>
   </div>
 
-
-<p>A Series defines the common series attributes and is the super class for
-all concrete series types.</p>
+<p>
+A Series defines the common series attributes and is the super class for
+all concrete series types.
+</p>
 
 
   </div>
@@ -149,8 +151,9 @@ all concrete series types.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The chart that owns this series.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The chart that owns this series.
+</p>
 </div></span>
   
 </li>
@@ -175,8 +178,9 @@ all concrete series types.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The title of the series.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The title of the series.
+</p>
 </div></span>
   
 </li>
@@ -211,8 +215,9 @@ all concrete series types.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The index of this series in the chart's series.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The index of this series in the chart&#8217;s series.
+</p>
 </div></span>
   
 </li>
@@ -236,8 +241,9 @@ all concrete series types.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Creates a new series.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Creates a new series.
+</p>
 </div></span>
   
 </li>
@@ -259,8 +265,9 @@ all concrete series types.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The order of this series in the chart's series.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The order of this series in the chart&#8217;s series.
+</p>
 </div></span>
   
 </li>
@@ -287,6 +294,30 @@ all concrete series types.</p>
 </li>
 
       
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_xml-instance_method" title="#to_xml (instance method)">- (String) <strong>to_xml</strong>(xml) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Serializes the series.
+</p>
+</div></span>
+  
+</li>
+
+      
     </ul>
   
 
@@ -302,8 +333,9 @@ all concrete series types.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Creates a new series</p>
+    <p>
+Creates a new series
+</p>
 
 
   </div>
@@ -335,8 +367,9 @@ all concrete series types.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>a customizable set of options</p>
+        <div class='inline'><p>
+a customizable set of options
+</p>
 </div>
       
     </li>
@@ -391,14 +424,15 @@ all concrete series types.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/series.rb', line 20</span>
 
-<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id chart'>chart</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='ivar'>@order</span> <span class='op'>=</span> <span class='kw'>nil</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='id chart'>chart</span> <span class='op'>=</span> <span class='id chart'>chart</span>
-  <span class='ivar'>@chart</span><span class='period'>.</span><span class='id series'>series</span> <span class='op'>&lt;&lt;</span> <span class='kw'>self</span>
-  <span class='id options'>options</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id o'>o</span><span class='op'>|</span>
-    <span class='kw'>self</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span>
-  <span class='kw'>end</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='chart identifier id'>chart</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='@order ivar id'>@order</span> <span class='assign token'>=</span> <span class='nil nil kw'>nil</span>
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='chart identifier id'>chart</span> <span class='assign token'>=</span> <span class='chart identifier id'>chart</span>
+  <span class='@chart ivar id'>@chart</span><span class='dot token'>.</span><span class='series identifier id'>series</span> <span class='lshft op'>&lt;&lt;</span> <span class='self self kw'>self</span>
+  <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='o identifier id'>o</span><span class='bitor op'>|</span>
+    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='dstring node'>&quot;#{o[0]}=&quot;</span><span class='comma token'>,</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span> <span class='dstring node'>&quot;#{o[0]}=&quot;</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -421,8 +455,9 @@ all concrete series types.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The chart that owns this series</p>
+    <p>
+The chart that owns this series
+</p>
 
 
   </div>
@@ -456,9 +491,10 @@ all concrete series types.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/series.rb', line 10</span>
 
-<span class='kw'>def</span> <span class='id chart'>chart</span>
-  <span class='ivar'>@chart</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='chart identifier id'>chart</span>
+  <span class='@chart ivar id'>@chart</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -476,8 +512,9 @@ all concrete series types.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The title of the series</p>
+    <p>
+The title of the series
+</p>
 
 
   </div>
@@ -511,9 +548,10 @@ all concrete series types.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/series.rb', line 14</span>
 
-<span class='kw'>def</span> <span class='id title'>title</span>
-  <span class='ivar'>@title</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='title identifier id'>title</span>
+  <span class='@title ivar id'>@title</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -535,8 +573,9 @@ all concrete series types.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The index of this series in the chart's series.</p>
+    <p>
+The index of this series in the chart&#8217;s series.
+</p>
 
 
   </div>
@@ -570,9 +609,10 @@ all concrete series types.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/series.rb', line 31</span>
 
-<span class='kw'>def</span> <span class='id index'>index</span>
-  <span class='ivar'>@chart</span><span class='period'>.</span><span class='id series'>series</span><span class='period'>.</span><span class='id index'>index</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='index identifier id'>index</span>
+  <span class='@chart ivar id'>@chart</span><span class='dot token'>.</span><span class='series identifier id'>series</span><span class='dot token'>.</span><span class='index identifier id'>index</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -587,9 +627,10 @@ all concrete series types.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The order of this series in the chart's series. By default the order is the
-index of the series.</p>
+    <p>
+The order of this series in the chart&#8217;s series. By default the order
+is the index of the series.
+</p>
 
 
   </div>
@@ -623,9 +664,10 @@ index of the series.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/series.rb', line 38</span>
 
-<span class='kw'>def</span> <span class='id order'>order</span>
-  <span class='ivar'>@order</span> <span class='op'>||</span> <span class='id index'>index</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='order identifier id'>order</span>
+  <span class='@order ivar id'>@order</span> <span class='orop op'>||</span> <span class='index identifier id'>index</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -665,7 +707,93 @@ index of the series.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/series.rb', line 43</span>
 
-<span class='kw'>def</span> <span class='id order='>order=</span><span class='lparen'>(</span><span class='id v'>v</span><span class='rparen'>)</span>  <span class='const'>Axlsx</span><span class='op'>::</span><span class='id validate_unsigned_int'>validate_unsigned_int</span><span class='lparen'>(</span><span class='id v'>v</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='ivar'>@order</span> <span class='op'>=</span> <span class='id v'>v</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='order= identifier id'>order=</span><span class='lparen token'>(</span><span class='v identifier id'>v</span><span class='rparen token'>)</span>  <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='validate_unsigned_int identifier id'>validate_unsigned_int</span><span class='lparen token'>(</span><span class='v identifier id'>v</span><span class='rparen token'>)</span><span class='semicolon token'>;</span> <span class='@order ivar id'>@order</span> <span class='assign token'>=</span> <span class='v identifier id'>v</span> <span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="to_xml-instance_method">
+  
+    - (<tt>String</tt>) <strong>to_xml</strong>(xml) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Serializes the series
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>xml</span>
+      
+      
+        <span class='type'>(<tt>Nokogiri::XML::Builder</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The document builder instance this objects xml will be added to.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+60
+61
+62
+63
+64
+65
+66
+67</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/series.rb', line 60</span>
+
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:ser'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:idx'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='index identifier id'>index</span><span class='rparen token'>)</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:order'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='order identifier id'>order</span> <span class='orop op'>||</span> <span class='index identifier id'>index</span><span class='rparen token'>)</span>        
+    <span class='title identifier id'>title</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='title identifier id'>title</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+    <span class='yield yield kw'>yield</span> <span class='xml identifier id'>xml</span> <span class='if if_mod kw'>if</span> <span class='block_given? fid id'>block_given?</span>
+  <span class='rbrace token'>}</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -676,9 +804,9 @@ index of the series.</p>
 </div>
     
     <div id="footer">
-  Generated on Sat Nov 26 13:16:37 2011 by 
+  Generated on Sun Nov 27 18:05:07 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.9.3).
+  0.7.3 (ruby-1.8.7).
 </div>
 
   </body>

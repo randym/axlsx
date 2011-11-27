@@ -27,10 +27,10 @@ Gem::Specification.new do |s|
     fl.exclude("*.gem")
     fl.exclude("*.xlsx")
   end
-  s.add_runtime_dependency 'nokogiri', '~> 1.4'
-  s.add_runtime_dependency 'active_support', '~> 3'
-  s.add_runtime_dependency 'rmagick', '~> 2'
-  s.add_runtime_dependency 'zip', '~> 2'
-  s.require_path = 'lib'
+  s.add_runtime_dependency 'nokogiri', '>= 1.4.1'
+  s.add_runtime_dependency 'activesupport', '>= 2.3.9'
+  s.add_runtime_dependency 'rmagick', '>= 2.12.2'
+  s.add_runtime_dependency 'zip', '~> 2.0.2'
   s.required_ruby_version = '>= 1.8.7'
+  s.require_path = 'lib'
 end

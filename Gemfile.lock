@@ -1,0 +1,18 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    active_support (3.0.0)
+      activesupport (= 3.0.0)
+    activesupport (3.0.0)
+    nokogiri (1.5.0)
+    rmagick (2.13.1)
+    zip (2.0.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  active_support (>= 3)
+  nokogiri (>= 1.4)
+  rmagick (>= 2)
+  zip (>= 2)

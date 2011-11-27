@@ -89,6 +89,33 @@ module Axlsx
       @rows.last
     end
 
+    # Set the style for cells in a specific row
+    # @param [Integer] index the index of the row
+    # @param [Integer] the cellXfs index
+    # @option options [Integer] col_offset only cells after this column will be updated.
+    # @note You can also specify the style in the add_row call
+    # @see Worksheet#add_row
+    # @see README.md for an example
+    def row_style(index, style, options={})
+      raise ArgumentError, "Invalid Row Index" unless index < @rows.size
+      offset = options.delete(:col_offset) || 0
+      @rows[index].cells[(offset..-1)].each { |c| c.style = style }
+    end
+
+
+    # Set the style for cells in a specific column
+    # @param [Integer] index the index of the column
+    # @param [Integer] the cellXfs index
+    # @option options [Integer] row_offset only cells after this column will be updated.
+    # @note You can also specify the style for specific columns in the call to add_row by using an array for the :styles option
+    # @see Worksheet#add_row
+    # @see README.md for an example
+    def col_style(index, style, options={})
+      raise ArgumentError, "Invalid Column Index" unless index < @rows.first.cells.size
+      offset = options.delete(:row_offset) || 0
+      @rows[(offset..-1)].each { |r| r.cells[index].style = style }
+    end
+
     # Adds a chart to this worksheets drawing. This is the recommended way to create charts for your worksheet. This method wraps the complexity of dealing with ooxml drawing, anchors, markers graphic frames chart objects and all the other dirty details. 
     # @param [Class] chart_type
     # @option options [Array] start_at
@@ -183,7 +210,7 @@ module Axlsx
     #  From ECMA docs
     #   Column width measured as the number of characters of the maximum digit width of the numbers 0 .. 9 as 
     #   rendered in the normal style's font. There are 4 pixels of margin padding (two on each side), plus 1 pixel padding for the gridlines.
-    #   width = Truncate([!{Number of Characters} * !{Maximum Digit Width} + !{5 pixel padding}]/!{Maximum Digit Width}*256)/256
+    #   width = Truncate([!{Number of Characters} * !{Maximum Digit Width} + !{5 pixel padding}]/{Maximum Digit Width}*256)/256
     # @return [Float]
     # @param [Hash] A hash of auto_fit_data 
     def auto_width(col)

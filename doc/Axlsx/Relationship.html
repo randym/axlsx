@@ -97,13 +97,15 @@
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'>
-<p>Packages automatcially manage relationships.</p>
+    <div class='inline'><p>
+Packages automatcially manage relationships.
+</p>
 </div>
   </div>
 
-
-<p>A relationship defines a reference between package parts.</p>
+<p>
+A relationship defines a reference between package parts.
+</p>
 
 
   </div>
@@ -135,8 +137,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The location of the relationship target.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The location of the relationship target.
+</p>
 </div></span>
   
 </li>
@@ -161,8 +164,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The type of relationship.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The type of relationship.
+</p>
 </div></span>
   
 </li>
@@ -199,8 +203,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>A new instance of Relationship.</p>
+    <span class="summary_desc"><div class='inline'><p>
+A new instance of Relationship.
+</p>
 </div></span>
   
 </li>
@@ -222,8 +227,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Serializes the relationship.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Serializes the relationship.
+</p>
 </div></span>
   
 </li>
@@ -244,8 +250,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>A new instance of Relationship</p>
+    <p>
+A new instance of Relationship
+</p>
 
 
   </div>
@@ -267,10 +274,11 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/rels/relationship.rb', line 24</span>
 
-<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id type'>type</span><span class='comma'>,</span> <span class='id target'>target</span><span class='rparen'>)</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='const'>Target</span><span class='op'>=</span><span class='id target'>target</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='const'>Type</span><span class='op'>=</span><span class='id type'>type</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='type identifier id'>type</span><span class='comma token'>,</span> <span class='target identifier id'>target</span><span class='rparen token'>)</span>
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='Target constant id'>Target</span><span class='assign token'>=</span><span class='target identifier id'>target</span>
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='Type constant id'>Type</span><span class='assign token'>=</span><span class='type identifier id'>type</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -293,8 +301,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The location of the relationship target</p>
+    <p>
+The location of the relationship target
+</p>
 
 
   </div>
@@ -328,9 +337,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/rels/relationship.rb', line 8</span>
 
-<span class='kw'>def</span> <span class='const'>Target</span>
-  <span class='ivar'>@Target</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='Target constant id'>Target</span>
+  <span class='@Target ivar id'>@Target</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -351,13 +361,15 @@
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'>
-<p>Supported types are defined as constants in Axlsx:</p>
+    <div class='inline'><p>
+Supported types are defined as constants in Axlsx:
+</p>
 </div>
   </div>
 
-
-<p>The type of relationship</p>
+<p>
+The type of relationship
+</p>
 
 
   </div>
@@ -416,9 +428,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/rels/relationship.rb', line 23</span>
 
-<span class='kw'>def</span> <span class='const'>Type</span>
-  <span class='ivar'>@Type</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='Type constant id'>Type</span>
+  <span class='@Type ivar id'>@Type</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -440,8 +453,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Serializes the relationship</p>
+    <p>
+Serializes the relationship
+</p>
 
 
   </div>
@@ -460,8 +474,9 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The document builder instance this objects xml will be added to.</p>
+        <div class='inline'><p>
+The document builder instance this objects xml will be added to.
+</p>
 </div>
       
     </li>
@@ -476,8 +491,9 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>the reference id of the object.</p>
+        <div class='inline'><p>
+the reference id of the object.
+</p>
 </div>
       
     </li>
@@ -513,11 +529,12 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/rels/relationship.rb', line 38</span>
 
-<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='comma'>,</span> <span class='id rId'>rId</span><span class='rparen'>)</span>
-  <span class='id h'>h</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id instance_values'>instance_values</span>
-  <span class='id h'>h</span><span class='lbracket'>[</span><span class='symbol'>:Id</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id rId'>rId</span>
-  <span class='id xml'>xml</span><span class='period'>.</span><span class='const'>Relationship</span><span class='lparen'>(</span><span class='id h'>h</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='comma token'>,</span> <span class='rId identifier id'>rId</span><span class='rparen token'>)</span>
+  <span class='h identifier id'>h</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='instance_values identifier id'>instance_values</span>
+  <span class='h identifier id'>h</span><span class='lbrack token'>[</span><span class='symbol val'>:Id</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='rId identifier id'>rId</span>
+  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='Relationship constant id'>Relationship</span><span class='lparen token'>(</span><span class='h identifier id'>h</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -528,9 +545,9 @@
 </div>
     
     <div id="footer">
-  Generated on Sat Nov 26 13:16:38 2011 by 
+  Generated on Sun Nov 27 18:05:13 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.9.3).
+  0.7.3 (ruby-1.8.7).
 </div>
 
   </body>

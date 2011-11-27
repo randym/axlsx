@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Module: Axlsx::Ar::SingletonMethods
+  
+    &mdash; AXLSX
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '../..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../../_index.html">Index (S)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../../Axlsx.html" title="Axlsx (module)">Axlsx</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Ar.html" title="Axlsx::Ar (module)">Ar</a></span></span>
+     &raquo; 
+    <span class="title">SingletonMethods</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Module: Axlsx::Ar::SingletonMethods
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/axlsx/ar.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_xlsx-instance_method" title="#to_xlsx (instance method)">- (Object) <strong>to_xlsx</strong>(number = :all, options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="to_xlsx-instance_method">
+  
+    - (<tt>Object</tt>) <strong>to_xlsx</strong>(number = :all, options = {}) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/ar.rb', line 22</span>
+
+<span class='def def kw'>def</span> <span class='to_xlsx identifier id'>to_xlsx</span><span class='lparen token'>(</span><span class='number identifier id'>number</span> <span class='assign token'>=</span> <span class='symbol val'>:all</span><span class='comma token'>,</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='row_style identifier id'>row_style</span> <span class='assign token'>=</span> <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='delete identifier id'>delete</span><span class='lparen token'>(</span><span class='symbol val'>:style</span><span class='rparen token'>)</span>
+  <span class='header_style identifier id'>header_style</span> <span class='assign token'>=</span> <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='delete identifier id'>delete</span><span class='lparen token'>(</span><span class='symbol val'>:header_style</span><span class='rparen token'>)</span> <span class='orop op'>||</span> <span class='row_style identifier id'>row_style</span>
+  <span class='types identifier id'>types</span> <span class='assign token'>=</span> <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='delete identifier id'>delete</span><span class='lparen token'>(</span><span class='symbol val'>:types</span><span class='rparen token'>)</span>
+
+  <span class='data identifier id'>data</span> <span class='assign token'>=</span> <span class='lbrack token'>[</span><span class='mult op'>*</span><span class='find identifier id'>find</span><span class='lparen token'>(</span><span class='number identifier id'>number</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span><span class='rbrack token'>]</span>
+  <span class='data identifier id'>data</span><span class='dot token'>.</span><span class='compact! fid id'>compact!</span>
+  <span class='data identifier id'>data</span><span class='dot token'>.</span><span class='flatten! fid id'>flatten!</span>
+  <span class='columns identifier id'>columns</span> <span class='assign token'>=</span> <span class='data identifier id'>data</span><span class='dot token'>.</span><span class='first identifier id'>first</span><span class='dot token'>.</span><span class='attributes identifier id'>attributes</span><span class='dot token'>.</span><span class='keys identifier id'>keys</span>
+  <span class='p identifier id'>p</span> <span class='assign token'>=</span> <span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+  <span class='row_style identifier id'>row_style</span> <span class='assign token'>=</span> <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='styles identifier id'>styles</span><span class='dot token'>.</span><span class='add_style identifier id'>add_style</span><span class='lparen token'>(</span><span class='row_style identifier id'>row_style</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='row_style identifier id'>row_style</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+  <span class='header_style identifier id'>header_style</span> <span class='assign token'>=</span> <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='styles identifier id'>styles</span><span class='dot token'>.</span><span class='add_style identifier id'>add_style</span><span class='lparen token'>(</span><span class='header_style identifier id'>header_style</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='header_style identifier id'>header_style</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+  
+  <span class='p identifier id'>p</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='add_worksheet identifier id'>add_worksheet</span><span class='lparen token'>(</span><span class='symbol val'>:name=</span><span class='gt op'>&gt;</span><span class='table_name identifier id'>table_name</span><span class='dot token'>.</span><span class='humanize identifier id'>humanize</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='sheet identifier id'>sheet</span><span class='bitor op'>|</span>
+    <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='columns identifier id'>columns</span><span class='comma token'>,</span> <span class='symbol val'>:style=</span><span class='gt op'>&gt;</span><span class='header_style identifier id'>header_style</span>
+    <span class='data identifier id'>data</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='r identifier id'>r</span><span class='bitor op'>|</span>
+      <span class='sheet identifier id'>sheet</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='r identifier id'>r</span><span class='dot token'>.</span><span class='attributes identifier id'>attributes</span><span class='dot token'>.</span><span class='values identifier id'>values</span><span class='comma token'>,</span> <span class='symbol val'>:style=</span><span class='gt op'>&gt;</span><span class='row_style identifier id'>row_style</span><span class='comma token'>,</span> <span class='symbol val'>:types=</span><span class='gt op'>&gt;</span><span class='types identifier id'>types</span>
+    <span class='end end kw'>end</span>
+  <span class='end end kw'>end</span>
+  <span class='p identifier id'>p</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Sun Nov 27 18:05:16 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.3 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>

@@ -14,6 +14,12 @@ class TestRow < Test::Unit::TestCase
     assert_equal(@row.worksheet, @ws, "has a reference to the worksheet")
   end
 
+  def test_style
+    r = @ws.add_row([1,2,3,4,5])
+    r.style=1
+    r.cells.each { |c| assert_equal(c.style,1) }    
+  end
+
   def test_index
     assert_equal(@row.index, @row.worksheet.rows.index(@row))
   end

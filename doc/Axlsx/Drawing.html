@@ -97,17 +97,19 @@
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'>
-<p>The recommended way to manage drawings is to use the Worksheet.add_chart
-method.</p>
+    <div class='inline'><p>
+The recommended way to manage drawings is to use the Worksheet.add_chart
+method.
+</p>
 </div>
   </div>
 
-
-<p>A Drawing is a canvas for charts. Each worksheet has a single drawing that
+<p>
+A Drawing is a canvas for charts. Each worksheet has a single drawing that
 manages anchors. The anchors reference the charts via graphical frames.
 This is not a trivial relationship so please do follow the advice in the
-note. see README for an example of how to create a chart.</p>
+note. see README for an example of how to create a chart.
+</p>
 
 
   </div>
@@ -148,9 +150,10 @@ note. see README for an example of how to create a chart.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>A collection of anchors for this drawing only TwoCellAnchors are supported
-in this version.</p>
+    <span class="summary_desc"><div class='inline'><p>
+A collection of anchors for this drawing only TwoCellAnchors are supported
+in this version.
+</p>
 </div></span>
   
 </li>
@@ -175,8 +178,9 @@ in this version.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The worksheet that owns the drawing.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The worksheet that owns the drawing.
+</p>
 </div></span>
   
 </li>
@@ -211,8 +215,9 @@ in this version.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Adds a chart to the drawing.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Adds a chart to the drawing.
+</p>
 </div></span>
   
 </li>
@@ -234,8 +239,9 @@ in this version.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Adds an image to the chart.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Adds an image to the chart.
+</p>
 </div></span>
   
 </li>
@@ -257,8 +263,9 @@ in this version.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>An array of charts that are associated with this drawing's anchors.</p>
+    <span class="summary_desc"><div class='inline'><p>
+An array of charts that are associated with this drawing&#8217;s anchors.
+</p>
 </div></span>
   
 </li>
@@ -280,8 +287,10 @@ in this version.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>An array of image objects that are associated with this drawing's anchors.</p>
+    <span class="summary_desc"><div class='inline'><p>
+An array of image objects that are associated with this drawing&#8217;s
+anchors.
+</p>
 </div></span>
   
 </li>
@@ -303,8 +312,10 @@ in this version.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The index of this drawing in the owning workbooks's drawings collection.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The index of this drawing in the owning workbooks&#8217;s drawings
+collection.
+</p>
 </div></span>
   
 </li>
@@ -328,8 +339,9 @@ in this version.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Creates a new Drawing object.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Creates a new Drawing object.
+</p>
 </div></span>
   
 </li>
@@ -351,8 +363,9 @@ in this version.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The part name for this drawing.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The part name for this drawing.
+</p>
 </div></span>
   
 </li>
@@ -374,8 +387,9 @@ in this version.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The drawing's relationships.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The drawing&#8217;s relationships.
+</p>
 </div></span>
   
 </li>
@@ -397,8 +411,9 @@ in this version.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The relational part name for this drawing.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The relational part name for this drawing.
+</p>
 </div></span>
   
 </li>
@@ -420,8 +435,9 @@ in this version.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The relation reference id for this drawing.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The relation reference id for this drawing.
+</p>
 </div></span>
   
 </li>
@@ -443,8 +459,9 @@ in this version.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Serializes the drawing.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Serializes the drawing.
+</p>
 </div></span>
   
 </li>
@@ -465,8 +482,9 @@ in this version.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Creates a new Drawing object</p>
+    <p>
+Creates a new Drawing object
+</p>
 
 
   </div>
@@ -485,8 +503,9 @@ in this version.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>The worksheet that owns this drawing</p>
+        <div class='inline'><p>
+The worksheet that owns this drawing
+</p>
 </div>
       
     </li>
@@ -510,12 +529,13 @@ in this version.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 52</span>
 
-<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id worksheet'>worksheet</span><span class='rparen'>)</span>
-  <span class='const'>DataTypeValidator</span><span class='period'>.</span><span class='id validate'>validate</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Drawing.worksheet</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='const'>Worksheet</span><span class='comma'>,</span> <span class='id worksheet'>worksheet</span>
-  <span class='ivar'>@worksheet</span> <span class='op'>=</span> <span class='id worksheet'>worksheet</span>
-  <span class='ivar'>@worksheet</span><span class='period'>.</span><span class='id workbook'>workbook</span><span class='period'>.</span><span class='id drawings'>drawings</span> <span class='op'>&lt;&lt;</span> <span class='kw'>self</span>
-  <span class='ivar'>@anchors</span> <span class='op'>=</span> <span class='const'>SimpleTypedList</span><span class='period'>.</span><span class='id new'>new</span> <span class='lbracket'>[</span><span class='const'>TwoCellAnchor</span><span class='comma'>,</span> <span class='const'>OneCellAnchor</span><span class='rbracket'>]</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='worksheet identifier id'>worksheet</span><span class='rparen token'>)</span>
+  <span class='DataTypeValidator constant id'>DataTypeValidator</span><span class='dot token'>.</span><span class='validate identifier id'>validate</span> <span class='string val'>&quot;Drawing.worksheet&quot;</span><span class='comma token'>,</span> <span class='Worksheet constant id'>Worksheet</span><span class='comma token'>,</span> <span class='worksheet identifier id'>worksheet</span>
+  <span class='@worksheet ivar id'>@worksheet</span> <span class='assign token'>=</span> <span class='worksheet identifier id'>worksheet</span>
+  <span class='@worksheet ivar id'>@worksheet</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='drawings identifier id'>drawings</span> <span class='lshft op'>&lt;&lt;</span> <span class='self self kw'>self</span>
+  <span class='@anchors ivar id'>@anchors</span> <span class='assign token'>=</span> <span class='SimpleTypedList constant id'>SimpleTypedList</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='lbrack token'>[</span><span class='TwoCellAnchor constant id'>TwoCellAnchor</span><span class='comma token'>,</span> <span class='OneCellAnchor constant id'>OneCellAnchor</span><span class='rbrack token'>]</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -538,9 +558,10 @@ in this version.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>A collection of anchors for this drawing only TwoCellAnchors are supported
-in this version</p>
+    <p>
+A collection of anchors for this drawing only TwoCellAnchors are supported
+in this version
+</p>
 
 
   </div>
@@ -574,9 +595,10 @@ in this version</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 48</span>
 
-<span class='kw'>def</span> <span class='id anchors'>anchors</span>
-  <span class='ivar'>@anchors</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='anchors identifier id'>anchors</span>
+  <span class='@anchors ivar id'>@anchors</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -594,8 +616,9 @@ in this version</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The worksheet that owns the drawing</p>
+    <p>
+The worksheet that owns the drawing
+</p>
 
 
   </div>
@@ -629,9 +652,10 @@ in this version</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 43</span>
 
-<span class='kw'>def</span> <span class='id worksheet'>worksheet</span>
-  <span class='ivar'>@worksheet</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='worksheet identifier id'>worksheet</span>
+  <span class='@worksheet ivar id'>@worksheet</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -656,14 +680,16 @@ in this version</p>
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'>
-<p>The recommended way to manage charts is to use Worksheet.add_chart. Please
-refer to that method for documentation.</p>
+    <div class='inline'><p>
+The recommended way to manage charts is to use Worksheet.add_chart. Please
+refer to that method for documentation.
+</p>
 </div>
   </div>
 
-
-<p>Adds a chart to the drawing.</p>
+<p>
+Adds a chart to the drawing.
+</p>
 
 
   </div>
@@ -692,10 +718,11 @@ refer to that method for documentation.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 70</span>
 
-<span class='kw'>def</span> <span class='id add_chart'>add_chart</span><span class='lparen'>(</span><span class='id chart_type'>chart_type</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='const'>TwoCellAnchor</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='id options'>options</span><span class='rparen'>)</span>
-  <span class='ivar'>@anchors</span><span class='period'>.</span><span class='id last'>last</span><span class='period'>.</span><span class='id add_chart'>add_chart</span><span class='lparen'>(</span><span class='id chart_type'>chart_type</span><span class='comma'>,</span> <span class='id options'>options</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='add_chart identifier id'>add_chart</span><span class='lparen token'>(</span><span class='chart_type identifier id'>chart_type</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='TwoCellAnchor constant id'>TwoCellAnchor</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
+  <span class='@anchors ivar id'>@anchors</span><span class='dot token'>.</span><span class='last identifier id'>last</span><span class='dot token'>.</span><span class='add_chart identifier id'>add_chart</span><span class='lparen token'>(</span><span class='chart_type identifier id'>chart_type</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -713,14 +740,16 @@ refer to that method for documentation.</p>
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'>
-<p>The recommended way to manage images is to use Worksheet.add_image. Please
-refer to that method for documentation.</p>
+    <div class='inline'><p>
+The recommended way to manage images is to use Worksheet.add_image. Please
+refer to that method for documentation.
+</p>
 </div>
   </div>
 
-
-<p>Adds an image to the chart</p>
+<p>
+Adds an image to the chart
+</p>
 
 
   </div>
@@ -749,10 +778,11 @@ refer to that method for documentation.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 62</span>
 
-<span class='kw'>def</span> <span class='id add_image'>add_image</span><span class='lparen'>(</span><span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='const'>OneCellAnchor</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='id options'>options</span><span class='rparen'>)</span>
-  <span class='ivar'>@anchors</span><span class='period'>.</span><span class='id last'>last</span><span class='period'>.</span><span class='id object'>object</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='add_image identifier id'>add_image</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='OneCellAnchor constant id'>OneCellAnchor</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
+  <span class='@anchors ivar id'>@anchors</span><span class='dot token'>.</span><span class='last identifier id'>last</span><span class='dot token'>.</span><span class='object identifier id'>object</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -767,8 +797,9 @@ refer to that method for documentation.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>An array of charts that are associated with this drawing's anchors</p>
+    <p>
+An array of charts that are associated with this drawing&#8217;s anchors
+</p>
 
 
   </div>
@@ -803,10 +834,11 @@ refer to that method for documentation.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 77</span>
 
-<span class='kw'>def</span> <span class='id charts'>charts</span>
-  <span class='id charts'>charts</span> <span class='op'>=</span> <span class='ivar'>@anchors</span><span class='period'>.</span><span class='id select'>select</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id a'>a</span><span class='op'>|</span> <span class='id a'>a</span><span class='period'>.</span><span class='id object'>object</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>GraphicFrame</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
-  <span class='id charts'>charts</span><span class='period'>.</span><span class='id map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id a'>a</span><span class='op'>|</span> <span class='id a'>a</span><span class='period'>.</span><span class='id object'>object</span><span class='period'>.</span><span class='id chart'>chart</span> <span class='rbrace'>}</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='charts identifier id'>charts</span>
+  <span class='charts identifier id'>charts</span> <span class='assign token'>=</span> <span class='@anchors ivar id'>@anchors</span><span class='dot token'>.</span><span class='select identifier id'>select</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='a identifier id'>a</span><span class='bitor op'>|</span> <span class='a identifier id'>a</span><span class='dot token'>.</span><span class='object identifier id'>object</span><span class='dot token'>.</span><span class='is_a? fid id'>is_a?</span><span class='lparen token'>(</span><span class='GraphicFrame constant id'>GraphicFrame</span><span class='rparen token'>)</span> <span class='rbrace token'>}</span>
+  <span class='charts identifier id'>charts</span><span class='dot token'>.</span><span class='map identifier id'>map</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='a identifier id'>a</span><span class='bitor op'>|</span> <span class='a identifier id'>a</span><span class='dot token'>.</span><span class='object identifier id'>object</span><span class='dot token'>.</span><span class='chart identifier id'>chart</span> <span class='rbrace token'>}</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -821,8 +853,10 @@ refer to that method for documentation.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>An array of image objects that are associated with this drawing's anchors</p>
+    <p>
+An array of image objects that are associated with this drawing&#8217;s
+anchors
+</p>
 
 
   </div>
@@ -857,10 +891,11 @@ refer to that method for documentation.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 84</span>
 
-<span class='kw'>def</span> <span class='id images'>images</span>
-  <span class='id images'>images</span> <span class='op'>=</span> <span class='ivar'>@anchors</span><span class='period'>.</span><span class='id select'>select</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id a'>a</span><span class='op'>|</span> <span class='id a'>a</span><span class='period'>.</span><span class='id object'>object</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Pic</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
-  <span class='id images'>images</span><span class='period'>.</span><span class='id map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id a'>a</span><span class='op'>|</span> <span class='id a'>a</span><span class='period'>.</span><span class='id object'>object</span> <span class='rbrace'>}</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='images identifier id'>images</span>
+  <span class='images identifier id'>images</span> <span class='assign token'>=</span> <span class='@anchors ivar id'>@anchors</span><span class='dot token'>.</span><span class='select identifier id'>select</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='a identifier id'>a</span><span class='bitor op'>|</span> <span class='a identifier id'>a</span><span class='dot token'>.</span><span class='object identifier id'>object</span><span class='dot token'>.</span><span class='is_a? fid id'>is_a?</span><span class='lparen token'>(</span><span class='Pic constant id'>Pic</span><span class='rparen token'>)</span> <span class='rbrace token'>}</span>
+  <span class='images identifier id'>images</span><span class='dot token'>.</span><span class='map identifier id'>map</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='a identifier id'>a</span><span class='bitor op'>|</span> <span class='a identifier id'>a</span><span class='dot token'>.</span><span class='object identifier id'>object</span> <span class='rbrace token'>}</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -875,8 +910,10 @@ refer to that method for documentation.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The index of this drawing in the owning workbooks's drawings collection.</p>
+    <p>
+The index of this drawing in the owning workbooks&#8217;s drawings
+collection.
+</p>
 
 
   </div>
@@ -910,9 +947,10 @@ refer to that method for documentation.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 91</span>
 
-<span class='kw'>def</span> <span class='id index'>index</span>
-  <span class='ivar'>@worksheet</span><span class='period'>.</span><span class='id workbook'>workbook</span><span class='period'>.</span><span class='id drawings'>drawings</span><span class='period'>.</span><span class='id index'>index</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='index identifier id'>index</span>
+  <span class='@worksheet ivar id'>@worksheet</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='drawings identifier id'>drawings</span><span class='dot token'>.</span><span class='index identifier id'>index</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -927,8 +965,9 @@ refer to that method for documentation.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The part name for this drawing</p>
+    <p>
+The part name for this drawing
+</p>
 
 
   </div>
@@ -962,9 +1001,10 @@ refer to that method for documentation.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 103</span>
 
-<span class='kw'>def</span> <span class='id pn'>pn</span>
-  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='const'>DRAWING_PN</span> <span class='op'>%</span> <span class='lparen'>(</span><span class='id index'>index</span><span class='op'>+</span><span class='int'>1</span><span class='rparen'>)</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='pn identifier id'>pn</span>
+  <span class='dstring node'>&quot;#{DRAWING_PN % (index+1)}&quot;</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -979,8 +1019,9 @@ refer to that method for documentation.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The drawing's relationships.</p>
+    <p>
+The drawing&#8217;s relationships.
+</p>
 
 
   </div>
@@ -1021,16 +1062,17 @@ refer to that method for documentation.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 115</span>
 
-<span class='kw'>def</span> <span class='id relationships'>relationships</span>
-  <span class='id r'>r</span> <span class='op'>=</span> <span class='const'>Relationships</span><span class='period'>.</span><span class='id new'>new</span>
-  <span class='id charts'>charts</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id chart'>chart</span><span class='op'>|</span>
-    <span class='id r'>r</span> <span class='op'>&lt;&lt;</span> <span class='const'>Relationship</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='const'>CHART_R</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>../</span><span class='embexpr_beg'>#{</span><span class='id chart'>chart</span><span class='period'>.</span><span class='id pn'>pn</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-  <span class='id images'>images</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id image'>image</span><span class='op'>|</span>
-    <span class='id r'>r</span> <span class='op'>&lt;&lt;</span> <span class='const'>Relationship</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='const'>IMAGE_R</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>../</span><span class='embexpr_beg'>#{</span><span class='id image'>image</span><span class='period'>.</span><span class='id pn'>pn</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-  <span class='id r'>r</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='relationships identifier id'>relationships</span>
+  <span class='r identifier id'>r</span> <span class='assign token'>=</span> <span class='Relationships constant id'>Relationships</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+  <span class='charts identifier id'>charts</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='chart identifier id'>chart</span><span class='bitor op'>|</span>
+    <span class='r identifier id'>r</span> <span class='lshft op'>&lt;&lt;</span> <span class='Relationship constant id'>Relationship</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='CHART_R constant id'>CHART_R</span><span class='comma token'>,</span> <span class='dstring node'>&quot;../#{chart.pn}&quot;</span><span class='rparen token'>)</span>
+  <span class='end end kw'>end</span>
+  <span class='images identifier id'>images</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='image identifier id'>image</span><span class='bitor op'>|</span>
+    <span class='r identifier id'>r</span> <span class='lshft op'>&lt;&lt;</span> <span class='Relationship constant id'>Relationship</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='IMAGE_R constant id'>IMAGE_R</span><span class='comma token'>,</span> <span class='dstring node'>&quot;../#{image.pn}&quot;</span><span class='rparen token'>)</span>
+  <span class='end end kw'>end</span>
+  <span class='r identifier id'>r</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -1045,8 +1087,9 @@ refer to that method for documentation.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The relational part name for this drawing</p>
+    <p>
+The relational part name for this drawing
+</p>
 
 
   </div>
@@ -1080,9 +1123,10 @@ refer to that method for documentation.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 109</span>
 
-<span class='kw'>def</span> <span class='id rels_pn'>rels_pn</span>
-  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='const'>DRAWING_RELS_PN</span> <span class='op'>%</span> <span class='lparen'>(</span><span class='id index'>index</span><span class='op'>+</span><span class='int'>1</span><span class='rparen'>)</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='rels_pn identifier id'>rels_pn</span>
+  <span class='dstring node'>&quot;#{DRAWING_RELS_PN % (index+1)}&quot;</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -1097,8 +1141,9 @@ refer to that method for documentation.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The relation reference id for this drawing</p>
+    <p>
+The relation reference id for this drawing
+</p>
 
 
   </div>
@@ -1132,9 +1177,10 @@ refer to that method for documentation.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 97</span>
 
-<span class='kw'>def</span> <span class='id rId'>rId</span>
-  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>rId</span><span class='embexpr_beg'>#{</span><span class='id index'>index</span><span class='op'>+</span><span class='int'>1</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='rId identifier id'>rId</span>
+  <span class='dstring node'>&quot;rId#{index+1}&quot;</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -1149,8 +1195,9 @@ refer to that method for documentation.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Serializes the drawing</p>
+    <p>
+Serializes the drawing
+</p>
 
 
   </div>
@@ -1189,14 +1236,15 @@ refer to that method for documentation.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/drawing.rb', line 128</span>
 
-<span class='kw'>def</span> <span class='id to_xml'>to_xml</span>
-  <span class='id builder'>builder</span> <span class='op'>=</span> <span class='const'>Nokogiri</span><span class='op'>::</span><span class='const'>XML</span><span class='op'>::</span><span class='const'>Builder</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='symbol'>:encoding</span> <span class='op'>=&gt;</span> <span class='const'>ENCODING</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id xml'>xml</span><span class='op'>|</span>
-    <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>xdr:wsDr</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:xmlns:xdr</span><span class='tstring_end'>'</span></span><span class='op'>=&gt;</span><span class='const'>XML_NS_XDR</span><span class='comma'>,</span> <span class='symbol'>:xmlns:a</span><span class='tstring_end'>'</span></span><span class='op'>=&gt;</span><span class='const'>XML_NS_A</span><span class='rparen'>)</span> <span class='lbrace'>{</span>
-      <span class='id anchors'>anchors</span><span class='period'>.</span><span class='id each'>each</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id anchor'>anchor</span><span class='op'>|</span> <span class='id anchor'>anchor</span><span class='period'>.</span><span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
-    <span class='rbrace'>}</span>        
-  <span class='kw'>end</span>
-  <span class='id builder'>builder</span><span class='period'>.</span><span class='id to_xml'>to_xml</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span>
+  <span class='builder identifier id'>builder</span> <span class='assign token'>=</span> <span class='Nokogiri constant id'>Nokogiri</span><span class='colon2 op'>::</span><span class='XML constant id'>XML</span><span class='colon2 op'>::</span><span class='Builder constant id'>Builder</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:encoding</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='ENCODING constant id'>ENCODING</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='xml identifier id'>xml</span><span class='bitor op'>|</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'xdr:wsDr'</span><span class='comma token'>,</span> <span class='symbol val'>:'xmlns:xdr'</span><span class='assign token'>=</span><span class='gt op'>&gt;</span><span class='XML_NS_XDR constant id'>XML_NS_XDR</span><span class='comma token'>,</span> <span class='symbol val'>:'xmlns:a'</span><span class='assign token'>=</span><span class='gt op'>&gt;</span><span class='XML_NS_A constant id'>XML_NS_A</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+      <span class='anchors identifier id'>anchors</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='lbrace token'>{</span><span class='bitor op'>|</span><span class='anchor identifier id'>anchor</span><span class='bitor op'>|</span> <span class='anchor identifier id'>anchor</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span> <span class='rbrace token'>}</span>
+    <span class='rbrace token'>}</span>        
+  <span class='end end kw'>end</span>
+  <span class='builder identifier id'>builder</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -1207,9 +1255,9 @@ refer to that method for documentation.</p>
 </div>
     
     <div id="footer">
-  Generated on Sat Nov 26 13:16:37 2011 by 
+  Generated on Sun Nov 27 18:05:18 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.9.3).
+  0.7.3 (ruby-1.8.7).
 </div>
 
   </body>

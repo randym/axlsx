@@ -94,8 +94,9 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>A GradientFill defines the color and positioning for gradiant cell fill.</p>
+    <p>
+A GradientFill defines the color and positioning for gradiant cell fill.
+</p>
 
 
   </div>
@@ -134,8 +135,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Percentage format bottom.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Percentage format bottom.
+</p>
 </div></span>
   
 </li>
@@ -160,8 +162,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Angle of the linear gradient.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Angle of the linear gradient.
+</p>
 </div></span>
   
 </li>
@@ -186,8 +189,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Percentage format left.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Percentage format left.
+</p>
 </div></span>
   
 </li>
@@ -212,8 +216,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Percentage format right.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Percentage format right.
+</p>
 </div></span>
   
 </li>
@@ -238,8 +243,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Collection of stop objects.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Collection of stop objects.
+</p>
 </div></span>
   
 </li>
@@ -264,8 +270,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Percentage format top.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Percentage format top.
+</p>
 </div></span>
   
 </li>
@@ -290,8 +297,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The type of gradient.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The type of gradient.
+</p>
 </div></span>
   
 </li>
@@ -328,8 +336,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Creates a new GradientFill object.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Creates a new GradientFill object.
+</p>
 </div></span>
   
 </li>
@@ -351,8 +360,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Serializes the gradientFill.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Serializes the gradientFill.
+</p>
 </div></span>
   
 </li>
@@ -373,8 +383,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Creates a new GradientFill object</p>
+    <p>
+Creates a new GradientFill object
+</p>
 
 
   </div>
@@ -395,8 +406,9 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>a customizable set of options</p>
+        <div class='inline'><p>
+a customizable set of options
+</p>
 </div>
       
     </li>
@@ -484,13 +496,14 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/gradient_fill.rb', line 46</span>
 
-<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:type</span><span class='rbracket'>]</span> <span class='op'>||=</span> <span class='symbol'>:linear</span>
-  <span class='id options'>options</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id o'>o</span><span class='op'>|</span>
-    <span class='kw'>self</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span> <span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
-  <span class='kw'>end</span>
-  <span class='ivar'>@stop</span> <span class='op'>=</span> <span class='const'>SimpleTypedList</span><span class='period'>.</span><span class='id new'>new</span> <span class='const'>GradientStop</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:type</span><span class='rbrack token'>]</span> <span class='opasgn op'>||=</span> <span class='symbol val'>:linear</span>
+  <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='o identifier id'>o</span><span class='bitor op'>|</span>
+    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='dstring node'>&quot;#{o[0]}=&quot;</span><span class='comma token'>,</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>0</span><span class='rbrack token'>]</span>
+  <span class='end end kw'>end</span>
+  <span class='@stop ivar id'>@stop</span> <span class='assign token'>=</span> <span class='SimpleTypedList constant id'>SimpleTypedList</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='GradientStop constant id'>GradientStop</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -513,8 +526,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Percentage format bottom</p>
+    <p>
+Percentage format bottom
+</p>
 
 
   </div>
@@ -548,9 +562,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/gradient_fill.rb', line 33</span>
 
-<span class='kw'>def</span> <span class='id bottom'>bottom</span>
-  <span class='ivar'>@bottom</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='bottom identifier id'>bottom</span>
+  <span class='@bottom ivar id'>@bottom</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -568,8 +583,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Angle of the linear gradient</p>
+    <p>
+Angle of the linear gradient
+</p>
 
 
   </div>
@@ -603,9 +619,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/gradient_fill.rb', line 17</span>
 
-<span class='kw'>def</span> <span class='id degree'>degree</span>
-  <span class='ivar'>@degree</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='degree identifier id'>degree</span>
+  <span class='@degree ivar id'>@degree</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -623,8 +640,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Percentage format left</p>
+    <p>
+Percentage format left
+</p>
 
 
   </div>
@@ -658,9 +676,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/gradient_fill.rb', line 21</span>
 
-<span class='kw'>def</span> <span class='id left'>left</span>
-  <span class='ivar'>@left</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='left identifier id'>left</span>
+  <span class='@left ivar id'>@left</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -678,8 +697,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Percentage format right</p>
+    <p>
+Percentage format right
+</p>
 
 
   </div>
@@ -713,9 +733,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/gradient_fill.rb', line 25</span>
 
-<span class='kw'>def</span> <span class='id right'>right</span>
-  <span class='ivar'>@right</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='right identifier id'>right</span>
+  <span class='@right ivar id'>@right</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -733,8 +754,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Collection of stop objects</p>
+    <p>
+Collection of stop objects
+</p>
 
 
   </div>
@@ -768,9 +790,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/gradient_fill.rb', line 37</span>
 
-<span class='kw'>def</span> <span class='id stop'>stop</span>
-  <span class='ivar'>@stop</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='stop identifier id'>stop</span>
+  <span class='@stop ivar id'>@stop</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -788,8 +811,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Percentage format top</p>
+    <p>
+Percentage format top
+</p>
 
 
   </div>
@@ -823,9 +847,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/gradient_fill.rb', line 29</span>
 
-<span class='kw'>def</span> <span class='id top'>top</span>
-  <span class='ivar'>@top</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='top identifier id'>top</span>
+  <span class='@top ivar id'>@top</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -846,16 +871,19 @@
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'>
-<p>valid options are</p>
-
-<pre class="code"><span class='symbol'>:linear</span>
-<span class='symbol'>:path</span></pre>
+    <div class='inline'><p>
+valid options are
+</p>
+<pre class="code">
+ <span class='symbol val'>:linear</span>
+ <span class='symbol val'>:path</span>
+</pre>
 </div>
   </div>
 
-
-<p>The type of gradient.</p>
+<p>
+The type of gradient.
+</p>
 
 
   </div>
@@ -889,9 +917,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/gradient_fill.rb', line 13</span>
 
-<span class='kw'>def</span> <span class='id type'>type</span>
-  <span class='ivar'>@type</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='type identifier id'>type</span>
+  <span class='@type ivar id'>@type</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -913,8 +942,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Serializes the gradientFill</p>
+    <p>
+Serializes the gradientFill
+</p>
 
 
   </div>
@@ -933,8 +963,9 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The document builder instance this objects xml will be added to.</p>
+        <div class='inline'><p>
+The document builder instance this objects xml will be added to.
+</p>
 </div>
       
     </li>
@@ -970,11 +1001,12 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/gradient_fill.rb', line 70</span>
 
-<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
-  <span class='id xml'>xml</span><span class='period'>.</span><span class='id gradientFill'>gradientFill</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id instance_values'>instance_values</span><span class='period'>.</span><span class='id reject'>reject</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id k'>k</span><span class='comma'>,</span><span class='id v'>v</span><span class='op'>|</span> <span class='id k'>k</span><span class='period'>.</span><span class='id to_sym'>to_sym</span> <span class='op'>==</span> <span class='symbol'>:stop</span> <span class='rbrace'>}</span><span class='rparen'>)</span> <span class='lbrace'>{</span>
-    <span class='ivar'>@stop</span><span class='period'>.</span><span class='id each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id s'>s</span><span class='op'>|</span> <span class='id s'>s</span><span class='period'>.</span><span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
-  <span class='rbrace'>}</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='gradientFill identifier id'>gradientFill</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='dot token'>.</span><span class='instance_values identifier id'>instance_values</span><span class='dot token'>.</span><span class='reject identifier id'>reject</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='k identifier id'>k</span><span class='comma token'>,</span><span class='v identifier id'>v</span><span class='bitor op'>|</span> <span class='k identifier id'>k</span><span class='dot token'>.</span><span class='to_sym identifier id'>to_sym</span> <span class='eq op'>==</span> <span class='symbol val'>:stop</span> <span class='rbrace token'>}</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+    <span class='@stop ivar id'>@stop</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='s identifier id'>s</span><span class='bitor op'>|</span> <span class='s identifier id'>s</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span> <span class='rbrace token'>}</span>
+  <span class='rbrace token'>}</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -985,9 +1017,9 @@
 </div>
     
     <div id="footer">
-  Generated on Sat Nov 26 13:16:39 2011 by 
+  Generated on Sun Nov 27 18:05:19 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.9.3).
+  0.7.3 (ruby-1.8.7).
 </div>
 
   </body>
