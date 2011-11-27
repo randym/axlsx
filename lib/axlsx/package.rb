@@ -36,6 +36,8 @@ module Axlsx
     #     wb = Package.new().workbook = Workbook.new
     def workbook
       @workbook || @workbook = Workbook.new
+      yield @workbook if block_given?
+      @workbook
     end
 
     # @see workbook

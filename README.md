@@ -6,7 +6,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 **Author**:       Randy Morgan   
 **Copyright**:    2011      
 **License**:      MIT License      
-**Latest Version**: 1.0.10   
+**Latest Version**: 1.0.10.a   
 **Ruby Version**: 1.8.7 - 1.9.3   
 **Release Date**: November 26th 2011     
 
@@ -194,6 +194,10 @@ Styling Rows
 
 
 Rails 3
+
+     #ImageMagick port needs to be confirgured --disable-openmp when using with rails3
+     # http://stackoverflow.com/questions/2838307/why-is-this-rmagick-call-generating-a-segmentation-fault
+
      # 1. Add the gem to your Gemfile and bundle install
 
      gem 'axlsx'
@@ -230,8 +234,8 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
  
 Changelog
 ---------
-- **October.27.11**: 1.0.10 release
-  - Updating gemspec to be compatible with rails3 requirements
+- **October.27.11**: 1.0.10.a release
+  - Updating gemspec to loosen up some of the gem requirements in the hope of maintaining compatibility with rails 2
   - Added acts_as_xlsx mixin for rails3 See Examples
   - Added row.style assignation for updating the cell style for an entire row
   - Added col_style method to worksheet upate a the style for a column of cells

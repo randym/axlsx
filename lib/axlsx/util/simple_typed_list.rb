@@ -38,6 +38,10 @@ module Axlsx
       @locked_at = @list.size
       self
     end
+    
+    def to_ary
+      @list
+    end
 
     # Unlock the list
     # @return [self]
@@ -151,5 +155,6 @@ module Axlsx
       }
     end
   end
+
 
 end

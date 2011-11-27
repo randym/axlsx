@@ -97,15 +97,13 @@
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'><p>
-The recommended way to manage styles is with Styles#add_style
-</p>
+    <div class='inline'>
+<p>The recommended way to manage styles is with Styles#add_style</p>
 </div>
   </div>
 
-<p>
-A PatternFill is the pattern and solid fill styling for a cell.
-</p>
+
+<p>A PatternFill is the pattern and solid fill styling for a cell.</p>
 
 
   </div>
@@ -144,9 +142,8 @@ A PatternFill is the pattern and solid fill styling for a cell.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The color to use for the background of the fill when the type is not solid.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The color to use for the background of the fill when the type is not solid.</p>
 </div></span>
   
 </li>
@@ -171,9 +168,8 @@ The color to use for the background of the fill when the type is not solid.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The color to use for the the background in solid fills.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The color to use for the the background in solid fills.</p>
 </div></span>
   
 </li>
@@ -198,9 +194,8 @@ The color to use for the the background in solid fills.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The pattern type to use.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The pattern type to use.</p>
 </div></span>
   
 </li>
@@ -237,9 +232,8 @@ The pattern type to use.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Creates a new PatternFill Object.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new PatternFill Object.</p>
 </div></span>
   
 </li>
@@ -261,9 +255,8 @@ Creates a new PatternFill Object.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Serializes the pattern fill.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Serializes the pattern fill.</p>
 </div></span>
   
 </li>
@@ -284,9 +277,8 @@ Serializes the pattern fill.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Creates a new PatternFill Object
-</p>
+    
+<p>Creates a new PatternFill Object</p>
 
 
   </div>
@@ -307,9 +299,8 @@ Creates a new PatternFill Object
       
       
         &mdash;
-        <div class='inline'><p>
-a customizable set of options
-</p>
+        <div class='inline'>
+<p>a customizable set of options</p>
 </div>
       
     </li>
@@ -369,13 +360,12 @@ a customizable set of options
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/pattern_fill.rb', line 44</span>
 
-<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
-  <span class='@patternType ivar id'>@patternType</span> <span class='assign token'>=</span> <span class='symbol val'>:none</span>
-  <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='o identifier id'>o</span><span class='bitor op'>|</span>
-    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='dstring node'>&quot;#{o[0]}=&quot;</span><span class='comma token'>,</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span> <span class='dstring node'>&quot;#{o[0]}=&quot;</span>
-  <span class='end end kw'>end</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='ivar'>@patternType</span> <span class='op'>=</span> <span class='symbol'>:none</span>
+  <span class='id options'>options</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id o'>o</span><span class='op'>|</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -398,9 +388,8 @@ a customizable set of options
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The color to use for the background of the fill when the type is not solid.
-</p>
+    
+<p>The color to use for the background of the fill when the type is not solid.</p>
 
 
   </div>
@@ -434,10 +423,9 @@ The color to use for the background of the fill when the type is not solid.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/pattern_fill.rb', line 13</span>
 
-<span class='def def kw'>def</span> <span class='bgColor identifier id'>bgColor</span>
-  <span class='@bgColor ivar id'>@bgColor</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id bgColor'>bgColor</span>
+  <span class='ivar'>@bgColor</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -455,9 +443,8 @@ The color to use for the background of the fill when the type is not solid.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The color to use for the the background in solid fills.
-</p>
+    
+<p>The color to use for the the background in solid fills.</p>
 
 
   </div>
@@ -491,10 +478,9 @@ The color to use for the the background in solid fills.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/pattern_fill.rb', line 9</span>
 
-<span class='def def kw'>def</span> <span class='fgColor identifier id'>fgColor</span>
-  <span class='@fgColor ivar id'>@fgColor</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id fgColor'>fgColor</span>
+  <span class='ivar'>@fgColor</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -515,36 +501,33 @@ The color to use for the the background in solid fills.
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'><p>
-patternType must be one of
-</p>
-<pre class="code">
- <span class='symbol val'>:none</span>
- <span class='symbol val'>:solid</span>
- <span class='symbol val'>:mediumGray</span>
- <span class='symbol val'>:darkGray</span>
- <span class='symbol val'>:lightGray</span>
- <span class='symbol val'>:darkHorizontal</span>
- <span class='symbol val'>:darkVertical</span>
- <span class='symbol val'>:darkDown</span>
- <span class='symbol val'>:darkUp</span>
- <span class='symbol val'>:darkGrid</span>
- <span class='symbol val'>:darkTrellis</span>
- <span class='symbol val'>:lightHorizontal</span>
- <span class='symbol val'>:lightVertical</span>
- <span class='symbol val'>:lightDown</span>
- <span class='symbol val'>:lightUp</span>
- <span class='symbol val'>:lightGrid</span>
- <span class='symbol val'>:lightTrellis</span>
- <span class='symbol val'>:gray125</span>
- <span class='symbol val'>:gray0625</span>
-</pre>
+    <div class='inline'>
+<p>patternType must be one of</p>
+
+<pre class="code"><span class='symbol'>:none</span>
+<span class='symbol'>:solid</span>
+<span class='symbol'>:mediumGray</span>
+<span class='symbol'>:darkGray</span>
+<span class='symbol'>:lightGray</span>
+<span class='symbol'>:darkHorizontal</span>
+<span class='symbol'>:darkVertical</span>
+<span class='symbol'>:darkDown</span>
+<span class='symbol'>:darkUp</span>
+<span class='symbol'>:darkGrid</span>
+<span class='symbol'>:darkTrellis</span>
+<span class='symbol'>:lightHorizontal</span>
+<span class='symbol'>:lightVertical</span>
+<span class='symbol'>:lightDown</span>
+<span class='symbol'>:lightUp</span>
+<span class='symbol'>:lightGrid</span>
+<span class='symbol'>:lightTrellis</span>
+<span class='symbol'>:gray125</span>
+<span class='symbol'>:gray0625</span></pre>
 </div>
   </div>
 
-<p>
-The pattern type to use
-</p>
+
+<p>The pattern type to use</p>
 
 
   </div>
@@ -572,10 +555,9 @@ The pattern type to use
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/pattern_fill.rb', line 38</span>
 
-<span class='def def kw'>def</span> <span class='patternType identifier id'>patternType</span>
-  <span class='@patternType ivar id'>@patternType</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id patternType'>patternType</span>
+  <span class='ivar'>@patternType</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -597,9 +579,8 @@ The pattern type to use
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Serializes the pattern fill
-</p>
+    
+<p>Serializes the pattern fill</p>
 
 
   </div>
@@ -618,9 +599,8 @@ Serializes the pattern fill
       
       
         &mdash;
-        <div class='inline'><p>
-The document builder instance this objects xml will be added to.
-</p>
+        <div class='inline'>
+<p>The document builder instance this objects xml will be added to.</p>
 </div>
       
     </li>
@@ -656,12 +636,11 @@ The document builder instance this objects xml will be added to.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/pattern_fill.rb', line 60</span>
 
-<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span> 
-  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='patternFill identifier id'>patternFill</span><span class='lparen token'>(</span><span class='symbol val'>:patternType</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='patternType identifier id'>patternType</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span> 
-    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='instance_values identifier id'>instance_values</span><span class='dot token'>.</span><span class='reject identifier id'>reject</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='k identifier id'>k</span><span class='comma token'>,</span><span class='v identifier id'>v</span><span class='bitor op'>|</span> <span class='k identifier id'>k</span><span class='dot token'>.</span><span class='to_sym identifier id'>to_sym</span> <span class='eq op'>==</span> <span class='symbol val'>:patternType</span> <span class='rbrace token'>}</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='k identifier id'>k</span><span class='comma token'>,</span><span class='v identifier id'>v</span><span class='bitor op'>|</span> <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='k identifier id'>k</span><span class='comma token'>,</span> <span class='v identifier id'>v</span><span class='dot token'>.</span><span class='instance_values identifier id'>instance_values</span><span class='rparen token'>)</span> <span class='rbrace token'>}</span>    
-  <span class='rbrace token'>}</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span> 
+  <span class='id xml'>xml</span><span class='period'>.</span><span class='id patternFill'>patternFill</span><span class='lparen'>(</span><span class='symbol'>:patternType</span> <span class='op'>=&gt;</span> <span class='kw'>self</span><span class='period'>.</span><span class='id patternType'>patternType</span><span class='rparen'>)</span> <span class='lbrace'>{</span> 
+    <span class='kw'>self</span><span class='period'>.</span><span class='id instance_values'>instance_values</span><span class='period'>.</span><span class='id reject'>reject</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id k'>k</span><span class='comma'>,</span><span class='id v'>v</span><span class='op'>|</span> <span class='id k'>k</span><span class='period'>.</span><span class='id to_sym'>to_sym</span> <span class='op'>==</span> <span class='symbol'>:patternType</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id k'>k</span><span class='comma'>,</span><span class='id v'>v</span><span class='op'>|</span> <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='id k'>k</span><span class='comma'>,</span> <span class='id v'>v</span><span class='period'>.</span><span class='id instance_values'>instance_values</span><span class='rparen'>)</span> <span class='rbrace'>}</span>    
+  <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -672,9 +651,9 @@ The document builder instance this objects xml will be added to.
 </div>
     
     <div id="footer">
-  Generated on Sun Nov 27 18:05:02 2011 by 
+  Generated on Sun Nov 27 20:28:15 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.8.7).
+  0.7.3 (ruby-1.9.3).
 </div>
 
   </body>

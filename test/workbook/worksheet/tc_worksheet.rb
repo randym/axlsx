@@ -51,12 +51,23 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.add_row [1,2,3,4]
     @ws.add_row [1,2,3,4]
     @ws.add_row [1,2,3,4]
-    @ws.col_style 1, 1, :row_offset=>1
+    @ws.col_style (1..2), 1, :row_offset=>1
     @ws.rows[(1..-1)].each do | r | 
       assert_equal(r.cells[1].style, 1)
+      assert_equal(r.cells[2].style, 1)
     end
     assert_equal(@ws.rows.first.cells[1].style, 0)
     assert_equal(@ws.rows.first.cells[0].style, 0)
+  end
+
+  def test_cols
+    @ws.add_row [1,2,3,4]
+    @ws.add_row [1,2,3,4]
+    @ws.add_row [1,2,3,4]
+    @ws.add_row [1,2,3,4]
+    c = @ws.cols[1]
+    assert_equal(c.size, 4)    
+    assert_equal(c[0].value, 2)
   end
 
   def test_row_style

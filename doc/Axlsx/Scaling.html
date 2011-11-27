@@ -94,9 +94,8 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>
-The Scaling class defines axis scaling
-</p>
+    
+<p>The Scaling class defines axis scaling</p>
 
 
   </div>
@@ -128,9 +127,8 @@ The Scaling class defines axis scaling
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-logarithmic base for a logarithmic axis.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>logarithmic base for a logarithmic axis.</p>
 </div></span>
   
 </li>
@@ -155,9 +153,8 @@ logarithmic base for a logarithmic axis.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-the maximum scaling.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>the maximum scaling.</p>
 </div></span>
   
 </li>
@@ -182,9 +179,8 @@ the maximum scaling.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-the minimu scaling.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>the minimu scaling.</p>
 </div></span>
   
 </li>
@@ -209,9 +205,8 @@ the minimu scaling.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-the orientation of the axis must be one of [:minMax, :maxMin].
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>the orientation of the axis must be one of [:minMax, :maxMin].</p>
 </div></span>
   
 </li>
@@ -248,9 +243,8 @@ the orientation of the axis must be one of [:minMax, :maxMin].
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-creates a new Scaling object.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>creates a new Scaling object.</p>
 </div></span>
   
 </li>
@@ -272,9 +266,8 @@ creates a new Scaling object.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Serializes the axId.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Serializes the axId.</p>
 </div></span>
   
 </li>
@@ -295,9 +288,8 @@ Serializes the axId.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-creates a new Scaling object
-</p>
+    
+<p>creates a new Scaling object</p>
 
 
   </div>
@@ -318,9 +310,8 @@ creates a new Scaling object
       
       
         &mdash;
-        <div class='inline'><p>
-a customizable set of options
-</p>
+        <div class='inline'>
+<p>a customizable set of options</p>
 </div>
       
     </li>
@@ -390,14 +381,13 @@ a customizable set of options
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/scaling.rb', line 28</span>
 
-<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
-  <span class='@orientation ivar id'>@orientation</span> <span class='assign token'>=</span> <span class='symbol val'>:minMax</span>
-  <span class='@logBase ivar id'>@logBase</span><span class='comma token'>,</span> <span class='@min ivar id'>@min</span><span class='comma token'>,</span> <span class='@max ivar id'>@max</span> <span class='assign token'>=</span> <span class='nil nil kw'>nil</span><span class='comma token'>,</span> <span class='nil nil kw'>nil</span><span class='comma token'>,</span> <span class='nil nil kw'>nil</span>
-  <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='o identifier id'>o</span><span class='bitor op'>|</span>
-    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='dstring node'>&quot;#{o[0]}=&quot;</span><span class='comma token'>,</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span> <span class='dstring node'>&quot;#{o[0]}=&quot;</span>
-  <span class='end end kw'>end</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='ivar'>@orientation</span> <span class='op'>=</span> <span class='symbol'>:minMax</span>
+  <span class='ivar'>@logBase</span><span class='comma'>,</span> <span class='ivar'>@min</span><span class='comma'>,</span> <span class='ivar'>@max</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='kw'>nil</span>
+  <span class='id options'>options</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id o'>o</span><span class='op'>|</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -420,9 +410,8 @@ a customizable set of options
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-logarithmic base for a logarithmic axis. must be between 2 and 1000
-</p>
+    
+<p>logarithmic base for a logarithmic axis. must be between 2 and 1000</p>
 
 
   </div>
@@ -456,10 +445,9 @@ logarithmic base for a logarithmic axis. must be between 2 and 1000
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/scaling.rb', line 8</span>
 
-<span class='def def kw'>def</span> <span class='logBase identifier id'>logBase</span>
-  <span class='@logBase ivar id'>@logBase</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id logBase'>logBase</span>
+  <span class='ivar'>@logBase</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -477,9 +465,8 @@ logarithmic base for a logarithmic axis. must be between 2 and 1000
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-the maximum scaling
-</p>
+    
+<p>the maximum scaling</p>
 
 
   </div>
@@ -513,10 +500,9 @@ the maximum scaling
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/scaling.rb', line 17</span>
 
-<span class='def def kw'>def</span> <span class='max identifier id'>max</span>
-  <span class='@max ivar id'>@max</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id max'>max</span>
+  <span class='ivar'>@max</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -534,9 +520,8 @@ the maximum scaling
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-the minimu scaling
-</p>
+    
+<p>the minimu scaling</p>
 
 
   </div>
@@ -570,10 +555,9 @@ the minimu scaling
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/scaling.rb', line 21</span>
 
-<span class='def def kw'>def</span> <span class='min identifier id'>min</span>
-  <span class='@min ivar id'>@min</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id min'>min</span>
+  <span class='ivar'>@min</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -591,9 +575,8 @@ the minimu scaling
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-the orientation of the axis must be one of [:minMax, :maxMin]
-</p>
+    
+<p>the orientation of the axis must be one of [:minMax, :maxMin]</p>
 
 
   </div>
@@ -627,10 +610,9 @@ the orientation of the axis must be one of [:minMax, :maxMin]
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/scaling.rb', line 13</span>
 
-<span class='def def kw'>def</span> <span class='orientation identifier id'>orientation</span>
-  <span class='@orientation ivar id'>@orientation</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id orientation'>orientation</span>
+  <span class='ivar'>@orientation</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -652,9 +634,8 @@ the orientation of the axis must be one of [:minMax, :maxMin]
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Serializes the axId
-</p>
+    
+<p>Serializes the axId</p>
 
 
   </div>
@@ -673,9 +654,8 @@ Serializes the axId
       
       
         &mdash;
-        <div class='inline'><p>
-The document builder instance this objects xml will be added to.
-</p>
+        <div class='inline'>
+<p>The document builder instance this objects xml will be added to.</p>
 </div>
       
     </li>
@@ -714,15 +694,14 @@ The document builder instance this objects xml will be added to.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/scaling.rb', line 49</span>
 
-<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
-  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:scaling'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
-    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:logBase'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span> <span class='@logBase ivar id'>@logBase</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='@logBase ivar id'>@logBase</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
-    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:orientation'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span> <span class='@orientation ivar id'>@orientation</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='@orientation ivar id'>@orientation</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
-    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:min'</span><span class='comma token'>,</span> <span class='symbol val'>:val</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='@min ivar id'>@min</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='@min ivar id'>@min</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
-    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:max'</span><span class='comma token'>,</span> <span class='symbol val'>:val</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='@max ivar id'>@max</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='@max ivar id'>@max</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
-  <span class='rbrace token'>}</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
+  <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:scaling</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span>
+    <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:logBase</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span><span class='op'>=&gt;</span> <span class='ivar'>@logBase</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='ivar'>@logBase</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+    <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:orientation</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span><span class='op'>=&gt;</span> <span class='ivar'>@orientation</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='ivar'>@orientation</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+    <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:min</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span> <span class='op'>=&gt;</span> <span class='ivar'>@min</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='ivar'>@min</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+    <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:max</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span> <span class='op'>=&gt;</span> <span class='ivar'>@max</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='ivar'>@max</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+  <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -733,9 +712,9 @@ The document builder instance this objects xml will be added to.
 </div>
     
     <div id="footer">
-  Generated on Sun Nov 27 18:05:04 2011 by 
+  Generated on Sun Nov 27 20:28:13 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.8.7).
+  0.7.3 (ruby-1.9.3).
 </div>
 
   </body>

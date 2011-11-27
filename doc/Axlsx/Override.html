@@ -94,10 +94,9 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>
-An override content part. These parts are automatically created by for you
-based on the content of your package.
-</p>
+    
+<p>An override content part. These parts are automatically created by for you
+based on the content of your package.</p>
 
 
   </div>
@@ -129,9 +128,8 @@ based on the content of your package.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The type of content.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The type of content.</p>
 </div></span>
   
 </li>
@@ -156,9 +154,8 @@ The type of content.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The name and location of the part.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The name and location of the part.</p>
 </div></span>
   
 </li>
@@ -195,9 +192,8 @@ The name and location of the part.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Creates a new Override object.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new Override object.</p>
 </div></span>
   
 </li>
@@ -219,9 +215,8 @@ Creates a new Override object.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Serializes the Override object to xml.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Serializes the Override object to xml.</p>
 </div></span>
   
 </li>
@@ -242,9 +237,8 @@ Serializes the Override object to xml.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Creates a new Override object
-</p>
+    
+<p>Creates a new Override object</p>
 
 
   </div>
@@ -265,9 +259,8 @@ Creates a new Override object
       
       
         &mdash;
-        <div class='inline'><p>
-a customizable set of options
-</p>
+        <div class='inline'>
+<p>a customizable set of options</p>
 </div>
       
     </li>
@@ -312,10 +305,9 @@ a customizable set of options
       
       
         &mdash;
-        <div class='inline'><p>
-An argument error is raised if both PartName and ContentType are not
-specified.
-</p>
+        <div class='inline'>
+<p>An argument error is raised if both PartName and ContentType are not
+specified.</p>
 </div>
       
     </li>
@@ -338,13 +330,12 @@ specified.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/content_type/override.rb', line 17</span>
 
-<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
-  <span class='raise identifier id'>raise</span> <span class='ArgumentError constant id'>ArgumentError</span><span class='comma token'>,</span> <span class='string val'>&quot;PartName and ContentType are required&quot;</span> <span class='unless unless_mod kw'>unless</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:PartName</span><span class='rbrack token'>]</span> <span class='andop op'>&amp;&amp;</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:ContentType</span><span class='rbrack token'>]</span>
-  <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='o identifier id'>o</span><span class='bitor op'>|</span>
-    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='dstring node'>&quot;#{o[0]}=&quot;</span><span class='comma token'>,</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span> <span class='dstring node'>&quot;#{o[0]}=&quot;</span>
-  <span class='end end kw'>end</span>      
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>PartName and ContentType are required</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:PartName</span><span class='rbracket'>]</span> <span class='op'>&amp;&amp;</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:ContentType</span><span class='rbracket'>]</span>
+  <span class='id options'>options</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id o'>o</span><span class='op'>|</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>      
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -367,9 +358,8 @@ specified.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The type of content.
-</p>
+    
+<p>The type of content.</p>
 
 
   </div>
@@ -403,10 +393,9 @@ The type of content.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/content_type/override.rb', line 7</span>
 
-<span class='def def kw'>def</span> <span class='ContentType constant id'>ContentType</span>
-  <span class='@ContentType ivar id'>@ContentType</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='const'>ContentType</span>
+  <span class='ivar'>@ContentType</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -424,9 +413,8 @@ The type of content.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The name and location of the part.
-</p>
+    
+<p>The name and location of the part.</p>
 
 
   </div>
@@ -460,10 +448,9 @@ The name and location of the part.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/content_type/override.rb', line 11</span>
 
-<span class='def def kw'>def</span> <span class='PartName constant id'>PartName</span>
-  <span class='@PartName ivar id'>@PartName</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='const'>PartName</span>
+  <span class='ivar'>@PartName</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -485,9 +472,8 @@ The name and location of the part.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Serializes the Override object to xml
-</p>
+    
+<p>Serializes the Override object to xml</p>
 
 
   </div>
@@ -506,9 +492,8 @@ Serializes the Override object to xml
       
       
         &mdash;
-        <div class='inline'><p>
-The document builder instance this objects xml will be added to.
-</p>
+        <div class='inline'>
+<p>The document builder instance this objects xml will be added to.</p>
 </div>
       
     </li>
@@ -529,10 +514,9 @@ The document builder instance this objects xml will be added to.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/content_type/override.rb', line 33</span>
 
-<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
-  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='Override constant id'>Override</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='dot token'>.</span><span class='instance_values identifier id'>instance_values</span><span class='rparen token'>)</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
+  <span class='id xml'>xml</span><span class='period'>.</span><span class='const'>Override</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id instance_values'>instance_values</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -543,9 +527,9 @@ The document builder instance this objects xml will be added to.
 </div>
     
     <div id="footer">
-  Generated on Sun Nov 27 18:05:15 2011 by 
+  Generated on Sun Nov 27 20:28:15 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.8.7).
+  0.7.3 (ruby-1.9.3).
 </div>
 
   </body>

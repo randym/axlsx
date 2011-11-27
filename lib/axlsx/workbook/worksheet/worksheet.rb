@@ -39,6 +39,7 @@ module Axlsx
       @auto_fit_data = []
       self.name = options[:name] || "Sheet" + (index+1).to_s
       @magick_draw = Magick::Draw.new
+      @cols = SimpleTypedList.new Cell
     end
 
     # The name of the worksheet
@@ -90,16 +91,25 @@ module Axlsx
     end
 
     # Set the style for cells in a specific row
-    # @param [Integer] index the index of the row
+    # @param [Integer] index or range of indexes in the table
     # @param [Integer] the cellXfs index
     # @option options [Integer] col_offset only cells after this column will be updated.
     # @note You can also specify the style in the add_row call
     # @see Worksheet#add_row
     # @see README.md for an example
     def row_style(index, style, options={})
-      raise ArgumentError, "Invalid Row Index" unless index < @rows.size
       offset = options.delete(:col_offset) || 0
-      @rows[index].cells[(offset..-1)].each { |c| c.style = style }
+      rs = @rows[index]
+      if rs.is_a?(Array)
+        rs.each { |r| r.cells[(offset..-1)].each { |c| c.style = style } }
+      else
+        rs.cells[(offset..-1)].each { |c| c.style = style }
+      end
+    end
+
+    # returns the sheet data as columnw
+    def cols
+      @rows.transpose
     end
 
 
@@ -111,11 +121,17 @@ module Axlsx
     # @see Worksheet#add_row
     # @see README.md for an example
     def col_style(index, style, options={})
-      raise ArgumentError, "Invalid Column Index" unless index < @rows.first.cells.size
       offset = options.delete(:row_offset) || 0
-      @rows[(offset..-1)].each { |r| r.cells[index].style = style }
+      @rows[(offset..-1)].each do |r| 
+        cells = r.cells[index]
+        if cells.is_a?(Array)
+          cells.each { |c| c.style = style }
+        else
+          cells.style = style
+        end
+      end
     end
-
+    
     # Adds a chart to this worksheets drawing. This is the recommended way to create charts for your worksheet. This method wraps the complexity of dealing with ooxml drawing, anchors, markers graphic frames chart objects and all the other dirty details. 
     # @param [Class] chart_type
     # @option options [Array] start_at

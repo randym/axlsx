@@ -17,20 +17,16 @@ Gem::Specification.new do |s|
 
   s.files = FileList.new('*', 'lib/**/*', 'doc/**/*', 'test/**/*', 'schema/**/*', 'examples/**/*') do |fl|
     fl.exclude("*.*~")
-    fl.exclude(".DS_Store")
-    fl.exclude(".gitignore")
-    fl.exclude(".yardops")
-    fl.exclude(".yardops_guide")
-    fl.exclude(".git")
     fl.exclude(".*")
     fl.exclude("todo")
     fl.exclude("*.gem")
     fl.exclude("*.xlsx")
   end
+
   s.add_runtime_dependency 'nokogiri', '>= 1.4.1'
   s.add_runtime_dependency 'activesupport', '>= 2.3.9'
   s.add_runtime_dependency 'rmagick', '>= 2.12.2'
-  s.add_runtime_dependency 'zip', '~> 2.0.2'
+  s.add_runtime_dependency 'zip', '>= 2.0.2'
   s.required_ruby_version = '>= 1.8.7'
   s.require_path = 'lib'
 end

@@ -97,17 +97,15 @@
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'><p>
-The recommended way to manage styles in your workbook is to use
-Styles#add_style.
-</p>
+    <div class='inline'>
+<p>The recommended way to manage styles in your workbook is to use
+Styles#add_style.</p>
 </div>
   </div>
 
-<p>
-The Fill is a formatting object that manages the background color, and
-pattern for cells.
-</p>
+
+<p>The Fill is a formatting object that manages the background color, and
+pattern for cells.</p>
 
 
   </div>
@@ -150,9 +148,8 @@ pattern for cells.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The type of fill.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The type of fill.</p>
 </div></span>
   
 </li>
@@ -189,9 +186,8 @@ The type of fill.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Creates a new Fill object.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new Fill object.</p>
 </div></span>
   
 </li>
@@ -213,9 +209,8 @@ Creates a new Fill object.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Serializes the fill.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Serializes the fill.</p>
 </div></span>
   
 </li>
@@ -236,9 +231,8 @@ Serializes the fill.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Creates a new Fill object
-</p>
+    
+<p>Creates a new Fill object</p>
 
 
   </div>
@@ -271,9 +265,8 @@ Creates a new Fill object
       
       
         &mdash;
-        <div class='inline'><p>
-if the fill_type parameter is not a PatternFill or a GradientFill instance
-</p>
+        <div class='inline'>
+<p>if the fill_type parameter is not a PatternFill or a GradientFill instance</p>
 </div>
       
     </li>
@@ -293,10 +286,9 @@ if the fill_type parameter is not a PatternFill or a GradientFill instance
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/fill.rb', line 16</span>
 
-<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='fill_type identifier id'>fill_type</span><span class='rparen token'>)</span>
-  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='fill_type identifier id'>fill_type</span> <span class='assign token'>=</span> <span class='fill_type identifier id'>fill_type</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id fill_type'>fill_type</span><span class='rparen'>)</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id fill_type'>fill_type</span> <span class='op'>=</span> <span class='id fill_type'>fill_type</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -319,9 +311,8 @@ if the fill_type parameter is not a PatternFill or a GradientFill instance
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The type of fill
-</p>
+    
+<p>The type of fill</p>
 
 
   </div>
@@ -355,10 +346,9 @@ The type of fill
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/fill.rb', line 11</span>
 
-<span class='def def kw'>def</span> <span class='fill_type identifier id'>fill_type</span>
-  <span class='@fill_type ivar id'>@fill_type</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id fill_type'>fill_type</span>
+  <span class='ivar'>@fill_type</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -380,9 +370,8 @@ The type of fill
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Serializes the fill
-</p>
+    
+<p>Serializes the fill</p>
 
 
   </div>
@@ -401,9 +390,8 @@ Serializes the fill
       
       
         &mdash;
-        <div class='inline'><p>
-The document builder instance this objects xml will be added to.
-</p>
+        <div class='inline'>
+<p>The document builder instance this objects xml will be added to.</p>
 </div>
       
     </li>
@@ -437,10 +425,9 @@ The document builder instance this objects xml will be added to.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/fill.rb', line 23</span>
 
-<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
-  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='fill identifier id'>fill</span> <span class='lbrace token'>{</span> <span class='@fill_type ivar id'>@fill_type</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span> <span class='rbrace token'>}</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
+  <span class='id xml'>xml</span><span class='period'>.</span><span class='id fill'>fill</span> <span class='lbrace'>{</span> <span class='ivar'>@fill_type</span><span class='period'>.</span><span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -451,9 +438,9 @@ The document builder instance this objects xml will be added to.
 </div>
     
     <div id="footer">
-  Generated on Sun Nov 27 18:05:06 2011 by 
+  Generated on Sun Nov 27 20:28:13 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.8.7).
+  0.7.3 (ruby-1.9.3).
 </div>
 
   </body>

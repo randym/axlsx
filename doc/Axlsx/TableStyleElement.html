@@ -97,16 +97,14 @@
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'><p>
-tables and table styles are not supported in this version. This class
-exists in preparation for that support.
-</p>
+    <div class='inline'>
+<p>tables and table styles are not supported in this version. This class
+exists in preparation for that support.</p>
 </div>
   </div>
 
-<p>
-an element of style that belongs to a table style.
-</p>
+
+<p>an element of style that belongs to a table style.</p>
 
 
   </div>
@@ -138,9 +136,8 @@ an element of style that belongs to a table style.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The dxfId this style element points to.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The dxfId this style element points to.</p>
 </div></span>
   
 </li>
@@ -165,10 +162,9 @@ The dxfId this style element points to.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Number of rows or columns used in striping when the type is firstRowStripe,
-secondRowStripe, firstColumnStripe, or secondColumnStripe.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Number of rows or columns used in striping when the type is firstRowStripe,
+secondRowStripe, firstColumnStripe, or secondColumnStripe.</p>
 </div></span>
   
 </li>
@@ -193,9 +189,8 @@ secondRowStripe, firstColumnStripe, or secondColumnStripe.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The type of style element.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The type of style element.</p>
 </div></span>
   
 </li>
@@ -232,9 +227,8 @@ The type of style element.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-creates a new TableStyleElement object.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>creates a new TableStyleElement object.</p>
 </div></span>
   
 </li>
@@ -256,9 +250,8 @@ creates a new TableStyleElement object.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Serializes the table style element.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Serializes the table style element.</p>
 </div></span>
   
 </li>
@@ -279,9 +272,8 @@ Serializes the table style element.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-creates a new TableStyleElement object
-</p>
+    
+<p>creates a new TableStyleElement object</p>
 
 
   </div>
@@ -302,9 +294,8 @@ creates a new TableStyleElement object
       
       
         &mdash;
-        <div class='inline'><p>
-a customizable set of options
-</p>
+        <div class='inline'>
+<p>a customizable set of options</p>
 </div>
       
     </li>
@@ -363,12 +354,11 @@ a customizable set of options
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/table_style_element.rb', line 49</span>
 
-<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
-  <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='o identifier id'>o</span><span class='bitor op'>|</span>
-    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='dstring node'>&quot;#{o[0]}=&quot;</span><span class='comma token'>,</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>0</span><span class='rbrack token'>]</span>
-  <span class='end end kw'>end</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id options'>options</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id o'>o</span><span class='op'>|</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span> <span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -391,9 +381,8 @@ a customizable set of options
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The dxfId this style element points to
-</p>
+    
+<p>The dxfId this style element points to</p>
 
 
   </div>
@@ -427,10 +416,9 @@ The dxfId this style element points to
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/table_style_element.rb', line 43</span>
 
-<span class='def def kw'>def</span> <span class='dxfId identifier id'>dxfId</span>
-  <span class='@dxfId ivar id'>@dxfId</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id dxfId'>dxfId</span>
+  <span class='ivar'>@dxfId</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -448,10 +436,9 @@ The dxfId this style element points to
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Number of rows or columns used in striping when the type is firstRowStripe,
-secondRowStripe, firstColumnStripe, or secondColumnStripe.
-</p>
+    
+<p>Number of rows or columns used in striping when the type is firstRowStripe,
+secondRowStripe, firstColumnStripe, or secondColumnStripe.</p>
 
 
   </div>
@@ -485,10 +472,9 @@ secondRowStripe, firstColumnStripe, or secondColumnStripe.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/table_style_element.rb', line 39</span>
 
-<span class='def def kw'>def</span> <span class='size identifier id'>size</span>
-  <span class='@size ivar id'>@size</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id size'>size</span>
+  <span class='ivar'>@size</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -506,39 +492,37 @@ secondRowStripe, firstColumnStripe, or secondColumnStripe.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The type of style element. The following type are allowed
-</p>
-<pre class="code">
-  <span class='symbol val'>:wholeTable</span>
-  <span class='symbol val'>:headerRow</span>
-  <span class='symbol val'>:totalRow</span>
-  <span class='symbol val'>:firstColumn</span>
-  <span class='symbol val'>:lastColumn</span>
-  <span class='symbol val'>:firstRowStripe</span>
-  <span class='symbol val'>:secondRowStripe</span>
-  <span class='symbol val'>:firstColumnStripe</span>
-  <span class='symbol val'>:secondColumnStripe</span>
-  <span class='symbol val'>:firstHeaderCell</span>
-  <span class='symbol val'>:lastHeaderCell</span>
-  <span class='symbol val'>:firstTotalCell</span>
-  <span class='symbol val'>:lastTotalCell</span>
-  <span class='symbol val'>:firstSubtotalColumn</span>
-  <span class='symbol val'>:secondSubtotalColumn</span>
-  <span class='symbol val'>:thirdSubtotalColumn</span>
-  <span class='symbol val'>:firstSubtotalRow</span>
-  <span class='symbol val'>:secondSubtotalRow</span>
-  <span class='symbol val'>:thirdSubtotalRow</span>
-  <span class='symbol val'>:blankRow</span>
-  <span class='symbol val'>:firstColumnSubheading</span>
-  <span class='symbol val'>:secondColumnSubheading</span>
-  <span class='symbol val'>:thirdColumnSubheading</span>
-  <span class='symbol val'>:firstRowSubheading</span>
-  <span class='symbol val'>:secondRowSubheading</span>
-  <span class='symbol val'>:thirdRowSubheading</span>
-  <span class='symbol val'>:pageFieldLabels</span>
-  <span class='symbol val'>:pageFieldValues</span>
-</pre>
+    
+<p>The type of style element. The following type are allowed</p>
+
+<pre class="code"><span class='symbol'>:wholeTable</span>
+<span class='symbol'>:headerRow</span>
+<span class='symbol'>:totalRow</span>
+<span class='symbol'>:firstColumn</span>
+<span class='symbol'>:lastColumn</span>
+<span class='symbol'>:firstRowStripe</span>
+<span class='symbol'>:secondRowStripe</span>
+<span class='symbol'>:firstColumnStripe</span>
+<span class='symbol'>:secondColumnStripe</span>
+<span class='symbol'>:firstHeaderCell</span>
+<span class='symbol'>:lastHeaderCell</span>
+<span class='symbol'>:firstTotalCell</span>
+<span class='symbol'>:lastTotalCell</span>
+<span class='symbol'>:firstSubtotalColumn</span>
+<span class='symbol'>:secondSubtotalColumn</span>
+<span class='symbol'>:thirdSubtotalColumn</span>
+<span class='symbol'>:firstSubtotalRow</span>
+<span class='symbol'>:secondSubtotalRow</span>
+<span class='symbol'>:thirdSubtotalRow</span>
+<span class='symbol'>:blankRow</span>
+<span class='symbol'>:firstColumnSubheading</span>
+<span class='symbol'>:secondColumnSubheading</span>
+<span class='symbol'>:thirdColumnSubheading</span>
+<span class='symbol'>:firstRowSubheading</span>
+<span class='symbol'>:secondRowSubheading</span>
+<span class='symbol'>:thirdRowSubheading</span>
+<span class='symbol'>:pageFieldLabels</span>
+<span class='symbol'>:pageFieldValues</span></pre>
 
 
   </div>
@@ -572,10 +556,9 @@ The type of style element. The following type are allowed
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/table_style_element.rb', line 35</span>
 
-<span class='def def kw'>def</span> <span class='type identifier id'>type</span>
-  <span class='@type ivar id'>@type</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id type'>type</span>
+  <span class='ivar'>@type</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -597,9 +580,8 @@ The type of style element. The following type are allowed
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Serializes the table style element
-</p>
+    
+<p>Serializes the table style element</p>
 
 
   </div>
@@ -618,9 +600,8 @@ Serializes the table style element
       
       
         &mdash;
-        <div class='inline'><p>
-The document builder instance this objects xml will be added to.
-</p>
+        <div class='inline'>
+<p>The document builder instance this objects xml will be added to.</p>
 </div>
       
     </li>
@@ -654,10 +635,9 @@ The document builder instance this objects xml will be added to.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/table_style_element.rb', line 67</span>
 
-<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
-  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='tableStyleElement identifier id'>tableStyleElement</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='instance_values identifier id'>instance_values</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
+  <span class='id xml'>xml</span><span class='period'>.</span><span class='id tableStyleElement'>tableStyleElement</span> <span class='kw'>self</span><span class='period'>.</span><span class='id instance_values'>instance_values</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -668,9 +648,9 @@ The document builder instance this objects xml will be added to.
 </div>
     
     <div id="footer">
-  Generated on Sun Nov 27 18:05:14 2011 by 
+  Generated on Sun Nov 27 20:28:16 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.8.7).
+  0.7.3 (ruby-1.9.3).
 </div>
 
   </body>

@@ -63,8 +63,10 @@ require 'axlsx/workbook/worksheet/worksheet.rb'
     # @see Style#add_style
     # @see Style
     # @return [Styles]
-    attr_reader :styles
-
+    def styles
+      yield @styles if block_given?
+      @styles
+    end
 
 
     # Indicates if the epoc date for serialization should be 1904. If false, 1900 is used.

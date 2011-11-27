@@ -62,6 +62,10 @@ module Axlsx
       end
     end
 
+    def to_ary
+      @cells.to_ary
+    end
+
     private
 
     # assigns the owning worksheet for this row
@@ -72,6 +76,7 @@ module Axlsx
     def update_auto_fit_data
       worksheet.send(:update_auto_fit_data, self.cells)
     end
+
 
     # Converts values, types, and style options into cells and associates them with this row.
     # A new cell is created for each item in the values array.

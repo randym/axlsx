@@ -94,11 +94,10 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>
-Validate that the class of the value provided is either an instance or the
+    
+<p>Validate that the class of the value provided is either an instance or the
 class of the allowed types and that any specified additional validation
-returns true.
-</p>
+returns true.</p>
 
 
   </div>
@@ -135,9 +134,8 @@ returns true.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Perform validation.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Perform validation.</p>
 </div></span>
   
 </li>
@@ -161,9 +159,8 @@ Perform validation.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Perform validation
-</p>
+    
+<p>Perform validation</p>
 
 
   </div>
@@ -182,9 +179,8 @@ Perform validation
       
       
         &mdash;
-        <div class='inline'><p>
-The name of what is being validated. This is included in the error message
-</p>
+        <div class='inline'>
+<p>The name of what is being validated. This is included in the error message</p>
 </div>
       
     </li>
@@ -199,9 +195,8 @@ The name of what is being validated. This is included in the error message
       
       
         &mdash;
-        <div class='inline'><p>
-A single class or array of classes that the value is validated against.
-</p>
+        <div class='inline'>
+<p>A single class or array of classes that the value is validated against.</p>
 </div>
       
     </li>
@@ -218,9 +213,8 @@ A single class or array of classes that the value is validated against.
       
       
         &mdash;
-        <div class='inline'><p>
-Any block that must evaluate to true for the value to be valid
-</p>
+        <div class='inline'>
+<p>Any block that must evaluate to true for the value to be valid</p>
 </div>
       
     </li>
@@ -238,9 +232,8 @@ Any block that must evaluate to true for the value to be valid
       
       
         &mdash;
-        <div class='inline'><p>
-true if validation succeeds.
-</p>
+        <div class='inline'>
+<p>true if validation succeeds.</p>
 </div>
       
     </li>
@@ -257,10 +250,9 @@ true if validation succeeds.
       
       
         &mdash;
-        <div class='inline'><p>
-Raised if the class of the value provided is not in the specified array of
-types or the block passed returns false
-</p>
+        <div class='inline'>
+<p>Raised if the class of the value provided is not in the specified array of
+types or the block passed returns false</p>
 </div>
       
     </li>
@@ -294,17 +286,16 @@ types or the block passed returns false
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/util/validators.rb', line 34</span>
 
-<span class='def def kw'>def</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='validate identifier id'>validate</span><span class='lparen token'>(</span><span class='name identifier id'>name</span><span class='comma token'>,</span> <span class='types identifier id'>types</span><span class='comma token'>,</span> <span class='v identifier id'>v</span><span class='comma token'>,</span> <span class='other identifier id'>other</span><span class='assign token'>=</span> <span class='lambda identifier id'>lambda</span><span class='lbrace token'>{</span><span class='bitor op'>|</span><span class='arg identifier id'>arg</span><span class='bitor op'>|</span> <span class='true true kw'>true</span> <span class='rbrace token'>}</span><span class='rparen token'>)</span>
-  <span class='types identifier id'>types</span> <span class='assign token'>=</span> <span class='lbrack token'>[</span><span class='types identifier id'>types</span><span class='rbrack token'>]</span> <span class='unless unless_mod kw'>unless</span> <span class='types identifier id'>types</span><span class='dot token'>.</span><span class='is_a? fid id'>is_a?</span> <span class='Array constant id'>Array</span>
-  <span class='valid_type identifier id'>valid_type</span> <span class='assign token'>=</span> <span class='false false kw'>false</span>
-  <span class='if if kw'>if</span> <span class='v identifier id'>v</span><span class='dot token'>.</span><span class='class identifier id'>class</span> <span class='eq op'>==</span> <span class='Class constant id'>Class</span>
-    <span class='types identifier id'>types</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='t identifier id'>t</span><span class='bitor op'>|</span> <span class='valid_type identifier id'>valid_type</span> <span class='assign token'>=</span> <span class='true true kw'>true</span> <span class='if if_mod kw'>if</span> <span class='v identifier id'>v</span><span class='dot token'>.</span><span class='ancestors identifier id'>ancestors</span><span class='dot token'>.</span><span class='include? fid id'>include?</span><span class='lparen token'>(</span><span class='t identifier id'>t</span><span class='rparen token'>)</span> <span class='rbrace token'>}</span>
-  <span class='else else kw'>else</span>
-    <span class='types identifier id'>types</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='t identifier id'>t</span><span class='bitor op'>|</span> <span class='valid_type identifier id'>valid_type</span> <span class='assign token'>=</span> <span class='true true kw'>true</span> <span class='if if_mod kw'>if</span> <span class='v identifier id'>v</span><span class='dot token'>.</span><span class='is_a? fid id'>is_a?</span><span class='lparen token'>(</span><span class='t identifier id'>t</span><span class='rparen token'>)</span> <span class='rbrace token'>}</span>
-  <span class='end end kw'>end</span>
-  <span class='raise identifier id'>raise</span> <span class='ArgumentError constant id'>ArgumentError</span><span class='comma token'>,</span> <span class='lparen token'>(</span><span class='ERR_TYPE constant id'>ERR_TYPE</span> <span class='mod op'>%</span> <span class='lbrack token'>[</span><span class='v identifier id'>v</span><span class='dot token'>.</span><span class='inspect identifier id'>inspect</span><span class='comma token'>,</span> <span class='name identifier id'>name</span><span class='comma token'>,</span> <span class='types identifier id'>types</span><span class='dot token'>.</span><span class='inspect identifier id'>inspect</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='lparen token'>(</span><span class='other identifier id'>other</span><span class='dot token'>.</span><span class='call identifier id'>call</span><span class='lparen token'>(</span><span class='v identifier id'>v</span><span class='rparen token'>)</span> <span class='andop op'>&amp;&amp;</span> <span class='valid_type identifier id'>valid_type</span><span class='rparen token'>)</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id validate'>validate</span><span class='lparen'>(</span><span class='id name'>name</span><span class='comma'>,</span> <span class='id types'>types</span><span class='comma'>,</span> <span class='id v'>v</span><span class='comma'>,</span> <span class='id other'>other</span><span class='op'>=</span> <span class='id lambda'>lambda</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id arg'>arg</span><span class='op'>|</span> <span class='kw'>true</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id types'>types</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='id types'>types</span><span class='rbracket'>]</span> <span class='kw'>unless</span> <span class='id types'>types</span><span class='period'>.</span><span class='id is_a?'>is_a?</span> <span class='const'>Array</span>
+  <span class='id valid_type'>valid_type</span> <span class='op'>=</span> <span class='kw'>false</span>
+  <span class='kw'>if</span> <span class='id v'>v</span><span class='period'>.</span><span class='id class'>class</span> <span class='op'>==</span> <span class='const'>Class</span>
+    <span class='id types'>types</span><span class='period'>.</span><span class='id each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span> <span class='id valid_type'>valid_type</span> <span class='op'>=</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id v'>v</span><span class='period'>.</span><span class='id ancestors'>ancestors</span><span class='period'>.</span><span class='id include?'>include?</span><span class='lparen'>(</span><span class='id t'>t</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+  <span class='kw'>else</span>
+    <span class='id types'>types</span><span class='period'>.</span><span class='id each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span> <span class='id valid_type'>valid_type</span> <span class='op'>=</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id v'>v</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='id t'>t</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+  <span class='kw'>end</span>
+  <span class='id raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='lparen'>(</span><span class='const'>ERR_TYPE</span> <span class='op'>%</span> <span class='lbracket'>[</span><span class='id v'>v</span><span class='period'>.</span><span class='id inspect'>inspect</span><span class='comma'>,</span> <span class='id name'>name</span><span class='comma'>,</span> <span class='id types'>types</span><span class='period'>.</span><span class='id inspect'>inspect</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='lparen'>(</span><span class='id other'>other</span><span class='period'>.</span><span class='id call'>call</span><span class='lparen'>(</span><span class='id v'>v</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id valid_type'>valid_type</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -315,9 +306,9 @@ types or the block passed returns false
 </div>
     
     <div id="footer">
-  Generated on Sun Nov 27 18:05:05 2011 by 
+  Generated on Sun Nov 27 20:28:13 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.8.7).
+  0.7.3 (ruby-1.9.3).
 </div>
 
   </body>

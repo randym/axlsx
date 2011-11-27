@@ -97,16 +97,14 @@
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'><p>
-Using Styles#add_style is the recommended way to manage cell alignment.
-</p>
+    <div class='inline'>
+<p>Using Styles#add_style is the recommended way to manage cell alignment.</p>
 </div>
   </div>
 
-<p>
-CellAlignment stores information about the cell alignment of a style Xf
-Object.
-</p>
+
+<p>CellAlignment stores information about the cell alignment of a style Xf
+Object.</p>
 
 
   </div>
@@ -145,9 +143,8 @@ Object.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The horizontal alignment of the cell.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The horizontal alignment of the cell.</p>
 </div></span>
   
 </li>
@@ -172,9 +169,8 @@ The horizontal alignment of the cell.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The amount of indent.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The amount of indent.</p>
 </div></span>
   
 </li>
@@ -199,9 +195,8 @@ The amount of indent.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Indicate if the last line should be justified.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Indicate if the last line should be justified.</p>
 </div></span>
   
 </li>
@@ -226,10 +221,9 @@ Indicate if the last line should be justified.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The reading order of the text 0 Context Dependent 1 Left-to-Right 2
-Right-to-Left.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The reading order of the text 0 Context Dependent  1 Left-to-Right 2
+Right-to-Left.</p>
 </div></span>
   
 </li>
@@ -254,9 +248,8 @@ Right-to-Left.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The amount of relativeIndent.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The amount of relativeIndent.</p>
 </div></span>
   
 </li>
@@ -281,9 +274,8 @@ The amount of relativeIndent.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Indicate if the text should be shrunk to the fit in the cell.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Indicate if the text should be shrunk to the fit in the cell.</p>
 </div></span>
   
 </li>
@@ -308,9 +300,8 @@ Indicate if the text should be shrunk to the fit in the cell.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The textRotation of the cell.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The textRotation of the cell.</p>
 </div></span>
   
 </li>
@@ -335,9 +326,8 @@ The textRotation of the cell.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The vertical alignment of the cell.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The vertical alignment of the cell.</p>
 </div></span>
   
 </li>
@@ -362,9 +352,8 @@ The vertical alignment of the cell.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Indicate if the text of the cell should wrap.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Indicate if the text of the cell should wrap.</p>
 </div></span>
   
 </li>
@@ -401,9 +390,8 @@ Indicate if the text of the cell should wrap.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Create a new cell_alignment object.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Create a new cell_alignment object.</p>
 </div></span>
   
 </li>
@@ -425,9 +413,8 @@ Create a new cell_alignment object.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Serializes the cell alignment.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Serializes the cell alignment.</p>
 </div></span>
   
 </li>
@@ -448,9 +435,8 @@ Serializes the cell alignment.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Create a new cell_alignment object
-</p>
+    
+<p>Create a new cell_alignment object</p>
 
 
   </div>
@@ -471,9 +457,8 @@ Create a new cell_alignment object
       
       
         &mdash;
-        <div class='inline'><p>
-a customizable set of options
-</p>
+        <div class='inline'>
+<p>a customizable set of options</p>
 </div>
       
     </li>
@@ -586,12 +571,11 @@ a customizable set of options
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/cell_alignment.rb', line 72</span>
 
-<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
-  <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='o identifier id'>o</span><span class='bitor op'>|</span>
-    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='dstring node'>&quot;#{o[0]}=&quot;</span><span class='comma token'>,</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span> <span class='dstring node'>&quot;#{o[0]}=&quot;</span>
-  <span class='end end kw'>end</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id options'>options</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id o'>o</span><span class='op'>|</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -617,25 +601,22 @@ a customizable set of options
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'><p>
-The horizontal cell alignement style must be one of
-</p>
-<pre class="code">
- <span class='symbol val'>:general</span>
- <span class='symbol val'>:left</span>
- <span class='symbol val'>:center</span>
- <span class='symbol val'>:right</span>
- <span class='symbol val'>:fill</span>
- <span class='symbol val'>:justify</span>
- <span class='symbol val'>:centerContinuous</span>
- <span class='symbol val'>:distributed</span>
-</pre>
+    <div class='inline'>
+<p>The horizontal cell alignement style must be one of</p>
+
+<pre class="code"><span class='symbol'>:general</span>
+<span class='symbol'>:left</span>
+<span class='symbol'>:center</span>
+<span class='symbol'>:right</span>
+<span class='symbol'>:fill</span>
+<span class='symbol'>:justify</span>
+<span class='symbol'>:centerContinuous</span>
+<span class='symbol'>:distributed</span></pre>
 </div>
   </div>
 
-<p>
-The horizontal alignment of the cell.
-</p>
+
+<p>The horizontal alignment of the cell.</p>
 
 
   </div>
@@ -669,10 +650,9 @@ The horizontal alignment of the cell.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/cell_alignment.rb', line 18</span>
 
-<span class='def def kw'>def</span> <span class='horizontal identifier id'>horizontal</span>
-  <span class='@horizontal ivar id'>@horizontal</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id horizontal'>horizontal</span>
+  <span class='ivar'>@horizontal</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -690,9 +670,8 @@ The horizontal alignment of the cell.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The amount of indent
-</p>
+    
+<p>The amount of indent</p>
 
 
   </div>
@@ -726,10 +705,9 @@ The amount of indent
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/cell_alignment.rb', line 41</span>
 
-<span class='def def kw'>def</span> <span class='indent identifier id'>indent</span>
-  <span class='@indent ivar id'>@indent</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id indent'>indent</span>
+  <span class='ivar'>@indent</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -747,9 +725,8 @@ The amount of indent
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Indicate if the last line should be justified.
-</p>
+    
+<p>Indicate if the last line should be justified.</p>
 
 
   </div>
@@ -783,10 +760,9 @@ Indicate if the last line should be justified.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/cell_alignment.rb', line 49</span>
 
-<span class='def def kw'>def</span> <span class='justifyLastLine identifier id'>justifyLastLine</span>
-  <span class='@justifyLastLine ivar id'>@justifyLastLine</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id justifyLastLine'>justifyLastLine</span>
+  <span class='ivar'>@justifyLastLine</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -804,10 +780,9 @@ Indicate if the last line should be justified.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The reading order of the text 0 Context Dependent 1 Left-to-Right 2
-Right-to-Left
-</p>
+    
+<p>The reading order of the text 0 Context Dependent  1 Left-to-Right 2
+Right-to-Left</p>
 
 
   </div>
@@ -841,10 +816,9 @@ Right-to-Left
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/cell_alignment.rb', line 60</span>
 
-<span class='def def kw'>def</span> <span class='readingOrder identifier id'>readingOrder</span>
-  <span class='@readingOrder ivar id'>@readingOrder</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id readingOrder'>readingOrder</span>
+  <span class='ivar'>@readingOrder</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -862,9 +836,8 @@ Right-to-Left
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The amount of relativeIndent
-</p>
+    
+<p>The amount of relativeIndent</p>
 
 
   </div>
@@ -898,10 +871,9 @@ The amount of relativeIndent
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/cell_alignment.rb', line 45</span>
 
-<span class='def def kw'>def</span> <span class='relativeIndent identifier id'>relativeIndent</span>
-  <span class='@relativeIndent ivar id'>@relativeIndent</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id relativeIndent'>relativeIndent</span>
+  <span class='ivar'>@relativeIndent</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -919,9 +891,8 @@ The amount of relativeIndent
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Indicate if the text should be shrunk to the fit in the cell.
-</p>
+    
+<p>Indicate if the text should be shrunk to the fit in the cell.</p>
 
 
   </div>
@@ -955,10 +926,9 @@ Indicate if the text should be shrunk to the fit in the cell.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/cell_alignment.rb', line 53</span>
 
-<span class='def def kw'>def</span> <span class='shrinkToFit identifier id'>shrinkToFit</span>
-  <span class='@shrinkToFit ivar id'>@shrinkToFit</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id shrinkToFit'>shrinkToFit</span>
+  <span class='ivar'>@shrinkToFit</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -976,9 +946,8 @@ Indicate if the text should be shrunk to the fit in the cell.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The textRotation of the cell.
-</p>
+    
+<p>The textRotation of the cell.</p>
 
 
   </div>
@@ -1012,10 +981,9 @@ The textRotation of the cell.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/cell_alignment.rb', line 33</span>
 
-<span class='def def kw'>def</span> <span class='textRotation identifier id'>textRotation</span>
-  <span class='@textRotation ivar id'>@textRotation</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id textRotation'>textRotation</span>
+  <span class='ivar'>@textRotation</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1036,22 +1004,19 @@ The textRotation of the cell.
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'><p>
-The vertical cell allingment style must be one of the following:
-</p>
-<pre class="code">
- <span class='symbol val'>:top</span>
- <span class='symbol val'>:center</span>
- <span class='symbol val'>:bottom</span>
- <span class='symbol val'>:justify</span>
- <span class='symbol val'>:distributed</span>
-</pre>
+    <div class='inline'>
+<p>The vertical cell allingment style must be one of the following:</p>
+
+<pre class="code"><span class='symbol'>:top</span>
+<span class='symbol'>:center</span>
+<span class='symbol'>:bottom</span>
+<span class='symbol'>:justify</span>
+<span class='symbol'>:distributed</span></pre>
 </div>
   </div>
 
-<p>
-The vertical alignment of the cell.
-</p>
+
+<p>The vertical alignment of the cell.</p>
 
 
   </div>
@@ -1085,10 +1050,9 @@ The vertical alignment of the cell.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/cell_alignment.rb', line 29</span>
 
-<span class='def def kw'>def</span> <span class='vertical identifier id'>vertical</span>
-  <span class='@vertical ivar id'>@vertical</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id vertical'>vertical</span>
+  <span class='ivar'>@vertical</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1106,9 +1070,8 @@ The vertical alignment of the cell.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Indicate if the text of the cell should wrap
-</p>
+    
+<p>Indicate if the text of the cell should wrap</p>
 
 
   </div>
@@ -1142,10 +1105,9 @@ Indicate if the text of the cell should wrap
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/cell_alignment.rb', line 37</span>
 
-<span class='def def kw'>def</span> <span class='wrapText identifier id'>wrapText</span>
-  <span class='@wrapText ivar id'>@wrapText</span>
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id wrapText'>wrapText</span>
+  <span class='ivar'>@wrapText</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1167,9 +1129,8 @@ Indicate if the text of the cell should wrap
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Serializes the cell alignment
-</p>
+    
+<p>Serializes the cell alignment</p>
 
 
   </div>
@@ -1188,9 +1149,8 @@ Serializes the cell alignment
       
       
         &mdash;
-        <div class='inline'><p>
-The document builder instance this objects xml will be added to.
-</p>
+        <div class='inline'>
+<p>The document builder instance this objects xml will be added to.</p>
 </div>
       
     </li>
@@ -1224,10 +1184,9 @@ The document builder instance this objects xml will be added to.
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/cell_alignment.rb', line 100</span>
 
-<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
-  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='alignment identifier id'>alignment</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='dot token'>.</span><span class='instance_values identifier id'>instance_values</span><span class='rparen token'>)</span>      
-<span class='end end kw'>end</span>
-</pre>
+<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
+  <span class='id xml'>xml</span><span class='period'>.</span><span class='id alignment'>alignment</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id instance_values'>instance_values</span><span class='rparen'>)</span>      
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -1238,9 +1197,9 @@ The document builder instance this objects xml will be added to.
 </div>
     
     <div id="footer">
-  Generated on Sun Nov 27 18:05:10 2011 by 
+  Generated on Sun Nov 27 20:28:16 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.8.7).
+  0.7.3 (ruby-1.9.3).
 </div>
 
   </body>
