@@ -19,14 +19,14 @@ lib/axlsx/stylesheet/table_style_element.rb 117b80432ed6191c81a9e07bd467281319d2
 lib/axlsx/content_type/content_type.rb 6c576e1618f99f7163fffa6b6e89e964653dcb5f
 lib/axlsx/stylesheet/num_fmt.rb 796ee45611b89e8a670dcff3dd97ad9306f18048
 lib/axlsx/rels/relationships.rb 9c741e180796259bb378a789fd484fa1d8f04425
-lib/axlsx/ar.rb 3a72e7869a068f1f132674dfe746d5b9f7dac135
+lib/axlsx/ar.rb 81d786351c607bce3cf2035c0e3df880d731d33c
 lib/axlsx.rb 13120de6532e630275e55e14c36079384fd213ea
 lib/axlsx/drawing/graphic_frame.rb 271e897616d85ebc069820c0d6a7dd3a716deff2
 lib/axlsx/content_type/override.rb 43ff5dbbb01fbe0237a11c3da7fa5d8e1d5b67ef
 lib/axlsx/drawing/pie_series.rb 66dfb2152f3b0e80b358c7af9061beb3c4ab984d
 lib/axlsx/drawing/bar_series.rb ffe5dae5292d0324442b870fb1958847da6dde5e
 lib/axlsx/stylesheet/gradient_fill.rb 298777d050500c2f1f53294d8c71fce867997b3d
-lib/axlsx/workbook/worksheet/row.rb 489dca78a3e8f2f1d9ba360c6298117ca0447bd8
+lib/axlsx/workbook/worksheet/row.rb dbf8825d5959a4a1e14adf2f07c590329c4fe02c
 lib/axlsx/util/simple_typed_list.rb 49fa9b98ef7fc0990b070509c8cf31ddcf93ec9e
 lib/axlsx/workbook/workbook.rb 44a2cc7a807d47987b16b2577c9432480b07ff89
 lib/axlsx/drawing/view_3D.rb 8a83aed740c05d28aaa0e3430c7c4d2bbc44cc61

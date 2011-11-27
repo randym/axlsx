@@ -1,24 +1,33 @@
 # ActsAsAxlsx
 require 'axlsx'
 module Axlsx
-  
+  # Mixing module for adding acts_as_axlsx to active record base
   module Ar
     
+    # Extents active record with this ojbects class method acts_as_axlsx
     def self.included(base)
       base.send :extend, ClassMethods
     end
     
+    # Class methods for the mixin
     module ClassMethods
 
-      # we should do what ruport did and use only, exclude and methods hashes
+      # adds in the instance and singleton methods
       def acts_as_axlsx(options={})        
         include Axlsx::Ar::InstanceMethods        
         extend Axlsx::Ar::SingletonMethods
       end
     end
 
+    # Singleton methods for the mixin
     module SingletonMethods
 
+      # Maps the AR class to an Axlsx package
+      # options are passed into AR find
+      # @option options [Integer] header_style to apply to the first row of field names
+      # @option options [Array, Symbol] an array of Axlsx types for each cell in data rows or a single type that will be applied to all types.
+      # @option options [Integer, Array] style The style to pass to Worksheet#add_row
+      # @see Worksheet#add_row
       def to_xlsx(number = :all, options = {})
         row_style = options.delete(:style)
         header_style = options.delete(:header_style) || row_style
@@ -43,6 +52,8 @@ module Axlsx
 
     end
 
+    # Empty module - I really like ruports way of allowing :include, :only, :exclude 
+    # and am looking to add something like that in later
     module InstanceMethods
     end
     
@@ -51,6 +62,7 @@ module Axlsx
 
 end
 begin
+
 require 'active_record'
 ActiveRecord::Base.send :include, Axlsx::Ar
 rescue Exception=>e

@@ -77,7 +77,19 @@
 </dl>
 <div class="clear"></div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+Singleton methods for the mixin
+</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
@@ -106,7 +118,10 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><p>
+Maps the AR class to an Axlsx package options are passed into AR find.
+</p>
+</div></span>
   
 </li>
 
@@ -127,21 +142,102 @@
   
 
   
-</p><table class="source_code">
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Maps the AR class to an Axlsx package options are passed into AR find
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+a customizable set of options
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    
+    
+    <h3>Options Hash (<tt>options</tt>):</h3>
+    <ul class="option">
+      
+        <li>
+          <span class="name">header_style</span>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+to apply to the first row of field names
+</p>
+</div>
+        </li>
+      
+        <li>
+          <span class="name">an</span>
+          <span class="type">(<tt>Array</tt>, <tt>Symbol</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+array of Axlsx types for each cell in data rows or a single type that will
+be applied to all types.
+</p>
+</div>
+        </li>
+      
+        <li>
+          <span class="name">style</span>
+          <span class="type">(<tt>Integer</tt>, <tt>Array</tt>)</span>
+          <span class="default">
+            
+          </span>
+          &mdash; <div class='inline'><p>
+The style to pass to Worksheet#add_row
+</p>
+</div>
+        </li>
+      
+    </ul>
+  
+
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="../Worksheet.html#add_row-instance_method" title="Axlsx::Worksheet#add_row (method)">Worksheet#add_row</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-22
-23
-24
-25
-26
-27
-28
-29
-30
 31
 32
 33
@@ -153,10 +249,19 @@
 39
 40
 41
-42</pre>
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/ar.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/ar.rb', line 31</span>
 
 <span class='def def kw'>def</span> <span class='to_xlsx identifier id'>to_xlsx</span><span class='lparen token'>(</span><span class='number identifier id'>number</span> <span class='assign token'>=</span> <span class='symbol val'>:all</span><span class='comma token'>,</span> <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
   <span class='row_style identifier id'>row_style</span> <span class='assign token'>=</span> <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='delete identifier id'>delete</span><span class='lparen token'>(</span><span class='symbol val'>:style</span><span class='rparen token'>)</span>
@@ -190,7 +295,7 @@
 </div>
     
     <div id="footer">
-  Generated on Sun Nov 27 21:44:39 2011 by 
+  Generated on Sun Nov 27 21:52:44 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>

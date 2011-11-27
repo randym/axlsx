@@ -294,7 +294,7 @@ sets the style for every cell in this row.
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#to_ary-instance_method" title="#to_ary (instance method)">- (Object) <strong>to_ary</strong> </a>
+      <a href="#to_ary-instance_method" title="#to_ary (instance method)">- (Array) <strong>to_ary</strong> </a>
     
 
     
@@ -307,7 +307,11 @@ sets the style for every cell in this row.
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><p>
+returns the cells in this row as an array This lets us transpose the rows
+into columns.
+</p>
+</div></span>
   
 </li>
 
@@ -771,22 +775,48 @@ sets the style for every cell in this row
       <div class="method_details ">
   <p class="signature " id="to_ary-instance_method">
   
-    - (<tt>Object</tt>) <strong>to_ary</strong> 
+    - (<tt>Array</tt>) <strong>to_ary</strong> 
   
 
   
-</p><table class="source_code">
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+returns the cells in this row as an array This lets us transpose the rows
+into columns
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-65
-66
-67</pre>
+68
+69
+70</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/row.rb', line 65</span>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/row.rb', line 68</span>
 
 <span class='def def kw'>def</span> <span class='to_ary identifier id'>to_ary</span>
   <span class='@cells ivar id'>@cells</span><span class='dot token'>.</span><span class='to_ary identifier id'>to_ary</span>
@@ -877,7 +907,7 @@ The document builder instance this objects xml will be added to.
 </div>
     
     <div id="footer">
-  Generated on Sun Nov 27 21:44:27 2011 by 
+  Generated on Sun Nov 27 21:52:32 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>

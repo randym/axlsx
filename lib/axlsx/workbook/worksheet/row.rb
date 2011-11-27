@@ -62,6 +62,9 @@ module Axlsx
       end
     end
 
+    # returns the cells in this row as an array
+    # This lets us transpose the rows into columns 
+    # @return [Array]
     def to_ary
       @cells.to_ary
     end
