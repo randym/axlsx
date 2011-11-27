@@ -97,20 +97,22 @@
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'>
-<p>The recommended way to generate cells is via Worksheet#add_row</p>
+    <div class='inline'><p>
+The recommended way to generate cells is via Worksheet#add_row
+</p>
 </div>
   </div>
 
-
-<p>A cell in a worksheet.  Cell stores inforamation requried to serialize a
+<p>
+A cell in a worksheet. Cell stores inforamation requried to serialize a
 single worksheet cell to xml. You must provde the Row that the cell belongs
 to and the cells value. The data type will automatically be determed if you
 do not specify the :type option. The default style will be applied if you
-do not supply the :style option. Changing the cell's type will recast the
-value to the type specified. Altering the cell's value via the property
-accessor will also automatically cast the provided value to the cell's
-type.</p>
+do not supply the :style option. Changing the cell&#8217;s type will recast
+the value to the type specified. Altering the cell&#8217;s value via the
+property accessor will also automatically cast the provided value to the
+cell&#8217;s type.
+</p>
 
 
   </div>
@@ -120,23 +122,25 @@ type.</p>
   <div class="examples">
     <h3>Examples:</h3>
     
-      <h4><div class='inline'>
-<p>Manually creating and manipulating Cell objects</p>
+      <h4><div class='inline'><p>
+Manually creating and manipulating Cell objects
+</p>
 </div></h4>
-      <pre class="example code"><span class='id ws'>ws</span> <span class='op'>=</span> <span class='const'>Workbook</span><span class='period'>.</span><span class='id new'>new</span><span class='period'>.</span><span class='id add_worksheet'>add_worksheet</span> 
-<span class='comment'># This is the simple, and recommended way to create cells. Data types will automatically be determined for you.
-</span><span class='id ws'>ws</span><span class='period'>.</span><span class='id add_row'>add_row</span> <span class='symbol'>:values</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='int'>1</span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>fish</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='const'>Time</span><span class='period'>.</span><span class='id now'>now</span><span class='rbracket'>]</span>
+      <pre class="example code"><span class='ws identifier id'>ws</span> <span class='assign token'>=</span> <span class='Workbook constant id'>Workbook</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='dot token'>.</span><span class='add_worksheet identifier id'>add_worksheet</span> 
+<span class='comment val'># This is the simple, and recommended way to create cells. Data types will automatically be determined for you.</span>
+<span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span> <span class='symbol val'>:values</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='integer val'>1</span><span class='comma token'>,</span><span class='string val'>&quot;fish&quot;</span><span class='comma token'>,</span><span class='Time constant id'>Time</span><span class='dot token'>.</span><span class='now identifier id'>now</span><span class='rbrack token'>]</span>
 
-<span class='comment'># but you can also do this
-</span><span class='id r'>r</span> <span class='op'>=</span> <span class='id ws'>ws</span><span class='period'>.</span><span class='id add_row'>add_row</span>
-<span class='id r'>r</span><span class='period'>.</span><span class='id add_cell'>add_cell</span> <span class='int'>1</span>
+<span class='comment val'># but you can also do this</span>
+<span class='r identifier id'>r</span> <span class='assign token'>=</span> <span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span>
+<span class='r identifier id'>r</span><span class='dot token'>.</span><span class='add_cell identifier id'>add_cell</span> <span class='integer val'>1</span>
 
-<span class='comment'># or even this
-</span><span class='id r'>r</span> <span class='op'>=</span> <span class='id ws'>ws</span><span class='period'>.</span><span class='id add_row'>add_row</span>
-<span class='id c'>c</span> <span class='op'>=</span> <span class='const'>Cell</span><span class='period'>.</span><span class='id new'>new</span> <span class='id row'>row</span><span class='comma'>,</span> <span class='int'>1</span><span class='comma'>,</span> <span class='symbol'>:value</span><span class='op'>=&gt;</span><span class='id integer'>integer</span>
+<span class='comment val'># or even this</span>
+<span class='r identifier id'>r</span> <span class='assign token'>=</span> <span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='add_row identifier id'>add_row</span>
+<span class='c identifier id'>c</span> <span class='assign token'>=</span> <span class='Cell constant id'>Cell</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='row identifier id'>row</span><span class='comma token'>,</span> <span class='integer val'>1</span><span class='comma token'>,</span> <span class='symbol val'>:value=</span><span class='gt op'>&gt;</span><span class='integer identifier id'>integer</span>
 
-<span class='comment'># cells can also be accessed via Row#cells. The example here changes the cells type, which will automatically updated the value from 1 to 1.0
-</span><span class='id r'>r</span><span class='period'>.</span><span class='id cells'>cells</span><span class='period'>.</span><span class='id last'>last</span><span class='period'>.</span><span class='id type'>type</span> <span class='op'>=</span> <span class='symbol'>:float</span></pre>
+<span class='comment val'># cells can also be accessed via Row#cells. The example here changes the cells type, which will automatically updated the value from 1 to 1.0</span>
+<span class='r identifier id'>r</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span><span class='dot token'>.</span><span class='last identifier id'>last</span><span class='dot token'>.</span><span class='type identifier id'>type</span> <span class='assign token'>=</span> <span class='symbol val'>:float</span>
+</pre>
     
   </div>
 
@@ -172,8 +176,9 @@ type.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The row this cell belongs to.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The row this cell belongs to.
+</p>
 </div></span>
   
 </li>
@@ -198,8 +203,9 @@ type.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The index of the cellXfs item to be applied to this cell.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The index of the cellXfs item to be applied to this cell.
+</p>
 </div></span>
   
 </li>
@@ -224,8 +230,9 @@ type.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The cell's data type.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The cell&#8217;s data type.
+</p>
 </div></span>
   
 </li>
@@ -250,8 +257,9 @@ type.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The value of this cell.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The value of this cell.
+</p>
 </div></span>
   
 </li>
@@ -273,6 +281,78 @@ type.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#cast_value-instance_method" title="#cast_value (instance method)">- (Object) <strong>cast_value</strong>(v) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Cast the value into this cells data type.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cell_type_from_value-instance_method" title="#cell_type_from_value (instance method)">- (Symbol) <strong>cell_type_from_value</strong>(v) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Determines the cell type based on the cell value.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#col_ref-instance_method" title="#col_ref (instance method)">- (String) <strong>col_ref</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+converts the column index into alphabetical values.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#index-instance_method" title="#index (instance method)">- (Integer) <strong>index</strong> </a>
     
 
@@ -286,8 +366,9 @@ type.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The index of the cell in the containing row.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The index of the cell in the containing row.
+</p>
 </div></span>
   
 </li>
@@ -311,8 +392,9 @@ type.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>A new instance of Cell.</p>
+    <span class="summary_desc"><div class='inline'><p>
+A new instance of Cell.
+</p>
 </div></span>
   
 </li>
@@ -334,8 +416,9 @@ type.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The alpha(column)numeric(row) reference for this sell.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The alpha(column)numeric(row) reference for this sell.
+</p>
 </div></span>
   
 </li>
@@ -357,8 +440,9 @@ type.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The absolute alpha(column)numeric(row) reference for this sell.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The absolute alpha(column)numeric(row) reference for this sell.
+</p>
 </div></span>
   
 </li>
@@ -380,8 +464,9 @@ type.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Serializes the cell.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Serializes the cell.
+</p>
 </div></span>
   
 </li>
@@ -402,8 +487,9 @@ type.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>A new instance of Cell</p>
+    <p>
+A new instance of Cell
+</p>
 
 
   </div>
@@ -422,8 +508,9 @@ type.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>The row this cell belongs to.</p>
+        <div class='inline'><p>
+The row this cell belongs to.
+</p>
 </div>
       
     </li>
@@ -440,8 +527,9 @@ type.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>The value associated with this cell.</p>
+        <div class='inline'><p>
+The value associated with this cell.
+</p>
 </div>
       
     </li>
@@ -458,8 +546,9 @@ type.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>a customizable set of options</p>
+        <div class='inline'><p>
+a customizable set of options
+</p>
 </div>
       
     </li>
@@ -482,9 +571,10 @@ type.</p>
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'>
-<p>The intended data type for this cell. If not specified the data type will
-be determined internally based on the vlue provided.</p>
+          &mdash; <div class='inline'><p>
+The intended data type for this cell. If not specified the data type will
+be determined internally based on the vlue provided.
+</p>
 </div>
         </li>
       
@@ -494,9 +584,10 @@ be determined internally based on the vlue provided.</p>
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'>
-<p>The index of the cellXfs item to be applied to this cell. If not specified,
-the default style (0) will be applied.</p>
+          &mdash; <div class='inline'><p>
+The index of the cellXfs item to be applied to this cell. If not specified,
+the default style (0) will be applied.
+</p>
 </div>
         </li>
       
@@ -523,15 +614,16 @@ the default style (0) will be applied.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/cell.rb', line 69</span>
 
-<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id row'>row</span><span class='comma'>,</span> <span class='id value'>value</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='id row'>row</span><span class='op'>=</span><span class='id row'>row</span>
-  <span class='comment'>#reference for validation
-</span>  <span class='ivar'>@styles</span> <span class='op'>=</span> <span class='id row'>row</span><span class='period'>.</span><span class='id worksheet'>worksheet</span><span class='period'>.</span><span class='id workbook'>workbook</span><span class='period'>.</span><span class='id styles'>styles</span>
-  <span class='ivar'>@type</span><span class='op'>=</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:type</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id cell_type_from_value'>cell_type_from_value</span><span class='lparen'>(</span><span class='id value'>value</span><span class='rparen'>)</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='id style'>style</span> <span class='op'>=</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:style</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='int'>0</span> 
-  <span class='ivar'>@value</span> <span class='op'>=</span> <span class='id cast_value'>cast_value</span><span class='lparen'>(</span><span class='id value'>value</span><span class='rparen'>)</span>
-  <span class='ivar'>@row</span><span class='period'>.</span><span class='id cells'>cells</span> <span class='op'>&lt;&lt;</span> <span class='kw'>self</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='row identifier id'>row</span><span class='comma token'>,</span> <span class='value identifier id'>value</span><span class='assign token'>=</span><span class='string val'>&quot;&quot;</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='row identifier id'>row</span><span class='assign token'>=</span><span class='row identifier id'>row</span>
+  <span class='comment val'>#reference for validation</span>
+  <span class='@styles ivar id'>@styles</span> <span class='assign token'>=</span> <span class='row identifier id'>row</span><span class='dot token'>.</span><span class='worksheet identifier id'>worksheet</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span><span class='dot token'>.</span><span class='styles identifier id'>styles</span>
+  <span class='@type ivar id'>@type</span><span class='assign token'>=</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:type</span><span class='rbrack token'>]</span> <span class='orop op'>||</span> <span class='cell_type_from_value identifier id'>cell_type_from_value</span><span class='lparen token'>(</span><span class='value identifier id'>value</span><span class='rparen token'>)</span>
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='style identifier id'>style</span> <span class='assign token'>=</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:style</span><span class='rbrack token'>]</span> <span class='orop op'>||</span> <span class='integer val'>0</span> 
+  <span class='@value ivar id'>@value</span> <span class='assign token'>=</span> <span class='cast_value identifier id'>cast_value</span><span class='lparen token'>(</span><span class='value identifier id'>value</span><span class='rparen token'>)</span>
+  <span class='@row ivar id'>@row</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span> <span class='lshft op'>&lt;&lt;</span> <span class='self self kw'>self</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -554,8 +646,9 @@ the default style (0) will be applied.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The row this cell belongs to.</p>
+    <p>
+The row this cell belongs to.
+</p>
 
 
   </div>
@@ -589,9 +682,10 @@ the default style (0) will be applied.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/cell.rb', line 33</span>
 
-<span class='kw'>def</span> <span class='id row'>row</span>
-  <span class='ivar'>@row</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='row identifier id'>row</span>
+  <span class='@row ivar id'>@row</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -609,8 +703,9 @@ the default style (0) will be applied.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The index of the cellXfs item to be applied to this cell.</p>
+    <p>
+The index of the cellXfs item to be applied to this cell.
+</p>
 
 
   </div>
@@ -651,9 +746,10 @@ the default style (0) will be applied.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/cell.rb', line 29</span>
 
-<span class='kw'>def</span> <span class='id style'>style</span>
-  <span class='ivar'>@style</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='style identifier id'>style</span>
+  <span class='@style ivar id'>@style</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -674,22 +770,26 @@ the default style (0) will be applied.</p>
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'>
-<p>If the value provided cannot be cast into the type specified, type is
-changed to :string and the following logic is applied.</p>
-
-<pre class="code">:string to :integer or :float, type coversions always return 0 or 0.0    
-:string, :integer, or :float to :time conversions always return the original value as a string and set the cells type to :string.</pre>
-
-<p>No support is currently implemented for parsing time strings.</p>
+    <div class='inline'><p>
+If the value provided cannot be cast into the type specified, type is
+changed to :string and the following logic is applied.
+</p>
+<pre class="code">
+ <span class='symbol val'>:string</span> <span class='to identifier id'>to</span> <span class='symbol val'>:integer</span> <span class='or or kw'>or</span> <span class='symbol val'>:float</span><span class='comma token'>,</span> <span class='type identifier id'>type</span> <span class='coversions identifier id'>coversions</span> <span class='always identifier id'>always</span> <span class='return return kw'>return</span> <span class='integer val'>0</span> <span class='or or kw'>or</span> <span class='integer val'>0</span><span class='integer val'>.0</span>
+ <span class='symbol val'>:string</span><span class='comma token'>,</span> <span class='symbol val'>:integer</span><span class='comma token'>,</span> <span class='or or kw'>or</span> <span class='symbol val'>:float</span> <span class='to identifier id'>to</span> <span class='symbol val'>:time</span> <span class='conversions identifier id'>conversions</span> <span class='always identifier id'>always</span> <span class='return return kw'>return</span> <span class='the identifier id'>the</span> <span class='original identifier id'>original</span> <span class='value identifier id'>value</span> <span class='as identifier id'>as</span> <span class='a identifier id'>a</span> <span class='string identifier id'>string</span> <span class='and and kw'>and</span> <span class='set identifier id'>set</span> <span class='the identifier id'>the</span> <span class='cells identifier id'>cells</span> <span class='type identifier id'>type</span> <span class='to identifier id'>to</span> <span class='symbol val'>:string</span><span class='dot token'>.</span>
+</pre>
+<p>
+No support is currently implemented for parsing time strings.
+</p>
 </div>
   </div>
 
-
-<p>The cell's data type. Currently only four types are supported, :time,
+<p>
+The cell&#8217;s data type. Currently only four types are supported, :time,
 :float, :integer and :string. Changing the type for a cell will recast the
 value into that type. If no type option is specified in the constructor,
-the type is  automatically determed.</p>
+the type is automatically determed.
+</p>
 
 
   </div>
@@ -707,8 +807,9 @@ the type is  automatically determed.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>The type of data this cell’s value is cast to.</p>
+        <div class='inline'><p>
+The type of data this cell&#8217;s value is cast to.
+</p>
 </div>
       
     </li>
@@ -725,8 +826,9 @@ the type is  automatically determed.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>Cell.type must be one of [:time, :float, :integer, :string]</p>
+        <div class='inline'><p>
+Cell.type must be one of [:time, :float, :integer, :string]
+</p>
 </div>
       
     </li>
@@ -753,9 +855,10 @@ the type is  automatically determed.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/cell.rb', line 46</span>
 
-<span class='kw'>def</span> <span class='id type'>type</span>
-  <span class='ivar'>@type</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='type identifier id'>type</span>
+  <span class='@type ivar id'>@type</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -773,8 +876,9 @@ the type is  automatically determed.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The value of this cell.</p>
+    <p>
+The value of this cell.
+</p>
 
 
   </div>
@@ -792,8 +896,9 @@ the type is  automatically determed.</p>
       
       
         
-        <div class='inline'>
-<p>casted value based on cell’s type attribute.</p>
+        <div class='inline'><p>
+casted value based on cell&#8217;s type attribute.
+</p>
 </div>
       
     </li>
@@ -813,9 +918,10 @@ the type is  automatically determed.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/cell.rb', line 57</span>
 
-<span class='kw'>def</span> <span class='id value'>value</span>
-  <span class='ivar'>@value</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='value identifier id'>value</span>
+  <span class='@value ivar id'>@value</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -829,7 +935,377 @@ the type is  automatically determed.</p>
     
     
       <div class="method_details first">
-  <p class="signature first" id="index-instance_method">
+  <p class="signature first" id="cast_value-instance_method">
+  
+    - (<tt>Object</tt>) <strong>cast_value</strong>(v) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+About Time - Time in OOXML is <b>different</b> from what you might expect.
+The history as to why is interesting, but you can safely assume that if you
+are generating docs on a mac, you will want to specify Workbook.1904 as
+true when using time typed values.
+</p>
+</div>
+  </div>
+
+<p>
+Cast the value into this cells data type.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>Axlsx#date1904</li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/cell.rb', line 169</span>
+
+<span class='def def kw'>def</span> <span class='cast_value identifier id'>cast_value</span><span class='lparen token'>(</span><span class='v identifier id'>v</span><span class='rparen token'>)</span>
+  <span class='if if kw'>if</span> <span class='@type ivar id'>@type</span> <span class='eq op'>==</span> <span class='symbol val'>:time</span> <span class='andop op'>&amp;&amp;</span> <span class='v identifier id'>v</span><span class='dot token'>.</span><span class='is_a? fid id'>is_a?</span><span class='lparen token'>(</span><span class='Time constant id'>Time</span><span class='rparen token'>)</span>
+    <span class='comment val'>#todo consider a time parsing method to convert strings to time</span>
+    <span class='epoc identifier id'>epoc</span> <span class='assign token'>=</span> <span class='Workbook constant id'>Workbook</span><span class='dot token'>.</span><span class='date1904 identifier id'>date1904</span> <span class='integer val'>? </span><span class='Time constant id'>Time</span><span class='dot token'>.</span><span class='local identifier id'>local</span><span class='lparen token'>(</span><span class='integer val'>1904</span><span class='comma token'>,</span><span class='integer val'>1</span><span class='comma token'>,</span><span class='integer val'>1</span><span class='comma token'>,</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='v identifier id'>v</span><span class='dot token'>.</span><span class='zone identifier id'>zone</span><span class='rparen token'>)</span> <span class='colon op'>:</span> <span class='Time constant id'>Time</span><span class='dot token'>.</span><span class='local identifier id'>local</span><span class='lparen token'>(</span><span class='integer val'>1900</span><span class='comma token'>,</span><span class='integer val'>1</span><span class='comma token'>,</span><span class='integer val'>1</span><span class='comma token'>,</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='v identifier id'>v</span><span class='dot token'>.</span><span class='zone identifier id'>zone</span><span class='rparen token'>)</span>
+    <span class='lparen token'>(</span><span class='lparen token'>(</span><span class='v identifier id'>v</span> <span class='minus op'>-</span> <span class='epoc identifier id'>epoc</span><span class='rparen token'>)</span> <span class='div op'>/</span><span class='float val'>60.0</span><span class='div op'>/</span><span class='float val'>60.0</span><span class='div op'>/</span><span class='float val'>24.0</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='to_f identifier id'>to_f</span>
+  <span class='elsif elsif kw'>elsif</span> <span class='@type ivar id'>@type</span> <span class='eq op'>==</span> <span class='symbol val'>:float</span>
+    <span class='v identifier id'>v</span><span class='dot token'>.</span><span class='to_f identifier id'>to_f</span>
+  <span class='elsif elsif kw'>elsif</span> <span class='@type ivar id'>@type</span> <span class='eq op'>==</span> <span class='symbol val'>:integer</span>
+    <span class='v identifier id'>v</span><span class='dot token'>.</span><span class='to_i identifier id'>to_i</span>
+  <span class='else else kw'>else</span>
+    <span class='@type ivar id'>@type</span> <span class='assign token'>=</span> <span class='symbol val'>:string</span>
+    <span class='v identifier id'>v</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span>
+    <span class='comment val'># curious as to why this would be the cells responsibility</span>
+    <span class='comment val'># convert your values before passing them in wankers! CGI.unescapeHTML(v.to_s).to_xs</span>
+    <span class='comment val'># to revert, load this once when the gem is loaded.</span>
+    <span class='comment val'># unless String.method_defined? :to_xs</span>
+    <span class='comment val'>#   require 'fast_xs' #dep</span>
+    <span class='comment val'>#   class String</span>
+    <span class='comment val'>#     alias_method :to_xs, :fast_xs</span>
+    <span class='comment val'>#   end</span>
+    <span class='comment val'># end</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="cell_type_from_value-instance_method">
+  
+    - (<tt>Symbol</tt>) <strong>cell_type_from_value</strong>(v) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+This is only used when a cell is created but no :type option is specified,
+the following rules apply:
+</p>
+<ol>
+<li>If the value is an instance of Time, the type is set to :time
+
+</li>
+<li>:float and :integer types are determined by regular expression matching.
+
+</li>
+<li>Anything that does not meet either of the above is determined to be
+:string.
+
+</li>
+</ol>
+</div>
+  </div>
+
+<p>
+Determines the cell type based on the cell value.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The determined type
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/cell.rb', line 153</span>
+
+<span class='def def kw'>def</span> <span class='cell_type_from_value identifier id'>cell_type_from_value</span><span class='lparen token'>(</span><span class='v identifier id'>v</span><span class='rparen token'>)</span>      
+  <span class='if if kw'>if</span> <span class='v identifier id'>v</span><span class='dot token'>.</span><span class='is_a? fid id'>is_a?</span> <span class='Time constant id'>Time</span>
+    <span class='symbol val'>:time</span>
+  <span class='elsif elsif kw'>elsif</span> <span class='v identifier id'>v</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span><span class='dot token'>.</span><span class='match identifier id'>match</span><span class='lparen token'>(</span><span class='regexp val'>/\A[+-]?\d+?\Z/</span><span class='rparen token'>)</span> <span class='comment val'>#numeric</span>
+    <span class='symbol val'>:integer</span>
+  <span class='elsif elsif kw'>elsif</span> <span class='v identifier id'>v</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span><span class='dot token'>.</span><span class='match identifier id'>match</span><span class='lparen token'>(</span><span class='regexp val'>/\A[+-]?\d+\.\d+?\Z/</span><span class='rparen token'>)</span> <span class='comment val'>#float</span>
+    <span class='symbol val'>:float</span>
+  <span class='else else kw'>else</span>
+    <span class='symbol val'>:string</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="col_ref-instance_method">
+  
+    - (<tt>String</tt>) <strong>col_ref</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+This follows the standard spreadsheet convention of naming columns A to Z,
+followed by AA to AZ etc.
+</p>
+</div>
+  </div>
+
+<p>
+converts the column index into alphabetical values.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/cell.rb', line 136</span>
+
+<span class='def def kw'>def</span> <span class='col_ref identifier id'>col_ref</span>
+    <span class='chars identifier id'>chars</span> <span class='assign token'>=</span> <span class='lbrack token'>[</span><span class='rbrack token'>]</span>
+    <span class='index identifier id'>index</span> <span class='assign token'>=</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='index identifier id'>index</span>
+    <span class='while while kw'>while</span> <span class='index identifier id'>index</span> <span class='geq op'>&gt;=</span> <span class='integer val'>26</span> <span class='do do kw'>do</span>
+      <span class='chars identifier id'>chars</span> <span class='lshft op'>&lt;&lt;</span> <span class='lparen token'>(</span><span class='lparen token'>(</span><span class='index identifier id'>index</span> <span class='mod op'>%</span> <span class='integer val'>26</span><span class='rparen token'>)</span> <span class='plus op'>+</span> <span class='integer val'>65</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='chr identifier id'>chr</span>
+      <span class='index identifier id'>index</span> <span class='opasgn op'>/=</span> <span class='integer val'>26</span>
+    <span class='end end kw'>end</span>
+    <span class='chars identifier id'>chars</span> <span class='lshft op'>&lt;&lt;</span> <span class='lparen token'>(</span><span class='lparen token'>(</span><span class='chars identifier id'>chars</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span> <span class='integer val'>? </span><span class='index identifier id'>index</span> <span class='colon op'>:</span> <span class='index identifier id'>index</span><span class='minus op'>-</span><span class='integer val'>1</span><span class='rparen token'>)</span> <span class='plus op'>+</span> <span class='integer val'>65</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='chr identifier id'>chr</span>
+    <span class='chars identifier id'>chars</span><span class='dot token'>.</span><span class='reverse identifier id'>reverse</span><span class='dot token'>.</span><span class='join identifier id'>join</span>
+  <span class='end end kw'>end</span>
+
+  <span class='comment val'># Determines the cell type based on the cell value. </span>
+  <span class='comment val'># @note This is only used when a cell is created but no :type option is specified, the following rules apply:</span>
+  <span class='comment val'>#   1. If the value is an instance of Time, the type is set to :time</span>
+  <span class='comment val'>#   2. :float and :integer types are determined by regular expression matching.</span>
+  <span class='comment val'>#   3. Anything that does not meet either of the above is determined to be :string.</span>
+  <span class='comment val'># @return [Symbol] The determined type</span>
+  <span class='def def kw'>def</span> <span class='cell_type_from_value identifier id'>cell_type_from_value</span><span class='lparen token'>(</span><span class='v identifier id'>v</span><span class='rparen token'>)</span>      
+    <span class='if if kw'>if</span> <span class='v identifier id'>v</span><span class='dot token'>.</span><span class='is_a? fid id'>is_a?</span> <span class='Time constant id'>Time</span>
+      <span class='symbol val'>:time</span>
+    <span class='elsif elsif kw'>elsif</span> <span class='v identifier id'>v</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span><span class='dot token'>.</span><span class='match identifier id'>match</span><span class='lparen token'>(</span><span class='regexp val'>/\A[+-]?\d+?\Z/</span><span class='rparen token'>)</span> <span class='comment val'>#numeric</span>
+      <span class='symbol val'>:integer</span>
+    <span class='elsif elsif kw'>elsif</span> <span class='v identifier id'>v</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span><span class='dot token'>.</span><span class='match identifier id'>match</span><span class='lparen token'>(</span><span class='regexp val'>/\A[+-]?\d+\.\d+?\Z/</span><span class='rparen token'>)</span> <span class='comment val'>#float</span>
+      <span class='symbol val'>:float</span>
+    <span class='else else kw'>else</span>
+      <span class='symbol val'>:string</span>
+    <span class='end end kw'>end</span>
+  <span class='end end kw'>end</span>
+
+  <span class='comment val'># Cast the value into this cells data type. </span>
+  <span class='comment val'># @note </span>
+  <span class='comment val'>#   About Time - Time in OOXML is *different* from what you might expect. The history as to why is interesting,  but you can safely assume that if you are generating docs on a mac, you will want to specify Workbook.1904 as true when using time typed values.</span>
+  <span class='comment val'># @see Axlsx#date1904</span>
+  <span class='def def kw'>def</span> <span class='cast_value identifier id'>cast_value</span><span class='lparen token'>(</span><span class='v identifier id'>v</span><span class='rparen token'>)</span>
+    <span class='if if kw'>if</span> <span class='@type ivar id'>@type</span> <span class='eq op'>==</span> <span class='symbol val'>:time</span> <span class='andop op'>&amp;&amp;</span> <span class='v identifier id'>v</span><span class='dot token'>.</span><span class='is_a? fid id'>is_a?</span><span class='lparen token'>(</span><span class='Time constant id'>Time</span><span class='rparen token'>)</span>
+      <span class='comment val'>#todo consider a time parsing method to convert strings to time</span>
+      <span class='epoc identifier id'>epoc</span> <span class='assign token'>=</span> <span class='Workbook constant id'>Workbook</span><span class='dot token'>.</span><span class='date1904 identifier id'>date1904</span> <span class='integer val'>? </span><span class='Time constant id'>Time</span><span class='dot token'>.</span><span class='local identifier id'>local</span><span class='lparen token'>(</span><span class='integer val'>1904</span><span class='comma token'>,</span><span class='integer val'>1</span><span class='comma token'>,</span><span class='integer val'>1</span><span class='comma token'>,</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='v identifier id'>v</span><span class='dot token'>.</span><span class='zone identifier id'>zone</span><span class='rparen token'>)</span> <span class='colon op'>:</span> <span class='Time constant id'>Time</span><span class='dot token'>.</span><span class='local identifier id'>local</span><span class='lparen token'>(</span><span class='integer val'>1900</span><span class='comma token'>,</span><span class='integer val'>1</span><span class='comma token'>,</span><span class='integer val'>1</span><span class='comma token'>,</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='integer val'>0</span><span class='comma token'>,</span><span class='v identifier id'>v</span><span class='dot token'>.</span><span class='zone identifier id'>zone</span><span class='rparen token'>)</span>
+      <span class='lparen token'>(</span><span class='lparen token'>(</span><span class='v identifier id'>v</span> <span class='minus op'>-</span> <span class='epoc identifier id'>epoc</span><span class='rparen token'>)</span> <span class='div op'>/</span><span class='float val'>60.0</span><span class='div op'>/</span><span class='float val'>60.0</span><span class='div op'>/</span><span class='float val'>24.0</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='to_f identifier id'>to_f</span>
+    <span class='elsif elsif kw'>elsif</span> <span class='@type ivar id'>@type</span> <span class='eq op'>==</span> <span class='symbol val'>:float</span>
+      <span class='v identifier id'>v</span><span class='dot token'>.</span><span class='to_f identifier id'>to_f</span>
+    <span class='elsif elsif kw'>elsif</span> <span class='@type ivar id'>@type</span> <span class='eq op'>==</span> <span class='symbol val'>:integer</span>
+      <span class='v identifier id'>v</span><span class='dot token'>.</span><span class='to_i identifier id'>to_i</span>
+    <span class='else else kw'>else</span>
+      <span class='@type ivar id'>@type</span> <span class='assign token'>=</span> <span class='symbol val'>:string</span>
+      <span class='v identifier id'>v</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span>
+      <span class='comment val'># curious as to why this would be the cells responsibility</span>
+      <span class='comment val'># convert your values before passing them in wankers! CGI.unescapeHTML(v.to_s).to_xs</span>
+      <span class='comment val'># to revert, load this once when the gem is loaded.</span>
+      <span class='comment val'># unless String.method_defined? :to_xs</span>
+      <span class='comment val'>#   require 'fast_xs' #dep</span>
+      <span class='comment val'>#   class String</span>
+      <span class='comment val'>#     alias_method :to_xs, :fast_xs</span>
+      <span class='comment val'>#   end</span>
+      <span class='comment val'># end</span>
+    <span class='end end kw'>end</span>
+  <span class='end end kw'>end</span>    
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="index-instance_method">
   
     - (<tt>Integer</tt>) <strong>index</strong> 
   
@@ -837,8 +1313,9 @@ the type is  automatically determed.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The index of the cell in the containing row.</p>
+    <p>
+The index of the cell in the containing row.
+</p>
 
 
   </div>
@@ -856,8 +1333,9 @@ the type is  automatically determed.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>The index of the cell in the containing row.</p>
+        <div class='inline'><p>
+The index of the cell in the containing row.
+</p>
 </div>
       
     </li>
@@ -877,9 +1355,10 @@ the type is  automatically determed.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/cell.rb', line 80</span>
 
-<span class='kw'>def</span> <span class='id index'>index</span>
-  <span class='ivar'>@row</span><span class='period'>.</span><span class='id cells'>cells</span><span class='period'>.</span><span class='id index'>index</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='index identifier id'>index</span>
+  <span class='@row ivar id'>@row</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span><span class='dot token'>.</span><span class='index identifier id'>index</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -894,8 +1373,9 @@ the type is  automatically determed.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The alpha(column)numeric(row) reference for this sell.</p>
+    <p>
+The alpha(column)numeric(row) reference for this sell.
+</p>
 
 
   </div>
@@ -905,10 +1385,12 @@ the type is  automatically determed.</p>
   <div class="examples">
     <h3>Examples:</h3>
     
-      <h4><div class='inline'>
-<p>Relative Cell Reference</p>
+      <h4><div class='inline'><p>
+Relative Cell Reference
+</p>
 </div></h4>
-      <pre class="example code"><span class='id ws'>ws</span><span class='period'>.</span><span class='id rows'>rows</span><span class='period'>.</span><span class='id first'>first</span><span class='period'>.</span><span class='id cells'>cells</span><span class='period'>.</span><span class='id first'>first</span><span class='period'>.</span><span class='id r'>r</span> <span class='comment'>#=&gt; &quot;A1&quot; </span></pre>
+      <pre class="example code"><span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span><span class='dot token'>.</span><span class='first identifier id'>first</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span><span class='dot token'>.</span><span class='first identifier id'>first</span><span class='dot token'>.</span><span class='r identifier id'>r</span> <span class='comment val'>#=&gt; &quot;A1&quot; </span>
+</pre>
     
   </div>
 
@@ -923,8 +1405,9 @@ the type is  automatically determed.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>The alpha(column)numeric(row) reference for this sell.</p>
+        <div class='inline'><p>
+The alpha(column)numeric(row) reference for this sell.
+</p>
 </div>
       
     </li>
@@ -944,9 +1427,10 @@ the type is  automatically determed.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/cell.rb', line 87</span>
 
-<span class='kw'>def</span> <span class='id r'>r</span>
-  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id col_ref'>col_ref</span><span class='rbrace'>}</span><span class='embexpr_beg'>#{</span><span class='ivar'>@row</span><span class='period'>.</span><span class='id index'>index</span><span class='op'>+</span><span class='int'>1</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>      
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='r identifier id'>r</span>
+  <span class='dstring node'>&quot;#{col_ref}#{@row.index+1}&quot;</span>      
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -961,8 +1445,9 @@ the type is  automatically determed.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The absolute alpha(column)numeric(row) reference for this sell.</p>
+    <p>
+The absolute alpha(column)numeric(row) reference for this sell.
+</p>
 
 
   </div>
@@ -972,10 +1457,12 @@ the type is  automatically determed.</p>
   <div class="examples">
     <h3>Examples:</h3>
     
-      <h4><div class='inline'>
-<p>Absolute Cell Reference</p>
+      <h4><div class='inline'><p>
+Absolute Cell Reference
+</p>
 </div></h4>
-      <pre class="example code"><span class='id ws'>ws</span><span class='period'>.</span><span class='id rows'>rows</span><span class='period'>.</span><span class='id first'>first</span><span class='period'>.</span><span class='id cells'>cells</span><span class='period'>.</span><span class='id first'>first</span><span class='period'>.</span><span class='id r'>r</span> <span class='comment'>#=&gt; &quot;$A$1&quot; </span></pre>
+      <pre class="example code"><span class='ws identifier id'>ws</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span><span class='dot token'>.</span><span class='first identifier id'>first</span><span class='dot token'>.</span><span class='cells identifier id'>cells</span><span class='dot token'>.</span><span class='first identifier id'>first</span><span class='dot token'>.</span><span class='r identifier id'>r</span> <span class='comment val'>#=&gt; &quot;$A$1&quot; </span>
+</pre>
     
   </div>
 
@@ -990,8 +1477,9 @@ the type is  automatically determed.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>The absolute alpha(column)numeric(row) reference for this sell.</p>
+        <div class='inline'><p>
+The absolute alpha(column)numeric(row) reference for this sell.
+</p>
 </div>
       
     </li>
@@ -1011,9 +1499,10 @@ the type is  automatically determed.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/cell.rb', line 94</span>
 
-<span class='kw'>def</span> <span class='id r_abs'>r_abs</span>
-  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>$</span><span class='embexpr_beg'>#{</span><span class='id r'>r</span><span class='period'>.</span><span class='id split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>$</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='r_abs identifier id'>r_abs</span>
+  <span class='dstring node'>&quot;$#{r.split('').join('$')}&quot;</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -1031,14 +1520,16 @@ the type is  automatically determed.</p>
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'>
-<p>Shared Strings are not used in this library. All values are set directly in
-the each sheet.</p>
+    <div class='inline'><p>
+Shared Strings are not used in this library. All values are set directly in
+the each sheet.
+</p>
 </div>
   </div>
 
-
-<p>Serializes the cell</p>
+<p>
+Serializes the cell
+</p>
 
 
   </div>
@@ -1057,8 +1548,9 @@ the each sheet.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>The document builder instance this objects xml will be added to.</p>
+        <div class='inline'><p>
+The document builder instance this objects xml will be added to.
+</p>
 </div>
       
     </li>
@@ -1076,8 +1568,9 @@ the each sheet.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>xml text for the cell</p>
+        <div class='inline'><p>
+xml text for the cell
+</p>
 </div>
       
     </li>
@@ -1106,18 +1599,19 @@ the each sheet.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/cell.rb', line 114</span>
 
-<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
-  <span class='comment'># Both 1.8 and 1.9 return the same 'fast_xf'
-</span>  <span class='comment'># &amp;#12491;&amp;#12507;&amp;#12531;&amp;#12468;
-</span>  <span class='comment'># &amp;#12491;&amp;#12507;&amp;#12531;&amp;#12468;
-</span>  
-  <span class='comment'># however nokogiri does a nice 'force_encoding' which we shall remove!
-</span>  <span class='kw'>if</span> <span class='ivar'>@type</span> <span class='op'>==</span> <span class='symbol'>:string</span> 
-    <span class='id xml'>xml</span><span class='period'>.</span><span class='id c'>c</span><span class='lparen'>(</span><span class='symbol'>:r</span> <span class='op'>=&gt;</span> <span class='id r'>r</span><span class='comma'>,</span> <span class='symbol'>:t</span><span class='op'>=&gt;</span><span class='symbol'>:inlineStr</span><span class='comma'>,</span> <span class='symbol'>:s</span><span class='op'>=&gt;</span><span class='id style'>style</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id xml'>xml</span><span class='period'>.</span><span class='id is'>is</span> <span class='lbrace'>{</span> <span class='id xml'>xml</span><span class='period'>.</span><span class='id t'>t</span> <span class='ivar'>@value</span><span class='period'>.</span><span class='id to_s'>to_s</span> <span class='rbrace'>}</span> <span class='rbrace'>}</span>
-  <span class='kw'>else</span>
-    <span class='id xml'>xml</span><span class='period'>.</span><span class='id c'>c</span><span class='lparen'>(</span><span class='symbol'>:r</span> <span class='op'>=&gt;</span> <span class='id r'>r</span><span class='comma'>,</span> <span class='symbol'>:s</span> <span class='op'>=&gt;</span> <span class='id style'>style</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id xml'>xml</span><span class='period'>.</span><span class='id v'>v</span> <span class='id value'>value</span> <span class='rbrace'>}</span>
-  <span class='kw'>end</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+  <span class='comment val'># Both 1.8 and 1.9 return the same 'fast_xf'</span>
+  <span class='comment val'># &amp;#12491;&amp;#12507;&amp;#12531;&amp;#12468;</span>
+  <span class='comment val'># &amp;#12491;&amp;#12507;&amp;#12531;&amp;#12468;</span>
+  
+  <span class='comment val'># however nokogiri does a nice 'force_encoding' which we shall remove!</span>
+  <span class='if if kw'>if</span> <span class='@type ivar id'>@type</span> <span class='eq op'>==</span> <span class='symbol val'>:string</span> 
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='c identifier id'>c</span><span class='lparen token'>(</span><span class='symbol val'>:r</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='r identifier id'>r</span><span class='comma token'>,</span> <span class='symbol val'>:t=</span><span class='gt op'>&gt;</span><span class='symbol val'>:inlineStr</span><span class='comma token'>,</span> <span class='symbol val'>:s=</span><span class='gt op'>&gt;</span><span class='style identifier id'>style</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span> <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='is identifier id'>is</span> <span class='lbrace token'>{</span> <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='t identifier id'>t</span> <span class='@value ivar id'>@value</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span> <span class='rbrace token'>}</span> <span class='rbrace token'>}</span>
+  <span class='else else kw'>else</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='c identifier id'>c</span><span class='lparen token'>(</span><span class='symbol val'>:r</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='r identifier id'>r</span><span class='comma token'>,</span> <span class='symbol val'>:s</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='style identifier id'>style</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span> <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='v identifier id'>v</span> <span class='value identifier id'>value</span> <span class='rbrace token'>}</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -1128,9 +1622,9 @@ the each sheet.</p>
 </div>
     
     <div id="footer">
-  Generated on Sun Nov 27 20:28:15 2011 by 
+  Generated on Sun Nov 27 21:44:41 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.9.3).
+  0.7.3 (ruby-1.8.7).
 </div>
 
   </body>

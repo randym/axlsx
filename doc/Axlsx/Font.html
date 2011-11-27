@@ -97,13 +97,15 @@
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'>
-<p>The recommended way to manage fonts, and other styles is Styles#add_style</p>
+    <div class='inline'><p>
+The recommended way to manage fonts, and other styles is Styles#add_style
+</p>
 </div>
   </div>
 
-
-<p>The Font class details a font instance for use in styling cells.</p>
+<p>
+The Font class details a font instance for use in styling cells.
+</p>
 
 
   </div>
@@ -142,8 +144,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Indicates if the font should be rendered in <b>bold</b>.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Indicates if the font should be rendered in <b>bold</b>.
+</p>
 </div></span>
   
 </li>
@@ -168,8 +171,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The charset of the font.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The charset of the font.
+</p>
 </div></span>
   
 </li>
@@ -194,8 +198,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The color of the font.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The color of the font.
+</p>
 </div></span>
   
 </li>
@@ -220,8 +225,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Indicates if the font should be condensed.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Indicates if the font should be condensed.
+</p>
 </div></span>
   
 </li>
@@ -246,8 +252,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The font's extend property.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The font&#8217;s extend property.
+</p>
 </div></span>
   
 </li>
@@ -272,8 +279,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The font's family.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The font&#8217;s family.
+</p>
 </div></span>
   
 </li>
@@ -298,8 +306,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Indicates if the font should be rendered italicized.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Indicates if the font should be rendered italicized.
+</p>
 </div></span>
   
 </li>
@@ -324,8 +333,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The name of the font.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The name of the font.
+</p>
 </div></span>
   
 </li>
@@ -350,8 +360,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Indicates if the font should be rendered with an outline.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Indicates if the font should be rendered with an outline.
+</p>
 </div></span>
   
 </li>
@@ -376,8 +387,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Indicates if the font should be rendered with a shadow.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Indicates if the font should be rendered with a shadow.
+</p>
 </div></span>
   
 </li>
@@ -402,8 +414,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Indicates if the font should be rendered with a strikthrough.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Indicates if the font should be rendered with a strikthrough.
+</p>
 </div></span>
   
 </li>
@@ -428,8 +441,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The size of the font.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The size of the font.
+</p>
 </div></span>
   
 </li>
@@ -466,8 +480,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Creates a new Font.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Creates a new Font.
+</p>
 </div></span>
   
 </li>
@@ -489,8 +504,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Serializes the fill.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Serializes the fill.
+</p>
 </div></span>
   
 </li>
@@ -511,8 +527,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Creates a new Font</p>
+    <p>
+Creates a new Font
+</p>
 
 
   </div>
@@ -533,8 +550,9 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>a customizable set of options</p>
+        <div class='inline'><p>
+a customizable set of options
+</p>
 </div>
       
     </li>
@@ -683,11 +701,12 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/font.rb', line 98</span>
 
-<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='id options'>options</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id o'>o</span><span class='op'>|</span>
-    <span class='kw'>self</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span> <span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
-  <span class='kw'>end</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='o identifier id'>o</span><span class='bitor op'>|</span>
+    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='dstring node'>&quot;#{o[0]}=&quot;</span><span class='comma token'>,</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>0</span><span class='rbrack token'>]</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -710,8 +729,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Indicates if the font should be rendered in <b>bold</b></p>
+    <p>
+Indicates if the font should be rendered in <b>bold</b>
+</p>
 
 
   </div>
@@ -745,9 +765,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/font.rb', line 50</span>
 
-<span class='kw'>def</span> <span class='id b'>b</span>
-  <span class='ivar'>@b</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='b identifier id'>b</span>
+  <span class='@b ivar id'>@b</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -768,34 +789,37 @@
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'>
-<p>The following values are defined in the OOXML specification and are OS
-dependant values</p>
-
-<pre class="code">0   ANSI_CHARSET
-1   DEFAULT_CHARSET
-2   SYMBOL_CHARSET
-77  MAC_CHARSET
-128 SHIFTJIS_CHARSET
-129 HANGUL_CHARSET
-130 JOHAB_CHARSET
-134 GB2312_CHARSET
-136 CHINESEBIG5_CHARSET
-161 GREEK_CHARSET
-162 TURKISH_CHARSET
-163 VIETNAMESE_CHARSET
-177 HEBREW_CHARSET
-178 ARABIC_CHARSET
-186 BALTIC_CHARSET
-204 RUSSIAN_CHARSET
-222 THAI_CHARSET
-238 EASTEUROPE_CHARSET
-255 OEM_CHARSET</pre>
+    <div class='inline'><p>
+The following values are defined in the OOXML specification and are OS
+dependant values
+</p>
+<pre class="code">
+ <span class='integer val'>0</span>   <span class='ANSI_CHARSET constant id'>ANSI_CHARSET</span>
+ <span class='integer val'>1</span>   <span class='DEFAULT_CHARSET constant id'>DEFAULT_CHARSET</span>
+ <span class='integer val'>2</span>   <span class='SYMBOL_CHARSET constant id'>SYMBOL_CHARSET</span>
+ <span class='integer val'>77</span>  <span class='MAC_CHARSET constant id'>MAC_CHARSET</span>
+ <span class='integer val'>128</span> <span class='SHIFTJIS_CHARSET constant id'>SHIFTJIS_CHARSET</span>
+ <span class='integer val'>129</span> <span class='HANGUL_CHARSET constant id'>HANGUL_CHARSET</span>
+ <span class='integer val'>130</span> <span class='JOHAB_CHARSET constant id'>JOHAB_CHARSET</span>
+ <span class='integer val'>134</span> <span class='GB2312_CHARSET constant id'>GB2312_CHARSET</span>
+ <span class='integer val'>136</span> <span class='CHINESEBIG5_CHARSET constant id'>CHINESEBIG5_CHARSET</span>
+ <span class='integer val'>161</span> <span class='GREEK_CHARSET constant id'>GREEK_CHARSET</span>
+ <span class='integer val'>162</span> <span class='TURKISH_CHARSET constant id'>TURKISH_CHARSET</span>
+ <span class='integer val'>163</span> <span class='VIETNAMESE_CHARSET constant id'>VIETNAMESE_CHARSET</span>
+ <span class='integer val'>177</span> <span class='HEBREW_CHARSET constant id'>HEBREW_CHARSET</span>
+ <span class='integer val'>178</span> <span class='ARABIC_CHARSET constant id'>ARABIC_CHARSET</span>
+ <span class='integer val'>186</span> <span class='BALTIC_CHARSET constant id'>BALTIC_CHARSET</span>
+ <span class='integer val'>204</span> <span class='RUSSIAN_CHARSET constant id'>RUSSIAN_CHARSET</span>
+ <span class='integer val'>222</span> <span class='THAI_CHARSET constant id'>THAI_CHARSET</span>
+ <span class='integer val'>238</span> <span class='EASTEUROPE_CHARSET constant id'>EASTEUROPE_CHARSET</span>
+ <span class='integer val'>255</span> <span class='OEM_CHARSET constant id'>OEM_CHARSET</span>
+</pre>
 </div>
   </div>
 
-
-<p>The charset of the font</p>
+<p>
+The charset of the font
+</p>
 
 
   </div>
@@ -829,9 +853,10 @@ dependant values</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/font.rb', line 33</span>
 
-<span class='kw'>def</span> <span class='id charset'>charset</span>
-  <span class='ivar'>@charset</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='charset identifier id'>charset</span>
+  <span class='@charset ivar id'>@charset</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -849,8 +874,9 @@ dependant values</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The color of the font</p>
+    <p>
+The color of the font
+</p>
 
 
   </div>
@@ -884,9 +910,10 @@ dependant values</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/font.rb', line 78</span>
 
-<span class='kw'>def</span> <span class='id color'>color</span>
-  <span class='ivar'>@color</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='color identifier id'>color</span>
+  <span class='@color ivar id'>@color</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -904,8 +931,9 @@ dependant values</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Indicates if the font should be condensed</p>
+    <p>
+Indicates if the font should be condensed
+</p>
 
 
   </div>
@@ -939,9 +967,10 @@ dependant values</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/font.rb', line 70</span>
 
-<span class='kw'>def</span> <span class='id condense'>condense</span>
-  <span class='ivar'>@condense</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='condense identifier id'>condense</span>
+  <span class='@condense ivar id'>@condense</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -959,8 +988,9 @@ dependant values</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The font's extend property</p>
+    <p>
+The font&#8217;s extend property
+</p>
 
 
   </div>
@@ -994,9 +1024,10 @@ dependant values</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/font.rb', line 74</span>
 
-<span class='kw'>def</span> <span class='id extend'>extend</span>
-  <span class='ivar'>@extend</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='extend identifier id'>extend</span>
+  <span class='@extend ivar id'>@extend</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -1017,21 +1048,24 @@ dependant values</p>
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'>
-<p>The following are defined OOXML specification</p>
-
-<pre class="code">0 Not applicable.
-1 Roman
-2 Swiss
-3 Modern
-4 Script
-5 Decorative
-6..14 Reserved for future use</pre>
+    <div class='inline'><p>
+The following are defined OOXML specification
+</p>
+<pre class="code">
+ <span class='integer val'>0</span> <span class='Not constant id'>Not</span> <span class='applicable identifier id'>applicable</span><span class='dot token'>.</span>
+ <span class='integer val'>1</span> <span class='Roman constant id'>Roman</span>
+ <span class='integer val'>2</span> <span class='Swiss constant id'>Swiss</span>
+ <span class='integer val'>3</span> <span class='Modern constant id'>Modern</span>
+ <span class='integer val'>4</span> <span class='Script constant id'>Script</span>
+ <span class='integer val'>5</span> <span class='Decorative constant id'>Decorative</span>
+ <span class='float val'>6</span><span class='dot2 op'>..</span><span class='integer val'>14</span> <span class='Reserved constant id'>Reserved</span> <span class='for for kw'>for</span> <span class='future identifier id'>future</span> <span class='use identifier id'>use</span>
+</pre>
 </div>
   </div>
 
-
-<p>The font's family</p>
+<p>
+The font&#8217;s family
+</p>
 
 
   </div>
@@ -1065,9 +1099,10 @@ dependant values</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/font.rb', line 46</span>
 
-<span class='kw'>def</span> <span class='id family'>family</span>
-  <span class='ivar'>@family</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='family identifier id'>family</span>
+  <span class='@family ivar id'>@family</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -1085,8 +1120,9 @@ dependant values</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Indicates if the font should be rendered italicized</p>
+    <p>
+Indicates if the font should be rendered italicized
+</p>
 
 
   </div>
@@ -1120,9 +1156,10 @@ dependant values</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/font.rb', line 54</span>
 
-<span class='kw'>def</span> <span class='id i'>i</span>
-  <span class='ivar'>@i</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='i identifier id'>i</span>
+  <span class='@i ivar id'>@i</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -1140,8 +1177,9 @@ dependant values</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The name of the font</p>
+    <p>
+The name of the font
+</p>
 
 
   </div>
@@ -1175,9 +1213,10 @@ dependant values</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/font.rb', line 8</span>
 
-<span class='kw'>def</span> <span class='id name'>name</span>
-  <span class='ivar'>@name</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='name identifier id'>name</span>
+  <span class='@name ivar id'>@name</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -1195,8 +1234,9 @@ dependant values</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Indicates if the font should be rendered with an outline</p>
+    <p>
+Indicates if the font should be rendered with an outline
+</p>
 
 
   </div>
@@ -1230,9 +1270,10 @@ dependant values</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/font.rb', line 62</span>
 
-<span class='kw'>def</span> <span class='id outline'>outline</span>
-  <span class='ivar'>@outline</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='outline identifier id'>outline</span>
+  <span class='@outline ivar id'>@outline</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -1250,8 +1291,9 @@ dependant values</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Indicates if the font should be rendered with a shadow</p>
+    <p>
+Indicates if the font should be rendered with a shadow
+</p>
 
 
   </div>
@@ -1285,9 +1327,10 @@ dependant values</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/font.rb', line 66</span>
 
-<span class='kw'>def</span> <span class='id shadow'>shadow</span>
-  <span class='ivar'>@shadow</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='shadow identifier id'>shadow</span>
+  <span class='@shadow ivar id'>@shadow</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -1305,8 +1348,9 @@ dependant values</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Indicates if the font should be rendered with a strikthrough</p>
+    <p>
+Indicates if the font should be rendered with a strikthrough
+</p>
 
 
   </div>
@@ -1340,9 +1384,10 @@ dependant values</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/font.rb', line 58</span>
 
-<span class='kw'>def</span> <span class='id strike'>strike</span>
-  <span class='ivar'>@strike</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='strike identifier id'>strike</span>
+  <span class='@strike ivar id'>@strike</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -1360,8 +1405,9 @@ dependant values</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The size of the font.</p>
+    <p>
+The size of the font.
+</p>
 
 
   </div>
@@ -1395,9 +1441,10 @@ dependant values</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/font.rb', line 82</span>
 
-<span class='kw'>def</span> <span class='id sz'>sz</span>
-  <span class='ivar'>@sz</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='sz identifier id'>sz</span>
+  <span class='@sz ivar id'>@sz</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -1419,8 +1466,9 @@ dependant values</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Serializes the fill</p>
+    <p>
+Serializes the fill
+</p>
 
 
   </div>
@@ -1439,8 +1487,9 @@ dependant values</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>The document builder instance this objects xml will be added to.</p>
+        <div class='inline'><p>
+The document builder instance this objects xml will be added to.
+</p>
 </div>
       
     </li>
@@ -1478,13 +1527,14 @@ dependant values</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/font.rb', line 131</span>
 
-<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
-  <span class='id xml'>xml</span><span class='period'>.</span><span class='id font'>font</span> <span class='lbrace'>{</span>
-    <span class='kw'>self</span><span class='period'>.</span><span class='id instance_values'>instance_values</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id k'>k</span><span class='comma'>,</span> <span class='id v'>v</span><span class='op'>|</span>
-      <span class='id v'>v</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Color</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id v'>v</span><span class='period'>.</span><span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='id k'>k</span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='symbol'>:val</span> <span class='op'>=&gt;</span> <span class='id v'>v</span><span class='rbrace'>}</span><span class='rparen'>)</span>            
-    <span class='kw'>end</span>
-  <span class='rbrace'>}</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='font identifier id'>font</span> <span class='lbrace token'>{</span>
+    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='instance_values identifier id'>instance_values</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='k identifier id'>k</span><span class='comma token'>,</span> <span class='v identifier id'>v</span><span class='bitor op'>|</span>
+      <span class='v identifier id'>v</span><span class='dot token'>.</span><span class='is_a? fid id'>is_a?</span><span class='lparen token'>(</span><span class='Color constant id'>Color</span><span class='rparen token'>)</span> <span class='question op'>?</span> <span class='v identifier id'>v</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span> <span class='colon op'>:</span> <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='k identifier id'>k</span><span class='comma token'>,</span> <span class='lbrace token'>{</span><span class='symbol val'>:val</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='v identifier id'>v</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>            
+    <span class='end end kw'>end</span>
+  <span class='rbrace token'>}</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -1495,9 +1545,9 @@ dependant values</p>
 </div>
     
     <div id="footer">
-  Generated on Sun Nov 27 20:28:13 2011 by 
+  Generated on Sun Nov 27 21:44:31 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.9.3).
+  0.7.3 (ruby-1.8.7).
 </div>
 
   </body>

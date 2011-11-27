@@ -94,8 +94,9 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>The GradientStop object represents a color point in a gradient.</p>
+    <p>
+The GradientStop object represents a color point in a gradient.
+</p>
 
 
   </div>
@@ -134,8 +135,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The color for this gradient stop.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The color for this gradient stop.
+</p>
 </div></span>
   
 </li>
@@ -160,8 +162,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The position of the color.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The position of the color.
+</p>
 </div></span>
   
 </li>
@@ -198,8 +201,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Creates a new GradientStop object.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Creates a new GradientStop object.
+</p>
 </div></span>
   
 </li>
@@ -221,8 +225,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Serializes the gradientStop.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Serializes the gradientStop.
+</p>
 </div></span>
   
 </li>
@@ -243,8 +248,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Creates a new GradientStop object</p>
+    <p>
+Creates a new GradientStop object
+</p>
 
 
   </div>
@@ -292,10 +298,11 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/gradient_stop.rb', line 18</span>
 
-<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id color'>color</span><span class='comma'>,</span> <span class='id position'>position</span><span class='rparen'>)</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='id color'>color</span> <span class='op'>=</span> <span class='id color'>color</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='id position'>position</span> <span class='op'>=</span> <span class='id position'>position</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='color identifier id'>color</span><span class='comma token'>,</span> <span class='position identifier id'>position</span><span class='rparen token'>)</span>
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='color identifier id'>color</span> <span class='assign token'>=</span> <span class='color identifier id'>color</span>
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='position identifier id'>position</span> <span class='assign token'>=</span> <span class='position identifier id'>position</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -318,8 +325,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The color for this gradient stop</p>
+    <p>
+The color for this gradient stop
+</p>
 
 
   </div>
@@ -360,9 +368,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/gradient_stop.rb', line 9</span>
 
-<span class='kw'>def</span> <span class='id color'>color</span>
-  <span class='ivar'>@color</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='color identifier id'>color</span>
+  <span class='@color ivar id'>@color</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -380,8 +389,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The position of the color</p>
+    <p>
+The position of the color
+</p>
 
 
   </div>
@@ -415,9 +425,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/gradient_stop.rb', line 13</span>
 
-<span class='kw'>def</span> <span class='id position'>position</span>
-  <span class='ivar'>@position</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='position identifier id'>position</span>
+  <span class='@position ivar id'>@position</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -439,8 +450,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Serializes the gradientStop</p>
+    <p>
+Serializes the gradientStop
+</p>
 
 
   </div>
@@ -459,8 +471,9 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The document builder instance this objects xml will be added to.</p>
+        <div class='inline'><p>
+The document builder instance this objects xml will be added to.
+</p>
 </div>
       
     </li>
@@ -492,7 +505,8 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/gradient_stop.rb', line 31</span>
 
-<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span> <span class='id xml'>xml</span><span class='period'>.</span><span class='id stop'>stop</span><span class='lparen'>(</span><span class='symbol'>:position</span> <span class='op'>=&gt;</span> <span class='kw'>self</span><span class='period'>.</span><span class='id position'>position</span><span class='rparen'>)</span> <span class='lbrace'>{</span><span class='kw'>self</span><span class='period'>.</span><span class='id color'>color</span><span class='period'>.</span><span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span><span class='rbrace'>}</span> <span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span> <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='stop identifier id'>stop</span><span class='lparen token'>(</span><span class='symbol val'>:position</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='position identifier id'>position</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span><span class='self self kw'>self</span><span class='dot token'>.</span><span class='color identifier id'>color</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span><span class='rbrace token'>}</span> <span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -503,9 +517,9 @@
 </div>
     
     <div id="footer">
-  Generated on Sun Nov 27 20:28:16 2011 by 
+  Generated on Sun Nov 27 21:44:29 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.9.3).
+  0.7.3 (ruby-1.8.7).
 </div>
 
   </body>

@@ -94,8 +94,9 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>3D attributes for a chart.</p>
+    <p>
+3D attributes for a chart.
+</p>
 
 
   </div>
@@ -111,8 +112,9 @@
         <dt id="H_PERCENT_REGEX-constant" class="">H_PERCENT_REGEX =
           <div class="docstring">
   <div class="discussion">
-    
-<p>Validation for hPercent</p>
+    <p>
+Validation for hPercent
+</p>
 
 
   </div>
@@ -122,13 +124,15 @@
 
 </div>
         </dt>
-        <dd><pre class="code"><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>0*(([5-9])|([1-9][0-9])|([1-4][0-9][0-9])|500)%</span><span class='regexp_end'>/</span></span></pre></dd>
+        <dd><pre class="code"><span class='regexp val'>/0*(([5-9])|([1-9][0-9])|([1-4][0-9][0-9])|500)%/</span>
+</pre></dd>
       
         <dt id="DEPTH_PERCENT_REGEX-constant" class="">DEPTH_PERCENT_REGEX =
           <div class="docstring">
   <div class="discussion">
-    
-<p>validation for depthPercent</p>
+    <p>
+validation for depthPercent
+</p>
 
 
   </div>
@@ -138,7 +142,8 @@
 
 </div>
         </dt>
-        <dd><pre class="code"><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>0*(([2-9][0-9])|([1-9][0-9][0-9])|(1[0-9][0-9][0-9])|2000)%</span><span class='regexp_end'>/</span></span></pre></dd>
+        <dd><pre class="code"><span class='regexp val'>/0*(([2-9][0-9])|([1-9][0-9][0-9])|(1[0-9][0-9][0-9])|2000)%/</span>
+</pre></dd>
       
     </dl>
   
@@ -166,8 +171,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>depth or chart as % of chart width must be between 20% and 2000%.</p>
+    <span class="summary_desc"><div class='inline'><p>
+depth or chart as % of chart width must be between 20% and 2000%.
+</p>
 </div></span>
   
 </li>
@@ -192,8 +198,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>height of chart as % of chart must be between 5% and 500%.</p>
+    <span class="summary_desc"><div class='inline'><p>
+height of chart as % of chart must be between 5% and 500%.
+</p>
 </div></span>
   
 </li>
@@ -218,8 +225,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>field of view angle.</p>
+    <span class="summary_desc"><div class='inline'><p>
+field of view angle.
+</p>
 </div></span>
   
 </li>
@@ -244,8 +252,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Chart axis are at right angles.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Chart axis are at right angles.
+</p>
 </div></span>
   
 </li>
@@ -270,8 +279,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>x rotation for the chart  must be between -90 and 90.</p>
+    <span class="summary_desc"><div class='inline'><p>
+x rotation for the chart must be between -90 and 90.
+</p>
 </div></span>
   
 </li>
@@ -296,8 +306,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>y rotation for the chart must be between 0 and 360.</p>
+    <span class="summary_desc"><div class='inline'><p>
+y rotation for the chart must be between 0 and 360.
+</p>
 </div></span>
   
 </li>
@@ -334,8 +345,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Creates a new View3D for charts.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Creates a new View3D for charts.
+</p>
 </div></span>
   
 </li>
@@ -357,8 +369,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Serializes the view3D properties.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Serializes the view3D properties.
+</p>
 </div></span>
   
 </li>
@@ -379,8 +392,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Creates a new View3D for charts</p>
+    <p>
+Creates a new View3D for charts
+</p>
 
 
   </div>
@@ -401,8 +415,9 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>a customizable set of options</p>
+        <div class='inline'><p>
+a customizable set of options
+</p>
 </div>
       
     </li>
@@ -489,12 +504,13 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 46</span>
 
-<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='ivar'>@rotX</span><span class='comma'>,</span> <span class='ivar'>@hPercent</span><span class='comma'>,</span> <span class='ivar'>@rotY</span><span class='comma'>,</span> <span class='ivar'>@depthPercent</span><span class='comma'>,</span> <span class='ivar'>@rAngAx</span><span class='comma'>,</span> <span class='ivar'>@perspective</span>  <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='kw'>nil</span> 
-  <span class='id options'>options</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id o'>o</span><span class='op'>|</span>
-    <span class='kw'>self</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span>
-  <span class='kw'>end</span>    
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='@rotX ivar id'>@rotX</span><span class='comma token'>,</span> <span class='@hPercent ivar id'>@hPercent</span><span class='comma token'>,</span> <span class='@rotY ivar id'>@rotY</span><span class='comma token'>,</span> <span class='@depthPercent ivar id'>@depthPercent</span><span class='comma token'>,</span> <span class='@rAngAx ivar id'>@rAngAx</span><span class='comma token'>,</span> <span class='@perspective ivar id'>@perspective</span>  <span class='assign token'>=</span> <span class='nil nil kw'>nil</span><span class='comma token'>,</span> <span class='nil nil kw'>nil</span><span class='comma token'>,</span> <span class='nil nil kw'>nil</span><span class='comma token'>,</span> <span class='nil nil kw'>nil</span><span class='comma token'>,</span> <span class='nil nil kw'>nil</span><span class='comma token'>,</span> <span class='nil nil kw'>nil</span> 
+  <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='o identifier id'>o</span><span class='bitor op'>|</span>
+    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='dstring node'>&quot;#{o[0]}=&quot;</span><span class='comma token'>,</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span> <span class='dstring node'>&quot;#{o[0]}=&quot;</span>
+  <span class='end end kw'>end</span>    
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -517,8 +533,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>depth or chart as % of chart width must be between 20% and 2000%</p>
+    <p>
+depth or chart as % of chart width must be between 20% and 2000%
+</p>
 
 
   </div>
@@ -552,9 +569,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 29</span>
 
-<span class='kw'>def</span> <span class='id depthPercent'>depthPercent</span>
-  <span class='ivar'>@depthPercent</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='depthPercent identifier id'>depthPercent</span>
+  <span class='@depthPercent ivar id'>@depthPercent</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -572,8 +590,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>height of chart as % of chart must be between 5% and 500%</p>
+    <p>
+height of chart as % of chart must be between 5% and 500%
+</p>
 
 
   </div>
@@ -607,9 +626,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 19</span>
 
-<span class='kw'>def</span> <span class='id hPercent'>hPercent</span>
-  <span class='ivar'>@hPercent</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='hPercent identifier id'>hPercent</span>
+  <span class='@hPercent ivar id'>@hPercent</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -627,8 +647,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>field of view angle</p>
+    <p>
+field of view angle
+</p>
 
 
   </div>
@@ -662,9 +683,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 37</span>
 
-<span class='kw'>def</span> <span class='id perspective'>perspective</span>
-  <span class='ivar'>@perspective</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='perspective identifier id'>perspective</span>
+  <span class='@perspective ivar id'>@perspective</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -682,8 +704,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Chart axis are at right angles</p>
+    <p>
+Chart axis are at right angles
+</p>
 
 
   </div>
@@ -717,9 +740,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 33</span>
 
-<span class='kw'>def</span> <span class='id rAngAx'>rAngAx</span>
-  <span class='ivar'>@rAngAx</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='rAngAx identifier id'>rAngAx</span>
+  <span class='@rAngAx ivar id'>@rAngAx</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -737,8 +761,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>x rotation for the chart  must be between -90 and 90</p>
+    <p>
+x rotation for the chart must be between -90 and 90
+</p>
 
 
   </div>
@@ -772,9 +797,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 14</span>
 
-<span class='kw'>def</span> <span class='id rotX'>rotX</span>
-  <span class='ivar'>@rotX</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='rotX identifier id'>rotX</span>
+  <span class='@rotX ivar id'>@rotX</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -792,8 +818,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>y rotation for the chart must be between 0 and 360</p>
+    <p>
+y rotation for the chart must be between 0 and 360
+</p>
 
 
   </div>
@@ -827,9 +854,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 24</span>
 
-<span class='kw'>def</span> <span class='id rotY'>rotY</span>
-  <span class='ivar'>@rotY</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='rotY identifier id'>rotY</span>
+  <span class='@rotY ivar id'>@rotY</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -851,8 +879,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Serializes the view3D properties</p>
+    <p>
+Serializes the view3D properties
+</p>
 
 
   </div>
@@ -871,8 +900,9 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The document builder instance this objects xml will be added to.</p>
+        <div class='inline'><p>
+The document builder instance this objects xml will be added to.
+</p>
 </div>
       
     </li>
@@ -913,16 +943,17 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/view_3D.rb', line 74</span>
 
-<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
-  <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:view3D</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span>
-    <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:rotX</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span><span class='op'>=&gt;</span><span class='ivar'>@rotX</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='ivar'>@rotX</span><span class='period'>.</span><span class='id nil?'>nil?</span>
-    <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:hPercent</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span><span class='op'>=&gt;</span><span class='ivar'>@hPercent</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='ivar'>@hPercent</span><span class='period'>.</span><span class='id nil?'>nil?</span>
-    <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:rotY</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span><span class='op'>=&gt;</span><span class='ivar'>@rotY</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='ivar'>@rotY</span><span class='period'>.</span><span class='id nil?'>nil?</span>
-    <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:depthPercent</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span><span class='op'>=&gt;</span><span class='ivar'>@depthPercent</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='ivar'>@depthPercent</span><span class='period'>.</span><span class='id nil?'>nil?</span>
-    <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:rAngAx</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span><span class='op'>=&gt;</span><span class='ivar'>@rAngAx</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='ivar'>@rAngAx</span><span class='period'>.</span><span class='id nil?'>nil?</span>
-    <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:perspective</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span><span class='op'>=&gt;</span><span class='ivar'>@perspective</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='ivar'>@perspective</span><span class='period'>.</span><span class='id nil?'>nil?</span>
-  <span class='rbrace'>}</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:view3D'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:rotX'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@rotX ivar id'>@rotX</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='@rotX ivar id'>@rotX</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:hPercent'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@hPercent ivar id'>@hPercent</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='@hPercent ivar id'>@hPercent</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:rotY'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@rotY ivar id'>@rotY</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='@rotY ivar id'>@rotY</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:depthPercent'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@depthPercent ivar id'>@depthPercent</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='@depthPercent ivar id'>@depthPercent</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:rAngAx'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@rAngAx ivar id'>@rAngAx</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='@rAngAx ivar id'>@rAngAx</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:perspective'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@perspective ivar id'>@perspective</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='@perspective ivar id'>@perspective</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+  <span class='rbrace token'>}</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -933,9 +964,9 @@
 </div>
     
     <div id="footer">
-  Generated on Sun Nov 27 20:28:13 2011 by 
+  Generated on Sun Nov 27 21:44:37 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.9.3).
+  0.7.3 (ruby-1.8.7).
 </div>
 
   </body>

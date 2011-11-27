@@ -96,8 +96,9 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>A SerAxis object defines a series axis</p>
+    <p>
+A SerAxis object defines a series axis
+</p>
 
 
   </div>
@@ -133,8 +134,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The number of tick lables to skip between labels.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The number of tick lables to skip between labels.
+</p>
 </div></span>
   
 </li>
@@ -159,8 +161,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The number of tickmarks to be skipped before the next one is rendered.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The number of tickmarks to be skipped before the next one is rendered.
+</p>
 </div></span>
   
 </li>
@@ -205,8 +208,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Creates a new SerAxis object.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Creates a new SerAxis object.
+</p>
 </div></span>
   
 </li>
@@ -228,8 +232,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Serializes the series axis.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Serializes the series axis.
+</p>
 </div></span>
   
 </li>
@@ -255,8 +260,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Creates a new SerAxis object</p>
+    <p>
+Creates a new SerAxis object
+</p>
 
 
   </div>
@@ -275,8 +281,9 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>the id of this axis. Inherited</p>
+        <div class='inline'><p>
+the id of this axis. Inherited
+</p>
 </div>
       
     </li>
@@ -291,8 +298,9 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>the id of the perpendicular axis. Inherited</p>
+        <div class='inline'><p>
+the id of the perpendicular axis. Inherited
+</p>
 </div>
       
     </li>
@@ -309,8 +317,9 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>a customizable set of options</p>
+        <div class='inline'><p>
+a customizable set of options
+</p>
 </div>
       
     </li>
@@ -333,8 +342,9 @@
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'>
-<p>Inherited</p>
+          &mdash; <div class='inline'><p>
+Inherited
+</p>
 </div>
         </li>
       
@@ -344,8 +354,9 @@
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'>
-<p>Inherited</p>
+          &mdash; <div class='inline'><p>
+Inherited
+</p>
 </div>
         </li>
       
@@ -355,8 +366,9 @@
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'>
-<p>Inherited</p>
+          &mdash; <div class='inline'><p>
+Inherited
+</p>
 </div>
         </li>
       
@@ -396,10 +408,11 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/ser_axis.rb', line 21</span>
 
-<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id axId'>axId</span><span class='comma'>,</span> <span class='id crossAx'>crossAx</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='ivar'>@tickLblSkip</span><span class='comma'>,</span> <span class='ivar'>@tickMarkSkip</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='kw'>nil</span>
-  <span class='kw'>super</span><span class='lparen'>(</span><span class='id axId'>axId</span><span class='comma'>,</span> <span class='id crossAx'>crossAx</span><span class='comma'>,</span> <span class='id options'>options</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='axId identifier id'>axId</span><span class='comma token'>,</span> <span class='crossAx identifier id'>crossAx</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='@tickLblSkip ivar id'>@tickLblSkip</span><span class='comma token'>,</span> <span class='@tickMarkSkip ivar id'>@tickMarkSkip</span> <span class='assign token'>=</span> <span class='nil nil kw'>nil</span><span class='comma token'>,</span> <span class='nil nil kw'>nil</span>
+  <span class='super super kw'>super</span><span class='lparen token'>(</span><span class='axId identifier id'>axId</span><span class='comma token'>,</span> <span class='crossAx identifier id'>crossAx</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -422,8 +435,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The number of tick lables to skip between labels</p>
+    <p>
+The number of tick lables to skip between labels
+</p>
 
 
   </div>
@@ -457,9 +471,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/ser_axis.rb', line 7</span>
 
-<span class='kw'>def</span> <span class='id tickLblSkip'>tickLblSkip</span>
-  <span class='ivar'>@tickLblSkip</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='tickLblSkip identifier id'>tickLblSkip</span>
+  <span class='@tickLblSkip ivar id'>@tickLblSkip</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -477,8 +492,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The number of tickmarks to be skipped before the next one is rendered.</p>
+    <p>
+The number of tickmarks to be skipped before the next one is rendered.
+</p>
 
 
   </div>
@@ -512,9 +528,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/ser_axis.rb', line 11</span>
 
-<span class='kw'>def</span> <span class='id tickMarkSkip'>tickMarkSkip</span>
-  <span class='ivar'>@tickMarkSkip</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='tickMarkSkip identifier id'>tickMarkSkip</span>
+  <span class='@tickMarkSkip ivar id'>@tickMarkSkip</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -536,8 +553,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Serializes the series axis</p>
+    <p>
+Serializes the series axis
+</p>
 
 
   </div>
@@ -556,8 +574,9 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The document builder instance this objects xml will be added to.</p>
+        <div class='inline'><p>
+The document builder instance this objects xml will be added to.
+</p>
 </div>
       
     </li>
@@ -595,13 +614,14 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/ser_axis.rb', line 35</span>
 
-<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
-  <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:serAx</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span>
-    <span class='kw'>super</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
-    <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:tickLblSkip</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span><span class='op'>=&gt;</span><span class='ivar'>@tickLblSkip</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='ivar'>@tickLblSkip</span><span class='period'>.</span><span class='id nil?'>nil?</span>
-    <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:tickMarkSkip</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span><span class='op'>=&gt;</span><span class='ivar'>@tickMarkSkip</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='ivar'>@tickMarkSkip</span><span class='period'>.</span><span class='id nil?'>nil?</span>
-  <span class='rbrace'>}</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:serAx'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+    <span class='super super kw'>super</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:tickLblSkip'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@tickLblSkip ivar id'>@tickLblSkip</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='@tickLblSkip ivar id'>@tickLblSkip</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:tickMarkSkip'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@tickMarkSkip ivar id'>@tickMarkSkip</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='@tickMarkSkip ivar id'>@tickMarkSkip</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+  <span class='rbrace token'>}</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -612,9 +632,9 @@
 </div>
     
     <div id="footer">
-  Generated on Sun Nov 27 20:28:14 2011 by 
+  Generated on Sun Nov 27 21:44:37 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.9.3).
+  0.7.3 (ruby-1.8.7).
 </div>
 
   </body>

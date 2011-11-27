@@ -96,9 +96,10 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>The Bar3DChart is a three dimentional barchart (who would have guessed?)
-that you can add to your worksheet.</p>
+    <p>
+The Bar3DChart is a three dimentional barchart (who would have guessed?)
+that you can add to your worksheet.
+</p>
 
 
   </div>
@@ -127,8 +128,9 @@ that you can add to your worksheet.</p>
         <dt id="GAP_AMOUNT_PERCENT-constant" class="">GAP_AMOUNT_PERCENT =
           <div class="docstring">
   <div class="discussion">
-    
-<p>validation regex for gap amount percent</p>
+    <p>
+validation regex for gap amount percent
+</p>
 
 
   </div>
@@ -138,7 +140,8 @@ that you can add to your worksheet.</p>
 
 </div>
         </dt>
-        <dd><pre class="code"><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>0*(([0-9])|([1-9][0-9])|([1-4][0-9][0-9])|500)%</span><span class='regexp_end'>/</span></span></pre></dd>
+        <dd><pre class="code"><span class='regexp val'>/0*(([0-9])|([1-9][0-9])|([1-4][0-9][0-9])|500)%/</span>
+</pre></dd>
       
     </dl>
   
@@ -170,8 +173,9 @@ that you can add to your worksheet.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The direction of the bars in the chart must be one of [:bar, :col].</p>
+    <span class="summary_desc"><div class='inline'><p>
+The direction of the bars in the chart must be one of [:bar, :col].
+</p>
 </div></span>
   
 </li>
@@ -196,8 +200,9 @@ that you can add to your worksheet.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>the category axis.</p>
+    <span class="summary_desc"><div class='inline'><p>
+the category axis.
+</p>
 </div></span>
   
 </li>
@@ -222,9 +227,10 @@ that you can add to your worksheet.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>space between bar or column clusters, as a percentage of the bar or column
-width.</p>
+    <span class="summary_desc"><div class='inline'><p>
+space between bar or column clusters, as a percentage of the bar or column
+width.
+</p>
 </div></span>
   
 </li>
@@ -249,9 +255,10 @@ width.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>space between bar or column clusters, as a percentage of the bar or column
-width.</p>
+    <span class="summary_desc"><div class='inline'><p>
+space between bar or column clusters, as a percentage of the bar or column
+width.
+</p>
 </div></span>
   
 </li>
@@ -276,8 +283,9 @@ width.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>grouping for a column, line, or area chart.</p>
+    <span class="summary_desc"><div class='inline'><p>
+grouping for a column, line, or area chart.
+</p>
 </div></span>
   
 </li>
@@ -302,9 +310,10 @@ width.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The shabe of the bars or columns must be one of  [:cone, :coneToMax, :box,
-:cylinder, :pyramid, :pyramidToMax].</p>
+    <span class="summary_desc"><div class='inline'><p>
+The shabe of the bars or columns must be one of [:cone, :coneToMax, :box,
+:cylinder, :pyramid, :pyramidToMax].
+</p>
 </div></span>
   
 </li>
@@ -329,8 +338,9 @@ width.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>the valueaxis.</p>
+    <span class="summary_desc"><div class='inline'><p>
+the valueaxis.
+</p>
 </div></span>
   
 </li>
@@ -375,8 +385,9 @@ width.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Creates a new bar chart object.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Creates a new bar chart object.
+</p>
 </div></span>
   
 </li>
@@ -398,8 +409,9 @@ width.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Serializes the bar chart.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Serializes the bar chart.
+</p>
 </div></span>
   
 </li>
@@ -430,8 +442,9 @@ width.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Creates a new bar chart object</p>
+    <p>
+Creates a new bar chart object
+</p>
 
 
   </div>
@@ -450,8 +463,9 @@ width.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>The workbook that owns this chart.</p>
+        <div class='inline'><p>
+The workbook that owns this chart.
+</p>
 </div>
       
     </li>
@@ -468,8 +482,9 @@ width.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>a customizable set of options</p>
+        <div class='inline'><p>
+a customizable set of options
+</p>
 </div>
       
     </li>
@@ -636,18 +651,19 @@ width.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/bar_3D_chart.rb', line 61</span>
 
-<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id frame'>frame</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='ivar'>@barDir</span> <span class='op'>=</span> <span class='symbol'>:bar</span>
-  <span class='ivar'>@grouping</span> <span class='op'>=</span> <span class='symbol'>:clustered</span>
-  <span class='ivar'>@gapWidth</span><span class='comma'>,</span> <span class='ivar'>@gapDepth</span><span class='comma'>,</span> <span class='ivar'>@shape</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='kw'>nil</span>
-  <span class='ivar'>@catAxId</span> <span class='op'>=</span> <span class='id rand'>rand</span><span class='lparen'>(</span><span class='int'>8</span> <span class='op'>**</span> <span class='int'>8</span><span class='rparen'>)</span>
-  <span class='ivar'>@valAxId</span> <span class='op'>=</span> <span class='id rand'>rand</span><span class='lparen'>(</span><span class='int'>8</span> <span class='op'>**</span> <span class='int'>8</span><span class='rparen'>)</span>
-  <span class='ivar'>@catAxis</span> <span class='op'>=</span> <span class='const'>CatAxis</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='ivar'>@catAxId</span><span class='comma'>,</span> <span class='ivar'>@valAxId</span><span class='rparen'>)</span>
-  <span class='ivar'>@valAxis</span> <span class='op'>=</span> <span class='const'>ValAxis</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='ivar'>@valAxId</span><span class='comma'>,</span> <span class='ivar'>@catAxId</span><span class='rparen'>)</span>
-  <span class='kw'>super</span><span class='lparen'>(</span><span class='id frame'>frame</span><span class='comma'>,</span> <span class='id options'>options</span><span class='rparen'>)</span>      
-  <span class='ivar'>@series_type</span> <span class='op'>=</span> <span class='const'>BarSeries</span>
-  <span class='ivar'>@view3D</span> <span class='op'>=</span> <span class='const'>View3D</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='symbol'>:rAngAx</span><span class='op'>=&gt;</span><span class='int'>1</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id merge'>merge</span><span class='lparen'>(</span><span class='id options'>options</span><span class='rparen'>)</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='frame identifier id'>frame</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='@barDir ivar id'>@barDir</span> <span class='assign token'>=</span> <span class='symbol val'>:bar</span>
+  <span class='@grouping ivar id'>@grouping</span> <span class='assign token'>=</span> <span class='symbol val'>:clustered</span>
+  <span class='@gapWidth ivar id'>@gapWidth</span><span class='comma token'>,</span> <span class='@gapDepth ivar id'>@gapDepth</span><span class='comma token'>,</span> <span class='@shape ivar id'>@shape</span> <span class='assign token'>=</span> <span class='nil nil kw'>nil</span><span class='comma token'>,</span> <span class='nil nil kw'>nil</span><span class='comma token'>,</span> <span class='nil nil kw'>nil</span>
+  <span class='@catAxId ivar id'>@catAxId</span> <span class='assign token'>=</span> <span class='rand identifier id'>rand</span><span class='lparen token'>(</span><span class='integer val'>8</span> <span class='pow op'>**</span> <span class='integer val'>8</span><span class='rparen token'>)</span>
+  <span class='@valAxId ivar id'>@valAxId</span> <span class='assign token'>=</span> <span class='rand identifier id'>rand</span><span class='lparen token'>(</span><span class='integer val'>8</span> <span class='pow op'>**</span> <span class='integer val'>8</span><span class='rparen token'>)</span>
+  <span class='@catAxis ivar id'>@catAxis</span> <span class='assign token'>=</span> <span class='CatAxis constant id'>CatAxis</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='@catAxId ivar id'>@catAxId</span><span class='comma token'>,</span> <span class='@valAxId ivar id'>@valAxId</span><span class='rparen token'>)</span>
+  <span class='@valAxis ivar id'>@valAxis</span> <span class='assign token'>=</span> <span class='ValAxis constant id'>ValAxis</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='@valAxId ivar id'>@valAxId</span><span class='comma token'>,</span> <span class='@catAxId ivar id'>@catAxId</span><span class='rparen token'>)</span>
+  <span class='super super kw'>super</span><span class='lparen token'>(</span><span class='frame identifier id'>frame</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>      
+  <span class='@series_type ivar id'>@series_type</span> <span class='assign token'>=</span> <span class='BarSeries constant id'>BarSeries</span>
+  <span class='@view3D ivar id'>@view3D</span> <span class='assign token'>=</span> <span class='View3D constant id'>View3D</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='lbrace token'>{</span><span class='symbol val'>:rAngAx=</span><span class='gt op'>&gt;</span><span class='integer val'>1</span><span class='rbrace token'>}</span><span class='dot token'>.</span><span class='merge identifier id'>merge</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -670,8 +686,9 @@ width.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The direction of the bars in the chart must be one of [:bar, :col]</p>
+    <p>
+The direction of the bars in the chart must be one of [:bar, :col]
+</p>
 
 
   </div>
@@ -705,9 +722,10 @@ width.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/bar_3D_chart.rb', line 21</span>
 
-<span class='kw'>def</span> <span class='id barDir'>barDir</span>
-  <span class='ivar'>@barDir</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='barDir identifier id'>barDir</span>
+  <span class='@barDir ivar id'>@barDir</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -725,8 +743,9 @@ width.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>the category axis</p>
+    <p>
+the category axis
+</p>
 
 
   </div>
@@ -760,9 +779,10 @@ width.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/bar_3D_chart.rb', line 12</span>
 
-<span class='kw'>def</span> <span class='id catAxis'>catAxis</span>
-  <span class='ivar'>@catAxis</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='catAxis identifier id'>catAxis</span>
+  <span class='@catAxis ivar id'>@catAxis</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -780,9 +800,10 @@ width.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>space between bar or column clusters, as a percentage of the bar or column
-width.</p>
+    <p>
+space between bar or column clusters, as a percentage of the bar or column
+width.
+</p>
 
 
   </div>
@@ -816,9 +837,10 @@ width.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/bar_3D_chart.rb', line 25</span>
 
-<span class='kw'>def</span> <span class='id gapDepth'>gapDepth</span>
-  <span class='ivar'>@gapDepth</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='gapDepth identifier id'>gapDepth</span>
+  <span class='@gapDepth ivar id'>@gapDepth</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -836,9 +858,10 @@ width.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>space between bar or column clusters, as a percentage of the bar or column
-width.</p>
+    <p>
+space between bar or column clusters, as a percentage of the bar or column
+width.
+</p>
 
 
   </div>
@@ -872,9 +895,10 @@ width.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/bar_3D_chart.rb', line 29</span>
 
-<span class='kw'>def</span> <span class='id gapWidth'>gapWidth</span>
-  <span class='ivar'>@gapWidth</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='gapWidth identifier id'>gapWidth</span>
+  <span class='@gapWidth ivar id'>@gapWidth</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -892,9 +916,10 @@ width.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>grouping for a column, line, or area chart. must be one of 
-[:percentStacked, :clustered, :standard, :stacked]</p>
+    <p>
+grouping for a column, line, or area chart. must be one of
+[:percentStacked, :clustered, :standard, :stacked]
+</p>
 
 
   </div>
@@ -928,9 +953,10 @@ width.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/bar_3D_chart.rb', line 34</span>
 
-<span class='kw'>def</span> <span class='id grouping'>grouping</span>
-  <span class='ivar'>@grouping</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='grouping identifier id'>grouping</span>
+  <span class='@grouping ivar id'>@grouping</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -948,9 +974,10 @@ width.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The shabe of the bars or columns must be one of  [:cone, :coneToMax, :box,
-:cylinder, :pyramid, :pyramidToMax]</p>
+    <p>
+The shabe of the bars or columns must be one of [:cone, :coneToMax, :box,
+:cylinder, :pyramid, :pyramidToMax]
+</p>
 
 
   </div>
@@ -984,9 +1011,10 @@ width.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/bar_3D_chart.rb', line 39</span>
 
-<span class='kw'>def</span> <span class='id shape'>shape</span>
-  <span class='ivar'>@shape</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='shape identifier id'>shape</span>
+  <span class='@shape ivar id'>@shape</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -1004,8 +1032,9 @@ width.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>the valueaxis</p>
+    <p>
+the valueaxis
+</p>
 
 
   </div>
@@ -1039,9 +1068,10 @@ width.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/bar_3D_chart.rb', line 16</span>
 
-<span class='kw'>def</span> <span class='id valAxis'>valAxis</span>
-  <span class='ivar'>@valAxis</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='valAxis identifier id'>valAxis</span>
+  <span class='@valAxis ivar id'>@valAxis</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -1063,8 +1093,9 @@ width.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Serializes the bar chart</p>
+    <p>
+Serializes the bar chart
+</p>
 
 
   </div>
@@ -1113,24 +1144,25 @@ width.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/bar_3D_chart.rb', line 109</span>
 
-<span class='kw'>def</span> <span class='id to_xml'>to_xml</span>
-  <span class='kw'>super</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id xml'>xml</span><span class='op'>|</span>
-    <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:bar3DChart</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span>
-      <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:barDir</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span> <span class='op'>=&gt;</span> <span class='id barDir'>barDir</span><span class='rparen'>)</span>
-      <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:grouping</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span><span class='op'>=&gt;</span><span class='id grouping'>grouping</span><span class='rparen'>)</span>
-      <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:varyColors</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span><span class='op'>=&gt;</span><span class='int'>1</span><span class='rparen'>)</span>
-      <span class='ivar'>@series</span><span class='period'>.</span><span class='id each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id ser'>ser</span><span class='op'>|</span> <span class='id ser'>ser</span><span class='period'>.</span><span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
-      <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:gapWidth</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span><span class='op'>=&gt;</span><span class='ivar'>@gapWidth</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='ivar'>@gapWidth</span><span class='period'>.</span><span class='id nil?'>nil?</span>
-      <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:gapDepth</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span><span class='op'>=&gt;</span><span class='ivar'>@gapDepth</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='ivar'>@gapDepth</span><span class='period'>.</span><span class='id nil?'>nil?</span>
-      <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:shape</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span><span class='op'>=&gt;</span><span class='ivar'>@shape</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='ivar'>@shape</span><span class='period'>.</span><span class='id nil?'>nil?</span>
-      <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:axId</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span><span class='op'>=&gt;</span><span class='ivar'>@catAxId</span><span class='rparen'>)</span>
-      <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:axId</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span><span class='op'>=&gt;</span><span class='ivar'>@valAxId</span><span class='rparen'>)</span>
-      <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:axId</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span><span class='op'>=&gt;</span><span class='int'>0</span><span class='rparen'>)</span>
-    <span class='rbrace'>}</span>
-    <span class='ivar'>@catAxis</span><span class='period'>.</span><span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
-    <span class='ivar'>@valAxis</span><span class='period'>.</span><span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>        
-  <span class='kw'>end</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span>
+  <span class='super super kw'>super</span><span class='lparen token'>(</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='xml identifier id'>xml</span><span class='bitor op'>|</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:bar3DChart'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:barDir'</span><span class='comma token'>,</span> <span class='symbol val'>:val</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='barDir identifier id'>barDir</span><span class='rparen token'>)</span>
+      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:grouping'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='grouping identifier id'>grouping</span><span class='rparen token'>)</span>
+      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:varyColors'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='integer val'>1</span><span class='rparen token'>)</span>
+      <span class='@series ivar id'>@series</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='ser identifier id'>ser</span><span class='bitor op'>|</span> <span class='ser identifier id'>ser</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span> <span class='rbrace token'>}</span>
+      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:gapWidth'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@gapWidth ivar id'>@gapWidth</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='@gapWidth ivar id'>@gapWidth</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:gapDepth'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@gapDepth ivar id'>@gapDepth</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='@gapDepth ivar id'>@gapDepth</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:shape'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@shape ivar id'>@shape</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='@shape ivar id'>@shape</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span>
+      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:axId'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@catAxId ivar id'>@catAxId</span><span class='rparen token'>)</span>
+      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:axId'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@valAxId ivar id'>@valAxId</span><span class='rparen token'>)</span>
+      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:axId'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='integer val'>0</span><span class='rparen token'>)</span>
+    <span class='rbrace token'>}</span>
+    <span class='@catAxis ivar id'>@catAxis</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+    <span class='@valAxis ivar id'>@valAxis</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>        
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -1141,9 +1173,9 @@ width.</p>
 </div>
     
     <div id="footer">
-  Generated on Sun Nov 27 20:28:15 2011 by 
+  Generated on Sun Nov 27 21:44:43 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.9.3).
+  0.7.3 (ruby-1.8.7).
 </div>
 
   </body>

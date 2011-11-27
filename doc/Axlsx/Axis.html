@@ -94,8 +94,9 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>the access class defines common properties and values for a chart axis.</p>
+    <p>
+the access class defines common properties and values for a chart axis.
+</p>
 
 
   </div>
@@ -131,8 +132,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>the id of the axis.</p>
+    <span class="summary_desc"><div class='inline'><p>
+the id of the axis.
+</p>
 </div></span>
   
 </li>
@@ -157,8 +159,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The position of the axis must be one of [:l, :r, :t, :b].</p>
+    <span class="summary_desc"><div class='inline'><p>
+The position of the axis must be one of [:l, :r, :t, :b].
+</p>
 </div></span>
   
 </li>
@@ -183,8 +186,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The perpendicular axis.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The perpendicular axis.
+</p>
 </div></span>
   
 </li>
@@ -209,9 +213,10 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>specifies how the perpendicular axis is crossed must be one of [:autoZero,
-:min, :max].</p>
+    <span class="summary_desc"><div class='inline'><p>
+specifies how the perpendicular axis is crossed must be one of [:autoZero,
+:min, :max].
+</p>
 </div></span>
   
 </li>
@@ -236,8 +241,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The number format format code for this axis default :General.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The number format format code for this axis default :General.
+</p>
 </div></span>
   
 </li>
@@ -262,8 +268,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The scaling of the axis.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The scaling of the axis.
+</p>
 </div></span>
   
 </li>
@@ -288,8 +295,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>the position of the tick labels must be one of [:nextTo, :high, :low].</p>
+    <span class="summary_desc"><div class='inline'><p>
+the position of the tick labels must be one of [:nextTo, :high, :low].
+</p>
 </div></span>
   
 </li>
@@ -326,8 +334,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Creates an Axis object.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Creates an Axis object.
+</p>
 </div></span>
   
 </li>
@@ -349,8 +358,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Serializes the common axis.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Serializes the common axis.
+</p>
 </div></span>
   
 </li>
@@ -371,8 +381,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Creates an Axis object</p>
+    <p>
+Creates an Axis object
+</p>
 
 
   </div>
@@ -391,8 +402,9 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>the id of this axis</p>
+        <div class='inline'><p>
+the id of this axis
+</p>
 </div>
       
     </li>
@@ -407,8 +419,9 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>the id of the perpendicular axis</p>
+        <div class='inline'><p>
+the id of the perpendicular axis
+</p>
 </div>
       
     </li>
@@ -425,8 +438,9 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>a customizable set of options</p>
+        <div class='inline'><p>
+a customizable set of options
+</p>
 </div>
       
     </li>
@@ -484,8 +498,9 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>If axId or crossAx are not unsigned integers</p>
+        <div class='inline'><p>
+If axId or crossAx are not unsigned integers
+</p>
 </div>
       
     </li>
@@ -517,21 +532,22 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/axis.rb', line 45</span>
 
-<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id axId'>axId</span><span class='comma'>,</span> <span class='id crossAx'>crossAx</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='const'>Axlsx</span><span class='op'>::</span><span class='id validate_unsigned_int'>validate_unsigned_int</span><span class='lparen'>(</span><span class='id axId'>axId</span><span class='rparen'>)</span>
-  <span class='const'>Axlsx</span><span class='op'>::</span><span class='id validate_unsigned_int'>validate_unsigned_int</span><span class='lparen'>(</span><span class='id crossAx'>crossAx</span><span class='rparen'>)</span>
-  <span class='ivar'>@axId</span> <span class='op'>=</span> <span class='id axId'>axId</span>
-  <span class='ivar'>@crossAx</span> <span class='op'>=</span> <span class='id crossAx'>crossAx</span>
-  <span class='ivar'>@format_code</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>General</span><span class='tstring_end'>&quot;</span></span>
-  <span class='ivar'>@scaling</span> <span class='op'>=</span> <span class='const'>Scaling</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='symbol'>:orientation</span><span class='op'>=&gt;</span><span class='symbol'>:minMax</span><span class='rparen'>)</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='id axPos'>axPos</span> <span class='op'>=</span> <span class='symbol'>:l</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='id tickLblPos'>tickLblPos</span> <span class='op'>=</span> <span class='symbol'>:nextTo</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='id format_code'>format_code</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>General</span><span class='tstring_end'>&quot;</span></span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='id crosses'>crosses</span> <span class='op'>=</span> <span class='symbol'>:autoZero</span>
-  <span class='id options'>options</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id o'>o</span><span class='op'>|</span>
-    <span class='kw'>self</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span>
-  <span class='kw'>end</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='axId identifier id'>axId</span><span class='comma token'>,</span> <span class='crossAx identifier id'>crossAx</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='validate_unsigned_int identifier id'>validate_unsigned_int</span><span class='lparen token'>(</span><span class='axId identifier id'>axId</span><span class='rparen token'>)</span>
+  <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='validate_unsigned_int identifier id'>validate_unsigned_int</span><span class='lparen token'>(</span><span class='crossAx identifier id'>crossAx</span><span class='rparen token'>)</span>
+  <span class='@axId ivar id'>@axId</span> <span class='assign token'>=</span> <span class='axId identifier id'>axId</span>
+  <span class='@crossAx ivar id'>@crossAx</span> <span class='assign token'>=</span> <span class='crossAx identifier id'>crossAx</span>
+  <span class='@format_code ivar id'>@format_code</span> <span class='assign token'>=</span> <span class='string val'>&quot;General&quot;</span>
+  <span class='@scaling ivar id'>@scaling</span> <span class='assign token'>=</span> <span class='Scaling constant id'>Scaling</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:orientation=</span><span class='gt op'>&gt;</span><span class='symbol val'>:minMax</span><span class='rparen token'>)</span>
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='axPos identifier id'>axPos</span> <span class='assign token'>=</span> <span class='symbol val'>:l</span>
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='tickLblPos identifier id'>tickLblPos</span> <span class='assign token'>=</span> <span class='symbol val'>:nextTo</span>
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='format_code identifier id'>format_code</span> <span class='assign token'>=</span> <span class='string val'>&quot;General&quot;</span>
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='crosses identifier id'>crosses</span> <span class='assign token'>=</span> <span class='symbol val'>:autoZero</span>
+  <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='o identifier id'>o</span><span class='bitor op'>|</span>
+    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='dstring node'>&quot;#{o[0]}=&quot;</span><span class='comma token'>,</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span> <span class='dstring node'>&quot;#{o[0]}=&quot;</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -554,8 +570,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>the id of the axis.</p>
+    <p>
+the id of the axis.
+</p>
 
 
   </div>
@@ -589,9 +606,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/axis.rb', line 7</span>
 
-<span class='kw'>def</span> <span class='id axId'>axId</span>
-  <span class='ivar'>@axId</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='axId identifier id'>axId</span>
+  <span class='@axId ivar id'>@axId</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -609,8 +627,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The position of the axis must be one of [:l, :r, :t, :b]</p>
+    <p>
+The position of the axis must be one of [:l, :r, :t, :b]
+</p>
 
 
   </div>
@@ -644,9 +663,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/axis.rb', line 21</span>
 
-<span class='kw'>def</span> <span class='id axPos'>axPos</span>
-  <span class='ivar'>@axPos</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='axPos identifier id'>axPos</span>
+  <span class='@axPos ivar id'>@axPos</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -664,8 +684,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The perpendicular axis</p>
+    <p>
+The perpendicular axis
+</p>
 
 
   </div>
@@ -699,9 +720,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/axis.rb', line 11</span>
 
-<span class='kw'>def</span> <span class='id crossAx'>crossAx</span>
-  <span class='ivar'>@crossAx</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='crossAx identifier id'>crossAx</span>
+  <span class='@crossAx ivar id'>@crossAx</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -719,9 +741,10 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>specifies how the perpendicular axis is crossed must be one of [:autoZero,
-:min, :max]</p>
+    <p>
+specifies how the perpendicular axis is crossed must be one of [:autoZero,
+:min, :max]
+</p>
 
 
   </div>
@@ -755,9 +778,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/axis.rb', line 36</span>
 
-<span class='kw'>def</span> <span class='id crosses'>crosses</span>
-  <span class='ivar'>@crosses</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='crosses identifier id'>crosses</span>
+  <span class='@crosses ivar id'>@crosses</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -775,8 +799,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The number format format code for this axis default :General</p>
+    <p>
+The number format format code for this axis default :General
+</p>
 
 
   </div>
@@ -810,9 +835,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/axis.rb', line 31</span>
 
-<span class='kw'>def</span> <span class='id format_code'>format_code</span>
-  <span class='ivar'>@format_code</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='format_code identifier id'>format_code</span>
+  <span class='@format_code ivar id'>@format_code</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -830,8 +856,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The scaling of the axis</p>
+    <p>
+The scaling of the axis
+</p>
 
 
   </div>
@@ -872,9 +899,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/axis.rb', line 16</span>
 
-<span class='kw'>def</span> <span class='id scaling'>scaling</span>
-  <span class='ivar'>@scaling</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='scaling identifier id'>scaling</span>
+  <span class='@scaling ivar id'>@scaling</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -892,8 +920,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>the position of the tick labels must be one of [:nextTo, :high, :low]</p>
+    <p>
+the position of the tick labels must be one of [:nextTo, :high, :low]
+</p>
 
 
   </div>
@@ -927,9 +956,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/axis.rb', line 26</span>
 
-<span class='kw'>def</span> <span class='id tickLblPos'>tickLblPos</span>
-  <span class='ivar'>@tickLblPos</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='tickLblPos identifier id'>tickLblPos</span>
+  <span class='@tickLblPos ivar id'>@tickLblPos</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -951,8 +981,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Serializes the common axis</p>
+    <p>
+Serializes the common axis
+</p>
 
 
   </div>
@@ -971,8 +1002,9 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The document builder instance this objects xml will be added to.</p>
+        <div class='inline'><p>
+The document builder instance this objects xml will be added to.
+</p>
 </div>
       
     </li>
@@ -1013,16 +1045,17 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/axis.rb', line 79</span>
 
-<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
-  <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:axId</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span><span class='op'>=&gt;</span><span class='ivar'>@axId</span><span class='rparen'>)</span>
-  <span class='ivar'>@scaling</span><span class='period'>.</span><span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
-  <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:axPos</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span><span class='op'>=&gt;</span><span class='ivar'>@axPos</span><span class='rparen'>)</span>
-  <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:majorGridlines</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
-  <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:numFmt</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:formatCode</span> <span class='op'>=&gt;</span> <span class='ivar'>@format_code</span><span class='comma'>,</span> <span class='symbol'>:sourceLinked</span><span class='op'>=&gt;</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-  <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:tickLblPos</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span><span class='op'>=&gt;</span><span class='ivar'>@tickLblPos</span><span class='rparen'>)</span>
-  <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:crossAx</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span><span class='op'>=&gt;</span><span class='ivar'>@crossAx</span><span class='rparen'>)</span>
-  <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:crosses</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span><span class='op'>=&gt;</span><span class='ivar'>@crosses</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:axId'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@axId ivar id'>@axId</span><span class='rparen token'>)</span>
+  <span class='@scaling ivar id'>@scaling</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:axPos'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@axPos ivar id'>@axPos</span><span class='rparen token'>)</span>
+  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:majorGridlines'</span><span class='rparen token'>)</span>
+  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:numFmt'</span><span class='comma token'>,</span> <span class='symbol val'>:formatCode</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='@format_code ivar id'>@format_code</span><span class='comma token'>,</span> <span class='symbol val'>:sourceLinked=</span><span class='gt op'>&gt;</span><span class='string val'>&quot;1&quot;</span><span class='rparen token'>)</span>
+  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:tickLblPos'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@tickLblPos ivar id'>@tickLblPos</span><span class='rparen token'>)</span>
+  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:crossAx'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@crossAx ivar id'>@crossAx</span><span class='rparen token'>)</span>
+  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:crosses'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@crosses ivar id'>@crosses</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -1033,9 +1066,9 @@
 </div>
     
     <div id="footer">
-  Generated on Sun Nov 27 20:28:12 2011 by 
+  Generated on Sun Nov 27 21:44:29 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.9.3).
+  0.7.3 (ruby-1.8.7).
 </div>
 
   </body>

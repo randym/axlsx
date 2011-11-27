@@ -97,13 +97,15 @@
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'>
-<p>The recommended way to manage rows and cells is to use Worksheet#add_row</p>
+    <div class='inline'><p>
+The recommended way to manage rows and cells is to use Worksheet#add_row
+</p>
 </div>
   </div>
 
-
-<p>A Row is a single row in a worksheet.</p>
+<p>
+A Row is a single row in a worksheet.
+</p>
 
 
   </div>
@@ -142,8 +144,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The cells this row holds.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The cells this row holds.
+</p>
 </div></span>
   
 </li>
@@ -168,8 +171,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The worksheet this row belongs to.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The worksheet this row belongs to.
+</p>
 </div></span>
   
 </li>
@@ -204,9 +208,10 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Adds a singel sell to the row based on the data provided and updates the
-worksheet's autofit data.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Adds a singel sell to the row based on the data provided and updates the
+worksheet&#8217;s autofit data.
+</p>
 </div></span>
   
 </li>
@@ -228,8 +233,9 @@ worksheet's autofit data.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The index of this row in the worksheet.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The index of this row in the worksheet.
+</p>
 </div></span>
   
 </li>
@@ -253,8 +259,9 @@ worksheet's autofit data.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Creates a new row.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Creates a new row.
+</p>
 </div></span>
   
 </li>
@@ -276,8 +283,9 @@ worksheet's autofit data.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>sets the style for every cell in this row.</p>
+    <span class="summary_desc"><div class='inline'><p>
+sets the style for every cell in this row.
+</p>
 </div></span>
   
 </li>
@@ -320,8 +328,9 @@ worksheet's autofit data.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Serializes the row.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Serializes the row.
+</p>
 </div></span>
   
 </li>
@@ -342,17 +351,19 @@ worksheet's autofit data.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Creates a new row. New Cell objects are created based on the values, types
+    <p>
+Creates a new row. New Cell objects are created based on the values, types
 and style options. A new cell is created for each item in the values array.
-style and types options are applied as follows:</p>
-
-<pre class="code">If the types option is defined and is a symbol it is applied to all the cells created.
-If the types option is an array, cell types are applied by index for each cell
-If the types option is not set, the cell will automatically determine its type.
-If the style option is defined and is an Integer, it is applied to all cells created.
-If the style option is an array, style is applied by index for each cell.
-If the style option is not defined, the default style (0) is applied to each cell.</pre>
+style and types options are applied as follows:
+</p>
+<pre class="code">
+  <span class='If constant id'>If</span> <span class='the identifier id'>the</span> <span class='types identifier id'>types</span> <span class='option identifier id'>option</span> <span class='is identifier id'>is</span> <span class='defined identifier id'>defined</span> <span class='and and kw'>and</span> <span class='is identifier id'>is</span> <span class='a identifier id'>a</span> <span class='symbol identifier id'>symbol</span> <span class='it identifier id'>it</span> <span class='is identifier id'>is</span> <span class='applied identifier id'>applied</span> <span class='to identifier id'>to</span> <span class='all identifier id'>all</span> <span class='the identifier id'>the</span> <span class='cells identifier id'>cells</span> <span class='created identifier id'>created</span><span class='dot token'>.</span>
+  <span class='If constant id'>If</span> <span class='the identifier id'>the</span> <span class='types identifier id'>types</span> <span class='option identifier id'>option</span> <span class='is identifier id'>is</span> <span class='an identifier id'>an</span> <span class='array identifier id'>array</span><span class='comma token'>,</span> <span class='cell identifier id'>cell</span> <span class='types identifier id'>types</span> <span class='are identifier id'>are</span> <span class='applied identifier id'>applied</span> <span class='by identifier id'>by</span> <span class='index identifier id'>index</span> <span class='for for kw'>for</span> <span class='each identifier id'>each</span> <span class='cell identifier id'>cell</span>
+  <span class='If constant id'>If</span> <span class='the identifier id'>the</span> <span class='types identifier id'>types</span> <span class='option identifier id'>option</span> <span class='is identifier id'>is</span> <span class='not not kw'>not</span> <span class='set identifier id'>set</span><span class='comma token'>,</span> <span class='the identifier id'>the</span> <span class='cell identifier id'>cell</span> <span class='will identifier id'>will</span> <span class='automatically identifier id'>automatically</span> <span class='determine identifier id'>determine</span> <span class='its identifier id'>its</span> <span class='type identifier id'>type</span><span class='dot token'>.</span>
+  <span class='If constant id'>If</span> <span class='the identifier id'>the</span> <span class='style identifier id'>style</span> <span class='option identifier id'>option</span> <span class='is identifier id'>is</span> <span class='defined identifier id'>defined</span> <span class='and and kw'>and</span> <span class='is identifier id'>is</span> <span class='an identifier id'>an</span> <span class='Integer constant id'>Integer</span><span class='comma token'>,</span> <span class='it identifier id'>it</span> <span class='is identifier id'>is</span> <span class='applied identifier id'>applied</span> <span class='to identifier id'>to</span> <span class='all identifier id'>all</span> <span class='cells identifier id'>cells</span> <span class='created identifier id'>created</span><span class='dot token'>.</span>
+  <span class='If constant id'>If</span> <span class='the identifier id'>the</span> <span class='style identifier id'>style</span> <span class='option identifier id'>option</span> <span class='is identifier id'>is</span> <span class='an identifier id'>an</span> <span class='array identifier id'>array</span><span class='comma token'>,</span> <span class='style identifier id'>style</span> <span class='is identifier id'>is</span> <span class='applied identifier id'>applied</span> <span class='by identifier id'>by</span> <span class='index identifier id'>index</span> <span class='for for kw'>for</span> <span class='each identifier id'>each</span> <span class='cell identifier id'>cell</span><span class='dot token'>.</span>
+  <span class='If constant id'>If</span> <span class='the identifier id'>the</span> <span class='style identifier id'>style</span> <span class='option identifier id'>option</span> <span class='is identifier id'>is</span> <span class='not not kw'>not</span> <span class='defined identifier id'>defined</span><span class='comma token'>,</span> <span class='the identifier id'>the</span> <span class='default identifier id'>default</span> <span class='style identifier id'>style</span> <span class='lparen token'>(</span><span class='integer val'>0</span><span class='rparen token'>)</span> <span class='is identifier id'>is</span> <span class='applied identifier id'>applied</span> <span class='to identifier id'>to</span> <span class='each identifier id'>each</span> <span class='cell identifier id'>cell</span><span class='dot token'>.</span>
+</pre>
 
 
   </div>
@@ -384,8 +395,9 @@ If the style option is not defined, the default style (0) is applied to each cel
       
       
         &mdash;
-        <div class='inline'>
-<p>a customizable set of options</p>
+        <div class='inline'><p>
+a customizable set of options
+</p>
 </div>
       
     </li>
@@ -458,12 +470,13 @@ If the style option is not defined, the default style (0) is applied to each cel
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/row.rb', line 29</span>
 
-<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id worksheet'>worksheet</span><span class='comma'>,</span> <span class='id values'>values</span><span class='op'>=</span><span class='lbracket'>[</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='id worksheet'>worksheet</span> <span class='op'>=</span> <span class='id worksheet'>worksheet</span>
-  <span class='ivar'>@cells</span> <span class='op'>=</span> <span class='const'>SimpleTypedList</span><span class='period'>.</span><span class='id new'>new</span> <span class='const'>Cell</span>
-  <span class='ivar'>@worksheet</span><span class='period'>.</span><span class='id rows'>rows</span> <span class='op'>&lt;&lt;</span> <span class='kw'>self</span>
-  <span class='id array_to_cells'>array_to_cells</span><span class='lparen'>(</span><span class='id values'>values</span><span class='comma'>,</span> <span class='id options'>options</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='worksheet identifier id'>worksheet</span><span class='comma token'>,</span> <span class='values identifier id'>values</span><span class='assign token'>=</span><span class='lbrack token'>[</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='worksheet identifier id'>worksheet</span> <span class='assign token'>=</span> <span class='worksheet identifier id'>worksheet</span>
+  <span class='@cells ivar id'>@cells</span> <span class='assign token'>=</span> <span class='SimpleTypedList constant id'>SimpleTypedList</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='Cell constant id'>Cell</span>
+  <span class='@worksheet ivar id'>@worksheet</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span> <span class='lshft op'>&lt;&lt;</span> <span class='self self kw'>self</span>
+  <span class='array_to_cells identifier id'>array_to_cells</span><span class='lparen token'>(</span><span class='values identifier id'>values</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -486,8 +499,9 @@ If the style option is not defined, the default style (0) is applied to each cel
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The cells this row holds</p>
+    <p>
+The cells this row holds
+</p>
 
 
   </div>
@@ -521,9 +535,10 @@ If the style option is not defined, the default style (0) is applied to each cel
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/row.rb', line 13</span>
 
-<span class='kw'>def</span> <span class='id cells'>cells</span>
-  <span class='ivar'>@cells</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='cells identifier id'>cells</span>
+  <span class='@cells ivar id'>@cells</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -541,8 +556,9 @@ If the style option is not defined, the default style (0) is applied to each cel
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The worksheet this row belongs to</p>
+    <p>
+The worksheet this row belongs to
+</p>
 
 
   </div>
@@ -576,9 +592,10 @@ If the style option is not defined, the default style (0) is applied to each cel
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/row.rb', line 9</span>
 
-<span class='kw'>def</span> <span class='id worksheet'>worksheet</span>
-  <span class='ivar'>@worksheet</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='worksheet identifier id'>worksheet</span>
+  <span class='@worksheet ivar id'>@worksheet</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -600,9 +617,10 @@ If the style option is not defined, the default style (0) is applied to each cel
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Adds a singel sell to the row based on the data provided and updates the
-worksheet's autofit data.</p>
+    <p>
+Adds a singel sell to the row based on the data provided and updates the
+worksheet&#8217;s autofit data.
+</p>
 
 
   </div>
@@ -638,11 +656,12 @@ worksheet's autofit data.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/row.rb', line 51</span>
 
-<span class='kw'>def</span> <span class='id add_cell'>add_cell</span><span class='lparen'>(</span><span class='id value'>value</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='id c'>c</span> <span class='op'>=</span> <span class='const'>Cell</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='id value'>value</span><span class='comma'>,</span> <span class='id options'>options</span><span class='rparen'>)</span>
-  <span class='id update_auto_fit_data'>update_auto_fit_data</span>
-  <span class='id c'>c</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='add_cell identifier id'>add_cell</span><span class='lparen token'>(</span><span class='value identifier id'>value</span><span class='assign token'>=</span><span class='string val'>&quot;&quot;</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='c identifier id'>c</span> <span class='assign token'>=</span> <span class='Cell constant id'>Cell</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='comma token'>,</span> <span class='value identifier id'>value</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
+  <span class='update_auto_fit_data identifier id'>update_auto_fit_data</span>
+  <span class='c identifier id'>c</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -657,8 +676,9 @@ worksheet's autofit data.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The index of this row in the worksheet</p>
+    <p>
+The index of this row in the worksheet
+</p>
 
 
   </div>
@@ -692,9 +712,10 @@ worksheet's autofit data.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/row.rb', line 38</span>
 
-<span class='kw'>def</span> <span class='id index'>index</span> 
-  <span class='id worksheet'>worksheet</span><span class='period'>.</span><span class='id rows'>rows</span><span class='period'>.</span><span class='id index'>index</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='index identifier id'>index</span> 
+  <span class='worksheet identifier id'>worksheet</span><span class='dot token'>.</span><span class='rows identifier id'>rows</span><span class='dot token'>.</span><span class='index identifier id'>index</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -709,8 +730,9 @@ worksheet's autofit data.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>sets the style for every cell in this row</p>
+    <p>
+sets the style for every cell in this row
+</p>
 
 
   </div>
@@ -734,12 +756,13 @@ worksheet's autofit data.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/row.rb', line 58</span>
 
-<span class='kw'>def</span> <span class='id style='>style=</span><span class='lparen'>(</span><span class='id style'>style</span><span class='rparen'>)</span>
-  <span class='id cells'>cells</span><span class='period'>.</span><span class='id each_with_index'>each_with_index</span> <span class='kw'>do</span> <span class='op'>|</span> <span class='id cell'>cell</span><span class='comma'>,</span> <span class='id index'>index</span> <span class='op'>|</span>
-    <span class='id s'>s</span> <span class='op'>=</span> <span class='id style'>style</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Array</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id style'>style</span><span class='lbracket'>[</span><span class='id index'>index</span><span class='rbracket'>]</span> <span class='op'>:</span> <span class='id style'>style</span>
-    <span class='id cell'>cell</span><span class='period'>.</span><span class='id style'>style</span> <span class='op'>=</span> <span class='id s'>s</span>
-  <span class='kw'>end</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='style= identifier id'>style=</span><span class='lparen token'>(</span><span class='style identifier id'>style</span><span class='rparen token'>)</span>
+  <span class='cells identifier id'>cells</span><span class='dot token'>.</span><span class='each_with_index identifier id'>each_with_index</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span> <span class='cell identifier id'>cell</span><span class='comma token'>,</span> <span class='index identifier id'>index</span> <span class='bitor op'>|</span>
+    <span class='s identifier id'>s</span> <span class='assign token'>=</span> <span class='style identifier id'>style</span><span class='dot token'>.</span><span class='is_a? fid id'>is_a?</span><span class='lparen token'>(</span><span class='Array constant id'>Array</span><span class='rparen token'>)</span> <span class='question op'>?</span> <span class='style identifier id'>style</span><span class='lbrack token'>[</span><span class='index identifier id'>index</span><span class='rbrack token'>]</span> <span class='colon op'>:</span> <span class='style identifier id'>style</span>
+    <span class='cell identifier id'>cell</span><span class='dot token'>.</span><span class='style identifier id'>style</span> <span class='assign token'>=</span> <span class='s identifier id'>s</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -765,9 +788,10 @@ worksheet's autofit data.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/row.rb', line 65</span>
 
-<span class='kw'>def</span> <span class='id to_ary'>to_ary</span>
-  <span class='ivar'>@cells</span><span class='period'>.</span><span class='id to_ary'>to_ary</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='to_ary identifier id'>to_ary</span>
+  <span class='@cells ivar id'>@cells</span><span class='dot token'>.</span><span class='to_ary identifier id'>to_ary</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -782,8 +806,9 @@ worksheet's autofit data.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Serializes the row</p>
+    <p>
+Serializes the row
+</p>
 
 
   </div>
@@ -802,8 +827,9 @@ worksheet's autofit data.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>The document builder instance this objects xml will be added to.</p>
+        <div class='inline'><p>
+The document builder instance this objects xml will be added to.
+</p>
 </div>
       
     </li>
@@ -837,9 +863,10 @@ worksheet's autofit data.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/workbook/worksheet/row.rb', line 45</span>
 
-<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
-  <span class='id xml'>xml</span><span class='period'>.</span><span class='id row'>row</span><span class='lparen'>(</span><span class='symbol'>:r</span> <span class='op'>=&gt;</span> <span class='id index'>index</span><span class='op'>+</span><span class='int'>1</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='ivar'>@cells</span><span class='period'>.</span><span class='id each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id cell'>cell</span><span class='op'>|</span> <span class='id cell'>cell</span><span class='period'>.</span><span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span> <span class='rbrace'>}</span> <span class='rbrace'>}</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='row identifier id'>row</span><span class='lparen token'>(</span><span class='symbol val'>:r</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='index identifier id'>index</span><span class='plus op'>+</span><span class='integer val'>1</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span> <span class='@cells ivar id'>@cells</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='cell identifier id'>cell</span><span class='bitor op'>|</span> <span class='cell identifier id'>cell</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span> <span class='rbrace token'>}</span> <span class='rbrace token'>}</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -850,9 +877,9 @@ worksheet's autofit data.</p>
 </div>
     
     <div id="footer">
-  Generated on Sun Nov 27 20:28:15 2011 by 
+  Generated on Sun Nov 27 21:44:27 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.9.3).
+  0.7.3 (ruby-1.8.7).
 </div>
 
   </body>
