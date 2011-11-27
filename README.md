@@ -38,7 +38,7 @@ Feature List
 
 **7. Add jpg, gif and png images to worksheets
 
-**8. Build in mixin with Active record. simply add acts_as_xlsx to you models and they will support to_xlsx
+**8. Built in mixin with Active record. simply add acts_as_xlsx to you models and they will support to_xlsx if you add this gem to your Rails3 project
 
 Installing
 ----------
