@@ -29,7 +29,7 @@ require 'zip/zip'
 #core dependencies
 require 'bigdecimal'
 require 'time'
-require 'CGI'
+
 
 # xlsx generation with charts, images, automated column width, customizable styles and full schema validation. Axlsx excels at helping you generate beautiful Office Open XML Spreadsheet documents without having to understand the entire ECMA specification. Check out the README for some examples of how easy it is. Best of all, you can validate your xlsx file before serialization so you know for sure that anything generated is going to load on your client's machine.
 module Axlsx
