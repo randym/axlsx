@@ -2,6 +2,7 @@ require 'test/unit'
 require 'axlsx.rb'
 
 class TestRelationships < Test::Unit::TestCase
+
   def setup    
     @rels = Axlsx::Relationships.new
   end
@@ -10,6 +11,7 @@ class TestRelationships < Test::Unit::TestCase
   end  
 
   def test_valid_document
+    @rels = Axlsx::Relationships.new
     schema = Nokogiri::XML::Schema(File.open(Axlsx::RELS_XSD))
     doc = Nokogiri::XML(@rels.to_xml)
     errors = []
