@@ -6,7 +6,7 @@ class TestBar3DChart < Test::Unit::TestCase
   def setup
     @p = Axlsx::Package.new
     ws = @p.workbook.add_worksheet
-    @row = ws.add_row ["one", 1, Time.now]
+    @row = ws.add_row ["one", 1, Time.local(2011)]
     @chart = ws.add_chart Axlsx::Bar3DChart, :title => "fishery"
   end
 
