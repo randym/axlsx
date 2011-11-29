@@ -17,7 +17,7 @@ require 'axlsx/workbook/workbook.rb'
 require 'axlsx/package.rb'
 
 #required gems
-require 'Nokogiri'
+require 'nokogiri'
 require 'active_support/core_ext/object/instance_variables'
 require 'active_support/inflector'
 require 'rmagick'
