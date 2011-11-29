@@ -3,12 +3,6 @@ require 'axlsx.rb'
 
 class TestRelationships < Test::Unit::TestCase
 
-  def setup    
-    @rels = Axlsx::Relationships.new
-  end
-  
-  def teardown    
-  end  
 
   def test_valid_document
     @rels = Axlsx::Relationships.new
