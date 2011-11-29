@@ -169,7 +169,9 @@ module Axlsx
     def cast_value(v)
       if (@type == :time && v.is_a?(Time)) || (@type == :time && v.respond_to?(:to_time))
         v = v.respond_to?(:to_time) ? v.to_time : v
-        epoc = Workbook.date1904 ? Time.local(1904,1,1) : Time.local(1900,1,1)
+        epoc1900 = Time.local(1900, 1, 1)
+        epoc1904 = Time.local(1904,1, 1) 
+        epoc = Workbook.date1904 ? epoc1904 : epoc1900
         ((v.localtime - epoc) /60.0/60.0/24.0).to_f
       elsif @type == :float
         v.to_f
