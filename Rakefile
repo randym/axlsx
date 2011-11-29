@@ -10,6 +10,7 @@ end
 
 task :test do 
      require 'rake/testtask'
+     puts "The current time is: #{Time.now}"
      Rake::TestTask.new do |t|
        t.libs << 'test'
        t.test_files = FileList['test/**/tc_*.rb']
