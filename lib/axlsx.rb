@@ -20,7 +20,7 @@ require 'axlsx/package.rb'
 require 'nokogiri'
 require 'active_support/core_ext/object/instance_variables'
 require 'active_support/inflector'
-require 'rmagick'
+require 'RMagick'
 require 'zip/zip'
 
 #core dependencies
