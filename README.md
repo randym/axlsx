@@ -1,5 +1,6 @@
 Axlsx: Office Open XML Spreadsheet Generation
 ====================================
+[![Build Status](https://secure.travis-ci.org/randym/axlsx.png)](http://travis-ci.org/randym/axlsx/)
 
 **IRC**:          [irc.freenode.net / #axlsx](irc://irc.freenode.net/axlsx)    
 **Git**:          [http://github.com/randym/axlsx](http://github.com/randym/axlsx)   
@@ -7,7 +8,8 @@ Axlsx: Office Open XML Spreadsheet Generation
 **Copyright**:    2011      
 **License**:      MIT License      
 **Latest Version**: 1.0.10   
-**Ruby Version**: 1.8.7 - 1.9.3   
+**Ruby Version**: 1.8.7, 1.9.3 
+
 **Release Date**: November 29th 2011     
 
 Synopsis

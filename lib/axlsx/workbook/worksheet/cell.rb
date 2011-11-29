@@ -169,7 +169,9 @@ module Axlsx
     def cast_value(v)
       if (@type == :time && v.is_a?(Time)) || (@type == :time && v.respond_to?(:to_time))
         v = v.respond_to?(:to_time) ? v.to_time : v
-        epoc1900 = -2209021200 #Time.local(1900, 1, 1)
+        # Using hardcoded offsets here as some operating systems will not except a 'negative' offset from the ruby epoc.
+        # (1970)
+        epoc1900 = -2209021200 #Time.local(1900, 1, 1) 
         epoc1904 = -2082877200 #Time.local(1904, 1, 1) 
         epoc = Workbook.date1904 ? epoc1904 : epoc1900
         ((v.localtime.to_f - epoc) /60.0/60.0/24.0).to_f
