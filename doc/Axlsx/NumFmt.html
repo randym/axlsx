@@ -97,16 +97,14 @@
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'><p>
-The recommended way to manage styles is Styles#add_style
-</p>
+    <div class='inline'>
+<p>The recommended way to manage styles is Styles#add_style</p>
 </div>
   </div>
 
-<p>
-A NumFmt object defines an identifier and formatting code for data in
-cells.
-</p>
+
+<p>A NumFmt object defines an identifier and formatting code for data in
+cells.</p>
 
 
   </div>
@@ -138,9 +136,8 @@ cells.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The formatting to use for this number format.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The formatting to use for this number format.</p>
 </div></span>
   
 </li>
@@ -165,9 +162,8 @@ The formatting to use for this number format.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-An unsinged integer referencing a standard or custom number format.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>An unsinged integer referencing a standard or custom number format.</p>
 </div></span>
   
 </li>
@@ -204,9 +200,8 @@ An unsinged integer referencing a standard or custom number format.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-A new instance of NumFmt.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of NumFmt.</p>
 </div></span>
   
 </li>
@@ -228,10 +223,9 @@ A new instance of NumFmt.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Creates a numFmt element applying the instance values of this object as
-attributes.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a numFmt element applying the instance values of this object as
+attributes.</p>
 </div></span>
   
 </li>
@@ -252,9 +246,8 @@ attributes.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-A new instance of NumFmt
-</p>
+    
+<p>A new instance of NumFmt</p>
 
 
   </div>
@@ -309,9 +302,8 @@ A new instance of NumFmt
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-The formatting to use for this number format.
-</p>
+    
+<p>The formatting to use for this number format.</p>
 
 
   </div>
@@ -329,9 +321,8 @@ The formatting to use for this number format.
       
       
         &mdash;
-        <div class='inline'><p>
-The formatting to use for this number format.
-</p>
+        <div class='inline'>
+<p>The formatting to use for this number format.</p>
 </div>
       
     </li>
@@ -382,51 +373,49 @@ The formatting to use for this number format.
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'><p>
-These are the known formats I can dig up. The constant NUM_FMT_PERCENT is
+    <div class='inline'>
+<p>These are the known formats I can dig up. The constant NUM_FMT_PERCENT is
 9, and uses the default % formatting. Axlsx also defines a few formats for
 date and time that are commonly used in asia as NUM_FMT_YYYYMMDD and
-NUM_FRM_YYYYMMDDHHMMSS.
-</p>
-<pre class="code">
- <span class='integer val'>1</span> <span class='integer val'>0</span>
- <span class='integer val'>2</span> <span class='integer val'>0</span><span class='integer val'>.00</span>
- <span class='integer val'>3</span> <span class='comment val'>#,##0</span>
- <span class='integer val'>4</span> <span class='comment val'>#,##0.00</span>
- <span class='integer val'>5</span> $<span class='comment val'>#,##0_);($#,##0)</span>
- <span class='integer val'>6</span> $<span class='comment val'>#,##0_);[Red]($#,##0)</span>
- <span class='integer val'>7</span> $<span class='comment val'>#,##0.00_);($#,##0.00)</span>
- <span class='integer val'>8</span> $<span class='comment val'>#,##0.00_);[Red]($#,##0.00)</span>
- <span class='integer val'>9</span> <span class='integer val'>0</span><span class='mod op'>%</span>
- <span class='integer val'>10</span> <span class='integer val'>0</span><span class='integer val'>.00</span><span class='mod op'>%</span>
- <span class='integer val'>11</span> <span class='integer val'>0</span><span class='float val'>.00E+00</span>
- <span class='integer val'>12</span> <span class='comment val'># ?/?</span>
- <span class='integer val'>13</span> <span class='comment val'># ??/??</span>
- <span class='integer val'>14</span> <span class='m identifier id'>m</span><span class='div op'>/</span><span class='d identifier id'>d</span><span class='div op'>/</span><span class='yyyy identifier id'>yyyy</span>
- <span class='integer val'>15</span> <span class='d identifier id'>d</span><span class='minus op'>-</span><span class='mmm identifier id'>mmm</span><span class='minus op'>-</span><span class='yy identifier id'>yy</span>
- <span class='integer val'>16</span> <span class='d identifier id'>d</span><span class='minus op'>-</span><span class='mmm identifier id'>mmm</span>
- <span class='integer val'>17</span> <span class='mmm identifier id'>mmm</span><span class='minus op'>-</span><span class='yy identifier id'>yy</span>
- <span class='integer val'>18</span> <span class='h identifier id'>h</span><span class='symbol val'>:mm</span> <span class='AM constant id'>AM</span><span class='div op'>/</span><span class='PM constant id'>PM</span>
- <span class='integer val'>19</span> <span class='h identifier id'>h</span><span class='symbol val'>:mm</span><span class='symbol val'>:ss</span> <span class='AM constant id'>AM</span><span class='div op'>/</span><span class='PM constant id'>PM</span>
- <span class='integer val'>20</span> <span class='h identifier id'>h</span><span class='symbol val'>:mm</span>
- <span class='integer val'>21</span> <span class='h identifier id'>h</span><span class='symbol val'>:mm</span><span class='symbol val'>:ss</span>
- <span class='integer val'>22</span> <span class='m identifier id'>m</span><span class='div op'>/</span><span class='d identifier id'>d</span><span class='div op'>/</span><span class='yyyy identifier id'>yyyy</span> <span class='h identifier id'>h</span><span class='symbol val'>:mm</span>
- <span class='integer val'>37</span> <span class='comment val'>#,##0_);(#,##0)</span>
- <span class='integer val'>38</span> <span class='comment val'>#,##0_);[Red](#,##0)</span>
- <span class='integer val'>39</span> <span class='comment val'>#,##0.00_);(#,##0.00)</span>
- <span class='integer val'>40</span> <span class='comment val'>#,##0.00_);[Red](#,##0.00)</span>
- <span class='integer val'>45</span> <span class='mm identifier id'>mm</span><span class='symbol val'>:ss</span>
- <span class='integer val'>46</span> <span class='lbrack token'>[</span><span class='h identifier id'>h</span><span class='rbrack token'>]</span><span class='symbol val'>:mm</span><span class='symbol val'>:ss</span>
- <span class='integer val'>47</span> <span class='mm identifier id'>mm</span><span class='symbol val'>:ss</span><span class='integer val'>.0</span>
- <span class='integer val'>48</span> <span class='comment val'>##0.0E+0</span>
- <span class='integer val'>49</span> @
+NUM_FRM_YYYYMMDDHHMMSS.</p>
+
+<pre class="code"><span class='integer val'>1</span> <span class='integer val'>0</span>
+<span class='integer val'>2</span> <span class='integer val'>0</span><span class='integer val'>.00</span>
+<span class='integer val'>3</span> <span class='comment val'>#,##0</span>
+<span class='integer val'>4</span> <span class='comment val'>#,##0.00</span>
+<span class='integer val'>5</span> $<span class='comment val'>#,##0_);($#,##0)</span>
+<span class='integer val'>6</span> $<span class='comment val'>#,##0_);[Red]($#,##0)</span>
+<span class='integer val'>7</span> $<span class='comment val'>#,##0.00_);($#,##0.00)</span>
+<span class='integer val'>8</span> $<span class='comment val'>#,##0.00_);[Red]($#,##0.00)</span>
+<span class='integer val'>9</span> <span class='integer val'>0</span><span class='mod op'>%</span>
+<span class='integer val'>10</span> <span class='integer val'>0</span><span class='integer val'>.00</span><span class='mod op'>%</span>
+<span class='integer val'>11</span> <span class='integer val'>0</span><span class='float val'>.00E+00</span>
+<span class='integer val'>12</span> <span class='comment val'># ?/?</span>
+<span class='integer val'>13</span> <span class='comment val'># ??/??</span>
+<span class='integer val'>14</span> <span class='m identifier id'>m</span><span class='div op'>/</span><span class='d identifier id'>d</span><span class='div op'>/</span><span class='yyyy identifier id'>yyyy</span>
+<span class='integer val'>15</span> <span class='d identifier id'>d</span><span class='minus op'>-</span><span class='mmm identifier id'>mmm</span><span class='minus op'>-</span><span class='yy identifier id'>yy</span>
+<span class='integer val'>16</span> <span class='d identifier id'>d</span><span class='minus op'>-</span><span class='mmm identifier id'>mmm</span>
+<span class='integer val'>17</span> <span class='mmm identifier id'>mmm</span><span class='minus op'>-</span><span class='yy identifier id'>yy</span>
+<span class='integer val'>18</span> <span class='h identifier id'>h</span><span class='symbol val'>:mm</span> <span class='AM constant id'>AM</span><span class='div op'>/</span><span class='PM constant id'>PM</span>
+<span class='integer val'>19</span> <span class='h identifier id'>h</span><span class='symbol val'>:mm</span><span class='symbol val'>:ss</span> <span class='AM constant id'>AM</span><span class='div op'>/</span><span class='PM constant id'>PM</span>
+<span class='integer val'>20</span> <span class='h identifier id'>h</span><span class='symbol val'>:mm</span>
+<span class='integer val'>21</span> <span class='h identifier id'>h</span><span class='symbol val'>:mm</span><span class='symbol val'>:ss</span>
+<span class='integer val'>22</span> <span class='m identifier id'>m</span><span class='div op'>/</span><span class='d identifier id'>d</span><span class='div op'>/</span><span class='yyyy identifier id'>yyyy</span> <span class='h identifier id'>h</span><span class='symbol val'>:mm</span>
+<span class='integer val'>37</span> <span class='comment val'>#,##0_);(#,##0)</span>
+<span class='integer val'>38</span> <span class='comment val'>#,##0_);[Red](#,##0)</span>
+<span class='integer val'>39</span> <span class='comment val'>#,##0.00_);(#,##0.00)</span>
+<span class='integer val'>40</span> <span class='comment val'>#,##0.00_);[Red](#,##0.00)</span>
+<span class='integer val'>45</span> <span class='mm identifier id'>mm</span><span class='symbol val'>:ss</span>
+<span class='integer val'>46</span> <span class='lbrack token'>[</span><span class='h identifier id'>h</span><span class='rbrack token'>]</span><span class='symbol val'>:mm</span><span class='symbol val'>:ss</span>
+<span class='integer val'>47</span> <span class='mm identifier id'>mm</span><span class='symbol val'>:ss</span><span class='integer val'>.0</span>
+<span class='integer val'>48</span> <span class='comment val'>##0.0E+0</span>
+<span class='integer val'>49</span> @
 </pre>
 </div>
   </div>
 
-<p>
-An unsinged integer referencing a standard or custom number format.
-</p>
+
+<p>An unsinged integer referencing a standard or custom number format.</p>
 
 
   </div>
@@ -444,9 +433,8 @@ An unsinged integer referencing a standard or custom number format.
       
       
         &mdash;
-        <div class='inline'><p>
-An unsinged integer referencing a standard or custom number format.
-</p>
+        <div class='inline'>
+<p>An unsinged integer referencing a standard or custom number format.</p>
 </div>
       
     </li>
@@ -498,10 +486,9 @@ An unsinged integer referencing a standard or custom number format.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Creates a numFmt element applying the instance values of this object as
-attributes.
-</p>
+    
+<p>Creates a numFmt element applying the instance values of this object as
+attributes.</p>
 
 
   </div>
@@ -520,9 +507,8 @@ attributes.
       
       
         &mdash;
-        <div class='inline'><p>
-The document builder instance this objects xml will be added to.
-</p>
+        <div class='inline'>
+<p>The document builder instance this objects xml will be added to.</p>
 </div>
       
     </li>
@@ -553,7 +539,7 @@ The document builder instance this objects xml will be added to.
 </div>
     
     <div id="footer">
-  Generated on Tue Nov 29 13:28:49 2011 by 
+  Generated on Wed Nov 30 08:46:22 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>

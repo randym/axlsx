@@ -19,7 +19,7 @@ lib/axlsx/stylesheet/table_style_element.rb 117b80432ed6191c81a9e07bd467281319d2
 lib/axlsx/content_type/content_type.rb 6c576e1618f99f7163fffa6b6e89e964653dcb5f
 lib/axlsx/rels/relationships.rb 9c741e180796259bb378a789fd484fa1d8f04425
 lib/axlsx/stylesheet/num_fmt.rb 796ee45611b89e8a670dcff3dd97ad9306f18048
-lib/axlsx.rb 95ca38c3323064bedcfc86ac80488c25b8841762
+lib/axlsx.rb 98da8c39c002ea0389b3d91318a10fada3a96d92
 lib/axlsx/content_type/override.rb 43ff5dbbb01fbe0237a11c3da7fa5d8e1d5b67ef
 lib/axlsx/drawing/graphic_frame.rb 271e897616d85ebc069820c0d6a7dd3a716deff2
 lib/axlsx/drawing/pie_series.rb 66dfb2152f3b0e80b358c7af9061beb3c4ab984d
@@ -39,7 +39,7 @@ lib/axlsx/util/validators.rb c70f27b943d3711fbe1244a8311789a6fad7e31e
 lib/axlsx/stylesheet/font.rb 1ee29414f720d26b7d484a90d8ebdaa7ecda4fa6
 lib/axlsx/doc_props/app.rb c64077808d7cb6aa30472e15c600009a01f3f338
 lib/axlsx/workbook/worksheet/worksheet.rb 8f2dea71b5b95d700127958757301495a444e5c8
-lib/axlsx/workbook/worksheet/cell.rb 043fb997d55e24cd0c11bc20cf43e36b0fadb9c1
+lib/axlsx/workbook/worksheet/cell.rb 38a373677f808fabf4b65eaff7e081dca0e539de
 lib/axlsx/rels/relationship.rb 8d279056b53ba22ff288187ff0f3d18273dcdcb7
 lib/axlsx/stylesheet/border.rb cee9b6982c4a946f7caa850090f72d0d7ce0a0d2
 lib/axlsx/drawing/ser_axis.rb 1f4952403738e3089e30deb266b1385679d46096

@@ -25,9 +25,11 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'nokogiri', '>= 1.4.1'
   s.add_runtime_dependency 'activesupport', '>= 2.3.9'
+  s.add_runtime_dependency 'i18n', '>= 0.6.0'
   s.add_runtime_dependency 'rmagick', '>= 2.12.2'
   s.add_runtime_dependency 'zip', '>= 2.0.2'
   s.add_development_dependency 'rake'
+  s.add_development_dependency 'bundler'
 
   s.required_ruby_version = '>= 1.8.7'
   s.require_path = 'lib'

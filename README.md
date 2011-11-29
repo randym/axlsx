@@ -10,7 +10,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 **Latest Version**: 1.0.10   
 **Ruby Version**: 1.8.7, 1.9.3 
 
-**Release Date**: November 29th 2011     
+**Release Date**: November 30th 2011     
 
 Synopsis
 --------
@@ -209,12 +209,15 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
  
 Changelog
 ---------
-- **October.29.11**: 1.0.10 release
+- **October.30.11**: 1.0.10 release
   - Updating gemspec to lower gem version requirements.
   - Added row.style assignation for updating the cell style for an entire row
   - Added col_style method to worksheet upate a the style for a column of cells
   - Added cols for an easy reference to columns in a worksheet.
-  - prep for release of acts_as_xlsx gem
+  - prep for pre release of acts_as_xlsx gem
+  - added in travis.ci configuration and build status
+  - fixed out of range bug in time calculations for 32bit time.
+  - added i18n for active support
 
 - **October.26.11**: 1.0.9 release
   - Updated to support ruby 1.9.3

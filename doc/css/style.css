@@ -294,7 +294,7 @@ li.r2 { background: #fafafa; }
 #filecontents pre.code, .docstring pre.code { display: block; }
 .source_code .lines { padding-right: 12px; color: #555; text-align: right; }
 #filecontents pre.code, .docstring pre.code, 
-.tags .example { padding: 5px 12px; margin-top: 4px; border: 1px solid #eef; background: #f5f5ff; }
+.tags pre.example { padding: 5px 12px; margin-top: 4px; border: 1px solid #eef; background: #f5f5ff; }
 pre.code { color: #000; }
 pre.code .info.file { color: #555; }
 pre.code .val { color: #036A07; }

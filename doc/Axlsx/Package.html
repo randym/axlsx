@@ -94,11 +94,10 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>
-Package is responsible for managing all the bits and peices that Open
+    
+<p>Package is responsible for managing all the bits and peices that Open
 Office XML requires to make a valid xlsx document including valdation and
-serialization.
-</p>
+serialization.</p>
 
 
   </div>
@@ -137,9 +136,8 @@ serialization.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Initializes your package.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Initializes your package.</p>
 </div></span>
   
 </li>
@@ -161,9 +159,8 @@ Initializes your package.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Accepts a ruport table for serialization to xlsx.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Accepts a ruport table for serialization to xlsx.</p>
 </div></span>
   
 </li>
@@ -185,9 +182,8 @@ Accepts a ruport table for serialization to xlsx.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Serialize your workbook to disk as an xlsx document.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Serialize your workbook to disk as an xlsx document.</p>
 </div></span>
   
 </li>
@@ -209,9 +205,8 @@ Serialize your workbook to disk as an xlsx document.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Validate all parts of the package against xsd schema.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>Validate all parts of the package against xsd schema.</p>
 </div></span>
   
 </li>
@@ -233,9 +228,8 @@ Validate all parts of the package against xsd schema.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-The workbook this package will serialize or validate.
-</p>
+    <span class="summary_desc"><div class='inline'>
+<p>The workbook this package will serialize or validate.</p>
 </div></span>
   
 </li>
@@ -277,9 +271,8 @@ The workbook this package will serialize or validate.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Initializes your package
-</p>
+    
+<p>Initializes your package</p>
 
 
   </div>
@@ -289,9 +282,8 @@ Initializes your package
   <div class="examples">
     <h3>Examples:</h3>
     
-      <h4><div class='inline'><p>
-Package.new :author =&gt; &#8216;you!&#8217;, :workbook =&gt; Workbook.new
-</p>
+      <h4><div class='inline'>
+<p>Package.new :author =&gt; ‘you!’, :workbook =&gt; Workbook.new</p>
 </div></h4>
       <pre class="example code">
 </pre>
@@ -312,10 +304,9 @@ Package.new :author =&gt; &#8216;you!&#8217;, :workbook =&gt; Workbook.new
       
       
         &mdash;
-        <div class='inline'><p>
-A hash that you can use to specify the author and workbook for this
-package.
-</p>
+        <div class='inline'>
+<p>A hash that you can use to specify the author and workbook for this
+package.</p>
 </div>
       
     </li>
@@ -334,9 +325,8 @@ package.
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'><p>
-The author of the document
-</p>
+          &mdash; <div class='inline'>
+<p>The author of the document</p>
 </div>
         </li>
       
@@ -369,9 +359,8 @@ The author of the document
       
       
         &mdash;
-        <div class='inline'><p>
-the object that the method was called on
-</p>
+        <div class='inline'>
+<p>the object that the method was called on</p>
 </div>
       
     </li>
@@ -422,9 +411,8 @@ the object that the method was called on
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Accepts a ruport table for serialization to xlsx
-</p>
+    
+<p>Accepts a ruport table for serialization to xlsx</p>
 
 
   </div>
@@ -443,9 +431,8 @@ Accepts a ruport table for serialization to xlsx
       
       
         &mdash;
-        <div class='inline'><p>
-a ruport Table object
-</p>
+        <div class='inline'>
+<p>a ruport Table object</p>
 </div>
       
     </li>
@@ -487,17 +474,15 @@ a ruport Table object
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'><p>
-A tremendous amount of effort has gone into ensuring that you cannot create
+    <div class='inline'>
+<p>A tremendous amount of effort has gone into ensuring that you cannot create
 invalid xlsx documents. confirm_valid should be used in the rare case that
-you cannot open the serialized file.
-</p>
+you cannot open the serialized file.</p>
 </div>
   </div>
 
-<p>
-Serialize your workbook to disk as an xlsx document.
-</p>
+
+<p>Serialize your workbook to disk as an xlsx document.</p>
 
 
   </div>
@@ -530,9 +515,8 @@ Serialize your workbook to disk as an xlsx document.
       
       
         &mdash;
-        <div class='inline'><p>
-The file you want to serialize your package to
-</p>
+        <div class='inline'>
+<p>The file you want to serialize your package to</p>
 </div>
       
     </li>
@@ -549,9 +533,8 @@ The file you want to serialize your package to
       
       
         &mdash;
-        <div class='inline'><p>
-Validate the package prior to serialization.
-</p>
+        <div class='inline'>
+<p>Validate the package prior to serialization.</p>
 </div>
       
     </li>
@@ -569,10 +552,9 @@ Validate the package prior to serialization.
       
       
         &mdash;
-        <div class='inline'><p>
-False if confirm_valid and validation errors exist. True if the package was
-serialized
-</p>
+        <div class='inline'>
+<p>False if confirm_valid and validation errors exist. True if the package was
+serialized</p>
 </div>
       
     </li>
@@ -650,25 +632,22 @@ serialized
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'><p>
-This gem includes all schema from OfficeOpenXML-XMLSchema-Transitional.zip
+    <div class='inline'>
+<p>This gem includes all schema from OfficeOpenXML-XMLSchema-Transitional.zip
 and OpenPackagingConventions-XMLSchema.zip as per ECMA-376, Third edition.
 opc schema require an internet connection to import remote schema from
 dublin core for dc, dcterms and xml namespaces. Those remote schema are
-included in this gem, and the original files have been altered to refer to
-the local versions.
-</p>
-<p>
-If by chance you are able to creat a package that does not validate it
+included in this gem, and the original files have been altered to  refer to
+the local versions.</p>
+
+<p>If by chance you are able to creat a package that does not validate it
 indicates that the internal validation is not robust enough and needs to be
-improved. Please report your errors to the gem author.
-</p>
+improved. Please report your errors to the gem author.</p>
 </div>
   </div>
 
-<p>
-Validate all parts of the package against xsd schema.
-</p>
+
+<p>Validate all parts of the package against xsd schema.</p>
 
 
   </div>
@@ -698,9 +677,8 @@ Validate all parts of the package against xsd schema.
       
       
         &mdash;
-        <div class='inline'><p>
-An array of all validation errors found.
-</p>
+        <div class='inline'>
+<p>An array of all validation errors found.</p>
 </div>
       
     </li>
@@ -752,25 +730,23 @@ An array of all validation errors found.
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'><p>
-As there are multiple ways to instantiate a workbook for the package, here
-are a few examples:
-</p>
-<pre class="code">
-  <span class='comment val'># assign directly during package instanciation</span>
-  <span class='wb identifier id'>wb</span> <span class='assign token'>=</span> <span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='symbol val'>:workbook</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='Workbook constant id'>Workbook</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span>
+    <div class='inline'>
+<p>As there are multiple ways to instantiate a workbook for the package,  here
+are a few examples:</p>
 
-  <span class='comment val'># get a fresh workbook automatically from the package</span>
-  <span class='wb identifier id'>wb</span> <span class='assign token'>=</span> <span class='Pacakge constant id'>Pacakge</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span>
-  <span class='comment val'>#     # set the workbook after creating the package</span>
-  <span class='wb identifier id'>wb</span> <span class='assign token'>=</span> <span class='Package constant id'>Package</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='workbook identifier id'>workbook</span> <span class='assign token'>=</span> <span class='Workbook constant id'>Workbook</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+<pre class="ruby"><span class="ruby-comment"># assign directly during package instanciation</span>
+<span class="ruby-identifier">wb</span> = <span class="ruby-constant">Package</span>.<span class="ruby-identifier">new</span>(:<span class="ruby-identifier">workbook</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Workbook</span>.<span class="ruby-identifier">new</span>).<span class="ruby-identifier">workbook</span>
+
+<span class="ruby-comment"># get a fresh workbook automatically from the package</span>
+<span class="ruby-identifier">wb</span> = <span class="ruby-constant">Pacakge</span>.<span class="ruby-identifier">new</span>().<span class="ruby-identifier">workbook</span>
+<span class="ruby-comment">#     # set the workbook after creating the package</span>
+<span class="ruby-identifier">wb</span> = <span class="ruby-constant">Package</span>.<span class="ruby-identifier">new</span>().<span class="ruby-identifier">workbook</span> = <span class="ruby-constant">Workbook</span>.<span class="ruby-identifier">new</span>
 </pre>
 </div>
   </div>
 
-<p>
-The workbook this package will serialize or validate.
-</p>
+
+<p>The workbook this package will serialize or validate.</p>
 
 
   </div>
@@ -801,10 +777,9 @@ The workbook this package will serialize or validate.
       
       
         &mdash;
-        <div class='inline'><p>
-If no workbook instance has been assigned with this package a new Workbook
-instance is returned.
-</p>
+        <div class='inline'>
+<p>If no workbook instance has been assigned with this package a new Workbook
+instance is returned.</p>
 </div>
       
     </li>
@@ -821,9 +796,8 @@ instance is returned.
       
       
         
-        <div class='inline'><p>
-ArgumentError if workbook parameter is not a Workbook instance.
-</p>
+        <div class='inline'>
+<p>ArgumentError if workbook parameter is not a Workbook instance.</p>
 </div>
       
     </li>
@@ -902,7 +876,7 @@ ArgumentError if workbook parameter is not a Workbook instance.
 </div>
     
     <div id="footer">
-  Generated on Tue Nov 29 13:28:43 2011 by 
+  Generated on Wed Nov 30 08:46:36 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.3 (ruby-1.8.7).
 </div>
