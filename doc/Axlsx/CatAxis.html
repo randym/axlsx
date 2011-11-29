@@ -96,8 +96,9 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>A CatAxis object defines a chart category axis</p>
+    <p>
+A CatAxis object defines a chart category axis
+</p>
 
 
   </div>
@@ -113,8 +114,9 @@
         <dt id="LBL_OFFSET_REGEX-constant" class="">LBL_OFFSET_REGEX =
           <div class="docstring">
   <div class="discussion">
-    
-<p>regex for validating label offset</p>
+    <p>
+regex for validating label offset
+</p>
 
 
   </div>
@@ -124,7 +126,8 @@
 
 </div>
         </dt>
-        <dd><pre class="code"><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>0*(([0-9])|([1-9][0-9])|([1-9][0-9][0-9])|1000)%</span><span class='regexp_end'>/</span></span></pre></dd>
+        <dd><pre class="code"><span class='regexp val'>/0*(([0-9])|([1-9][0-9])|([1-9][0-9][0-9])|1000)%/</span>
+</pre></dd>
       
     </dl>
   
@@ -156,9 +159,10 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>From the docs: This element specifies that this axis is a date or text axis
-based on the data that is used for the axis labels, not a specific choice.</p>
+    <span class="summary_desc"><div class='inline'><p>
+From the docs: This element specifies that this axis is a date or text axis
+based on the data that is used for the axis labels, not a specific choice.
+</p>
 </div></span>
   
 </li>
@@ -183,9 +187,10 @@ based on the data that is used for the axis labels, not a specific choice.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>specifies how the perpendicular axis is crossed must be one of [:ctr, :l,
-:r].</p>
+    <span class="summary_desc"><div class='inline'><p>
+specifies how the perpendicular axis is crossed must be one of [:ctr, :l,
+:r].
+</p>
 </div></span>
   
 </li>
@@ -210,8 +215,9 @@ based on the data that is used for the axis labels, not a specific choice.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The offset of the labels must be between a string between 0 and 1000.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The offset of the labels must be between a string between 0 and 1000.
+</p>
 </div></span>
   
 </li>
@@ -256,8 +262,9 @@ based on the data that is used for the axis labels, not a specific choice.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Creates a new CatAxis object.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Creates a new CatAxis object.
+</p>
 </div></span>
   
 </li>
@@ -279,8 +286,9 @@ based on the data that is used for the axis labels, not a specific choice.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Serializes the category axis.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Serializes the category axis.
+</p>
 </div></span>
   
 </li>
@@ -306,8 +314,9 @@ based on the data that is used for the axis labels, not a specific choice.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Creates a new CatAxis object</p>
+    <p>
+Creates a new CatAxis object
+</p>
 
 
   </div>
@@ -326,8 +335,9 @@ based on the data that is used for the axis labels, not a specific choice.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>the id of this axis. Inherited</p>
+        <div class='inline'><p>
+the id of this axis. Inherited
+</p>
 </div>
       
     </li>
@@ -342,8 +352,9 @@ based on the data that is used for the axis labels, not a specific choice.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>the id of the perpendicular axis. Inherited</p>
+        <div class='inline'><p>
+the id of the perpendicular axis. Inherited
+</p>
 </div>
       
     </li>
@@ -360,8 +371,9 @@ based on the data that is used for the axis labels, not a specific choice.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>a customizable set of options</p>
+        <div class='inline'><p>
+a customizable set of options
+</p>
 </div>
       
     </li>
@@ -384,8 +396,9 @@ based on the data that is used for the axis labels, not a specific choice.</p>
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'>
-<p>Inherited</p>
+          &mdash; <div class='inline'><p>
+Inherited
+</p>
 </div>
         </li>
       
@@ -395,8 +408,9 @@ based on the data that is used for the axis labels, not a specific choice.</p>
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'>
-<p>Inherited</p>
+          &mdash; <div class='inline'><p>
+Inherited
+</p>
 </div>
         </li>
       
@@ -406,8 +420,9 @@ based on the data that is used for the axis labels, not a specific choice.</p>
           <span class="default">
             
           </span>
-          &mdash; <div class='inline'>
-<p>Inherited</p>
+          &mdash; <div class='inline'><p>
+Inherited
+</p>
 </div>
         </li>
       
@@ -458,12 +473,13 @@ based on the data that is used for the axis labels, not a specific choice.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/cat_axis.rb', line 31</span>
 
-<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id axId'>axId</span><span class='comma'>,</span> <span class='id crossAx'>crossAx</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='id auto'>auto</span> <span class='op'>=</span> <span class='kw'>true</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='id lblAlgn'>lblAlgn</span> <span class='op'>=</span> <span class='symbol'>:ctr</span>
-  <span class='kw'>self</span><span class='period'>.</span><span class='id lblOffset'>lblOffset</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>100%</span><span class='tstring_end'>&quot;</span></span>
-  <span class='kw'>super</span><span class='lparen'>(</span><span class='id axId'>axId</span><span class='comma'>,</span> <span class='id crossAx'>crossAx</span><span class='comma'>,</span> <span class='id options'>options</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='axId identifier id'>axId</span><span class='comma token'>,</span> <span class='crossAx identifier id'>crossAx</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='auto identifier id'>auto</span> <span class='assign token'>=</span> <span class='true true kw'>true</span>
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='lblAlgn identifier id'>lblAlgn</span> <span class='assign token'>=</span> <span class='symbol val'>:ctr</span>
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='lblOffset identifier id'>lblOffset</span> <span class='assign token'>=</span> <span class='string val'>&quot;100%&quot;</span>
+  <span class='super super kw'>super</span><span class='lparen token'>(</span><span class='axId identifier id'>axId</span><span class='comma token'>,</span> <span class='crossAx identifier id'>crossAx</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -486,9 +502,10 @@ based on the data that is used for the axis labels, not a specific choice.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>From the docs: This element specifies that this axis is a date or text axis
-based on the data that is used for the axis labels, not a specific choice.</p>
+    <p>
+From the docs: This element specifies that this axis is a date or text axis
+based on the data that is used for the axis labels, not a specific choice.
+</p>
 
 
   </div>
@@ -522,9 +539,10 @@ based on the data that is used for the axis labels, not a specific choice.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/cat_axis.rb', line 7</span>
 
-<span class='kw'>def</span> <span class='id auto'>auto</span>
-  <span class='ivar'>@auto</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='auto identifier id'>auto</span>
+  <span class='@auto ivar id'>@auto</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -542,9 +560,10 @@ based on the data that is used for the axis labels, not a specific choice.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>specifies how the perpendicular axis is crossed must be one of [:ctr, :l,
-:r]</p>
+    <p>
+specifies how the perpendicular axis is crossed must be one of [:ctr, :l,
+:r]
+</p>
 
 
   </div>
@@ -578,9 +597,10 @@ based on the data that is used for the axis labels, not a specific choice.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/cat_axis.rb', line 12</span>
 
-<span class='kw'>def</span> <span class='id lblAlgn'>lblAlgn</span>
-  <span class='ivar'>@lblAlgn</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='lblAlgn identifier id'>lblAlgn</span>
+  <span class='@lblAlgn ivar id'>@lblAlgn</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -598,8 +618,9 @@ based on the data that is used for the axis labels, not a specific choice.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The offset of the labels must be between a string between 0 and 1000</p>
+    <p>
+The offset of the labels must be between a string between 0 and 1000
+</p>
 
 
   </div>
@@ -633,9 +654,10 @@ based on the data that is used for the axis labels, not a specific choice.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/cat_axis.rb', line 17</span>
 
-<span class='kw'>def</span> <span class='id lblOffset'>lblOffset</span>
-  <span class='ivar'>@lblOffset</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='lblOffset identifier id'>lblOffset</span>
+  <span class='@lblOffset ivar id'>@lblOffset</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -657,8 +679,9 @@ based on the data that is used for the axis labels, not a specific choice.</p>
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Serializes the category axis</p>
+    <p>
+Serializes the category axis
+</p>
 
 
   </div>
@@ -677,8 +700,9 @@ based on the data that is used for the axis labels, not a specific choice.</p>
       
       
         &mdash;
-        <div class='inline'>
-<p>The document builder instance this objects xml will be added to.</p>
+        <div class='inline'><p>
+The document builder instance this objects xml will be added to.
+</p>
 </div>
       
     </li>
@@ -717,14 +741,15 @@ based on the data that is used for the axis labels, not a specific choice.</p>
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/cat_axis.rb', line 52</span>
 
-<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
-  <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:catAx</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span>
-    <span class='kw'>super</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
-    <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:auto</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span><span class='op'>=&gt;</span><span class='ivar'>@auto</span><span class='rparen'>)</span>
-    <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:lblAlgn</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span><span class='op'>=&gt;</span><span class='ivar'>@lblAlgn</span><span class='rparen'>)</span>
-    <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:lblOffset</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span><span class='op'>=&gt;</span><span class='ivar'>@lblOffset</span><span class='rparen'>)</span>                 
-  <span class='rbrace'>}</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:catAx'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+    <span class='super super kw'>super</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:auto'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@auto ivar id'>@auto</span><span class='rparen token'>)</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:lblAlgn'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@lblAlgn ivar id'>@lblAlgn</span><span class='rparen token'>)</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:lblOffset'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='@lblOffset ivar id'>@lblOffset</span><span class='rparen token'>)</span>                 
+  <span class='rbrace token'>}</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -735,9 +760,9 @@ based on the data that is used for the axis labels, not a specific choice.</p>
 </div>
     
     <div id="footer">
-  Generated on Sun Nov 27 22:10:48 2011 by 
+  Generated on Tue Nov 29 13:28:42 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.9.3).
+  0.7.3 (ruby-1.8.7).
 </div>
 
   </body>

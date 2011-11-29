@@ -94,8 +94,9 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>The color class represents a color used for borders, fills an fonts</p>
+    <p>
+The color class represents a color used for borders, fills an fonts
+</p>
 
 
   </div>
@@ -127,8 +128,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Determines if the color is system color dependant.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Determines if the color is system color dependant.
+</p>
 </div></span>
   
 </li>
@@ -153,8 +155,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The color as defined in rgb terms.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The color as defined in rgb terms.
+</p>
 </div></span>
   
 </li>
@@ -179,8 +182,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The tint value.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The tint value.
+</p>
 </div></span>
   
 </li>
@@ -217,8 +221,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Creates a new Color object.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Creates a new Color object.
+</p>
 </div></span>
   
 </li>
@@ -240,8 +245,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Serializes the color.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Serializes the color.
+</p>
 </div></span>
   
 </li>
@@ -262,8 +268,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Creates a new Color object</p>
+    <p>
+Creates a new Color object
+</p>
 
 
   </div>
@@ -284,8 +291,9 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>a customizable set of options</p>
+        <div class='inline'><p>
+a customizable set of options
+</p>
 </div>
       
     </li>
@@ -345,12 +353,13 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/color.rb', line 34</span>
 
-<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='ivar'>@rgb</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>FF000000</span><span class='tstring_end'>&quot;</span></span>
-  <span class='id options'>options</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id o'>o</span><span class='op'>|</span>
-    <span class='kw'>self</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span> <span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
-  <span class='kw'>end</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='@rgb ivar id'>@rgb</span> <span class='assign token'>=</span> <span class='string val'>&quot;FF000000&quot;</span>
+  <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='o identifier id'>o</span><span class='bitor op'>|</span>
+    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='dstring node'>&quot;#{o[0]}=&quot;</span><span class='comma token'>,</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>0</span><span class='rbrack token'>]</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -373,8 +382,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Determines if the color is system color dependant</p>
+    <p>
+Determines if the color is system color dependant
+</p>
 
 
   </div>
@@ -408,9 +418,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/color.rb', line 6</span>
 
-<span class='kw'>def</span> <span class='id auto'>auto</span>
-  <span class='ivar'>@auto</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='auto identifier id'>auto</span>
+  <span class='@auto ivar id'>@auto</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -431,14 +442,16 @@
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'>
-<p>rgb colors need to conform to ST_UnsignedIntHex. That basically means put
-'FF' before you color</p>
+    <div class='inline'><p>
+rgb colors need to conform to ST_UnsignedIntHex. That basically means put
+&#8216;FF&#8217; before you color
+</p>
 </div>
   </div>
 
-
-<p>The color as defined in rgb terms.</p>
+<p>
+The color as defined in rgb terms.
+</p>
 
 
   </div>
@@ -448,11 +461,13 @@
   <div class="examples">
     <h3>Examples:</h3>
     
-      <h4><div class='inline'>
-<p>rgb colors</p>
+      <h4><div class='inline'><p>
+rgb colors
+</p>
 </div></h4>
-      <pre class="example code">&quot;FF000000&quot; is black
-&quot;FFFFFFFF&quot; is white</pre>
+      <pre class="example code"><span class='string val'>&quot;FF000000&quot;</span> <span class='is identifier id'>is</span> <span class='black identifier id'>black</span>
+<span class='string val'>&quot;FFFFFFFF&quot;</span> <span class='is identifier id'>is</span> <span class='white identifier id'>white</span>
+</pre>
     
   </div>
 
@@ -483,9 +498,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/color.rb', line 19</span>
 
-<span class='kw'>def</span> <span class='id rgb'>rgb</span>
-  <span class='ivar'>@rgb</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='rgb identifier id'>rgb</span>
+  <span class='@rgb ivar id'>@rgb</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -506,13 +522,15 @@
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'>
-<p>valid values are between -1.0 and 1.0</p>
+    <div class='inline'><p>
+valid values are between -1.0 and 1.0
+</p>
 </div>
   </div>
 
-
-<p>The tint value.</p>
+<p>
+The tint value.
+</p>
 
 
   </div>
@@ -546,9 +564,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/color.rb', line 28</span>
 
-<span class='kw'>def</span> <span class='id tint'>tint</span>
-  <span class='ivar'>@tint</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='tint identifier id'>tint</span>
+  <span class='@tint ivar id'>@tint</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -570,8 +589,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Serializes the color</p>
+    <p>
+Serializes the color
+</p>
 
 
   </div>
@@ -590,8 +610,9 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The document builder instance this objects xml will be added to.</p>
+        <div class='inline'><p>
+The document builder instance this objects xml will be added to.
+</p>
 </div>
       
     </li>
@@ -623,7 +644,8 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/color.rb', line 57</span>
 
-<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span> <span class='id xml'>xml</span><span class='period'>.</span><span class='id color'>color</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id instance_values'>instance_values</span><span class='rparen'>)</span> <span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span> <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='color identifier id'>color</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='dot token'>.</span><span class='instance_values identifier id'>instance_values</span><span class='rparen token'>)</span> <span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -634,9 +656,9 @@
 </div>
     
     <div id="footer">
-  Generated on Sun Nov 27 22:10:47 2011 by 
+  Generated on Tue Nov 29 13:28:57 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.9.3).
+  0.7.3 (ruby-1.8.7).
 </div>
 
   </body>

@@ -16,9 +16,6 @@ require 'axlsx/drawing/drawing.rb'
 require 'axlsx/workbook/workbook.rb'
 require 'axlsx/package.rb'
 
-require 'axlsx/ar.rb'
-
-
 #required gems
 require 'Nokogiri'
 require 'active_support/core_ext/object/instance_variables'

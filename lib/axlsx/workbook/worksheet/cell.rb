@@ -167,8 +167,8 @@ module Axlsx
     #   About Time - Time in OOXML is *different* from what you might expect. The history as to why is interesting,  but you can safely assume that if you are generating docs on a mac, you will want to specify Workbook.1904 as true when using time typed values.
     # @see Axlsx#date1904
     def cast_value(v)
-      if @type == :time && v.is_a?(Time)
-        #todo consider a time parsing method to convert strings to time
+      if (@type == :time && v.is_a?(Time)) || (@type == :time && v.respond_to?(:to_time))
+        v = v.to_time
         epoc = Workbook.date1904 ? Time.local(1904,1,1,0,0,0,0,v.zone) : Time.local(1900,1,1,0,0,0,0,v.zone)
         ((v - epoc) /60.0/60.0/24.0).to_f
       elsif @type == :float
@@ -178,15 +178,6 @@ module Axlsx
       else
         @type = :string
         v.to_s
-        # curious as to why this would be the cells responsibility
-        # convert your values before passing them in wankers! CGI.unescapeHTML(v.to_s).to_xs
-        # to revert, load this once when the gem is loaded.
-        # unless String.method_defined? :to_xs
-        #   require 'fast_xs' #dep
-        #   class String
-        #     alias_method :to_xs, :fast_xs
-        #   end
-        # end
       end
     end    
   end

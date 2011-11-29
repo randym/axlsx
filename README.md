@@ -6,15 +6,18 @@ Axlsx: Office Open XML Spreadsheet Generation
 **Author**:       Randy Morgan   
 **Copyright**:    2011      
 **License**:      MIT License      
-**Latest Version**: 1.0.10.a   
+**Latest Version**: 1.0.10   
 **Ruby Version**: 1.8.7 - 1.9.3   
-**Release Date**: November 27th 2011     
+**Release Date**: November 29th 2011     
 
 Synopsis
 --------
 
 Axlsx is an Office Open XML Spreadsheet generator for the Ruby programming language.
 With Axlsx you can create worksheets with charts, images, automated column width, customizable styles and full schema validation. Axlsx excels at helping you generate beautiful Office Open XML Spreadsheet documents without having to understand the entire ECMA specification. Check out the README for some examples of how easy it is. Best of all, you can validate your xlsx file before serialization so you know for sure that anything generated is going to load on your client's machine.
+
+If you are working in rails, or with active record see:
+http://github.com/randym/acts_as_xlsx 
 
 Help Wanted
 -----------
@@ -37,8 +40,6 @@ Feature List
 **6. Support for both 1904 and 1900 epocs configurable in the workbook.
 
 **7. Add jpg, gif and png images to worksheets
-
-**8. Built in mixin with Active record. simply add acts_as_xlsx to you models and they will support to_xlsx if you add this gem to your Rails3 project
 
 Installing
 ----------
@@ -192,55 +193,6 @@ Styling Rows
      p.workbook.worksheets.first.row_style 0, head
      p.serialize("example11.xlsx")
 
-
-Rails 3
-
-     #ImageMagick port needs to be confirgured --disable-openmp when using with rails3
-     #http://stackoverflow.com/questions/2838307/why-is-this-rmagick-call-generating-a-segmentation-fault
-
-     #Add the gem to your Gemfile and bundle install
-       gem 'axlsx'
-
-     # A Model that has id, name, title, content, vote, popularity, created_at and updated_at attributes 
-     class Post < ActiveRecord::Base
-     
-       # support for :include, :exclude, :only like ruport has not been implemented yet
-       acts_as_axlsx
-
-       def report
-         # First generate your package from the model
-         # scopes, conditions etc are allowed but must be before the to_xlsx call.
-         p = Post.to_xlsx(:all, :style => {:border => Axlsx::STYLE_THIN_BORDER})
-
-         # Add in some basic styles and formats
-         percent, date, header = nil, nil, nil
-         p.workbook.styles do |s|
-           percent = s.add_style :num_fmt=>9, :border => STYLE_THIN_BORDER
-           date = s.add_style :format_code => 'yyyy/mm/dd', :border => STYLE_THIN_BORDER
-           header = s.add_style :bg_color => "FF000000", :fg_color => "FFFFFFFF", :alignment => {:horizontal=>:center}, :sz=>14
-         end
-
-         ws = p.workbook.worksheets.first
-  
-         # Update the row and columns style so they propery format data.
-         ws.row_style(0, header)
-         ws.col_style(5, percent, :row_offset=>1)
-         ws.col_style((6..7), date, :row_offset=>1)
-       
-         # Add a chart for good measure
-         ws.add_chart(Axlsx::Bar3DChart) do |chart|
-           chart.title='Post Votes'
-           chart.start_at 0, ws.rows.size
-           chart.end_at 4, ws.rows.size+20
-           chart.add_series :data => ws.cols[4][(1..-1)], :labels=>ws.cols[0][(1..-1)]
-         end
-    
-         p.serialize('posts.xlsx')
-         send_file 'posts.xlsx', :type=>"application/xlsx", :x_sendfile=>true
-       end
-     end
-
-
 ###Documentation
 
 This gem is 100% documented with YARD, an exceptional documentation library. To see documentation for this, and all the gems installed on your system use:
@@ -255,12 +207,12 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
  
 Changelog
 ---------
-- **October.27.11**: 1.0.10.a release
-  - Updating gemspec to loosen up some of the gem requirements in the hope of maintaining compatibility with rails 2
-  - Added acts_as_xlsx mixin for rails3 See Examples
+- **October.29.11**: 1.0.10 release
+  - Updating gemspec to lower gem version requirements.
   - Added row.style assignation for updating the cell style for an entire row
   - Added col_style method to worksheet upate a the style for a column of cells
   - Added cols for an easy reference to columns in a worksheet.
+  - prep for release of acts_as_xlsx gem
 
 - **October.26.11**: 1.0.9 release
   - Updated to support ruby 1.9.3

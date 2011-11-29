@@ -94,8 +94,9 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>A border part.</p>
+    <p>
+A border part.
+</p>
 
 
   </div>
@@ -127,8 +128,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The color of this border part.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The color of this border part.
+</p>
 </div></span>
   
 </li>
@@ -153,8 +155,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The name of this border part.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The name of this border part.
+</p>
 </div></span>
   
 </li>
@@ -179,8 +182,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The syle of this border part.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The syle of this border part.
+</p>
 </div></span>
   
 </li>
@@ -217,8 +221,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Creates a new Border Part Object.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Creates a new Border Part Object.
+</p>
 </div></span>
   
 </li>
@@ -240,8 +245,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Serializes the border part.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Serializes the border part.
+</p>
 </div></span>
   
 </li>
@@ -262,8 +268,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Creates a new Border Part Object</p>
+    <p>
+Creates a new Border Part Object
+</p>
 
 
   </div>
@@ -284,8 +291,9 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>a customizable set of options</p>
+        <div class='inline'><p>
+a customizable set of options
+</p>
 </div>
       
     </li>
@@ -351,11 +359,12 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/border_pr.rb', line 46</span>
 
-<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='id options'>options</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id o'>o</span><span class='op'>|</span>
-    <span class='kw'>self</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id o'>o</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span>
-  <span class='kw'>end</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='options identifier id'>options</span><span class='assign token'>=</span><span class='lbrace token'>{</span><span class='rbrace token'>}</span><span class='rparen token'>)</span>
+  <span class='options identifier id'>options</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='o identifier id'>o</span><span class='bitor op'>|</span>
+    <span class='self self kw'>self</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='dstring node'>&quot;#{o[0]}=&quot;</span><span class='comma token'>,</span> <span class='o identifier id'>o</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span> <span class='dstring node'>&quot;#{o[0]}=&quot;</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -378,8 +387,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The color of this border part.</p>
+    <p>
+The color of this border part.
+</p>
 
 
   </div>
@@ -397,8 +407,9 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The color of this border part.</p>
+        <div class='inline'><p>
+The color of this border part.
+</p>
 </div>
       
     </li>
@@ -418,9 +429,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/border_pr.rb', line 6</span>
 
-<span class='kw'>def</span> <span class='id color'>color</span>
-  <span class='ivar'>@color</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='color identifier id'>color</span>
+  <span class='@color ivar id'>@color</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -441,23 +453,26 @@
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'>
-<p>The following are allowed</p>
-
-<pre class="code"><span class='symbol'>:start</span>
-<span class='symbol'>:end</span>
-<span class='symbol'>:left</span>
-<span class='symbol'>:right</span>
-<span class='symbol'>:top</span>
-<span class='symbol'>:bottom</span>
-<span class='symbol'>:diagonal</span>
-<span class='symbol'>:vertical</span>
-<span class='symbol'>:horizontal</span></pre>
+    <div class='inline'><p>
+The following are allowed
+</p>
+<pre class="code">
+ <span class='symbol val'>:start</span>
+ <span class='symbol val'>:end</span>
+ <span class='symbol val'>:left</span>
+ <span class='symbol val'>:right</span>
+ <span class='symbol val'>:top</span>
+ <span class='symbol val'>:bottom</span>
+ <span class='symbol val'>:diagonal</span>
+ <span class='symbol val'>:vertical</span>
+ <span class='symbol val'>:horizontal</span>
+</pre>
 </div>
   </div>
 
-
-<p>The name of this border part</p>
+<p>
+The name of this border part
+</p>
 
 
   </div>
@@ -475,8 +490,9 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The name of this border part</p>
+        <div class='inline'><p>
+The name of this border part
+</p>
 </div>
       
     </li>
@@ -496,9 +512,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/border_pr.rb', line 39</span>
 
-<span class='kw'>def</span> <span class='id name'>name</span>
-  <span class='ivar'>@name</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='name identifier id'>name</span>
+  <span class='@name ivar id'>@name</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -519,28 +536,31 @@
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'>
-<p>The following are allowed</p>
-
-<pre class="code"><span class='symbol'>:none</span> 
-<span class='symbol'>:thin</span>
-<span class='symbol'>:medium</span>
-<span class='symbol'>:dashed</span>
-<span class='symbol'>:dotted</span>
-<span class='symbol'>:thick</span>
-<span class='symbol'>:double</span>
-<span class='symbol'>:hair</span> 
-<span class='symbol'>:mediumDashed</span>
-<span class='symbol'>:dashDot</span>
-<span class='symbol'>:mediumDashDot</span>
-<span class='symbol'>:dashDotDot</span>
-<span class='symbol'>:mediumDashDotDot</span>
-<span class='symbol'>:slantDashDot</span></pre>
+    <div class='inline'><p>
+The following are allowed
+</p>
+<pre class="code">
+ <span class='symbol val'>:none</span>
+ <span class='symbol val'>:thin</span>
+ <span class='symbol val'>:medium</span>
+ <span class='symbol val'>:dashed</span>
+ <span class='symbol val'>:dotted</span>
+ <span class='symbol val'>:thick</span>
+ <span class='symbol val'>:double</span>
+ <span class='symbol val'>:hair</span>
+ <span class='symbol val'>:mediumDashed</span>
+ <span class='symbol val'>:dashDot</span>
+ <span class='symbol val'>:mediumDashDot</span>
+ <span class='symbol val'>:dashDotDot</span>
+ <span class='symbol val'>:mediumDashDotDot</span>
+ <span class='symbol val'>:slantDashDot</span>
+</pre>
 </div>
   </div>
 
-
-<p>The syle of this border part.</p>
+<p>
+The syle of this border part.
+</p>
 
 
   </div>
@@ -558,8 +578,9 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The syle of this border part.</p>
+        <div class='inline'><p>
+The syle of this border part.
+</p>
 </div>
       
     </li>
@@ -579,9 +600,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/border_pr.rb', line 25</span>
 
-<span class='kw'>def</span> <span class='id style'>style</span>
-  <span class='ivar'>@style</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='style identifier id'>style</span>
+  <span class='@style ivar id'>@style</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -603,8 +625,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Serializes the border part</p>
+    <p>
+Serializes the border part
+</p>
 
 
   </div>
@@ -623,8 +646,9 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The document builder instance this objects xml will be added to.</p>
+        <div class='inline'><p>
+The document builder instance this objects xml will be added to.
+</p>
 </div>
       
     </li>
@@ -660,11 +684,12 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/stylesheet/border_pr.rb', line 62</span>
 
-<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
-  <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='ivar'>@name</span><span class='comma'>,</span> <span class='symbol'>:style</span> <span class='op'>=&gt;</span> <span class='ivar'>@style</span><span class='rparen'>)</span> <span class='lbrace'>{</span>
-    <span class='ivar'>@color</span><span class='period'>.</span><span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='ivar'>@color</span><span class='period'>.</span><span class='id is_a?'>is_a?</span> <span class='const'>Color</span>
-  <span class='rbrace'>}</span> 
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='@name ivar id'>@name</span><span class='comma token'>,</span> <span class='symbol val'>:style</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='@style ivar id'>@style</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+    <span class='@color ivar id'>@color</span><span class='dot token'>.</span><span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span> <span class='if if_mod kw'>if</span> <span class='@color ivar id'>@color</span><span class='dot token'>.</span><span class='is_a? fid id'>is_a?</span> <span class='Color constant id'>Color</span>
+  <span class='rbrace token'>}</span> 
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -675,9 +700,9 @@
 </div>
     
     <div id="footer">
-  Generated on Sun Nov 27 22:10:48 2011 by 
+  Generated on Tue Nov 29 13:29:01 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.9.3).
+  0.7.3 (ruby-1.8.7).
 </div>
 
   </body>

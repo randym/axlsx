@@ -98,8 +98,9 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-<p>The ValAxisData class manages the values for a chart value series.</p>
+    <p>
+The ValAxisData class manages the values for a chart value series.
+</p>
 
 
   </div>
@@ -155,8 +156,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Serializes the value axis data.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Serializes the value axis data.
+</p>
 </div></span>
   
 </li>
@@ -211,8 +213,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Serializes the value axis data</p>
+    <p>
+Serializes the value axis data
+</p>
 
 
   </div>
@@ -231,8 +234,9 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The document builder instance this objects xml will be added to.</p>
+        <div class='inline'><p>
+The document builder instance this objects xml will be added to.
+</p>
 </div>
       
     </li>
@@ -280,23 +284,24 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/val_axis_data.rb', line 8</span>
 
-<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
-  <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:val</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span>
-    <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:numRef</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span>
-      <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:f</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='const'>Axlsx</span><span class='op'>::</span><span class='id cell_range'>cell_range</span><span class='lparen'>(</span><span class='ivar'>@list</span><span class='rparen'>)</span><span class='rparen'>)</span>
-      <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:numCache</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span>
-        <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:formatCode</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>General</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
-        <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:ptCount</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:val</span><span class='op'>=&gt;</span><span class='id size'>size</span><span class='rparen'>)</span>
-        <span class='id each_with_index'>each_with_index</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id item'>item</span><span class='comma'>,</span> <span class='id index'>index</span><span class='op'>|</span>
-          <span class='id v'>v</span> <span class='op'>=</span> <span class='id item'>item</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Cell</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id item'>item</span><span class='period'>.</span><span class='id value'>value</span> <span class='op'>:</span> <span class='id item'>item</span>
-          <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:pt</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:idx</span><span class='op'>=&gt;</span><span class='id index'>index</span><span class='rparen'>)</span> <span class='lbrace'>{</span>
-            <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:v</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='id v'>v</span><span class='rparen'>)</span> 
-          <span class='rbrace'>}</span>
-        <span class='kw'>end</span>
-      <span class='rbrace'>}</span>                        
-    <span class='rbrace'>}</span>
-  <span class='rbrace'>}</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:val'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:numRef'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:f'</span><span class='comma token'>,</span> <span class='Axlsx constant id'>Axlsx</span><span class='colon2 op'>::</span><span class='cell_range identifier id'>cell_range</span><span class='lparen token'>(</span><span class='@list ivar id'>@list</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
+      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:numCache'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+        <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:formatCode'</span><span class='comma token'>,</span> <span class='string val'>'General'</span><span class='rparen token'>)</span>
+        <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:ptCount'</span><span class='comma token'>,</span> <span class='symbol val'>:val=</span><span class='gt op'>&gt;</span><span class='size identifier id'>size</span><span class='rparen token'>)</span>
+        <span class='each_with_index identifier id'>each_with_index</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='item identifier id'>item</span><span class='comma token'>,</span> <span class='index identifier id'>index</span><span class='bitor op'>|</span>
+          <span class='v identifier id'>v</span> <span class='assign token'>=</span> <span class='item identifier id'>item</span><span class='dot token'>.</span><span class='is_a? fid id'>is_a?</span><span class='lparen token'>(</span><span class='Cell constant id'>Cell</span><span class='rparen token'>)</span> <span class='question op'>?</span> <span class='item identifier id'>item</span><span class='dot token'>.</span><span class='value identifier id'>value</span> <span class='colon op'>:</span> <span class='item identifier id'>item</span>
+          <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:pt'</span><span class='comma token'>,</span> <span class='symbol val'>:idx=</span><span class='gt op'>&gt;</span><span class='index identifier id'>index</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+            <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:v'</span><span class='comma token'>,</span> <span class='v identifier id'>v</span><span class='rparen token'>)</span> 
+          <span class='rbrace token'>}</span>
+        <span class='end end kw'>end</span>
+      <span class='rbrace token'>}</span>                        
+    <span class='rbrace token'>}</span>
+  <span class='rbrace token'>}</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -307,9 +312,9 @@
 </div>
     
     <div id="footer">
-  Generated on Sun Nov 27 22:10:49 2011 by 
+  Generated on Tue Nov 29 13:28:44 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.9.3).
+  0.7.3 (ruby-1.8.7).
 </div>
 
   </body>

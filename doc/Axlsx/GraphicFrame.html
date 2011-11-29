@@ -97,13 +97,15 @@
     
   <div class="note notetag">
     <strong>Note:</strong> 
-    <div class='inline'>
-<p>The recommended way to manage charts is Worksheet#add_chart</p>
+    <div class='inline'><p>
+The recommended way to manage charts is Worksheet#add_chart
+</p>
 </div>
   </div>
 
-
-<p>A graphic frame defines a container for a chart object</p>
+<p>
+A graphic frame defines a container for a chart object
+</p>
 
 
   </div>
@@ -142,8 +144,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>A anchor that holds this frame.</p>
+    <span class="summary_desc"><div class='inline'><p>
+A anchor that holds this frame.
+</p>
 </div></span>
   
 </li>
@@ -168,8 +171,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>A reference to the chart object associated with this frame.</p>
+    <span class="summary_desc"><div class='inline'><p>
+A reference to the chart object associated with this frame.
+</p>
 </div></span>
   
 </li>
@@ -206,8 +210,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Creates a new GraphicFrame object.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Creates a new GraphicFrame object.
+</p>
 </div></span>
   
 </li>
@@ -229,8 +234,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The relationship id for this graphic.</p>
+    <span class="summary_desc"><div class='inline'><p>
+The relationship id for this graphic.
+</p>
 </div></span>
   
 </li>
@@ -252,8 +258,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Serializes the graphic frame.</p>
+    <span class="summary_desc"><div class='inline'><p>
+Serializes the graphic frame.
+</p>
 </div></span>
   
 </li>
@@ -274,8 +281,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Creates a new GraphicFrame object</p>
+    <p>
+Creates a new GraphicFrame object
+</p>
 
 
   </div>
@@ -324,11 +332,12 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/graphic_frame.rb', line 18</span>
 
-<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id anchor'>anchor</span><span class='comma'>,</span> <span class='id chart_type'>chart_type</span><span class='comma'>,</span> <span class='id options'>options</span><span class='rparen'>)</span>
-  <span class='const'>DataTypeValidator</span><span class='period'>.</span><span class='id validate'>validate</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Drawing.chart_type</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='const'>Chart</span><span class='comma'>,</span> <span class='id chart_type'>chart_type</span> 
-  <span class='ivar'>@anchor</span> <span class='op'>=</span> <span class='id anchor'>anchor</span>
-  <span class='ivar'>@chart</span> <span class='op'>=</span> <span class='id chart_type'>chart_type</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='id options'>options</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='anchor identifier id'>anchor</span><span class='comma token'>,</span> <span class='chart_type identifier id'>chart_type</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
+  <span class='DataTypeValidator constant id'>DataTypeValidator</span><span class='dot token'>.</span><span class='validate identifier id'>validate</span> <span class='string val'>&quot;Drawing.chart_type&quot;</span><span class='comma token'>,</span> <span class='Chart constant id'>Chart</span><span class='comma token'>,</span> <span class='chart_type identifier id'>chart_type</span> 
+  <span class='@anchor ivar id'>@anchor</span> <span class='assign token'>=</span> <span class='anchor identifier id'>anchor</span>
+  <span class='@chart ivar id'>@chart</span> <span class='assign token'>=</span> <span class='chart_type identifier id'>chart_type</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='comma token'>,</span> <span class='options identifier id'>options</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -351,8 +360,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>A anchor that holds this frame</p>
+    <p>
+A anchor that holds this frame
+</p>
 
 
   </div>
@@ -386,9 +396,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/graphic_frame.rb', line 13</span>
 
-<span class='kw'>def</span> <span class='id anchor'>anchor</span>
-  <span class='ivar'>@anchor</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='anchor identifier id'>anchor</span>
+  <span class='@anchor ivar id'>@anchor</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -406,8 +417,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>A reference to the chart object associated with this frame</p>
+    <p>
+A reference to the chart object associated with this frame
+</p>
 
 
   </div>
@@ -441,9 +453,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/graphic_frame.rb', line 9</span>
 
-<span class='kw'>def</span> <span class='id chart'>chart</span>
-  <span class='ivar'>@chart</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='chart identifier id'>chart</span>
+  <span class='@chart ivar id'>@chart</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -465,8 +478,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>The relationship id for this graphic</p>
+    <p>
+The relationship id for this graphic
+</p>
 
 
   </div>
@@ -500,9 +514,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/graphic_frame.rb', line 26</span>
 
-<span class='kw'>def</span> <span class='id rId'>rId</span> 
-  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>rId</span><span class='embexpr_beg'>#{</span><span class='ivar'>@anchor</span><span class='period'>.</span><span class='id index'>index</span><span class='op'>+</span><span class='int'>1</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='rId identifier id'>rId</span> 
+  <span class='dstring node'>&quot;rId#{@anchor.index+1}&quot;</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -517,8 +532,9 @@
   
 </p><div class="docstring">
   <div class="discussion">
-    
-<p>Serializes the graphic frame</p>
+    <p>
+Serializes the graphic frame
+</p>
 
 
   </div>
@@ -537,8 +553,9 @@
       
       
         &mdash;
-        <div class='inline'>
-<p>The document builder instance this objects xml will be added to.</p>
+        <div class='inline'><p>
+The document builder instance this objects xml will be added to.
+</p>
 </div>
       
     </li>
@@ -587,24 +604,25 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/axlsx/drawing/graphic_frame.rb', line 33</span>
 
-<span class='kw'>def</span> <span class='id to_xml'>to_xml</span><span class='lparen'>(</span><span class='id xml'>xml</span><span class='rparen'>)</span>
-  <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>xdr:graphicFrame</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span>        
-    <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>xdr:nvGraphicFramePr</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span>
-      <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>xdr:cNvPr</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:id</span><span class='op'>=&gt;</span><span class='int'>2</span><span class='comma'>,</span> <span class='symbol'>:name</span><span class='op'>=&gt;</span><span class='id chart'>chart</span><span class='period'>.</span><span class='id title'>title</span><span class='rparen'>)</span>
-      <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>xdr:cNvGraphicFramePr</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>                
-    <span class='rbrace'>}</span>
-    <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>xdr:xfrm</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span>
-      <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>a:off</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:x</span><span class='op'>=&gt;</span><span class='int'>0</span><span class='comma'>,</span> <span class='symbol'>:y</span><span class='op'>=&gt;</span><span class='int'>0</span><span class='rparen'>)</span>
-      <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>a:ext</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:cx</span><span class='op'>=&gt;</span><span class='int'>0</span><span class='comma'>,</span> <span class='symbol'>:cy</span><span class='op'>=&gt;</span><span class='int'>0</span><span class='rparen'>)</span>
-    <span class='rbrace'>}</span>
-    <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>a:graphic</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span>
-      <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>a:graphicData</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:uri</span><span class='op'>=&gt;</span><span class='const'>XML_NS_C</span><span class='rparen'>)</span> <span class='lbrace'>{</span>
-        <span class='id xml'>xml</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>c:chart</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:xmlns:c</span><span class='tstring_end'>'</span></span><span class='op'>=&gt;</span><span class='const'>XML_NS_C</span><span class='comma'>,</span> <span class='symbol'>:xmlns:r</span><span class='tstring_end'>'</span></span><span class='op'>=&gt;</span><span class='const'>XML_NS_R</span><span class='comma'>,</span> <span class='symbol'>:r:id</span><span class='tstring_end'>'</span></span><span class='op'>=&gt;</span><span class='id rId'>rId</span><span class='rparen'>)</span>
-      <span class='rbrace'>}</span>
-    <span class='rbrace'>}</span>
-  <span class='rbrace'>}</span>
+<span class='def def kw'>def</span> <span class='to_xml identifier id'>to_xml</span><span class='lparen token'>(</span><span class='xml identifier id'>xml</span><span class='rparen token'>)</span>
+  <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'xdr:graphicFrame'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>        
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'xdr:nvGraphicFramePr'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'xdr:cNvPr'</span><span class='comma token'>,</span> <span class='symbol val'>:id=</span><span class='gt op'>&gt;</span><span class='integer val'>2</span><span class='comma token'>,</span> <span class='symbol val'>:name=</span><span class='gt op'>&gt;</span><span class='chart identifier id'>chart</span><span class='dot token'>.</span><span class='title identifier id'>title</span><span class='rparen token'>)</span>
+      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'xdr:cNvGraphicFramePr'</span><span class='rparen token'>)</span>                
+    <span class='rbrace token'>}</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'xdr:xfrm'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'a:off'</span><span class='comma token'>,</span> <span class='symbol val'>:x=</span><span class='gt op'>&gt;</span><span class='integer val'>0</span><span class='comma token'>,</span> <span class='symbol val'>:y=</span><span class='gt op'>&gt;</span><span class='integer val'>0</span><span class='rparen token'>)</span>
+      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'a:ext'</span><span class='comma token'>,</span> <span class='symbol val'>:cx=</span><span class='gt op'>&gt;</span><span class='integer val'>0</span><span class='comma token'>,</span> <span class='symbol val'>:cy=</span><span class='gt op'>&gt;</span><span class='integer val'>0</span><span class='rparen token'>)</span>
+    <span class='rbrace token'>}</span>
+    <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'a:graphic'</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+      <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'a:graphicData'</span><span class='comma token'>,</span> <span class='symbol val'>:uri=</span><span class='gt op'>&gt;</span><span class='XML_NS_C constant id'>XML_NS_C</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span>
+        <span class='xml identifier id'>xml</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='string val'>'c:chart'</span><span class='comma token'>,</span> <span class='symbol val'>:'xmlns:c'</span><span class='assign token'>=</span><span class='gt op'>&gt;</span><span class='XML_NS_C constant id'>XML_NS_C</span><span class='comma token'>,</span> <span class='symbol val'>:'xmlns:r'</span><span class='assign token'>=</span><span class='gt op'>&gt;</span><span class='XML_NS_R constant id'>XML_NS_R</span><span class='comma token'>,</span> <span class='symbol val'>:'r:id'</span><span class='assign token'>=</span><span class='gt op'>&gt;</span><span class='rId identifier id'>rId</span><span class='rparen token'>)</span>
+      <span class='rbrace token'>}</span>
+    <span class='rbrace token'>}</span>
+  <span class='rbrace token'>}</span>
   
-<span class='kw'>end</span></pre>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -615,9 +633,9 @@
 </div>
     
     <div id="footer">
-  Generated on Sun Nov 27 22:10:49 2011 by 
+  Generated on Tue Nov 29 13:28:56 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.3 (ruby-1.9.3).
+  0.7.3 (ruby-1.8.7).
 </div>
 
   </body>

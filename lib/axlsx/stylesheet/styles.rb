@@ -258,7 +258,7 @@ module Axlsx
       @numFmts.lock
 
       @fonts = SimpleTypedList.new Font
-      @fonts << Font.new(:name => "Arial", :sz => 11, :family=>1)
+      @fonts << Font.new(:name => "Arial", :sz => 11, :family=>1, :numFmt=>"0")
       @fonts.lock
 
       @fills = SimpleTypedList.new Fill
