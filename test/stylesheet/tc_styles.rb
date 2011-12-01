@@ -49,16 +49,4 @@ class TestStyles < Test::Unit::TestCase
 
   end
 
-
-  #:numFmts, :fonts, :fills, :borders, :cellStyleXfs, :cellXfs, :dxfs, :tableStyles
-  def test_ensure_locking
-    assert_equal(@styles.numFmts.locked_at, 2, "numFmts should be locked at 2")
-    assert_equal(@styles.fonts.locked_at, 1, "fonts should be locked at 1" )
-    assert_equal(@styles.fills.locked_at, 2, "fills should be locked at 2" )
-    assert_equal(@styles.borders.locked_at, 2, "borders should be locked at two" )
-    assert_equal(@styles.cellStyleXfs.locked_at, 1, "cellStyleXfs should be locked at two" )
-    assert_equal(@styles.cellXfs.locked_at, 2, "cellXfs should be locked at 2" )
-    assert_equal(@styles.dxfs.locked_at, 0, "dxfs should be locked at 0" )
-    assert_equal(@styles.tableStyles.locked_at, 0, "tableStyles should be locked at 0" )
-  end
 end

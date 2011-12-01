@@ -286,6 +286,8 @@ module Axlsx
       @cellXfs = SimpleTypedList.new Xf, "cellXfs"
       @cellXfs << Xf.new(:borderId=>0, :xfId=>0, :numFmtId=>0, :fontId=>0, :fillId=>0)
       @cellXfs << Xf.new(:borderId=>1, :xfId=>0, :numFmtId=>0, :fontId=>0, :fillId=>0)
+      # default date formatting
+      @cellXfs << Xf.new(:borderId=>0, :xfId=>0, :numFmtId=>14, :fontId=>0, :fillId=>0)
       @cellXfs.lock
 
       @dxfs = SimpleTypedList.new(Xf, "dxfs"); @dxfs.lock

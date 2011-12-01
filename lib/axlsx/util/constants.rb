@@ -199,6 +199,9 @@ module Axlsx
   # cellXfs id for thin borders around the cell
   STYLE_THIN_BORDER = 1
 
+  # cellXfs id for default date styling
+  STYLE_DATE = 2
+
   # error messages RestrictionValidor
   ERR_RESTRICTION = "Invalid Data: %s. %s must be one of %s." 
 

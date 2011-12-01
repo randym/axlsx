@@ -9,7 +9,7 @@ if ARGV.size == 0 || ARGV.include?("1")
       p = Axlsx::Package.new
       p.workbook.add_worksheet do |sheet|
         sheet.add_row ["First", "Second", "Third"]
-        sheet.add_row [1, 2, 3]
+        sheet.add_row [1, 2, Time.now]
       end
       p.serialize("example1.xlsx")
 end

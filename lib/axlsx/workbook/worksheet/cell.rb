@@ -169,6 +169,7 @@ module Axlsx
     def cast_value(v)
       if (@type == :time && v.is_a?(Time)) || (@type == :time && v.respond_to?(:to_time))
         v = v.respond_to?(:to_time) ? v.to_time : v
+        self.style = STYLE_DATE if self.style == 0
         # Using hardcoded offsets here as some operating systems will not except a 'negative' offset from the ruby epoc.
         # (1970)
         epoc1900 = -2209021200 #Time.local(1900, 1, 1) 

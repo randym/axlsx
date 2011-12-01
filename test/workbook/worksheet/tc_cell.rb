@@ -18,6 +18,11 @@ class TestCell < Test::Unit::TestCase
     assert_equal(@c.value, 1.0, "type option is applied and value is casted")
   end
 
+  def test_style_date_data
+    c = Axlsx::Cell.new(@c.row, Time.now)
+    assert_equal(Axlsx::STYLE_DATE, c.style)
+  end
+
   def test_index
     assert_equal(@c.index, @row.cells.index(@c))
   end
@@ -31,7 +36,7 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_style
-    assert_raise(ArgumentError, "must reject invalid style indexes") { @c.style=3 }
+    assert_raise(ArgumentError, "must reject invalid style indexes") { @c.style=@c.row.worksheet.workbook.styles.cellXfs.size }
     assert_nothing_raised("must allow valid style index changes") {@c.style=1} 
     assert_equal(@c.style, 1)
   end

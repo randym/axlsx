@@ -3,7 +3,6 @@ require 'axlsx.rb'
 
 class TestRelationships < Test::Unit::TestCase
 
-
   def test_valid_document
     @rels = Axlsx::Relationships.new
     schema = Nokogiri::XML::Schema(File.open(Axlsx::RELS_XSD))
