@@ -27,7 +27,7 @@ module Axlsx
   require 'axlsx/drawing/bar_3D_chart.rb'
   require 'axlsx/drawing/line_3D_chart.rb'
 
-
+  require 'axlsx/drawing/picture_locking.rb'
   require 'axlsx/drawing/pic.rb'
 
   # A Drawing is a canvas for charts. Each worksheet has a single drawing that manages anchors.

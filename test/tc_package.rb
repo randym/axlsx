@@ -7,6 +7,8 @@ class TestPackage < Test::Unit::TestCase
     ws = @package.workbook.add_worksheet
     chart = ws.add_chart Axlsx::Pie3DChart
     chart.add_series :data=>[1,2,3], :labels=>["a", "b", "c"]
+    @fname = 'axlsx_test_serialization.xlsx'
+
   end
 
   def test_default_objects_are_created
@@ -20,10 +22,10 @@ class TestPackage < Test::Unit::TestCase
     fname = 'axlsx_test_serialization.xlsx'
     assert_nothing_raised do
       begin
-         z= @package.serialize(fname)              
-         zf = Zip::ZipFile.open(fname)
+         z= @package.serialize(@fname)              
+         zf = Zip::ZipFile.open(@fname)
          @package.send(:parts).each{ |part| zf.get_entry(part[:entry]) }
-         File.delete(fname)        
+         File.delete(@fname)        
       rescue Errno::EACCES
          puts "WARNING:: test_serialization requires write access."
       end

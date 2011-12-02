@@ -71,7 +71,16 @@ require 'axlsx/workbook/worksheet/worksheet.rb'
 
     # Indicates if the epoc date for serialization should be 1904. If false, 1900 is used.
     @@date1904 = false
-    
+
+    # lets come back to this later when we are ready for parsing. 
+    #def self.parse entry
+    #  io = entry.get_input_stream
+    #  w = self.new
+    #  w.parser_xml = Nokogiri::XML(io.read)
+    #  w.parse_string :date1904, "//xmlns:workbookPr/@date1904"      
+    #  w
+    #end
+
     # Creates a new Workbook
     # @option options [Boolean] date1904
     def initialize(options={})

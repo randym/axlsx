@@ -26,6 +26,8 @@ module Axlsx
     # @return [OneCellAnchor]
     attr_reader :anchor
 
+    # The picture locking attributes for this picture
+    attr_reader :picture_locking
    
     # Creates a new Pic(ture) object
     # @param [Anchor] anchor the anchor that holds this image
@@ -43,6 +45,7 @@ module Axlsx
       end
       start_at(*options[:start_at]) if options[:start_at]
       yield self if block_given?
+      @picture_locking = PictureLocking.new(options)
     end
     
     def image_src=(v) 
@@ -94,7 +97,7 @@ module Axlsx
     def width=(v)
       @anchor.width = v
     end
-
+    
     # providing access to update the anchor's height attribute
     # @param [Integer] v
     # @see OneCellAnchor.width
@@ -126,7 +129,7 @@ module Axlsx
         xml.send('xdr:nvPicPr') {
           xml.send('xdr:cNvPr', :id=>"2", :name=>name, :descr=>descr)
           xml.send('xdr:cNvPicPr') {
-            xml.send('a:picLocks', :noChangeAspect=>1)
+            picture_locking.to_xml(xml)
           }
         }
         xml.send('xdr:blipFill') {

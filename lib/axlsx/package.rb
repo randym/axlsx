@@ -16,12 +16,6 @@ module Axlsx
       yield self if block_given?
     end
 
-    # Accepts a ruport table for serialization to xlsx
-    # @param [Table] table a ruport Table object
-    def ruport_table(table)
-      puts table
-    end
-
     # The workbook this package will serialize or validate.
     # @return [Workbook] If no workbook instance has been assigned with this package a new Workbook instance is returned.
     # @raise ArgumentError if workbook parameter is not a Workbook instance.
@@ -39,6 +33,18 @@ module Axlsx
       yield @workbook if block_given?
       @workbook
     end
+    
+    #def self.parse(input, confirm_valid = false)
+    #  p = Package.new
+    #  z = Zip::ZipFile.open(input)
+    #  p.workbook = Workbook.parse z.get_entry(WORKBOOK_PN)
+    #  p
+    #end
+
+    
+    
+
+    
 
     # @see workbook
     def workbook=(workbook) DataTypeValidator.validate "Package.workbook", Workbook, workbook; @workbook = workbook; end
@@ -76,7 +82,8 @@ module Axlsx
       end
       true
     end
-
+    
+    
     # Validate all parts of the package against xsd schema. 
     # @return [Array] An array of all validation errors found.
     # @note This gem includes all schema from OfficeOpenXML-XMLSchema-Transitional.zip and OpenPackagingConventions-XMLSchema.zip

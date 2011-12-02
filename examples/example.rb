@@ -98,13 +98,14 @@ if ARGV.size==0 || ARGV.include?("7")
      end  
      p.serialize("example7.xlsx")
 end
+
 #Add an Image
 if ARGV.size==0 || ARGV.include?("8")
 
      p = Axlsx::Package.new
      p.workbook.add_worksheet do |sheet|
        img = File.expand_path('examples/image1.jpeg') 
-       sheet.add_image(:image_src => img) do |image|
+       sheet.add_image(:image_src => img, :noSelect=>true, :noMove=>true) do |image|
          image.width=720
          image.height=666
          image.start_at 2, 2

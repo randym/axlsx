@@ -5,6 +5,10 @@ Encoding::default_external = 'UTF-8' unless RUBY_VERSION < '1.9'
 require 'axlsx/util/simple_typed_list.rb'
 require 'axlsx/util/constants.rb'
 require 'axlsx/util/validators.rb'
+
+# to be included with parsable intitites.
+#require 'axlsx/util/parser.rb'
+
 require 'axlsx/stylesheet/styles.rb'
 
 require 'axlsx/doc_props/app.rb'
