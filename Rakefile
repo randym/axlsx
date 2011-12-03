@@ -1,5 +1,12 @@
 require File.expand_path(File.dirname(__FILE__) + '/lib/axlsx/version.rb')
 
+begin
+  require 'bundler'
+  Bundler::GemHelper.install_tasks
+rescue LoadError
+  $stderr.puts "You should install Bundler with: gem install bundler"
+end
+
 task :build => :gendoc do
   system "gem build axlsx.gemspec"
 end
@@ -17,8 +24,8 @@ task :test do
      end
 end
 
-task :release => :build do
-  system "gem push axlsx-#{Axlsx::VERSION}.gem"
-end
+#task :release => :build do
+#  system "gem push axlsx-#{Axlsx::VERSION}.gem"
+#end
 
 task :default => :test
