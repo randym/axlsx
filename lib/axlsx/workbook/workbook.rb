@@ -129,6 +129,17 @@ require 'axlsx/workbook/worksheet/worksheet.rb'
       r
     end
 
+    # returns a range of cells in a worksheet
+    # @params [String] cell_def The excel style reference defining the worksheet and cells. The range must specify the sheet to 
+    # retrieve the cells from. e.g. range('Sheet1!A1:B2') will return an array of four cells [A1, A2, B1, B2] while range('Sheet1!A1') will return a single Cell.
+    # @return [Cell, Array]
+    def [](cell_def)
+      sheet_name = cell_def.split('!')[0] if cell_def.match('!')
+      worksheet =  self.worksheets.select { |s| s.name == sheet_name }.first
+      raise ArgumentError, 'Unknown Sheet' unless sheet_name && worksheet.is_a?(Worksheet) 
+      worksheet[cell_def.gsub(/.+!/,"")]
+    end
+
     # Serializes the workbook document
     # @return [String]
     def to_xml()
