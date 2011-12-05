@@ -44,7 +44,7 @@ module Axlsx
 
     # Returns the cell or cells defined using excel style A1:B3 references.
     # @param [String] cell_def the string defining the cell or range of cells
-    # @returns [Cell, Array]
+    # @return [Cell, Array]
     def [](cell_def)
       parts = cell_def.split(':')
       first = name_to_cell parts[0]

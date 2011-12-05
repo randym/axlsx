@@ -130,7 +130,7 @@ require 'axlsx/workbook/worksheet/worksheet.rb'
     end
 
     # returns a range of cells in a worksheet
-    # @params [String] cell_def The excel style reference defining the worksheet and cells. The range must specify the sheet to 
+    # @param [String] cell_def The excel style reference defining the worksheet and cells. The range must specify the sheet to 
     # retrieve the cells from. e.g. range('Sheet1!A1:B2') will return an array of four cells [A1, A2, B1, B2] while range('Sheet1!A1') will return a single Cell.
     # @return [Cell, Array]
     def [](cell_def)

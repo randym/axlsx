@@ -211,5 +211,6 @@ module Axlsx
   # error message for RegexValidator
   ERR_REGEX = "Invalid Data. %s does not match %s."
 
+  # error message for duplicate sheet names
   ERR_DUPLICATE_SHEET_NAME = "There is already a worksheet in this workbook named '%s'. Please use a unique name"
 end
