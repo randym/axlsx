@@ -42,9 +42,44 @@ module Axlsx
       @cols = SimpleTypedList.new Cell
     end
 
+    # Returns the cell or cells defined using excel style A1:B3 references.
+    # @param [String] cell_def the string defining the cell or range of cells
+    # @returns [Cell, Array]
+    def [](cell_def)
+      parts = cell_def.split(':')
+      first = name_to_cell parts[0]
+
+      if parts.size == 1
+        first
+      else
+        cells = []
+        last = name_to_cell(parts[1])
+        rows[(first.row.index..last.row.index)].each do |r|
+          r.cells[(first.index..last.index)].each do |c|
+            cells << c
+          end
+        end
+        cells
+      end
+    end
+
+    # returns the column and row index for a named based cell
+    # @param [String] name The cell or cell range to return. "A1" will return the first cell of the first row.
+    # @return [Cell]
+    def name_to_cell(name)
+      col_index, row_index = *Axlsx::name_to_indices(name)
+      r = rows[row_index]
+      r.cells[col_index] if r
+    end
+
     # The name of the worksheet
     # @param [String] v
-    def name=(v) DataTypeValidator.validate "Worksheet.name", String, v; @name=v end
+    def name=(v) 
+      DataTypeValidator.validate "Worksheet.name", String, v
+      sheet_names = @workbook.worksheets.map { |s| s.name }
+      raise ArgumentError, (ERR_DUPLICATE_SHEET_NAME % v) if sheet_names.include?(v) 
+      @name=v 
+    end
 
     # The part name of this worksheet
     # @return [String]
@@ -205,13 +240,12 @@ module Axlsx
       styles = self.workbook.styles
       cellXfs, fonts = styles.cellXfs, styles.fonts
       sz = fonts[0].sz
-
       cells.each_with_index do |item, index|
+        next if item.value.is_a?(String) && item.value.start_with?('=')
         col = @auto_fit_data[index] || {:longest=>"", :sz=>sz} 
         cell_xf = cellXfs[item.style]
         font = fonts[cell_xf.fontId || 0]
-        sz = font.sz || sz
-
+        sz = item.sz || font.sz || fonts[0].sz
         if (col[:longest].scan(/./mu).size * col[:sz]) < (item.value.to_s.scan(/./mu).size * sz)
           col[:sz] =  sz
           col[:longest] = item.value.to_s
