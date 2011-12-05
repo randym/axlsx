@@ -5,16 +5,19 @@ module Axlsx
     # @return [Boolean]
     attr_reader :auto
     
-    # Backwards compatability color index
-    # return [Integer]
-    #attr_reader :indexed
-
     # The color as defined in rgb terms. 
     # @note 
     #  rgb colors need to conform to ST_UnsignedIntHex. That basically means put 'FF' before you color
-    # @example rgb colors
-    #  "FF000000" is black
-    #  "FFFFFFFF" is white
+    # When assigning the rgb value the behavior is much like CSS selectors and can use shorthand versions as follows:
+    # If you provide a two character value it will be repeated for each r, g, b assignment
+    # If you provide data that is not 2 characters in length, and is less than 8 characters it will be padded with "F"
+    # @example
+    #        Color.new :rgb => "FF000000"
+    #          => #<Axlsx::Color:0x102106b68 @rgb="FF000000">
+    #        Color.new :rgb => "0A"
+    #          => #<Axlsx::Color:0x102106b68 @rgb="FF0A0A0A">
+    #        Color.new :rgb => "00BB"
+    #          => #<Axlsx::Color:0x102106b68 @rgb="FFFF00BB">
     # @return [String]
     attr_reader :rgb
 
@@ -39,8 +42,15 @@ module Axlsx
     end
     # @see auto
     def auto=(v) Axlsx::validate_boolean v; @auto = v end    
-    # @see rgb
-    def rgb=(v) Axlsx::validate_string v; @rgb = v end    
+    # @see color
+    def rgb=(v)
+      Axlsx::validate_string(v)
+      v.upcase!
+      v = v * 3 if v.size == 2
+      v = v.rjust(8, 'FF')
+      raise ArgumentError, "Invalid color rgb value: #{v}." unless v.match(/[0-9A-F]{8}/)
+      @rgb = v
+    end
     # @see tint
     def tint=(v) Axlsx::validate_float v; @tint = v end
 
