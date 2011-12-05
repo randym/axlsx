@@ -42,6 +42,13 @@ class TestWorkbook < Test::Unit::TestCase
     end
     assert(errors.empty?, "error free validation")
   end
+  def test_range_requires__valid_sheet
+    ws = @wb.add_worksheet :name=>'fish'
+    ws.add_row [1,2,3]
+    ws.add_row [4,5,6]
+    assert_raise(ArgumentError, "no sheet name part") { @wb["A1:C2"]}
+    assert_equal @wb['fish!A1:C2'].size, 6
+  end
 
   def test_to_xml_adds_worksheet_when_worksheets_is_empty
     assert(@wb.worksheets.empty?)

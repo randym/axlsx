@@ -27,6 +27,10 @@ class TestCell < Test::Unit::TestCase
     assert_equal(@c.index, @row.cells.index(@c))
   end
 
+  def test_index
+    assert_equal(@c.pos, [@c.index, @c.row.index])
+  end
+
   def test_r
     assert_equal(@c.r, "A1", "calculate cell reference")
   end
@@ -80,4 +84,96 @@ class TestCell < Test::Unit::TestCase
     assert_equal(@c.send(:cast_value, nil), "")
 
   end
+
+  def test_color
+    assert_raise(ArgumentError) { @c.color = -1.1 }
+    assert_nothing_raised { @c.color = "FF00FF00" }
+    assert_equal(@c.color.rgb, "FF00FF00")
+  end
+
+  def test_scheme
+    assert_raise(ArgumentError) { @c.scheme = -1.1 }
+    assert_nothing_raised { @c.scheme = :major }
+    assert_equal(@c.scheme, :major)
+  end
+
+  def test_vertAlign
+    assert_raise(ArgumentError) { @c.vertAlign = -1.1 }
+    assert_nothing_raised { @c.vertAlign = :baseline }
+    assert_equal(@c.vertAlign, :baseline)
+  end
+
+  def test_sz
+    assert_raise(ArgumentError) { @c.sz = -1.1 }
+    assert_nothing_raised { @c.sz = 12 }
+    assert_equal(@c.sz, 12)
+  end
+
+  def test_extend
+    assert_raise(ArgumentError) { @c.extend = -1.1 }
+    assert_nothing_raised { @c.extend = false }
+    assert_equal(@c.extend, false)
+  end
+
+  def test_condense
+    assert_raise(ArgumentError) { @c.condense = -1.1 }
+    assert_nothing_raised { @c.condense = false }
+    assert_equal(@c.condense, false)
+  end
+
+  def test_shadow
+    assert_raise(ArgumentError) { @c.shadow = -1.1 }
+    assert_nothing_raised { @c.shadow = false }
+    assert_equal(@c.shadow, false)
+  end
+
+  def test_outline
+    assert_raise(ArgumentError) { @c.outline = -1.1 }
+    assert_nothing_raised { @c.outline = false }
+    assert_equal(@c.outline, false)
+  end
+
+  def test_strike
+    assert_raise(ArgumentError) { @c.strike = -1.1 }
+    assert_nothing_raised { @c.strike = false }
+    assert_equal(@c.strike, false)
+  end
+
+  def test_u
+    assert_raise(ArgumentError) { @c.u = -1.1 }
+    assert_nothing_raised { @c.u = false }
+    assert_equal(@c.u, false)
+  end
+
+  def test_i
+    assert_raise(ArgumentError) { @c.i = -1.1 }
+    assert_nothing_raised { @c.i = false }
+    assert_equal(@c.i, false)
+  end
+
+  def test_rFont
+    assert_raise(ArgumentError) { @c.font_name = -1.1 }
+    assert_nothing_raised { @c.font_name = "Arial" }
+    assert_equal(@c.font_name, "Arial")
+  end
+
+  def test_charset
+    assert_raise(ArgumentError) { @c.charset = -1.1 }
+    assert_nothing_raised { @c.charset = 1 }
+    assert_equal(@c.charset, 1)
+  end
+
+  def test_family
+    assert_raise(ArgumentError) { @c.family = -1.1 }
+    assert_nothing_raised { @c.family = "Who knows!" }
+    assert_equal(@c.family, "Who knows!")
+  end
+
+  def test_b
+    assert_raise(ArgumentError) { @c.b = -1.1 }
+    assert_nothing_raised { @c.b = false }
+    assert_equal(@c.b, false)
+  end
+
+
 end

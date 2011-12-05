@@ -28,6 +28,15 @@ class TestWorksheet < Test::Unit::TestCase
   def test_index
     assert_equal(@ws.index, @ws.workbook.worksheets.index(@ws))
   end
+  
+  def test_referencing
+    @ws.add_row [1, 2, 3]
+    @ws.add_row [4, 5, 6]
+    range = @ws["A1:C2"]
+    assert_equal(range.size, 6)
+    assert_equal(range.first, @ws.rows.first.cells.first)
+    assert_equal(range.last, @ws.rows.last.cells.last)    
+  end
 
   def test_add_row
     assert(@ws.rows.empty?, "sheet has no rows by default")
@@ -103,12 +112,20 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   
+  def test_name_unique
+    assert_raise(ArgumentError, "worksheet name must be unique") { n = @ws.name; @ws.workbook.add_worksheet(:name=> @ws) }
+  end
+
   def test_update_auto_with_data
     small = @ws.workbook.styles.add_style(:sz=>2)
     big = @ws.workbook.styles.add_style(:sz=>10)
+
     @ws.add_row ["chasing windmills", "penut"], :style=>small
     assert(@ws.auto_fit_data.size == 2, "a data item for each column")
+
     assert_equal(@ws.auto_fit_data[0], {:sz=>2,:longest=>"chasing windmills"}, "adding a row updates auto_fit_data if the product of the string length and font is greater for the column")
+
+
     @ws.add_row ["mule"], :style=>big
     assert_equal(@ws.auto_fit_data[0], {:sz=>10,:longest=>"mule"}, "adding a row updates auto_fit_data if the product of the string length and font is greater for the column")
   end

@@ -39,12 +39,7 @@ module Axlsx
     #  z = Zip::ZipFile.open(input)
     #  p.workbook = Workbook.parse z.get_entry(WORKBOOK_PN)
     #  p
-    #end
-
-    
-    
-
-    
+    #end    
 
     # @see workbook
     def workbook=(workbook) DataTypeValidator.validate "Package.workbook", Workbook, workbook; @workbook = workbook; end
