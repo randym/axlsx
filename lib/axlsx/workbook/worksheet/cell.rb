@@ -53,27 +53,137 @@ module Axlsx
 
 
     # The value of this cell.
-    # @return casted value based on cell's type attribute.
+    # @return [String, Integer, Float, Time] casted value based on cell's type attribute.
     attr_reader :value
     # @see value
     def value=(v)
       #TODO: consider doing value based type determination first?
       @value = cast_value(v)
     end
+    
+    # The inline font_name property for the cell
+    # @return [String]
+    attr_reader :font_name
+    # @see font_name
+    def font_name=(v) Axlsx::validate_string(v); @font_name = v; end
 
+    # The inline charset property for the cell
+    # @return [String]
+    attr_reader :charset
+    # @see charset
+    def charset=(v) Axlsx::validate_unsigned_int(v); @charset = v; end
+
+    # The inline family property for the cell
+    # @return [String]
+    attr_reader :family
+    # @see family
+    def family=(v) Axlsx::validate_string(v); @family = v; end
+
+    # The inline bold property for the cell
+    # @return [Boolean]
+    attr_reader :b
+    # @see b
+    def b=(v) Axlsx::validate_boolean(v); @b = v; end
+
+    # The inline italic property for the cell
+    # @return [Boolean]
+    attr_reader :i
+    # @see i
+    def i=(v) Axlsx::validate_boolean(v); @i = v; end
+
+    # The inline strike property for the cell
+    # @return [Boolean]
+    attr_reader :strike
+    # @see strike
+    def strike=(v) Axlsx::validate_boolean(v); @strike = v; end
+
+    # The inline outline property for the cell
+    # @return [Boolean]
+    attr_reader :outline
+    # @see outline
+    def outline=(v) Axlsx::validate_boolean(v); @outline = v; end
+
+    # The inline shadow property for the cell
+    # @return [Boolean]
+    attr_reader :shadow
+    # @see shadow
+    def shadow=(v) Axlsx::validate_boolean(v); @shadow = v; end
+
+    # The inline condense property for the cell
+    # @return [Boolean]
+    attr_reader :condense
+    # @see condense
+    def condense=(v) Axlsx::validate_boolean(v); @condense = v; end
+
+    # The inline extend property for the cell
+    # @return [Boolean]
+    attr_reader :extend
+    # @see extend
+    def extend=(v) Axlsx::validate_boolean(v); @extend = v; end
+
+    # The inline underline property for the cell
+    # @return [Boolean]
+    attr_reader :u
+    # @see u
+    def u=(v) Axlsx::validate_boolean(v); @u = v; end
+
+    # The inline color property for the cell
+    # @return [Color]
+    attr_reader :color
+    # @param [String] The 8 character representation for an rgb color #FFFFFFFF"
+    def color=(v) 
+      @color = v.is_a?(Color) ? v : Color.new(:rgb=>v)
+    end
+
+    # The inline sz property for the cell
+    # @return [Boolean]
+    attr_reader :sz
+    # @see sz
+    def sz=(v) Axlsx::validate_unsigned_int(v); @sz = v; end
+
+    # The inline vertical alignment property for the cell
+    # this must be one of [:baseline, :subscript, :superscript]
+    # @return [Symbol]
+    attr_reader :vertAlign
+    # @see vertAlign
+    def vertAlign=(v) RestrictionValidator.validate "Cell.vertAlign", [:baseline, :subscript, :superscript], v; @vertAlign = v; end
+
+    # The inline scheme property for the cell
+    # this must be one of [:none, major, minor]
+    # @return [Symbol]
+    attr_reader :scheme
+    # @see scheme
+    def scheme=(v) RestrictionValidator.validate "Cell.schema", [:none, :major, :minor], v; @scheme = v; end
 
     # @param [Row] row The row this cell belongs to.
     # @param [Any] value The value associated with this cell. 
     # @option options [Symbol] type The intended data type for this cell. If not specified the data type will be determined internally based on the vlue provided.
     # @option options [Integer] style The index of the cellXfs item to be applied to this cell. If not specified, the default style (0) will be applied.
+    # @option options [String] font_name
+    # @option options [Integer] charset
+    # @option options [String] family
+    # @option options [Boolean] b
+    # @option options [Boolean] i
+    # @option options [Boolean] strike
+    # @option options [Boolean] outline
+    # @option options [Boolean] shadow
+    # @option options [Boolean] condense
+    # @option options [Boolean] extend
+    # @option options [Boolean] u
+    # @option options [Symbol] vertAlign must be one of :baseline, :subscript, :superscript
+    # @option options [Integer] sz
+    # @option options [String] color an 8 letter rgb specification
+    # @option options [Symbol] scheme must be one of :none, major, :minor
     def initialize(row, value="", options={})
       self.row=row
-      #reference for validation
       @styles = row.worksheet.workbook.styles
-      @type= options[:type] || cell_type_from_value(value)
-      self.style = options[:style] || 0 
+      @style = 0 
+      @type = cell_type_from_value(value)
+      @row.cells << self      
+      options.each do |o|
+        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
+      end
       @value = cast_value(value)
-      @row.cells << self
     end
 
     # @return [Integer] The index of the cell in the containing row.
@@ -104,7 +214,10 @@ module Axlsx
       @style = v
     end
 
-
+    # @return [Array] of x/y coordinates in the cheet for this cell.
+    def pos
+      [index, row.index]
+    end
 
     # Serializes the cell
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
@@ -118,7 +231,45 @@ module Axlsx
       
       # however nokogiri does a nice 'force_encoding' which we shall remove!
       if @type == :string 
-        xml.c(:r => r, :t=>:inlineStr, :s=>style) { xml.is { xml.t @value.to_s } }
+        #parse formula
+        if @value.start_with?('=')
+          xml.c(:r => r, :s=>style) {
+            xml.f @value.to_s.gsub('=', '')
+          }
+        else
+          #parse standard string
+          #xml.c(:r => r, :t=>:inlineStr, :s=>style) {
+          #  xml.is { xml.t @value.to_s } 
+          #}
+          #parse styled string
+          xml.c(:r => r, :s=>style) {
+            xml.is {
+              xml.r {
+                xml.rPr {
+                  xml.rFont(:val=>@font_name) if @font_name
+                  xml.charset(:val=>@charset) if @charset
+                  xml.family(:val=>@family) if @family
+                  xml.b(:val=>@b) if @b
+                  xml.i(:val=>@i) if @i
+                  xml.strike(:val=>@strike) if @strike
+                  xml.outline(:val=>@outline) if @outline
+                  xml.shadow(:val=>@shadow) if @shadow
+                  xml.condense(:val=>@condense) if @condense
+                  xml.extend(:val=>@extend) if @extend
+                  @color.to_xml(xml) if @color
+                  xml.sz(:val=>@sz) if @sz
+                  xml.u(:val=>@u) if @u
+                  # :baseline, :subscript, :superscript
+                  xml.vertAlign(:val=>@vertAlign) if @verAlign
+                  # :none, major, :minor
+                  xml.scheme(:val=>@scheme) if @scheme
+                }
+                xml.t @value.to_s
+              }
+            }
+          }
+        end
+
       else
         xml.c(:r => r, :s => style) { xml.v value }
       end
