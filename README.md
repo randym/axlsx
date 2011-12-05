@@ -7,10 +7,10 @@ Axlsx: Office Open XML Spreadsheet Generation
 **Author**:       Randy Morgan   
 **Copyright**:    2011      
 **License**:      MIT License      
-**Latest Version**: 1.0.10   
-**Ruby Version**: 1.8.7, 1.9.3 
+**Latest Version**: 1.0.11   
+**Ruby Version**: 1.8.7, 1.9.2, 1.9.3 
 
-**Release Date**: November 30th 2011     
+**Release Date**: December 5th 2011     
 
 Synopsis
 --------
@@ -39,9 +39,15 @@ Feature List
 
 **5. Automatic column widths: Axlsx will automatically determine the appropriate width for your columns based on the content in the worksheet.
 
-**6. Support for both 1904 and 1900 epocs configurable in the workbook.
+**6. Support for automatically formatted 1904 and 1900 epocs configurable in the workbook.
 
 **7. Add jpg, gif and png images to worksheets
+
+**8. Refernce cells in your worksheet with "A1" and "A1:D4" style references or from the workbook using "Sheett1!A3:B4" style references
+
+**9. Cell level style overrides for default and customized style object
+
+**10. Support for formulas
 
 Installing
 ----------
@@ -58,64 +64,6 @@ Usage
      require 'rubygems'
      require 'axlsx'
 
-A Simple Workbook
-
-      p = Axlsx::Package.new
-      p.workbook.add_worksheet do |sheet|
-        sheet.add_row ["First", "Second", "Third"]
-        sheet.add_row [1, 2, 3]
-      end
-      p.serialize("example1.xlsx")
-
-Generating A Bar Chart
-
-     p = Axlsx::Package.new
-     p.workbook.add_worksheet do |sheet|
-       sheet.add_row ["First", "Second", "Third"]
-       sheet.add_row [1, 2, 3]
-       sheet.add_chart(Axlsx::Bar3DChart, :start_at => [0,2], :end_at => [5, 15], :title=>"example 2: Chart") do |chart|
-         chart.add_series :data=>sheet.rows.last.cells, :labels=> sheet.rows.first.cells
-       end
-     end  
-     p.serialize("example2.xlsx")
-
-Generating A Pie Chart
-
-     p = Axlsx::Package.new
-     p.workbook.add_worksheet do |sheet|
-       sheet.add_row ["First", "Second", "Third"]
-       sheet.add_row [1, 2, 3]
-       sheet.add_chart(Axlsx::Pie3DChart, :start_at => [0,2], :end_at => [5, 15], :title=>"example 3: Pie Chart") do |chart|
-         chart.add_series :data=>sheet.rows.last.cells, :labels=> sheet.rows.first.cells
-       end
-     end  
-     p.serialize("example3.xlsx")
-
-Using Custom Styles
-
-     p = Axlsx::Package.new
-     wb = p.workbook
-     black_cell = wb.styles.add_style :bg_color => "FF000000", :fg_color => "FFFFFFFF", :sz=>14, :alignment => { :horizontal=> :center }
-     blue_cell = wb.styles.add_style  :bg_color => "FF0000FF", :fg_color => "FFFFFFFF", :sz=>14, :alignment => { :horizontal=> :center }
-     wb.add_worksheet do |sheet|
-       sheet.add_row ["Text Autowidth", "Second", "Third"], :style => [black_cell, blue_cell, black_cell]
-       sheet.add_row [1, 2, 3], :style => Axlsx::STYLE_THIN_BORDER
-     end
-     p.serialize("example4.xlsx")
-
-Using Custom Formatting and date1904
-
-     p = Axlsx::Package.new
-     wb = p.workbook
-     date = wb.styles.add_style :format_code=>"yyyy-mm-dd", :border => Axlsx::STYLE_THIN_BORDER
-     padded = wb.styles.add_style :format_code=>"00#", :border => Axlsx::STYLE_THIN_BORDER
-     percent = wb.styles.add_style :format_code=>"0%", :border => Axlsx::STYLE_THIN_BORDER
-     wb.date1904 = true # required for generation on mac
-     wb.add_worksheet do |sheet|
-       sheet.add_row ["Custom Formatted Date", "Percent Formatted Float", "Padded Numbers"], :style => Axlsx::STYLE_THIN_BORDER
-       sheet.add_row [Time.now, 0.2, 32], :style => [date, percent, padded]
-     end
-     p.serialize("example5.xlsx")
 
 Validation
 
@@ -129,6 +77,40 @@ Validation
        puts error.inspect
      end
 
+A Simple Workbook
+
+      p = Axlsx::Package.new
+      p.workbook.add_worksheet do |sheet|
+        sheet.add_row ["First", "Second", "Third"]
+        sheet.add_row [1, 2, Time.now]
+      end
+      p.serialize("example1.xlsx")
+
+Generating A Bar Chart
+
+     p = Axlsx::Package.new
+     p.workbook.add_worksheet do |sheet|
+       sheet.add_row ["A Simple Bar Chart"]
+       sheet.add_row ["First", "Second", "Third"]
+       sheet.add_row [1, 2, 3]
+       sheet.add_chart(Axlsx::Bar3DChart, :start_at => "A4", :end_at => "F17", :title=>sheet["A1"]) do |chart|
+         chart.add_series :data => sheet["A3:C3"], :labels => sheet["A2:C2"]
+       end
+     end  
+     p.serialize("example2.xlsx")
+
+Generating A Pie Chart
+
+     p = Axlsx::Package.new
+     p.workbook.add_worksheet do |sheet|
+       sheet.add_row ["First", "Second", "Third", "Fourth"]
+       sheet.add_row [1, 2, 3, "=PRODUCT(A2:C2)"]
+       sheet.add_chart(Axlsx::Pie3DChart, :start_at => [0, 2], :end_at => [5, 15], :title=>"example 3: Pie Chart") do |chart|
+         chart.add_series :data => sheet["A2:D2"], :labels => sheet["A1:D1"]
+       end
+     end  
+     p.serialize("example3.xlsx")
+
 Generating A Line Chart
 
      p = Axlsx::Package.new
@@ -138,24 +120,53 @@ Generating A Line Chart
        sheet.add_chart(Axlsx::Line3DChart, :title=>"example 6: Line Chart") do |chart|
          chart.start_at 0, 2
          chart.end_at 10, 15
-         chart.add_series :data=>sheet.rows.first.cells[(1..-1)], :title=> sheet.rows.first.cells.first
-         chart.add_series :data=>sheet.rows.last.cells[(1..-1)], :title=> sheet.rows.last.cells.first
+         chart.add_series :data=>sheet["B1:E1"], :title=> sheet["A1"]
+         chart.add_series :data=>sheet["B2:E2"], :title=> sheet["A2"]
        end
        
      end  
+     p.serialize("example4.xlsx")
+
+Using Custom Styles
+
+     p = Axlsx::Package.new
+     wb = p.workbook
+     black_cell = wb.styles.add_style :bg_color => "00", :fg_color => "FF", :sz=>14, :alignment => { :horizontal=> :center }
+     blue_cell = wb.styles.add_style  :bg_color => "0000FF", :fg_color => "FF", :sz=>14, :alignment => { :horizontal=> :center }
+     wb.add_worksheet do |sheet|
+       sheet.add_row ["Text Autowidth", "Second", "Third"], :style => [black_cell, blue_cell, black_cell]
+       sheet.add_row [1, 2, 3], :style => Axlsx::STYLE_THIN_BORDER
+     end
+     p.serialize("example5.xlsx")
+
+Using Custom Formatting and date1904
+
+     p = Axlsx::Package.new
+     wb = p.workbook
+     date = wb.styles.add_style :format_code=>"yyyy-mm-dd", :border => Axlsx::STYLE_THIN_BORDER
+     padded = wb.styles.add_style :format_code=>"00#", :border => Axlsx::STYLE_THIN_BORDER
+     percent = wb.styles.add_style :format_code=>"0%", :border => Axlsx::STYLE_THIN_BORDER
+     wb.date1904 = true # required for generation on mac
+     wb.add_worksheet do |sheet|
+       sheet.add_row ["Custom Formatted Date", "Percent Formatted Float", "Padded Numbers"], :style => Axlsx::STYLE_THIN_BORDER
+       sheet.add_row [Time.now, 0.2, 32], :style => [date, percent, padded]
+     end
      p.serialize("example6.xlsx")
 
-Adding an Image
+
+
+Add an Image
 
      p = Axlsx::Package.new
      p.workbook.add_worksheet do |sheet|
-       sheet.add_image(:image_src => (File.dirname(__FILE__) + "/image1.png")) do |image|
+       img = File.expand_path('examples/image1.jpeg') 
+       sheet.add_image(:image_src => img, :noSelect=>true, :noMove=>true) do |image|
          image.width=720
          image.height=666
          image.start_at 2, 2
        end
      end  
-     p.serialize("example7.xlsx")
+     p.serialize("example8.xlsx")
 
 Asian Language Support
 
@@ -165,7 +176,7 @@ Asian Language Support
        sheet.add_row ["华语/華語"]
        sheet.add_row ["한국어/조선말"]
      end  
-     p.serialize("example8.xlsx")
+     p.serialize("example9.xlsx")
 
 Styling Columns
 
@@ -189,11 +200,35 @@ Styling Rows
        sheet.add_row [1, 2, 0.2, 4]
        sheet.add_row [1, 2, 0.1, 4]
      end
-     head = p.workbook.styles.add_style :bg_color => "FF000000", :fg_color=>"FFFFFFFF"
+     head = p.workbook.styles.add_style :bg_color => "00", :fg_color=>"FF"
      percent = p.workbook.styles.add_style :num_fmt => 9
      p.workbook.worksheets.first.col_style 2, percent, :row_offset=>1
      p.workbook.worksheets.first.row_style 0, head
      p.serialize("example11.xlsx")
+
+Using formula
+
+     p = Axlsx::Package.new
+     p.workbook.add_worksheet do |sheet|
+       sheet.add_row ['col 1', 'col 2', 'col 3', 'col 4']
+       sheet.add_row [1, 2, 3, "=SUM(A2:C2)"]
+     end
+     p.serialize("example12.xlsx")
+
+Using cell specific styling and range / name based access
+
+     p = Axlsx::Package.new
+     p.workbook.add_worksheet(:name=>'My Worksheet') do |sheet|
+         # cell level style overides when adding cells
+         sheet.add_row ['col 1', 'col 2', 'col 3', 'col 4'], :sz => 16
+         sheet.add_row [1, 2, 3, "=SUM(A2:C2)"]
+         # cell level style overrides via sheet range
+         sheet["A1:D1"].each { |c| c.color = "FF0000"}
+     end     
+     p.workbook['My Worksheet!A1:D2'].each { |c| c.style = Axlsx::STYLE_THIN_BORDER }
+     p.serialize("example13.xlsx")
+
+
 
 ###Documentation
 
@@ -209,19 +244,13 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
  
 Changelog
 ---------
-- **October.30.11**: 1.0.10 release
-  - Updating gemspec to lower gem version requirements.
-  - Added row.style assignation for updating the cell style for an entire row
-  - Added col_style method to worksheet upate a the style for a column of cells
-  - Added cols for an easy reference to columns in a worksheet.
-  - prep for pre release of acts_as_xlsx gem
-  - added in travis.ci configuration and build status
-  - fixed out of range bug in time calculations for 32bit time.
-  - added i18n for active support
-
-- **October.26.11**: 1.0.9 release
-  - Updated to support ruby 1.9.3
-  - Updated to eliminate all warnings originating in this gem
+- **December.5.11**: 1.0.11 release
+  - Added [] methods to worksheet and workbook to provide name based access to cells.
+  - Added support for functions as cell values
+  - Updated color creation so that two character shorthand values can be used like 'FF' for 'FFFFFFFF' or 'D8' for 'FFD8D8D8'
+  - Examples for all this fun stuff added to the readme
+  - Clean up and support for 1.9.2 and travis integration
+  - Added support for string based cell referencing to chart start_at and end_at. That means you can now use :start_at=>"A1" when using worksheet.add_chart, or chart.start_at ="A1" in addition to passing a cell or the x, y coordinates.
  
 Please see the {file:CHANGELOG.md} document for past release information.
 

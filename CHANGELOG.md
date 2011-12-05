@@ -1,6 +1,20 @@
 CHANGELOG
 ---------
 
+- **October.30.11**: 1.0.10 release
+  - Updating gemspec to lower gem version requirements.
+  - Added row.style assignation for updating the cell style for an entire row
+  - Added col_style method to worksheet upate a the style for a column of cells
+  - Added cols for an easy reference to columns in a worksheet.
+  - prep for pre release of acts_as_xlsx gem
+  - added in travis.ci configuration and build status
+  - fixed out of range bug in time calculations for 32bit time.
+  - added i18n for active support
+
+- **October.26.11**: 1.0.9 release
+  - Updated to support ruby 1.9.3
+  - Updated to eliminate all warnings originating in this gem
+
 - **October.23.11**: 1.0.8 release
   - Added support for images (jpg, gif, png) in worksheets.
 
