@@ -51,8 +51,8 @@ module Axlsx
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
-      start_at(*options[:start_at]) if options[:start_at]
-      end_at(*options[:end_at]) if options[:start_at]
+      start_at *options[:start_at] if options[:start_at]
+      end_at *options[:end_at] if options[:start_at]
       yield self if block_given?
     end
 
@@ -140,7 +140,8 @@ module Axlsx
     # @param [Integer] x The column
     # @param [Integer] y The row
     # @return [Marker]
-    def start_at(x, y)
+    def start_at(x, y=0)
+      x, y = *parse_coord_args(x, y)
       @graphic_frame.anchor.from.col = x
       @graphic_frame.anchor.from.row = y
     end
@@ -151,12 +152,27 @@ module Axlsx
     # @param [Integer] x The column
     # @param [Integer] y The row
     # @return [Marker]
-    def end_at(x, y)
+    def end_at(x, y=0)
+      x, y = *parse_coord_args(x, y)
       @graphic_frame.anchor.to.col = x
       @graphic_frame.anchor.to.row = y
     end
 
     private
+
+    def parse_coord_args(x, y=0)
+      if x.is_a?(String)
+        x, y = *Axlsx::name_to_indices(x)
+      end
+      if x.is_a?(Cell)
+        x, y = *x.pos
+      end
+      if x.is_a?(Array)
+        x, y = *x
+      end
+      [x, y]
+    end
+
     def view3D=(v) DataTypeValidator.validate "#{self.class}.view3D", View3D, v; @view3D = v; end
 
   end
