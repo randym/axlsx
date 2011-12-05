@@ -41,4 +41,14 @@ module Axlsx
     ref += ":#{items.last.r_abs}" if items.size > 1
     ref
   end
+
+  def self.name_to_indices(name)
+    raise ArgumentError, 'invalid cell name' unless name.size > 1
+    v = name[/[A-Z]+/].reverse.chars.reduce({:base=>1, :i=>0}) do  |v, c|        
+      v[:i] += ((c.bytes.first - 65) + v[:base]); v[:base] *= 26; v 
+    end
+
+    [v[:i]-1, ((name[/[1-9]+/]).to_i)-1]
+
+  end
 end
