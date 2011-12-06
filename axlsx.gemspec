@@ -33,8 +33,9 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'rmagick', '>= 2.12.2'
   s.add_runtime_dependency 'zip', '>= 2.0.2'
 
-  s.add_development_dependency 'rake', "0.8.7" if RUBY_VERSION == "1.9.2"
-  s.add_development_dependency 'rake', "0.9.2.2" if ["1.9.3", "1.8.7"].include?(RUBY_VERSION)
+  # pinning rake to see if it solves some bundler exec rake problems with recursive includes
+  s.add_development_dependency 'rake', "0.8.7" # if RUBY_VERSION == "1.9.2"
+  #s.add_development_dependency 'rake', "~> 0.9" if ["1.9.3", "1.8.7"].include?(RUBY_VERSION)
   s.add_development_dependency 'bundler'
 
   s.required_ruby_version = '>= 1.8.7'

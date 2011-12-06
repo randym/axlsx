@@ -199,12 +199,15 @@ module Axlsx
     # @return [String]
     def to_xml
       builder = Nokogiri::XML::Builder.new(:encoding => ENCODING) do |xml|
-        xml.worksheet(:xmlns => XML_NS, :'xmlns:r' => XML_NS_R) {
+        xml.worksheet(:xmlns => XML_NS, 
+                      :'xmlns:r' => XML_NS_R, 
+                      :'xmlns:mc' => XML_NS_MC,
+                      :'xmlns:x14ac' => XML_NS_X14AC) {
           if @auto_fit_data.size > 0
             xml.cols {
               @auto_fit_data.each_with_index do |col, index|
                 min_max = index+1
-                xml.col(:min=>min_max, :max=>min_max, :width => auto_width(col), :customWidth=>"true")
+                xml.col(:min=>min_max, :max=>min_max, :width => ("%.2f" % auto_width(col)), :customWidth=>"true")
               end
             }
           end

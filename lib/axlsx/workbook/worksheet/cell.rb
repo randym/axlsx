@@ -326,7 +326,8 @@ module Axlsx
         epoc1900 = -2209021200 #Time.local(1900, 1, 1) 
         epoc1904 = -2082877200 #Time.local(1904, 1, 1) 
         epoc = Workbook.date1904 ? epoc1904 : epoc1900
-        ((v.localtime.to_f - epoc) /60.0/60.0/24.0).to_f
+        v = ((v.localtime.to_f - epoc) /60.0/60.0/24.0).to_f
+        ((v * 10**11).round.to_f / 10**11)
       elsif @type == :float
         v.to_f
       elsif @type == :integer
