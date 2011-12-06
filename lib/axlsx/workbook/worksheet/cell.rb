@@ -242,7 +242,7 @@ module Axlsx
           #  xml.is { xml.t @value.to_s } 
           #}
           #parse styled string
-          xml.c(:r => r, :s=>style) {
+          xml.c(:r => r, :s=>style, :t => :inlineStr) {
             xml.is {
               xml.r {
                 xml.rPr {
