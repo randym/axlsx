@@ -245,7 +245,7 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 Changelog
 ---------
 - **December.7.11**: 1.0.12 release
-  - changed dependency from 'zip' jem to 'rubyzip' and added conditional code to force binary encoding to resolve issue with excel 2011
+  - changed dependency from 'zip' gem to 'rubyzip' and added conditional code to force binary encoding to resolve issue with excel 2011
   - Patched bug in app.xml that would ignore user specified properties.
 - **December.5.11**: 1.0.11 release
   - Added [] methods to worksheet and workbook to provide name based access to cells.
