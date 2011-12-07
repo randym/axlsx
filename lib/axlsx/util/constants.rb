@@ -12,10 +12,6 @@ module Axlsx
   # extended-properties namespace
   APP_NS = "http://schemas.openxmlformats.org/officeDocument/2006/extended-properties"
 
-  XML_NS_MC="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-
-  XML_NS_X14AC = "http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac"
-
   # doc props namespace
   APP_NS_VT = "http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes"
 
