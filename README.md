@@ -7,10 +7,10 @@ Axlsx: Office Open XML Spreadsheet Generation
 **Author**:       Randy Morgan   
 **Copyright**:    2011      
 **License**:      MIT License      
-**Latest Version**: 1.0.12   
+**Latest Version**: 1.0.13   
 **Ruby Version**: 1.8.7, 1.9.2, 1.9.3 
 
-**Release Date**: December 7th 2011     
+**Release Date**: December 8th 2011     
 
 Synopsis
 --------
@@ -244,7 +244,11 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
  
 Changelog
 ---------
+- **December.8.11**: 1.0.13 release
+    Fixing .gemspec errors that caused gem to miss the lib directory. Sorry about that.
+
 - **December.7.11**: 1.0.12 release
+    DO NOT USE THIS VERSION = THE GEM IS BROKEN
   - changed dependency from 'zip' gem to 'rubyzip' and added conditional code to force binary encoding to resolve issue with excel 2011
   - Patched bug in app.xml that would ignore user specified properties.
 - **December.5.11**: 1.0.11 release
