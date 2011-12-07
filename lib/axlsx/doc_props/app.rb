@@ -102,9 +102,9 @@ module Axlsx
     # @option options [String] Application
     # @option options [String] AppVersion
     # @option options [Integer] DocSecurity
-    def initalize(options={})
+    def initialize(options={})
       options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? o[0]
+        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
     end
 
@@ -168,7 +168,7 @@ module Axlsx
       builder = Nokogiri::XML::Builder.new(:encoding => ENCODING) do |xml|
         xml.send(:Properties, :xmlns => APP_NS, :'xmlns:vt' => APP_NS_VT) {
           self.instance_values.each do |name, value|
-            xml.send("ap:#{name}", value)
+            xml.send(name, value)
           end
         }
       end      

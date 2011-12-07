@@ -1,16 +1,18 @@
 #!/usr/bin/env ruby
 # -*- coding: utf-8 -*-
-     require 'rubygems'
-     require 'axlsx.rb'
+# require 'rubygems' if that is how you do it!
+require 'axlsx'
 
 
 #A Simple Workbook
 if ARGV.size == 0 || ARGV.include?("1")
       p = Axlsx::Package.new
       p.workbook.add_worksheet do |sheet|
-        sheet.add_row ["First", "Second", "Third"]
-        sheet.add_row [1, 2, Time.now]
+        sheet.add_row ["First Column", "Second", "Third"]
+        sheet.add_row [1, 2, 3]
       end
+      #p.workbook.date1904 = true
+      p.validate.each { |e| puts e.message }
       p.serialize("example1.xlsx")
 end
 #Generating A Bar Chart

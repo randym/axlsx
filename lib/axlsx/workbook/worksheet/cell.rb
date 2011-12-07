@@ -225,15 +225,12 @@ module Axlsx
     # @note
     #   Shared Strings are not used in this library. All values are set directly in the each sheet.
     def to_xml(xml)
-      # Both 1.8 and 1.9 return the same 'fast_xf'
-      # &#12491;&#12507;&#12531;&#12468;
-      # &#12491;&#12507;&#12531;&#12468;
       
       # however nokogiri does a nice 'force_encoding' which we shall remove!
       if @type == :string 
         #parse formula
         if @value.start_with?('=')
-          xml.c(:r => r, :s=>style) {
+          xml.c(:r => r, :t=>:str, :s=>style) {
             xml.f @value.to_s.gsub('=', '')
           }
         else
@@ -269,7 +266,6 @@ module Axlsx
             }
           }
         end
-
       else
         xml.c(:r => r, :s => style) { xml.v value }
       end

@@ -240,7 +240,7 @@ module Axlsx
       builder = Nokogiri::XML::Builder.new(:encoding => ENCODING) do |xml|
         xml.styleSheet(:xmlns => XML_NS) {
           [:numFmts, :fonts, :fills, :borders, :cellStyleXfs, :cellXfs, :cellStyles, :dxfs, :tableStyles].each do |key|
-            self.instance_values[key.to_s].to_xml(xml)
+            self.instance_values[key.to_s].to_xml(xml) unless self.instance_values[key.to_s].nil?
           end
         }
       end
@@ -258,7 +258,7 @@ module Axlsx
       @numFmts.lock
 
       @fonts = SimpleTypedList.new Font
-      @fonts << Font.new(:name => "Arial", :sz => 11, :family=>1, :numFmt=>"0")
+      @fonts << Font.new(:name => "Arial", :sz => 11, :family=>1)
       @fonts.lock
 
       @fills = SimpleTypedList.new Fill
@@ -276,7 +276,7 @@ module Axlsx
       @borders.lock
 
       @cellStyleXfs = SimpleTypedList.new Xf, "cellStyleXfs"
-      @cellStyleXfs << Xf.new(:borderId=>0, :xfId=>0, :numFmtId=>0, :fontId=>0, :fillId=>0)
+      @cellStyleXfs << Xf.new(:borderId=>0, :numFmtId=>0, :fontId=>0, :fillId=>0)
       @cellStyleXfs.lock
 
       @cellStyles = SimpleTypedList.new CellStyle
@@ -287,7 +287,7 @@ module Axlsx
       @cellXfs << Xf.new(:borderId=>0, :xfId=>0, :numFmtId=>0, :fontId=>0, :fillId=>0)
       @cellXfs << Xf.new(:borderId=>1, :xfId=>0, :numFmtId=>0, :fontId=>0, :fillId=>0)
       # default date formatting
-      @cellXfs << Xf.new(:borderId=>0, :xfId=>0, :numFmtId=>14, :fontId=>0, :fillId=>0)
+      @cellXfs << Xf.new(:borderId=>0, :xfId=>0, :numFmtId=>14, :fontId=>0, :fillId=>0, :applyNumberFormat=>1)
       @cellXfs.lock
 
       @dxfs = SimpleTypedList.new(Xf, "dxfs"); @dxfs.lock

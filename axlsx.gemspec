@@ -14,9 +14,10 @@ Gem::Specification.new do |s|
   s.description = <<-eof
     xlsx generation with charts, images, automated column width, customizable styles and full schema validation. Axlsx excels at helping you generate beautiful Office Open XML Spreadsheet documents without having to understand the entire ECMA specification. Check out the README for some examples of how easy it is. Best of all, you can validate your xlsx file before serialization so you know for sure that anything generated is going to load on your client's machine.
   eof
-  s.files 	= Dir.glob("{doc,lib,test,schema,examples}/**/*") + %w{ LICENSE README.md Rakefile CHANGELOG.md }
+  s.files 	= Dir.glob("{lib/**/*.rb,lib/schema,examples}/**/*") + %w{ LICENSE README.md Rakefile CHANGELOG.md .yardopts }
+  s.test_files  = Dir.glob("{test/**/*.rb}")
 
-  # s.files = FileList.new('*', 'lib/**/*', 'doc/**/*', 'schema/**/*', 'examples/**/*') do |fl|
+  # s.files = FileList.new('*', 'lib/**/*.rb', 'doc/**/*', /**/*', 'examples/**/*') do |fl|
   #   fl.exclude("*.*~")
   #   fl.exclude(".*")
   #   fl.exclude("todo")
@@ -32,11 +33,10 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'activesupport', '>= 2.3.9'
   s.add_runtime_dependency 'i18n', '>= 0.6.0'
   s.add_runtime_dependency 'rmagick', '>= 2.12.2'
-  s.add_runtime_dependency 'zip', '>= 2.0.2'
+  s.add_runtime_dependency 'rubyzip', '~> 0.9'
   
   s.add_development_dependency 'rake', "0.8.7"  if RUBY_VERSION == "1.9.2"
   s.add_development_dependency 'rake', "~> 0.9" if ["1.9.3", "1.8.7"].include?(RUBY_VERSION)
-  s.add_development_dependency 'bundler'
 
   s.required_ruby_version = '>= 1.8.7'
   s.require_path = 'lib'

@@ -11,7 +11,7 @@ module Axlsx
     # @example Package.new :author => 'you!', :workbook => Workbook.new
     def initialize(options={})
       @workbook = nil
-      @core, @app = Core.new, App.new
+      @core, @app  =  Core.new, App.new
       @core.creator = options[:author] || @core.creator
       yield self if block_given?
     end
@@ -65,8 +65,9 @@ module Axlsx
       Zip::ZipOutputStream.open(output) do |zip|
         p.each do |part| 
           unless part[:doc].nil?
-            zip.put_next_entry(part[:entry]); 
-            zip.puts(part[:doc])
+            zip.put_next_entry(part[:entry]);
+            entry = ['1.9.2', '1.9.3'].include?(RUBY_VERSION) ? part[:doc].force_encoding('BINARY') : part[:doc]
+            zip.puts(entry)
           end
           unless part[:path].nil?
             zip.put_next_entry(part[:entry]); 
@@ -108,12 +109,12 @@ module Axlsx
     def parts
       @parts = [
        {:entry => RELS_PN, :doc => relationships.to_xml, :schema => RELS_XSD},
+       {:entry => "xl/#{STYLES_PN}", :doc => workbook.styles.to_xml, :schema => SML_XSD},
        {:entry => CORE_PN, :doc => @core.to_xml, :schema => CORE_XSD},
        {:entry => APP_PN, :doc => @app.to_xml, :schema => APP_XSD},
        {:entry => WORKBOOK_RELS_PN, :doc => workbook.relationships.to_xml, :schema => RELS_XSD},
-       {:entry => WORKBOOK_PN, :doc => workbook.to_xml, :schema => SML_XSD},
        {:entry => CONTENT_TYPES_PN, :doc => content_types.to_xml, :schema => CONTENT_TYPES_XSD},
-       {:entry => "xl/#{STYLES_PN}", :doc => workbook.styles.to_xml, :schema => SML_XSD}
+       {:entry => WORKBOOK_PN, :doc => workbook.to_xml, :schema => SML_XSD}
       ]
       workbook.drawings.each do |drawing|
         @parts << {:entry => "xl/#{drawing.rels_pn}", :doc => drawing.relationships.to_xml, :schema => RELS_XSD}

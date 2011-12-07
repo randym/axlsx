@@ -7,10 +7,10 @@ Axlsx: Office Open XML Spreadsheet Generation
 **Author**:       Randy Morgan   
 **Copyright**:    2011      
 **License**:      MIT License      
-**Latest Version**: 1.0.11   
+**Latest Version**: 1.0.12   
 **Ruby Version**: 1.8.7, 1.9.2, 1.9.3 
 
-**Release Date**: December 5th 2011     
+**Release Date**: December 7th 2011     
 
 Synopsis
 --------
@@ -81,7 +81,7 @@ A Simple Workbook
 
       p = Axlsx::Package.new
       p.workbook.add_worksheet do |sheet|
-        sheet.add_row ["First", "Second", "Third"]
+        sheet.add_row ["First Column", "Second Column", "Third Column"]
         sheet.add_row [1, 2, Time.now]
       end
       p.serialize("example1.xlsx")
@@ -105,7 +105,7 @@ Generating A Pie Chart
      p.workbook.add_worksheet do |sheet|
        sheet.add_row ["First", "Second", "Third", "Fourth"]
        sheet.add_row [1, 2, 3, "=PRODUCT(A2:C2)"]
-       sheet.add_chart(Axlsx::Pie3DChart, :start_at => [0, 2], :end_at => [5, 15], :title=>"example 3: Pie Chart") do |chart|
+       sheet.add_chart(Axlsx::Pie3DChart, :start_at => [0, 2], :end_at => [5, 25], :title=>"example 3: Pie Chart") do |chart|
          chart.add_series :data => sheet["A2:D2"], :labels => sheet["A1:D1"]
        end
      end  
@@ -244,6 +244,9 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
  
 Changelog
 ---------
+- **December.7.11**: 1.0.12 release
+  - changed dependency from 'zip' jem to 'rubyzip' and added conditional code to force binary encoding to resolve issue with excel 2011
+  - Patched bug in app.xml that would ignore user specified properties.
 - **December.5.11**: 1.0.11 release
   - Added [] methods to worksheet and workbook to provide name based access to cells.
   - Added support for functions as cell values
