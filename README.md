@@ -228,6 +228,23 @@ Using cell specific styling and range / name based access
      p.workbook['My Worksheet!A1:D2'].each { |c| c.style = Axlsx::STYLE_THIN_BORDER }
      p.serialize("example13.xlsx")
 
+#Merging Cells.
+     p = Axlsx::Package.new
+     p.workbook.add_worksheet(:name=>'My Worksheet') do |sheet|
+         # cell level style overides when adding cells
+         sheet.add_row ['col 1', 'col 2', 'col 3', 'col 4'], :sz => 16
+         sheet.add_row [1, 2, 3, "=SUM(A2:C2)"]
+         sheet.add_row [2, 3, 4, "=SUM(A3:C3)"]
+         sheet.add_row ["total", "", "", "=SUM(D2:D3)"]
+         sheet.merge_cells('A4:C4')
+        # cell level style overrides via sheet range
+         sheet["A1:D1"].each { |c| c.color = "FF0000"}
+     end     
+     p.workbook['My Worksheet!A1:D4'].each { |c| c.style = Axlsx::STYLE_THIN_BORDER }
+     p.serialize("example14.xlsx")
+
+end
+
 
 
 ###Documentation
@@ -244,8 +261,11 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
  
 Changelog
 ---------
+- **December.?.11**: 1.0.14 release
+   - Added support for mergin cells
+	
 - **December.8.11**: 1.0.13 release
-    Fixing .gemspec errors that caused gem to miss the lib directory. Sorry about that.
+   -  Fixing .gemspec errors that caused gem to miss the lib directory. Sorry about that.
 
 - **December.7.11**: 1.0.12 release
     DO NOT USE THIS VERSION = THE GEM IS BROKEN

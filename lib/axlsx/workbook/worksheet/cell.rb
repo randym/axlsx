@@ -219,6 +219,18 @@ module Axlsx
       [index, row.index]
     end
 
+    # Merges all the cells in a range created between this cell and the cell or string name for a cell  provided
+    # @see worksheet.merge_cells
+    # @param [Cell, String] target The last cell, or str ref for the cell in the merge range
+    def merge(target)
+      range_end = if target.is_a?(String)
+                    target
+                  elsif(target.is_a?(Cell))
+                    target.r
+                  end
+      self.row.worksheet.merge_cells "#{self.r}:#{range_end}" unless range_end.nil?
+    end              
+
     # Serializes the cell
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String] xml text for the cell

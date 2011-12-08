@@ -200,5 +200,22 @@ if ARGV.size==0 || ARGV.include?("13")
 
 end
 
+#Merging Cells.
+if ARGV.size==0 || ARGV.include?("14")
+     p = Axlsx::Package.new
+     p.workbook.add_worksheet(:name=>'My Worksheet') do |sheet|
+         # cell level style overides when adding cells
+         sheet.add_row ['col 1', 'col 2', 'col 3', 'col 4'], :sz => 16
+         sheet.add_row [1, 2, 3, "=SUM(A2:C2)"]
+         sheet.add_row [2, 3, 4, "=SUM(A3:C3)"]
+         sheet.add_row ["total", "", "", "=SUM(D2:D3)"]
+         sheet.merge_cells('A1:B4')
+         sheet["A1:D1"].each { |c| c.color = "FF0000"}
+     end     
+     p.workbook['My Worksheet!A1:D4'].each { |c| c.style = Axlsx::STYLE_THIN_BORDER }
+     p.serialize("example14.xlsx")
+
+end
+
      
 

@@ -24,8 +24,10 @@ module Axlsx
     # @return [Array] of Hash 
     attr_reader :auto_fit_data
 
-    # TODO Merge Cells
-    # attr_reader :merge_cells
+    # An array of merged cell ranges e.d "A1:B3"
+    # Content and formatting is read from the first cell.
+    # @return Array
+    attr_reader :merged_cells
     
     # Creates a new worksheet.
     # @note the recommended way to manage worksheets is Workbook#add_worksheet
@@ -40,7 +42,27 @@ module Axlsx
       self.name = options[:name] || "Sheet" + (index+1).to_s
       @magick_draw = Magick::Draw.new
       @cols = SimpleTypedList.new Cell
+      @merged_cells = []
     end
+
+    # Creates merge information for this worksheet. 
+    # Cells can be merged by calling the merge_cells method on a worksheet.
+    # @example This would merge the three cells C1..E1    #  
+    #        worksheet.merge_cells "C1:E1"
+    #        # you can also provide an array of cells to be merged
+    #        worksheet.merge_cells worksheet.rows.first.cells[(2..4)]
+    #        #alternatively you can do it from a single cell
+    #        worksheet["C1"].merge worksheet["E1"]
+    # @param [Array, string]    
+    def merge_cells(cells)
+      @merged_cells << if cells.is_a?(String)
+                         cells
+                       elsif cells.is_a?(Array)
+                         cells = cells.sort { |x, y| x.r <=> y.r }
+                         "#{cells.first.r}:#{cells.last.r}"
+                       end       
+    end
+
 
     # Returns the cell or cells defined using excel style A1:B3 references.
     # @param [String] cell_def the string defining the cell or range of cells
@@ -214,6 +236,7 @@ module Axlsx
               row.to_xml(xml)
             end
           }
+          xml.mergeCells(:count=>@merged_cells.size) { @merged_cells.each { | mc | xml.mergeCell(:ref=>mc) } } unless @merged_cells.empty?
           xml.drawing :"r:id"=>"rId1" if @drawing          
         }
       end

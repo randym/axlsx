@@ -135,4 +135,17 @@ class TestWorksheet < Test::Unit::TestCase
     assert(@ws.send(:auto_width, {:sz=>12, :longest=>"fish"}) > @ws.send(:auto_width, {:sz=>11, :longest=>"fish"}), "larger font size gets a longer auto_width using the same text")
   end
 
+  def test_merge_cells
+    assert(@ws.merged_cells.is_a?(Array))
+    assert_equal(@ws.merged_cells.size, 0)           
+    @ws.add_row [1,2,3]
+    @ws.add_row [4,5,6]
+    @ws.add_row [7,8,9]
+    @ws.merge_cells "A1:A2"
+    @ws.merge_cells "B2:C3"
+    @ws.merge_cells @ws.rows.last.cells[(0..1)]
+    assert_equal(@ws.merged_cells.size, 3)
+    assert_equal(@ws.merged_cells.last, "A3:B3")
+  end
+
 end
