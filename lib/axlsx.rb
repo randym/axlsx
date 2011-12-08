@@ -39,7 +39,7 @@ module Axlsx
   # determines the cell range for the items provided
   def self.cell_range(items)
     return "" unless items.first.is_a? Cell          
-    ref = "#{items.first.row.worksheet.name}!" +
+    ref = "'#{items.first.row.worksheet.name}'!" +
       "#{items.first.r_abs}"
     ref += ":#{items.last.r_abs}" if items.size > 1
     ref
