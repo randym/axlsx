@@ -88,14 +88,22 @@ module Axlsx
     # @return [String]
     def to_xml
       super() do |xml|
-        xml.send('c:line3DChart') {
-          xml.send('c:grouping', :val=>grouping)
-          xml.send('c:varyColors', :val=>1)
+        xml.line3DChart {
+          xml.grouping :val=>grouping
+          xml.varyColors :val=>1
           @series.each { |ser| ser.to_xml(xml) }
-          xml.send('c:gapDepth', :val=>@gapDepth) unless @gapDepth.nil?
-          xml.send('c:axId', :val=>@catAxId)
-          xml.send('c:axId', :val=>@valAxId)
-          xml.send('c:axId', :val=>@serAxId)
+          xml.dLbls {
+            xml.showLegendKey :val=>0
+            xml.showVal :val=>0
+            xml.showCatName :val=>0
+            xml.showSerName :val=>0
+            xml.showPercent :val=>0
+            xml.showBubbleSize :val=>0            
+          }
+          xml.gapDepth :val=>@gapDepth unless @gapDepth.nil?
+          xml.axId :val=>@catAxId
+          xml.axId :val=>@valAxId
+          xml.axId :val=>@serAxId
         }
         @catAxis.to_xml(xml)
         @valAxis.to_xml(xml)

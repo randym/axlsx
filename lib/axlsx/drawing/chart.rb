@@ -48,6 +48,7 @@ module Axlsx
       @series = SimpleTypedList.new Series
       @show_legend = true
       @series_type = Series
+      @title = Title.new
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
@@ -72,11 +73,14 @@ module Axlsx
     # @param [String, Cell] v
     # @return [Title]
     def title=(v) 
-      v = Title.new(v) if v.is_a?(String) || v.is_a?(Cell)
-      DataTypeValidator.validate "#{self.class}.title", Title, v
-      @title = v
+      DataTypeValidator.validate "#{self.class}.title", [String, Cell], v
+      if v.is_a?(String)
+        @title.text = v
+      elsif v.is_a?(Cell)
+        @title.cell = v
+      end
     end
-
+    
     # Show the legend in the chart
     # @param [Boolean] v
     # @return [Boolean]
@@ -112,23 +116,33 @@ module Axlsx
     # serializes the chart
     def to_xml
       builder = Nokogiri::XML::Builder.new(:encoding => ENCODING) do |xml|
-        xml.send('c:chartSpace',:'xmlns:c' => XML_NS_C, :'xmlns:a' => XML_NS_A) {
-          xml.send('c:date1904', :val=>Axlsx::Workbook.date1904)
-          xml.send('c:style', :val=>style)
-          xml.send('c:chart') {
-            @title.to_xml(xml) unless @title.nil?
+        xml.send('c:chartSpace', :'xmlns:c' => XML_NS_C, :'xmlns:a' => XML_NS_A) {
+          xml[:c].date1904 :val => Axlsx::Workbook.date1904
+          xml[:c].style :val=>style
+          xml[:c].chart {
+            @title.to_xml(xml)
+            xml.autoTitleDeleted :val=>0
             @view3D.to_xml(xml) unless @view3D.nil?
-            xml.send('c:plotArea') {
-              xml.send('c:layout')
+            
+            xml.floor { xml.thickness(:val=>0) }
+            xml.sideWall { xml.thickness(:val=>0) }
+            xml.backWall { xml.thickness(:val=>0) }
+            xml.plotArea {
+              xml.layout
               yield xml if block_given?
             }
             if @show_legend
-              xml.send('c:legend') {
-                xml.send('c:legendPos', :val => "r")
-                xml.send('c:layout')
+                xml.legend {
+                xml.legendPos :val => "r"
+                xml.layout
+                xml.overlay :val => 0                  
               }
-            end
+              end
+            xml.plotVisOnly :val => 1
+            xml.dispBlanksAs :val => :zero
+            xml.showDLblsOverMax :val => 1
           }
+          
         }
       end
       builder.to_xml

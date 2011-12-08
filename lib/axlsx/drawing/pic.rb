@@ -125,26 +125,26 @@ module Axlsx
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String]
     def to_xml(xml)
-      xml.send('xdr:pic') {
-        xml.send('xdr:nvPicPr') {
-          xml.send('xdr:cNvPr', :id=>"2", :name=>name, :descr=>descr)
-          xml.send('xdr:cNvPicPr') {
+      xml.pic {
+        xml.nvPicPr {
+          xml.cNvPr :id=>"2", :name=>name, :descr=>descr
+          xml.cNvPicPr {
             picture_locking.to_xml(xml)
           }
         }
-        xml.send('xdr:blipFill') {
-          xml.send('a:blip', :'xmlns:r' => XML_NS_R, :'r:embed'=>"rId1")
-          xml.send('a:stretch') {
-            xml.send('a:fillRect')
+        xml.blipFill {
+          xml[:a].blip :'xmlns:r' => XML_NS_R, :'r:embed'=>"rId1"
+          xml[:a].stretch {
+            xml.fillRect
           }
         }
-        xml.send('xdr:spPr') {
-          xml.send('a:xfrm') {
-            xml.send('a:off', :x=>0, :y=>0)
-            xml.send('a:ext', :cx=>2336800, :cy=>2161540)
+        xml.spPr {
+          xml[:a].xfrm {
+            xml.off :x=>0, :y=>0
+            xml.ext :cx=>2336800, :cy=>2161540
           }
-          xml.send('a:prstGeom', :prst=>:rect) {
-            xml.send('a:avLst')
+          xml[:a].prstGeom(:prst=>:rect) {
+            xml.avLst
           }
         }
       }

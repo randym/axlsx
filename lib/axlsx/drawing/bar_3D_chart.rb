@@ -65,7 +65,7 @@ module Axlsx
       @catAxId = rand(8 ** 8)
       @valAxId = rand(8 ** 8)
       @catAxis = CatAxis.new(@catAxId, @valAxId)
-      @valAxis = ValAxis.new(@valAxId, @catAxId)
+      @valAxis = ValAxis.new(@valAxId, @catAxId, :tickLblPos => :low)
       super(frame, options)      
       @series_type = BarSeries
       @view3D = View3D.new({:rAngAx=>1}.merge(options))
@@ -108,17 +108,25 @@ module Axlsx
     # @return [String]
     def to_xml
       super() do |xml|
-        xml.send('c:bar3DChart') {
-          xml.send('c:barDir', :val => barDir)
-          xml.send('c:grouping', :val=>grouping)
-          xml.send('c:varyColors', :val=>1)
+        xml.bar3DChart {
+          xml.barDir :val => barDir
+          xml.grouping :val=>grouping
+          xml.varyColors :val=>1
           @series.each { |ser| ser.to_xml(xml) }
-          xml.send('c:gapWidth', :val=>@gapWidth) unless @gapWidth.nil?
-          xml.send('c:gapDepth', :val=>@gapDepth) unless @gapDepth.nil?
-          xml.send('c:shape', :val=>@shape) unless @shape.nil?
-          xml.send('c:axId', :val=>@catAxId)
-          xml.send('c:axId', :val=>@valAxId)
-          xml.send('c:axId', :val=>0)
+          xml.dLbls {
+            xml.showLegendKey :val=>0
+            xml.showVal :val=>0
+            xml.showCatName :val=>0
+            xml.showSerName :val=>0
+            xml.showPercent :val=>0
+            xml.showBubbleSize :val=>0            
+          }
+          xml.gapWidth :val=>@gapWidth unless @gapWidth.nil?
+          xml.gapDepth :val=>@gapDepth unless @gapDepth.nil?
+          xml.shape :val=>@shape unless @shape.nil?
+          xml.axId :val=>@catAxId
+          xml.axId :val=>@valAxId
+          xml.axId :val=>0
         }
         @catAxis.to_xml(xml)
         @valAxis.to_xml(xml)        

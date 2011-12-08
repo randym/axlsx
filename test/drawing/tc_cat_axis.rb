@@ -9,7 +9,7 @@ class TestCatAxis < Test::Unit::TestCase
   end
 
   def test_initialization
-    assert_equal(@axis.auto, true, "axis auto default incorrect")
+    assert_equal(@axis.auto, 1, "axis auto default incorrect")
     assert_equal(@axis.lblAlgn, :ctr, "label align default incorrect")
     assert_equal(@axis.lblOffset, "100%", "label offset default incorrect")
   end

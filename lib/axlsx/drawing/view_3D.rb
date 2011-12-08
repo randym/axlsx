@@ -72,13 +72,13 @@ module Axlsx
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String]
     def to_xml(xml)
-      xml.send('c:view3D') {
-        xml.send('c:rotX', :val=>@rotX) unless @rotX.nil?
-        xml.send('c:hPercent', :val=>@hPercent) unless @hPercent.nil?
-        xml.send('c:rotY', :val=>@rotY) unless @rotY.nil?
-        xml.send('c:depthPercent', :val=>@depthPercent) unless @depthPercent.nil?
-        xml.send('c:rAngAx', :val=>@rAngAx) unless @rAngAx.nil?
-        xml.send('c:perspective', :val=>@perspective) unless @perspective.nil?
+      xml[:c].view3D {
+        xml[:c].rotX :val=>@rotX unless @rotX.nil?
+        xml[:c].hPercent :val=>@hPercent unless @hPercent.nil?
+        xml[:c].rotY :val=>@rotY unless @rotY.nil?
+        xml[:c].depthPercent :val=>@depthPercent unless @depthPercent.nil?
+        xml[:c].rAngAx :val=>@rAngAx unless @rAngAx.nil?
+        xml[:c].perspective :val=>@perspective unless @perspective.nil?
       }
     end
   end

@@ -33,10 +33,10 @@ module Axlsx
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String]
     def to_xml(xml)
-      xml.send('c:serAx') {
+      xml[:c].serAx {
         super(xml)
-        xml.send('c:tickLblSkip', :val=>@tickLblSkip) unless @tickLblSkip.nil?
-        xml.send('c:tickMarkSkip', :val=>@tickMarkSkip) unless @tickMarkSkip.nil?
+        xml[:c].tickLblSkip :val=>@tickLblSkip unless @tickLblSkip.nil?
+        xml[:c].tickMarkSkip :val=>@tickMarkSkip unless @tickMarkSkip.nil?
       }
     end
   end

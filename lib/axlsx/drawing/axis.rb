@@ -48,8 +48,8 @@ module Axlsx
       @axId = axId
       @crossAx = crossAx
       @format_code = "General"
-      @scaling = Scaling.new(:orientation=>:minMax)
-      self.axPos = :l
+      @scaling = Scaling.new(:orientation=>:minMax)      
+      self.axPos = :b
       self.tickLblPos = :nextTo
       self.format_code = "General"
       self.crosses = :autoZero
@@ -67,7 +67,7 @@ module Axlsx
 
     # The number format format code for this axis
     # default :General
-    def format_code=(v) Axlsx::validate_string(v); @formatCode = v; end
+    def format_code=(v) Axlsx::validate_string(v); @format_code = v; end
 
     # specifies how the perpendicular axis is crossed
     # must be one of [:autoZero, :min, :max]
@@ -77,14 +77,17 @@ module Axlsx
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String]
     def to_xml(xml)
-      xml.send('c:axId', :val=>@axId)
+      xml.axId :val=>@axId
       @scaling.to_xml(xml)
-      xml.send('c:axPos', :val=>@axPos)
-      xml.send('c:majorGridlines')
-      xml.send('c:numFmt', :formatCode => @format_code, :sourceLinked=>"1")
-      xml.send('c:tickLblPos', :val=>@tickLblPos)
-      xml.send('c:crossAx', :val=>@crossAx)
-      xml.send('c:crosses', :val=>@crosses)
+      xml.delete :val=>0
+      xml.axPos :val=>@axPos
+      xml.majorGridlines
+      xml.numFmt :formatCode => @format_code, :sourceLinked=>"1"
+      xml.majorTickMark :val=>"none"
+      xml.minorTickMark :val=>"none"
+      xml.tickLblPos :val=>@tickLblPos
+      xml.crossAx :val=>@crossAx
+      xml.crosses :val=>@crosses
     end    
   end
 end

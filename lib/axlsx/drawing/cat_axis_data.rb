@@ -14,15 +14,15 @@ module Axlsx
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String]
     def to_xml(xml)
-      xml.send('c:cat') {
-        xml.send('c:strRef') {
-          xml.send('c:f', Axlsx::cell_range(@list))
-          xml.send('c:strCache') {
-            xml.send('c:ptCount', :val=>size)
+      xml.cat {
+        xml.strRef {
+          xml.f Axlsx::cell_range(@list)
+          xml.strCache {
+            xml.ptCount :val=>size
             each_with_index do |item, index|
               v = item.is_a?(Cell) ? item.value : item
-              xml.send('c:pt', :idx=>index) {
-                xml.send('c:v', v)
+              xml.pt(:idx=>index) {
+                xml.v v
               }                          
             end
           }

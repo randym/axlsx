@@ -31,8 +31,8 @@ module Axlsx
     # @return [String]
     def to_xml
       super() do |xml|
-        xml.send('c:pie3DChart') {
-          xml.send('c:varyColors', :val=>1)
+        xml[:c].pie3DChart {
+          xml[:c].varyColors :val=>1
           @series.each { |ser| ser.to_xml(xml) }
         }                      
       end

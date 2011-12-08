@@ -53,7 +53,7 @@ module Axlsx
     # @return [String]
     def to_xml(xml)
       [:col, :colOff, :row, :rowOff].each do |k|
-        xml.send("xdr:#{k.to_s}", self.send(k))
+        xml.send(k.to_sym, self.send(k))
       end      
     end
   end

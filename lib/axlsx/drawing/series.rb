@@ -58,9 +58,9 @@ module Axlsx
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String]
     def to_xml(xml)
-      xml.send('c:ser') {
-        xml.send('c:idx', :val=>index)
-        xml.send('c:order', :val=>order || index)        
+      xml.ser {
+        xml.idx :val=>index
+        xml.order :val=>order || index
         title.to_xml(xml) unless title.nil?
         yield xml if block_given?
       }

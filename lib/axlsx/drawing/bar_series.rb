@@ -46,7 +46,7 @@ module Axlsx
       super(xml) do |xml_inner|
         @labels.to_xml(xml_inner) unless @labels.nil?
         @data.to_xml(xml_inner) unless @data.nil?
-        xml_inner.send('c:shape', :val=>@shape)
+        xml_inner.shape :val=>@shape
       end      
     end
 

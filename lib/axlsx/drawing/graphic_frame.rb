@@ -31,18 +31,18 @@ module Axlsx
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String]
     def to_xml(xml)
-      xml.send('xdr:graphicFrame') {        
-        xml.send('xdr:nvGraphicFramePr') {
-          xml.send('xdr:cNvPr', :id=>2, :name=>chart.title)
-          xml.send('xdr:cNvGraphicFramePr')                
+      xml.graphicFrame {        
+        xml.nvGraphicFramePr {
+          xml.cNvPr :id=>2, :name=>chart.title
+          xml.cNvGraphicFramePr                
         }
-        xml.send('xdr:xfrm') {
-          xml.send('a:off', :x=>0, :y=>0)
-          xml.send('a:ext', :cx=>0, :cy=>0)
+        xml.xfrm {
+          xml[:a].off(:x=>0, :y=>0)
+          xml[:a].ext :cx=>0, :cy=>0
         }
-        xml.send('a:graphic') {
-          xml.send('a:graphicData', :uri=>XML_NS_C) {
-            xml.send('c:chart', :'xmlns:c'=>XML_NS_C, :'xmlns:r'=>XML_NS_R, :'r:id'=>rId)
+        xml[:a].graphic {
+          xml.graphicData(:uri=>XML_NS_C) {
+            xml[:c].chart :'xmlns:c'=>XML_NS_C, :'xmlns:r'=>XML_NS_R, :'r:id'=>rId
           }
         }
       }

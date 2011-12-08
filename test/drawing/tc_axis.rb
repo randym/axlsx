@@ -9,7 +9,7 @@ class TestAxis < Test::Unit::TestCase
   end
 
   def test_initialization
-    assert_equal(@axis.axPos, :l, "axis position default incorrect")
+    assert_equal(@axis.axPos, :b, "axis position default incorrect")
     assert_equal(@axis.tickLblPos, :nextTo, "tick label position default incorrect")
     assert_equal(@axis.tickLblPos, :nextTo, "tick label position default incorrect")
     assert_equal(@axis.crosses, :autoZero, "tick label position default incorrect")

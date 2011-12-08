@@ -58,15 +58,15 @@ module Axlsx
     # @return [String]
     def to_xml(xml)
       #build it for now, break it down later!
-      xml.send('xdr:twoCellAnchor') {
-        xml.send('xdr:from') {
+      xml[:xdr].twoCellAnchor {
+        xml.from {
           from.to_xml(xml)
         }
-        xml.send('xdr:to') {
+        xml.to {
           to.to_xml(xml)
         }
         @object.to_xml(xml)
-        xml.send('xdr:clientData')
+        xml.clientData
       }
     end    
 

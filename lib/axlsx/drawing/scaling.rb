@@ -47,11 +47,11 @@ module Axlsx
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String]
     def to_xml(xml)
-      xml.send('c:scaling') {
-        xml.send('c:logBase', :val=> @logBase) unless @logBase.nil?
-        xml.send('c:orientation', :val=> @orientation) unless @orientation.nil?
-        xml.send('c:min', :val => @min) unless @min.nil?
-        xml.send('c:max', :val => @max) unless @max.nil?
+      xml[:c].scaling {
+        xml[:c].logBase :val=> @logBase unless @logBase.nil?
+        xml[:c].orientation :val=> @orientation unless @orientation.nil?
+        xml[:c].min :val => @min unless @min.nil?
+        xml[:c].max :val => @max unless @max.nil?
       }
     end
 

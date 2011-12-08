@@ -6,13 +6,13 @@ module Axlsx
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String]
     def to_xml(xml)
-      xml.send('c:tx') {
-        xml.send('c:strRef') {
-          xml.send('c:f', Axlsx::cell_range([@cell]))
-          xml.send('c:strCache') {
-            xml.send('c:ptCount', :val=>1)
-            xml.send('c:pt', :idx=>0) {
-              xml.send('c:v', @text)
+      xml[:c].tx {
+        xml[:c].strRef {
+          xml[:c].f Axlsx::cell_range([@cell])
+          xml[:c].strCache {
+            xml[:c].ptCount :val=>1
+            xml[:c].pt(:idx=>0) {
+              xml[:c].v @text
             }
           }
         }

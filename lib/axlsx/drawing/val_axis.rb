@@ -25,9 +25,9 @@ module Axlsx
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String]
     def to_xml(xml)
-      xml.send('c:valAx') {
+      xml.valAx {
         super(xml)
-        xml.send('c:crossBetween', :val=>@crossBetween)
+        xml.crossBetween :val=>@crossBetween
       }
     end
   end

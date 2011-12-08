@@ -64,13 +64,13 @@ module Axlsx
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String]
     def to_xml(xml)
-      xml.send('xdr:oneCellAnchor') {
-        xml.send('xdr:from') {
+      xml[:xdr].oneCellAnchor {
+        xml.from {
           from.to_xml(xml)
         }
-        xml.send('xdr:ext', ext)
+        xml.ext ext
         @object.to_xml(xml)
-        xml.send('xdr:clientData')
+        xml.clientData
       }
     end    
 

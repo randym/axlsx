@@ -29,7 +29,7 @@ module Axlsx
     # @option options [Symbol] lblAlgn
     # @option options [Integer] lblOffset    
     def initialize(axId, crossAx, options={})
-      self.auto = true
+      self.auto = 1
       self.lblAlgn = :ctr
       self.lblOffset = "100%"
       super(axId, crossAx, options)
@@ -50,11 +50,11 @@ module Axlsx
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String]
     def to_xml(xml)
-      xml.send('c:catAx') {
+      xml.catAx {
         super(xml)
-        xml.send('c:auto', :val=>@auto)
-        xml.send('c:lblAlgn', :val=>@lblAlgn)
-        xml.send('c:lblOffset', :val=>@lblOffset)                 
+        xml.auto :val=>@auto
+        xml.lblAlgn :val=>@lblAlgn
+        xml.lblOffset :val=>@lblOffset
       }
     end
   end

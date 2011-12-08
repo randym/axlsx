@@ -38,7 +38,7 @@ module Axlsx
     # @return [String]
     def to_xml(xml)
       super(xml) do  |xml_inner|
-        xml_inner.send('c:explosion', :val=>@explosion) unless @explosion.nil?
+        xml_inner.explosion :val=>@explosion unless @explosion.nil?
         @labels.to_xml(xml_inner) unless @labels.nil?
         @data.to_xml(xml_inner) unless @data.nil?
       end      
