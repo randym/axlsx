@@ -278,6 +278,14 @@ module Axlsx
             }
           }
         end
+      elsif @type == :time
+        # Using hardcoded offsets here as some operating systems will not except a 'negative' offset from the ruby epoc.
+        # (1970)
+        epoc1900 = -2209021200 #Time.local(1900, 1, 1) 
+        epoc1904 = -2082877200 #Time.local(1904, 1, 1) 
+        epoc = Workbook.date1904 ? epoc1904 : epoc1900
+        v = ((@value.localtime.to_f - epoc) /60.0/60.0/24.0).to_f
+        xml.c(:r => r, :s => style) { xml.v v }
       else
         xml.c(:r => r, :s => style) { xml.v value }
       end
@@ -327,15 +335,8 @@ module Axlsx
     # @see Axlsx#date1904
     def cast_value(v)
       if (@type == :time && v.is_a?(Time)) || (@type == :time && v.respond_to?(:to_time))
-        v = v.respond_to?(:to_time) ? v.to_time : v
         self.style = STYLE_DATE if self.style == 0
-        # Using hardcoded offsets here as some operating systems will not except a 'negative' offset from the ruby epoc.
-        # (1970)
-        epoc1900 = -2209021200 #Time.local(1900, 1, 1) 
-        epoc1904 = -2082877200 #Time.local(1904, 1, 1) 
-        epoc = Workbook.date1904 ? epoc1904 : epoc1900
-        v = ((v.localtime.to_f - epoc) /60.0/60.0/24.0).to_f
-        ((v * 10**11).round.to_f / 10**11)
+        v.respond_to?(:to_time) ? v.to_time : v
       elsif @type == :float
         v.to_f
       elsif @type == :integer
