@@ -132,7 +132,9 @@ class TestWorksheet < Test::Unit::TestCase
 
   def test_auto_width
     assert(@ws.send(:auto_width, {:sz=>11, :longest=>"fisheries"}) > @ws.send(:auto_width, {:sz=>11, :longest=>"fish"}), "longer strings get a longer auto_width at the same font size")
-    assert(@ws.send(:auto_width, {:sz=>12, :longest=>"fish"}) > @ws.send(:auto_width, {:sz=>11, :longest=>"fish"}), "larger font size gets a longer auto_width using the same text")
+
+    assert(@ws.send(:auto_width, {:sz=>11, :longest=>"fish"}) < @ws.send(:auto_width, {:sz=>12, :longest=>"fish"}), "larger fonts produce longer with with same string")
+
   end
 
   def test_merge_cells
@@ -148,4 +150,10 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(@ws.merged_cells.last, "A3:B3")
   end
 
+  def test_auto_filter
+    assert(@ws.auto_filter.nil?)
+    assert_raise(ArgumentError) { @ws.auto_filter = 123 }
+    @ws.auto_filter = "A1:D9"
+    assert_equal(@ws.auto_filter, "A1:D9")
+  end
 end

@@ -28,6 +28,12 @@ module Axlsx
     # Content and formatting is read from the first cell.
     # @return Array
     attr_reader :merged_cells
+
+    # An range that excel will apply an autfilter to "A1:B3"
+    # This will turn filtering on for the cells in the range.
+    # The first row is considered the header, while subsequent rows are considerd to be data.
+    # @return Array
+    attr_reader :auto_filter
     
     # Creates a new worksheet.
     # @note the recommended way to manage worksheets is Workbook#add_worksheet
@@ -101,6 +107,14 @@ module Axlsx
       sheet_names = @workbook.worksheets.map { |s| s.name }
       raise ArgumentError, (ERR_DUPLICATE_SHEET_NAME % v) if sheet_names.include?(v) 
       @name=v 
+    end
+
+    # The auto filter range for the worksheet
+    # @param [String] v
+    # @see auto_filter
+    def auto_filter=(v) 
+      DataTypeValidator.validate "Worksheet.auto_filter", String, v
+      @auto_filter = v
     end
 
     # The part name of this worksheet
@@ -236,6 +250,7 @@ module Axlsx
               row.to_xml(xml)
             end
           }
+          xml.autoFilter :ref=>@auto_filter if @auto_filter
           xml.mergeCells(:count=>@merged_cells.size) { @merged_cells.each { | mc | xml.mergeCell(:ref=>mc) } } unless @merged_cells.empty?
           xml.drawing :"r:id"=>"rId1" if @drawing          
         }
@@ -257,15 +272,20 @@ module Axlsx
     def workbook=(v) DataTypeValidator.validate "Worksheet.workbook", Workbook, v; @workbook = v; end
 
     # Updates auto fit data. 
-    # Autofit data attempts to determine the cell in a column that has the greatest width by comparing the length of the text multiplied by the size of the font.
+    # We store an auto_fit_data item for each column. when a row is added we multiple the font size by the length of the text to 
+    # attempt to identify the longest cell in the column. This is not 100% accurate as it needs to take into account
+    # any formatting that will be applied to the data, as well as the actual rendering size when the length and size is equal 
+    # for two cells.
     # @return [Array] of Cell objects
     # @param [Array] cells an array of cells
     def update_auto_fit_data(cells)
       styles = self.workbook.styles
       cellXfs, fonts = styles.cellXfs, styles.fonts
-      sz = fonts[0].sz
+      sz = 11
       cells.each_with_index do |item, index|
+        # ignore formula - there is no way for us to know the result
         next if item.value.is_a?(String) && item.value.start_with?('=')
+
         col = @auto_fit_data[index] || {:longest=>"", :sz=>sz} 
         cell_xf = cellXfs[item.style]
         font = fonts[cell_xf.fontId || 0]
@@ -278,25 +298,37 @@ module Axlsx
       end
       cells
     end
-
+    
     # Determines the proper width for a column based on content.
     # @note 
-    #  From ECMA docs
-    #   Column width measured as the number of characters of the maximum digit width of the numbers 0 .. 9 as 
-    #   rendered in the normal style's font. There are 4 pixels of margin padding (two on each side), plus 1 pixel padding for the gridlines.
     #   width = Truncate([!{Number of Characters} * !{Maximum Digit Width} + !{5 pixel padding}]/{Maximum Digit Width}*256)/256
     # @return [Float]
     # @param [Hash] A hash of auto_fit_data 
     def auto_width(col)
-      mdw = 6.0 # maximum digit with is always 6.0 with RMagick's default font
-      mdw_count = 0 
-      best_guess = 1.5  #direct testing shows the results of the documented formula to be a bit too small. This is a best guess scaling
-      font_scale = col[:sz].to_f / (self.workbook.styles.fonts[0].sz.to_f || 11.0)
-      
-      col[:longest].scan(/./mu).each do |i|
-        mdw_count +=1 if @magick_draw.get_type_metrics(i).width >= mdw 
+      mdw_count, font_scale, mdw = 0, col[:sz]/11.0, 6.0
+      mdw_count = col[:longest].scan(/./mu).reduce(0) do | count, char |
+        count +=1 if @magick_draw.get_type_metrics(char).max_advance >= mdw
+        count
       end
-      ((mdw_count * mdw + 5) / mdw * 256) / 256.0 * best_guess * font_scale      
-    end   
+      ((mdw_count * mdw + 5) / mdw * 256) / 256.0 * font_scale
+    end
+
+    # Something to look into:
+    #  width calculation actually needs to be done agains the formatted value for items that apply a 
+    # format
+    # def excel_format(cell)
+    #   # The most common case.
+    #   return time.value.to_s if cell.style == 0
+    #
+    #   # The second most common case   
+    #   num_fmt = workbook.styles.cellXfs[items.style].numFmtId
+    #   return value.to_s if num_fmt == 0
+    #   
+    #   format_code = workbook.styles.numFmts[num_fmt]
+    #   # need to find some exceptionally fast way of parsing value according to
+    #   # an excel format_code
+    #   item.value.to_s
+    # end      
+
   end
 end
