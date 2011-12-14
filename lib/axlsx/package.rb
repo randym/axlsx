@@ -4,6 +4,14 @@ module Axlsx
   # xlsx document including valdation and serialization.
   class Package
 
+    # provides access to the app doc properties for this package
+    # see App
+    attr_reader :app
+
+    # provides access to the core doc properties for the package
+    # see Core
+    attr_reader :core
+
     # Initializes your package
     #
     # @param [Hash] options A hash that you can use to specify the author and workbook for this package.

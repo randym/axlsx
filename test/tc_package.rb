@@ -11,6 +11,16 @@ class TestPackage < Test::Unit::TestCase
 
   end
 
+  def test_core_accessor
+    assert_equal(@package.core, @package.instance_values["core"])
+    assert_raise(NoMethodError) {@package.core = nil }
+  end
+
+  def test_app_accessor
+    assert_equal(@package.app, @package.instance_values["app"])
+    assert_raise(NoMethodError) {@package.app = nil }
+  end
+
   def test_default_objects_are_created
     assert(@package.instance_values["app"].is_a?(Axlsx::App), 'App object not created')
     assert(@package.instance_values["core"].is_a?(Axlsx::Core), 'Core object not created')
