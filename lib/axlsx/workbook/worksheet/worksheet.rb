@@ -66,7 +66,7 @@ module Axlsx
                        elsif cells.is_a?(Array)
                          cells = cells.sort { |x, y| x.r <=> y.r }
                          "#{cells.first.r}:#{cells.last.r}"
-                       end       
+                       end 
     end
 
 
@@ -279,6 +279,7 @@ module Axlsx
     # @return [Array] of Cell objects
     # @param [Array] cells an array of cells
     def update_auto_fit_data(cells)
+      # TODO delay this until rendering. too much work when we dont know what they are going to do to the sheet.
       styles = self.workbook.styles
       cellXfs, fonts = styles.cellXfs, styles.fonts
       sz = 11
@@ -301,7 +302,7 @@ module Axlsx
     
     # Determines the proper width for a column based on content.
     # @note 
-    #   width = Truncate([!{Number of Characters} * !{Maximum Digit Width} + !{5 pixel padding}]/{Maximum Digit Width}*256)/256
+    #   width = Truncate([!{Number of Characters} * !{Maximum Digit Width} + !{5 pixel padding}]/!{Maximum Digit Width}*256)/256
     # @return [Float]
     # @param [Hash] A hash of auto_fit_data 
     def auto_width(col)
