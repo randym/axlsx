@@ -147,6 +147,7 @@ require 'axlsx/workbook/worksheet/worksheet.rb'
       builder = Nokogiri::XML::Builder.new(:encoding => ENCODING) do |xml|
         xml.workbook(:xmlns => XML_NS, :'xmlns:r' => XML_NS_R) {
           xml.workbookPr(:date1904=>@@date1904)
+          #<x:workbookProtection workbookPassword="xsd:hexBinary data" lockStructure="1" lockWindows="1" />
           xml.sheets {
             @worksheets.each_with_index do |sheet, index|              
               xml.sheet(:name=>sheet.name, :sheetId=>index+1, :"r:id"=>sheet.rId)
