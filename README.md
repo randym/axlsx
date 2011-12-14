@@ -263,7 +263,7 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 #Changelog
 ---------
 - **December.14.11**: 1.0.14 release
-   - Added support for mergin cells
+   - Added support for merging cells
    - Added support for auto filters
    - Improved auto width calculations
    - Improved charts
