@@ -1,13 +1,6 @@
 # This will recursively require rake when using rake 0.9.2.2 and bundler
 #require 'rake'
-
-begin
-  require File.expand_path(File.dirname(__FILE__) + '/lib/axlsx/version.rb') unless Axlsx::VERSION
-rescue NameError=>e
-  # As far as I can tell, when a consuming application points to github, bundler runs the Gemfile, which in turn 
-  # kicks this and then includes axlsx. As we are defining Axlsx::VERSION here, we see a 
-  #   warning: already initialized constant VERSION
-end
+require File.expand_path(File.dirname(__FILE__) + '/lib/axlsx/version.rb')
 
 Gem::Specification.new do |s|
   s.name        = 'axlsx'
