@@ -222,6 +222,8 @@ module Axlsx
       applyProtection = (options[:hidden] || options[:locked]) ? 1 : 0
       
       xf = Xf.new(:fillId => fill, :fontId=>fontId, :applyFill=>1, :applyFont=>1, :numFmtId=>numFmtId, :borderId=>borderId, :applyProtection=>applyProtection)
+
+      xf.applyNumberFormat = true if xf.numFmtId > 0
       
       if options[:alignment]
         xf.alignment = CellAlignment.new(options[:alignment])
