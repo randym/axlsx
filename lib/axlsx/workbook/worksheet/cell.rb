@@ -175,14 +175,14 @@ module Axlsx
     # @option options [String] color an 8 letter rgb specification
     # @option options [Symbol] scheme must be one of :none, major, :minor
     def initialize(row, value="", options={})
-      self.row=row
+      self.row=row      
       @styles = row.worksheet.workbook.styles
-      @style = 0 
-      @type = cell_type_from_value(value)
       @row.cells << self      
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
+      @style ||= 0
+      @type ||= cell_type_from_value(value)
       @value = cast_value(value)
     end
 
