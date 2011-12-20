@@ -48,7 +48,7 @@ module Axlsx
     def type=(v) 
       RestrictionValidator.validate "Cell.type", [:time, :float, :integer, :string], v      
       @type=v 
-      self.value = @value
+      self.value = @value unless @value.nil?
     end
 
 
@@ -182,8 +182,10 @@ module Axlsx
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
       @style ||= 0
+      puts @type
       @type ||= cell_type_from_value(value)
       @value = cast_value(value)
+      puts @type
     end
 
     # @return [Integer] The index of the cell in the containing row.
