@@ -132,14 +132,18 @@ module Axlsx
     #   :drop_while
     #   :delete_if
     #   :clear
-    def method_missing(meth, *args, &block)
-      raise ArgumentError, "#{meth} not supported" if [:replace, :insert, :collect!, :map!, :pop, :delete_if, :reverse!, :shift, :shuffle!, :slice!, :sort!, :uniq!, :unshift, :zip, :flatten!, :fill, :drop, :drop_while, :delete_if, :clear].include? meth.to_sym        
-      if @list.respond_to? meth
-        @list.send(meth, *args, &block)      
-      else
-        puts "method:#{meth.inspect}"
-        super
-      end
+    DESTRUCTIVE = ['replace', 'insert', 'collect!', 'map!', 'pop', 'delete_if',
+                   'reverse!', 'shift', 'shuffle!', 'slice!', 'sort!', 'uniq!',
+                   'unshift', 'zip', 'flatten!', 'fill', 'drop', 'drop_while',
+                   'delete_if', 'clear']
+    DELEGATES = Array.instance_methods - self.instance_methods - DESTRUCTIVE
+
+    DELEGATES.each do |method|
+      class_eval %{ 
+        def #{method}(*args, &block)
+          @list.send(:#{method}, *args, &block)
+        end
+      }
     end
 
     # Serializes the list
