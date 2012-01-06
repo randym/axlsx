@@ -53,6 +53,18 @@ module Axlsx
       @primary ||= create_primary
     end
 
+    # returns the summary information storage
+    # @return [Storage]
+    def summary_information
+      @summary_information ||= create_summary_information
+    end
+
+    # returns the document summary information 
+    # @return [Storage]
+    def document_summary_information
+      @document_summary_information ||= create_document_summary_information
+    end
+
     # returns the stream of data allocated in the fat
     # @return [String]
     def fat_stream 
@@ -212,7 +224,40 @@ module Axlsx
       v_stream = [88,1,76,"{FF9A3F03-56EF-4613-BDD5-5A41C1D07246}".bytes.to_a].flatten
       v_stream.concat [78, "Microsoft.Container.EncryptionTransform".bytes.to_a,1,1,1,4].flatten
       v_stream = v_stream.pack PRIMARY_PACKING
-      Storage.new([6].pack("c")+"Primary", :data=>v_stream, :size=>v_stream.size)
+      Storage.new([6].pack("c")+"Primary", :data=>v_stream)
+    end
+
+
+    SUMMARY_INFORMATION_PACKING = ""
+    # creates the summary information storage
+    # @return [Storage]
+    def create_summary_information
+      # FEFF 0000 030A 0100 0000 0000 0000 0000
+      # 0000 0000 0000 0000 0100 0000 E085 9FF2 
+      # F94F 6810 AB91 0800 2B27 B3D9 3000 0000
+      # AC00 0000 0700 0000 0100 0000 4000 0000
+      # 0400 0000 4800 0000 0800 0000 5800 0000
+      # 1200 0000 6800 0000 0C00 0000 8C00 0000
+      # 0D00 0000 9800 0000 1300 0000 A400 0000 
+      # 0200 0000 E9FD 0000 1E00 0000 0800 0000 
+      # 7261 6E64 796D 0000 1E00 0000 0800 0000 
+      # 7261 6E64 796D 0000 1E00 0000 1C00 0000 
+      # 4D69 6372 6F73 6F66 7420 4D61 6369 6E74 
+      # 6F73 6820 4578 6365 6C00 0000 4000 0000 
+      # 10AC 5396 60BC CC01 4000 0000 40F4 FDAF
+      # 60BC CC01 0300 0000 0100 0000
+      v_stream = []
+      v_stream = v_stream.pack SUMMARY_INFORMATION_PACKING
+      Storage.new([5].pack('c')+"SummaryInformation", :data=>v_stream)
+    end
+
+    DOCUMENT_SUMMARY_INFORMATION_PACKING = ""
+    # creates the document summary information storage
+    # @return [Storage]
+    def create_document_summary_information
+      v_stream = []
+      v_stream = v_stream.pack DOCUMENT_SUMMARY_INFORMATION_PACKING
+      Storage.new([5].pack('c')+"DocumentSummaryInformation", :data=>v_stream)
     end
 
     # Creates the header 
