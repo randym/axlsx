@@ -7,10 +7,10 @@ Axlsx: Office Open XML Spreadsheet Generation
 **Author**:       Randy Morgan   
 **Copyright**:    2011      
 **License**:      MIT License      
-**Latest Version**: 1.0.14   
+**Latest Version**: 1.0.15   
 **Ruby Version**: 1.8.7, 1.9.2, 1.9.3 
 
-**Release Date**: December 14th 2011     
+**Release Date**: January 6th 2012     
 
 Synopsis
 --------
@@ -262,6 +262,12 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
  
 #Changelog
 ---------
+- **January.6.12**: 1.0.15 release
+   - Bug fix add_style specified number formats must be explicity applied for libraOffice
+   - performance improvements from ochko when creating cells with options.
+   - Bug fix setting types=>[:n] when adding a row incorrectly determines the cell type to be string as the value is null during creation.
+   - Release in preparation for password protection merge
+
 - **December.14.11**: 1.0.14 release
    - Added support for merging cells
    - Added support for auto filters
@@ -288,7 +294,9 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
  
 Please see the {file:CHANGELOG.md} document for past release information.
 
-
+#Thanks!
+--------
+ochko https://github.com/ochko
 #Copyright and License
 ----------
 

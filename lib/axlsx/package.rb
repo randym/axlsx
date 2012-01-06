@@ -4,6 +4,7 @@ module Axlsx
   # xlsx document including valdation and serialization.
   class Package
 
+    # plain text password
     # provides access to the app doc properties for this package
     # see App
     attr_reader :app
@@ -87,6 +88,11 @@ module Axlsx
       true
     end
     
+    # Encrypt the package into a CFB using the password provided
+    def encrypt(file_name, password)      
+      moc = MsOffCrypto.new(file_name, password)
+      moc.save    
+    end
     
     # Validate all parts of the package against xsd schema. 
     # @return [Array] An array of all validation errors found.
