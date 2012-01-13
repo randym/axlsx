@@ -195,6 +195,7 @@ module Axlsx
       offset = options.delete(:row_offset) || 0
       @rows[(offset..-1)].each do |r| 
         cells = r.cells[index]
+        next unless cells
         if cells.is_a?(Array)
           cells.each { |c| c.style = style }
         else

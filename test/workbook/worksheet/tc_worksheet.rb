@@ -69,6 +69,13 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(@ws.rows.first.cells[0].style, 0)
   end
 
+  def test_col_style_with_empty_column
+    @ws.add_row [1,2,3,4]
+    @ws.add_row [1]
+    @ws.add_row [1,2,3,4]
+    assert_nothing_raised {@ws.col_style(1, 1)}
+  end
+
   def test_cols
     @ws.add_row [1,2,3,4]
     @ws.add_row [1,2,3,4]
