@@ -18,7 +18,7 @@ require 'axlsx/rels/relationship.rb'
           each_with_index { |rel, index| rel.to_xml(xml, "rId#{index+1}") }
         }
       end
-      builder.to_xml
+      builder.to_xml(:save_with => 0)
     end
   
   end

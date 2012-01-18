@@ -144,7 +144,7 @@ require 'axlsx/workbook/worksheet/worksheet.rb'
     # @return [String]
     def to_xml()
       add_worksheet unless worksheets.size > 0
-      builder = Nokogiri::XML::Builder.new(:encoding => ENCODING) do |xml|
+      builder = Nokogiri::XML::Builder.new(:encoding => ENCODING) do |xml|        
         xml.workbook(:xmlns => XML_NS, :'xmlns:r' => XML_NS_R) {
           xml.workbookPr(:date1904=>@@date1904)
           #<x:workbookProtection workbookPassword="xsd:hexBinary data" lockStructure="1" lockWindows="1" />
@@ -155,7 +155,7 @@ require 'axlsx/workbook/worksheet/worksheet.rb'
           }
         }
       end      
-      builder.to_xml(:indent=>0)
+      builder.to_xml(:save_with => 0)
     end
   end
 end

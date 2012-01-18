@@ -145,7 +145,7 @@ module Axlsx
           
         }
       end
-      builder.to_xml
+      builder.to_xml(:save_with => 0)
     end
 
     # This is a short cut method to set the start anchor position

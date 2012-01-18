@@ -246,7 +246,7 @@ module Axlsx
           end
         }
       end
-      builder.to_xml
+      builder.to_xml(:save_with => 0)
     end
 
     private

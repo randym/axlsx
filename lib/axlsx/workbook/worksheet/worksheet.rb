@@ -256,7 +256,7 @@ module Axlsx
           xml.drawing :"r:id"=>"rId1" if @drawing          
         }
       end
-      builder.to_xml
+      builder.to_xml(:save_with => 0)
     end
 
     # The worksheet relationships. This is managed automatically by the worksheet
