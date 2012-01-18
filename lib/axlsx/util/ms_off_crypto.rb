@@ -106,18 +106,18 @@ module Axlsx
       header = [3, 0, 2, 0] # version
       # Header flags copy
       header.concat [0x24, 0, 0, 0] #flags -- VERY UNSURE ABOUT THIS STILL
-      header.concat [0, 0, 0, 0] #unused
+      # header.concat [0, 0, 0, 0] #unused
       header.concat [0xA4, 0, 0, 0] #length
       # Header
       header.concat  [0x24, 0, 0, 0] #flags again
-      header.concat [0, 0, 0, 0] #unused again,
+      # header.concat [0, 0, 0, 0] #unused again,
       header.concat [0x0E, 0x66, 0, 0] #alg id
       header.concat [0x04, 0x80, 0, 0] #alg hash id
       header.concat [key.size, 0, 0, 0] #key size
       header.concat [0x18, 0, 0, 0] #provider type
-      header.concat [0, 0, 0, 0] #reserved 1
-      header.concat [0, 0, 0, 0] #reserved 2
-      #header.concat [0xA0, 0xC7, 0xDC, 0x2, 0, 0, 0, 0]
+      # header.concat [0, 0, 0, 0] #reserved 1
+      # header.concat [0, 0, 0, 0] #reserved 2
+      header.concat [0xA0, 0xC7, 0xDC, 0x2, 0, 0, 0, 0]
       header.concat "Microsoft Enhanced RSA and AES Cryptographic Provider (Prototype)".bytes.to_a.pack('s*').bytes.to_a
       header.concat [0, 0] #null terminator
 

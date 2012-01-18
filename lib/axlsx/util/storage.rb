@@ -28,7 +28,6 @@ module Axlsx
              @modified, 
              @sector, 
              @size].flatten
-      puts data.inspect
       data.pack(PACKING)
     end
 

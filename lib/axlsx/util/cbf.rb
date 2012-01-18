@@ -10,13 +10,13 @@ module Axlsx
     VERSION_PACKING = 'l s30 l3'
 
     # The serialization for the MS-OFF-CRYPTO dataspace map stream
-    DATA_SPACE_MAP_PACKING = 'l6 s16 l s25'
+    DATA_SPACE_MAP_PACKING = 'l6 s16 l s25 x2'
 
     # The serialization for the MS-OFF-CRYPTO strong encrytion data space stream
-    STRONG_ENCRYPTION_DATA_SPACE_PACKING = 'l3 s25'
+    STRONG_ENCRYPTION_DATA_SPACE_PACKING = 'l3 s26'
 
     # The serialization for the MS-OFF-CRYPTO primary stream
-    PRIMARY_PACKING = 'l3 s38 l s39 l3 x12 l x2'
+    PRIMARY_PACKING = 'l3 s38 l s40 l3 x12 l'
 
     # The cutoff size that determines if a stream should be in the mini-fat or the fat
     MINI_CUTOFF = 4096
@@ -28,6 +28,7 @@ module Axlsx
     # @param [MsOffCrypto] ms_off_crypto
     def initialize(ms_off_crypto)
       @file_name = ms_off_crypto.file_name  
+      @ms_off_crypto = ms_off_crypto
       create_storages
       mini_fat_stream
       mini_fat
@@ -95,6 +96,17 @@ module Axlsx
       @header ||= create_header
     end
 
+    # returns the encryption info from the ms_off_crypt object provided during intialization
+    # @return [String] encryption info
+    def encryption_info
+      @ms_off_crypto.encryption_info
+    end
+
+    # returns the encrypted package from the ms_off_crypt object provided during initalization
+    # @return [String] encrypted package
+    def encrypted_package
+      @ms_off_crypto.encrypted_package
+    end
 
     # writes the compound binary file to disk
     def save
@@ -114,12 +126,11 @@ module Axlsx
     # Generates the storages required for ms-office-cryptography cfb
     def create_storages
       @storages = []
-      @encryption_info = ms_off_crypto.encryption_info
-      @encrypted_package = ms_off_crypto.encrypted_package
-      @storages << Storage.new('R', :type=>Storage::TYPES[:root], :color=>Storage::COLORS[:red], :child=>1, :modified=>129685612742510730)
-      @storages.last.name_size = 2
-      @storages << Storage.new('EncryptionInfo', :data=>@encryption_info, :left=>3, :size => @encryption_info.size) # example shows right child. do we need the summary info????
-      @storages << Storage.new('EncryptedPackage', :data=>@encrypted_package, :color=>Storage::COLORS[:red], :size=>@encrypted_package.size)
+      @encryption_info = @ms_off_crypto.encryption_info
+      @encrypted_package = @ms_off_crypto.encrypted_package
+
+      @storages << Storage.new('EncryptionInfo', :data=>encryption_info, :left=>3, :right=>11) # example shows right child. do we need the summary info????
+      @storages << Storage.new('EncryptedPackage', :data=>encrypted_package, :color=>Storage::COLORS[:red])
       @storages << Storage.new([6].pack("c")+"DataSpaces", :child=>5, :modified =>129685612740945580, :created=>129685612740819979)
       @storages << version
       @storages << data_space_map
@@ -128,6 +139,12 @@ module Axlsx
       @storages << Storage.new('TransformInfo', :color => Storage::COLORS[:red],  :child=>9, :created=>129685612740834130, :modified=>129685612740943959)
       @storages << Storage.new('StrongEncryptionTransform', :child=>10, :created=>129685612740834169, :modified=>129685612740942280)
       @storages << primary      
+      @storages << summary_information
+      @storages << document_summary_information
+
+      # we do this at the end as we need to build the minifat stream to determine the size. #HOWEVER - it looks like the size should not include the padding?
+      @storages.unshift Storage.new('Root Entry', :type=>Storage::TYPES[:root], :color=>Storage::COLORS[:red], :child=>1, :data => mini_fat_stream)
+
     end
 
     # generates the mini fat stream
@@ -135,10 +152,11 @@ module Axlsx
     def create_mini_fat_stream
       mfs = []
       @storages.select{ |s| s.type == Storage::TYPES[:stream] && s.size < MINI_CUTOFF}.each_with_index do |stream, index|
+        puts "#{stream.name.pack('c*')}: #{stream.data.size}"        
         mfs.concat stream.data
-        mfs.concat Array.new(64 - (mfs.size % 64), 0) if mfs.size % 64        
+        mfs.concat Array.new(64 - (mfs.size % 64), 0) if mfs.size % 64 > 0        
+        puts "mini fat stream size: #{mfs.size}"
       end
-      @storages[0].size = mfs.size
       mfs.concat(Array.new(512 - (mfs.size % 512), 0))
       mfs.pack 'c*'
     end
@@ -149,7 +167,7 @@ module Axlsx
       mfs = []
       @storages.select{ |s| s.type == Storage::TYPES[:stream] && s.size >= MINI_CUTOFF}.each_with_index do |stream, index|
         mfs.concat stream.data
-        mfs.concat Array.new(512 - (mfs.size % 512), 0) if mfs.size % 512        
+        mfs.concat Array.new(512 - (mfs.size % 512), 0) if mfs.size % 512 > 0     
       end
       mfs.pack 'c*'
     end
@@ -214,7 +232,7 @@ module Axlsx
     # creates the stron encryption data space storage
     # @return [Storgae]
     def create_strong_encryption_data_space
-      v_stream = [8,1,50,"StrongEncryptionTransform".bytes.to_a].flatten.pack STRONG_ENCRYPTION_DATA_SPACE_PACKING
+      v_stream = [8,1,50,"StrongEncryptionTransform".bytes.to_a,0].flatten.pack STRONG_ENCRYPTION_DATA_SPACE_PACKING
       Storage.new("StrongEncryptionDataSpace", :data=>v_stream, :size => v_stream.size)
     end
     
@@ -222,41 +240,58 @@ module Axlsx
     # @return [Storgae]
     def create_primary
       v_stream = [88,1,76,"{FF9A3F03-56EF-4613-BDD5-5A41C1D07246}".bytes.to_a].flatten
-      v_stream.concat [78, "Microsoft.Container.EncryptionTransform".bytes.to_a,1,1,1,4].flatten
+      v_stream.concat [78, "Microsoft.Container.EncryptionTransform".bytes.to_a,0,1,1,1,4].flatten
       v_stream = v_stream.pack PRIMARY_PACKING
       Storage.new([6].pack("c")+"Primary", :data=>v_stream)
     end
 
 
-    SUMMARY_INFORMATION_PACKING = ""
     # creates the summary information storage
     # @return [Storage]
     def create_summary_information
-      # FEFF 0000 030A 0100 0000 0000 0000 0000
-      # 0000 0000 0000 0000 0100 0000 E085 9FF2 
-      # F94F 6810 AB91 0800 2B27 B3D9 3000 0000
-      # AC00 0000 0700 0000 0100 0000 4000 0000
-      # 0400 0000 4800 0000 0800 0000 5800 0000
-      # 1200 0000 6800 0000 0C00 0000 8C00 0000
-      # 0D00 0000 9800 0000 1300 0000 A400 0000 
-      # 0200 0000 E9FD 0000 1E00 0000 0800 0000 
-      # 7261 6E64 796D 0000 1E00 0000 0800 0000 
-      # 7261 6E64 796D 0000 1E00 0000 1C00 0000 
-      # 4D69 6372 6F73 6F66 7420 4D61 6369 6E74 
-      # 6F73 6820 4578 6365 6C00 0000 4000 0000 
-      # 10AC 5396 60BC CC01 4000 0000 40F4 FDAF
-      # 60BC CC01 0300 0000 0100 0000
       v_stream = []
-      v_stream = v_stream.pack SUMMARY_INFORMATION_PACKING
-      Storage.new([5].pack('c')+"SummaryInformation", :data=>v_stream)
+      v_stream.concat [0xFEFF, 0x0000, 0x030A, 0x0100, 0x0000, 0x0000, 0x0000, 0x0000]
+      v_stream.concat [0x0000, 0x0000, 0x0000, 0x0000, 0x0100, 0x0000, 0xE085, 0x9FF2]
+      v_stream.concat [0xF94F, 0x6810, 0xAB91, 0x0800, 0x2B27, 0xB3D9, 0x3000, 0x0000]
+      v_stream.concat [0xAC00, 0x0000, 0x0700, 0x0000, 0x0100, 0x0000, 0x4000, 0x0000]
+      v_stream.concat [0x0400, 0x0000, 0x4800, 0x0000, 0x0800, 0x0000, 0x5800, 0x0000]
+      v_stream.concat [0x1200, 0x0000, 0x6800, 0x0000, 0x0C00, 0x0000, 0x8C00, 0x0000]
+      v_stream.concat [0x0D00, 0x0000, 0x9800, 0x0000, 0x1300, 0x0000, 0xA400, 0x0000]
+      v_stream.concat [0x0200, 0x0000, 0xE9FD, 0x0000, 0x1E00, 0x0000, 0x0800, 0x0000]
+      v_stream.concat [0x7261, 0x6E64, 0x796D, 0x0000, 0x1E00, 0x0000, 0x0800, 0x0000]
+      v_stream.concat [0x7261, 0x6E64, 0x796D, 0x0000, 0x1E00, 0x0000, 0x1C00, 0x0000]
+      v_stream.concat [0x4D69, 0x6372, 0x6F73, 0x6F66, 0x7420, 0x4D61, 0x6369, 0x6E74]
+      v_stream.concat [0x6F73, 0x6820, 0x4578, 0x6365, 0x6C00, 0x0000, 0x4000, 0x0000]
+      v_stream.concat [0x10AC, 0x5396, 0x60BC, 0xCC01, 0x4000, 0x0000, 0x40F4, 0xFDAF]
+      v_stream.concat [0x60BC, 0xCC01, 0x0300, 0x0000, 0x0100, 0x0000]
+
+      v_stream = v_stream.pack "s*"
+
+      Storage.new([5].pack('c')+"SummaryInformation", :data=>v_stream, :left => 2)
     end
 
-    DOCUMENT_SUMMARY_INFORMATION_PACKING = ""
+
     # creates the document summary information storage
     # @return [Storage]
     def create_document_summary_information
       v_stream = []
-      v_stream = v_stream.pack DOCUMENT_SUMMARY_INFORMATION_PACKING
+      v_stream.concat [0xFEFF, 0x0000, 0x030A, 0x0100, 0x0000, 0x0000, 0x0000, 0x0000]
+      v_stream.concat [0x0000, 0x0000, 0x0000, 0x0000, 0x0100, 0x0000, 0x02D5, 0xCDD5]
+      v_stream.concat [0x9C2E, 0x1B10, 0x9397, 0x0800, 0x2B2C, 0xF9AE, 0x3000, 0x0000]
+      v_stream.concat [0xCC00, 0x0000, 0x0900, 0x0000, 0x0100, 0x0000, 0x5000, 0x0000]
+      v_stream.concat [0x0F00, 0x0000, 0x5800, 0x0000, 0x1700, 0x0000, 0x6400, 0x0000]
+      v_stream.concat [0x0B00, 0x0000, 0x6C00, 0x0000, 0x1000, 0x0000, 0x7400, 0x0000]
+      v_stream.concat [0x1300, 0x0000, 0x7C00, 0x0000, 0x1600, 0x0000, 0x8400, 0x0000]
+      v_stream.concat [0x0D00, 0x0000, 0x8C00, 0x0000, 0x0C00, 0x0000, 0x9F00, 0x0000]
+      v_stream.concat [0x0200, 0x0000, 0xE9FD, 0x0000, 0x1E00, 0x0000, 0x0400, 0x0000]
+      v_stream.concat [0x0000, 0x0000, 0x0300, 0x0000, 0x0000, 0x0C00, 0x0B00, 0x0000]
+      v_stream.concat [0x0000, 0x0000, 0x0B00, 0x0000, 0x0000, 0x0000, 0x0B00, 0x0000]
+      v_stream.concat [0x0000, 0x0000, 0x0B00, 0x0000, 0x0000, 0x0000, 0x1E10, 0x0000]
+      v_stream.concat [0x0100, 0x0000, 0x0700, 0x0000, 0x5368, 0x6565, 0x7431, 0x000C]
+      v_stream.concat [0x1000, 0x0002, 0x0000, 0x001E, 0x0000, 0x0013, 0x0000, 0x00E3]
+      v_stream.concat [0x83AF, 0xE383, 0xBCE3, 0x82AF, 0xE382, 0xB7E3, 0x83BC, 0xE383]
+      v_stream.concat [0x8800, 0x0300, 0x0000, 0x0100, 0x0000, 0x0000]
+      v_stream = v_stream.pack 'c*'
       Storage.new([5].pack('c')+"DocumentSummaryInformation", :data=>v_stream)
     end
 
