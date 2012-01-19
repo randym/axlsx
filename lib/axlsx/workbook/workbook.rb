@@ -89,8 +89,13 @@ require 'axlsx/workbook/worksheet/worksheet.rb'
       @drawings = SimpleTypedList.new Drawing
       @charts = SimpleTypedList.new Chart
       @images = SimpleTypedList.new Pic
-      self.date1904= options[:date1904] unless options[:date1904].nil?
+      self.date1904= options[:date1904].nil? ? is_bsd? : options[:date1904]
       yield self if block_given?      
+    end
+
+    def is_bsd?
+      platform = RUBY_PLATFORM.downcase
+      platform.include?('freebsd') || platform.include?('darwin')
     end
 
     # Instance level access to the class variable 1904
