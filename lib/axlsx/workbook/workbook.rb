@@ -82,7 +82,9 @@ require 'axlsx/workbook/worksheet/worksheet.rb'
     #end
 
     # Creates a new Workbook
-    # @option options [Boolean] date1904
+    #
+    # @option options [Boolean] date1904. If this is not specified, we try to determine if the platform is bsd/darwin and set date1904 to true automatically.
+    #
     def initialize(options={})
       @styles = Styles.new
       @worksheets = SimpleTypedList.new Worksheet
@@ -93,6 +95,9 @@ require 'axlsx/workbook/worksheet/worksheet.rb'
       yield self if block_given?      
     end
 
+    # Uses RUBY_PLATFORM constant to determine if the OS is freebsd or darwin
+    # based on this value we attempt to set date1904.
+    # @return [Boolean]
     def is_bsd?
       platform = RUBY_PLATFORM.downcase
       platform.include?('freebsd') || platform.include?('darwin')

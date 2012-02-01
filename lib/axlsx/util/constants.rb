@@ -170,22 +170,22 @@ module Axlsx
   IMAGE_PN = "media/image%d.%s"
 
   # App validation schema
-  APP_XSD = "lib/schema/shared-documentPropertiesExtended.xsd"
+  APP_XSD = "/../schema/shared-documentPropertiesExtended.xsd"
 
   # core validation schema
-  CORE_XSD = "lib/schema/opc-coreProperties.xsd"
+  CORE_XSD = "/../schema/opc-coreProperties.xsd"
 
   # content types validation schema
-  CONTENT_TYPES_XSD = "lib/schema/opc-contentTypes.xsd"
+  CONTENT_TYPES_XSD = "/../schema/opc-contentTypes.xsd"
 
   # rels validation schema
-  RELS_XSD = "lib/schema/opc-relationships.xsd"
+  RELS_XSD = "/../schema/opc-relationships.xsd"
 
   # spreadsheetML validation schema
-  SML_XSD = "lib/schema/sml.xsd"
+  SML_XSD = "/../schema/sml.xsd"
   
   # drawing validation schema
-  DRAWING_XSD = "lib/schema/dml-spreadsheetDrawing.xsd"
+  DRAWING_XSD = "/../schema/dml-spreadsheetDrawing.xsd"
 
   # number format id for pecentage formatting using the default formatting id.
   NUM_FMT_PERCENT = 9 

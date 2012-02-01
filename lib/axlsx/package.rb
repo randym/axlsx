@@ -157,7 +157,7 @@ module Axlsx
     # @return [Array] An array of all validation errors encountered.
     # @private
     def validate_single_doc(schema, doc)
-      schema = Nokogiri::XML::Schema(File.open(schema))
+      schema = Nokogiri::XML::Schema(File.open(File.dirname(__FILE__)+schema))
       doc = Nokogiri::XML(doc)
 
       errors = []
