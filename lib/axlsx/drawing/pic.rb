@@ -47,7 +47,24 @@ module Axlsx
       yield self if block_given?
       @picture_locking = PictureLocking.new(options)
     end
+
+    attr_reader :hyperlink
     
+    # sets or updates a hyperlink for this image.
+    # @param [String] v The href value for the hyper link
+    # @option options @see Hyperlink#initialize All options available to the Hyperlink class apply - however href will be overridden with the v parameter value.
+    def hyperlink=(v, options={})
+      options[:href] = v
+      if @hyperlink.is_a?(Hyperlink)
+        options.each do |o|
+          @hyperlink.send("#{o[0]}=", o[1]) if @hyperlink.respond_to? "#{o[0]}="
+        end
+      else
+        @hyperlink = Hyperlink.new(self, options)
+      end
+      @hyperlink
+    end
+
     def image_src=(v) 
       Axlsx::validate_string(v)
       RestrictionValidator.validate 'Pic.image_src', ALLOWED_EXTENSIONS, File.extname(v).delete('.')
@@ -75,7 +92,7 @@ module Axlsx
     end
 
     # The index of this image in the workbooks images collections
-    # @return [Index]
+    # @return [Index]    
     def index
       @anchor.drawing.worksheet.workbook.images.index(self)
     end
@@ -84,6 +101,11 @@ module Axlsx
     # @return [String]
     def pn
       "#{IMAGE_PN % [(index+1), extname]}"
+    end
+
+    # The relational id withing the drawing's relationships
+    def id
+      @anchor.drawing.charts.size + @anchor.drawing.images.index(self) + 1
     end
 
     # providing access to the anchor's width attribute
@@ -127,13 +149,17 @@ module Axlsx
     def to_xml(xml)
       xml.pic {
         xml.nvPicPr {
-          xml.cNvPr :id=>"2", :name=>name, :descr=>descr
+          xml.cNvPr(:id=>"2", :name=>name, :descr=>descr) {
+            if @hyperlink.is_a?(Hyperlink)
+              @hyperlink.to_xml(xml)
+            end
+          }
           xml.cNvPicPr {
             picture_locking.to_xml(xml)
           }
         }
         xml.blipFill {
-          xml[:a].blip :'xmlns:r' => XML_NS_R, :'r:embed'=>"rId1"
+          xml[:a].blip :'xmlns:r' => XML_NS_R, :'r:embed'=>"rId#{id}"
           xml[:a].stretch {
             xml.fillRect
           }

@@ -17,6 +17,12 @@ class TestPic < Test::Unit::TestCase
     assert_equal(@p.workbook.images.first, @image)
     assert_equal(@image.image_src, @test_img)
   end
+  
+  def test_hyperlink
+    assert_equal(@image.hyperlink, nil)
+    @image.hyperlink = "http://axlsx.blogspot.com"
+    assert_equal(@image.hyperlink.href, "http://axlsx.blogspot.com")
+  end
 
   def test_name
     assert_raise(ArgumentError) { @image.name = 49 }

@@ -1,5 +1,28 @@
 CHANGELOG
 ---------
+- **December.14.11**: 1.0.14 release
+   - Added support for merging cells
+   - Added support for auto filters
+   - Improved auto width calculations
+   - Improved charts
+   - Updated examples to output to a single workbook with multiple sheets
+   - Added access to app and core package objects so you can set the creator and other properties of the package
+   - The beginning of password protected xlsx files - roadmapped for January release.
+	
+- **December.8.11**: 1.0.13 release
+   -  Fixing .gemspec errors that caused gem to miss the lib directory. Sorry about that.
+
+- **December.7.11**: 1.0.12 release
+    DO NOT USE THIS VERSION = THE GEM IS BROKEN
+  - changed dependency from 'zip' gem to 'rubyzip' and added conditional code to force binary encoding to resolve issue with excel 2011
+  - Patched bug in app.xml that would ignore user specified properties.
+- **December.5.11**: 1.0.11 release
+  - Added [] methods to worksheet and workbook to provide name based access to cells.
+  - Added support for functions as cell values
+  - Updated color creation so that two character shorthand values can be used like 'FF' for 'FFFFFFFF' or 'D8' for 'FFD8D8D8'
+  - Examples for all this fun stuff added to the readme
+  - Clean up and support for 1.9.2 and travis integration
+  - Added support for string based cell referencing to chart start_at and end_at. That means you can now use :start_at=>"A1" when using worksheet.add_chart, or chart.start_at ="A1" in addition to passing a cell or the x, y coordinates.
 
 - **October.30.11**: 1.0.10 release
   - Updating gemspec to lower gem version requirements.

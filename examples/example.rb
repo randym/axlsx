@@ -24,7 +24,7 @@
      end
 
 ##Using Custom Formatting and date1904
-
+     require 'date'
      wb.styles do |s|
        date = s.add_style(:format_code => "yyyy-mm-dd", :border => Axlsx::STYLE_THIN_BORDER)
        padded = s.add_style(:format_code => "00#", :border => Axlsx::STYLE_THIN_BORDER)
@@ -32,7 +32,7 @@
        wb.date1904 = true # required for generation on mac
        wb.add_worksheet(:name => "Formatting Data") do |sheet|
          sheet.add_row ["Custom Formatted Date", "Percent Formatted Float", "Padded Numbers"], :style => Axlsx::STYLE_THIN_BORDER
-         sheet.add_row [Time.now, 0.2, 32], :style => [date, percent, padded]
+         sheet.add_row [Date::strptime('2012-01-19','%Y-%m-%d'), 0.2, 32], :style => [date, percent, padded]
        end
      end
 
@@ -43,6 +43,18 @@
        sheet.add_image(:image_src => img, :noSelect => true, :noMove => true) do |image|
          image.width=720
          image.height=666
+         image.start_at 2, 2
+       end
+     end  
+
+##Add an Image with a hyperlink
+
+     wb.add_worksheet(:name => "Image with Hyperlink") do |sheet|
+       img = File.expand_path('examples/image1.jpeg') 
+       sheet.add_image(:image_src => img, :noSelect => true, :noMove => true, :hyperlink=>"http://axlsx.blogspot.com") do |image|
+         image.width=720
+         image.height=666
+         image.hyperlink.tooltip = "Labeled Link"
          image.start_at 2, 2
        end
      end  

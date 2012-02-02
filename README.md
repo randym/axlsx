@@ -7,10 +7,10 @@ Axlsx: Office Open XML Spreadsheet Generation
 **Author**:       Randy Morgan   
 **Copyright**:    2011      
 **License**:      MIT License      
-**Latest Version**: 1.0.15   
+**Latest Version**: 1.0.16   
 **Ruby Version**: 1.8.7, 1.9.2, 1.9.3 
 
-**Release Date**: January 6th 2012     
+**Release Date**: February 2nd 2012     
 
 Synopsis
 --------
@@ -44,7 +44,7 @@ Feature List
 
 **6. Support for automatically formatted 1904 and 1900 epocs configurable in the workbook.
 
-**7. Add jpg, gif and png images to worksheets
+**7. Add jpg, gif and png images to worksheets with hyperlinks
 
 **8. Refernce cells in your worksheet with "A1" and "A1:D4" style references or from the workbook using "Sheett1!A3:B4" style references
 
@@ -89,17 +89,49 @@ To install Axlsx, use the following command:
        end
      end
 
-##Using Custom Formatting
-
+##Using Custom Formatting and date1904
+     require 'date'
      wb.styles do |s|
        date = s.add_style(:format_code => "yyyy-mm-dd", :border => Axlsx::STYLE_THIN_BORDER)
        padded = s.add_style(:format_code => "00#", :border => Axlsx::STYLE_THIN_BORDER)
        percent = s.add_style(:format_code => "0000%", :border => Axlsx::STYLE_THIN_BORDER)
+       wb.date1904 = true # required for generation on mac
        wb.add_worksheet(:name => "Formatting Data") do |sheet|
          sheet.add_row ["Custom Formatted Date", "Percent Formatted Float", "Padded Numbers"], :style => Axlsx::STYLE_THIN_BORDER
-         sheet.add_row [Time.now, 0.2, 32], :style => [date, percent, padded]
+         sheet.add_row [Date::strptime('2012-01-19','%Y-%m-%d'), 0.2, 32], :style => [date, percent, padded]
        end
      end
+
+##Add an Image
+
+     wb.add_worksheet(:name => "Images") do |sheet|
+       img = File.expand_path('examples/image1.jpeg') 
+       sheet.add_image(:image_src => img, :noSelect => true, :noMove => true) do |image|
+         image.width=720
+         image.height=666
+         image.start_at 2, 2
+       end
+     end  
+
+##Add an Image with a hyperlink
+
+     wb.add_worksheet(:name => "Image with Hyperlink") do |sheet|
+       img = File.expand_path('examples/image1.jpeg') 
+       sheet.add_image(:image_src => img, :noSelect => true, :noMove => true, :hyperlink=>"http://axlsx.blogspot.com") do |image|
+         image.width=720
+         image.height=666
+         image.hyperlink.tooltip = "Labeled Link"
+         image.start_at 2, 2
+       end
+     end  
+
+##Asian Language Support
+
+     wb.add_worksheet(:name => "Unicode Support") do |sheet|
+       sheet.add_row ["日本語"]
+       sheet.add_row ["华语/華語"]
+       sheet.add_row ["한국어/조선말"]
+     end  
 
 ##Styling Columns
 
@@ -140,26 +172,6 @@ To install Axlsx, use the following command:
          sheet['A1:D2'].each { |c| c.style = Axlsx::STYLE_THIN_BORDER }
      end     
 
-##Add an Image
-
-     wb.add_worksheet(:name => "Images") do |sheet|
-       img = File.expand_path('examples/image1.jpeg') 
-       sheet.add_image(:image_src => img, :noSelect => true, :noMove => true) do |image|
-         image.width=720
-         image.height=666
-         image.start_at 2, 2
-       end
-     end  
-
-##Asian Language Support
-
-     wb.add_worksheet(:name => "Unicode Support") do |sheet|
-       sheet.add_row ["日本語"]
-       sheet.add_row ["华语/華語"]
-       sheet.add_row ["한국어/조선말"]
-     end  
-
-
 ##Using formula
 
      wb.add_worksheet(:name => "Using Formulas") do |sheet|
@@ -167,8 +179,7 @@ To install Axlsx, use the following command:
        sheet.add_row [1, 2, 3, "=SUM(A2:C2)"]
      end
 
-
-##Merging Cells
+##Merging Cells.
 
      wb.add_worksheet(:name => 'Merging Cells') do |sheet|
          # cell level style overides when adding cells
@@ -255,48 +266,34 @@ This gem is 100% documented with YARD, an exceptional documentation library. To 
       gem install yard
       yard server -g
 
-
 #Specs
 ------
 This gem has 100% test coverage using test/unit. To execute tests for this gem, simply run rake in the gem directory.
  
 #Changelog
 ---------
+- ** February.2.12**: 1.0.16 release
+   - Bug fix for schema file locations when validating in rails
+   - Added hyperlink to images
+   - date1904 now automatically set in bsd and mac environments
+   - removed whitespace/indentation from xml outputs
+   - col_style now skips rows that do not contain cells at the column index
+ 
 - **January.6.12**: 1.0.15 release
    - Bug fix add_style specified number formats must be explicity applied for libraOffice
    - performance improvements from ochko when creating cells with options.
    - Bug fix setting types=>[:n] when adding a row incorrectly determines the cell type to be string as the value is null during creation.
    - Release in preparation for password protection merge
 
-- **December.14.11**: 1.0.14 release
-   - Added support for merging cells
-   - Added support for auto filters
-   - Improved auto width calculations
-   - Improved charts
-   - Updated examples to output to a single workbook with multiple sheets
-   - Added access to app and core package objects so you can set the creator and other properties of the package
-   - The beginning of password protected xlsx files - roadmapped for January release.
-	
-- **December.8.11**: 1.0.13 release
-   -  Fixing .gemspec errors that caused gem to miss the lib directory. Sorry about that.
-
-- **December.7.11**: 1.0.12 release
-    DO NOT USE THIS VERSION = THE GEM IS BROKEN
-  - changed dependency from 'zip' gem to 'rubyzip' and added conditional code to force binary encoding to resolve issue with excel 2011
-  - Patched bug in app.xml that would ignore user specified properties.
-- **December.5.11**: 1.0.11 release
-  - Added [] methods to worksheet and workbook to provide name based access to cells.
-  - Added support for functions as cell values
-  - Updated color creation so that two character shorthand values can be used like 'FF' for 'FFFFFFFF' or 'D8' for 'FFD8D8D8'
-  - Examples for all this fun stuff added to the readme
-  - Clean up and support for 1.9.2 and travis integration
-  - Added support for string based cell referencing to chart start_at and end_at. That means you can now use :start_at=>"A1" when using worksheet.add_chart, or chart.start_at ="A1" in addition to passing a cell or the x, y coordinates.
  
 Please see the {file:CHANGELOG.md} document for past release information.
 
 #Thanks!
 --------
-ochko https://github.com/ochko
+[ochko](https://github.com/ochko) - for performance fixes, kicking the crap out of axlsx and helping to maintain my general sanity.
+
+[kleine2](https://github.com/kleine2) - for generously donating in return for the image hyperlink feature.
+
 #Copyright and License
 ----------
 

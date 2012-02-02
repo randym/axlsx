@@ -13,4 +13,9 @@ class TestRelationships < Test::Unit::TestCase
     assert_nothing_raised { Axlsx::Relationship.new Axlsx::WORKSHEET_R, 'target' }
   end
 
+  def test_target_mode
+    assert_raise(ArgumentError) { Axlsx::Relationship.new 'type', 'target', :target_mode => "FISH" }
+    assert_nothing_raised { Axlsx::Relationship.new( Axlsx::WORKSHEET_R, 'target', :target_mode => :External) }
+  end
+
 end

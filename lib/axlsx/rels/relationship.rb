@@ -21,15 +21,30 @@ module Axlsx
     # @see DRAWING_R
     # @return [String]
     attr_reader :Type
-    def initialize(type, target)
+
+    # The target mode of the relationship
+    # used for hyperlink type relationships to mark the relationship to an external resource
+    # TargetMode can be specified during initialization by passing in a :target_mode option
+    # Target mode must be :external for now.
+    attr_reader :TargetMode
+
+    # creates a new relationship
+    # @param [String] Type The type of the relationship
+    # @param [String] Target The target for the relationship
+    # @option [Symbol] target_mode only accepts :external.    
+    def initialize(type, target, options={})
       self.Target=target
       self.Type=type
+      self.TargetMode = options.delete(:target_mode) if options[:target_mode]
     end
 
     # @see Target
     def Target=(v) Axlsx::validate_string v; @Target = v end
     # @see Type
     def Type=(v) Axlsx::validate_relationship_type v; @Type = v end
+
+    # @see TargetMode
+    def TargetMode=(v) RestrictionValidator.validate 'Relationship.TargetMode', [:External, :Internal], v; @TargetMode = v; end
 
     # Serializes the relationship    
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.

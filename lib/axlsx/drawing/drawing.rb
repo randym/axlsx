@@ -29,6 +29,7 @@ module Axlsx
 
   require 'axlsx/drawing/picture_locking.rb'
   require 'axlsx/drawing/pic.rb'
+  require 'axlsx/drawing/hyperlink.rb'
 
   # A Drawing is a canvas for charts. Each worksheet has a single drawing that manages anchors.
   # The anchors reference the charts via graphical frames. This is not a trivial relationship so please do follow the advice in the note.
@@ -79,6 +80,13 @@ module Axlsx
       charts.map { |a| a.object.chart }
     end
 
+    # An array of hyperlink objects associated with this drawings images
+    # @return [Array]
+    def hyperlinks
+      links = self.images.select { |a| a.hyperlink.is_a?(Hyperlink) }
+      links.map { |a| a.hyperlink }
+    end
+
     # An array of image objects that are associated with this drawing's anchors
     # @return [Array]
     def images
@@ -119,6 +127,9 @@ module Axlsx
       end
       images.each do |image|
         r << Relationship.new(IMAGE_R, "../#{image.pn}")
+      end
+      hyperlinks.each do |hyperlink|
+        r << Relationship.new(HYPERLINK_R, hyperlink.href, :target_mode => :External)
       end
       r
     end
