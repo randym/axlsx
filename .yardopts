@@ -2,3 +2,4 @@
 --no-private
 --title "AXLSX"
 --files LICENSE
+--files CHANGELOG.md
