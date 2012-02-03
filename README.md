@@ -273,6 +273,7 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 #Changelog
 ---------
 - ** February.2.12**: 1.0.16 release
+   https://github.com/randym/axlsx/compare/1.0.15...1.0.16
    - Bug fix for schema file locations when validating in rails
    - Added hyperlink to images
    - date1904 now automatically set in bsd and mac environments
@@ -280,6 +281,7 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
    - col_style now skips rows that do not contain cells at the column index
  
 - **January.6.12**: 1.0.15 release
+   https://github.com/randym/axlsx/compare/1.0.14...1.0.15
    - Bug fix add_style specified number formats must be explicity applied for libraOffice
    - performance improvements from ochko when creating cells with options.
    - Bug fix setting types=>[:n] when adding a row incorrectly determines the cell type to be string as the value is null during creation.
