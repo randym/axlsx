@@ -57,6 +57,7 @@ module Axlsx
     #
     # @param [File] output The file you want to serialize your package to
     # @param [Boolean] confirm_valid Validate the package prior to serialization.
+    # @option options stream indicates if we should be writing to a stream or a file. True for stream, nil for file
     # @return [Boolean] False if confirm_valid and validation errors exist. True if the package was serialized
     # @note A tremendous amount of effort has gone into ensuring that you cannot create invalid xlsx documents.
     #   confirm_valid should be used in the rare case that you cannot open the serialized file. 
@@ -70,29 +71,29 @@ module Axlsx
     #   # You will find a file called test.xlsx
     def serialize(output, confirm_valid=false)
       return false unless !confirm_valid || self.validate.empty?
-      p = parts
       Zip::ZipOutputStream.open(output) do |zip|
-        p.each do |part| 
-          unless part[:doc].nil?
-            zip.put_next_entry(part[:entry]);
-            entry = ['1.9.2', '1.9.3'].include?(RUBY_VERSION) ? part[:doc].force_encoding('BINARY') : part[:doc]
-            zip.puts(entry)
-          end
-          unless part[:path].nil?
-            zip.put_next_entry(part[:entry]); 
-            # binread for 1.9.3
-            zip.write IO.respond_to?(:binread) ? IO.binread(part[:path]) : IO.read(part[:path])
-          end          
-        end
+        write_parts(zip)
       end
       true
     end
+
+
+    # Serialize your workbook to a StringIO instance
+    # @param [Boolean] confirm_valid Validate the package prior to serialization.
+    # @return [StringIO|Boolean] False if confirm_valid and validation errors exist. rewound string IO if not.
+    def to_stream(confirm_valid=false)
+      return false unless !confirm_valid || self.validate.empty?
+      zip = write_parts(Zip::ZipOutputStream.new("streamed", true))
+      stream = zip.close_buffer
+      stream.rewind
+      stream
+    end
     
     # Encrypt the package into a CFB using the password provided
-    # def encrypt(file_name, password)      
-    #   moc = MsOffCrypto.new(file_name, password)
-    #   moc.save    
-    # end
+    def encrypt(file_name, password)      
+      moc = MsOffCrypto.new(file_name, password)
+      moc.save    
+    end
     
     # Validate all parts of the package against xsd schema. 
     # @return [Array] An array of all validation errors found.
@@ -116,6 +117,26 @@ module Axlsx
     end
 
     private 
+
+    # Writes the package parts to a zip archive.
+    # @param [Zip::ZipOutputStream] zip
+    # @return [Zip::ZipOutputStream]
+    def write_parts(zip)
+      p = parts
+        p.each do |part| 
+          unless part[:doc].nil?
+            zip.put_next_entry(part[:entry]);
+            entry = ['1.9.2', '1.9.3'].include?(RUBY_VERSION) ? part[:doc].force_encoding('BINARY') : part[:doc]
+            zip.puts(entry)
+          end
+          unless part[:path].nil?
+            zip.put_next_entry(part[:entry]); 
+            # binread for 1.9.3
+            zip.write IO.respond_to?(:binread) ? IO.binread(part[:path]) : IO.read(part[:path])
+          end          
+        end
+      zip
+    end
 
     # The parts of a package
     # @return [Array] An array of hashes that define the entry, document and schema for each part of the package. 

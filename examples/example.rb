@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 # -*- coding: utf-8 -*-
-     require 'axlsx'
+     require 'axlsx.rb'
 
      p = Axlsx::Package.new
      wb = p.workbook
@@ -192,5 +192,7 @@
      p.validate.each { |e| puts e.message }
      p.serialize("example.xlsx")
 
+     s = p.to_stream()
+     File.open('example_streamed.xlsx', 'w') { |f| f.write(s.read) }
      
 
