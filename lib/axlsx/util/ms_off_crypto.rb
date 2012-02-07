@@ -48,7 +48,7 @@ module Axlsx
     # encrypts and returns the package specified by the file name 
     # @return [String]
     def encrypted_package
-      @encrypted_package ||= encrypt_package(file_name, password)
+      @encrypted_package ||= encrypt_package(file_name)
     end
 
     # returns the encryption info for this instance of ms-off-crypto
@@ -94,10 +94,10 @@ module Axlsx
     end
     
     # size of unencrypted package? concated with encrypted package
-    def encrypt_package(file_name, password)      
+    def encrypt_package(file_name)      
       package = File.open(file_name, 'r')
-      package_text = package.read
-      [package_text.bytes.to_a.size].pack('q') + encrypt(package_text)
+      crypt_pack = encrypt(package.read)      
+      [crypt_pack.size].pack('q') + crypt_pack
     end
 
     # Generates an encryption info structure

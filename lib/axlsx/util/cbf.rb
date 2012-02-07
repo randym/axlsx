@@ -139,8 +139,8 @@ module Axlsx
       @storages << Storage.new('TransformInfo', :color => Storage::COLORS[:red],  :child=>9, :created=>129685612740834130, :modified=>129685612740943959)
       @storages << Storage.new('StrongEncryptionTransform', :child=>10, :created=>129685612740834169, :modified=>129685612740942280)
       @storages << primary      
-      @storages << summary_information
-      @storages << document_summary_information
+      # @storages << summary_information
+      # @storages << document_summary_information
 
       # we do this at the end as we need to build the minifat stream to determine the size. #HOWEVER - it looks like the size should not include the padding?
       @storages.unshift Storage.new('Root Entry', :type=>Storage::TYPES[:root], :color=>Storage::COLORS[:red], :child=>1, :data => mini_fat_stream)
