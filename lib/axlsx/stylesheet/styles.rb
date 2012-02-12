@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# encoding: UTF-8
 module Axlsx
   require 'axlsx/stylesheet/border.rb'
   require 'axlsx/stylesheet/border_pr.rb'

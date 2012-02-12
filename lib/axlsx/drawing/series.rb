@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module Axlsx
   # A Series defines the common series attributes and is the super class for all concrete series types.
   # @note The recommended way to manage series is to use Chart#add_series

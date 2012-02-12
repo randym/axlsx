@@ -1,10 +1,10 @@
-# -*- coding: utf-8 -*-
+# encoding: UTF-8
 module Axlsx
   # Package is responsible for managing all the bits and peices that Open Office XML requires to make a valid
   # xlsx document including valdation and serialization.
   class Package
 
-    # plain text password
+    
     # provides access to the app doc properties for this package
     # see App
     attr_reader :app
@@ -17,12 +17,29 @@ module Axlsx
     #
     # @param [Hash] options A hash that you can use to specify the author and workbook for this package.
     # @option options [String] :author The author of the document
+    # @option options [Boolean] :use_shared_strings This is passed to the workbook to specify that shared strings should be used when serializing the package.
     # @example Package.new :author => 'you!', :workbook => Workbook.new
     def initialize(options={})
       @workbook = nil
       @core, @app  =  Core.new, App.new
       @core.creator = options[:author] || @core.creator
+      options.each do |o|
+        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
+      end
       yield self if block_given?
+    end
+
+    # Shortcut to specify that the workbook should use shared strings
+    # @see Workbook#use_shared_strings
+    def use_shared_strings=(v) 
+      Axlsx::validate_boolean(v); 
+      workbook.use_shared_strings = v
+    end
+
+    # Shortcut to determine if the workbook is configured to use shared strings
+    # @see Workbook#use_shared_strings
+    def use_shared_strings
+      workbook.use_shared_strings
     end
 
     # The workbook this package will serialize or validate.
@@ -90,7 +107,9 @@ module Axlsx
     end
     
     # Encrypt the package into a CFB using the password provided
+    # This is not ready yet
     def encrypt(file_name, password)      
+      return false
       moc = MsOffCrypto.new(file_name, password)
       moc.save    
     end
@@ -164,6 +183,10 @@ module Axlsx
         @parts << {:entry => "xl/#{image.pn}", :path => image.image_src}
       end
 
+      if use_shared_strings
+        @parts << {:entry => "xl/#{SHARED_STRINGS_PN}", :doc => workbook.shared_strings.to_xml, :schema => SML_XSD}
+      end
+
       workbook.worksheets.each do |sheet|            
         @parts << {:entry => "xl/#{sheet.rels_pn}", :doc => sheet.relationships.to_xml, :schema => RELS_XSD}
         @parts << {:entry => "xl/#{sheet.pn}", :doc => sheet.to_xml, :schema => SML_XSD}        
@@ -215,6 +238,10 @@ module Axlsx
                PNG_CT
              end
         c_types << Axlsx::Default.new(:ContentType => ct, :Extension => ext )
+      end
+      if use_shared_strings
+        c_types << Axlsx::Override.new(:PartName => "/xl/#{SHARED_STRINGS_PN}",
+                                       :ContentType => SHARED_STRINGS_CT)
       end
       c_types
     end

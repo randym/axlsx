@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module Axlsx
   # A border part. 
   class BorderPr

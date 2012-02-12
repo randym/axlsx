@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module Axlsx
 
   # The Cfb class is a MS-OFF-CRYPTOGRAPHY specific OLE (MS-CBF) writer implementation. No attempt is made to re-invent the wheel for read/write of compound binary files.

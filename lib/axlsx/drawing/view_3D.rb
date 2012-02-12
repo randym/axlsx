@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module Axlsx
   # 3D attributes for a chart.
   class View3D

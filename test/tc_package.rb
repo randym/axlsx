@@ -21,6 +21,13 @@ class TestPackage < Test::Unit::TestCase
     assert_raise(NoMethodError) {@package.app = nil }
   end
 
+  def test_use_shared_strings
+    assert_equal(@package.use_shared_strings, nil)
+    assert_raise(ArgumentError) {@package.use_shared_strings 9}
+    assert_nothing_raised {@package.use_shared_strings = true}
+    assert_equal(@package.use_shared_strings, @package.workbook.use_shared_strings)
+  end
+
   def test_default_objects_are_created
     assert(@package.instance_values["app"].is_a?(Axlsx::App), 'App object not created')
     assert(@package.instance_values["core"].is_a?(Axlsx::Core), 'Core object not created')
@@ -69,10 +76,34 @@ class TestPackage < Test::Unit::TestCase
 
     #no mystery parts
     assert_equal(p.size, 12)
+    
+  end
 
+  def test_shared_strings_requires_part
+    @package.use_shared_strings = true
+    p = @package.send(:parts)
+    assert_equal(p.select{ |part| part[:entry] =~/xl\/sharedStrings.xml/}.size, 1, "shared strings table missing")
   end
   
   def test_workbook_is_a_workbook
     assert @package.workbook.is_a? Axlsx::Workbook
   end
+
+  def test_base_content_types
+    ct = @package.send(:base_content_types)
+    assert(ct.select { |ct| ct.ContentType == Axlsx::RELS_CT }.size == 1, "rels content type missing")
+    assert(ct.select { |ct| ct.ContentType == Axlsx::XML_CT }.size == 1, "xml content type missing")
+    assert(ct.select { |ct| ct.ContentType == Axlsx::APP_CT }.size == 1, "app content type missing")
+    assert(ct.select { |ct| ct.ContentType == Axlsx::CORE_CT }.size == 1, "core content type missing")
+    assert(ct.select { |ct| ct.ContentType == Axlsx::STYLES_CT }.size == 1, "styles content type missing")
+    assert(ct.select { |ct| ct.ContentType == Axlsx::WORKBOOK_CT }.size == 1, "workbook content type missing")
+    assert(ct.size == 6)
+  end
+
+  def test_content_type_added_with_shared_strings
+    @package.use_shared_strings = true
+    ct = @package.send(:content_types)
+    assert(ct.select { |ct| ct.ContentType == Axlsx::SHARED_STRINGS_CT }.size == 1)
+  end
+
 end

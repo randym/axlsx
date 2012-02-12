@@ -4,6 +4,7 @@ module Axlsx
 require 'axlsx/workbook/worksheet/cell.rb'
 require 'axlsx/workbook/worksheet/row.rb'
 require 'axlsx/workbook/worksheet/worksheet.rb'
+require 'axlsx/workbook/shared_strings_table.rb'
 
   # The Workbook class is an xlsx workbook that manages worksheets, charts, drawings and styles.
   # The following parts of the Office Open XML spreadsheet specification are not implimented in this version.
@@ -29,6 +30,19 @@ require 'axlsx/workbook/worksheet/worksheet.rb'
   #
   #   *workbookPr is only supported to the extend of date1904
   class Workbook
+
+    # When true, the Package will be generated with a shared string table. This may be required by some OOXML processors that do not
+    # adhere to the ECMA specification that dictates string may be inline in the sheet.
+    # Using this option will increase the time required to serialize the document as every string in every cell must be analzed and referenced.
+    # @return [Boolean]
+    attr_reader :use_shared_strings
+
+    # @see use_shared_strings
+    def use_shared_strings=(v) 
+      Axlsx::validate_boolean(v)
+      @use_shared_strings = v
+    end
+
 
     # A collection of worksheets associated with this workbook. 
     # @note The recommended way to manage worksheets is add_worksheet
@@ -84,6 +98,7 @@ require 'axlsx/workbook/worksheet/worksheet.rb'
     # Creates a new Workbook
     #
     # @option options [Boolean] date1904. If this is not specified, we try to determine if the platform is bsd/darwin and set date1904 to true automatically.
+    # @option
     #
     def initialize(options={})
       @styles = Styles.new
@@ -136,7 +151,16 @@ require 'axlsx/workbook/worksheet/worksheet.rb'
         r << Relationship.new(WORKSHEET_R, WORKSHEET_PN % (r.size+1))
       end 
       r << Relationship.new(STYLES_R,  STYLES_PN)
+      if use_shared_strings
+          r << Relationship.new(SHARED_STRINGS_R,  SHARED_STRINGS_PN)
+      end
       r
+    end
+
+    # generates a shared string object against all cells in all worksheets.
+    # @return [SharedStringTable]
+    def shared_strings
+      SharedStringsTable.new(worksheets.collect { |ws| ws.cells })
     end
 
     # returns a range of cells in a worksheet

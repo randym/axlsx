@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# encoding: UTF-8
 module Axlsx
   # A cell in a worksheet. 
   # Cell stores inforamation requried to serialize a single worksheet cell to xml. You must provde the Row that the cell belongs to and the cells value. The data type will automatically be determed if you do not specify the :type option. The default style will be applied if you do not supply the :style option. Changing the cell's type will recast the value to the type specified. Altering the cell's value via the property accessor will also automatically cast the provided value to the cell's type.
@@ -22,6 +22,12 @@ module Axlsx
   # 
   # @see Worksheet#add_row
   class Cell
+
+    # The index of this string in the shared string table
+    # This is only set when the use_shared_strings option on the package is true.
+    # @return [Integer]
+    # @see Package#use_shared_strings
+    attr_accessor :shared_string_index
 
     # The index of the cellXfs item to be applied to this cell.
     # @return [Integer] 
@@ -186,6 +192,26 @@ module Axlsx
       @value = cast_value(value)
     end
 
+    # The Shared Strings Table index for this cell
+    attr_reader :ssti
+    
+    # equality comparison to test value, type and inline style attributes
+    # this is how we work out if the cell needs to be added or already exists in the shared strings table
+    def shareable(v)
+      comparable_keys = [:value, :type, :font_name, :charset, 
+                         :family, :b, :i, :strike,:outline, 
+                         :shadow, :condense, :extend, :u, 
+                         :vertAlign, :sz, :color, :scheme]
+      v_hash = v.instance_values.select { |k, v| comparable_keys.include? k.to_sym }
+
+      self_hash = self.instance_values.select { |k, v| comparable_keys.include? k.to_sym }
+      # required as color is an object, and the comparison will fail even though both use the same color.
+      v_hash['color'] = v_hash['color'].instance_values if v_hash['color']
+      self_hash['color'] = self_hash['color'].instance_values if self_hash['color']
+
+      v_hash == self_hash
+    end
+
     # @return [Integer] The index of the cell in the containing row.
     def index
       @row.cells.index(self)
@@ -250,33 +276,39 @@ module Axlsx
           #xml.c(:r => r, :t=>:inlineStr, :s=>style) {
           #  xml.is { xml.t @value.to_s } 
           #}
-          #parse styled string
-          xml.c(:r => r, :s=>style, :t => :inlineStr) {
-            xml.is {
-              xml.r {
-                xml.rPr {
-                  xml.rFont(:val=>@font_name) if @font_name
-                  xml.charset(:val=>@charset) if @charset
-                  xml.family(:val=>@family) if @family
-                  xml.b(:val=>@b) if @b
-                  xml.i(:val=>@i) if @i
-                  xml.strike(:val=>@strike) if @strike
-                  xml.outline(:val=>@outline) if @outline
-                  xml.shadow(:val=>@shadow) if @shadow
-                  xml.condense(:val=>@condense) if @condense
-                  xml.extend(:val=>@extend) if @extend
-                  @color.to_xml(xml) if @color
-                  xml.sz(:val=>@sz) if @sz
-                  xml.u(:val=>@u) if @u
-                  # :baseline, :subscript, :superscript
-                  xml.vertAlign(:val=>@vertAlign) if @verAlign
-                  # :none, major, :minor
-                  xml.scheme(:val=>@scheme) if @scheme
+          if @ssti
+            xml.c(:r => r, :s=>style, :t => :s) {
+              xml.v ssti
+            }
+          else
+            #parse inline string
+            xml.c(:r => r, :s=>style, :t => :inlineStr) {
+              xml.is {
+                xml.r {
+                  xml.rPr {
+                    xml.rFont(:val=>@font_name) if @font_name
+                    xml.charset(:val=>@charset) if @charset
+                    xml.family(:val=>@family) if @family
+                    xml.b(:val=>@b) if @b
+                    xml.i(:val=>@i) if @i
+                    xml.strike(:val=>@strike) if @strike
+                    xml.outline(:val=>@outline) if @outline
+                    xml.shadow(:val=>@shadow) if @shadow
+                    xml.condense(:val=>@condense) if @condense
+                    xml.extend(:val=>@extend) if @extend
+                    @color.to_xml(xml) if @color
+                    xml.sz(:val=>@sz) if @sz
+                    xml.u(:val=>@u) if @u
+                    # :baseline, :subscript, :superscript
+                    xml.vertAlign(:val=>@vertAlign) if @verAlign
+                    # :none, major, :minor
+                    xml.scheme(:val=>@scheme) if @scheme
+                  }
+                  xml.t @value.to_s
                 }
-                xml.t @value.to_s
               }
             }
-          }
+          end
         end
       elsif @type == :time
         # Using hardcoded offsets here as some operating systems will not except a 'negative' offset from the ruby epoc.
@@ -293,6 +325,12 @@ module Axlsx
 
 
     private 
+
+    # @see ssti
+    def ssti=(v) 
+      Axlsx::validate_unsigned_int(v)
+      @ssti = v
+    end
 
     # assigns the owning row for this cell.
     def row=(v) DataTypeValidator.validate "Cell.row", Row, v; @row=v end

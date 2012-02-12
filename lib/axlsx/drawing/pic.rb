@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# encoding: UTF-8
 module Axlsx
   # a Pic object represents an image in your worksheet
   # Worksheet#add_image is the recommended way to manage images in your sheets

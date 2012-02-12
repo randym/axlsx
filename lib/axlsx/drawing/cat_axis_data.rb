@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module Axlsx
   # The CatAxisData class serializes the category axis data for a chart
   class CatAxisData < SimpleTypedList

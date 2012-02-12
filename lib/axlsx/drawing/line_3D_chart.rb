@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module Axlsx
 
   # The Line3DChart is a three dimentional line chart (who would have guessed?) that you can add to your worksheet.

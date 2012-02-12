@@ -28,7 +28,13 @@ class TestWorksheet < Test::Unit::TestCase
   def test_index
     assert_equal(@ws.index, @ws.workbook.worksheets.index(@ws))
   end
-  
+
+  def test_dimension
+    @ws.add_row [1, 2, 3]
+    @ws.add_row [4, 5, 6]
+    assert_equal @ws.dimension, "A1:C2"
+  end
+
   def test_referencing
     @ws.add_row [1, 2, 3]
     @ws.add_row [4, 5, 6]

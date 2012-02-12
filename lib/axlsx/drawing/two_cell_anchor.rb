@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module Axlsx
   # This class details the anchor points for drawings.
   # @note The recommended way to manage drawings and charts is Worksheet#add_chart. Anchors are specified by the :start_at and :end_at options to that method.

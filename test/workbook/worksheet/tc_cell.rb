@@ -18,6 +18,7 @@ class TestCell < Test::Unit::TestCase
     assert_equal(@c.value, 1.0, "type option is applied and value is casted")
   end
 
+
   def test_style_date_data
     c = Axlsx::Cell.new(@c.row, Time.now)
     assert_equal(Axlsx::STYLE_DATE, c.style)
@@ -190,5 +191,17 @@ class TestCell < Test::Unit::TestCase
     @c.merge @row.cells.last
     assert_equal(@c.row.worksheet.merged_cells.last, "A1:C1")    
   end
+
+  def test_equality
+      c2 = @row.add_cell 1, :type=>:float, :style=>1
+      assert(c2.shareable(@c))
+      c3 = @row.add_cell 2, :type=>:float, :style=>1
+      c4 = @row.add_cell 1, :type=>:float, :style=>1, :color => "#FFFFFFFF"
+      assert_equal(c4.shareable(c2) ,false)
+      c5 = @row.add_cell 1, :type=>:float, :style=>1, :color => "#FFFFFFFF"
+      assert(c5.shareable(c4))
+
+  end
+
 
 end

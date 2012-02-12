@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module Axlsx
 
   # XML Encoding
@@ -63,6 +64,9 @@ module Axlsx
 
   # styles rels namespace
   STYLES_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles"
+
+  # shared strings namespace
+  SHARED_STRINGS_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/sharedStrings"
 
   # drawing rels namespace
   DRAWING_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/drawing"
@@ -138,6 +142,9 @@ module Axlsx
 
   # styles part
   STYLES_PN = "styles.xml"
+
+  # shared_strings  part
+  SHARED_STRINGS_PN = "sharedStrings.xml"
   
   # app part
   APP_PN = "docProps/app.xml"

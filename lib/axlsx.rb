@@ -1,3 +1,4 @@
+# encoding: UTF-8
 Encoding::default_internal = 'UTF-8' unless RUBY_VERSION < '1.9'
 Encoding::default_external = 'UTF-8' unless RUBY_VERSION < '1.9'
 

@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# encoding: UTF-8
 module Axlsx
   # The GradientStop object represents a color point in a gradient.
   # @see Open Office XML Part 1 §18.8.24  

@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module Axlsx
   # The Font class details a font instance for use in styling cells.
   # @note The recommended way to manage fonts, and other styles is Styles#add_style

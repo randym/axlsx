@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module Axlsx
   # A Row is a single row in a worksheet.
   # @note The recommended way to manage rows and cells is to use Worksheet#add_row

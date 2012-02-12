@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module Axlsx
   # The Fill is a formatting object that manages the background color, and pattern for cells.
   # @note The recommended way to manage styles in your workbook is to use Styles#add_style.

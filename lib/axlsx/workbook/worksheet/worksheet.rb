@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# encoding: UTF-8
 module Axlsx
   
   # The Worksheet class represents a worksheet in the workbook. 
@@ -51,6 +51,12 @@ module Axlsx
       @merged_cells = []
     end
 
+    # convinience method to access all cells in this worksheet
+    # @return [Array] cells
+    def cells
+      rows.flatten
+    end
+
     # Creates merge information for this worksheet. 
     # Cells can be merged by calling the merge_cells method on a worksheet.
     # @example This would merge the three cells C1..E1    #  
@@ -67,6 +73,14 @@ module Axlsx
                          cells = cells.sort { |x, y| x.r <=> y.r }
                          "#{cells.first.r}:#{cells.last.r}"
                        end 
+    end
+
+
+    # The demensions of a worksheet. This is not actually a required element by the spec, 
+    # but at least a few other document readers expect this for conversion
+    # @return [String] the A1:B2 style reference for the first and last row column intersection in the workbook
+    def dimension
+      "#{rows.first.cells.first.r}:#{rows.last.cells.last.r}"
     end
 
 
@@ -238,6 +252,7 @@ module Axlsx
       builder = Nokogiri::XML::Builder.new(:encoding => ENCODING) do |xml|
         xml.worksheet(:xmlns => XML_NS, 
                       :'xmlns:r' => XML_NS_R) {
+          xml.dimension :ref=>dimension unless rows.size == 0
           if @auto_fit_data.size > 0
             xml.cols {
               @auto_fit_data.each_with_index do |col, index|

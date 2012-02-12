@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module Axlsx
   # A graphic frame defines a container for a chart object
   # @note The recommended way to manage charts is Worksheet#add_chart

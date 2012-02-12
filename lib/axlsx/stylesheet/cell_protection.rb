@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module Axlsx
   # CellProtection stores information about locking or hiding cells in spreadsheet.
   # @note Using Styles#add_style is the recommended way to manage cell protection.

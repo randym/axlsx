@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module Axlsx
   # The picture locking class defines the locking properties for pictures in your workbook. 
   class PictureLocking

@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module Axlsx
   # The ValAxisData class manages the values for a chart value series.
   class ValAxisData < CatAxisData

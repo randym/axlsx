@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module Axlsx
   # An default content part. These parts are automatically created by for you based on the content of your package.
   class Default

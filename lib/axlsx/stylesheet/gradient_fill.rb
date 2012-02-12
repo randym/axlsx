@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# encoding: UTF-8
 module Axlsx
   # A GradientFill defines the color and positioning for gradiant cell fill.
   # @see Open Office XML Part 1 §18.8.24  

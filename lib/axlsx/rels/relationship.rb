@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module Axlsx
   # A relationship defines a reference between package parts.
   # @note Packages automatcially manage relationships.

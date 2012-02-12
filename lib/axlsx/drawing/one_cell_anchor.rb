@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module Axlsx
   # This class details a single cell anchor for drawings.
   # @note The recommended way to manage drawings, images and charts is Worksheet#add_chart or Worksheet#add_image.

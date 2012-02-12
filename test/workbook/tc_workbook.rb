@@ -18,6 +18,12 @@ class TestWorkbook < Test::Unit::TestCase
     assert_equal(Axlsx::Workbook.date1904, @wb.date1904)
   end
 
+  def test_shared_strings
+    assert_equal(@wb.use_shared_strings, nil)
+    assert_raise(ArgumentError) {@wb.use_shared_strings = 'bpb'}
+    assert_nothing_raised {@wb.use_shared_strings = :true}
+  end
+
   def test_add_worksheet
     assert(@wb.worksheets.empty?, "worbook has no worksheets by default")
     ws = @wb.add_worksheet(:name=>"bob")
@@ -30,6 +36,8 @@ class TestWorkbook < Test::Unit::TestCase
     assert(@wb.relationships.size == 1)
     @wb.add_worksheet
     assert(@wb.relationships.size == 2)
+    @wb.use_shared_strings = true
+    assert(@wb.relationships.size == 3)
   end
 
   def test_to_xml
