@@ -2,7 +2,7 @@
 module Axlsx
 
   # The Shared String Table class is responsible for managing and serializing common strings in a workbook.
-  # While the ECMA-376 spec allows for both inline and shared strings it seems that at least some applications like Numbers (Mac)
+  # While the ECMA-376 spec allows for both inline and shared strings it seems that at least some applications like iWorks Numbers
   # and Google Docs require that the shared string table is populated in order to interoperate properly. 
   # As a developer, you should never need to directly work against this class. Simply set 'use_shared_strings'
   # on the package or workbook to generate a package that uses the shared strings table instead of inline strings.
@@ -29,7 +29,7 @@ module Axlsx
     # Creates a new Shared Strings Table agains an array of cells
     # @param [Array] cells This is an array of all of the cells in the workbook
     def initialize(cells)
-      cells = cells.flatten.reject { |c| c.type != :string }
+      cells = cells.flatten.reject { |c| c.type != :string || c.value.start_with?('=') }
       @count = cells.size
       @unique_cells = []
       resolve(cells)
@@ -42,7 +42,7 @@ module Axlsx
       builder = Nokogiri::XML::Builder.new(:encoding => ENCODING) do |xml|
         xml.sst(:xmlns => Axlsx::XML_NS, :count => count, :uniqueCount => unique_count) {
           @unique_cells.each do |cell|
-            xml.si { xml.t cell.value.to_s }
+            xml.si { cell.run_xml(xml) }
           end
         }
       end
