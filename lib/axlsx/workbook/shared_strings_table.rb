@@ -32,7 +32,7 @@ module Axlsx
       cells = cells.flatten.reject { |c| c.type != :string }
       @count = cells.size
       @unique_cells = []
-      resolve cells
+      resolve(cells)
     end
 
 
@@ -48,25 +48,24 @@ module Axlsx
       end
       builder.to_xml(:save_with => 0)
     end
-  end
 
-  private
-
-  # Interate over all of the cells in the array. 
-  # if our unique cells array does not contain a sharable cell, 
-  # add the cell to our unique cells array and set the ssti attribute on the index of this cell in the shared strings table
-  # if a sharable cell already exists in our unique_cells array, set the ssti attribute of the cell and move on.
-  # @return [Array] unique cells
-  def resolve(cells)
-    cells.each do |cell|
-      index = @unique_cells.index { |item| item.shareable(cell) }
-      if index == nil
-        cell.send :ssti=, @unique_cells.size
-        @unique_cells << cell
-      else
-        cell.send :ssti=, index
+    private
+    
+    # Interate over all of the cells in the array. 
+    # if our unique cells array does not contain a sharable cell, 
+    # add the cell to our unique cells array and set the ssti attribute on the index of this cell in the shared strings table
+    # if a sharable cell already exists in our unique_cells array, set the ssti attribute of the cell and move on.
+    # @return [Array] unique cells
+    def resolve(cells)
+      cells.each do |cell|
+        index = @unique_cells.index { |item| item.shareable(cell) }
+        if index == nil
+          cell.send :ssti=, @unique_cells.size
+          @unique_cells << cell
+        else
+          cell.send :ssti=, index
+        end
       end
-    end
+    end    
   end
-  
 end
