@@ -194,5 +194,12 @@
 
      s = p.to_stream()
      File.open('example_streamed.xlsx', 'w') { |f| f.write(s.read) }
+
+
+##Using Shared Strings
+     p.use_shared_strings = true
+     p.serialize("shared_strings_example.xlsx")
+
+
      
 
