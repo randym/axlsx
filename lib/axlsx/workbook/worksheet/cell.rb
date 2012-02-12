@@ -23,11 +23,12 @@ module Axlsx
   # @see Worksheet#add_row
   class Cell
 
-    # The index of this string in the shared string table
-    # This is only set when the use_shared_strings option on the package is true.
-    # @return [Integer]
-    # @see Package#use_shared_strings
-    attr_accessor :shared_string_index
+
+    INLINE_STYLES = ['value', 'type', 'font_name', 'charset', 
+                         'family', 'b', 'i', 'strike','outline', 
+                         'shadow', 'condense', 'extend', 'u', 
+                         'vertAlign', 'sz', 'color', 'scheme']
+
 
     # The index of the cellXfs item to be applied to this cell.
     # @return [Integer] 
@@ -193,19 +194,16 @@ module Axlsx
     end
 
     # The Shared Strings Table index for this cell
+    # @return [Integer]
     attr_reader :ssti
     
     # equality comparison to test value, type and inline style attributes
     # this is how we work out if the cell needs to be added or already exists in the shared strings table
     def shareable(v)
-      comparable_keys = [:value, :type, :font_name, :charset, 
-                         :family, :b, :i, :strike,:outline, 
-                         :shadow, :condense, :extend, :u, 
-                         :vertAlign, :sz, :color, :scheme]
 
       #using reject becase 1.8.7 select returns an array...
-      v_hash = v.instance_values.reject { |k, v| !comparable_keys.include?(k.to_sym) }
-      self_hash = self.instance_values.reject { |k, v| !comparable_keys.include?(k.to_sym) }
+      v_hash = v.instance_values.reject { |k, v| !INLINE_STYLES.include?(k) }
+      self_hash = self.instance_values.reject { |k, v| !INLINE_STYLES.include?(k) }
       # required as color is an object, and the comparison will fail even though both use the same color.
       v_hash['color'] = v_hash['color'].instance_values if v_hash['color']
       self_hash['color'] = self_hash['color'].instance_values if self_hash['color']
@@ -258,14 +256,42 @@ module Axlsx
       self.row.worksheet.merge_cells "#{self.r}:#{range_end}" unless range_end.nil?
     end              
 
+    # builds an xml text run based on this cells attributes. This is extracted from to_xml so that shared strings can use it.
+    # @param [Nokogiri::XML::Builder] xml The document builder instance this output will be added to.
+    # @return [String] the xml for this cell's text run
+    def run_xml(xml)
+      if (self.instance_values.keys & INLINE_STYLES).size > 0
+        xml.r {
+          xml.rPr {
+            xml.rFont(:val=>@font_name) if @font_name
+            xml.charset(:val=>@charset) if @charset
+            xml.family(:val=>@family) if @family
+            xml.b(:val=>@b) if @b
+            xml.i(:val=>@i) if @i
+            xml.strike(:val=>@strike) if @strike
+            xml.outline(:val=>@outline) if @outline
+            xml.shadow(:val=>@shadow) if @shadow
+            xml.condense(:val=>@condense) if @condense
+            xml.extend(:val=>@extend) if @extend
+            @color.to_xml(xml) if @color
+            xml.sz(:val=>@sz) if @sz
+            xml.u(:val=>@u) if @u
+            # :baseline, :subscript, :superscript
+            xml.vertAlign(:val=>@vertAlign) if @verAlign
+            # :none, major, :minor
+            xml.scheme(:val=>@scheme) if @scheme
+          }
+          xml.t @value.to_s
+        }
+      else
+        xml.t @value.to_s
+      end        
+    end
+
     # Serializes the cell
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String] xml text for the cell
-    # @note
-    #   Shared Strings are not used in this library. All values are set directly in the each sheet.
-    def to_xml(xml)
-      
-      # however nokogiri does a nice 'force_encoding' which we shall remove!
+    def to_xml(xml)      
       if @type == :string 
         #parse formula
         if @value.start_with?('=')
@@ -273,47 +299,20 @@ module Axlsx
             xml.f @value.to_s.gsub('=', '')
           }
         else
-          #parse standard string
-          #xml.c(:r => r, :t=>:inlineStr, :s=>style) {
-          #  xml.is { xml.t @value.to_s } 
-          #}
+          #parse shared
           if @ssti
-            xml.c(:r => r, :s=>style, :t => :s) {
-              xml.v ssti
-            }
+            xml.c(:r => r, :s=>style, :t => :s) { xml.v ssti }
           else
             #parse inline string
             xml.c(:r => r, :s=>style, :t => :inlineStr) {
               xml.is {
-                xml.r {
-                  xml.rPr {
-                    xml.rFont(:val=>@font_name) if @font_name
-                    xml.charset(:val=>@charset) if @charset
-                    xml.family(:val=>@family) if @family
-                    xml.b(:val=>@b) if @b
-                    xml.i(:val=>@i) if @i
-                    xml.strike(:val=>@strike) if @strike
-                    xml.outline(:val=>@outline) if @outline
-                    xml.shadow(:val=>@shadow) if @shadow
-                    xml.condense(:val=>@condense) if @condense
-                    xml.extend(:val=>@extend) if @extend
-                    @color.to_xml(xml) if @color
-                    xml.sz(:val=>@sz) if @sz
-                    xml.u(:val=>@u) if @u
-                    # :baseline, :subscript, :superscript
-                    xml.vertAlign(:val=>@vertAlign) if @verAlign
-                    # :none, major, :minor
-                    xml.scheme(:val=>@scheme) if @scheme
-                  }
-                  xml.t @value.to_s
-                }
+                run_xml(xml)
               }
             }
           end
         end
       elsif @type == :time
         # Using hardcoded offsets here as some operating systems will not except a 'negative' offset from the ruby epoc.
-        # (1970)
         epoc1900 = -2209021200 #Time.local(1900, 1, 1) 
         epoc1904 = -2082877200 #Time.local(1904, 1, 1) 
         epoc = Workbook.date1904 ? epoc1904 : epoc1900
@@ -323,7 +322,6 @@ module Axlsx
         xml.c(:r => r, :s => style) { xml.v value }
       end
     end
-
 
     private 
 
