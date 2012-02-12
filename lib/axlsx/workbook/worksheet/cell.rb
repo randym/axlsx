@@ -202,9 +202,10 @@ module Axlsx
                          :family, :b, :i, :strike,:outline, 
                          :shadow, :condense, :extend, :u, 
                          :vertAlign, :sz, :color, :scheme]
-      v_hash = v.instance_values.select { |k, v| comparable_keys.include? k.to_sym }
 
-      self_hash = self.instance_values.select { |k, v| comparable_keys.include? k.to_sym }
+      #using reject becase 1.8.7 select returns an array...
+      v_hash = v.instance_values.reject { |k, v| !comparable_keys.include?(k.to_sym) }
+      self_hash = self.instance_values.reject { |k, v| !comparable_keys.include?(k.to_sym) }
       # required as color is an object, and the comparison will fail even though both use the same color.
       v_hash['color'] = v_hash['color'].instance_values if v_hash['color']
       self_hash['color'] = self_hash['color'].instance_values if self_hash['color']

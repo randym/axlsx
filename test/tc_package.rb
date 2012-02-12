@@ -91,12 +91,12 @@ class TestPackage < Test::Unit::TestCase
 
   def test_base_content_types
     ct = @package.send(:base_content_types)
-    assert(ct.select { |ct| ct.ContentType == Axlsx::RELS_CT }.size == 1, "rels content type missing")
-    assert(ct.select { |ct| ct.ContentType == Axlsx::XML_CT }.size == 1, "xml content type missing")
-    assert(ct.select { |ct| ct.ContentType == Axlsx::APP_CT }.size == 1, "app content type missing")
-    assert(ct.select { |ct| ct.ContentType == Axlsx::CORE_CT }.size == 1, "core content type missing")
-    assert(ct.select { |ct| ct.ContentType == Axlsx::STYLES_CT }.size == 1, "styles content type missing")
-    assert(ct.select { |ct| ct.ContentType == Axlsx::WORKBOOK_CT }.size == 1, "workbook content type missing")
+    assert(ct.select { |c| c.ContentType == Axlsx::RELS_CT }.size == 1, "rels content type missing")
+    assert(ct.select { |c| c.ContentType == Axlsx::XML_CT }.size == 1, "xml content type missing")
+    assert(ct.select { |c| c.ContentType == Axlsx::APP_CT }.size == 1, "app content type missing")
+    assert(ct.select { |c| c.ContentType == Axlsx::CORE_CT }.size == 1, "core content type missing")
+    assert(ct.select { |c| c.ContentType == Axlsx::STYLES_CT }.size == 1, "styles content type missing")
+    assert(ct.select { |c| c.ContentType == Axlsx::WORKBOOK_CT }.size == 1, "workbook content type missing")
     assert(ct.size == 6)
   end
 
