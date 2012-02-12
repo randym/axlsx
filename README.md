@@ -56,6 +56,10 @@ Feature List
 
 **12. Auto filtering tables with worksheet.auto_filter
 
+**13. Export using shared strings or inline string
+
+**14. Output to disk or StringIO
+
 Installing
 ----------
 
@@ -258,6 +262,14 @@ To install Axlsx, use the following command:
      p.validate.each { |e| puts e.message }
      p.serialize("example.xlsx")
 
+     # alternatively, serilaize to StringIO
+     s = p.to_stream()
+     File.open('example_streamed.xlsx', 'w') { |f| f.write(s.read) }
+
+##Using Shared Strings
+
+     p.use_shared_strings = true
+     p.serialize("shared_strings_example.xlsx")
 
 #Documentation
 --------------
@@ -272,6 +284,11 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
  
 #Changelog
 ---------
+- ** February.12.12**: 1.0.17 release
+   https://github.com/randym/axlsx/compare/1.0.16...1.0.17
+   - Added in support for serializing to StringIO
+   - Added in support for using shared strings table. This makes most of the features in axlsx interoperable with iWorks Numbers
+
 - ** February.2.12**: 1.0.16 release
    https://github.com/randym/axlsx/compare/1.0.15...1.0.16
    - Bug fix for schema file locations when validating in rails

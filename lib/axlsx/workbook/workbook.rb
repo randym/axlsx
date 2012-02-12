@@ -96,10 +96,8 @@ require 'axlsx/workbook/shared_strings_table.rb'
     #end
 
     # Creates a new Workbook
-    #
-    # @option options [Boolean] date1904. If this is not specified, we try to determine if the platform is bsd/darwin and set date1904 to true automatically.
-    # @option
-    #
+    # The recomended way to work with workbooks is via Package#workbook
+    # @option options [Boolean] date1904. If this is not specified, we try to determine if the platform is bsd/darwin and set date1904 to true automatically.    
     def initialize(options={})
       @styles = Styles.new
       @worksheets = SimpleTypedList.new Worksheet

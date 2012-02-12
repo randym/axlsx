@@ -24,6 +24,7 @@ module Axlsx
   class Cell
 
 
+    # An array of available inline styes.
     INLINE_STYLES = ['value', 'type', 'font_name', 'charset', 
                          'family', 'b', 'i', 'strike','outline', 
                          'shadow', 'condense', 'extend', 'u', 
