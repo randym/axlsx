@@ -313,6 +313,8 @@ Please see the {file:CHANGELOG.md} document for past release information.
 
 [kleine2](https://github.com/kleine2) - for generously donating in return for the image hyperlink feature.
 
+[ffmike](https://github.com/ffmike) - for knocking down an over restrictive i18n dependency, massive patience and great communication skills.
+
 #Copyright and License
 ----------
 
