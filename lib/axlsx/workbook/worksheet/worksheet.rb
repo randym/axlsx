@@ -303,7 +303,7 @@ module Axlsx
         # ignore formula - there is no way for us to know the result
         next if item.value.is_a?(String) && item.value.start_with?('=')
 
-        col = @auto_fit_data[index] || {:longest=>"", :sz=>sz} 
+        col = @auto_fit_data[index] || {:longest=>"", :sz=>sz, :fixed=>nil} 
         cell_xf = cellXfs[item.style]
         font = fonts[cell_xf.fontId || 0]
         sz = item.sz || font.sz || fonts[0].sz
@@ -322,6 +322,8 @@ module Axlsx
     # @return [Float]
     # @param [Hash] A hash of auto_fit_data 
     def auto_width(col)
+      return col[:fixed] unless col[:fixed] == nil
+
       mdw_count, font_scale, mdw = 0, col[:sz]/11.0, 6.0
       mdw_count = col[:longest].scan(/./mu).reduce(0) do | count, char |
         count +=1 if @magick_draw.get_type_metrics(char).max_advance >= mdw

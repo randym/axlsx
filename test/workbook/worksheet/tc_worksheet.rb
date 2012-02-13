@@ -136,19 +136,20 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.add_row ["chasing windmills", "penut"], :style=>small
     assert(@ws.auto_fit_data.size == 2, "a data item for each column")
 
-    assert_equal(@ws.auto_fit_data[0], {:sz=>2,:longest=>"chasing windmills"}, "adding a row updates auto_fit_data if the product of the string length and font is greater for the column")
+    assert_equal(@ws.auto_fit_data[0], {:sz => 2, :longest => "chasing windmills", :fixed=>nil}, "adding a row updates auto_fit_data if the product of the string length and font is greater for the column")
 
 
     @ws.add_row ["mule"], :style=>big
-    assert_equal(@ws.auto_fit_data[0], {:sz=>10,:longest=>"mule"}, "adding a row updates auto_fit_data if the product of the string length and font is greater for the column")
+    assert_equal(@ws.auto_fit_data[0], {:sz=>10,:longest=>"mule", :fixed=>nil}, "adding a row updates auto_fit_data if the product of the string length and font is greater for the column")
   end
 
   def test_auto_width
     assert(@ws.send(:auto_width, {:sz=>11, :longest=>"fisheries"}) > @ws.send(:auto_width, {:sz=>11, :longest=>"fish"}), "longer strings get a longer auto_width at the same font size")
 
     assert(@ws.send(:auto_width, {:sz=>11, :longest=>"fish"}) < @ws.send(:auto_width, {:sz=>12, :longest=>"fish"}), "larger fonts produce longer with with same string")
-
+    assert_equal(@ws.send(:auto_width, {:sz=>11, :longest => "This is a really long string", :fixed=>0.2}), 0.2, "fixed rules!")
   end
+
 
   def test_merge_cells
     assert(@ws.merged_cells.is_a?(Array))
