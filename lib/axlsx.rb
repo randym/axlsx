@@ -36,6 +36,7 @@ require 'time'
 # I am a very big fan of activesupports instance_values method, but do not want to require nor include the entire 
 # library just for this one method. 
 if !Object.respond_to?(:instance_values)
+  Object.send :public  # patch for 1.8.7 as it uses private scope
   Object.send :define_method, :instance_values do
     Hash[instance_variables.map { |name| [name.to_s[1..-1], instance_variable_get(name)] }]
   end
