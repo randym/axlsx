@@ -217,7 +217,19 @@ module Axlsx
         end
       end
     end
-    
+
+    # lets you specify a fixed width for any valid column in the worksheet. 
+    # Axlsx is sparse, so if you have not set data for a column, you cannot set the width.
+    # Setting a fixed column width to nil will revert the behaviour back to calculating the width for you.
+    # @option options [Array] a array of column widths. Use nil memebers do default to the auto-fit behaviour. Values should be nil or an unsigned Integer, Float or Fixnum
+    def column_widths(options=[])
+      options.each_with_index do |value, index|
+        raise ArgumentError, "Invalid column specification" unless index < @auto_fit_data.size
+        Axlsx::validate_unsigned_numeric(value) unless value == nil
+        @auto_fit_data[index][:fixed] = value
+      end
+    end
+
     # Adds a chart to this worksheets drawing. This is the recommended way to create charts for your worksheet. This method wraps the complexity of dealing with ooxml drawing, anchors, markers graphic frames chart objects and all the other dirty details. 
     # @param [Class] chart_type
     # @option options [Array] start_at

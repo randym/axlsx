@@ -262,7 +262,7 @@ To install Axlsx, use the following command:
 
      wb.add_worksheet(:name => "custom column widths") do |sheet|
        sheet.add_row ["I use auto_fit and am very wide", "I use a custom width and am narrow"]
-       sheet.auto_fit_data[1][:fixed] = 3
+       sheet.column_widths [nil, 3]
      end
 
 ##Validate and Serialize

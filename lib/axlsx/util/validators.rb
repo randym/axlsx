@@ -53,6 +53,14 @@ module Axlsx
     DataTypeValidator.validate(:unsigned_int, [Fixnum, Integer], v, lambda { |arg| arg.respond_to?(:>=) && arg >= 0 })
   end
 
+  # Requires that the value is a Fixnum Integer or Float and is greater or equal to 0
+  # @param [Any] v The value validated
+  # @raise [ArgumentError] raised if the value is not a Fixnum or Integer value greater or equal to 0
+  # @return [Boolean] true if the data is valid
+  def self.validate_unsigned_numeric(v)
+    DataTypeValidator.validate("Invalid column width", [Fixnum, Integer, Float], v, lambda { |arg| arg.respond_to?(:>=) && arg >= 0 })
+  end
+
   # Requires that the value is a Fixnum or Integer
   # @param [Any] v The value validated
   def self.validate_int(v)
