@@ -253,22 +253,22 @@ module Axlsx
     # Creates the default set of styles the exel requires to be valid as well as setting up the 
     # Axlsx::STYLE_THIN_BORDER
     def load_default_styles
-      @numFmts = SimpleTypedList.new NumFmt
+      @numFmts = SimpleTypedList.new NumFmt, 'numFmts'
       @numFmts << NumFmt.new(:numFmtId => NUM_FMT_YYYYMMDD, :formatCode=> "yyyy/mm/dd")
       @numFmts << NumFmt.new(:numFmtId => NUM_FMT_YYYYMMDDHHMMSS, :formatCode=> "yyyy/mm/dd hh:mm:ss")
 
       @numFmts.lock
 
-      @fonts = SimpleTypedList.new Font
+      @fonts = SimpleTypedList.new Font, 'fonts'
       @fonts << Font.new(:name => "Arial", :sz => 11, :family=>1)
       @fonts.lock
 
-      @fills = SimpleTypedList.new Fill
+      @fills = SimpleTypedList.new Fill, 'fills'
       @fills << Fill.new(Axlsx::PatternFill.new(:patternType=>:none))
       @fills << Fill.new(Axlsx::PatternFill.new(:patternType=>:gray125))
       @fills.lock
 
-      @borders = SimpleTypedList.new Border
+      @borders = SimpleTypedList.new Border, 'borders'
       @borders << Border.new
       black_border = Border.new
       [:left, :right, :top, :bottom].each do |item| 
@@ -281,7 +281,7 @@ module Axlsx
       @cellStyleXfs << Xf.new(:borderId=>0, :numFmtId=>0, :fontId=>0, :fillId=>0)
       @cellStyleXfs.lock
 
-      @cellStyles = SimpleTypedList.new CellStyle
+      @cellStyles = SimpleTypedList.new CellStyle, 'cellStyles'
       @cellStyles << CellStyle.new(:name =>"Normal", :builtinId =>0, :xfId=>0)
       @cellStyles.lock
 

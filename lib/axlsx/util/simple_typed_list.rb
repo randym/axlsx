@@ -154,7 +154,7 @@ module Axlsx
     # @return [String]
     def to_xml(xml)
       classname = @allowed_types[0].name.split('::').last
-      el_name = serialize_as || (classname[0,1].downcase + classname[1..-1]).pluralize
+      el_name = serialize_as || (classname[0,1].downcase + classname[1..-1])
       xml.send(el_name, :count=>@list.size) {
         @list.each { |item| item.to_xml(xml) }
       }

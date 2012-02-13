@@ -1,7 +1,4 @@
 # encoding: UTF-8
-Encoding::default_internal = 'UTF-8' unless RUBY_VERSION < '1.9'
-Encoding::default_external = 'UTF-8' unless RUBY_VERSION < '1.9'
-
 require 'axlsx/version.rb'
 
 require 'axlsx/util/simple_typed_list.rb'
@@ -28,14 +25,18 @@ require 'axlsx/package.rb'
 
 #required gems
 require 'nokogiri'
-require 'active_support/core_ext/object/instance_variables'
-require 'active_support/inflector'
 require 'RMagick'
 require 'zip/zip'
 
 #core dependencies
 require 'bigdecimal'
 require 'time'
+
+#if object does not have this already, I am borrowing it from active_support.
+
+  Object.send :define_method, :instance_values do
+    Hash[instance_variables.map { |name| [name.to_s[1..-1], instance_variable_get(name)] }]
+   end unless Object.respond_to?(:instance_values)
 
 
 # xlsx generation with charts, images, automated column width, customizable styles and full schema validation. Axlsx excels at helping you generate beautiful Office Open XML Spreadsheet documents without having to understand the entire ECMA specification. Check out the README for some examples of how easy it is. Best of all, you can validate your xlsx file before serialization so you know for sure that anything generated is going to load on your client's machine.
