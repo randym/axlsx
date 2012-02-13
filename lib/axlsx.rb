@@ -33,10 +33,13 @@ require 'bigdecimal'
 require 'time'
 
 #if object does not have this already, I am borrowing it from active_support.
-
+# I am a very big fan of activesupports instance_values method, but do not want to require nor include the entire 
+# library just for this one method. 
+if !Object.respond_to?(:instance_values)
   Object.send :define_method, :instance_values do
     Hash[instance_variables.map { |name| [name.to_s[1..-1], instance_variable_get(name)] }]
-   end unless Object.respond_to?(:instance_values)
+  end
+end
 
 
 # xlsx generation with charts, images, automated column width, customizable styles and full schema validation. Axlsx excels at helping you generate beautiful Office Open XML Spreadsheet documents without having to understand the entire ECMA specification. Check out the README for some examples of how easy it is. Best of all, you can validate your xlsx file before serialization so you know for sure that anything generated is going to load on your client's machine.
