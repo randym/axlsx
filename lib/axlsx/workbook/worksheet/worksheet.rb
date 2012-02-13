@@ -218,12 +218,15 @@ module Axlsx
       end
     end
 
-    # lets you specify a fixed width for any valid column in the worksheet. 
+    # This is a helper method that Lets you specify a fixed width for multiple columns in a worksheet in one go.    
     # Axlsx is sparse, so if you have not set data for a column, you cannot set the width.
     # Setting a fixed column width to nil will revert the behaviour back to calculating the width for you.
-    # @option options [Array] a array of column widths. Use nil memebers do default to the auto-fit behaviour. Values should be nil or an unsigned Integer, Float or Fixnum
-    def column_widths(options=[])
-      options.each_with_index do |value, index|
+    # @example This would set the first and third column widhts but leave the second column in autofit state.
+    #      ws.column_widths 7.2, nil, 3
+    # @note For updating only a single column it is probably easier to just set ws.auto_fit_data[col_index][:fixed] directly
+    # @param [Integer|Float|Fixnum|nil] values 
+    def column_widths(*args)
+      args.each_with_index do |value, index|
         raise ArgumentError, "Invalid column specification" unless index < @auto_fit_data.size
         Axlsx::validate_unsigned_numeric(value) unless value == nil
         @auto_fit_data[index][:fixed] = value

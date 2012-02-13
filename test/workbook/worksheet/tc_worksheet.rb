@@ -153,11 +153,11 @@ class TestWorksheet < Test::Unit::TestCase
   def test_set_column_width
     @ws.add_row ["chasing windmills", "penut"]
     assert_equal(@ws.auto_fit_data[0][:fixed], nil, 'no fixed by default')
-    @ws.column_widths [nil, 0.5]
+    @ws.column_widths nil, 0.5
     assert_equal(@ws.auto_fit_data[1][:fixed], 0.5, 'eat my width')
-    assert_raise(ArgumentError, 'reject invalid columns') { @ws.column_widths [2, 7, nil] }
-    assert_raise(ArgumentError, 'only accept unsigned ints') { @ws.column_widths [2, 7, -1] }
-    assert_raise(ArgumentError, 'only accept Integer, Float or Fixnum') { @ws.column_widths [2, 7, "-1"] }
+    assert_raise(ArgumentError, 'reject invalid columns') { @ws.column_widths 2, 7, nil }
+    assert_raise(ArgumentError, 'only accept unsigned ints') { @ws.column_widths 2, 7, -1 }
+    assert_raise(ArgumentError, 'only accept Integer, Float or Fixnum') { @ws.column_widths 2, 7, "-1" }
   end
 
 

@@ -13,6 +13,20 @@ module Axlsx
     # @return [SimpleTypedList]
     attr_reader :cells
 
+    # TODO  18.3.1.73
+    # collapsed
+    # customFormat
+    # customHeight
+    # hidden
+    # ht (height)
+    # outlineLevel
+    # ph
+    # s (style)
+    # spans
+    # thickTop
+    # thickBottom
+
+
     # Creates a new row. New Cell objects are created based on the values, types and style options.
     # A new cell is created for each item in the values array. style and types options are applied as follows:
     #   If the types option is defined and is a symbol it is applied to all the cells created.

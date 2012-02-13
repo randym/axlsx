@@ -10,7 +10,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 **Latest Version**: 1.0.17   
 **Ruby Version**: 1.8.7, 1.9.2, 1.9.3 
 
-**Release Date**: February 13th 2012     
+**Release Date**: February 14th 2012     
 
 Synopsis
 --------
@@ -262,7 +262,7 @@ To install Axlsx, use the following command:
 
      wb.add_worksheet(:name => "custom column widths") do |sheet|
        sheet.add_row ["I use auto_fit and am very wide", "I use a custom width and am narrow"]
-       sheet.column_widths [nil, 3]
+       sheet.column_widths nil, 3
      end
 
 ##Validate and Serialize
@@ -294,11 +294,11 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
  
 #Changelog
 ---------
-- ** February.13.12**: 1.0.17 release
+- ** February.14.12**: 1.0.17 release
    https://github.com/randym/axlsx/compare/1.0.16...1.0.17
    - Added in support for serializing to StringIO
    - Added in support for using shared strings table. This makes most of the features in axlsx interoperable with iWorks Numbers
-   - Added in support for fixed column widths via worksheet.auto_fit_data[index][:fixed] = Int||Float
+   - Added in support for fixed column_widths
    - Removed unneded depenencies on activesupport and i18n
 
 - ** February.2.12**: 1.0.16 release

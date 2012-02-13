@@ -191,7 +191,7 @@
 
      wb.add_worksheet(:name => "custom column widths") do |sheet|
        sheet.add_row ["I use autowidth and am very wide", "I use a custom width and am narrow"]
-       sheet.column_widths [nil, 3]
+       sheet.column_widths nil, 3
      end
 
 ##Validate and Serialize
