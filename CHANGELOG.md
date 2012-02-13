@@ -1,5 +1,12 @@
 CHANGELOG
 ---------
+- **January.6.12**: 1.0.15 release
+   https://github.com/randym/axlsx/compare/1.0.14...1.0.15
+   - Bug fix add_style specified number formats must be explicity applied for libraOffice
+   - performance improvements from ochko when creating cells with options.
+   - Bug fix setting types=>[:n] when adding a row incorrectly determines the cell type to be string as the value is null during creation.
+   - Release in preparation for password protection merge
+
 - **December.14.11**: 1.0.14 release
    - Added support for merging cells
    - Added support for auto filters

@@ -187,6 +187,13 @@
        sheet.auto_filter = "A2:D5"
      end  
 
+##Specifying Column Widths
+
+     wb.add_worksheet(:name => "custom column widths") do |sheet|
+       sheet.add_row ["I use autowidth and am very wide", "I use a custom width and am narrow"]
+       sheet.auto_fit_data[1][:fixed] = 3
+     end
+
 ##Validate and Serialize
 
      p.validate.each { |e| puts e.message }
@@ -197,6 +204,7 @@
 
 
 ##Using Shared Strings
+
      p.use_shared_strings = true
      p.serialize("shared_strings_example.xlsx")
 

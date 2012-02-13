@@ -7,16 +7,16 @@ Axlsx: Office Open XML Spreadsheet Generation
 **Author**:       Randy Morgan   
 **Copyright**:    2011      
 **License**:      MIT License      
-**Latest Version**: 1.0.16   
+**Latest Version**: 1.0.17   
 **Ruby Version**: 1.8.7, 1.9.2, 1.9.3 
 
-**Release Date**: February 2nd 2012     
+**Release Date**: February 13th 2012     
 
 Synopsis
 --------
 
 Axlsx is an Office Open XML Spreadsheet generator for the Ruby programming language.
-With Axlsx you can create excel worksheets with charts, images, automated column width, customizable styles, functins, merged cells and auto filters as well as full schema validation. Axlsx excels at helping you generate beautiful Office Open XML Spreadsheet documents without having to understand the entire ECMA specification.
+With Axlsx you can create excel worksheets with charts, images (with links), automated and fixed column widths, customizable styles, functions, merged cells, auto filters, file adn stream serialization  as well as full schema validation. Axlsx excels at helping you generate beautiful Office Open XML Spreadsheet documents without having to understand the entire ECMA specification.
 
 If you are working in rails, or with active record see:
 http://github.com/randym/acts_as_xlsx 
@@ -40,15 +40,15 @@ Feature List
 
 **4. Automatic type support: Axlsx will automatically determine the type of data you are generating. In this release Float, Integer, String and Time types are automatically identified and serialized to your spreadsheet.
 
-**5. Automatic column widths: Axlsx will automatically determine the appropriate width for your columns based on the content in the worksheet.
+**5. Automatic and fixed column widths: Axlsx will automatically determine the appropriate width for your columns based on the content in the worksheet, or use any value you specify for the really funky stuff.
 
 **6. Support for automatically formatted 1904 and 1900 epocs configurable in the workbook.
 
 **7. Add jpg, gif and png images to worksheets with hyperlinks
 
-**8. Refernce cells in your worksheet with "A1" and "A1:D4" style references or from the workbook using "Sheett1!A3:B4" style references
+**8. Reference cells in your worksheet with "A1" and "A1:D4" style references or from the workbook using "Sheett1!A3:B4" style references
 
-**9. Cell level style overrides for default and customized style object
+**9. Cell level style overrides for default and customized style objects
 
 **10. Support for formulas
 
@@ -56,9 +56,9 @@ Feature List
 
 **12. Auto filtering tables with worksheet.auto_filter
 
-**13. Export using shared strings or inline string
+**13. Export using shared strings or inline strings so we can inter-op with iWork Numbers (sans charts for now).
 
-**14. Output to disk or StringIO
+**14. Output to file or StringIO
 
 Installing
 ----------
@@ -94,6 +94,7 @@ To install Axlsx, use the following command:
      end
 
 ##Using Custom Formatting and date1904
+
      require 'date'
      wb.styles do |s|
        date = s.add_style(:format_code => "yyyy-mm-dd", :border => Axlsx::STYLE_THIN_BORDER)
@@ -257,6 +258,13 @@ To install Axlsx, use the following command:
        sheet.auto_filter = "A2:D5"
      end  
 
+##Specifying Column Widths
+
+     wb.add_worksheet(:name => "custom column widths") do |sheet|
+       sheet.add_row ["I use auto_fit and am very wide", "I use a custom width and am narrow"]
+       sheet.auto_fit_data[1][:fixed] = 3
+     end
+
 ##Validate and Serialize
 
      p.validate.each { |e| puts e.message }
@@ -271,6 +279,8 @@ To install Axlsx, use the following command:
      p.use_shared_strings = true
      p.serialize("shared_strings_example.xlsx")
 
+
+
 #Documentation
 --------------
 This gem is 100% documented with YARD, an exceptional documentation library. To see documentation for this, and all the gems installed on your system use:
@@ -284,10 +294,12 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
  
 #Changelog
 ---------
-- ** February.12.12**: 1.0.17 release
+- ** February.13.12**: 1.0.17 release
    https://github.com/randym/axlsx/compare/1.0.16...1.0.17
    - Added in support for serializing to StringIO
    - Added in support for using shared strings table. This makes most of the features in axlsx interoperable with iWorks Numbers
+   - Added in support for fixed column widths via worksheet.auto_fit_data[index][:fixed] = Int||Float
+   - Removed unneded depenencies on activesupport and i18n
 
 - ** February.2.12**: 1.0.16 release
    https://github.com/randym/axlsx/compare/1.0.15...1.0.16
@@ -297,13 +309,6 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
    - removed whitespace/indentation from xml outputs
    - col_style now skips rows that do not contain cells at the column index
  
-- **January.6.12**: 1.0.15 release
-   https://github.com/randym/axlsx/compare/1.0.14...1.0.15
-   - Bug fix add_style specified number formats must be explicity applied for libraOffice
-   - performance improvements from ochko when creating cells with options.
-   - Bug fix setting types=>[:n] when adding a row incorrectly determines the cell type to be string as the value is null during creation.
-   - Release in preparation for password protection merge
-
  
 Please see the {file:CHANGELOG.md} document for past release information.
 
