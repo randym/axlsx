@@ -268,7 +268,11 @@ module Axlsx
       builder = Nokogiri::XML::Builder.new(:encoding => ENCODING) do |xml|
         xml.worksheet(:xmlns => XML_NS, 
                       :'xmlns:r' => XML_NS_R) {
+          # another patch for the folks at rubyXL as thier parser depends on this optional element.
           xml.dimension :ref=>dimension unless rows.size == 0
+          # this is required by rubyXL, spec says who cares - but it seems they didnt notice
+          xml.sheetViews { xml.sheetView }
+
           if @auto_fit_data.size > 0
             xml.cols {
               @auto_fit_data.each_with_index do |col, index|
