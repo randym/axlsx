@@ -110,8 +110,8 @@ module Axlsx
     # This is not ready yet
     def encrypt(file_name, password)      
       return false
-      moc = MsOffCrypto.new(file_name, password)
-      moc.save    
+      # moc = MsOffCrypto.new(file_name, password)
+      # moc.save    
     end
     
     # Validate all parts of the package against xsd schema. 

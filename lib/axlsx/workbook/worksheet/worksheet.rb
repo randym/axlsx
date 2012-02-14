@@ -41,6 +41,7 @@ module Axlsx
     # @option options [String] name The name of this sheet.
     def initialize(wb, options={})
       @drawing = nil
+      @auto_filter = nil
       @rows = SimpleTypedList.new Row
       self.workbook = wb
       @workbook.worksheets << self

@@ -39,6 +39,7 @@ module Axlsx
     # @option options [Intger] height
     def initialize(anchor, options={})
       @anchor = anchor
+      @hyperlink = nil
       @anchor.drawing.worksheet.workbook.images << self
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="

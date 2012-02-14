@@ -184,6 +184,8 @@ module Axlsx
     # @option options [Symbol] scheme must be one of :none, major, :minor
     def initialize(row, value="", options={})
       self.row=row      
+      @font_name = @charset = @family = @b = @i = @strike = @outline = @shadow = nil
+      @condense = @u = @vertAlign = @sz = @color = @scheme = @extend = @ssti = nil
       @styles = row.worksheet.workbook.styles
       @row.cells << self      
       options.each do |o|
@@ -278,7 +280,7 @@ module Axlsx
             xml.sz(:val=>@sz) if @sz
             xml.u(:val=>@u) if @u
             # :baseline, :subscript, :superscript
-            xml.vertAlign(:val=>@vertAlign) if @verAlign
+            xml.vertAlign(:val=>@vertAlign) if @vertAlign
             # :none, major, :minor
             xml.scheme(:val=>@scheme) if @scheme
           }

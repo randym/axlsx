@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env ruby -w -s
 # -*- coding: utf-8 -*-
      require 'axlsx.rb'
 
@@ -61,7 +61,7 @@
 
 ##Asian Language Support
 
-     wb.add_worksheet(:name => "Unicode Support") do |sheet|
+     wb.add_worksheet(:name => "日本語でのシート名") do |sheet|
        sheet.add_row ["日本語"]
        sheet.add_row ["华语/華語"]
        sheet.add_row ["한국어/조선말"]

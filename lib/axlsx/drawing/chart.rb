@@ -52,8 +52,8 @@ module Axlsx
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
-      start_at *options[:start_at] if options[:start_at]
-      end_at *options[:end_at] if options[:start_at]
+      start_at(*options[:start_at]) if options[:start_at]
+      end_at(*options[:end_at]) if options[:start_at]
       yield self if block_given?
     end
 
