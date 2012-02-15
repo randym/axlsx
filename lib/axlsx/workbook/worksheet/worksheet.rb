@@ -165,13 +165,40 @@ module Axlsx
     end
 
     # Adds a row to the worksheet and updates auto fit data
+    # @example - put a vanilla row in your spreadsheet
+    #     ws.add_row [1, 'fish on my pl', '8']
+    # 
+    # @example - specify a fixed width for a column in your spreadsheet
+    #     # The first column will ignore the content of this cell when calculating column autowidth.
+    #     # The second column will include this text in calculating the columns autowidth
+    #     # The third cell will set a fixed with of 80 for the column.
+    #     # any :width value that is not :ignore or numeric is treated as :auto
+    #
+    #     ws.add_row ['I wish', 'for a fish', 'on my fish wish dish'], :widths=>[:ignore, :auto, 80]
+    #
+    # @example - create and use a style for all cells in the row
+    #     blue = ws.styles.add_style :color => "#00FF00"
+    #     ws.add_row [1, 2, 3], :style=>blue
+    #
+    # @example - only style some cells
+    #     blue = ws.styles.add_style :color => "#00FF00"
+    #     red = ws.styles.add_style :color => "#FF0000"
+    #     big = ws.styles.add_style :sz => 40
+    #     ws.add_row ["red fish", "blue fish", "one fish", "two fish"], :style=>[red, blue, nil, big] # the last nil is optional
+    #
+    #
+    # @example - force the second cell to be a float value
+    #     ws.add_row [3, 4, 5], :types => [nil, :float]
+    #
+    # @see Worksheet#column_widths 
     # @return [Row]
     # @option options [Array] values
     # @option options [Array, Symbol] types 
     # @option options [Array, Integer] style 
+    # @option options [Array] widths each member of the widths array will affect how auto_fit behavies.
     def add_row(values=[], options={})
       Row.new(self, values, options)
-      update_auto_fit_data @rows.last.cells, options.delete(:widths)
+      update_auto_fit_data @rows.last.cells, options.delete(:widths) || []
       yield @rows.last if block_given?
       @rows.last
     end
@@ -311,31 +338,22 @@ module Axlsx
     # We store an auto_fit_data item for each column. when a row is added we multiple the font size by the length of the text to 
     # attempt to identify the longest cell in the column. This is not 100% accurate as it needs to take into account
     # any formatting that will be applied to the data, as well as the actual rendering size when the length and size is equal 
-    # for two cells. If second argument is Array, it will try to set fixed width of each column.
-    # If corresponding argement is falsy, it will try to auto fit. If number is given, it will set column as fixed width.
+    # for two cells. 
+
     # @return [Array] of Cell objects
     # @param [Array] cells an array of cells
-    # @param [Array] widths an array of cell widths
-    def update_auto_fit_data(cells, widths=nil)
+    # @param [Array] widths an array of cell widths @see Worksheet#add_row
+    def update_auto_fit_data(cells, widths=[])
       # TODO delay this until rendering. too much work when we dont know what they are going to do to the sheet.
       styles = self.workbook.styles
       cellXfs, fonts = styles.cellXfs, styles.fonts
       sz = 11
       cells.each_with_index do |item, index|
         col = @auto_fit_data[index] ||= {:longest=>"", :sz=>sz, :fixed=>nil}
-
-        if widths.is_a?(Array)
-          if width = widths[index]
-            # any numeric value in width is fixed width
-            col[:fixed] = width if width.is_a?(Numeric)
-            # any non falsy value in width will skip auto fit updating
-            next
-          end
-          # falsy value in width will continue updating auto fit data
-        end
-
-        # ignore formula - there is no way for us to know the result
-        next if item.value.is_a?(String) && item.value.start_with?('=')
+        width = widths[index]
+        col[:fixed] = width if [Integer, Float, Fixnum, NilClass].include? width.class
+        # ignore default column widths and formula
+        next if width == :ignore || (item.value.is_a?(String) && item.value.start_with?('='))
 
         cell_xf = cellXfs[item.style]
         font = fonts[cell_xf.fontId || 0]

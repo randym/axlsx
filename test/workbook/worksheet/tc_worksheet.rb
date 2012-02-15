@@ -144,13 +144,14 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   def test_set_fixed_width_column
-    big = @ws.workbook.styles.add_style(:sz=>10)
-
-    @ws.add_row ["mule", "donkey", "horse"], :style=>big, :widths => [20, true, false]
+    @ws.add_row ["mule", "donkey", "horse"], :widths => [20, :ignore, nil]
     assert(@ws.auto_fit_data.size == 3, "a data item for each column")
-    assert_equal({:sz=>11, :fixed=>20, :longest=>"" }, @ws.auto_fit_data[0], "adding a row with fixed width updates :fixed attribute")
-    assert_equal({:sz=>11,:longest=>"", :fixed=>nil}, @ws.auto_fit_data[1], "adding a row with fixed with 'true' doesn't try set auto fit data")
-    assert_equal({:sz=>10,:longest=>"horse", :fixed=>nil}, @ws.auto_fit_data[2], "adding a row with falsy fixed value updates auto_fit_data")
+    assert_equal({:sz=>11, :fixed=>20, :longest=>"mule" }, @ws.auto_fit_data[0], "adding a row with fixed width updates :fixed attribute")
+    assert_equal({:sz=>11, :longest=>"", :fixed=>nil}, @ws.auto_fit_data[1], ":ignore does not set any data")
+    assert_equal({:sz=>11, :longest=>"horse", :fixed=>nil}, @ws.auto_fit_data[2], "nil, well really anything else just works as normal")
+    @ws.add_row ["mule", "donkey", "horse"]
+    assert_equal({:sz=>11, :longest=>"donkey", :fixed=>nil}, @ws.auto_fit_data[1])
+
   end
 
   def test_auto_width
