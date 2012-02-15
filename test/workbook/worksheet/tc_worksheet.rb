@@ -143,6 +143,16 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(@ws.auto_fit_data[0], {:sz=>10,:longest=>"mule", :fixed=>nil}, "adding a row updates auto_fit_data if the product of the string length and font is greater for the column")
   end
 
+  def test_set_fixed_width_column
+    big = @ws.workbook.styles.add_style(:sz=>10)
+
+    @ws.add_row ["mule", "donkey", "horse"], :style=>big, :widths => [20, true, false]
+    assert(@ws.auto_fit_data.size == 3, "a data item for each column")
+    assert_equal({:sz=>11, :fixed=>20, :longest=>"" }, @ws.auto_fit_data[0], "adding a row with fixed width updates :fixed attribute")
+    assert_equal({:sz=>11,:longest=>"", :fixed=>nil}, @ws.auto_fit_data[1], "adding a row with fixed with 'true' doesn't try set auto fit data")
+    assert_equal({:sz=>10,:longest=>"horse", :fixed=>nil}, @ws.auto_fit_data[2], "adding a row with falsy fixed value updates auto_fit_data")
+  end
+
   def test_auto_width
     assert(@ws.send(:auto_width, {:sz=>11, :longest=>"fisheries"}) > @ws.send(:auto_width, {:sz=>11, :longest=>"fish"}), "longer strings get a longer auto_width at the same font size")
 

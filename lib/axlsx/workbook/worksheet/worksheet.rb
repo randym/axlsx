@@ -171,7 +171,7 @@ module Axlsx
     # @option options [Array, Integer] style 
     def add_row(values=[], options={})
       Row.new(self, values, options)
-      update_auto_fit_data @rows.last.cells
+      update_auto_fit_data @rows.last.cells, options.delete(:widths)
       yield @rows.last if block_given?
       @rows.last
     end
@@ -311,19 +311,32 @@ module Axlsx
     # We store an auto_fit_data item for each column. when a row is added we multiple the font size by the length of the text to 
     # attempt to identify the longest cell in the column. This is not 100% accurate as it needs to take into account
     # any formatting that will be applied to the data, as well as the actual rendering size when the length and size is equal 
-    # for two cells.
+    # for two cells. If second argument is Array, it will try to set fixed width of each column.
+    # If corresponding argement is falsy, it will try to auto fit. If number is given, it will set column as fixed width.
     # @return [Array] of Cell objects
     # @param [Array] cells an array of cells
-    def update_auto_fit_data(cells)
+    # @param [Array] widths an array of cell widths
+    def update_auto_fit_data(cells, widths=nil)
       # TODO delay this until rendering. too much work when we dont know what they are going to do to the sheet.
       styles = self.workbook.styles
       cellXfs, fonts = styles.cellXfs, styles.fonts
       sz = 11
       cells.each_with_index do |item, index|
+        col = @auto_fit_data[index] ||= {:longest=>"", :sz=>sz, :fixed=>nil}
+
+        if widths.is_a?(Array)
+          if width = widths[index]
+            # any numeric value in width is fixed width
+            col[:fixed] = width if width.is_a?(Numeric)
+            # any non falsy value in width will skip auto fit updating
+            next
+          end
+          # falsy value in width will continue updating auto fit data
+        end
+
         # ignore formula - there is no way for us to know the result
         next if item.value.is_a?(String) && item.value.start_with?('=')
 
-        col = @auto_fit_data[index] || {:longest=>"", :sz=>sz, :fixed=>nil} 
         cell_xf = cellXfs[item.style]
         font = fonts[cell_xf.fontId || 0]
         sz = item.sz || font.sz || fonts[0].sz
