@@ -156,10 +156,19 @@ class TestWorksheet < Test::Unit::TestCase
 
   def test_fixed_widths_with_merged_cells
     @ws.add_row ["hey, I'm like really long and stuff so I think you will merge me."]
+    @ws.merge_cells "A1:C1"
     @ws.add_row ["but Im Short!"], :widths=> [14.8]
     assert_equal(@ws.send(:auto_width, @ws.auto_fit_data[0]), 14.8)
   end
-
+  
+  def test_fixed_width_to_auto
+    @ws.add_row ["hey, I'm like really long and stuff so I think you will merge me."]
+    @ws.merge_cells "A1:C1"
+    @ws.add_row ["but Im Short!"], :widths=> [14.8]
+    assert_equal(@ws.send(:auto_width, @ws.auto_fit_data[0]), 14.8)
+    @ws.add_row ["no, I like auto!"], :widths=>[:auto]
+    assert_equal(@ws.auto_fit_data[0][:fixed], nil)
+  end
 
   def test_auto_width
     assert(@ws.send(:auto_width, {:sz=>11, :longest=>"fisheries"}) > @ws.send(:auto_width, {:sz=>11, :longest=>"fish"}), "longer strings get a longer auto_width at the same font size")

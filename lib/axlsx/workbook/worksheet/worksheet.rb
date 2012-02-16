@@ -355,6 +355,8 @@ module Axlsx
         col[:fixed] = width if [Integer, Float, Fixnum].include?(width.class)
         # ignore default column widths and formula
         next if width == :ignore || (item.value.is_a?(String) && item.value.start_with?('='))
+        # make sure we can turn that fixed with off!
+        col[:fixed] = nil if width == :auto
 
         cell_xf = cellXfs[item.style]
         font = fonts[cell_xf.fontId || 0]
