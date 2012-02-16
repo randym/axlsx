@@ -146,7 +146,7 @@ class TestWorksheet < Test::Unit::TestCase
   def test_set_fixed_width_column
     @ws.add_row ["mule", "donkey", "horse"], :widths => [20, :ignore, nil]
     assert(@ws.auto_fit_data.size == 3, "a data item for each column")
-    assert_equal({:sz=>11, :longest=>"", :fixed=>20 }, @ws.auto_fit_data[0], "adding a row with fixed width updates :fixed attribute")
+    assert_equal({:sz=>11, :longest=>"mule", :fixed=>20 }, @ws.auto_fit_data[0], "adding a row with fixed width updates :fixed attribute")
     assert_equal({:sz=>11, :longest=>"", :fixed=>nil}, @ws.auto_fit_data[1], ":ignore does not set any data")
     assert_equal({:sz=>11, :longest=>"horse", :fixed=>nil}, @ws.auto_fit_data[2], "nil, well really anything else just works as normal")
     @ws.add_row ["mule", "donkey", "horse"]
@@ -154,12 +154,21 @@ class TestWorksheet < Test::Unit::TestCase
 
   end
 
+  def test_fixed_widths_with_merged_cells
+    @ws.add_row ["hey, I'm like really long and stuff so I think you will merge me."]
+    @ws.add_row ["but Im Short!"], :widths=> [14.8]
+    assert_equal(@ws.send(:auto_width, @ws.auto_fit_data[0]), 14.8)
+  end
+
+
   def test_auto_width
     assert(@ws.send(:auto_width, {:sz=>11, :longest=>"fisheries"}) > @ws.send(:auto_width, {:sz=>11, :longest=>"fish"}), "longer strings get a longer auto_width at the same font size")
 
     assert(@ws.send(:auto_width, {:sz=>11, :longest=>"fish"}) < @ws.send(:auto_width, {:sz=>12, :longest=>"fish"}), "larger fonts produce longer with with same string")
     assert_equal(@ws.send(:auto_width, {:sz=>11, :longest => "This is a really long string", :fixed=>0.2}), 0.2, "fixed rules!")
   end
+
+
 
   def test_set_column_width
     @ws.add_row ["chasing windmills", "penut"]
@@ -170,7 +179,6 @@ class TestWorksheet < Test::Unit::TestCase
     assert_raise(ArgumentError, 'only accept unsigned ints') { @ws.column_widths 2, 7, -1 }
     assert_raise(ArgumentError, 'only accept Integer, Float or Fixnum') { @ws.column_widths 2, 7, "-1" }
   end
-
 
   def test_merge_cells
     assert(@ws.merged_cells.is_a?(Array))

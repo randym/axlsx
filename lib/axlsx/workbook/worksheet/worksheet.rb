@@ -352,7 +352,7 @@ module Axlsx
         col = @auto_fit_data[index] ||= {:longest=>"", :sz=>sz, :fixed=>nil}
         width = widths[index]
         # set fixed width and skip if numeric width is given
-        col[:fixed] = width and next if [Integer, Float, Fixnum].include?(width.class)
+        col[:fixed] = width if [Integer, Float, Fixnum].include?(width.class)
         # ignore default column widths and formula
         next if width == :ignore || (item.value.is_a?(String) && item.value.start_with?('='))
 
