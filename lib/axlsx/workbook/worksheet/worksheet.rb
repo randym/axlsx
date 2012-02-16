@@ -172,7 +172,7 @@ module Axlsx
     #     # The first column will ignore the content of this cell when calculating column autowidth.
     #     # The second column will include this text in calculating the columns autowidth
     #     # The third cell will set a fixed with of 80 for the column.
-    #     # any :width value that is not :ignore or numeric is treated as :auto
+    #     # If you need to un-fix a column width, use :auto. That will recalculate the column width based on all content in the column
     #
     #     ws.add_row ['I wish', 'for a fish', 'on my fish wish dish'], :widths=>[:ignore, :auto, 80]
     #
