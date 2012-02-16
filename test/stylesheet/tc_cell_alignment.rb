@@ -5,8 +5,7 @@ class TestCellAlignment < Test::Unit::TestCase
   def setup    
     @item = Axlsx::CellAlignment.new
   end
-  def teardown
-  end
+
   def test_initialiation
     assert_equal(@item.horizontal, nil)
     assert_equal(@item.vertical, nil)
@@ -17,7 +16,13 @@ class TestCellAlignment < Test::Unit::TestCase
     assert_equal(@item.justifyLastLine, nil)
     assert_equal(@item.shrinkToFit, nil)
     assert_equal(@item.readingOrder, nil)
-
+    options =  { :horizontal => :left, :vertical => :top, :textRotation => 3, 
+                 :wrapText => true, :indent => 2, :relativeIndent => 5, 
+      :justifyLastLine => true, :shrinkToFit => true, :readingOrder => 2 }
+    ca = Axlsx::CellAlignment.new options
+    options.each do |key, value|
+      assert_equal(ca.send(key.to_sym),value)
+    end
   end
 
   def test_horizontal

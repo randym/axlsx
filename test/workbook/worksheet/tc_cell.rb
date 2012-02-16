@@ -24,6 +24,10 @@ class TestCell < Test::Unit::TestCase
     assert_equal(Axlsx::STYLE_DATE, c.style)
   end
 
+  def test_row
+    assert_equal(@c.row, @row)
+  end
+
   def test_index
     assert_equal(@c.index, @row.cells.index(@c))
   end
@@ -203,5 +207,10 @@ class TestCell < Test::Unit::TestCase
 
   end
 
+  def test_ssti
+    assert_raise(ArgumentError, "ssti must be an unsigned integer!") { @c.send(:ssti=, -1) }
+    @c.send :ssti=, 1
+    assert_equal(@c.ssti, 1)
+  end
 
 end

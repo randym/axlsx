@@ -41,9 +41,9 @@ class TestChart < Test::Unit::TestCase
 
   end
 
-  def end_at
+  def test_end_at
     @chart.end_at 25, 90
-    assert_equal(@chart.graphic_frame.anchor.from.col, 25)
+    assert_equal(@chart.graphic_frame.anchor.to.col, 25)
     assert_equal(@chart.graphic_frame.anchor.to.row, 90)
   end
 
