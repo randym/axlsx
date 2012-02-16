@@ -351,7 +351,8 @@ module Axlsx
       cells.each_with_index do |item, index|
         col = @auto_fit_data[index] ||= {:longest=>"", :sz=>sz, :fixed=>nil}
         width = widths[index]
-        col[:fixed] = width if [Integer, Float, Fixnum, NilClass].include? width.class
+        # set fixed width and skip if numeric width is given
+        col[:fixed] = width and next if [Integer, Float, Fixnum].include?(width.class)
         # ignore default column widths and formula
         next if width == :ignore || (item.value.is_a?(String) && item.value.start_with?('='))
 
@@ -362,7 +363,6 @@ module Axlsx
           col[:sz] =  sz
           col[:longest] = item.value.to_s
         end
-        @auto_fit_data[index] = col
       end
       cells
     end
