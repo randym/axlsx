@@ -223,6 +223,7 @@ module Axlsx
       
       xf = Xf.new(:fillId => fill, :fontId=>fontId, :applyFill=>1, :applyFont=>1, :numFmtId=>numFmtId, :borderId=>borderId, :applyProtection=>applyProtection)
 
+      xf.applyBorder = true if borderId > 0
       xf.applyNumberFormat = true if xf.numFmtId > 0
       
       if options[:alignment]
