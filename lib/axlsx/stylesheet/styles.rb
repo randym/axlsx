@@ -129,7 +129,7 @@ module Axlsx
     # @option options [Boolean] strike Indicates if the text should be rendered with a shadow
     # @option options [Integer] charset The character set to use.
     # @option options [Integer] family The font family to use.
-    # @option options [String] name The name of the font to use
+    # @option options [String] font_name The name of the font to use
     # @option options [Integer] num_fmt The number format to apply
     # @option options [String] format_code The formatting to apply. If this is specified, num_fmt is ignored.
     # @option options [Integer] border The border style to use. 
