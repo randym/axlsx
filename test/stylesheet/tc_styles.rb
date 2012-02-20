@@ -42,10 +42,14 @@ class TestStyles < Test::Unit::TestCase
 
     assert(xf.alignment.is_a?(Axlsx::CellAlignment), "alignment was created")
     assert_equal(xf.alignment.horizontal, :left, "horizontal alignment applied")
-    assert_equal(xf.applyProtection, 1, "protection applied")
     assert_equal(xf.protection.hidden, true, "hidden protection set")
     assert_equal(xf.protection.locked, true, "cell locking set")
-    assert_raise(ArgumentError, "should reject invalid borderId") { @styles.add_style :border => 2 }
+    assert_raise(ArgumentError, "should reject invalid borderId") { @styles.add_style :border => 2 }    
+
+    
+    assert_equal(xf.applyProtection, 1, "protection applied")
+    assert_equal(xf.applyBorder, true, "border applied")
+    assert_equal(xf.applyNumberFormat, true, "border applied")
 
   end
 
