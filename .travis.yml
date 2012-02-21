@@ -3,9 +3,10 @@ rvm:
   - 1.9.2
   - 1.9.3
   - jruby
+
 matrix:
   allow_failures:
-    - jruby
+    - rvm: jruby
 
 notifications:
   irc: "irc.freenode.org#axlsx
