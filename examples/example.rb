@@ -116,10 +116,8 @@
 ##Automatic cell types
 
      wb.add_worksheet(:name => "Automatic cell types") do |sheet|
-       t = Time.now
        sheet.add_row ["Date", "Time", "String", "Boolean", "Float", "Integer"]
-       sheet.add_row [Date.today, t, "value", true, 0.1, 1]
-       sheet.add_row ["", t.to_f, "", "", "", ""]
+       sheet.add_row [Date.today, Time.now, "value", true, 0.1, 1]
      end
 
 ##Merging Cells.
