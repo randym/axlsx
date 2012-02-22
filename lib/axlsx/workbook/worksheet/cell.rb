@@ -40,12 +40,12 @@ module Axlsx
     # @return [Row]
     attr_reader :row
     
-    # The cell's data type. Currently only five types are supported, :time, :float, :integer, :string and :boolean.
+    # The cell's data type. Currently only six types are supported, :date, :time, :float, :integer, :string and :boolean.
     # Changing the type for a cell will recast the value into that type. If no type option is specified in the constructor, the type is 
     # automatically determed.
     # @see Cell#cell_type_from_value
     # @return [Symbol] The type of data this cell's value is cast to. 
-    # @raise [ArgumentExeption] Cell.type must be one of [:time, :float, :integer, :string, :boolean]
+    # @raise [ArgumentExeption] Cell.type must be one of [:date, time, :float, :integer, :string, :boolean]
     # @note 
     #  If the value provided cannot be cast into the type specified, type is changed to :string and the following logic is applied.
     #   :string to :integer or :float, type conversions always return 0 or 0.0    
@@ -54,7 +54,7 @@ module Axlsx
     attr_reader :type
     # @see type
     def type=(v) 
-      RestrictionValidator.validate "Cell.type", [:time, :float, :integer, :string, :boolean], v      
+      RestrictionValidator.validate "Cell.type", [:date, :time, :float, :integer, :string, :boolean], v      
       @type=v 
       self.value = @value unless @value.nil?
     end
@@ -314,13 +314,20 @@ module Axlsx
             }
           end
         end
+      elsif @type == :date
+        # TODO: See if this is subject to the same restriction as Time below
+        epoc = Workbook.date1904 ? Date.new(1904) : Date.new(1900)
+        v = (@value-epoc).to_f
+        xml.c(:r => r, :s => style) { xml.v v }
       elsif @type == :time
         # Using hardcoded offsets here as some operating systems will not except a 'negative' offset from the ruby epoc.
-        epoc1900 = -2209021200 #Time.local(1900, 1, 1) 
-        epoc1904 = -2082877200 #Time.local(1904, 1, 1) 
+        epoc1900 = -2209021200 #Time.local(1900, 1, 1)
+        epoc1904 = -2082877200 #Time.local(1904, 1, 1)
         epoc = Workbook.date1904 ? epoc1904 : epoc1900
         v = ((@value.localtime.to_f - epoc) /60.0/60.0/24.0).to_f
         xml.c(:r => r, :s => style) { xml.v v }
+      elsif @type == :boolean
+        xml.c(:r => r, :s => style, :t => :b) { xml.v value }
       else
         xml.c(:r => r, :s => style) { xml.v value }
       end
@@ -353,13 +360,16 @@ module Axlsx
 
     # Determines the cell type based on the cell value. 
     # @note This is only used when a cell is created but no :type option is specified, the following rules apply:
-    #   1. If the value is an instance of Time, the type is set to :time
-    #   2. If the value is an instance of TrueClass or FalseClass, the type is set to :boolean
-    #   3. :float and :integer types are determined by regular expression matching.
-    #   4. Anything that does not meet either of the above is determined to be :string.
+    #   1. If the value is an instance of Date, the type is set to :date
+    #   2. If the value is an instance of Time, the type is set to :time
+    #   3. If the value is an instance of TrueClass or FalseClass, the type is set to :boolean
+    #   4. :float and :integer types are determined by regular expression matching.
+    #   5. Anything that does not meet either of the above is determined to be :string.
     # @return [Symbol] The determined type
     def cell_type_from_value(v)      
-      if v.is_a? Time
+      if v.is_a?(Date)
+        :date
+      elsif v.is_a?(Time)
         :time
       elsif v.is_a?(TrueClass) || v.is_a?(FalseClass)
         :boolean
@@ -377,7 +387,10 @@ module Axlsx
     #   About Time - Time in OOXML is *different* from what you might expect. The history as to why is interesting,  but you can safely assume that if you are generating docs on a mac, you will want to specify Workbook.1904 as true when using time typed values.
     # @see Axlsx#date1904
     def cast_value(v)
-      if (@type == :time && v.is_a?(Time)) || (@type == :time && v.respond_to?(:to_time))
+      if @type == :date
+        self.style = STYLE_DATE if self.style == 0
+        v
+      elsif (@type == :time && v.is_a?(Time)) || (@type == :time && v.respond_to?(:to_time))
         self.style = STYLE_DATE if self.style == 0
         v.respond_to?(:to_time) ? v.to_time : v
       elsif @type == :float

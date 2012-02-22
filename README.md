@@ -184,6 +184,13 @@ To install Axlsx, use the following command:
        sheet.add_row [1, 2, 3, "=SUM(A2:C2)"]
      end
 
+##Automatic cell types
+
+     wb.add_worksheet(:name => "Automatic cell types") do |sheet|
+       sheet.add_row ["Date", "Time", "String", "Boolean", "Float", "Integer"]
+       sheet.add_row [Date.today, Time.now, "value", true, 0.1, 1]
+     end
+
 ##Merging Cells.
 
      wb.add_worksheet(:name => 'Merging Cells') do |sheet|
