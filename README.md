@@ -327,7 +327,7 @@ Please see the {file:CHANGELOG.md} document for past release information.
 
 [ffmike](https://github.com/ffmike) - for knocking down an over restrictive i18n dependency, massive patience and great communication skills.
 
-[JohnathanTron](https://github.com/JonathanTron) - for giving the gem some style, and making sure it applies.
+[JonathanTron](https://github.com/JonathanTron) - for giving the gem some style, and making sure it applies.
 
 #Copyright and License
 ----------
