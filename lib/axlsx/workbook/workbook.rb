@@ -181,7 +181,11 @@ require 'axlsx/workbook/shared_strings_table.rb'
           xml.workbookPr(:date1904=>@@date1904)
           #<x:workbookProtection workbookPassword="xsd:hexBinary data" lockStructure="1" lockWindows="1" />
           # Required to support rubyXL parsing as it requires sheetView, which requires this.
-          xml.bookViews { xml.workbookView :activeTab=>0 }
+          xml.bookViews { 
+            worksheets.count.times do 
+              xml.workbookView :activeTab=>0 
+            end
+          }
           xml.sheets {
             @worksheets.each_with_index do |sheet, index|              
               xml.sheet(:name=>sheet.name, :sheetId=>index+1, :"r:id"=>sheet.rId)

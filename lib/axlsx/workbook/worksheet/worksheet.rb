@@ -298,7 +298,11 @@ module Axlsx
           # another patch for the folks at rubyXL as thier parser depends on this optional element.
           xml.dimension :ref=>dimension unless rows.size == 0
           # this is required by rubyXL, spec says who cares - but it seems they didnt notice
-          xml.sheetViews { xml.sheetView :workbookViewId =>0 }
+          xml.sheetViews { 
+            xml.sheetView(:tabSelected => 1, :workbookViewId => index) {
+              xml.selection :activeCell=>"A1", :sqref => "A1"
+            }
+          }
 
           if @auto_fit_data.size > 0
             xml.cols {
