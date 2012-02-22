@@ -316,15 +316,10 @@ module Axlsx
         end
       elsif @type == :date
         # TODO: See if this is subject to the same restriction as Time below
-        epoc = Workbook.date1904 ? Date.new(1904) : Date.new(1900)
-        v = (@value-epoc).to_f
+        v = Converter.date_to_serial @value, Workbook.date1904
         xml.c(:r => r, :s => style) { xml.v v }
       elsif @type == :time
-        # Using hardcoded offsets here as some operating systems will not except a 'negative' offset from the ruby epoc.
-        epoc1900 = -2209021200 #Time.local(1900, 1, 1)
-        epoc1904 = -2082877200 #Time.local(1904, 1, 1)
-        epoc = Workbook.date1904 ? epoc1904 : epoc1900
-        v = ((@value.localtime.to_f - epoc) /60.0/60.0/24.0).to_f
+        v = Converter.time_to_serial @value, Workbook.date1904
         xml.c(:r => r, :s => style) { xml.v v }
       elsif @type == :boolean
         xml.c(:r => r, :s => style, :t => :b) { xml.v value }

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 module Axlsx 
 
+require 'axlsx/workbook/worksheet/converter.rb'
 require 'axlsx/workbook/worksheet/cell.rb'
 require 'axlsx/workbook/worksheet/row.rb'
 require 'axlsx/workbook/worksheet/worksheet.rb'
