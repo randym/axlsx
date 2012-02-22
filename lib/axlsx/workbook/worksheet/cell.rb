@@ -40,21 +40,21 @@ module Axlsx
     # @return [Row]
     attr_reader :row
     
-    # The cell's data type. Currently only four types are supported, :time, :float, :integer and :string.
+    # The cell's data type. Currently only five types are supported, :time, :float, :integer, :string and :boolean.
     # Changing the type for a cell will recast the value into that type. If no type option is specified in the constructor, the type is 
     # automatically determed.
     # @see Cell#cell_type_from_value
     # @return [Symbol] The type of data this cell's value is cast to. 
-    # @raise [ArgumentExeption] Cell.type must be one of [:time, :float, :integer, :string]
+    # @raise [ArgumentExeption] Cell.type must be one of [:time, :float, :integer, :string, :boolean]
     # @note 
     #  If the value provided cannot be cast into the type specified, type is changed to :string and the following logic is applied.
-    #   :string to :integer or :float, type coversions always return 0 or 0.0    
+    #   :string to :integer or :float, type conversions always return 0 or 0.0    
     #   :string, :integer, or :float to :time conversions always return the original value as a string and set the cells type to :string.
     #  No support is currently implemented for parsing time strings.
     attr_reader :type
     # @see type
     def type=(v) 
-      RestrictionValidator.validate "Cell.type", [:time, :float, :integer, :string], v      
+      RestrictionValidator.validate "Cell.type", [:time, :float, :integer, :string, :boolean], v      
       @type=v 
       self.value = @value unless @value.nil?
     end
@@ -354,12 +354,15 @@ module Axlsx
     # Determines the cell type based on the cell value. 
     # @note This is only used when a cell is created but no :type option is specified, the following rules apply:
     #   1. If the value is an instance of Time, the type is set to :time
-    #   2. :float and :integer types are determined by regular expression matching.
-    #   3. Anything that does not meet either of the above is determined to be :string.
+    #   2. If the value is an instance of TrueClass or FalseClass, the type is set to :boolean
+    #   3. :float and :integer types are determined by regular expression matching.
+    #   4. Anything that does not meet either of the above is determined to be :string.
     # @return [Symbol] The determined type
     def cell_type_from_value(v)      
       if v.is_a? Time
         :time
+      elsif v.is_a?(TrueClass) || v.is_a?(FalseClass)
+        :boolean
       elsif v.to_s.match(/\A[+-]?\d+?\Z/) #numeric
         :integer
       elsif v.to_s.match(/\A[+-]?\d+\.\d+?\Z/) #float
@@ -381,6 +384,8 @@ module Axlsx
         v.to_f
       elsif @type == :integer
         v.to_i
+      elsif @type == :boolean
+        v ? 1 : 0
       else
         @type = :string
         v.to_s

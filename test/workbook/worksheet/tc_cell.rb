@@ -51,7 +51,7 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_type
-    assert_raise(ArgumentError, "type must be :string, :integer, :float, :time") { @c.type = :array }
+    assert_raise(ArgumentError, "type must be :string, :integer, :float, :time, :boolean") { @c.type = :array }
     assert_nothing_raised("type can be changed") { @c.type = :string }
     assert_equal(@c.value, "1.0", "changing type casts the value")
     
@@ -76,6 +76,8 @@ class TestCell < Test::Unit::TestCase
     assert_equal(@c.send(:cell_type_from_value, "d"), :string)
     assert_equal(@c.send(:cell_type_from_value, nil), :string)
     assert_equal(@c.send(:cell_type_from_value, -1), :integer)
+    assert_equal(@c.send(:cell_type_from_value, true), :boolean)
+    assert_equal(@c.send(:cell_type_from_value, false), :boolean)
   end
 
   def test_cast_value    
@@ -87,7 +89,9 @@ class TestCell < Test::Unit::TestCase
     assert_equal(@c.send(:cast_value, "1.0"), 1.0)
     @c.type = :string
     assert_equal(@c.send(:cast_value, nil), "")
-
+    @c.type = :boolean
+    assert_equal(@c.send(:cast_value, true), 1)
+    assert_equal(@c.send(:cast_value, false), 0)
   end
 
   def test_color
