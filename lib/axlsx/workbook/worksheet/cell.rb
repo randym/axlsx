@@ -205,8 +205,8 @@ module Axlsx
     def shareable(v)
 
       #using reject becase 1.8.7 select returns an array...
-      v_hash = v.instance_values.reject { |k, v| !INLINE_STYLES.include?(k) }
-      self_hash = self.instance_values.reject { |k, v| !INLINE_STYLES.include?(k) }
+      v_hash = v.instance_values.reject { |key, val| !INLINE_STYLES.include?(key) }
+      self_hash = self.instance_values.reject { |key, val| !INLINE_STYLES.include?(key) }
       # required as color is an object, and the comparison will fail even though both use the same color.
       v_hash['color'] = v_hash['color'].instance_values if v_hash['color']
       self_hash['color'] = self_hash['color'].instance_values if self_hash['color']

@@ -137,7 +137,7 @@ module Axlsx
                 xml.layout
                 xml.overlay :val => 0                  
               }
-              end
+            end
             xml.plotVisOnly :val => 1
             xml.dispBlanksAs :val => :zero
             xml.showDLblsOverMax :val => 1
