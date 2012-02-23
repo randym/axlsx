@@ -96,6 +96,7 @@ class TestDateTimeConverter < Test::Unit::TestCase
   end
 
   def test_timezone
+    return if RUBY_VERSION == '1.8.7' # temporarily forcing this to only run on 1.9.2 and 1.9.3 as Time.new is quite different in 1.8.7
     utc = Time.utc 2012 # January 1st, 2012 at 0:00 UTC
     local = Time.new 2012, 1, 1, 1, 0, 0, 3600 # January 1st, 2012 at 1:00 GMT+1
     assert_equal local, utc
