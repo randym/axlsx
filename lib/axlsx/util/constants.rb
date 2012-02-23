@@ -224,6 +224,9 @@ module Axlsx
   # error message for RegexValidator
   ERR_REGEX = "Invalid Data. %s does not match %s."
 
+  # error message for sheets that use a name which is longer than 31 bytes
+  ERR_SHEET_NAME_TOO_LONG = "Your worksheet name '%s' is too long. Worksheet names must be 31 characters (bytes) or less"
+
   # error message for duplicate sheet names
   ERR_DUPLICATE_SHEET_NAME = "There is already a worksheet in this workbook named '%s'. Please use a unique name"
 end

@@ -129,6 +129,11 @@ class TestWorksheet < Test::Unit::TestCase
     assert_raise(ArgumentError, "worksheet name must be unique") { n = @ws.name; @ws.workbook.add_worksheet(:name=> @ws) }
   end
 
+  def test_name_size
+    assert_raise(ArgumentError, "name too long!") { @ws.name = Array.new(32, "A").to_s }
+    assert_nothing_raised { @ws.name = Array.new(31, "A").to_s }
+  end
+
   def test_update_auto_with_data
     small = @ws.workbook.styles.add_style(:sz=>2)
     big = @ws.workbook.styles.add_style(:sz=>10)
