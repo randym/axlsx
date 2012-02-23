@@ -130,8 +130,8 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   def test_name_size
-    assert_raise(ArgumentError, "name too long!") { @ws.name = Array.new(32, "A").to_s }
-    assert_nothing_raised { @ws.name = Array.new(31, "A").to_s }
+    assert_raise(ArgumentError, "name too long!") { @ws.name = Array.new(32, "A").join('') }
+    assert_nothing_raised { @ws.name = Array.new(31, "A").join('') }
   end
 
   def test_update_auto_with_data
