@@ -9,7 +9,7 @@ module Axlsx
   class PageMargins
 
     # Default left and right margin (in inches)
-    DEFAULT_LEFT_RIGHT = 0.5
+    DEFAULT_LEFT_RIGHT = 0.75
     
     # Default top and bottom margins (in inches)
     DEFAULT_TOP_BOTTOM = 1.00
