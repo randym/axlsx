@@ -35,6 +35,10 @@ module Axlsx
     # @return Array
     attr_reader :auto_filter
     
+    # Page margins for printing the worksheet.
+    # @return [PageMargins]
+    attr_reader :page_margins
+    
     # Creates a new worksheet.
     # @note the recommended way to manage worksheets is Workbook#add_worksheet
     # @see Workbook#add_worksheet
@@ -50,6 +54,7 @@ module Axlsx
       @magick_draw = Magick::Draw.new
       @cols = SimpleTypedList.new Cell
       @merged_cells = []
+      @page_margins = PageMargins.new
     end
 
     # convinience method to access all cells in this worksheet
@@ -321,6 +326,7 @@ module Axlsx
           }
           xml.autoFilter :ref=>@auto_filter if @auto_filter
           xml.mergeCells(:count=>@merged_cells.size) { @merged_cells.each { | mc | xml.mergeCell(:ref=>mc) } } unless @merged_cells.empty?
+          @page_margins.to_xml(xml)
           xml.drawing :"r:id"=>"rId1" if @drawing          
         }
       end
