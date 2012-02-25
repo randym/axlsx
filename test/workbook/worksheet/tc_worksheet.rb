@@ -13,6 +13,29 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(ws.pn, "worksheets/sheet2.xml")
   end
 
+  def test_page_margins
+    assert(@ws.page_margins.is_a? Axlsx::PageMargins)    
+  end
+
+  def test_page_margins_yeild
+    @ws.page_margins do |pm|
+      assert(pm.is_a? Axlsx::PageMargins)
+      assert(@ws.page_margins == pm)
+    end
+  end
+
+  def test_initialization_options
+    page_margins = {:left => 2, :right => 2, :bottom => 2, :top => 2, :header => 2, :footer => 2}
+    optioned = @ws.workbook.add_worksheet(:name => 'bob', :page_margins => page_margins)
+    assert_equal(optioned.page_margins.left, page_margins[:left])
+    assert_equal(optioned.page_margins.right, page_margins[:right])
+    assert_equal(optioned.page_margins.top, page_margins[:top])
+    assert_equal(optioned.page_margins.bottom, page_margins[:bottom])
+    assert_equal(optioned.page_margins.header, page_margins[:header])
+    assert_equal(optioned.page_margins.footer, page_margins[:footer])
+    assert_equal(optioned.name, 'bob')
+  end
+
   def test_rels_pn
     assert_equal(@ws.rels_pn, "worksheets/_rels/sheet1.xml.rels")
     ws = @ws.workbook.add_worksheet

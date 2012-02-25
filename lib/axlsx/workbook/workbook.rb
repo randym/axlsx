@@ -136,6 +136,7 @@ require 'axlsx/workbook/shared_strings_table.rb'
     # Adds a worksheet to this workbook
     # @return [Worksheet]
     # @option options [String] name The name of the worksheet.
+    # @option options [Hash] page_margins The page margins for the worksheet.
     # @see Worksheet#initialize
     def add_worksheet(options={})
       worksheet = Worksheet.new(self, options)
