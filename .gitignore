@@ -1,1 +1,9 @@
 Gemfile.lock
+doc
+unzip
+coverage
+.yardoc
+*.gem
+*.xlsx
+*.*~
+.DS_Store
