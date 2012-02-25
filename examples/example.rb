@@ -201,6 +201,12 @@
        sheet.column_widths nil, 3
      end
 
+##Specify Page Margins for printing
+     margins = {:left => 3, :right => 3, :top => 1.2, :bottom => 1.2, :header => 0.7, :footer => 0.7}
+     wb.add_worksheet(:name => "print margins", :page_margins => margins) do |sheet|
+       sheet.add_row["this sheet uses customized page margins for printing"]
+     end
+
 ##Validate and Serialize
 
      p.validate.each { |e| puts e.message }
@@ -214,6 +220,7 @@
 
      p.use_shared_strings = true
      p.serialize("shared_strings_example.xlsx")
+
 
 
      

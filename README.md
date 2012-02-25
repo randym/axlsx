@@ -38,7 +38,7 @@ Feature List
                                                                               
 **3. Custom Styles: With guaranteed document validity, you can style borders, alignment, fills, fonts, and number formats in a single line of code. Those styles can be applied to an entire row, or a single cell anywhere in your workbook.
 
-**4. Automatic type support: Axlsx will automatically determine the type of data you are generating. In this release Float, Integer, String and Time types are automatically identified and serialized to your spreadsheet.
+**4. Automatic type support: Axlsx will automatically determine the type of data you are generating. In this release Float, Integer, String, Date, Time and Boolean types are automatically identified and serialized to your spreadsheet.
 
 **5. Automatic and fixed column widths: Axlsx will automatically determine the appropriate width for your columns based on the content in the worksheet, or use any value you specify for the really funky stuff.
 
@@ -59,6 +59,8 @@ Feature List
 **13. Export using shared strings or inline strings so we can inter-op with iWork Numbers (sans charts for now).
 
 **14. Output to file or StringIO
+
+**15. Support for page margins
 
 Installing
 ----------
@@ -272,6 +274,12 @@ To install Axlsx, use the following command:
        sheet.column_widths nil, 3
      end
 
+##Specify Page Margins for printing
+     margins = {:left => 3, :right => 3, :top => 1.2, :bottom => 1.2, :header => 0.7, :footer => 0.7}
+     wb.add_worksheet(:name => "print margins", :page_margins => margins) do |sheet|
+       sheet.add_row["this sheet uses customized page margins for printing"]
+     end
+
 ##Validate and Serialize
 
      p.validate.each { |e| puts e.message }
@@ -301,6 +309,14 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
  
 #Changelog
 ---------
+- ** March.??.12**: 1.0.18 release
+   https://github.com/randym/axlsx/compare/1.0.17...1.0.18
+   - bugfix custom borders are not properly applied when using styles.add_style
+   - interop worksheet names must be 31 characters or less or some versions of office complain about repairs
+   - added type support for :boolean and :date types cell values
+   - iterop added some elements so that rubyXL can parse sheets generated with axlsx
+   - added support for fixed column widths
+
 - ** February.14.12**: 1.0.17 release
    https://github.com/randym/axlsx/compare/1.0.16...1.0.17
    - Added in support for serializing to StringIO
@@ -328,6 +344,10 @@ Please see the {file:CHANGELOG.md} document for past release information.
 [ffmike](https://github.com/ffmike) - for knocking down an over restrictive i18n dependency, massive patience and great communication skills.
 
 [JonathanTron](https://github.com/JonathanTron) - for giving the gem some style, and making sure it applies.
+
+[JosephHalter](https://github.com/JosephHalter) - for making sure we arrive at the right time on the right date.
+
+[noniq](https://github.com/noniq) - for keeping true to the gem's style, and making sure what we put on paper does not get marginalized.
 
 #Copyright and License
 ----------
