@@ -36,13 +36,33 @@ module Axlsx
     attr_reader :auto_filter
     
     # Page margins for printing the worksheet.
+    # @example
+    #      wb = Axlsx::Package.new.workbook
+    #      # using options when creating the worksheet.
+    #      ws = wb.add_worksheet :page_margins => {:left => 1.9, :header => 0.1}
+    #      
+    #      # use the set method of the page_margins object
+    #      ws.page_margins.set(:bottom => 3, :footer => 0.7)
+    #      
+    #      # set page margins in a block
+    #      ws.page_margins do |margins|
+    #        margins.right = 6
+    #        margins.top = 0.2
+    #      end
+    # @see PageMargins#initialize
     # @return [PageMargins]
-    attr_reader :page_margins
+    # @yeilds self
+    def page_margins
+      @page_margins ||= PageMargins.new
+      yield @page_margins if block_given?
+      @page_margins
+    end
     
     # Creates a new worksheet.
     # @note the recommended way to manage worksheets is Workbook#add_worksheet
     # @see Workbook#add_worksheet
-    # @option options [String] name The name of this sheet.
+    # @option options [String] name The name of this worksheet.
+    # @option options [Hash] page_margins A hash containing page margins for this worksheet. @see PageMargins
     def initialize(wb, options={})
       @drawing = nil
       @auto_filter = nil
@@ -51,10 +71,12 @@ module Axlsx
       @workbook.worksheets << self
       @auto_fit_data = []
       self.name = options[:name] || "Sheet" + (index+1).to_s
+
       @magick_draw = Magick::Draw.new
       @cols = SimpleTypedList.new Cell
       @merged_cells = []
-      @page_margins = PageMargins.new
+      
+      @page_margins = PageMargins.new options[:page_margins] if options[:page_margins]
     end
 
     # convinience method to access all cells in this worksheet
@@ -326,7 +348,7 @@ module Axlsx
           }
           xml.autoFilter :ref=>@auto_filter if @auto_filter
           xml.mergeCells(:count=>@merged_cells.size) { @merged_cells.each { | mc | xml.mergeCell(:ref=>mc) } } unless @merged_cells.empty?
-          @page_margins.to_xml(xml)
+          page_margins.to_xml(xml)
           xml.drawing :"r:id"=>"rId1" if @drawing          
         }
       end

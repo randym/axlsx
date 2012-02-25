@@ -5,7 +5,9 @@ module Axlsx
   # has been specified. Otherwise, it serializes to a PageMargin element specifying all 6 margin values
   # (using default values for margins that have not been specified explicitly).
   #
+  # @note The recommended way to manage page margins is via Worksheet#page_margins
   # @see Worksheet#page_margins
+  # @see Worksheet#initialize
   class PageMargins
 
     # Default left and right margin (in inches)
@@ -41,18 +43,29 @@ module Axlsx
     # @return [Float]
     attr_reader :footer
     
-    def initialize
+    # Creates a new PageMargins object
+    # @option options [Numeric] left The left margin in inches
+    # @option options [Numeric] right The right margin in inches
+    # @option options [Numeric] bottom The bottom margin in inches
+    # @option options [Numeric] top The top margin in inches
+    # @option options [Numeric] header The header margin in inches
+    # @option options [Numeric] footer The footer margin in inches
+    def initialize(options={})
       # Default values taken from MS Excel for Mac 2011
       @left = @right = DEFAULT_LEFT_RIGHT
       @top = @bottom = DEFAULT_TOP_BOTTOM
       @header = @footer = DEFAULT_HEADER_FOOTER
-      
-      @custom_margins_specified = false
+
+      options.each do |o|
+        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
+      end
     end
     
     # True if custom page margins have been specified.
     def custom_margins_specified?
-      @custom_margins_specified
+      !(@left == @right && @right == DEFAULT_LEFT_RIGHT &&
+      @top == @bottom && @bottom == DEFAULT_TOP_BOTTOM &&
+      @header == @footer && @footer == DEFAULT_HEADER_FOOTER)
     end
     
     # Set some or all margins at once.
@@ -65,17 +78,17 @@ module Axlsx
     end
     
     # @see left
-    def left=(v); Axlsx::validate_unsigned_numeric(v); @custom_margins_specified = true; @left = v end
+    def left=(v); Axlsx::validate_unsigned_numeric(v); @left = v end
     # @see right
-    def right=(v); Axlsx::validate_unsigned_numeric(v); @custom_margins_specified = true; @right = v end
+    def right=(v); Axlsx::validate_unsigned_numeric(v); @right = v end
     # @see top
-    def top=(v); Axlsx::validate_unsigned_numeric(v); @custom_margins_specified = true; @top = v end
+    def top=(v); Axlsx::validate_unsigned_numeric(v); @top = v end
     # @see bottom
-    def bottom=(v); Axlsx::validate_unsigned_numeric(v); @custom_margins_specified = true; @bottom = v end
+    def bottom=(v); Axlsx::validate_unsigned_numeric(v); @bottom = v end
     # @see header
-    def header=(v); Axlsx::validate_unsigned_numeric(v); @custom_margins_specified = true; @header = v end
+    def header=(v); Axlsx::validate_unsigned_numeric(v); @header = v end
     # @see footer
-    def footer=(v); Axlsx::validate_unsigned_numeric(v); @custom_margins_specified = true; @footer = v end
+    def footer=(v); Axlsx::validate_unsigned_numeric(v); @footer = v end
 
     # Serializes the page margins element
     # @note For compatibility, this is a noop unless custom margins have been specified.

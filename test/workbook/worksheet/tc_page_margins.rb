@@ -18,7 +18,18 @@ class TestPageMargins < Test::Unit::TestCase
     assert_equal(Axlsx::PageMargins::DEFAULT_HEADER_FOOTER, @pm.header)
     assert_equal(Axlsx::PageMargins::DEFAULT_HEADER_FOOTER, @pm.footer)
   end
-  
+
+  def test_initialize_with_options
+    optioned = Axlsx::PageMargins.new(:left => 2, :right => 3, :top => 2, :bottom => 1, :header => 0.1, :footer => 0.1)
+    assert_equal(true, optioned.custom_margins_specified?)
+    assert_equal(2, optioned.left)
+    assert_equal(3, optioned.right)
+    assert_equal(2, optioned.top)
+    assert_equal(1, optioned.bottom)
+    assert_equal(0.1, optioned.header)
+    assert_equal(0.1, optioned.footer)    
+  end
+
   def test_custom_margins_specified
     @pm.left = 0.5
     assert(@pm.custom_margins_specified?)
