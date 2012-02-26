@@ -139,6 +139,19 @@ class TestWorksheet < Test::Unit::TestCase
     assert(errors.empty?, "error free validation")
   end
 
+  def test_valid_with_page_margins
+    @ws.page_margins.set :left => 9
+    schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
+    doc = Nokogiri::XML(@ws.to_xml)
+    errors = []
+    schema.validate(doc).each do |error|
+      errors.push error
+      puts error.message
+    end
+    assert(errors.empty?, "error free validation")
+    
+  end
+
   def test_relationships
     assert(@ws.relationships.empty?, "No Drawing relationship until you add a chart")
     c = @ws.add_chart Axlsx::Pie3DChart

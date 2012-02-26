@@ -61,13 +61,6 @@ module Axlsx
       end
     end
     
-    # True if custom page margins have been specified.
-    def custom_margins_specified?
-      !(@left == @right && @right == DEFAULT_LEFT_RIGHT &&
-      @top == @bottom && @bottom == DEFAULT_TOP_BOTTOM &&
-      @header == @footer && @footer == DEFAULT_HEADER_FOOTER)
-    end
-    
     # Set some or all margins at once.
     # @param [Hash] margins the margins to set (possible keys are :left, :right, :top, :bottom, :header and :footer).
     def set(margins)
@@ -95,7 +88,6 @@ module Axlsx
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @see #custom_margins_specified?
     def to_xml(xml)
-      return unless custom_margins_specified?
       xml.pageMargins :left => left, :right => right, :top => top, :bottom => bottom, :header => header, :footer => footer
     end
   end

@@ -348,7 +348,7 @@ module Axlsx
           }
           xml.autoFilter :ref=>@auto_filter if @auto_filter
           xml.mergeCells(:count=>@merged_cells.size) { @merged_cells.each { | mc | xml.mergeCell(:ref=>mc) } } unless @merged_cells.empty?
-          page_margins.to_xml(xml)
+          page_margins.to_xml(xml) if @page_margins
           xml.drawing :"r:id"=>"rId1" if @drawing          
         }
       end

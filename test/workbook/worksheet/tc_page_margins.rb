@@ -10,7 +10,6 @@ class TestPageMargins < Test::Unit::TestCase
   end
   
   def test_initialize
-    assert_equal(false, @pm.custom_margins_specified?)
     assert_equal(Axlsx::PageMargins::DEFAULT_LEFT_RIGHT, @pm.left)
     assert_equal(Axlsx::PageMargins::DEFAULT_LEFT_RIGHT, @pm.right)
     assert_equal(Axlsx::PageMargins::DEFAULT_TOP_BOTTOM, @pm.top)
@@ -21,7 +20,6 @@ class TestPageMargins < Test::Unit::TestCase
 
   def test_initialize_with_options
     optioned = Axlsx::PageMargins.new(:left => 2, :right => 3, :top => 2, :bottom => 1, :header => 0.1, :footer => 0.1)
-    assert_equal(true, optioned.custom_margins_specified?)
     assert_equal(2, optioned.left)
     assert_equal(3, optioned.right)
     assert_equal(2, optioned.top)
@@ -30,14 +28,9 @@ class TestPageMargins < Test::Unit::TestCase
     assert_equal(0.1, optioned.footer)    
   end
 
-  def test_custom_margins_specified
-    @pm.left = 0.5
-    assert(@pm.custom_margins_specified?)
-  end
 
   def test_set_all_values
     @pm.set(:left => 1.1, :right => 1.2, :top => 1.3, :bottom => 1.4, :header => 0.8, :footer => 0.9)
-    assert(@pm.custom_margins_specified?)
     assert_equal(1.1, @pm.left)
     assert_equal(1.2, @pm.right)
     assert_equal(1.3, @pm.top)
@@ -48,7 +41,6 @@ class TestPageMargins < Test::Unit::TestCase
 
   def test_set_some_values
     @pm.set(:left => 1.1, :right => 1.2)
-    assert(@pm.custom_margins_specified?)
     assert_equal(1.1, @pm.left)
     assert_equal(1.2, @pm.right)
     assert_equal(Axlsx::PageMargins::DEFAULT_TOP_BOTTOM, @pm.top)
@@ -70,14 +62,6 @@ class TestPageMargins < Test::Unit::TestCase
     assert_equal(1, doc.xpath(".//pageMargins[@left=1.1][@right=1.2][@top=1.3][@bottom=1.4][@header=0.8][@footer=0.9]").size)
   end
       
-  def test_to_xml_is_noop_unless_custom_margins_specified
-    assert_equal(false, @pm.custom_margins_specified?)
-    xml = Nokogiri::XML::Builder.new
-    @pm.to_xml(xml)
-    doc = Nokogiri::XML.parse(xml.to_xml)
-    assert_equal(0, doc.children.size)
-  end
-  
   def test_left
     assert_raise(ArgumentError) { @pm.left = -1.2 }
     assert_nothing_raised { @pm.left = 1.5 }
