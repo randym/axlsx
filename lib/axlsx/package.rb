@@ -4,7 +4,7 @@ module Axlsx
   # xlsx document including valdation and serialization.
   class Package
 
-    
+
     # provides access to the app doc properties for this package
     # see App
     attr_reader :app
@@ -31,8 +31,8 @@ module Axlsx
 
     # Shortcut to specify that the workbook should use shared strings
     # @see Workbook#use_shared_strings
-    def use_shared_strings=(v) 
-      Axlsx::validate_boolean(v); 
+    def use_shared_strings=(v)
+      Axlsx::validate_boolean(v);
       workbook.use_shared_strings = v
     end
 
@@ -45,7 +45,7 @@ module Axlsx
     # The workbook this package will serialize or validate.
     # @return [Workbook] If no workbook instance has been assigned with this package a new Workbook instance is returned.
     # @raise ArgumentError if workbook parameter is not a Workbook instance.
-    # @note As there are multiple ways to instantiate a workbook for the package, 
+    # @note As there are multiple ways to instantiate a workbook for the package,
     #   here are a few examples:
     #     # assign directly during package instanciation
     #     wb = Package.new(:workbook => Workbook.new).workbook
@@ -59,13 +59,13 @@ module Axlsx
       yield @workbook if block_given?
       @workbook
     end
-    
+
     #def self.parse(input, confirm_valid = false)
     #  p = Package.new
     #  z = Zip::ZipFile.open(input)
     #  p.workbook = Workbook.parse z.get_entry(WORKBOOK_PN)
     #  p
-    #end    
+    #end
 
     # @see workbook
     def workbook=(workbook) DataTypeValidator.validate "Package.workbook", Workbook, workbook; @workbook = workbook; end
@@ -77,7 +77,7 @@ module Axlsx
     # @option options stream indicates if we should be writing to a stream or a file. True for stream, nil for file
     # @return [Boolean] False if confirm_valid and validation errors exist. True if the package was serialized
     # @note A tremendous amount of effort has gone into ensuring that you cannot create invalid xlsx documents.
-    #   confirm_valid should be used in the rare case that you cannot open the serialized file. 
+    #   confirm_valid should be used in the rare case that you cannot open the serialized file.
     # @see Package#validate
     # @example
     #   # This is how easy it is to create a valid xlsx file. Of course you might want to add a sheet or two, and maybe some data, styles and charts.
@@ -105,20 +105,19 @@ module Axlsx
       stream.rewind
       stream
     end
-    
+
     # Encrypt the package into a CFB using the password provided
     # This is not ready yet
-    def encrypt(file_name, password)      
-      return false
-      # moc = MsOffCrypto.new(file_name, password)
-      # moc.save    
+    def encrypt(file_name, password)
+       moc = MsOffCrypto.new(file_name, password)
+       moc.save
     end
-    
-    # Validate all parts of the package against xsd schema. 
+
+    # Validate all parts of the package against xsd schema.
     # @return [Array] An array of all validation errors found.
     # @note This gem includes all schema from OfficeOpenXML-XMLSchema-Transitional.zip and OpenPackagingConventions-XMLSchema.zip
     #   as per ECMA-376, Third edition. opc schema require an internet connection to import remote schema from dublin core for dc,
-    #   dcterms and xml namespaces. Those remote schema are included in this gem, and the original files have been altered to 
+    #   dcterms and xml namespaces. Those remote schema are included in this gem, and the original files have been altered to
     #   refer to the local versions.
     #
     #   If by chance you are able to creat a package that does not validate it indicates that the internal
@@ -135,30 +134,30 @@ module Axlsx
       errors
     end
 
-    private 
+    private
 
     # Writes the package parts to a zip archive.
     # @param [Zip::ZipOutputStream] zip
     # @return [Zip::ZipOutputStream]
     def write_parts(zip)
       p = parts
-        p.each do |part| 
+        p.each do |part|
           unless part[:doc].nil?
             zip.put_next_entry(part[:entry]);
             entry = ['1.9.2', '1.9.3'].include?(RUBY_VERSION) ? part[:doc].force_encoding('BINARY') : part[:doc]
             zip.puts(entry)
           end
           unless part[:path].nil?
-            zip.put_next_entry(part[:entry]); 
+            zip.put_next_entry(part[:entry]);
             # binread for 1.9.3
             zip.write IO.respond_to?(:binread) ? IO.binread(part[:path]) : IO.read(part[:path])
-          end          
+          end
         end
       zip
     end
 
     # The parts of a package
-    # @return [Array] An array of hashes that define the entry, document and schema for each part of the package. 
+    # @return [Array] An array of hashes that define the entry, document and schema for each part of the package.
     # @private
     def parts
       @parts = [
@@ -174,10 +173,10 @@ module Axlsx
         @parts << {:entry => "xl/#{drawing.rels_pn}", :doc => drawing.relationships.to_xml, :schema => RELS_XSD}
         @parts << {:entry => "xl/#{drawing.pn}", :doc => drawing.to_xml, :schema => DRAWING_XSD}
       end
-        
-      workbook.charts.each do |chart|          
+
+      workbook.charts.each do |chart|
         @parts << {:entry => "xl/#{chart.pn}", :doc => chart.to_xml, :schema => DRAWING_XSD}
-      end                  
+      end
 
       workbook.images.each do |image|
         @parts << {:entry => "xl/#{image.pn}", :path => image.image_src}
@@ -187,9 +186,9 @@ module Axlsx
         @parts << {:entry => "xl/#{SHARED_STRINGS_PN}", :doc => workbook.shared_strings.to_xml, :schema => SML_XSD}
       end
 
-      workbook.worksheets.each do |sheet|            
+      workbook.worksheets.each do |sheet|
         @parts << {:entry => "xl/#{sheet.rels_pn}", :doc => sheet.relationships.to_xml, :schema => RELS_XSD}
-        @parts << {:entry => "xl/#{sheet.pn}", :doc => sheet.to_xml, :schema => SML_XSD}        
+        @parts << {:entry => "xl/#{sheet.pn}", :doc => sheet.to_xml, :schema => SML_XSD}
       end
       @parts
     end
@@ -217,15 +216,15 @@ module Axlsx
     def content_types
       c_types = base_content_types
       workbook.drawings.each do |drawing|
-        c_types << Axlsx::Override.new(:PartName => "/xl/#{drawing.pn}", 
+        c_types << Axlsx::Override.new(:PartName => "/xl/#{drawing.pn}",
                                        :ContentType => DRAWING_CT)
       end
       workbook.charts.each do |chart|
-        c_types << Axlsx::Override.new(:PartName => "/xl/#{chart.pn}", 
-                                       :ContentType => CHART_CT)                    
+        c_types << Axlsx::Override.new(:PartName => "/xl/#{chart.pn}",
+                                       :ContentType => CHART_CT)
       end
       workbook.worksheets.each do |sheet|
-        c_types << Axlsx::Override.new(:PartName => "/xl/#{sheet.pn}", 
+        c_types << Axlsx::Override.new(:PartName => "/xl/#{sheet.pn}",
                                          :ContentType => WORKSHEET_CT)
       end
       exts = workbook.images.map { |image| image.extname }
@@ -256,7 +255,7 @@ module Axlsx
       c_types << Override.new(:PartName => "/#{APP_PN}", :ContentType => APP_CT)
       c_types << Override.new(:PartName => "/#{CORE_PN}", :ContentType => CORE_CT)
       c_types << Override.new(:PartName => "/xl/#{STYLES_PN}", :ContentType => STYLES_CT)
-      c_types << Axlsx::Override.new(:PartName => "/#{WORKBOOK_PN}", :ContentType => WORKBOOK_CT)      
+      c_types << Axlsx::Override.new(:PartName => "/#{WORKBOOK_PN}", :ContentType => WORKBOOK_CT)
       c_types.lock
       c_types
     end
