@@ -54,6 +54,10 @@ module Axlsx
     # @return [Boolean]
     attr_reader :i
 
+    # Indicates if the font should be rendered underlined
+    # @return [Boolean]
+    attr_reader :u
+
     # Indicates if the font should be rendered with a strikthrough
     # @return [Boolean]
     attr_reader :strike
@@ -89,6 +93,7 @@ module Axlsx
     # @option options [Integer] family
     # @option options [Boolean] b
     # @option options [Boolean] i
+    # @option options [Boolean] u
     # @option options [Boolean] strike
     # @option options [Boolean] outline
     # @option options [Boolean] shadow
@@ -111,6 +116,8 @@ module Axlsx
     def b=(v) Axlsx::validate_boolean v; @b = v end    
     # @see i
     def i=(v) Axlsx::validate_boolean v; @i = v end
+    # @see u
+    def u=(v) Axlsx::validate_boolean v; @u = v end
     # @see strike
     def strike=(v) Axlsx::validate_boolean v; @strike = v end
     # @see outline
