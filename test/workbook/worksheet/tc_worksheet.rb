@@ -218,6 +218,10 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(@ws.send(:auto_width, {:sz=>11, :longest => "This is a really long string", :fixed=>0.2}), 0.2, "fixed rules!")
   end
 
+  def test_fixed_height
+    @ws.add_row [1, 2, 3], :height => 40
+    assert_equal(40, @ws.rows[-1].height)
+  end
 
 
   def test_set_column_width

@@ -205,6 +205,9 @@ module Axlsx
     #
     #     ws.add_row ['I wish', 'for a fish', 'on my fish wish dish'], :widths=>[:ignore, :auto, 80]
     #
+    # @example - specify a fixed height for a row
+    #     ws.add_row ['I wish', 'for a fish', 'on my fish wish dish'], :height => 40
+    #
     # @example - create and use a style for all cells in the row
     #     blue = ws.styles.add_style :color => "#00FF00"
     #     ws.add_row [1, 2, 3], :style=>blue
@@ -225,6 +228,7 @@ module Axlsx
     # @option options [Array, Symbol] types 
     # @option options [Array, Integer] style 
     # @option options [Array] widths each member of the widths array will affect how auto_fit behavies.
+    # @option options [Float] height the row's height (in points)
     def add_row(values=[], options={})
       Row.new(self, values, options)
       update_auto_fit_data @rows.last.cells, options.delete(:widths) || []
