@@ -125,6 +125,7 @@ module Axlsx
     # @option options [Integer] sz The text size
     # @option options [Boolean] b Indicates if the text should be bold
     # @option options [Boolean] i Indicates if the text should be italicised
+    # @option options [Boolean] u Indicates if the text should be underlined
     # @option options [Boolean] strike Indicates if the text should be rendered with a strikethrough
     # @option options [Boolean] strike Indicates if the text should be rendered with a shadow
     # @option options [Integer] charset The character set to use.
@@ -210,9 +211,9 @@ module Axlsx
                0
              end
       
-      fontId = if (options.values_at(:fg_color, :sz, :b, :i, :strike, :outline, :shadow, :charset, :family, :font_name).length)
+      fontId = if (options.values_at(:fg_color, :sz, :b, :i, :u, :strike, :outline, :shadow, :charset, :family, :font_name).length)
                  font = Font.new()
-                 [:b, :i, :strike, :outline, :shadow, :charset, :family, :sz].each { |k| font.send("#{k}=", options[k]) unless options[k].nil? }
+                 [:b, :i, :u, :strike, :outline, :shadow, :charset, :family, :sz].each { |k| font.send("#{k}=", options[k]) unless options[k].nil? }
                  font.color = Color.new(:rgb => options[:fg_color]) unless options[:fg_color].nil?
                  font.name = options[:font_name] unless options[:font_name].nil?
                  fonts << font

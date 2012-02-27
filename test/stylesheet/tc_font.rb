@@ -17,6 +17,7 @@ class TestFont < Test::Unit::TestCase
     assert_equal(@item.family, nil)
     assert_equal(@item.b, nil)
     assert_equal(@item.i, nil)
+    assert_equal(@item.u, nil)
     assert_equal(@item.strike, nil)
     assert_equal(@item.outline, nil)
     assert_equal(@item.shadow, nil)
@@ -60,6 +61,13 @@ class TestFont < Test::Unit::TestCase
     assert_raise(ArgumentError) { @item.i = -7 }
     assert_nothing_raised { @item.i = true }
     assert_equal(@item.i, true)
+  end
+  
+    # def u=(v) Axlsx::validate_boolean v; @u = v end
+  def test_u
+    assert_raise(ArgumentError) { @item.u = -7 }
+    assert_nothing_raised { @item.u = true }
+    assert_equal(@item.u, true)
   end
 
     # def strike=(v) Axlsx::validate_boolean v; @strike = v end
