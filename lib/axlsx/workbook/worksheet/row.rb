@@ -13,12 +13,14 @@ module Axlsx
     # @return [SimpleTypedList]
     attr_reader :cells
 
+    # The height of this row in points, if set explicitly.
+    # @return [Float]
+    attr_reader :height
+
     # TODO  18.3.1.73
     # collapsed
     # customFormat
-    # customHeight
     # hidden
-    # ht (height)
     # outlineLevel
     # ph
     # s (style)
@@ -39,12 +41,14 @@ module Axlsx
     # @option options [Array] values
     # @option options [Array, Symbol] types 
     # @option options [Array, Integer] style 
+    # @option options [Float] height the row's height (in points)
     # @see Row#array_to_cells
     # @see Cell
     def initialize(worksheet, values=[], options={})
       self.worksheet = worksheet
       @cells = SimpleTypedList.new Cell
       @worksheet.rows << self
+      self.height = options.delete(:height) if options[:height]
       array_to_cells(values, options)
     end
 
@@ -58,7 +62,9 @@ module Axlsx
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String]
     def to_xml(xml)
-      xml.row(:r => index+1) { @cells.each { |cell| cell.to_xml(xml) } }
+      attrs = {:r => index+1}
+      attrs.merge!(:customHeight => 1, :ht => height) if custom_height?
+      xml.row(attrs) { |xml| @cells.each { |cell| cell.to_xml(xml) } }
     end
 
     # Adds a singel sell to the row based on the data provided and updates the worksheet's autofit data.
@@ -82,6 +88,16 @@ module Axlsx
     # @return [Array]
     def to_ary
       @cells.to_ary
+    end
+
+    # @see height
+    def height=(v); Axlsx::validate_unsigned_numeric(v) unless v.nil?; @height = v end
+
+    # true if the row height has been manually set
+    # @return [Boolean]
+    # @see #height
+    def custom_height?
+      @height != nil
     end
 
     private
