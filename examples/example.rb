@@ -39,25 +39,25 @@
 ##Add an Image
 
      wb.add_worksheet(:name => "Images") do |sheet|
-       img = File.expand_path('examples/image1.jpeg') 
+       img = File.expand_path('examples/image1.jpeg')
        sheet.add_image(:image_src => img, :noSelect => true, :noMove => true) do |image|
          image.width=720
          image.height=666
          image.start_at 2, 2
        end
-     end  
+     end
 
 ##Add an Image with a hyperlink
 
      wb.add_worksheet(:name => "Image with Hyperlink") do |sheet|
-       img = File.expand_path('examples/image1.jpeg') 
+       img = File.expand_path('examples/image1.jpeg')
        sheet.add_image(:image_src => img, :noSelect => true, :noMove => true, :hyperlink=>"http://axlsx.blogspot.com") do |image|
          image.width=720
          image.height=666
          image.hyperlink.tooltip = "Labeled Link"
          image.start_at 2, 2
        end
-     end  
+     end
 
 ##Asian Language Support
 
@@ -65,7 +65,7 @@
        sheet.add_row ["日本語"]
        sheet.add_row ["华语/華語"]
        sheet.add_row ["한국어/조선말"]
-     end  
+     end
 
 ##Styling Columns
 
@@ -104,7 +104,7 @@
          # cell level style overrides via sheet range
          sheet["A1:D1"].each { |c| c.color = "FF0000"}
          sheet['A1:D2'].each { |c| c.style = Axlsx::STYLE_THIN_BORDER }
-     end     
+     end
 
 ##Using formula
 
@@ -131,7 +131,7 @@
          sheet.merge_cells("A4:C4")
          sheet["A1:D1"].each { |c| c.color = "FF0000"}
          sheet["A1:D4"].each { |c| c.style = Axlsx::STYLE_THIN_BORDER }
-     end     
+     end
 
 ##Generating A Bar Chart
 
@@ -142,7 +142,7 @@
        sheet.add_chart(Axlsx::Bar3DChart, :start_at => "A4", :end_at => "F17") do |chart|
          chart.add_series :data => sheet["A3:C3"], :labels => sheet["A2:C2"], :title => sheet["A1"]
        end
-     end  
+     end
 
 ##Generating A Pie Chart
 
@@ -152,7 +152,7 @@
        sheet.add_chart(Axlsx::Pie3DChart, :start_at => [0,2], :end_at => [5, 15], :title => "example 3: Pie Chart") do |chart|
          chart.add_series :data => sheet["A2:D2"], :labels => sheet["A1:D1"]
        end
-     end  
+     end
 
 ##Data over time
 
@@ -166,9 +166,9 @@
          sheet.add_chart(Axlsx::Bar3DChart) do |chart|
             chart.start_at "B7"
             chart.end_at "H27"
-            chart.add_series(:data => sheet["B2:B5"], :labels => sheet["A2:A5"], :title => sheet["B1"])           
-         end 
-     end     
+            chart.add_series(:data => sheet["B2:B5"], :labels => sheet["A2:A5"], :title => sheet["B1"])
+         end
+     end
 
 ##Generating A Line Chart
 
@@ -179,9 +179,9 @@
          chart.start_at 0, 2
          chart.end_at 10, 15
          chart.add_series :data => sheet["B1:E1"], :title => sheet["A1"]
-         chart.add_series :data => sheet["B2:E2"], :title => sheet["A2"]         
-       end       
-     end  
+         chart.add_series :data => sheet["B2:E2"], :title => sheet["A2"]
+       end
+     end
 
 ##Auto Filter
 
@@ -192,7 +192,7 @@
        sheet.add_row ["19.2", "1 min 28 sec", "about 10 hours ago", "1.9.2"]
        sheet.add_row ["19.3", "1 min 35 sec", "about 10 hours ago", "1.9.3"]
        sheet.auto_filter = "A2:D5"
-     end  
+     end
 
 ##Specifying Column Widths
 
@@ -204,7 +204,7 @@
 ##Specify Page Margins for printing
      margins = {:left => 3, :right => 3, :top => 1.2, :bottom => 1.2, :header => 0.7, :footer => 0.7}
      wb.add_worksheet(:name => "print margins", :page_margins => margins) do |sheet|
-       sheet.add_row["this sheet uses customized page margins for printing"]
+       sheet.add_row ["this sheet uses customized page margins for printing"]
      end
 
 ##Validate and Serialize
@@ -223,5 +223,5 @@
 
 
 
-     
+
 
