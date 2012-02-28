@@ -10,7 +10,7 @@ class TestCell < Test::Unit::TestCase
     @row = @ws.add_row
     @c = @row.add_cell 1, :type=>:float, :style=>1
   end
-  
+
   def test_initialize
     assert_equal(@row.cells.last, @c, "the cell was added to the row")
     assert_equal(@c.type, :float, "type option is applied")
@@ -46,7 +46,7 @@ class TestCell < Test::Unit::TestCase
 
   def test_style
     assert_raise(ArgumentError, "must reject invalid style indexes") { @c.style=@c.row.worksheet.workbook.styles.cellXfs.size }
-    assert_nothing_raised("must allow valid style index changes") {@c.style=1} 
+    assert_nothing_raised("must allow valid style index changes") {@c.style=1}
     assert_equal(@c.style, 1)
   end
 
@@ -54,7 +54,7 @@ class TestCell < Test::Unit::TestCase
     assert_raise(ArgumentError, "type must be :string, :integer, :float, :date, :time, :boolean") { @c.type = :array }
     assert_nothing_raised("type can be changed") { @c.type = :string }
     assert_equal(@c.value, "1.0", "changing type casts the value")
-    
+
     assert_equal(@row.add_cell(Time.now).type, :time, 'time should be time')
     assert_equal(@row.add_cell(Date.today).type, :date, 'date should be date')
     assert_equal(@row.add_cell(true).type, :boolean, 'boolean should be boolean')
@@ -83,7 +83,7 @@ class TestCell < Test::Unit::TestCase
     assert_equal(@c.send(:cell_type_from_value, false), :boolean)
   end
 
-  def test_cast_value    
+  def test_cast_value
     @c.type = :string
     assert_equal(@c.send(:cast_value, 1.0), "1.0")
     @c.type = :integer
@@ -192,7 +192,7 @@ class TestCell < Test::Unit::TestCase
     @c.row.add_cell 2
     @c.row.add_cell 3
     @c.merge "A2"
-    assert_equal(@c.row.worksheet.merged_cells.last, "A1:A2")    
+    assert_equal(@c.row.worksheet.merged_cells.last, "A1:A2")
   end
 
   def test_merge_with_cell
@@ -200,7 +200,7 @@ class TestCell < Test::Unit::TestCase
     @c.row.add_cell 2
     @c.row.add_cell 3
     @c.merge @row.cells.last
-    assert_equal(@c.row.worksheet.merged_cells.last, "A1:C1")    
+    assert_equal(@c.row.worksheet.merged_cells.last, "A1:C1")
   end
 
   def test_equality
@@ -218,6 +218,20 @@ class TestCell < Test::Unit::TestCase
     assert_raise(ArgumentError, "ssti must be an unsigned integer!") { @c.send(:ssti=, -1) }
     @c.send :ssti=, 1
     assert_equal(@c.ssti, 1)
+  end
+
+  def test_to_xml
+    # TODO This could use some much more stringent testing related to the xml content generated!
+    row = @ws.add_row [Time.now, Date.today, true, 1, 1.0, "text", "=sum(A1:A2)"]
+    schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
+    doc = Nokogiri::XML(@ws.to_xml)
+    errors = []
+    schema.validate(doc).each do |error|
+      errors.push error
+      puts error.message
+    end
+    assert(errors.empty?, "error free validation")
+
   end
 
 end
