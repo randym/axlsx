@@ -316,10 +316,10 @@ module Axlsx
         end
       elsif @type == :date
         # TODO: See if this is subject to the same restriction as Time below
-        v = DateTimeConverter.date_to_serial @value
+        v = DateTimeConverter::date_to_serial @value
         xml.c(:r => r, :s => style) { xml.v v }
       elsif @type == :time
-        v = DateTimeConverter.time_to_serial @value
+        v = DateTimeConverter::time_to_serial @value
         xml.c(:r => r, :s => style) { xml.v v }
       elsif @type == :boolean
         xml.c(:r => r, :s => style, :t => :b) { xml.v value }

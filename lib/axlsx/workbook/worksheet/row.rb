@@ -39,12 +39,13 @@ module Axlsx
     #   If the style option is not defined, the default style (0) is applied to each cell.
     # @param [Worksheet] worksheet
     # @option options [Array] values
-    # @option options [Array, Symbol] types 
-    # @option options [Array, Integer] style 
+    # @option options [Array, Symbol] types
+    # @option options [Array, Integer] style
     # @option options [Float] height the row's height (in points)
     # @see Row#array_to_cells
     # @see Cell
     def initialize(worksheet, values=[], options={})
+      @height = nil
       self.worksheet = worksheet
       @cells = SimpleTypedList.new Cell
       @worksheet.rows << self
@@ -54,17 +55,17 @@ module Axlsx
 
     # The index of this row in the worksheet
     # @return [Integer]
-    def index 
+    def index
       worksheet.rows.index(self)
     end
-    
+
     # Serializes the row
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String]
     def to_xml(xml)
       attrs = {:r => index+1}
       attrs.merge!(:customHeight => 1, :ht => height) if custom_height?
-      xml.row(attrs) { |xml| @cells.each { |cell| cell.to_xml(xml) } }
+      xml.row(attrs) { |ixml| @cells.each { |cell| cell.to_xml(ixml) } }
     end
 
     # Adds a singel sell to the row based on the data provided and updates the worksheet's autofit data.
@@ -74,7 +75,7 @@ module Axlsx
       update_auto_fit_data
       c
     end
-    
+
     # sets the style for every cell in this row
     def style=(style)
       cells.each_with_index do | cell, index |
@@ -84,7 +85,7 @@ module Axlsx
     end
 
     # returns the cells in this row as an array
-    # This lets us transpose the rows into columns 
+    # This lets us transpose the rows into columns
     # @return [Array]
     def to_ary
       @cells.to_ary
@@ -104,7 +105,7 @@ module Axlsx
 
     # assigns the owning worksheet for this row
     def worksheet=(v) DataTypeValidator.validate "Row.worksheet", Worksheet, v; @worksheet=v; end
-    
+
     # Tell the worksheet to update autofit data for the columns based on this row's cells.
     # @return [SimpleTypedList]
     def update_auto_fit_data
@@ -119,13 +120,13 @@ module Axlsx
     # If the style option is defined and is an Integer, it is applied to all cells created.
     # If the style option is an array, style is applied by index for each cell.
     # @option options [Array] values
-    # @option options [Array, Symbol] types 
-    # @option options [Array, Integer] style 
+    # @option options [Array, Symbol] types
+    # @option options [Array, Integer] style
     def array_to_cells(values, options={})
       values = values
       DataTypeValidator.validate 'Row.array_to_cells', Array, values
       types, style = options.delete(:types), options.delete(:style)
-      values.each_with_index do |value, index|        
+      values.each_with_index do |value, index|
         cell_style = style.is_a?(Array) ? style[index] : style
         options[:style] = cell_style if cell_style
         cell_type = types.is_a?(Array)? types[index] : types
@@ -134,5 +135,5 @@ module Axlsx
       end
     end
   end
-  
+
 end

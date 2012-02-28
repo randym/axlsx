@@ -1,9 +1,9 @@
 # encoding: UTF-8
 module Axlsx
-  
-  # The Worksheet class represents a worksheet in the workbook. 
+
+  # The Worksheet class represents a worksheet in the workbook.
   class Worksheet
-    
+
     # The name of the worksheet
     # @return [String]
     attr_reader :name
@@ -21,7 +21,7 @@ module Axlsx
 
     # An array of content based calculated column widths.
     # @note a single auto fit data item is a hash with :longest => [String] and :sz=> [Integer] members.
-    # @return [Array] of Hash 
+    # @return [Array] of Hash
     attr_reader :auto_fit_data
 
     # An array of merged cell ranges e.d "A1:B3"
@@ -34,16 +34,16 @@ module Axlsx
     # The first row is considered the header, while subsequent rows are considerd to be data.
     # @return Array
     attr_reader :auto_filter
-    
+
     # Page margins for printing the worksheet.
     # @example
     #      wb = Axlsx::Package.new.workbook
     #      # using options when creating the worksheet.
     #      ws = wb.add_worksheet :page_margins => {:left => 1.9, :header => 0.1}
-    #      
+    #
     #      # use the set method of the page_margins object
     #      ws.page_margins.set(:bottom => 3, :footer => 0.7)
-    #      
+    #
     #      # set page margins in a block
     #      ws.page_margins do |margins|
     #        margins.right = 6
@@ -57,15 +57,14 @@ module Axlsx
       yield @page_margins if block_given?
       @page_margins
     end
-    
+
     # Creates a new worksheet.
     # @note the recommended way to manage worksheets is Workbook#add_worksheet
     # @see Workbook#add_worksheet
     # @option options [String] name The name of this worksheet.
     # @option options [Hash] page_margins A hash containing page margins for this worksheet. @see PageMargins
     def initialize(wb, options={})
-      @drawing = nil
-      @auto_filter = nil
+      @drawing = @page_margins = @auto_filter = nil
       @rows = SimpleTypedList.new Row
       self.workbook = wb
       @workbook.worksheets << self
@@ -75,7 +74,7 @@ module Axlsx
       @magick_draw = Magick::Draw.new
       @cols = SimpleTypedList.new Cell
       @merged_cells = []
-      
+
       @page_margins = PageMargins.new options[:page_margins] if options[:page_margins]
     end
 
@@ -85,26 +84,26 @@ module Axlsx
       rows.flatten
     end
 
-    # Creates merge information for this worksheet. 
+    # Creates merge information for this worksheet.
     # Cells can be merged by calling the merge_cells method on a worksheet.
-    # @example This would merge the three cells C1..E1    #  
+    # @example This would merge the three cells C1..E1    #
     #        worksheet.merge_cells "C1:E1"
     #        # you can also provide an array of cells to be merged
     #        worksheet.merge_cells worksheet.rows.first.cells[(2..4)]
     #        #alternatively you can do it from a single cell
     #        worksheet["C1"].merge worksheet["E1"]
-    # @param [Array, string]    
+    # @param [Array, string]
     def merge_cells(cells)
       @merged_cells << if cells.is_a?(String)
                          cells
                        elsif cells.is_a?(Array)
                          cells = cells.sort { |x, y| x.r <=> y.r }
                          "#{cells.first.r}:#{cells.last.r}"
-                       end 
+                       end
     end
 
 
-    # The demensions of a worksheet. This is not actually a required element by the spec, 
+    # The demensions of a worksheet. This is not actually a required element by the spec,
     # but at least a few other document readers expect this for conversion
     # @return [String] the A1:B2 style reference for the first and last row column intersection in the workbook
     def dimension
@@ -145,18 +144,18 @@ module Axlsx
     # The name of the worksheet
     # The name of a worksheet must be unique in the workbook, and must not exceed 31 characters
     # @param [String] v
-    def name=(v) 
+    def name=(v)
       DataTypeValidator.validate "Worksheet.name", String, v
       raise ArgumentError, (ERR_SHEET_NAME_TOO_LONG % v) if v.size > 31
       sheet_names = @workbook.worksheets.map { |s| s.name }
-      raise ArgumentError, (ERR_DUPLICATE_SHEET_NAME % v) if sheet_names.include?(v) 
-      @name=v 
+      raise ArgumentError, (ERR_DUPLICATE_SHEET_NAME % v) if sheet_names.include?(v)
+      @name=v
     end
 
     # The auto filter range for the worksheet
     # @param [String] v
     # @see auto_filter
-    def auto_filter=(v) 
+    def auto_filter=(v)
       DataTypeValidator.validate "Worksheet.auto_filter", String, v
       @auto_filter = v
     end
@@ -196,7 +195,7 @@ module Axlsx
     # Adds a row to the worksheet and updates auto fit data
     # @example - put a vanilla row in your spreadsheet
     #     ws.add_row [1, 'fish on my pl', '8']
-    # 
+    #
     # @example - specify a fixed width for a column in your spreadsheet
     #     # The first column will ignore the content of this cell when calculating column autowidth.
     #     # The second column will include this text in calculating the columns autowidth
@@ -222,11 +221,11 @@ module Axlsx
     # @example - force the second cell to be a float value
     #     ws.add_row [3, 4, 5], :types => [nil, :float]
     #
-    # @see Worksheet#column_widths 
+    # @see Worksheet#column_widths
     # @return [Row]
     # @option options [Array] values
-    # @option options [Array, Symbol] types 
-    # @option options [Array, Integer] style 
+    # @option options [Array, Symbol] types
+    # @option options [Array, Integer] style
     # @option options [Array] widths each member of the widths array will affect how auto_fit behavies.
     # @option options [Float] height the row's height (in points)
     def add_row(values=[], options={})
@@ -268,7 +267,7 @@ module Axlsx
     # @see README.md for an example
     def col_style(index, style, options={})
       offset = options.delete(:row_offset) || 0
-      @rows[(offset..-1)].each do |r| 
+      @rows[(offset..-1)].each do |r|
         cells = r.cells[index]
         next unless cells
         if cells.is_a?(Array)
@@ -279,13 +278,13 @@ module Axlsx
       end
     end
 
-    # This is a helper method that Lets you specify a fixed width for multiple columns in a worksheet in one go.    
+    # This is a helper method that Lets you specify a fixed width for multiple columns in a worksheet in one go.
     # Axlsx is sparse, so if you have not set data for a column, you cannot set the width.
     # Setting a fixed column width to nil will revert the behaviour back to calculating the width for you.
     # @example This would set the first and third column widhts but leave the second column in autofit state.
     #      ws.column_widths 7.2, nil, 3
     # @note For updating only a single column it is probably easier to just set ws.auto_fit_data[col_index][:fixed] directly
-    # @param [Integer|Float|Fixnum|nil] values 
+    # @param [Integer|Float|Fixnum|nil] values
     def column_widths(*args)
       args.each_with_index do |value, index|
         raise ArgumentError, "Invalid column specification" unless index < @auto_fit_data.size
@@ -294,14 +293,14 @@ module Axlsx
       end
     end
 
-    # Adds a chart to this worksheets drawing. This is the recommended way to create charts for your worksheet. This method wraps the complexity of dealing with ooxml drawing, anchors, markers graphic frames chart objects and all the other dirty details. 
+    # Adds a chart to this worksheets drawing. This is the recommended way to create charts for your worksheet. This method wraps the complexity of dealing with ooxml drawing, anchors, markers graphic frames chart objects and all the other dirty details.
     # @param [Class] chart_type
     # @option options [Array] start_at
     # @option options [Array] end_at
     # @option options [Cell, String] title
     # @option options [Boolean] show_legend
-    # @option options [Integer] style 
-    # @note each chart type also specifies additional options 
+    # @option options [Integer] style
+    # @note each chart type also specifies additional options
     # @see Chart
     # @see Pie3DChart
     # @see Bar3DChart
@@ -326,12 +325,12 @@ module Axlsx
     # @return [String]
     def to_xml
       builder = Nokogiri::XML::Builder.new(:encoding => ENCODING) do |xml|
-        xml.worksheet(:xmlns => XML_NS, 
+        xml.worksheet(:xmlns => XML_NS,
                       :'xmlns:r' => XML_NS_R) {
           # another patch for the folks at rubyXL as thier parser depends on this optional element.
           xml.dimension :ref=>dimension unless rows.size == 0
           # this is required by rubyXL, spec says who cares - but it seems they didnt notice
-          xml.sheetViews { 
+          xml.sheetViews {
             xml.sheetView(:tabSelected => 1, :workbookViewId => index) {
               xml.selection :activeCell=>"A1", :sqref => "A1"
             }
@@ -353,7 +352,7 @@ module Axlsx
           xml.autoFilter :ref=>@auto_filter if @auto_filter
           xml.mergeCells(:count=>@merged_cells.size) { @merged_cells.each { | mc | xml.mergeCell(:ref=>mc) } } unless @merged_cells.empty?
           page_margins.to_xml(xml) if @page_margins
-          xml.drawing :"r:id"=>"rId1" if @drawing          
+          xml.drawing :"r:id"=>"rId1" if @drawing
         }
       end
       builder.to_xml(:save_with => 0)
@@ -367,16 +366,16 @@ module Axlsx
         r
     end
 
-    private 
+    private
 
     # assigns the owner workbook for this worksheet
     def workbook=(v) DataTypeValidator.validate "Worksheet.workbook", Workbook, v; @workbook = v; end
 
-    # Updates auto fit data. 
-    # We store an auto_fit_data item for each column. when a row is added we multiple the font size by the length of the text to 
+    # Updates auto fit data.
+    # We store an auto_fit_data item for each column. when a row is added we multiple the font size by the length of the text to
     # attempt to identify the longest cell in the column. This is not 100% accurate as it needs to take into account
-    # any formatting that will be applied to the data, as well as the actual rendering size when the length and size is equal 
-    # for two cells. 
+    # any formatting that will be applied to the data, as well as the actual rendering size when the length and size is equal
+    # for two cells.
 
     # @return [Array] of Cell objects
     # @param [Array] cells an array of cells
@@ -406,12 +405,12 @@ module Axlsx
       end
       cells
     end
-    
+
     # Determines the proper width for a column based on content.
-    # @note 
+    # @note
     #   width = Truncate([!{Number of Characters} * !{Maximum Digit Width} + !{5 pixel padding}]/!{Maximum Digit Width}*256)/256
     # @return [Float]
-    # @param [Hash] A hash of auto_fit_data 
+    # @param [Hash] A hash of auto_fit_data
     def auto_width(col)
       return col[:fixed] unless col[:fixed] == nil
 
@@ -424,21 +423,21 @@ module Axlsx
     end
 
     # Something to look into:
-    #  width calculation actually needs to be done agains the formatted value for items that apply a 
+    #  width calculation actually needs to be done agains the formatted value for items that apply a
     # format
     # def excel_format(cell)
     #   # The most common case.
     #   return time.value.to_s if cell.style == 0
     #
-    #   # The second most common case   
+    #   # The second most common case
     #   num_fmt = workbook.styles.cellXfs[items.style].numFmtId
     #   return value.to_s if num_fmt == 0
-    #   
+    #
     #   format_code = workbook.styles.numFmts[num_fmt]
     #   # need to find some exceptionally fast way of parsing value according to
     #   # an excel format_code
     #   item.value.to_s
-    # end      
+    # end
 
   end
 end
