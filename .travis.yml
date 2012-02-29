@@ -10,4 +10,5 @@ matrix:
 
 notifications:
   irc: "irc.freenode.org#axlsx
+  email: "digital.ipseity@gmail.com"
 
