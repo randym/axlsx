@@ -193,7 +193,7 @@ module Axlsx
       @drawing || @drawing = Axlsx::Drawing.new(self)
     end
 
-    # Adds a row to the worksheet and updates auto fit data
+    # Adds a row to the worksheet and updates auto fit data.
     # @example - put a vanilla row in your spreadsheet
     #     ws.add_row [1, 'fish on my pl', '8']
     #
@@ -222,6 +222,9 @@ module Axlsx
     # @example - force the second cell to be a float value
     #     ws.add_row [3, 4, 5], :types => [nil, :float]
     #
+    # @example - use << alias
+    #     ws << [3, 4, 5], :types => [nil, :float]
+    #
     # @see Worksheet#column_widths
     # @return [Row]
     # @option options [Array] values
@@ -235,7 +238,7 @@ module Axlsx
       yield @rows.last if block_given?
       @rows.last
     end
-    
+
     alias :<< :add_row
 
     # Set the style for cells in a specific row
