@@ -1,5 +1,3 @@
-language: ruby
-
 notifications:
   irc: "irc.freenode.org#axlsx"
   email: "digital.ipeseity@gmail.com"
