@@ -9,6 +9,5 @@ matrix:
     - rvm: jruby
 
 notifications:
-  irc: "irc.freenode.org#axlsx
+  irc: "irc.freenode.org#axlsx"
   email: "digital.ipseity@gmail.com"
-
