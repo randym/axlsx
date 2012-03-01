@@ -234,6 +234,8 @@ module Axlsx
       yield @rows.last if block_given?
       @rows.last
     end
+    
+    alias :<< :add_row
 
     # Set the style for cells in a specific row
     # @param [Integer] index or range of indexes in the table
