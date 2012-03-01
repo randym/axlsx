@@ -112,9 +112,10 @@ module Axlsx
 
 
     # Returns the cell or cells defined using excel style A1:B3 references.
-    # @param [String] cell_def the string defining the cell or range of cells
+    # @param [String|Integer] cell_def the string defining the cell or range of cells, or the rownumber
     # @return [Cell, Array]
     def [](cell_def)
+      return rows[cell_def - 1] if cell_def.is_a? Integer
       parts = cell_def.split(':')
       first = name_to_cell parts[0]
 
@@ -234,6 +235,8 @@ module Axlsx
       yield @rows.last if block_given?
       @rows.last
     end
+    
+    alias :<< :add_row
 
     # Set the style for cells in a specific row
     # @param [Integer] index or range of indexes in the table
