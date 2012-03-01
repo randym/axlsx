@@ -2,15 +2,15 @@ Axlsx: Office Open XML Spreadsheet Generation
 ====================================
 [![Build Status](https://secure.travis-ci.org/randym/axlsx.png)](http://travis-ci.org/randym/axlsx/)
 
-**IRC**:          [irc.freenode.net / #axlsx](irc://irc.freenode.net/axlsx)    
-**Git**:          [http://github.com/randym/axlsx](http://github.com/randym/axlsx)   
-**Author**:       Randy Morgan   
-**Copyright**:    2011      
-**License**:      MIT License      
-**Latest Version**: 1.0.17   
-**Ruby Version**: 1.8.7, 1.9.2, 1.9.3 
+**IRC**:          [irc.freenode.net / #axlsx](irc://irc.freenode.net/axlsx)
+**Git**:          [http://github.com/randym/axlsx](http://github.com/randym/axlsx)
+**Author**:       Randy Morgan
+**Copyright**:    2011
+**License**:      MIT License
+**Latest Version**: 1.0.17
+**Ruby Version**: 1.8.7, 1.9.2, 1.9.3
 
-**Release Date**: February 14th 2012     
+**Release Date**: February 14th 2012
 
 Synopsis
 --------
@@ -19,7 +19,7 @@ Axlsx is an Office Open XML Spreadsheet generator for the Ruby programming langu
 With Axlsx you can create excel worksheets with charts, images (with links), automated and fixed column widths, customizable styles, functions, merged cells, auto filters, file and stream serialization  as well as full schema validation. Axlsx excels at helping you generate beautiful Office Open XML Spreadsheet documents without having to understand the entire ECMA specification.
 
 If you are working in rails, or with active record see:
-http://github.com/randym/acts_as_xlsx 
+http://github.com/randym/acts_as_xlsx
 
 There are guides for using axlsx and acts_as_xlsx here:
 [http://axlsx.blogspot.com](http://axlsx.blogspot.com)
@@ -31,11 +31,11 @@ I'd really like to get rid of the depenency on RMagick in this gem. RMagic is be
 
 Feature List
 ------------
-                                                                              
+
 **1. Author xlsx documents: Axlsx is made to let you easily and quickly generate profesional xlsx based reports that can be validated before serialiation.
 
 **2. Generate 3D Pie, Line and Bar Charts: With Axlsx chart generation and management is as easy as a few lines of code. You can build charts based off data in your worksheet or generate charts without any data in your sheet at all.
-                                                                              
+
 **3. Custom Styles: With guaranteed document validity, you can style borders, alignment, fills, fonts, and number formats in a single line of code. Those styles can be applied to an entire row, or a single cell anywhere in your workbook.
 
 **4. Automatic type support: Axlsx will automatically determine the type of data you are generating. In this release Float, Integer, String, Date, Time and Boolean types are automatically identified and serialized to your spreadsheet.
@@ -68,7 +68,7 @@ Installing
 To install Axlsx, use the following command:
 
     $ gem install axlsx
-    
+
 #Usage
 ------
 
@@ -112,25 +112,25 @@ To install Axlsx, use the following command:
 ##Add an Image
 
      wb.add_worksheet(:name => "Images") do |sheet|
-       img = File.expand_path('examples/image1.jpeg') 
+       img = File.expand_path('examples/image1.jpeg')
        sheet.add_image(:image_src => img, :noSelect => true, :noMove => true) do |image|
          image.width=720
          image.height=666
          image.start_at 2, 2
        end
-     end  
+     end
 
 ##Add an Image with a hyperlink
 
      wb.add_worksheet(:name => "Image with Hyperlink") do |sheet|
-       img = File.expand_path('examples/image1.jpeg') 
+       img = File.expand_path('examples/image1.jpeg')
        sheet.add_image(:image_src => img, :noSelect => true, :noMove => true, :hyperlink=>"http://axlsx.blogspot.com") do |image|
          image.width=720
          image.height=666
          image.hyperlink.tooltip = "Labeled Link"
          image.start_at 2, 2
        end
-     end  
+     end
 
 ##Asian Language Support
 
@@ -138,7 +138,7 @@ To install Axlsx, use the following command:
        sheet.add_row ["日本語"]
        sheet.add_row ["华语/華語"]
        sheet.add_row ["한국어/조선말"]
-     end  
+     end
 
 ##Styling Columns
 
@@ -177,7 +177,7 @@ To install Axlsx, use the following command:
          # cell level style overrides via sheet range
          sheet["A1:D1"].each { |c| c.color = "FF0000"}
          sheet['A1:D2'].each { |c| c.style = Axlsx::STYLE_THIN_BORDER }
-     end     
+     end
 
 ##Using formula
 
@@ -204,7 +204,7 @@ To install Axlsx, use the following command:
          sheet.merge_cells("A4:C4")
          sheet["A1:D1"].each { |c| c.color = "FF0000"}
          sheet["A1:D4"].each { |c| c.style = Axlsx::STYLE_THIN_BORDER }
-     end     
+     end
 
 ##Generating A Bar Chart
 
@@ -215,7 +215,7 @@ To install Axlsx, use the following command:
        sheet.add_chart(Axlsx::Bar3DChart, :start_at => "A4", :end_at => "F17") do |chart|
          chart.add_series :data => sheet["A3:C3"], :labels => sheet["A2:C2"], :title => sheet["A1"]
        end
-     end  
+     end
 
 ##Generating A Pie Chart
 
@@ -225,7 +225,7 @@ To install Axlsx, use the following command:
        sheet.add_chart(Axlsx::Pie3DChart, :start_at => [0,2], :end_at => [5, 15], :title => "example 3: Pie Chart") do |chart|
          chart.add_series :data => sheet["A2:D2"], :labels => sheet["A1:D1"]
        end
-     end  
+     end
 
 ##Data over time
 
@@ -239,9 +239,9 @@ To install Axlsx, use the following command:
          sheet.add_chart(Axlsx::Bar3DChart) do |chart|
             chart.start_at "B7"
             chart.end_at "H27"
-            chart.add_series(:data => sheet["B2:B5"], :labels => sheet["A2:A5"], :title => sheet["B1"])           
-         end 
-     end     
+            chart.add_series(:data => sheet["B2:B5"], :labels => sheet["A2:A5"], :title => sheet["B1"])
+         end
+     end
 
 ##Generating A Line Chart
 
@@ -252,9 +252,9 @@ To install Axlsx, use the following command:
          chart.start_at 0, 2
          chart.end_at 10, 15
          chart.add_series :data => sheet["B1:E1"], :title => sheet["A1"]
-         chart.add_series :data => sheet["B2:E2"], :title => sheet["A2"]         
-       end       
-     end  
+         chart.add_series :data => sheet["B2:E2"], :title => sheet["A2"]
+       end
+     end
 
 ##Auto Filter
 
@@ -265,7 +265,7 @@ To install Axlsx, use the following command:
        sheet.add_row ["19.2", "1 min 28 sec", "about 10 hours ago", "1.9.2"]
        sheet.add_row ["19.3", "1 min 35 sec", "about 10 hours ago", "1.9.3"]
        sheet.auto_filter = "A2:D5"
-     end  
+     end
 
 ##Specifying Column Widths
 
@@ -306,7 +306,7 @@ This gem is 100% documented with YARD, an exceptional documentation library. To 
 #Specs
 ------
 This gem has 100% test coverage using test/unit. To execute tests for this gem, simply run rake in the gem directory.
- 
+
 #Changelog
 ---------
 - ** March.??.12**: 1.0.18 release
@@ -331,8 +331,8 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
    - date1904 now automatically set in bsd and mac environments
    - removed whitespace/indentation from xml outputs
    - col_style now skips rows that do not contain cells at the column index
- 
- 
+
+
 Please see the {file:CHANGELOG.md} document for past release information.
 
 #Thanks!
@@ -349,8 +349,10 @@ Please see the {file:CHANGELOG.md} document for past release information.
 
 [noniq](https://github.com/noniq) - for keeping true to the gem's style, and making sure what we put on paper does not get marginalized.
 
+[jurriaan](https://github.com/jurriaan) - for showing there is more than one way to skin a cat, and work with rows while you are at it!keeping true to the gem's style, and making sure what we put on paper does not get marginalize.
+
 #Copyright and License
 ----------
 
-Axlsx &copy; 2011 by [Randy Morgan](mailto:digial.ipseity@gmail.com). Axlsx is 
+Axlsx &copy; 2011 by [Randy Morgan](mailto:digial.ipseity@gmail.com). Axlsx is
 licensed under the MIT license. Please see the {file:LICENSE} document for more information.
