@@ -349,7 +349,7 @@ Please see the {file:CHANGELOG.md} document for past release information.
 
 [noniq](https://github.com/noniq) - for keeping true to the gem's style, and making sure what we put on paper does not get marginalized.
 
-[jurriaan](https://github.com/jurriaan) - for showing there is more than one way to skin a cat, and work with rows while you are at it!keeping true to the gem's style, and making sure what we put on paper does not get marginalize.
+[jurriaan](https://github.com/jurriaan) - for showing there is more than one way to skin a cat, and work with rows while you are at it.
 
 #Copyright and License
 ----------
