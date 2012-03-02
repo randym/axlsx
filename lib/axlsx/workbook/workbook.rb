@@ -99,23 +99,15 @@ require 'axlsx/workbook/shared_strings_table.rb'
 
     # Creates a new Workbook
     # The recomended way to work with workbooks is via Package#workbook
-    # @option options [Boolean] date1904. If this is not specified, we try to determine if the platform is bsd/darwin and set date1904 to true automatically.    
+    # @option options [Boolean] date1904. If this is not specified, date1904 is set to false. Office 2011 for Mac defaults to false.
     def initialize(options={})
       @styles = Styles.new
       @worksheets = SimpleTypedList.new Worksheet
       @drawings = SimpleTypedList.new Drawing
       @charts = SimpleTypedList.new Chart
       @images = SimpleTypedList.new Pic
-      self.date1904= options[:date1904].nil? ? is_bsd? : options[:date1904]
+      self.date1904= !options[:date1904].nil? && options[:date1904]
       yield self if block_given?      
-    end
-
-    # Uses RUBY_PLATFORM constant to determine if the OS is freebsd or darwin
-    # based on this value we attempt to set date1904.
-    # @return [Boolean]
-    def is_bsd?
-      platform = RUBY_PLATFORM.downcase
-      platform.include?('freebsd') || platform.include?('darwin')
     end
 
     # Instance level access to the class variable 1904
