@@ -171,6 +171,9 @@ module Axlsx
 
   # drawing rels part
   DRAWING_RELS_PN = "drawings/_rels/drawing%d.xml.rels"
+  
+  # drawing part
+  TABLE_PN = "tables/table%d.xml"
 
   # chart part
   CHART_PN = "charts/chart%d.xml"
