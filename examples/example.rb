@@ -206,6 +206,18 @@ wb.add_worksheet(:name => "Auto Filter") do |sheet|
   sheet.auto_filter = "A2:D5"
 end
 
+##Tables
+
+wb.add_worksheet(:name => "Table") do |sheet|
+  sheet.add_row ["Build Matrix"]
+  sheet.add_row ["Build", "Duration", "Finished", "Rvm"]
+  sheet.add_row ["19.1", "1 min 32 sec", "about 10 hours ago", "1.8.7"]
+  sheet.add_row ["19.2", "1 min 28 sec", "about 10 hours ago", "1.9.2"]
+  sheet.add_row ["19.3", "1 min 35 sec", "about 10 hours ago", "1.9.3"]
+  sheet.add_table "A2:D5", :name => 'Build Matrix'
+end
+
+
 ##Specifying Column Widths
 
 wb.add_worksheet(:name => "custom column widths") do |sheet|
@@ -235,7 +247,7 @@ end
 
 ##Validate and Serialize
 
-p.validate.each { |e| puts e.message }
+#p.validate.each { |e| puts e.message }
 p.serialize("example.xlsx")
 
 s = p.to_stream()
