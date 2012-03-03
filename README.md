@@ -318,6 +318,7 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
    - added support for fixed column widths
    - added support for page_margins
    - added << alias for add_row
+   - removed presetting of date1904 based on authoring platform. Now defaults to use 1900 epoch (date1904 = false)
 
 - ** February.14.12**: 1.0.17 release
    https://github.com/randym/axlsx/compare/1.0.16...1.0.17
