@@ -1,7 +1,10 @@
 language: ruby
 notifications:
   irc: "irc.freenode.org#axlsx"
-  email: "digital.ipeseity@gmail.com"
+  email:
+    recipients:
+      - digital.ipseity@gmail.com
+    on_success: always
 rvm:
   - 1.8.7
   - 1.9.2
