@@ -1,7 +1,7 @@
 # encoding: UTF-8
 module Axlsx
   # A relationship defines a reference between package parts.
-  # @note Packages automatcially manage relationships.
+  # @note Packages automatically manage relationships.
   class Relationship
 
     # The location of the relationship target
@@ -32,7 +32,7 @@ module Axlsx
     # creates a new relationship
     # @param [String] Type The type of the relationship
     # @param [String] Target The target for the relationship
-    # @option [Symbol] target_mode only accepts :external.    
+    # @option [Symbol] target_mode only accepts :external.
     def initialize(type, target, options={})
       self.Target=target
       self.Type=type
@@ -47,7 +47,7 @@ module Axlsx
     # @see TargetMode
     def TargetMode=(v) RestrictionValidator.validate 'Relationship.TargetMode', [:External, :Internal], v; @TargetMode = v; end
 
-    # Serializes the relationship    
+    # Serializes the relationship
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @param [String] rId the reference id of the object.
     # @return [String]
