@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-module Axlsx 
+module Axlsx
 
 require 'axlsx/workbook/worksheet/date_time_converter.rb'
 require 'axlsx/workbook/worksheet/cell.rb'
@@ -10,7 +10,7 @@ require 'axlsx/workbook/shared_strings_table.rb'
 
   # The Workbook class is an xlsx workbook that manages worksheets, charts, drawings and styles.
   # The following parts of the Office Open XML spreadsheet specification are not implimented in this version.
-  # 
+  #
   #   bookViews
   #   calcPr
   #   customWorkbookViews
@@ -40,13 +40,13 @@ require 'axlsx/workbook/shared_strings_table.rb'
     attr_reader :use_shared_strings
 
     # @see use_shared_strings
-    def use_shared_strings=(v) 
+    def use_shared_strings=(v)
       Axlsx::validate_boolean(v)
       @use_shared_strings = v
     end
 
 
-    # A collection of worksheets associated with this workbook. 
+    # A collection of worksheets associated with this workbook.
     # @note The recommended way to manage worksheets is add_worksheet
     # @see Workbook#add_worksheet
     # @see Worksheet
@@ -88,12 +88,12 @@ require 'axlsx/workbook/shared_strings_table.rb'
     # Indicates if the epoc date for serialization should be 1904. If false, 1900 is used.
     @@date1904 = false
 
-    # lets come back to this later when we are ready for parsing. 
+    # lets come back to this later when we are ready for parsing.
     #def self.parse entry
     #  io = entry.get_input_stream
     #  w = self.new
     #  w.parser_xml = Nokogiri::XML(io.read)
-    #  w.parse_string :date1904, "//xmlns:workbookPr/@date1904"      
+    #  w.parse_string :date1904, "//xmlns:workbookPr/@date1904"
     #  w
     #end
 
@@ -107,12 +107,12 @@ require 'axlsx/workbook/shared_strings_table.rb'
       @charts = SimpleTypedList.new Chart
       @images = SimpleTypedList.new Pic
       self.date1904= !options[:date1904].nil? && options[:date1904]
-      yield self if block_given?      
+      yield self if block_given?
     end
 
     # Instance level access to the class variable 1904
     # @return [Boolean]
-    def date1904() @@date1904; end    
+    def date1904() @@date1904; end
 
     # see @date1904
     def date1904=(v) Axlsx::validate_boolean v; @@date1904 = v; end
@@ -142,7 +142,7 @@ require 'axlsx/workbook/shared_strings_table.rb'
       r = Relationships.new
       @worksheets.each do |sheet|
         r << Relationship.new(WORKSHEET_R, WORKSHEET_PN % (r.size+1))
-      end 
+      end
       r << Relationship.new(STYLES_R,  STYLES_PN)
       if use_shared_strings
           r << Relationship.new(SHARED_STRINGS_R,  SHARED_STRINGS_PN)
@@ -157,13 +157,13 @@ require 'axlsx/workbook/shared_strings_table.rb'
     end
 
     # returns a range of cells in a worksheet
-    # @param [String] cell_def The excel style reference defining the worksheet and cells. The range must specify the sheet to 
+    # @param [String] cell_def The excel style reference defining the worksheet and cells. The range must specify the sheet to
     # retrieve the cells from. e.g. range('Sheet1!A1:B2') will return an array of four cells [A1, A2, B1, B2] while range('Sheet1!A1') will return a single Cell.
     # @return [Cell, Array]
     def [](cell_def)
       sheet_name = cell_def.split('!')[0] if cell_def.match('!')
       worksheet =  self.worksheets.select { |s| s.name == sheet_name }.first
-      raise ArgumentError, 'Unknown Sheet' unless sheet_name && worksheet.is_a?(Worksheet) 
+      raise ArgumentError, 'Unknown Sheet' unless sheet_name && worksheet.is_a?(Worksheet)
       worksheet[cell_def.gsub(/.+!/,"")]
     end
 
@@ -171,23 +171,21 @@ require 'axlsx/workbook/shared_strings_table.rb'
     # @return [String]
     def to_xml()
       add_worksheet unless worksheets.size > 0
-      builder = Nokogiri::XML::Builder.new(:encoding => ENCODING) do |xml|        
+      builder = Nokogiri::XML::Builder.new(:encoding => ENCODING) do |xml|
         xml.workbook(:xmlns => XML_NS, :'xmlns:r' => XML_NS_R) {
           xml.workbookPr(:date1904=>@@date1904)
           #<x:workbookProtection workbookPassword="xsd:hexBinary data" lockStructure="1" lockWindows="1" />
           # Required to support rubyXL parsing as it requires sheetView, which requires this.
-          xml.bookViews { 
-            worksheets.count.times do 
-              xml.workbookView :activeTab=>0 
-            end
+          xml.bookViews {
+              xml.workbookView :activeTab=>0
           }
           xml.sheets {
-            @worksheets.each_with_index do |sheet, index|              
+            @worksheets.each_with_index do |sheet, index|
               xml.sheet(:name=>sheet.name, :sheetId=>index+1, :"r:id"=>sheet.rId)
             end
           }
         }
-      end      
+      end
       builder.to_xml(:save_with => 0)
     end
   end
