@@ -88,7 +88,7 @@ class TestDateTimeConverter < Test::Unit::TestCase
 
   def test_time_to_serial_1904
     Axlsx::Workbook.date1904 = true
-      # ruby 1.8.7 cannot parse dates prior to epoc. see http://ruby-doc.org/core-1.8.7/Time.html
+      # ruby 1.8.7 cannot parse dates prior to epoch. see http://ruby-doc.org/core-1.8.7/Time.html
 
     tests = if @extended_time_range
              { # examples taken straight from the spec

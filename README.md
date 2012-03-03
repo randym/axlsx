@@ -42,7 +42,7 @@ Feature List
 
 **5. Automatic and fixed column widths: Axlsx will automatically determine the appropriate width for your columns based on the content in the worksheet, or use any value you specify for the really funky stuff.
 
-**6. Support for automatically formatted 1904 and 1900 epocs configurable in the workbook.
+**6. Support for automatically formatted 1904 and 1900 epochs configurable in the workbook.
 
 **7. Add jpg, gif and png images to worksheets with hyperlinks
 
