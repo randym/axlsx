@@ -131,11 +131,7 @@ module Axlsx
     #  p.validate.each { |error| puts error.message }
     def validate
       errors = []
-      parts.each do |part|
-        next if part[:schema].nil?
-        e = validate_single_doc(part[:schema], part[:doc])
-        errors << { :entry => part[:entry], :errors => e } if e.size > 0
-      end
+      parts.each { |part| errors.concat validate_single_doc(part[:schema], part[:doc]) unless part[:schema].nil? }
       errors
     end
 
