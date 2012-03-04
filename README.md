@@ -7,10 +7,10 @@ Axlsx: Office Open XML Spreadsheet Generation
 **Author**:       Randy Morgan
 **Copyright**:    2011
 **License**:      MIT License
-**Latest Version**: 1.0.17
+**Latest Version**: 1.0.18
 **Ruby Version**: 1.8.7, 1.9.2, 1.9.3
 
-**Release Date**: February 14th 2012
+**Release Date**: March 5th 2012
 
 Synopsis
 --------
@@ -314,7 +314,6 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
    - bugfix custom borders are not properly applied when using styles.add_style
    - interop worksheet names must be 31 characters or less or some versions of office complain about repairs
    - added type support for :boolean and :date types cell values
-   - iterop added some elements so that rubyXL can parse sheets generated with axlsx
    - added support for fixed column widths
    - added support for page_margins
    - added << alias for add_row

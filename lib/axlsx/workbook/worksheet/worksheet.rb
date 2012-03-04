@@ -51,7 +51,6 @@ module Axlsx
     #      end
     # @see PageMargins#initialize
     # @return [PageMargins]
-    # @yeilds self
     def page_margins
       @page_margins ||= PageMargins.new
       yield @page_margins if block_given?
@@ -336,11 +335,13 @@ module Axlsx
           # another patch for the folks at rubyXL as thier parser depends on this optional element.
           xml.dimension :ref=>dimension unless rows.size == 0
           # this is required by rubyXL, spec says who cares - but it seems they didnt notice
-          xml.sheetViews {
-            xml.sheetView(:tabSelected => 1, :workbookViewId => 0) {
-              xml.selection :activeCell=>"A1", :sqref => "A1"
-            }
-          }
+          # however, it also seems to be causing some odd [Grouped] stuff in excel 2011 - so
+          # removing until I understand it better.
+          # xml.sheetViews {
+          #  xml.sheetView(:tabSelected => 1, :workbookViewId => 0) {
+          #    xml.selection :activeCell=>"A1", :sqref => "A1"
+          #  }
+          # }
 
           if @auto_fit_data.size > 0
             xml.cols {
