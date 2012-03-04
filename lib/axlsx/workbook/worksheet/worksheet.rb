@@ -337,7 +337,7 @@ module Axlsx
           xml.dimension :ref=>dimension unless rows.size == 0
           # this is required by rubyXL, spec says who cares - but it seems they didnt notice
           xml.sheetViews {
-            xml.sheetView(:tabSelected => 1, :workbookViewId => 1) {
+            xml.sheetView(:tabSelected => 1, :workbookViewId => 0) {
               xml.selection :activeCell=>"A1", :sqref => "A1"
             }
           }
