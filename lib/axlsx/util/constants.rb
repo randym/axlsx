@@ -21,7 +21,7 @@ module Axlsx
 
   # dc elements (core) namespace
   CORE_NS_DC = "http://purl.org/dc/elements/1.1/"
-  
+
   # dcmit (core) namespcace
   CORE_NS_DCMIT = "http://purl.org/dc/dcmitype/"
 
@@ -30,10 +30,10 @@ module Axlsx
 
   # xml schema namespace
   CORE_NS_XSI = "http://www.w3.org/2001/XMLSchema-instance"
-  
+
   # spreadsheet drawing namespace
   XML_NS_XDR = "http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing"
-  
+
   # drawing namespace
   XML_NS_A  = "http://schemas.openxmlformats.org/drawingml/2006/main"
 
@@ -43,13 +43,12 @@ module Axlsx
   # relationships namespace
   XML_NS_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships"
 
-
   # relationships name space
   RELS_R = "http://schemas.openxmlformats.org/package/2006/relationships"
 
   # table rels namespace
   TABLE_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/table"
-  
+
   # workbook rels namespace
   WORKBOOK_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument"
 
@@ -80,7 +79,7 @@ module Axlsx
   # image rels namespace
   HYPERLINK_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink"
 
-  # table content type 
+  # table content type
   TABLE_CT = "application/vnd.openxmlformats-officedocument.spreadsheetml.table+xml"
 
   # workbook content type
@@ -90,14 +89,14 @@ module Axlsx
   APP_CT = "application/vnd.openxmlformats-officedocument.extended-properties+xml"
 
   # rels content type
-  RELS_CT = "application/vnd.openxmlformats-package.relationships+xml"  
+  RELS_CT = "application/vnd.openxmlformats-package.relationships+xml"
 
   # styles content type
   STYLES_CT = "application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"
 
   # xml content type
   XML_CT = "application/xml"
-  
+
   # worksheet content type
   WORKSHEET_CT = "application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"
 
@@ -127,7 +126,7 @@ module Axlsx
 
   # jpeg extension
   JPEG_EX = "jpeg"
-  
+
   # gif extension
   GIF_EX = "gif"
 
@@ -145,10 +144,10 @@ module Axlsx
 
   # shared_strings  part
   SHARED_STRINGS_PN = "sharedStrings.xml"
-  
+
   # app part
   APP_PN = "docProps/app.xml"
-  
+
   # core part
   CORE_PN = "docProps/core.xml"
 
@@ -196,12 +195,12 @@ module Axlsx
 
   # spreadsheetML validation schema
   SML_XSD = SCHEMA_BASE + "sml.xsd"
-  
+
   # drawing validation schema
   DRAWING_XSD = SCHEMA_BASE + "dml-spreadsheetDrawing.xsd"
 
   # number format id for pecentage formatting using the default formatting id.
-  NUM_FMT_PERCENT = 9 
+  NUM_FMT_PERCENT = 9
 
   # number format id for date format like 2011/11/13
   NUM_FMT_YYYYMMDD = 100
@@ -216,7 +215,7 @@ module Axlsx
   STYLE_DATE = 2
 
   # error messages RestrictionValidor
-  ERR_RESTRICTION = "Invalid Data: %s. %s must be one of %s." 
+  ERR_RESTRICTION = "Invalid Data: %s. %s must be one of %s."
 
   # error message DataTypeValidator
   ERR_TYPE = "Invalid Data %s for %s. must be %s."
