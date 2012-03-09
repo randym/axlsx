@@ -60,7 +60,7 @@ module Axlsx
       val[:i] += ((c.bytes.first - 65) + val[:base]); val[:base] *= 26; val 
     end
 
-    [v[:i]-1, ((name[/[1-9]+/]).to_i)-1]
+    [v[:i]-1, ((name[/[1-9][0-9]*/]).to_i)-1]
 
   end
 end
