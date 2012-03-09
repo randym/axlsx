@@ -24,8 +24,8 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'rubyzip', '~> 0.9'
 
-  s.add_runtime_dependency 'rake', "0.8.7"  if RUBY_VERSION == "1.9.2"
-  s.add_runtime_dependency 'rake', ">= 0.8.7" if ["1.9.3", "1.8.7"].include?(RUBY_VERSION)
+  s.add_runtime_dependency 'rake', '0.8.7'  if RUBY_VERSION == "1.9.2"
+  s.add_runtime_dependency 'rake', '>= 0.8.7' if ["1.9.3", "1.8.7"].include?(RUBY_VERSION)
   s.add_development_dependency 'yard'
   s.add_development_dependency 'yard'
   s.add_development_dependency 'rdiscount'
