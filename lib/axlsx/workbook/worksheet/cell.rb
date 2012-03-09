@@ -230,7 +230,7 @@ module Axlsx
     # @example Absolute Cell Reference
     #   ws.rows.first.cells.first.r #=> "$A$1"
     def r_abs
-      "$#{r.split('').join('$')}"
+      "$#{r.match(%r{([A-Z]+)([0-9]+)})[1,2].join('$')}"
     end
 
     # @return [Integer] The cellXfs item index applied to this cell.
