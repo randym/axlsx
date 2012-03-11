@@ -4,7 +4,7 @@ require 'test/unit'
 require 'axlsx.rb'
 
 class TestContentType < Test::Unit::TestCase
-  def setup    
+  def setup
     @package = Axlsx::Package.new
     @doc = Nokogiri::XML(@package.send(:content_types).to_xml)
   end
@@ -21,31 +21,31 @@ class TestContentType < Test::Unit::TestCase
 
   def test_pre_built_types
 
-    o_path = "Types Override [@ContentType='%s']"
-    d_path = "Types Default [@ContentType='%s']"
+    o_path = "//xmlns:Override[@ContentType='%s']"
+    d_path = "//xmlns:Default[@ContentType='%s']"
 
-    #default 
-    assert_equal(@doc.css("Types Default").size, 2, "There should be 2 default types")
-  
-    node = @doc.css(d_path % Axlsx::XML_CT).first
+    #default
+    assert_equal(@doc.xpath("//xmlns:Default").size, 2, "There should be 2 default types")
+
+    node = @doc.xpath(d_path % Axlsx::XML_CT).first
     assert_equal(node["Extension"], "#{Axlsx::XML_EX}", "xml content type invalid")
 
-    node = @doc.css(d_path % Axlsx::RELS_CT).first
+    node = @doc.xpath(d_path % Axlsx::RELS_CT).first
     assert_equal(node["Extension"],"#{Axlsx::RELS_EX}", "relationships content type invalid")
 
     #overrride
-    assert_equal(@doc.css("Types Override").size, 4, "There should be 4 Override types")
+    assert_equal(@doc.xpath("//xmlns:Override").size, 4, "There should be 4 Override types")
 
-    node = @doc.css(o_path % Axlsx::APP_CT).first
+    node = @doc.xpath(o_path % Axlsx::APP_CT).first
     assert_equal(node["PartName"], "/#{Axlsx::APP_PN}", "App part name invalid")
 
-    node = @doc.css(o_path % Axlsx::CORE_CT).first
+    node = @doc.xpath(o_path % Axlsx::CORE_CT).first
     assert_equal(node["PartName"], "/#{Axlsx::CORE_PN}", "Core part name invalid")
 
-    node = @doc.css(o_path % Axlsx::STYLES_CT).first
+    node = @doc.xpath(o_path % Axlsx::STYLES_CT).first
     assert_equal(node["PartName"], "/xl/#{Axlsx::STYLES_PN}", "Styles part name invalid")
 
-    node = @doc.css(o_path % Axlsx::WORKBOOK_CT).first
+    node = @doc.xpath(o_path % Axlsx::WORKBOOK_CT).first
     assert_equal(node["PartName"], "/#{Axlsx::WORKBOOK_PN}", "Workbook part invalid")
   end
 
