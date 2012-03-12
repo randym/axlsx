@@ -201,6 +201,13 @@ wb.add_worksheet(:name => "custom column widths") do |sheet|
   sheet.column_widths nil, 3
 end
 
+
+##Hide Gridlines in worksheet
+wb.add_worksheet(:name => "No Gridlines") do |sheet|
+  sheet.add_row ["This", "Sheet", "Hides", "Gridlines"]
+  sheet.show_gridlines = false
+end
+
 ##Specify Page Margins for printing
 margins = {:left => 3, :right => 3, :top => 1.2, :bottom => 1.2, :header => 0.7, :footer => 0.7}
 wb.add_worksheet(:name => "print margins", :page_margins => margins) do |sheet|

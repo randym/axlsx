@@ -35,6 +35,10 @@ module Axlsx
     # @return Array
     attr_reader :auto_filter
 
+    # Indicates if the worksheet should show gridlines or not
+    # @return Boolean
+    attr_reader :show_gridlines
+
     # Page margins for printing the worksheet.
     # @example
     #      wb = Axlsx::Package.new.workbook
@@ -55,6 +59,7 @@ module Axlsx
       @page_margins ||= PageMargins.new
       yield @page_margins if block_given?
       @page_margins
+
     end
 
     # Creates a new worksheet.
@@ -62,8 +67,10 @@ module Axlsx
     # @see Workbook#add_worksheet
     # @option options [String] name The name of this worksheet.
     # @option options [Hash] page_margins A hash containing page margins for this worksheet. @see PageMargins
+    # @option options [Boolean] show_gridlines indicates if gridlines should be shown for this sheet.
     def initialize(wb, options={})
       @drawing = @page_margins = @auto_filter = nil
+      @show_gridlines = true
       @rows = SimpleTypedList.new Row
       self.workbook = wb
       @workbook.worksheets << self
@@ -107,6 +114,14 @@ module Axlsx
     # @return [String] the A1:B2 style reference for the first and last row column intersection in the workbook
     def dimension
       "#{rows.first.cells.first.r}:#{rows.last.cells.last.r}"
+    end
+
+    # Indicates if gridlines should be shown in the sheet.
+    # This is true by default.
+    # @return [Boolean]
+    def show_gridlines=(v)
+      Axlsx::validate_boolean v
+      @show_gridlines = v
     end
 
 
@@ -337,11 +352,11 @@ module Axlsx
           # this is required by rubyXL, spec says who cares - but it seems they didnt notice
           # however, it also seems to be causing some odd [Grouped] stuff in excel 2011 - so
           # removing until I understand it better.
-          # xml.sheetViews {
-          #  xml.sheetView(:tabSelected => 1, :workbookViewId => 0) {
-          #    xml.selection :activeCell=>"A1", :sqref => "A1"
-          #  }
-          # }
+          xml.sheetViews {
+            xml.sheetView(:tabSelected => 1, :workbookViewId => 0, :showGridLines => show_gridlines) {
+              xml.selection :activeCell=>"A1", :sqref => "A1"
+            }
+          }
 
           if @auto_fit_data.size > 0
             xml.cols {
