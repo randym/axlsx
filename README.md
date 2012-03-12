@@ -353,6 +353,8 @@ Please see the {file:CHANGELOG.md} document for past release information.
 
 [jurriaan](https://github.com/jurriaan) - for showing there is more than one way to skin a cat, and work with rows while you are at it.
 
+[joekain](https://github.com/joekain) - for keeping our refereneces working even in the double digits!
+
 #Copyright and License
 ----------
 
