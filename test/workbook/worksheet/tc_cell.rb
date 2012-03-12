@@ -9,7 +9,8 @@ class TestCell < Test::Unit::TestCase
     p.workbook.styles.add_style :sz=>20
     @row = @ws.add_row
     @c = @row.add_cell 1, :type=>:float, :style=>1
-    @ws.add_row (0..26).map { |index| index }
+    data = (0..26).map { |index| index }
+    @ws.add_row data
     @cAA = @ws["AA2"]
   end
 
