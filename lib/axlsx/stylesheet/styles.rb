@@ -230,6 +230,7 @@ module Axlsx
 
       if options[:alignment]
         xf.alignment = CellAlignment.new(options[:alignment])
+        xf.applyAlignment = true
       end
 
       if applyProtection
