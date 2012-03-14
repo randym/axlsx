@@ -9,6 +9,9 @@ class TestCell < Test::Unit::TestCase
     p.workbook.styles.add_style :sz=>20
     @row = @ws.add_row
     @c = @row.add_cell 1, :type=>:float, :style=>1
+    data = (0..26).map { |index| index }
+    @ws.add_row data
+    @cAA = @ws["AA2"]
   end
 
   def test_initialize
@@ -17,7 +20,6 @@ class TestCell < Test::Unit::TestCase
     assert_equal(@c.style, 1, "style option is applied")
     assert_equal(@c.value, 1.0, "type option is applied and value is casted")
   end
-
 
   def test_style_date_data
     c = Axlsx::Cell.new(@c.row, Time.now)
@@ -42,6 +44,7 @@ class TestCell < Test::Unit::TestCase
 
   def test_r_abs
     assert_equal(@c.r_abs,"$A$1", "calculate absolute cell reference")
+    assert_equal(@cAA.r_abs,"$AA$2", "needs to accept multi-digit columns")
   end
 
   def test_style

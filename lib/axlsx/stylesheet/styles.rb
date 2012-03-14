@@ -120,7 +120,7 @@ module Axlsx
     end
 
     # Drastically simplifies style creation and management.
-    # @return [Integer] 
+    # @return [Integer]
     # @option options [String] fg_color The text color
     # @option options [Integer] sz The text size
     # @option options [Boolean] b Indicates if the text should be bold
@@ -133,13 +133,13 @@ module Axlsx
     # @option options [String] font_name The name of the font to use
     # @option options [Integer] num_fmt The number format to apply
     # @option options [String] format_code The formatting to apply. If this is specified, num_fmt is ignored.
-    # @option options [Integer] border The border style to use. 
+    # @option options [Integer] border The border style to use.
     # @option options [String] bg_color The background color to apply to the cell
     # @option options [Boolean] hidden Indicates if the cell should be hidden
     # @option options [Boolean] locked Indicates if the cell should be locked
     # @option options [Hash] alignment A hash defining any of the attributes used in CellAlignment
     # @see CellAlignment
-    # 
+    #
     # @example You Got Style
     #   require "rubygems" # if that is your preferred way to manage gems!
     #   require "axlsx"
@@ -165,15 +165,15 @@ module Axlsx
     #   ws = p.workbook.add_worksheet
     #
     #   # define your styles
-    #   title = ws.style.add_style(:bg_color => "FFFF0000", 
+    #   title = ws.style.add_style(:bg_color => "FFFF0000",
     #                              :fg_color=>"#FF000000",
-    #                              :border=>Axlsx::STYLE_THIN_BORDER, 
+    #                              :border=>Axlsx::STYLE_THIN_BORDER,
     #                              :alignment=>{:horizontal => :center})
     #
     #   date_time = ws.style.add_style(:num_fmt => Axlsx::NUM_FMT_YYYYMMDDHHMMSS,
     #                                  :border=>Axlsx::STYLE_THIN_BORDER)
     #
-    #   percent = ws.style.add_style(:num_fmt => Axlsx::NUM_FMT_PERCENT, 
+    #   percent = ws.style.add_style(:num_fmt => Axlsx::NUM_FMT_PERCENT,
     #                                :border=>Axlsx::STYLE_THIN_BORDER)
     #
     #   currency = ws.style.add_style(:format_code=>"¥#,##0;[Red]¥-#,##0",
@@ -190,7 +190,7 @@ module Axlsx
     #   f = File.open('example_you_got_style.xlsx', 'w')
     #   p.serialize(f)
     def add_style(options={})
-      
+
       numFmtId = if options[:format_code]
                    n = @numFmts.map{ |f| f.numFmtId }.max + 1
                    numFmts << NumFmt.new(:numFmtId => n, :formatCode=> options[:format_code])
@@ -198,19 +198,19 @@ module Axlsx
                  else
                    options[:num_fmt] || 0
                  end
-      
+
       borderId = options[:border] || 0
 
       raise ArgumentError, "Invalid borderId" unless borderId < borders.size
-      
+
       fill = if options[:bg_color]
                color = Color.new(:rgb=>options[:bg_color])
                pattern = PatternFill.new(:patternType =>:solid, :fgColor=>color)
-               fills << Fill.new(pattern)   
+               fills << Fill.new(pattern)
              else
                0
              end
-      
+
       fontId = if (options.values_at(:fg_color, :sz, :b, :i, :u, :strike, :outline, :shadow, :charset, :family, :font_name).length)
                  font = Font.new()
                  [:b, :i, :u, :strike, :outline, :shadow, :charset, :family, :sz].each { |k| font.send("#{k}=", options[k]) unless options[k].nil? }
@@ -218,27 +218,28 @@ module Axlsx
                  font.name = options[:font_name] unless options[:font_name].nil?
                  fonts << font
                else
-                 0 
+                 0
                end
-      
+
       applyProtection = (options[:hidden] || options[:locked]) ? 1 : 0
-      
+
       xf = Xf.new(:fillId => fill, :fontId=>fontId, :applyFill=>1, :applyFont=>1, :numFmtId=>numFmtId, :borderId=>borderId, :applyProtection=>applyProtection)
 
       xf.applyNumberFormat = true if xf.numFmtId > 0
       xf.applyBorder = true if borderId > 0
-      
+
       if options[:alignment]
         xf.alignment = CellAlignment.new(options[:alignment])
+        xf.applyAlignment = true
       end
-      
+
       if applyProtection
         xf.protection = CellProtection.new(options)
       end
-      
+
       cellXfs << xf
     end
-    
+
     # Serializes the styles document
     # @return [String]
     def to_xml()
@@ -253,7 +254,7 @@ module Axlsx
     end
 
     private
-    # Creates the default set of styles the exel requires to be valid as well as setting up the 
+    # Creates the default set of styles the exel requires to be valid as well as setting up the
     # Axlsx::STYLE_THIN_BORDER
     def load_default_styles
       @numFmts = SimpleTypedList.new NumFmt, 'numFmts'
@@ -274,8 +275,8 @@ module Axlsx
       @borders = SimpleTypedList.new Border, 'borders'
       @borders << Border.new
       black_border = Border.new
-      [:left, :right, :top, :bottom].each do |item| 
-        black_border.prs << BorderPr.new(:name=>item, :style=>:thin, :color=>Color.new(:rgb=>"FF000000")) 
+      [:left, :right, :top, :bottom].each do |item|
+        black_border.prs << BorderPr.new(:name=>item, :style=>:thin, :color=>Color.new(:rgb=>"FF000000"))
       end
       @borders << black_border
       @borders.lock
@@ -300,4 +301,4 @@ module Axlsx
     end
   end
 end
-  
+

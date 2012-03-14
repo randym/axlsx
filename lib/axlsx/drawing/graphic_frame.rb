@@ -17,14 +17,14 @@ module Axlsx
     # @param [TwoCellAnchor] anchor
     # @param [Class] chart_type
     def initialize(anchor, chart_type, options)
-      DataTypeValidator.validate "Drawing.chart_type", Chart, chart_type 
+      DataTypeValidator.validate "Drawing.chart_type", Chart, chart_type
       @anchor = anchor
       @chart = chart_type.new(self, options)
     end
 
     # The relationship id for this graphic
     # @return [String]
-    def rId 
+    def rId
       "rId#{@anchor.index+1}"
     end
 
@@ -32,10 +32,10 @@ module Axlsx
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String]
     def to_xml(xml)
-      xml.graphicFrame {        
+      xml.graphicFrame {
         xml.nvGraphicFramePr {
-          xml.cNvPr :id=>2, :name=>chart.title
-          xml.cNvGraphicFramePr                
+          xml.cNvPr :id=>2, :name=>chart.title.text
+          xml.cNvGraphicFramePr
         }
         xml.xfrm {
           xml[:a].off(:x=>0, :y=>0)
@@ -47,7 +47,7 @@ module Axlsx
           }
         }
       }
-      
+
     end
   end
 end

@@ -2,7 +2,7 @@ require 'test/unit'
 require 'axlsx.rb'
 
 class TestPackage < Test::Unit::TestCase
-  def setup    
+  def setup
     @package = Axlsx::Package.new
     ws = @package.workbook.add_worksheet
     chart = ws.add_chart Axlsx::Pie3DChart
@@ -39,16 +39,16 @@ class TestPackage < Test::Unit::TestCase
     fname = 'axlsx_test_serialization.xlsx'
     assert_nothing_raised do
       begin
-         z= @package.serialize(@fname)              
+         z= @package.serialize(@fname)
          zf = Zip::ZipFile.open(@fname)
          @package.send(:parts).each{ |part| zf.get_entry(part[:entry]) }
-         File.delete(@fname)        
+         File.delete(@fname)
       rescue Errno::EACCES
          puts "WARNING:: test_serialization requires write access."
       end
-     end    
+     end
    end
-  
+
   def test_validation
     assert_equal(@package.validate.size, 0, @package.validate)
     #how to test for failure? the internal validations on the models are so strict I cant break anthing.....
@@ -58,7 +58,7 @@ class TestPackage < Test::Unit::TestCase
     p = @package.send(:parts)
     p.each do |part|
       #all parts must have :doc, :entry, :schema
-      assert(part.keys.size == 3 && part.keys.reject{ |k| [:doc, :entry, :schema].include? k}.empty?) 
+      assert(part.keys.size == 3 && part.keys.reject{ |k| [:doc, :entry, :schema].include? k}.empty?)
     end
     #all parts have an entry
     assert_equal(p.select{ |part| part[:entry] =~ /_rels\/\.rels/ }.size, 1, "rels missing")
@@ -76,7 +76,7 @@ class TestPackage < Test::Unit::TestCase
 
     #no mystery parts
     assert_equal(p.size, 12)
-    
+
   end
 
   def test_shared_strings_requires_part
@@ -84,7 +84,7 @@ class TestPackage < Test::Unit::TestCase
     p = @package.send(:parts)
     assert_equal(p.select{ |part| part[:entry] =~/xl\/sharedStrings.xml/}.size, 1, "shared strings table missing")
   end
-  
+
   def test_workbook_is_a_workbook
     assert @package.workbook.is_a? Axlsx::Workbook
   end
@@ -106,4 +106,8 @@ class TestPackage < Test::Unit::TestCase
     assert(ct.select { |ct| ct.ContentType == Axlsx::SHARED_STRINGS_CT }.size == 1)
   end
 
+  def test_name_to_indices
+    assert(Axlsx::name_to_indices('A1') == [0,0])
+    assert(Axlsx::name_to_indices('A100') == [0,99], 'needs to axcept rows that contain 0')
+  end
 end

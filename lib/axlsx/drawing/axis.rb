@@ -3,7 +3,7 @@ module Axlsx
  # the access class defines common properties and values for a chart axis.
   class Axis
 
-    # the id of the axis. 
+    # the id of the axis.
     # @return [Integer]
     attr_reader :axId
 
@@ -15,7 +15,7 @@ module Axlsx
     # @see Scaling
     # @return [Scaling]
     attr_reader :scaling
-    
+
     # The position of the axis
     # must be one of [:l, :r, :t, :b]
     # @return [Symbol]
@@ -34,7 +34,11 @@ module Axlsx
     # specifies how the perpendicular axis is crossed
     # must be one of [:autoZero, :min, :max]
     # @return [Symbol]
-    attr_reader :crosses 
+    attr_reader :crosses
+
+    # specifies if gridlines should be shown in the chart
+    # @return [Boolean]
+    attr_reader :gridlines
 
     # Creates an Axis object
     # @param [Integer] axId the id of this axis
@@ -49,11 +53,12 @@ module Axlsx
       @axId = axId
       @crossAx = crossAx
       @format_code = "General"
-      @scaling = Scaling.new(:orientation=>:minMax)      
+      @scaling = Scaling.new(:orientation=>:minMax)
       self.axPos = :b
       self.tickLblPos = :nextTo
       self.format_code = "General"
       self.crosses = :autoZero
+      self.gridlines = true
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
@@ -70,6 +75,10 @@ module Axlsx
     # default :General
     def format_code=(v) Axlsx::validate_string(v); @format_code = v; end
 
+    # Specify if gridlines should be shown for this axis
+    # default true
+    def gridlines=(v) Axlsx::validate_boolean(v); @gridlines = v; end
+
     # specifies how the perpendicular axis is crossed
     # must be one of [:autoZero, :min, :max]
     def crosses=(v) RestrictionValidator.validate "#{self.class}.crosses", [:autoZero, :min, :max], v; @crosses = v; end
@@ -82,13 +91,21 @@ module Axlsx
       @scaling.to_xml(xml)
       xml.delete :val=>0
       xml.axPos :val=>@axPos
-      xml.majorGridlines
+      xml.majorGridlines {
+        if self.gridlines == false
+          xml.spPr {
+            xml[:a].ln {
+              xml[:a].noFill
+            }
+          }
+        end
+      }
       xml.numFmt :formatCode => @format_code, :sourceLinked=>"1"
       xml.majorTickMark :val=>"none"
       xml.minorTickMark :val=>"none"
       xml.tickLblPos :val=>@tickLblPos
       xml.crossAx :val=>@crossAx
       xml.crosses :val=>@crosses
-    end    
+    end
   end
 end
