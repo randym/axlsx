@@ -49,8 +49,8 @@ class TestStyles < Test::Unit::TestCase
     
     assert_equal(xf.applyProtection, 1, "protection applied")
     assert_equal(xf.applyBorder, true, "border applied")
-    assert_equal(xf.applyNumberFormat, true, "border applied")
-
+    assert_equal(xf.applyNumberFormat, true, "number format applied")
+    assert_equal(xf.applyAlignment, true, "alignment applied")
   end
 
 end
