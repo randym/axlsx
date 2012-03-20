@@ -3,11 +3,19 @@ Axlsx: Office Open XML Spreadsheet Generation
 [![Build Status](https://secure.travis-ci.org/randym/axlsx.png)](http://travis-ci.org/randym/axlsx/)
 
 **IRC**:          [irc.freenode.net / #axlsx](irc://irc.freenode.net/axlsx)
+
 **Git**:          [http://github.com/randym/axlsx](http://github.com/randym/axlsx)
+
+**Twitter**:      [https://twitter.com/#!/morgan_randy](https://twitter.com/#!/morgan_randy) release announcements and news will be published here
+
 **Author**:       Randy Morgan
+
 **Copyright**:    2011
+
 **License**:      MIT License
+
 **Latest Version**: 1.0.18
+
 **Ruby Version**: 1.8.7, 1.9.2, 1.9.3
 
 **Release Date**: March 5th 2012
@@ -275,10 +283,26 @@ To install Axlsx, use the following command:
      end
 
 ##Specify Page Margins for printing
+
      margins = {:left => 3, :right => 3, :top => 1.2, :bottom => 1.2, :header => 0.7, :footer => 0.7}
      wb.add_worksheet(:name => "print margins", :page_margins => margins) do |sheet|
        sheet.add_row["this sheet uses customized page margins for printing"]
      end
+
+##Fit to page printing
+
+    wb.add_worksheet(:name => "fit to page") do |sheet|
+      sheet.add_row ['this all goes on one page']
+      sheet.fit_to_page = true
+    end
+
+
+##Hide Gridlines in worksheet
+
+    wb.add_worksheet(:name => "No Gridlines") do |sheet|
+      sheet.add_row ["This", "Sheet", "Hides", "Gridlines"]
+      sheet.show_gridlines = false
+    end
 
 ##Validate and Serialize
 
@@ -294,6 +318,16 @@ To install Axlsx, use the following command:
      p.use_shared_strings = true
      p.serialize("shared_strings_example.xlsx")
 
+##Disabling Autowidth
+
+    p = Axlsx::Package.new
+    p.use_autowidth = false
+    wb = p.workbook
+    wb.add_worksheet(:name => "No Magick") do | sheet |
+      sheet.add_row ['oh look! no autowidth - and no magick loaded in your process']
+    end
+    p.validate.each { |e| puts e.message }
+    p.serialize("no-use_autowidth.xlsx")
 
 
 #Documentation
@@ -309,6 +343,16 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Changelog
 ---------
+- ** March.??.12**: 1.0.19 release
+   - bugfix patch name_to_indecies to properly handle extended ranges.
+   - bugfix properly serialize chart title.
+   - lower rake minimum requirement for 1.8.7 apps that don't want to move on to 0.9 NOTE this will be reverted for 2.0.0 with workbook parsing!
+   - Added Fit to Page printing
+   - added support for turning off gridlines in charts.
+   - added support for turning off gridlines in worksheet.
+   - bugfix some apps like libraoffice require apply[x] attributes to be true. applyAlignment is not properly set.
+   - added option to *not* use RMagick - and default all assigned columns to the excel default of 8.43
+
 - ** March.5.12**: 1.0.18 release
    https://github.com/randym/axlsx/compare/1.0.17...1.0.18
    - bugfix custom borders are not properly applied when using styles.add_style

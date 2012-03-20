@@ -144,6 +144,18 @@ wb.add_worksheet(:name => "Bar Chart") do |sheet|
   end
 end
 
+##Hide Gridlines in chart
+wb.add_worksheet(:name => "Chart With No Gridlines") do |sheet|
+  sheet.add_row ["A Simple Bar Chart"]
+  sheet.add_row ["First", "Second", "Third"]
+  sheet.add_row [1, 2, 3]
+  sheet.add_chart(Axlsx::Bar3DChart, :start_at => "A4", :end_at => "F17") do |chart|
+    chart.add_series :data => sheet["A3:C3"], :labels => sheet["A2:C2"], :title => sheet["A1"]
+    chart.valAxis.gridlines = false
+    chart.catAxis.gridlines = false
+  end
+end
+
 ##Generating A Pie Chart
 
 wb.add_worksheet(:name => "Pie Chart") do |sheet|
@@ -201,6 +213,13 @@ wb.add_worksheet(:name => "custom column widths") do |sheet|
   sheet.column_widths nil, 3
 end
 
+##Fit to page printing
+
+wb.add_worksheet(:name => "fit to page") do |sheet|
+  sheet.add_row ['this all goes on one page']
+  sheet.fit_to_page = true
+end
+
 
 ##Hide Gridlines in worksheet
 wb.add_worksheet(:name => "No Gridlines") do |sheet|
@@ -228,6 +247,15 @@ p.use_shared_strings = true
 p.serialize("shared_strings_example.xlsx")
 
 
+##Disabling Autowidth
+p = Axlsx::Package.new
+p.use_autowidth = false
+wb = p.workbook
+wb.add_worksheet(:name => "No Magick") do | sheet |
+  sheet.add_row ['oh look! no autowidth - and no magick loaded in your process']
+end
+p.validate.each { |e| puts e.message }
+p.serialize("no-use_autowidth.xlsx")
 
 
 

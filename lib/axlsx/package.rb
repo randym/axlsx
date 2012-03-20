@@ -29,6 +29,14 @@ module Axlsx
       yield self if block_given?
     end
 
+    # Shortcut to specify that the workbook should use autowidth
+    # @see Workbook#use_autowidth
+    def use_autowidth=(v)
+      Axlsx::validate_boolean(v);
+      workbook.use_autowidth = v
+    end
+
+
     # Shortcut to specify that the workbook should use shared strings
     # @see Workbook#use_shared_strings
     def use_shared_strings=(v)

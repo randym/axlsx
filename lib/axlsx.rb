@@ -25,7 +25,6 @@ require 'axlsx/package.rb'
 
 #required gems
 require 'nokogiri'
-require 'RMagick'
 require 'zip/zip'
 
 #core dependencies
@@ -33,8 +32,8 @@ require 'bigdecimal'
 require 'time'
 
 #if object does not have this already, I am borrowing it from active_support.
-# I am a very big fan of activesupports instance_values method, but do not want to require nor include the entire 
-# library just for this one method. 
+# I am a very big fan of activesupports instance_values method, but do not want to require nor include the entire
+# library just for this one method.
 if !Object.respond_to?(:instance_values)
   Object.send :public  # patch for 1.8.7 as it uses private scope
   Object.send :define_method, :instance_values do
@@ -42,12 +41,11 @@ if !Object.respond_to?(:instance_values)
   end
 end
 
-
 # xlsx generation with charts, images, automated column width, customizable styles and full schema validation. Axlsx excels at helping you generate beautiful Office Open XML Spreadsheet documents without having to understand the entire ECMA specification. Check out the README for some examples of how easy it is. Best of all, you can validate your xlsx file before serialization so you know for sure that anything generated is going to load on your client's machine.
 module Axlsx
   # determines the cell range for the items provided
   def self.cell_range(items)
-    return "" unless items.first.is_a? Cell          
+    return "" unless items.first.is_a? Cell
     ref = "'#{items.first.row.worksheet.name}'!" +
       "#{items.first.r_abs}"
     ref += ":#{items.last.r_abs}" if items.size > 1
@@ -56,8 +54,8 @@ module Axlsx
 
   def self.name_to_indices(name)
     raise ArgumentError, 'invalid cell name' unless name.size > 1
-    v = name[/[A-Z]+/].reverse.chars.reduce({:base=>1, :i=>0}) do  |val, c|        
-      val[:i] += ((c.bytes.first - 65) + val[:base]); val[:base] *= 26; val 
+    v = name[/[A-Z]+/].reverse.chars.reduce({:base=>1, :i=>0}) do  |val, c|
+      val[:i] += ((c.bytes.first - 65) + val[:base]); val[:base] *= 26; val
     end
 
     [v[:i]-1, ((name[/[1-9][0-9]*/]).to_i)-1]

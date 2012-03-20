@@ -39,6 +39,10 @@ module Axlsx
     # @return Boolean
     attr_reader :show_gridlines
 
+    # Indicates if the worksheet should print in a single page
+    # @return Boolean
+    attr_reader :fit_to_page
+
     # Page margins for printing the worksheet.
     # @example
     #      wb = Axlsx::Package.new.workbook
@@ -76,8 +80,12 @@ module Axlsx
       @workbook.worksheets << self
       @auto_fit_data = []
       self.name = options[:name] || "Sheet" + (index+1).to_s
-
-      @magick_draw = Magick::Draw.new
+      if self.workbook.use_autowidth
+        require 'RMagick' unless defined?(Magick)
+        @magick_draw = Magick::Draw.new
+      else
+        @magick_draw = nil
+      end
       @cols = SimpleTypedList.new Cell
       @merged_cells = []
 
@@ -124,6 +132,14 @@ module Axlsx
       @show_gridlines = v
     end
 
+
+    # Indicates if gridlines should be shown in the sheet.
+    # This is true by default.
+    # @return [Boolean]
+    def fit_to_page=(v)
+      Axlsx::validate_boolean v
+      @fit_to_page = v
+    end
 
     # Returns the cell or cells defined using excel style A1:B3 references.
     # @param [String|Integer] cell_def the string defining the cell or range of cells, or the rownumber
@@ -347,6 +363,9 @@ module Axlsx
       builder = Nokogiri::XML::Builder.new(:encoding => ENCODING) do |xml|
         xml.worksheet(:xmlns => XML_NS,
                       :'xmlns:r' => XML_NS_R) {
+           xml.sheetPr {
+             xml.pageSetUpPr :fitToPage => fit_to_page if fit_to_page
+          }
           # another patch for the folks at rubyXL as thier parser depends on this optional element.
           xml.dimension :ref=>dimension unless rows.size == 0
           # this is required by rubyXL, spec says who cares - but it seems they didnt notice
@@ -435,7 +454,7 @@ module Axlsx
     # @param [Hash] A hash of auto_fit_data
     def auto_width(col)
       return col[:fixed] unless col[:fixed] == nil
-
+      return 8.43 unless @magick_draw
       mdw_count, font_scale, mdw = 0, col[:sz]/11.0, 6.0
       mdw_count = col[:longest].scan(/./mu).reduce(0) do | count, char |
         count +=1 if @magick_draw.get_type_metrics(char).max_advance >= mdw

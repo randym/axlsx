@@ -46,6 +46,17 @@ require 'axlsx/workbook/shared_strings_table.rb'
     end
 
 
+    # True by default. When you set this to false, the library will not include image magick nor will it attempt to set autowidths for your columns.
+    # @return [Boolean]
+    attr_reader :use_autowidth
+
+
+    # @see use_autowidth
+    def use_autowidth=(v)
+      Axlsx::validate_boolean(v)
+      @use_autowidth = v
+    end
+
     # A collection of worksheets associated with this workbook.
     # @note The recommended way to manage worksheets is add_worksheet
     # @see Workbook#add_worksheet
@@ -106,6 +117,7 @@ require 'axlsx/workbook/shared_strings_table.rb'
       @drawings = SimpleTypedList.new Drawing
       @charts = SimpleTypedList.new Chart
       @images = SimpleTypedList.new Pic
+      @use_autowidth = true
       self.date1904= !options[:date1904].nil? && options[:date1904]
       yield self if block_given?
     end
