@@ -22,7 +22,6 @@ require 'axlsx/rels/relationships.rb'
 require 'axlsx/drawing/drawing.rb'
 require 'axlsx/workbook/workbook.rb'
 require 'axlsx/package.rb'
-require 'axlsx/table/table.rb'
 #required gems
 require 'nokogiri'
 require 'zip/zip'

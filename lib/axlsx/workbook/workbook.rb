@@ -7,6 +7,7 @@ require 'axlsx/workbook/worksheet/page_margins.rb'
 require 'axlsx/workbook/worksheet/row.rb'
 require 'axlsx/workbook/worksheet/worksheet.rb'
 require 'axlsx/workbook/shared_strings_table.rb'
+require 'axlsx/workbook/worksheet/table.rb'
 
   # The Workbook class is an xlsx workbook that manages worksheets, charts, drawings and styles.
   # The following parts of the Office Open XML spreadsheet specification are not implimented in this version.
@@ -117,7 +118,7 @@ require 'axlsx/workbook/shared_strings_table.rb'
       @images = SimpleTypedList.new Pic
       @tables = SimpleTypedList.new Table
       @use_autowidth = true
-    
+
       self.date1904= !options[:date1904].nil? && options[:date1904]
       yield self if block_given?
     end
