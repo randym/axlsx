@@ -12,6 +12,9 @@ module Axlsx
     # @return [Workbook]
     attr_reader :workbook
 
+    # The tables in this worksheet
+    # @return [Array] of Table
+    attr_reader :tables
 
     # The rows in this worksheet
     # @note The recommended way to manage rows is Worksheet#add_row
@@ -371,6 +374,13 @@ module Axlsx
       chart
     end
 
+    def add_table(ref, options={})
+      table = Table.new(ref, self, options)
+      @tables << table
+      yield table if block_given?
+      table
+    end
+
     # Adds a media item to the worksheets drawing
     # @param [Class] media_type
     # @option options [] unknown
@@ -416,6 +426,13 @@ module Axlsx
           xml.mergeCells(:count=>@merged_cells.size) { @merged_cells.each { | mc | xml.mergeCell(:ref=>mc) } } unless @merged_cells.empty?
           page_margins.to_xml(xml) if @page_margins
           xml.drawing :"r:id"=>"rId1" if @drawing
+          unless @tables.empty?
+            xml.tableParts(:count => @tables.length) {
+              @tables.each do |table|
+                xml.tablePart :'r:id' => table.rId
+              end
+            }
+          end
         }
       end
       builder.to_xml(:save_with => 0)
@@ -425,6 +442,9 @@ module Axlsx
     # @return [Relationships]
     def relationships
         r = Relationships.new
+        @tables.each do |table|
+          r << Relationship.new(TABLE_R, "../#{table.pn}")
+        end
         r << Relationship.new(DRAWING_R, "../#{@drawing.pn}") if @drawing
         r
     end

@@ -74,6 +74,14 @@ require 'axlsx/workbook/shared_strings_table.rb'
     # @return [SimpleTypedList]
     attr_reader :drawings
 
+    # A colllection of tables associated with this workbook
+    # @note The recommended way to manage drawings is Worksheet#add_table
+    # @see Worksheet#add_table
+    # @see Table
+    # @return [SimpleTypedList]
+    attr_reader :tables
+
+
     # The styles associated with this workbook
     # @note The recommended way to manage styles is Styles#add_style
     # @see Style#add_style
@@ -107,7 +115,9 @@ require 'axlsx/workbook/shared_strings_table.rb'
       @drawings = SimpleTypedList.new Drawing
       @charts = SimpleTypedList.new Chart
       @images = SimpleTypedList.new Pic
+      @tables = SimpleTypedList.new Table
       @use_autowidth = true
+    
       self.date1904= !options[:date1904].nil? && options[:date1904]
       yield self if block_given?
     end
