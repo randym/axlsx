@@ -2,12 +2,19 @@ require 'test/unit'
 require 'axlsx.rb'
 
 class TestWorkbook < Test::Unit::TestCase
-  def setup    
+  def setup
     p = Axlsx::Package.new
-    @wb = p.workbook    
+    @wb = p.workbook
   end
 
   def teardown
+  end
+
+  def test_no_autowidth
+    assert_equal(@wb.use_autowidth, true)
+    assert_raise(ArgumentError) {@wb.use_autowidth = 0.1}
+    assert_nothing_raised {@wb.use_autowidth = false}
+    assert_equal(@wb.use_autowidth, false)
   end
 
   def test_date1904
@@ -17,6 +24,8 @@ class TestWorkbook < Test::Unit::TestCase
     Axlsx::Workbook.date1904 = :true
     assert_equal(Axlsx::Workbook.date1904, @wb.date1904)
   end
+
+
 
   def test_shared_strings
     assert_equal(@wb.use_shared_strings, nil)

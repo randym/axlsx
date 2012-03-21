@@ -39,6 +39,13 @@ module Axlsx
     # @return Boolean
     attr_reader :show_gridlines
 
+
+    # Indicates if the worksheet is selected in the workbook
+    # It is possible to have more than one worksheet selected, however it might cause issues
+    # in some older versions of excel when using copy and paste.
+    # @return Boolean
+    attr_reader :selected
+
     # Indicates if the worksheet should print in a single page
     # @return Boolean
     attr_reader :fit_to_page
@@ -73,23 +80,32 @@ module Axlsx
     # @option options [Hash] page_margins A hash containing page margins for this worksheet. @see PageMargins
     # @option options [Boolean] show_gridlines indicates if gridlines should be shown for this sheet.
     def initialize(wb, options={})
-      @drawing = @page_margins = @auto_filter = nil
-      @show_gridlines = true
-      @rows = SimpleTypedList.new Row
       self.workbook = wb
       @workbook.worksheets << self
+
+      @drawing = @page_margins = @auto_filter = nil
+      @merged_cells = []
       @auto_fit_data = []
-      self.name = options[:name] || "Sheet" + (index+1).to_s
+
+      @selected = false
+      @show_gridlines = true
+      self.name = "Sheet" + (index+1).to_s
+      @page_margins = PageMargins.new options[:page_margins] if options[:page_margins]
+
+      @rows = SimpleTypedList.new Row
+      @cols = SimpleTypedList.new Cell
+
       if self.workbook.use_autowidth
         require 'RMagick' unless defined?(Magick)
         @magick_draw = Magick::Draw.new
       else
         @magick_draw = nil
       end
-      @cols = SimpleTypedList.new Cell
-      @merged_cells = []
 
-      @page_margins = PageMargins.new options[:page_margins] if options[:page_margins]
+      options.each do |o|
+        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
+      end
+
     end
 
     # convinience method to access all cells in this worksheet
@@ -130,6 +146,13 @@ module Axlsx
     def show_gridlines=(v)
       Axlsx::validate_boolean v
       @show_gridlines = v
+    end
+
+    # @see selected
+    # @return [Boolean]
+    def selected=(v)
+      Axlsx::validate_boolean v
+      @selected = v
     end
 
 
@@ -369,10 +392,9 @@ module Axlsx
           # another patch for the folks at rubyXL as thier parser depends on this optional element.
           xml.dimension :ref=>dimension unless rows.size == 0
           # this is required by rubyXL, spec says who cares - but it seems they didnt notice
-          # however, it also seems to be causing some odd [Grouped] stuff in excel 2011 - so
-          # removing until I understand it better.
+          # grouping issue resolved by keeping tabSelected set to 0
           xml.sheetViews {
-            xml.sheetView(:tabSelected => 1, :workbookViewId => 0, :showGridLines => show_gridlines) {
+            xml.sheetView(:tabSelected => @selected, :workbookViewId => 0, :showGridLines => show_gridlines) {
               xml.selection :activeCell=>"A1", :sqref => "A1"
             }
           }
@@ -454,7 +476,7 @@ module Axlsx
     # @param [Hash] A hash of auto_fit_data
     def auto_width(col)
       return col[:fixed] unless col[:fixed] == nil
-      return 8.43 unless @magick_draw
+      return Axlsx::FIXED_COL_WIDTH unless self.workbook.use_autowidth
       mdw_count, font_scale, mdw = 0, col[:sz]/11.0, 6.0
       mdw_count = col[:longest].scan(/./mu).reduce(0) do | count, char |
         count +=1 if @magick_draw.get_type_metrics(char).max_advance >= mdw

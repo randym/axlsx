@@ -46,18 +46,7 @@ require 'axlsx/workbook/shared_strings_table.rb'
     end
 
 
-    # True by default. When you set this to false, the library will not include image magick nor will it attempt to set autowidths for your columns.
-    # @return [Boolean]
-    attr_reader :use_autowidth
-
-
-    # @see use_autowidth
-    def use_autowidth=(v)
-      Axlsx::validate_boolean(v)
-      @use_autowidth = v
-    end
-
-    # A collection of worksheets associated with this workbook.
+   # A collection of worksheets associated with this workbook.
     # @note The recommended way to manage worksheets is add_worksheet
     # @see Workbook#add_worksheet
     # @see Worksheet
@@ -99,6 +88,7 @@ require 'axlsx/workbook/shared_strings_table.rb'
     # Indicates if the epoc date for serialization should be 1904. If false, 1900 is used.
     @@date1904 = false
 
+
     # lets come back to this later when we are ready for parsing.
     #def self.parse entry
     #  io = entry.get_input_stream
@@ -136,6 +126,14 @@ require 'axlsx/workbook/shared_strings_table.rb'
     # retrieves the date1904 attribute
     # @return [Boolean]
     def self.date1904() @@date1904; end
+
+    # Indicates if the workbook should use autowidths or not.
+    # this must be set before instantiating a worksheet to avoid Rmagix inclusion
+    # @return [Boolean]
+    def use_autowidth() @use_autowidth; end
+
+    # see @use_autowidth
+    def use_autowidth=(v) Axlsx::validate_boolean v; @use_autowidth = v; end
 
     # Adds a worksheet to this workbook
     # @return [Worksheet]

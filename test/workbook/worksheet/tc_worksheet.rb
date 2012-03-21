@@ -2,10 +2,11 @@ require 'test/unit'
 require 'axlsx.rb'
 
 class TestWorksheet < Test::Unit::TestCase
-  def setup    
+  def setup
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet
   end
+
 
   def test_pn
     assert_equal(@ws.pn, "worksheets/sheet1.xml")
@@ -14,7 +15,7 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   def test_page_margins
-    assert(@ws.page_margins.is_a? Axlsx::PageMargins)    
+    assert(@ws.page_margins.is_a? Axlsx::PageMargins)
   end
 
   def test_page_margins_yeild
@@ -24,9 +25,15 @@ class TestWorksheet < Test::Unit::TestCase
     end
   end
 
+  def test_no_autowidth
+    @ws.workbook.use_autowidth = false
+    @ws.add_row [1,2,3,4]
+    assert_equal(@ws.send(:auto_width, @ws.auto_fit_data[0]), Axlsx::FIXED_COL_WIDTH)
+  end
+
   def test_initialization_options
     page_margins = {:left => 2, :right => 2, :bottom => 2, :top => 2, :header => 2, :footer => 2}
-    optioned = @ws.workbook.add_worksheet(:name => 'bob', :page_margins => page_margins)
+    optioned = @ws.workbook.add_worksheet(:name => 'bob', :page_margins => page_margins, :selected => true, :show_gridlines => false)
     assert_equal(optioned.page_margins.left, page_margins[:left])
     assert_equal(optioned.page_margins.right, page_margins[:right])
     assert_equal(optioned.page_margins.top, page_margins[:top])
@@ -34,6 +41,21 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(optioned.page_margins.header, page_margins[:header])
     assert_equal(optioned.page_margins.footer, page_margins[:footer])
     assert_equal(optioned.name, 'bob')
+    assert_equal(optioned.selected, true)
+    assert_equal(optioned.show_gridlines, false)
+  end
+
+
+  def test_use_gridlines
+    assert_raise(ArgumentError) { @ws.show_gridlines = -1.1 }
+    assert_nothing_raised { @ws.show_gridlines = false }
+    assert_equal(@ws.show_gridlines, false)
+  end
+
+  def test_selected
+    assert_raise(ArgumentError) { @ws.selected = -1.1 }
+    assert_nothing_raised { @ws.selected = true }
+    assert_equal(@ws.selected, true)
   end
 
   def test_rels_pn
@@ -47,7 +69,7 @@ class TestWorksheet < Test::Unit::TestCase
     ws = @ws.workbook.add_worksheet
     assert_equal(ws.rId, "rId2")
   end
-  
+
   def test_index
     assert_equal(@ws.index, @ws.workbook.worksheets.index(@ws))
   end
@@ -68,7 +90,7 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(@ws.rows[1],last_row)
     assert_equal(range.size, 6)
     assert_equal(range.first, @ws.rows.first.cells.first)
-    assert_equal(range.last, @ws.rows.last.cells.last)    
+    assert_equal(range.last, @ws.rows.last.cells.last)
   end
 
   def test_add_row
@@ -94,7 +116,7 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.add_row [1,2,3,4]
     @ws.add_row [1,2,3,4]
     @ws.col_style( (1..2), 1, :row_offset=>1)
-    @ws.rows[(1..-1)].each do | r | 
+    @ws.rows[(1..-1)].each do | r |
       assert_equal(r.cells[1].style, 1)
       assert_equal(r.cells[2].style, 1)
     end
@@ -115,7 +137,7 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.add_row [1,2,3,4]
     @ws.add_row [1,2,3,4]
     c = @ws.cols[1]
-    assert_equal(c.size, 4)    
+    assert_equal(c.size, 4)
     assert_equal(c[0].value, 2)
   end
 
@@ -125,13 +147,13 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.add_row [1,2,3,4]
     @ws.add_row [1,2,3,4]
     @ws.row_style 1, 1, :col_offset=>1
-    @ws.rows[1].cells[(1..-1)].each do | c | 
+    @ws.rows[1].cells[(1..-1)].each do | c |
       assert_equal(c.style, 1)
     end
     assert_equal(@ws.rows[1].cells[0].style, 0)
     assert_equal(@ws.rows[2].cells[1].style, 0)
   end
-  
+
   def test_to_xml
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@ws.to_xml)
@@ -153,7 +175,7 @@ class TestWorksheet < Test::Unit::TestCase
       puts error.message
     end
     assert(errors.empty?, "error free validation")
-    
+
   end
 
   def test_relationships
@@ -164,7 +186,7 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(@ws.relationships.size, 1, "multiple charts still only result in one relationship")
   end
 
-  
+
   def test_name_unique
     assert_raise(ArgumentError, "worksheet name must be unique") { n = @ws.name; @ws.workbook.add_worksheet(:name=> @ws) }
   end
@@ -205,7 +227,7 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.add_row ["but Im Short!"], :widths=> [14.8]
     assert_equal(@ws.send(:auto_width, @ws.auto_fit_data[0]), 14.8)
   end
-  
+
   def test_fixed_width_to_auto
     @ws.add_row ["hey, I'm like really long and stuff so I think you will merge me."]
     @ws.merge_cells "A1:C1"
@@ -240,7 +262,7 @@ class TestWorksheet < Test::Unit::TestCase
 
   def test_merge_cells
     assert(@ws.merged_cells.is_a?(Array))
-    assert_equal(@ws.merged_cells.size, 0)           
+    assert_equal(@ws.merged_cells.size, 0)
     @ws.add_row [1,2,3]
     @ws.add_row [4,5,6]
     @ws.add_row [7,8,9]
