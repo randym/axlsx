@@ -183,6 +183,10 @@ module Axlsx
         @parts << {:entry => "xl/#{drawing.pn}", :doc => drawing.to_xml, :schema => DRAWING_XSD}
       end
 
+      workbook.tables.each do |table|
+        @parts << {:entry => "xl/#{table.pn}", :doc => table.to_xml, :schema => SML_XSD} 
+      end
+
       workbook.charts.each do |chart|
         @parts << {:entry => "xl/#{chart.pn}", :doc => chart.to_xml, :schema => DRAWING_XSD}
       end
@@ -231,6 +235,10 @@ module Axlsx
       workbook.charts.each do |chart|
         c_types << Axlsx::Override.new(:PartName => "/xl/#{chart.pn}",
                                        :ContentType => CHART_CT)
+      end
+      workbook.tables.each do |table|
+        c_types << Axlsx::Override.new(:PartName => "/xl/#{table.pn}",
+                                       :ContentType => TABLE_CT)
       end
       workbook.worksheets.each do |sheet|
         c_types << Axlsx::Override.new(:PartName => "/xl/#{sheet.pn}",
