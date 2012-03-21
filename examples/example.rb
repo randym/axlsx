@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby -w -s
 # -*- coding: utf-8 -*-
-require 'axlsx.rb'
+$:.unshift "#{File.dirname(__FILE__)}/../lib"
+require 'axlsx'
 
 p = Axlsx::Package.new
 wb = p.workbook
@@ -39,7 +40,7 @@ end
 ##Add an Image
 
 wb.add_worksheet(:name => "Images") do |sheet|
-  img = File.expand_path('examples/image1.jpeg')
+  img = File.expand_path('../image1.jpeg', __FILE__)
   sheet.add_image(:image_src => img, :noSelect => true, :noMove => true) do |image|
     image.width=720
     image.height=666
@@ -50,7 +51,7 @@ end
 ##Add an Image with a hyperlink
 
 wb.add_worksheet(:name => "Image with Hyperlink") do |sheet|
-  img = File.expand_path('examples/image1.jpeg')
+  img = File.expand_path('../image1.jpeg', __FILE__)
   sheet.add_image(:image_src => img, :noSelect => true, :noMove => true, :hyperlink=>"http://axlsx.blogspot.com") do |image|
     image.width=720
     image.height=666
