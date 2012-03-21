@@ -97,6 +97,7 @@ module Axlsx
 
       @rows = SimpleTypedList.new Row
       @cols = SimpleTypedList.new Cell
+      @tables = SimpleTypedList.new Table
 
       if self.workbook.use_autowidth
         require 'RMagick' unless defined?(Magick)
