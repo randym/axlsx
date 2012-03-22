@@ -21,13 +21,13 @@ module Axlsx
     # @option options [Boolean] outline
     # @example Making a border
     # p = Axlsx::Package.new
-    # red_border = Axlsx::Border.new
-    # [:left, :right, :top, :bottom].each {|item| red_border.prs << Axlsx::BorderPr.new(:name => item, :style=>:thin, :color => Axlsx::Color.new(:rgb => "FFFF0000"))}
-    # red_border = p.workbook.styles.borders << red_border
-    # red_border = p.workbook.styles.add_style :border => red_border
+    # red_border = p.workbook.styles.add_style :border => {:style =>: thin, :color => "FFFF0000"}
     # ws = p.workbook.add_worksheet
     # ws.add_row [1,2,3], :style => red_border
     # p.serialize('red_border.xlsx')
+    #
+    # @note The recommended way to manage borders is with Style#add_style
+    # @see Style#add_style
     def initialize(options={})
       @prs = SimpleTypedList.new BorderPr
       options.each do |o|

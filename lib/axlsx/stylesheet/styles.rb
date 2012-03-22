@@ -133,7 +133,7 @@ module Axlsx
     # @option options [String] font_name The name of the font to use
     # @option options [Integer] num_fmt The number format to apply
     # @option options [String] format_code The formatting to apply. If this is specified, num_fmt is ignored.
-    # @option options [Integer] border The border style to use.
+    # @option options [Integer] border The border style to use. This can be the index of an existing border or a hash like {:style => :thin, :color => "FFFF0000"} to create a new border style
     # @option options [String] bg_color The background color to apply to the cell
     # @option options [Boolean] hidden Indicates if the cell should be hidden
     # @option options [Boolean] locked Indicates if the cell should be locked
@@ -200,6 +200,16 @@ module Axlsx
                  end
 
       borderId = options[:border] || 0
+
+      if borderId.is_a?(Hash)
+        raise ArgumentError, "border hash definitions must include both style and color" unless borderId.keys.include?(:style) && borderId.keys.include?(:color)
+
+        s = borderId.delete :style
+        c = borderId.delete :color
+        border = Border.new
+        [:left, :right, :top, :bottom].each {|pr| border.prs << BorderPr.new(:name => pr, :style=>s, :color => Color.new(:rgb => c))}
+        borderId = self.borders << border
+      end
 
       raise ArgumentError, "Invalid borderId" unless borderId < borders.size
 
