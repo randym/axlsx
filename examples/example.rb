@@ -24,6 +24,19 @@ wb.styles do |s|
   end
 end
 
+#Using Custom Border Styles
+
+wb.styles do |s|
+  red_border =  s.add_style :border => {:style=>:thin, :color =>"FFFF0000"}
+  blue_border =  s.add_style :border => {:style=>:thin, :color =>"FF0000FF"}
+
+  wb.add_worksheet(:name => "Custom Borders") do |sheet|
+    sheet.add_row ["wrap", "me", "Up in Red"], :style => red_border
+    sheet.add_row [1, 2, 3], :style => blue_border
+  end
+end
+
+
 ##Using Custom Formatting and date1904
 require 'date'
 wb.styles do |s|
@@ -36,6 +49,7 @@ wb.styles do |s|
     sheet.add_row [Date::strptime('2012-01-19','%Y-%m-%d'), 0.2, 32], :style => [date, percent, padded]
   end
 end
+
 
 ##Add an Image
 
