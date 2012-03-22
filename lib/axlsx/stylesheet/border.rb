@@ -3,16 +3,16 @@ module Axlsx
   # This class details a border used in Office Open XML spreadsheet styles.
   class Border
 
-    # @return [Boolean] The diagonal up property for the border that indicates if the border should include a diagonal line from the bottom left to the top right of the cell. 
+    # @return [Boolean] The diagonal up property for the border that indicates if the border should include a diagonal line from the bottom left to the top right of the cell.
     attr_reader :diagonalUp
-    
+
     # @return [Boolean] The diagonal down property for the border that indicates if the border should include a diagonal line from the top left to the top right of the cell.
     attr_reader :diagonalDown
 
     # @return [Boolean] The outline property for the border indicating that top, left, right and bottom borders should only be applied to the outside border of a range of cells.
     attr_reader :outline
 
-    # @return [SimpleTypedList] A list of BorderPr objects for this border. 
+    # @return [SimpleTypedList] A list of BorderPr objects for this border.
     attr_reader :prs
 
     # Creates a new Border object
@@ -20,21 +20,20 @@ module Axlsx
     # @option options [Boolean] diagonalDown
     # @option options [Boolean] outline
     # @example Making a border
-    #   p = Package.new
-    #   red_border = Border.new
-    #   [:left, :right, :top, :bottom].each do |item| 
-    #     red_border.prs << BorderPr.new(:name=>item, :style=>:thin, :color=>Color.new(:rgb=>"FFFF0000"))     #   
-    #   end
-    #   # this sets red_border to be the index for the created border.
-    #   red_border = p.workbook.styles.@borders << red_border
-    #   #used in row creation as follows. This will add a red border to each of the cells in the row.
-    #   p.workbook.add_worksheet.rows << :values=>[1,2,3] :style=>red_border
+    # p = Axlsx::Package.new
+    # red_border = Axlsx::Border.new
+    # [:left, :right, :top, :bottom].each {|item| red_border.prs << Axlsx::BorderPr.new(:name => item, :style=>:thin, :color => Axlsx::Color.new(:rgb => "FFFF0000"))}
+    # red_border = p.workbook.styles.borders << red_border
+    # red_border = p.workbook.styles.add_style :border => red_border
+    # ws = p.workbook.add_worksheet
+    # ws.add_row [1,2,3], :style => red_border
+    # p.serialize('red_border.xlsx')
     def initialize(options={})
       @prs = SimpleTypedList.new BorderPr
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
-    end        
+    end
 
     # @see diagonalUp
     def diagonalUp=(v) Axlsx::validate_boolean v; @diagonalUp = v end
@@ -48,8 +47,8 @@ module Axlsx
     def to_xml(xml)
       xml.border(self.instance_values.select{ |k,v| [:diagonalUp, :diagonalDown, :outline].include? k }) {
         [:start, :end, :left, :right, :top, :bottom, :diagonal, :vertical, :horizontal].each do |k|
-          @prs.select { |pr| pr.name == k }.each do |part| 
-            part.to_xml(xml) 
+          @prs.select { |pr| pr.name == k }.each do |part|
+            part.to_xml(xml)
           end
         end
       }
