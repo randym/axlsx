@@ -206,6 +206,13 @@ require 'axlsx/workbook/worksheet/table.rb'
               xml.sheet(:name=>sheet.name, :sheetId=>index+1, :"r:id"=>sheet.rId)
             end
           }
+          xml.definedNames {
+            @worksheets.each_with_index do |sheet, index|
+              if sheet.auto_filter
+                xml.definedName(sheet.abs_auto_filter, :name => '_xlnm._FilterDatabase', :localSheetId => index, :hidden => 1)
+              end
+            end
+          }
         }
       end
       builder.to_xml(:save_with => 0)
