@@ -213,9 +213,7 @@ module Axlsx
     # The absolute auto filter range
     # @see auto_filter
     def abs_auto_filter
-      "'#{@name}'!#{@auto_filter.split(':').collect { |name| 
-        name_to_cell(name).r_abs
-      }.join(':')}" if @auto_filter
+      Axlsx.cell_range(@auto_filter.split(':').collect { |name| name_to_cell(name)}) if @auto_filter
     end
 
     # The auto filter range for the worksheet
