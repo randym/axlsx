@@ -1,8 +1,7 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestGraphicFrame < Test::Unit::TestCase
-  def setup    
+  def setup
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet
     @chart = @ws.add_chart Axlsx::Chart
@@ -20,7 +19,7 @@ class TestGraphicFrame < Test::Unit::TestCase
   def test_rId
     assert_equal(@frame.rId, "rId1")
     chart = @ws.add_chart Axlsx::Chart
-    assert_equal(chart.graphic_frame.rId, "rId2")    
+    assert_equal(chart.graphic_frame.rId, "rId2")
   end
 
 end

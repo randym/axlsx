@@ -1,5 +1,4 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestWorksheet < Test::Unit::TestCase
   def setup

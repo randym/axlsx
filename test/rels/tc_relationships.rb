@@ -1,5 +1,4 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestRelationships < Test::Unit::TestCase
 
@@ -21,7 +20,7 @@ class TestRelationships < Test::Unit::TestCase
       errors << error
     end
 
-    assert(errors.size == 0)    
+    assert(errors.size == 0)
   end
 
 end

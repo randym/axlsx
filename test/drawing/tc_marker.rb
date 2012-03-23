@@ -1,8 +1,7 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestMarker < Test::Unit::TestCase
-  def setup    
+  def setup
     @marker = Axlsx::Marker.new
   end
 
@@ -41,5 +40,5 @@ class TestMarker < Test::Unit::TestCase
     assert_equal(@marker.col, 5)
     assert_equal(@marker.row, 10)
   end
-  
+
 end

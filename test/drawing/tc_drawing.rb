@@ -1,8 +1,7 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestDrawing < Test::Unit::TestCase
-  def setup    
+  def setup
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet
 
@@ -24,14 +23,14 @@ class TestDrawing < Test::Unit::TestCase
     assert_equal([anchor.to.row, anchor.to.col], [1,1], "options for start at are applied")
     assert_equal(chart.title.text, "bob", "option for title is applied")
   end
-  
+
   def test_add_image
     src = File.dirname(__FILE__) + "/../../examples/image1.jpeg"
     image = @ws.add_image(:image_src => src, :start_at=>[0,0], :width=>600, :height=>400)
     assert(@ws.drawing.anchors.last.is_a?(Axlsx::OneCellAnchor))
     assert(image.is_a?(Axlsx::Pic))
     assert_equal(600, image.width)
-    assert_equal(400, image.height)        
+    assert_equal(400, image.height)
   end
 
   def test_charts
@@ -39,7 +38,7 @@ class TestDrawing < Test::Unit::TestCase
     chart = @ws.add_chart(Axlsx::Pie3DChart, :title=>"bob", :start_at=>[0,0], :end_at=>[1,1])
     assert_equal(@ws.drawing.charts.last, chart, "add chart is returned")
     chart = @ws.add_chart(Axlsx::Pie3DChart, :title=>"nancy", :start_at=>[1,5], :end_at=>[5,10])
-    assert_equal(@ws.drawing.charts.last, chart, "add chart is returned")   
+    assert_equal(@ws.drawing.charts.last, chart, "add chart is returned")
   end
 
   def test_pn
@@ -53,7 +52,7 @@ class TestDrawing < Test::Unit::TestCase
   def test_rId
     assert_equal(@ws.drawing.rId, "rId1")
   end
-  
+
   def test_index
     assert_equal(@ws.drawing.index, @ws.workbook.drawings.index(@ws.drawing))
   end

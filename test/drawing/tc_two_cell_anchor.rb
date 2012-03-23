@@ -1,9 +1,8 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestTwoCellAnchor < Test::Unit::TestCase
 
-  def setup    
+  def setup
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet
     row = @ws.add_row ["one", 1, Time.now]
@@ -22,7 +21,7 @@ class TestTwoCellAnchor < Test::Unit::TestCase
     assert(@anchor.to.row == 10)
   end
 
-  
+
   def test_options
     assert_raise(ArgumentError, 'invalid start_at') { @ws.add_chart Axlsx::Chart, :start_at=>[1] }
     assert_raise(ArgumentError, 'invalid end_at') { @ws.add_chart Axlsx::Chart, :start_at=>[1,2], :end_at => ["a", 4] }
@@ -34,5 +33,5 @@ class TestTwoCellAnchor < Test::Unit::TestCase
     assert_equal(a.graphic_frame.anchor.to.col, 90)
     assert_equal(a.graphic_frame.anchor.to.row, 45)
   end
-  
+
 end

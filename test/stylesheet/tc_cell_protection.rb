@@ -1,9 +1,8 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestCellProtection < Test::Unit::TestCase
 
-  def setup    
+  def setup
     @item = Axlsx::CellProtection.new
   end
 

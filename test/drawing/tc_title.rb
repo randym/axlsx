@@ -1,8 +1,7 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestTitle < Test::Unit::TestCase
-  def setup    
+  def setup
     @p = Axlsx::Package.new
     ws = @p.workbook.add_worksheet
     @row = ws.add_row ["one", 1, Time.now]
@@ -21,7 +20,7 @@ class TestTitle < Test::Unit::TestCase
   def test_text
     assert_raise(ArgumentError, "text must be a string") { @title.text = 123 }
     @title.cell = @row.cells.first
-    @title.text = "bob"    
+    @title.text = "bob"
     assert(@title.cell == nil, "setting title with text clears the cell")
   end
 
@@ -30,5 +29,5 @@ class TestTitle < Test::Unit::TestCase
     @title.cell = @row.cells.first
     assert(@title.text == "one")
   end
-  
+
 end

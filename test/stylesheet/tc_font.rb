@@ -1,5 +1,4 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestFont < Test::Unit::TestCase
 
@@ -29,7 +28,7 @@ class TestFont < Test::Unit::TestCase
 
 
 
-    # def name=(v) Axlsx::validate_string v; @name = v end    
+    # def name=(v) Axlsx::validate_string v; @name = v end
   def test_name
     assert_raise(ArgumentError) { @item.name = 7 }
     assert_nothing_raised { @item.name = "bob" }
@@ -49,7 +48,7 @@ class TestFont < Test::Unit::TestCase
     assert_equal(@item.family, 5)
   end
 
-    # def b=(v) Axlsx::validate_boolean v; @b = v end    
+    # def b=(v) Axlsx::validate_boolean v; @b = v end
   def test_b
     assert_raise(ArgumentError) { @item.b = -7 }
     assert_nothing_raised { @item.b = true }
@@ -62,7 +61,7 @@ class TestFont < Test::Unit::TestCase
     assert_nothing_raised { @item.i = true }
     assert_equal(@item.i, true)
   end
-  
+
     # def u=(v) Axlsx::validate_boolean v; @u = v end
   def test_u
     assert_raise(ArgumentError) { @item.u = -7 }
@@ -84,7 +83,7 @@ class TestFont < Test::Unit::TestCase
     assert_equal(@item.outline, true)
   end
 
-    # def shadow=(v) Axlsx::validate_boolean v; @shadow = v end    
+    # def shadow=(v) Axlsx::validate_boolean v; @shadow = v end
   def test_shadow
     assert_raise(ArgumentError) { @item.shadow = -7 }
     assert_nothing_raised { @item.shadow = true }
