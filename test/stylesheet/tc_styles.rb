@@ -1,13 +1,12 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestStyles < Test::Unit::TestCase
-  def setup    
+  def setup
     @styles = Axlsx::Styles.new
   end
   def teardown
   end
-  
+
   def test_valid_document
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@styles.to_xml)
@@ -18,7 +17,14 @@ class TestStyles < Test::Unit::TestCase
     end
     assert(errors.size == 0)
   end
+  def test_add_style_border_hash
+    border_count = @styles.borders.size
+    s = @styles.add_style :border => {:style=>:thin, :color => "FFFF0000"}
+    assert_equal(@styles.borders.size, border_count + 1)
+    assert_equal(@styles.borders.last.prs.last.color.rgb, "FFFF0000")
+    assert_raise(ArgumentError) { @styles.add_style :border => {:color => "FFFF0000"} }
 
+  end
 
   def test_add_style
     fill_count = @styles.fills.size
@@ -44,9 +50,9 @@ class TestStyles < Test::Unit::TestCase
     assert_equal(xf.alignment.horizontal, :left, "horizontal alignment applied")
     assert_equal(xf.protection.hidden, true, "hidden protection set")
     assert_equal(xf.protection.locked, true, "cell locking set")
-    assert_raise(ArgumentError, "should reject invalid borderId") { @styles.add_style :border => 2 }    
+    assert_raise(ArgumentError, "should reject invalid borderId") { @styles.add_style :border => 2 }
 
-    
+
     assert_equal(xf.applyProtection, 1, "protection applied")
     assert_equal(xf.applyBorder, true, "border applied")
     assert_equal(xf.applyNumberFormat, true, "number format applied")

@@ -1,14 +1,13 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestView3D < Test::Unit::TestCase
-  def setup    
+  def setup
     @view  = Axlsx::View3D.new
   end
 
   def teardown
   end
-  
+
   def test_options
     v = Axlsx::View3D.new :rotX => 10, :rotY => 5, :hPercent => "30%", :depthPercent => "45%", :rAngAx => false, :perspective => 10
     assert_equal(v.rotX, 10)
@@ -18,7 +17,7 @@ class TestView3D < Test::Unit::TestCase
     assert_equal(v.rAngAx, false)
     assert_equal(v.perspective, 10)
   end
-  
+
   def test_rotX
     assert_raise(ArgumentError) {@view.rotX = "bob"}
     assert_nothing_raised {@view.rotX = -90}
@@ -44,12 +43,12 @@ class TestView3D < Test::Unit::TestCase
     assert_raise(ArgumentError) {@view.rAngAx = "bob"}
     assert_nothing_raised {@view.rAngAx = true}
   end
-  
+
   def test_perspective
     assert_raise(ArgumentError) {@view.perspective = "bob"}
     assert_nothing_raised {@view.perspective = 30}
   end
 
 
-  
+
 end

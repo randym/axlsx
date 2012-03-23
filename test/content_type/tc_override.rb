@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestOverride < Test::Unit::TestCase
-  def setup    
+  def setup
   end
   def teardown
   end
@@ -18,7 +17,7 @@ class TestOverride < Test::Unit::TestCase
   def test_content_type_restriction
     assert_raise(ArgumentError, "requires known content type") { Axlsx::Override.new :ContentType=>"asdf" }
   end
-  
+
   def test_to_xml
     schema = Nokogiri::XML::Schema(File.open(Axlsx::CONTENT_TYPES_XSD))
     type = Axlsx::Override.new :PartName=>"somechart.xml", :ContentType=>Axlsx::CHART_CT
@@ -34,7 +33,7 @@ class TestOverride < Test::Unit::TestCase
       errors << error
     end
     assert_equal(errors.size, 0, "Override content type caused invalid content_type doc" + errors.map{ |e| e.message }.to_s)
-    
+
   end
 
 

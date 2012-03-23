@@ -7,6 +7,7 @@ require 'axlsx/workbook/worksheet/page_margins.rb'
 require 'axlsx/workbook/worksheet/row.rb'
 require 'axlsx/workbook/worksheet/worksheet.rb'
 require 'axlsx/workbook/shared_strings_table.rb'
+require 'axlsx/workbook/worksheet/table.rb'
 
   # The Workbook class is an xlsx workbook that manages worksheets, charts, drawings and styles.
   # The following parts of the Office Open XML spreadsheet specification are not implimented in this version.
@@ -46,7 +47,7 @@ require 'axlsx/workbook/shared_strings_table.rb'
     end
 
 
-    # A collection of worksheets associated with this workbook.
+   # A collection of worksheets associated with this workbook.
     # @note The recommended way to manage worksheets is add_worksheet
     # @see Workbook#add_worksheet
     # @see Worksheet
@@ -74,6 +75,14 @@ require 'axlsx/workbook/shared_strings_table.rb'
     # @return [SimpleTypedList]
     attr_reader :drawings
 
+    # A colllection of tables associated with this workbook
+    # @note The recommended way to manage drawings is Worksheet#add_table
+    # @see Worksheet#add_table
+    # @see Table
+    # @return [SimpleTypedList]
+    attr_reader :tables
+
+
     # The styles associated with this workbook
     # @note The recommended way to manage styles is Styles#add_style
     # @see Style#add_style
@@ -87,6 +96,7 @@ require 'axlsx/workbook/shared_strings_table.rb'
 
     # Indicates if the epoc date for serialization should be 1904. If false, 1900 is used.
     @@date1904 = false
+
 
     # lets come back to this later when we are ready for parsing.
     #def self.parse entry
@@ -106,6 +116,9 @@ require 'axlsx/workbook/shared_strings_table.rb'
       @drawings = SimpleTypedList.new Drawing
       @charts = SimpleTypedList.new Chart
       @images = SimpleTypedList.new Pic
+      @tables = SimpleTypedList.new Table
+      @use_autowidth = true
+
       self.date1904= !options[:date1904].nil? && options[:date1904]
       yield self if block_given?
     end
@@ -124,6 +137,14 @@ require 'axlsx/workbook/shared_strings_table.rb'
     # retrieves the date1904 attribute
     # @return [Boolean]
     def self.date1904() @@date1904; end
+
+    # Indicates if the workbook should use autowidths or not.
+    # this must be set before instantiating a worksheet to avoid Rmagix inclusion
+    # @return [Boolean]
+    def use_autowidth() @use_autowidth; end
+
+    # see @use_autowidth
+    def use_autowidth=(v) Axlsx::validate_boolean v; @use_autowidth = v; end
 
     # Adds a worksheet to this workbook
     # @return [Worksheet]

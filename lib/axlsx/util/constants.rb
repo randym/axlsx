@@ -171,6 +171,9 @@ module Axlsx
 
   # drawing rels part
   DRAWING_RELS_PN = "drawings/_rels/drawing%d.xml.rels"
+  
+  # drawing part
+  TABLE_PN = "tables/table%d.xml"
 
   # chart part
   CHART_PN = "charts/chart%d.xml"
@@ -228,4 +231,6 @@ module Axlsx
 
   # error message for duplicate sheet names
   ERR_DUPLICATE_SHEET_NAME = "There is already a worksheet in this workbook named '%s'. Please use a unique name"
+
+  FIXED_COL_WIDTH = 8.43
 end

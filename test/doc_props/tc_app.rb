@@ -1,12 +1,11 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestApp < Test::Unit::TestCase
-  def setup    
+  def setup
   end
   def teardown
   end
-  
+
   def test_valid_document
     schema = Nokogiri::XML::Schema(File.open(Axlsx::APP_XSD))
     doc = Nokogiri::XML(Axlsx::App.new.to_xml)

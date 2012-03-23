@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby -w -s
 # -*- coding: utf-8 -*-
-require 'axlsx.rb'
+$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../lib"
+require 'axlsx'
 
 p = Axlsx::Package.new
 wb = p.workbook
@@ -23,6 +24,19 @@ wb.styles do |s|
   end
 end
 
+#Using Custom Border Styles
+
+wb.styles do |s|
+  red_border =  s.add_style :border => {:style=>:thin, :color =>"FFFF0000"}
+  blue_border =  s.add_style :border => {:style=>:thin, :color =>"FF0000FF"}
+
+  wb.add_worksheet(:name => "Custom Borders") do |sheet|
+    sheet.add_row ["wrap", "me", "Up in Red"], :style => red_border
+    sheet.add_row [1, 2, 3], :style => blue_border
+  end
+end
+
+
 ##Using Custom Formatting and date1904
 require 'date'
 wb.styles do |s|
@@ -36,10 +50,11 @@ wb.styles do |s|
   end
 end
 
+
 ##Add an Image
 
 wb.add_worksheet(:name => "Images") do |sheet|
-  img = File.expand_path('examples/image1.jpeg')
+  img = File.expand_path('../image1.jpeg', __FILE__)
   sheet.add_image(:image_src => img, :noSelect => true, :noMove => true) do |image|
     image.width=720
     image.height=666
@@ -50,7 +65,7 @@ end
 ##Add an Image with a hyperlink
 
 wb.add_worksheet(:name => "Image with Hyperlink") do |sheet|
-  img = File.expand_path('examples/image1.jpeg')
+  img = File.expand_path('../image1.jpeg', __FILE__)
   sheet.add_image(:image_src => img, :noSelect => true, :noMove => true, :hyperlink=>"http://axlsx.blogspot.com") do |image|
     image.width=720
     image.height=666
@@ -144,6 +159,18 @@ wb.add_worksheet(:name => "Bar Chart") do |sheet|
   end
 end
 
+##Hide Gridlines in chart
+wb.add_worksheet(:name => "Chart With No Gridlines") do |sheet|
+  sheet.add_row ["A Simple Bar Chart"]
+  sheet.add_row ["First", "Second", "Third"]
+  sheet.add_row [1, 2, 3]
+  sheet.add_chart(Axlsx::Bar3DChart, :start_at => "A4", :end_at => "F17") do |chart|
+    chart.add_series :data => sheet["A3:C3"], :labels => sheet["A2:C2"], :title => sheet["A1"]
+    chart.valAxis.gridlines = false
+    chart.catAxis.gridlines = false
+  end
+end
+
 ##Generating A Pie Chart
 
 wb.add_worksheet(:name => "Pie Chart") do |sheet|
@@ -194,11 +221,30 @@ wb.add_worksheet(:name => "Auto Filter") do |sheet|
   sheet.auto_filter = "A2:D5"
 end
 
+##Tables
+
+ wb.add_worksheet(:name => "Table") do |sheet|
+   sheet.add_row ["Build Matrix"]
+   sheet.add_row ["Build", "Duration", "Finished", "Rvm"]
+   sheet.add_row ["19.1", "1 min 32 sec", "about 10 hours ago", "1.8.7"]
+   sheet.add_row ["19.2", "1 min 28 sec", "about 10 hours ago", "1.9.2"]
+   sheet.add_row ["19.3", "1 min 35 sec", "about 10 hours ago", "1.9.3"]
+   sheet.add_table "A2:D5", :name => 'Build Matrix'
+ end
+
+
 ##Specifying Column Widths
 
 wb.add_worksheet(:name => "custom column widths") do |sheet|
   sheet.add_row ["I use autowidth and am very wide", "I use a custom width and am narrow"]
   sheet.column_widths nil, 3
+end
+
+##Fit to page printing
+
+wb.add_worksheet(:name => "fit to page") do |sheet|
+  sheet.add_row ['this all goes on one page']
+  sheet.fit_to_page = true
 end
 
 
@@ -216,7 +262,7 @@ end
 
 ##Validate and Serialize
 
-p.validate.each { |e| puts e.message }
+#p.validate.each { |e| puts e.message }
 p.serialize("example.xlsx")
 
 s = p.to_stream()
@@ -228,6 +274,15 @@ p.use_shared_strings = true
 p.serialize("shared_strings_example.xlsx")
 
 
+##Disabling Autowidth
+p = Axlsx::Package.new
+p.use_autowidth = false
+wb = p.workbook
+wb.add_worksheet(:name => "No Magick") do | sheet |
+  sheet.add_row ['oh look! no autowidth - and no magick loaded in your process']
+end
+p.validate.each { |e| puts e.message }
+p.serialize("no-use_autowidth.xlsx")
 
 
 

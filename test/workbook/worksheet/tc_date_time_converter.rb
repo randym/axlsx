@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestDateTimeConverter < Test::Unit::TestCase
   def setup

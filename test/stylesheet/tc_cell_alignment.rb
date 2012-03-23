@@ -1,8 +1,7 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestCellAlignment < Test::Unit::TestCase
-  def setup    
+  def setup
     @item = Axlsx::CellAlignment.new
   end
 
@@ -16,8 +15,8 @@ class TestCellAlignment < Test::Unit::TestCase
     assert_equal(@item.justifyLastLine, nil)
     assert_equal(@item.shrinkToFit, nil)
     assert_equal(@item.readingOrder, nil)
-    options =  { :horizontal => :left, :vertical => :top, :textRotation => 3, 
-                 :wrapText => true, :indent => 2, :relativeIndent => 5, 
+    options =  { :horizontal => :left, :vertical => :top, :textRotation => 3,
+                 :wrapText => true, :indent => 2, :relativeIndent => 5,
       :justifyLastLine => true, :shrinkToFit => true, :readingOrder => 2 }
     ca = Axlsx::CellAlignment.new options
     options.each do |key, value|

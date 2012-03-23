@@ -1,30 +1,29 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 class TestValidators < Test::Unit::TestCase
-  def setup    
+  def setup
   end
   def teardown
   end
-  
+
   def test_validators
     #unsigned_int
     assert_nothing_raised { Axlsx.validate_unsigned_int 1 }
     assert_nothing_raised { Axlsx.validate_unsigned_int +1 }
     assert_raise(ArgumentError) { Axlsx.validate_unsigned_int -1 }
     assert_raise(ArgumentError) { Axlsx.validate_unsigned_int '1' }
-    
+
     #int
     assert_nothing_raised { Axlsx.validate_int 1 }
     assert_nothing_raised { Axlsx.validate_int -1 }
     assert_raise(ArgumentError) { Axlsx.validate_int 'a' }
     assert_raise(ArgumentError) { Axlsx.validate_int Array }
- 
+
     #boolean (as 0 or 1, :true, :false, true, false, or "true," "false")
     [0,1,:true, :false, true, false, "true", "false"].each do |v|
       assert_nothing_raised { Axlsx.validate_boolean 0 }
     end
     assert_raise(ArgumentError) { Axlsx.validate_boolean 2 }
-    
+
     #string
     assert_nothing_raised { Axlsx.validate_string "1" }
     assert_raise(ArgumentError) { Axlsx.validate_string 2 }
@@ -64,7 +63,7 @@ class TestValidators < Test::Unit::TestCase
     assert_raise(ArgumentError) { Axlsx.validate_content_type nil }
     assert_raise(ArgumentError) { Axlsx.validate_content_type "http://some.url" }
     assert_raise(ArgumentError) { Axlsx.validate_content_type false }
- 
+
     #relationshipType
     assert_nothing_raised { Axlsx.validate_relationship_type Axlsx::WORKBOOK_R }
     assert_raise(ArgumentError) { Axlsx.validate_relationship_type nil }

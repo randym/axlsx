@@ -1,9 +1,8 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestColor < Test::Unit::TestCase
 
-  def setup    
+  def setup
     @item = Axlsx::Color.new
   end
 

@@ -1,5 +1,4 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestPatternFill < Test::Unit::TestCase
 
@@ -17,13 +16,13 @@ class TestPatternFill < Test::Unit::TestCase
     assert_equal(@item.fgColor, nil)
   end
 
-  def test_bgColor    
+  def test_bgColor
     assert_raise(ArgumentError) { @item.bgColor = -1.1 }
     assert_nothing_raised { @item.bgColor = Axlsx::Color.new }
     assert_equal(@item.bgColor.rgb, "FF000000")
   end
 
-  def test_fgColor    
+  def test_fgColor
     assert_raise(ArgumentError) { @item.fgColor = -1.1 }
     assert_nothing_raised { @item.fgColor = Axlsx::Color.new }
     assert_equal(@item.fgColor.rgb, "FF000000")

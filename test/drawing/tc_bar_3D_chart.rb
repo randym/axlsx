@@ -1,5 +1,4 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestBar3DChart < Test::Unit::TestCase
 
@@ -13,7 +12,7 @@ class TestBar3DChart < Test::Unit::TestCase
   def teardown
   end
 
-  def test_initialization    
+  def test_initialization
     assert_equal(@chart.grouping, :clustered, "grouping defualt incorrect")
     assert_equal(@chart.series_type, Axlsx::BarSeries, "series type incorrect")
     assert_equal(@chart.barDir, :bar, " bar direction incorrect")
@@ -61,6 +60,6 @@ class TestBar3DChart < Test::Unit::TestCase
       puts error.message
     end
     assert(errors.empty?, "error free validation")
-  end  
-  
+  end
+
 end

@@ -1,5 +1,4 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestTableStyle < Test::Unit::TestCase
 
@@ -16,7 +15,7 @@ class TestTableStyle < Test::Unit::TestCase
     assert_equal(@item.table, nil)
   end
 
-  def test_name    
+  def test_name
     assert_raise(ArgumentError) { @item.name = -1.1 }
     assert_nothing_raised { @item.name = "lovely table style" }
     assert_equal(@item.name, "lovely table style")

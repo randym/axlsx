@@ -1,5 +1,4 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestHyperlink < Test::Unit::TestCase
 
@@ -66,5 +65,5 @@ class TestHyperlink < Test::Unit::TestCase
     assert_raise(ArgumentError) {@hyperlink.history = "bob"}
     assert_equal(@hyperlink.history, false )
   end
-  
+
 end

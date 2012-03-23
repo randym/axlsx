@@ -12,6 +12,9 @@ module Axlsx
     # @return [Workbook]
     attr_reader :workbook
 
+    # The tables in this worksheet
+    # @return [Array] of Table
+    attr_reader :tables
 
     # The rows in this worksheet
     # @note The recommended way to manage rows is Worksheet#add_row
@@ -38,6 +41,17 @@ module Axlsx
     # Indicates if the worksheet should show gridlines or not
     # @return Boolean
     attr_reader :show_gridlines
+
+
+    # Indicates if the worksheet is selected in the workbook
+    # It is possible to have more than one worksheet selected, however it might cause issues
+    # in some older versions of excel when using copy and paste.
+    # @return Boolean
+    attr_reader :selected
+
+    # Indicates if the worksheet should print in a single page
+    # @return Boolean
+    attr_reader :fit_to_page
 
     # Page margins for printing the worksheet.
     # @example
@@ -69,19 +83,33 @@ module Axlsx
     # @option options [Hash] page_margins A hash containing page margins for this worksheet. @see PageMargins
     # @option options [Boolean] show_gridlines indicates if gridlines should be shown for this sheet.
     def initialize(wb, options={})
-      @drawing = @page_margins = @auto_filter = nil
-      @show_gridlines = true
-      @rows = SimpleTypedList.new Row
       self.workbook = wb
       @workbook.worksheets << self
-      @auto_fit_data = []
-      self.name = options[:name] || "Sheet" + (index+1).to_s
 
-      @magick_draw = Magick::Draw.new
-      @cols = SimpleTypedList.new Cell
+      @drawing = @page_margins = @auto_filter = nil
       @merged_cells = []
+      @auto_fit_data = []
 
+      @selected = false
+      @show_gridlines = true
+      self.name = "Sheet" + (index+1).to_s
       @page_margins = PageMargins.new options[:page_margins] if options[:page_margins]
+
+      @rows = SimpleTypedList.new Row
+      @cols = SimpleTypedList.new Cell
+      @tables = SimpleTypedList.new Table
+
+      if self.workbook.use_autowidth
+        require 'RMagick' unless defined?(Magick)
+        @magick_draw = Magick::Draw.new
+      else
+        @magick_draw = nil
+      end
+
+      options.each do |o|
+        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
+      end
+
     end
 
     # convinience method to access all cells in this worksheet
@@ -124,6 +152,21 @@ module Axlsx
       @show_gridlines = v
     end
 
+    # @see selected
+    # @return [Boolean]
+    def selected=(v)
+      Axlsx::validate_boolean v
+      @selected = v
+    end
+
+
+    # Indicates if gridlines should be shown in the sheet.
+    # This is true by default.
+    # @return [Boolean]
+    def fit_to_page=(v)
+      Axlsx::validate_boolean v
+      @fit_to_page = v
+    end
 
     # Returns the cell or cells defined using excel style A1:B3 references.
     # @param [String|Integer] cell_def the string defining the cell or range of cells, or the rownumber
@@ -332,6 +375,13 @@ module Axlsx
       chart
     end
 
+    def add_table(ref, options={})
+      table = Table.new(ref, self, options)
+      @tables << table
+      yield table if block_given?
+      table
+    end
+
     # Adds a media item to the worksheets drawing
     # @param [Class] media_type
     # @option options [] unknown
@@ -347,13 +397,15 @@ module Axlsx
       builder = Nokogiri::XML::Builder.new(:encoding => ENCODING) do |xml|
         xml.worksheet(:xmlns => XML_NS,
                       :'xmlns:r' => XML_NS_R) {
+           xml.sheetPr {
+             xml.pageSetUpPr :fitToPage => fit_to_page if fit_to_page
+          }
           # another patch for the folks at rubyXL as thier parser depends on this optional element.
           xml.dimension :ref=>dimension unless rows.size == 0
           # this is required by rubyXL, spec says who cares - but it seems they didnt notice
-          # however, it also seems to be causing some odd [Grouped] stuff in excel 2011 - so
-          # removing until I understand it better.
+          # grouping issue resolved by keeping tabSelected set to 0
           xml.sheetViews {
-            xml.sheetView(:tabSelected => 1, :workbookViewId => 0, :showGridLines => show_gridlines) {
+            xml.sheetView(:tabSelected => @selected, :workbookViewId => 0, :showGridLines => show_gridlines) {
               xml.selection :activeCell=>"A1", :sqref => "A1"
             }
           }
@@ -375,6 +427,13 @@ module Axlsx
           xml.mergeCells(:count=>@merged_cells.size) { @merged_cells.each { | mc | xml.mergeCell(:ref=>mc) } } unless @merged_cells.empty?
           page_margins.to_xml(xml) if @page_margins
           xml.drawing :"r:id"=>"rId1" if @drawing
+          unless @tables.empty?
+            xml.tableParts(:count => @tables.length) {
+              @tables.each do |table|
+                xml.tablePart :'r:id' => table.rId
+              end
+            }
+          end
         }
       end
       builder.to_xml(:save_with => 0)
@@ -384,6 +443,9 @@ module Axlsx
     # @return [Relationships]
     def relationships
         r = Relationships.new
+        @tables.each do |table|
+          r << Relationship.new(TABLE_R, "../#{table.pn}")
+        end
         r << Relationship.new(DRAWING_R, "../#{@drawing.pn}") if @drawing
         r
     end
@@ -435,7 +497,7 @@ module Axlsx
     # @param [Hash] A hash of auto_fit_data
     def auto_width(col)
       return col[:fixed] unless col[:fixed] == nil
-
+      return Axlsx::FIXED_COL_WIDTH unless self.workbook.use_autowidth
       mdw_count, font_scale, mdw = 0, col[:sz]/11.0, 6.0
       mdw_count = col[:longest].scan(/./mu).reduce(0) do | count, char |
         count +=1 if @magick_draw.get_type_metrics(char).max_advance >= mdw

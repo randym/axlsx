@@ -3,11 +3,19 @@ Axlsx: Office Open XML Spreadsheet Generation
 [![Build Status](https://secure.travis-ci.org/randym/axlsx.png)](http://travis-ci.org/randym/axlsx/)
 
 **IRC**:          [irc.freenode.net / #axlsx](irc://irc.freenode.net/axlsx)
+
 **Git**:          [http://github.com/randym/axlsx](http://github.com/randym/axlsx)
+
+**Twitter**:      [https://twitter.com/#!/morgan_randy](https://twitter.com/#!/morgan_randy) release announcements and news will be published here
+
 **Author**:       Randy Morgan
+
 **Copyright**:    2011
+
 **License**:      MIT License
+
 **Latest Version**: 1.0.18
+
 **Ruby Version**: 1.8.7, 1.9.2, 1.9.3
 
 **Release Date**: March 5th 2012
@@ -16,7 +24,7 @@ Synopsis
 --------
 
 Axlsx is an Office Open XML Spreadsheet generator for the Ruby programming language.
-With Axlsx you can create excel worksheets with charts, images (with links), automated and fixed column widths, customizable styles, functions, merged cells, auto filters, file and stream serialization  as well as full schema validation. Axlsx excels at helping you generate beautiful Office Open XML Spreadsheet documents without having to understand the entire ECMA specification.
+With Axlsx you can create excel worksheets with charts, images (with links), automated and fixed column widths, customized styles, functions, merged cells, auto filters, file and stream serialization  as well as full schema validation. Axlsx excels at helping you generate beautiful Office Open XML Spreadsheet documents without having to understand the entire ECMA specification.
 
 If you are working in rails, or with active record see:
 http://github.com/randym/acts_as_xlsx
@@ -27,12 +35,12 @@ There are guides for using axlsx and acts_as_xlsx here:
 Help Wanted
 -----------
 
-I'd really like to get rid of the depenency on RMagick in this gem. RMagic is being used to calculate the column widths in a worksheet based on the content the user specified. If there happens to be anyone out there with the background and c skills to write an extenstion that can determine the width of a single character rendered with a specific font at a specific font size please give me a shout.
+I'd really like to get rid of the dependency on RMagick in this gem. RMagic is being used to calculate the column widths in a worksheet based on the content the user specified. If there happens to be anyone out there with the background and c skills to write an extension that can determine the width of a single character rendered with a specific font at a specific font size please give me a shout.
 
 Feature List
 ------------
 
-**1. Author xlsx documents: Axlsx is made to let you easily and quickly generate profesional xlsx based reports that can be validated before serialiation.
+**1. Author xlsx documents: Axlsx is made to let you easily and quickly generate professional xlsx based reports that can be validated before serialization.
 
 **2. Generate 3D Pie, Line and Bar Charts: With Axlsx chart generation and management is as easy as a few lines of code. You can build charts based off data in your worksheet or generate charts without any data in your sheet at all.
 
@@ -46,7 +54,7 @@ Feature List
 
 **7. Add jpg, gif and png images to worksheets with hyperlinks
 
-**8. Reference cells in your worksheet with "A1" and "A1:D4" style references or from the workbook using "Sheett1!A3:B4" style references
+**8. Reference cells in your worksheet with "A1" and "A1:D4" style references or from the workbook using "Sheet1!A3:B4" style references
 
 **9. Cell level style overrides for default and customized style objects
 
@@ -275,17 +283,33 @@ To install Axlsx, use the following command:
      end
 
 ##Specify Page Margins for printing
+
      margins = {:left => 3, :right => 3, :top => 1.2, :bottom => 1.2, :header => 0.7, :footer => 0.7}
      wb.add_worksheet(:name => "print margins", :page_margins => margins) do |sheet|
        sheet.add_row["this sheet uses customized page margins for printing"]
      end
+
+##Fit to page printing
+
+    wb.add_worksheet(:name => "fit to page") do |sheet|
+      sheet.add_row ['this all goes on one page']
+      sheet.fit_to_page = true
+    end
+
+
+##Hide Gridlines in worksheet
+
+    wb.add_worksheet(:name => "No Gridlines") do |sheet|
+      sheet.add_row ["This", "Sheet", "Hides", "Gridlines"]
+      sheet.show_gridlines = false
+    end
 
 ##Validate and Serialize
 
      p.validate.each { |e| puts e.message }
      p.serialize("example.xlsx")
 
-     # alternatively, serilaize to StringIO
+     # alternatively, serialize to StringIO
      s = p.to_stream()
      File.open('example_streamed.xlsx', 'w') { |f| f.write(s.read) }
 
@@ -294,6 +318,16 @@ To install Axlsx, use the following command:
      p.use_shared_strings = true
      p.serialize("shared_strings_example.xlsx")
 
+##Disabling Autowidth
+
+    p = Axlsx::Package.new
+    p.use_autowidth = false
+    wb = p.workbook
+    wb.add_worksheet(:name => "No Magick") do | sheet |
+      sheet.add_row ['oh look! no autowidth - and no magick loaded in your process']
+    end
+    p.validate.each { |e| puts e.message }
+    p.serialize("no-use_autowidth.xlsx")
 
 
 #Documentation
@@ -307,8 +341,20 @@ This gem is 100% documented with YARD, an exceptional documentation library. To 
 ------
 This gem has 100% test coverage using test/unit. To execute tests for this gem, simply run rake in the gem directory.
 
-#Changelog
+#Change log
 ---------
+- ** March.??.12**: 1.0.19 release
+   - bugfix patch name_to_indecies to properly handle extended ranges.
+   - bugfix properly serialize chart title.
+   - lower rake minimum requirement for 1.8.7 apps that don't want to move on to 0.9 NOTE this will be reverted for 2.0.0 with workbook parsing!
+   - Added Fit to Page printing
+   - added support for turning off gridlines in charts.
+   - added support for turning off gridlines in worksheet.
+   - bugfix some apps like libraoffice require apply[x] attributes to be true. applyAlignment is now properly set.
+   - added option to *not* use RMagick - and default all assigned columns to the excel default of 8.43
+   - added border style specification to styles#add_style - now you can pass in :border => {:style => :thin, :color =>"0000FF"} instead of creating a border object and border parts manually each time.
+   - Support for tables added in - Note: Pre 2011 versions of Mac office do not support this feature.
+
 - ** March.5.12**: 1.0.18 release
    https://github.com/randym/axlsx/compare/1.0.17...1.0.18
    - bugfix custom borders are not properly applied when using styles.add_style
@@ -324,13 +370,13 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
    - Added in support for serializing to StringIO
    - Added in support for using shared strings table. This makes most of the features in axlsx interoperable with iWorks Numbers
    - Added in support for fixed column_widths
-   - Removed unneded depenencies on activesupport and i18n
+   - Removed unneeded dependencies on active-support and i18n
 
 - ** February.2.12**: 1.0.16 release
    https://github.com/randym/axlsx/compare/1.0.15...1.0.16
    - Bug fix for schema file locations when validating in rails
    - Added hyperlink to images
-   - date1904 now automatically set in bsd and mac environments
+   - date1904 now automatically set in BSD and mac environments
    - removed whitespace/indentation from xml outputs
    - col_style now skips rows that do not contain cells at the column index
 
@@ -353,7 +399,7 @@ Please see the {file:CHANGELOG.md} document for past release information.
 
 [jurriaan](https://github.com/jurriaan) - for showing there is more than one way to skin a cat, and work with rows while you are at it.
 
-[joekain](https://github.com/joekain) - for keeping our refereneces working even in the double digits!
+[joekain](https://github.com/joekain) - for keeping our references working even in the double digits!
 
 #Copyright and License
 ----------

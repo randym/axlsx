@@ -1,5 +1,4 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestTableStyles < Test::Unit::TestCase
 
@@ -15,13 +14,13 @@ class TestTableStyles < Test::Unit::TestCase
     assert_equal(@item.defaultPivotStyle, "PivotStyleLight16")
   end
 
-  def test_defaultTableStyle    
+  def test_defaultTableStyle
     assert_raise(ArgumentError) { @item.defaultTableStyle = -1.1 }
     assert_nothing_raised { @item.defaultTableStyle = "anyones guess" }
     assert_equal(@item.defaultTableStyle, "anyones guess")
   end
 
-  def test_defaultPivotStyle    
+  def test_defaultPivotStyle
     assert_raise(ArgumentError) { @item.defaultPivotStyle = -1.1 }
     assert_nothing_raised { @item.defaultPivotStyle = "anyones guess" }
     assert_equal(@item.defaultPivotStyle, "anyones guess")

@@ -1,7 +1,5 @@
 # encoding: UTF-8
-
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestContentType < Test::Unit::TestCase
   def setup

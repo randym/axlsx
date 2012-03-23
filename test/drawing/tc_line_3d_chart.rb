@@ -1,5 +1,4 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestLine3DChart < Test::Unit::TestCase
 
@@ -13,7 +12,7 @@ class TestLine3DChart < Test::Unit::TestCase
   def teardown
   end
 
-  def test_initialization    
+  def test_initialization
     assert_equal(@chart.grouping, :standard, "grouping defualt incorrect")
     assert_equal(@chart.series_type, Axlsx::LineSeries, "series type incorrect")
     assert(@chart.catAxis.is_a?(Axlsx::CatAxis), "category axis not created")
@@ -43,6 +42,6 @@ class TestLine3DChart < Test::Unit::TestCase
       puts error.message
     end
     assert(errors.empty?, "error free validation")
-  end  
-  
+  end
+
 end

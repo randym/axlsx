@@ -1,12 +1,11 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestRelationships < Test::Unit::TestCase
-  def setup    
+  def setup
   end
-  
-  def teardown    
-  end  
+
+  def teardown
+  end
 
   def test_type
     assert_raise(ArgumentError) { Axlsx::Relationship.new 'type', 'target' }
