@@ -210,6 +210,21 @@ wb.add_worksheet(:name => "Line Chart") do |sheet|
   end
 end
 
+##Generating A Scatter Chart
+
+wb.add_worksheet(:name => "Scatter Chart") do |sheet|
+  sheet.add_row ["First",  1,  5,  7,  9]
+  sheet.add_row ["",       1, 25, 49, 81]
+  sheet.add_row ["Second", 5,  2, 14,  9]
+  sheet.add_row ["",       5, 10, 15, 20]
+  sheet.add_chart(Axlsx::ScatterChart, :title => "example 7: Scatter Chart") do |chart|
+    chart.start_at 0, 4
+    chart.end_at 10, 19
+    chart.add_series :xData => sheet["B1:E1"], :yData => sheet["B2:E2"], :title => sheet["A1"]
+    chart.add_series :xData => sheet["B3:E3"], :yData => sheet["B4:E4"], :title => sheet["A3"]
+  end
+end
+
 ##Auto Filter
 
 wb.add_worksheet(:name => "Auto Filter") do |sheet|
