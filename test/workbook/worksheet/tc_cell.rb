@@ -227,7 +227,7 @@ class TestCell < Test::Unit::TestCase
       @c.to_xml(xml)
     end
     c_xml = Nokogiri::XML(builder.to_xml(:save_with => 0))
-    assert_equal(@c.to_xml_string, c_xml.xpath("/c").to_xml(:save_with => 0))
+    assert_equal(c_xml.xpath("/c[@s=1]").size, 1)
   end
   def test_to_xml
     # TODO This could use some much more stringent testing related to the xml content generated!
