@@ -493,6 +493,7 @@ module Axlsx
     # @param [Array] cells an array of cells
     # @param [Array] widths an array of cell widths @see Worksheet#add_row
     def update_auto_fit_data(cells, widths=[])
+      return cells unless self.workbook.use_autowidth
       # TODO delay this until rendering. too much work when we dont know what they are going to do to the sheet.
       styles = self.workbook.styles
       cellXfs, fonts = styles.cellXfs, styles.fonts
