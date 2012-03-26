@@ -83,8 +83,8 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.add_row [1, 2, 3]
     @ws.add_row [4, 5, 6]
     range = @ws["A1:C2"]
-    first_row = @ws[1]
-    last_row = @ws[2]
+    first_row = @ws[0]
+    last_row = @ws[1]
     assert_equal(@ws.rows[0],first_row)
     assert_equal(@ws.rows[1],last_row)
     assert_equal(range.size, 6)
