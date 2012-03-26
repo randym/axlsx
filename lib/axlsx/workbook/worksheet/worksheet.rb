@@ -394,7 +394,7 @@ module Axlsx
       unless @tables.empty?
         str.concat "<tableParts count='%s'>%s</tableParts>" % [@tables.size, @tables.reduce('') { |memo, obj| memo += "<tablePart r:id='%s'/>" % obj.rId }]
       end
-      str
+      str + '</worksheet>'
     end
 
     # Serializes the worksheet document
@@ -459,24 +459,25 @@ module Axlsx
     # Returns the cell or cells defined using excel style A1:B3 references.
     # @param [String|Integer] cell_def the string defining the cell or range of cells, or the rownumber
     # @return [Cell, Array]
-    def [](cell_def)
-      return rows[cell_def - 1] if cell_def.is_a?(Integer)
-                  parts = cell_def.split(':')
-                  first = name_to_cell parts[0]
 
-                  if parts.size == 1
-                    first
-                  else
-                    cells = []
-                    last = name_to_cell(parts[1])
-                    rows[(first.row.index..last.row.index)].each do |r|
-                      r.cells[(first.index..last.index)].each do |c|
-                        cells << c
-                      end
-                    end
-                    cells
-                  end
-                end
+    def [] (cell_def)
+      return rows[cell_def] if cell_def.is_a?(Integer)
+
+      parts = cell_def.split(':')
+      first = name_to_cell parts[0]
+      if parts.size == 1
+        first
+      else
+        cells = []
+        last = name_to_cell(parts[1])
+        rows[(first.row.index..last.row.index)].each do |r|
+          r.cells[(first.index..last.index)].each do |c|
+            cells << c
+          end
+        end
+        cells
+      end
+    end
 
     private
 
@@ -502,11 +503,11 @@ module Axlsx
         width = widths[index]
         # set fixed width and skip if numeric width is given
         col[:fixed] = width if [Integer, Float, Fixnum].include?(width.class)
-        next unless self.workbook.use_autowidth
         # ignore default column widths and formula
         next if width == :ignore || (item.value.is_a?(String) && item.value.start_with?('='))
         # make sure we can turn that fixed with off!
         col[:fixed] = nil if width == :auto
+        next unless self.workbook.use_autowidth
 
         cell_xf = cellXfs[item.style]
         font = fonts[cell_xf.fontId || 0]
