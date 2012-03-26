@@ -493,7 +493,6 @@ module Axlsx
     # @param [Array] cells an array of cells
     # @param [Array] widths an array of cell widths @see Worksheet#add_row
     def update_auto_fit_data(cells, widths=[])
-      return cells unless self.workbook.use_autowidth
       # TODO delay this until rendering. too much work when we dont know what they are going to do to the sheet.
       styles = self.workbook.styles
       cellXfs, fonts = styles.cellXfs, styles.fonts
@@ -503,6 +502,7 @@ module Axlsx
         width = widths[index]
         # set fixed width and skip if numeric width is given
         col[:fixed] = width if [Integer, Float, Fixnum].include?(width.class)
+        next unless self.workbook.use_autowidth
         # ignore default column widths and formula
         next if width == :ignore || (item.value.is_a?(String) && item.value.start_with?('='))
         # make sure we can turn that fixed with off!
