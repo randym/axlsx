@@ -386,7 +386,7 @@ module Axlsx
         str.concat '</cols>'
       end
 
-      str.concat "<sheetData>%s</sheetData>" % [@rows.reduce('') { |memo, obj| memo += obj.to_xml_string }]
+      str.concat "<sheetData>%s</sheetData>" % @rows.map { |obj| obj.to_xml_string }.join
       str.concat page_margins.to_xml_string if @page_margins
       str.concat "<autoFilter ref='%s'></autoFilter>" % @auto_filter if @auto_filter
       str.concat "<mergeCells count='%s'>%s</mergeCells>" % [@merged_cells.size, @merged_cells.reduce('') { |memo, obj| "<mergeCell ref='%s'></mergeCell>" % obj } ] unless @merged_cells.empty?
@@ -493,6 +493,7 @@ module Axlsx
     # @param [Array] cells an array of cells
     # @param [Array] widths an array of cell widths @see Worksheet#add_row
     def update_auto_fit_data(cells, widths=[])
+      return cells unless self.workbook.use_autowidth
       # TODO delay this until rendering. too much work when we dont know what they are going to do to the sheet.
       styles = self.workbook.styles
       cellXfs, fonts = styles.cellXfs, styles.fonts
