@@ -153,6 +153,87 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(@ws.rows[2].cells[1].style, 0)
   end
 
+  def test_to_xml_string_fit_to_page
+    @ws.fit_to_page = true
+    doc = Nokogiri::XML(@ws.to_xml_string)
+    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:sheetPr/xmlns:pageSetUpPr[@fitToPage="true"]').size, 1)
+  end
+
+  def test_to_xml_string_dimensions
+    @ws.add_row [1,2,3]
+    doc = Nokogiri::XML(@ws.to_xml_string)
+    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:dimension[@ref="A1:C1"]').size, 1)
+  end
+
+  def test_to_xml_string_selected
+    @ws.selected = true
+    doc = Nokogiri::XML(@ws.to_xml_string)
+    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:sheetViews/xmlns:sheetView[@tabSelected="true"]').size, 1)
+  end
+
+  def test_to_xml_string_show_gridlines
+    @ws.show_gridlines = false
+    doc = Nokogiri::XML(@ws.to_xml_string)
+    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:sheetViews/xmlns:sheetView[@showGridLines="false"]').size, 1)
+  end
+
+
+  def test_to_xml_string_show_selection
+    doc = Nokogiri::XML(@ws.to_xml_string)
+    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:sheetViews/xmlns:sheetView/xmlns:selection[@activeCell="A1"]').size, 1)
+    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:sheetViews/xmlns:sheetView/xmlns:selection[@sqref="A1"]').size, 1)
+  end
+
+  def test_to_xml_string_auto_fit_data
+    @ws.add_row [1, "two"]
+    doc = Nokogiri::XML(@ws.to_xml_string)
+    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:cols/xmlns:col').size, 2)
+  end
+
+  def test_to_xml_string_sheet_data
+    @ws.add_row [1, "two"]
+    doc = Nokogiri::XML(@ws.to_xml_string)
+    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:sheetData/xmlns:row').size, 1)
+  end
+
+  def test_to_xml_string_auto_filter
+    @ws.add_row [1, "two"]
+    @ws.auto_filter = "A1:B1"
+    doc = Nokogiri::XML(@ws.to_xml_string)
+    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:autoFilter[@ref="A1:B1"]').size, 1)
+  end
+
+  def test_to_xml_string_merge_cells
+    @ws.add_row [1, "two"]
+    @ws.merge_cells "A1:D1"
+    doc = Nokogiri::XML(@ws.to_xml_string)
+    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:mergeCells/xmlns:mergeCell[@ref="A1:D1"]').size, 1)
+  end
+
+  def test_to_xml_string_page_margins
+    @ws.page_margins do |pm|
+      pm.left = 9
+      pm.right = 7
+    end
+    doc = Nokogiri::XML(@ws.to_xml_string)
+    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:pageMargins[@left="9"][@right="7"]').size, 1)
+  end
+
+  def test_to_xml_string_drawing
+    c = @ws.add_chart Axlsx::Pie3DChart
+    doc = Nokogiri::XML(@ws.to_xml_string)
+    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:drawing[@r:id="rId1"]').size, 1)
+  end
+
+  def test_to_xml_string_tables
+    @ws.add_row ["one", "two"]
+    @ws.add_row [1, 2]
+    @ws.add_table "A1:B2"
+    doc = Nokogiri::XML(@ws.to_xml_string)
+    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:tableParts[@count="1"]').size, 1)
+    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:tableParts/xmlns:tablePart[@r:id="rId1"]').size, 1)
+  end
+
   def test_to_xml
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@ws.to_xml)

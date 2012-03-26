@@ -259,6 +259,15 @@ module Axlsx
       self.row.worksheet.merge_cells "#{self.r}:#{range_end}" unless range_end.nil?
     end
 
+
+    def run_xml_string
+      #if (self.instance_values.keys & INLINE_STYLES).size > 0
+      #  str = "<r><rPr></rPr><r>"
+      #else
+      #  "<t>%s</t>" % value.to_s
+      #end
+      "<t>%s</t>" % value.to_s
+    end
     # builds an xml text run based on this cells attributes. This is extracted from to_xml so that shared strings can use it.
     # @param [Nokogiri::XML::Builder] xml The document builder instance this output will be added to.
     # @return [String] the xml for this cell's text run
@@ -294,11 +303,42 @@ module Axlsx
     # Serializes the cell
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String] xml text for the cell
+
+    FORMULA = "<c r=\"%s\" t=\"str\" s=\"%i\"><f>%s</f></c>"
+    SHARED_STRING = "<c r=\"%s\" t=\"s\" s=\"%i\"><v>%i</v></c>"
+    INLINE_STRING = "<c r=\"%s\" t=\"inlineStr\" s=\"%i\"><is>%s</is></c>"
+    OTHER = "<c r=\"%s\" s=\"%i\"><v>%s</v></c>"
+    BOOLEAN = "<c r=\"%s\" t=\"b\" s=\"%i\"><v>%s</v></c>"
+    def to_xml_string
+      if @type == :string
+        #parse formula
+        if @value.start_with?('=')
+          FORMULA % [r, style, value.to_s.gsub('=', '')]
+        else
+          #parse shared
+          if @ssti
+            SHARED_STRING % [r, style, ssti]
+          else
+            INLINE_STRING % [r, style, run_xml_string]
+          end
+        end
+      elsif @type == :date
+        # TODO: See if this is subject to the same restriction as Time below
+        OTHER % [r, style, DateTimeConverter::date_to_serial(@value)]
+      elsif @type == :time
+        OTHER % [r, style, DateTimeConverter::time_to_serial(@value)]
+      elsif @type == :boolean
+        BOOLEAN % [r, style, value]
+      else
+        OTHER % [r, style, value]
+      end
+    end
+
     def to_xml(xml)
       if @type == :string
         #parse formula
         if @value.start_with?('=')
-          xml.c(:r => r, :t=>:str, :s=>style) {
+          xml.c(:r => r, :s=>style, :t=>:str) {
             xml.f @value.to_s.gsub('=', '')
           }
         else

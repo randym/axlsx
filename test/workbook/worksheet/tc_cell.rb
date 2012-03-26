@@ -222,6 +222,13 @@ class TestCell < Test::Unit::TestCase
     assert_equal(@c.ssti, 1)
   end
 
+  def test_to_xml_string
+    builder = Nokogiri::XML::Builder.new(:encoding => Axlsx::ENCODING) do |xml|
+      @c.to_xml(xml)
+    end
+    c_xml = Nokogiri::XML(builder.to_xml(:save_with => 0))
+    assert_equal(@c.to_xml_string, c_xml.xpath("/c").to_xml(:save_with => 0))
+  end
   def test_to_xml
     # TODO This could use some much more stringent testing related to the xml content generated!
     row = @ws.add_row [Time.now, Date.today, true, 1, 1.0, "text", "=sum(A1:A2)"]

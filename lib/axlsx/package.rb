@@ -184,7 +184,7 @@ module Axlsx
       end
 
       workbook.tables.each do |table|
-        @parts << {:entry => "xl/#{table.pn}", :doc => table.to_xml, :schema => SML_XSD} 
+        @parts << {:entry => "xl/#{table.pn}", :doc => table.to_xml, :schema => SML_XSD}
       end
 
       workbook.charts.each do |chart|
@@ -201,7 +201,7 @@ module Axlsx
 
       workbook.worksheets.each do |sheet|
         @parts << {:entry => "xl/#{sheet.rels_pn}", :doc => sheet.relationships.to_xml, :schema => RELS_XSD}
-        @parts << {:entry => "xl/#{sheet.pn}", :doc => sheet.to_xml, :schema => SML_XSD}
+        @parts << {:entry => "xl/#{sheet.pn}", :doc => sheet.to_xml_string, :schema => SML_XSD}
       end
       @parts
     end

@@ -59,6 +59,13 @@ module Axlsx
       worksheet.rows.index(self)
     end
 
+    def to_xml_string
+      if custom_height?
+        "<row r=\"%s\" customHeight=\"1\" ht=\"%s\">%s</row>" % [index+1, height, @cells.inject("") { |memo, obj| obj.to_xml_string }]
+      else
+        "<row r=\"%s\">%s</row>" % [index+1, @cells.inject("") { |memo, obj| memo.concat obj.to_xml_string }]
+      end
+    end
     # Serializes the row
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String]
