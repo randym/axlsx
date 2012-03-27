@@ -30,7 +30,7 @@ module Axlsx
     # needs to define bla=(v) and bla methods on the class that hook into a
     # set_attr method that kicks the suplied validator and updates the instance_variable
     # for the key
-    INLINE_STYLES = ['font_name', 'charset',
+    INLINE_STYLES = ['value', 'type', 'font_name', 'charset',
                          'family', 'b', 'i', 'strike','outline',
                          'shadow', 'condense', 'extend', 'u',
                          'vertAlign', 'sz', 'color', 'scheme']
@@ -291,7 +291,7 @@ module Axlsx
       str = []
       if is_text_run?
         keys = self.instance_values.reject{|key, value| value == nil }.keys & INLINE_STYLES
-        keys.delete 'font_name'
+        keys.delete ['font_name', 'value', 'type']
         str << "<r><rPr>"
         str << "<rFont val='%s'/>" % @font_name if @font_name
         keys.each do |key|
