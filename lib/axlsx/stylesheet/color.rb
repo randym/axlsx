@@ -62,12 +62,11 @@ module Axlsx
     # def indexed=(v) Axlsx::validate_unsigned_integer v; @indexed = v end
 
     def to_xml_string
-      str = ["<color "]
+      str = "<color "
       self.instance_values.each do |key, value|
-        str << "%s='%s' " % [key, value]
+        str << key << '="' << value.to_s << '" '
       end
       str << "/>"
-      str.join
     end
 
     # Serializes the color

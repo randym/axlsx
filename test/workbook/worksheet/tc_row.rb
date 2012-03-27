@@ -61,14 +61,14 @@ class TestRow < Test::Unit::TestCase
   end
 
   def test_to_xml_string
-    r_s_xml = Nokogiri::XML(@row.to_xml_string)
+    r_s_xml = Nokogiri::XML(@row.to_xml_string(0, ''))
     assert_equal(r_s_xml.xpath(".//row[@r=1]").size, 1)
   end
 
   def test_to_xml_string_with_custom_height
     @row.add_cell 1
     @row.height = 20
-    r_s_xml = Nokogiri::XML(@row.to_xml_string)
+    r_s_xml = Nokogiri::XML(@row.to_xml_string(0, ''))
     assert_equal(r_s_xml.xpath(".//row[@r=1][@ht=20][@customHeight=1]").size, 1)
   end
 

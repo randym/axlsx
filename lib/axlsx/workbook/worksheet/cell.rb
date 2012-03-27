@@ -238,8 +238,9 @@ module Axlsx
     # @return [String] The alpha(column)numeric(row) reference for this sell.
     # @example Relative Cell Reference
     #   ws.rows.first.cells.first.r #=> "A1"
+    # @note this will be discontinued in 1.1.0 -  prefer Axlsx.cell_r
     def r
-      "#{col_ref}#{@row.index+1}"
+      "#{Axlsx::col_ref(index)}#{@row.index+1}"
     end
 
     # @return [String] The absolute alpha(column)numeric(row) reference for this sell.
@@ -275,9 +276,9 @@ module Axlsx
       self.row.worksheet.merge_cells "#{self.r}:#{range_end}" unless range_end.nil?
     end
 
-    def run_xml_string
-      str = ""
+    def run_xml_string(str = '')
       if is_text_run?
+        puts 'text run'
         data = self.instance_values.reject{|key, value| value == nil }
         keys = data.keys & INLINE_STYLES
         keys.delete ['value', 'type']
@@ -333,30 +334,32 @@ module Axlsx
     # Serializes the cell
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String] xml text for the cell
-    def to_xml_string
+    def to_xml_string(r_index, c_index, str = '')
+      str << '<c r="' << Axlsx::cell_r(c_index, r_index) << '" s="' << @style.to_s << '" '
       case @type
       when :string
         #parse formula
         if @value.start_with?('=')
-          '<c r="' << r << '" t="str" s="' << @style.to_s << '"><f>' << value.to_s.gsub('=', '') << '</f></c>'
+          str  << 't="str"><f>' << value.to_s.gsub('=', '') << '</f>'
         else
           #parse shared
           if @ssti
-            '<c r="' << r << '" t="s" s="' << @style.to_s << '"><v>' << ssti << '</v></c>'
+            str << 't="s"><v>' << ssti << '</v>'
           else
-            '<c r="' << r << '" t="inlineStr" s="' << @style.to_s << '"><is>' << run_xml_string << '</is></c>'
+            str << 't="inlineStr"><is>' << run_xml_string << '</is>'
           end
         end
       when :date
         # TODO: See if this is subject to the same restriction as Time below
-        '<c r="' << r << '" s="' << @style.to_s << '"><v>' << DateTimeConverter::date_to_serial(@value).to_s << '</v></c>'
+        str << '><v>' << DateTimeConverter::date_to_serial(@value).to_s << '</v>'
       when :time
-        '<c r="' << r << '" s="' << @style.to_s << '"><v>' << DateTimeConverter::time_to_serial(@value).to_s << '</v></c>'
+        str << '><v>' << DateTimeConverter::time_to_serial(@value).to_s << '</v>'
       when :boolean
-        '<c r="' << r << '" t="b" s="' << @style.to_s << '"><v>' << @value.to_s << '</v></c>'
+        str << 't="b"><v>' << @value.to_s << '</v>'
       else
-        '<c r="' << r << '" s="' << @style.to_s << '"><v>' << @value.to_s << '</v></c>'
+        str << '><v>' << @value.to_s << '</v>'
       end
+      str << '</c>'
     end
 
     def to_xml(xml)
@@ -411,20 +414,6 @@ module Axlsx
 
     # assigns the owning row for this cell.
     def row=(v) DataTypeValidator.validate "Cell.row", Row, v; @row=v end
-
-    # converts the column index into alphabetical values.
-    # @note This follows the standard spreadsheet convention of naming columns A to Z, followed by AA to AZ etc.
-    # @return [String]
-    def col_ref
-      chars = []
-      index = self.index
-      while index >= 26 do
-        chars << ((index % 26) + 65).chr
-        index /= 26
-      end
-      chars << ((chars.empty? ? index : index-1) + 65).chr
-      chars.reverse.join
-    end
 
     # Determines the cell type based on the cell value.
     # @note This is only used when a cell is created but no :type option is specified, the following rules apply:

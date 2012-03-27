@@ -69,7 +69,8 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_col_ref
-    assert_equal(@c.send(:col_ref), "A")
+    #TODO move to axlsx spec
+    assert_equal(Axlsx.col_ref(0), "A")
   end
 
   def test_cell_type_from_value

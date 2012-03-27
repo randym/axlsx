@@ -386,7 +386,9 @@ module Axlsx
         str.concat '</cols>'
       end
 
-      str.concat "<sheetData>%s</sheetData>" % @rows.map { |obj| obj.to_xml_string }.join
+      str.concat '<sheetData>'
+      @rows.each_with_index { |row, index| row.to_xml_string(index, str) }
+      str.concat '</sheetData>'
       str.concat page_margins.to_xml_string if @page_margins
       str.concat "<autoFilter ref='%s'></autoFilter>" % @auto_filter if @auto_filter
       str.concat "<mergeCells count='%s'>%s</mergeCells>" % [@merged_cells.size, @merged_cells.reduce('') { |memo, obj| "<mergeCell ref='%s'></mergeCell>" % obj } ] unless @merged_cells.empty?
