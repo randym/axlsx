@@ -282,7 +282,7 @@ module Axlsx
     end
 
     def run_xml_string
-      str = []
+      str = ""
       if is_text_run?
         keys = self.instance_values.reject{|key, value| value == nil }.keys & INLINE_STYLES
         keys.delete ['value', 'type']
@@ -290,20 +290,18 @@ module Axlsx
         keys.each do |key|
           case key
           when 'font_name'
-            str << "<rFont val='%s'/>" % @font_name if @font_name
+            str << "<rFont val='"<< @font_name << "'/>"
           when 'color'
             str << self.instance_values[key].to_xml_string
           else
-            "<%s val='%s'/>" % [key, self.instance_values[key]]
+            "<" << key << "val='" << self.instance_values[key] << "'/>"
           end
         end
-        str << "</rPr>"
-        str << "<t>%s</t>" % value.to_s
-        str << "</r>"
+        str << "</rPr>" << "<t>" << value.to_s << "</t></r>"
       else
-        str << "<t>%s</t>" % value.to_s
+        str << "<t>" << value.to_s << "</t>"
       end
-      str.join
+      str
     end
     # builds an xml text run based on this cells attributes. This is extracted from to_xml so that shared strings can use it.
     # @param [Nokogiri::XML::Builder] xml The document builder instance this output will be added to.
@@ -340,33 +338,29 @@ module Axlsx
     # Serializes the cell
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String] xml text for the cell
-    FORMULA = "<c r=\"%s\" t=\"str\" s=\"%i\"><f>%s</f></c>"
-    SHARED_STRING = "<c r=\"%s\" t=\"s\" s=\"%i\"><v>%i</v></c>"
-    INLINE_STRING = "<c r=\"%s\" t=\"inlineStr\" s=\"%i\"><is>%s</is></c>"
-    OTHER = "<c r=\"%s\" s=\"%i\"><v>%s</v></c>"
-    BOOLEAN = "<c r=\"%s\" t=\"b\" s=\"%i\"><v>%s</v></c>"
     def to_xml_string
-      if @type == :string
+      case @type
+      when :string
         #parse formula
         if @value.start_with?('=')
-          FORMULA % [r, style, value.to_s.gsub('=', '')]
+          '<c r="' << r << '" t="str" s="' << @style.to_s << '"><f>' << value.to_s.gsub('=', '') << '</f></c>'
         else
           #parse shared
           if @ssti
-            SHARED_STRING % [r, style, ssti]
+            '<c r="' << r << '" t="s" s="' << @style.to_s << '"><v>' << ssti << '</v></c>'
           else
-            INLINE_STRING % [r, style, run_xml_string]
+            '<c r="' << r << '" t="inlineStr" s="' << @style.to_s << '"><is>' << run_xml_string << '</is></c>'
           end
         end
-      elsif @type == :date
+      when :date
         # TODO: See if this is subject to the same restriction as Time below
-        OTHER % [r, style, DateTimeConverter::date_to_serial(@value)]
-      elsif @type == :time
-        OTHER % [r, style, DateTimeConverter::time_to_serial(@value)]
-      elsif @type == :boolean
-        BOOLEAN % [r, style, value]
+        '<c r="' << r << '" s="' << @style.to_s << '"><v>' << DateTimeConverter::date_to_serial(@value) << '</v></c>'
+      when :time
+        '<c r="' << r << '" s="' << @style.to_s << '"><v>' << DateTimeConverter::time_to_serial(@value) << '</v></c>'
+      when :boolean
+        '<c r="' << r << '" t="b" s="' << @style.to_s << '"><v>' << ssti << '</v></c>'
       else
-        OTHER % [r, style, value]
+        '<c r="' << r << '" s="' << @style.to_s << '"><v>' << @value.to_s << '</v></c>'
       end
     end
 
