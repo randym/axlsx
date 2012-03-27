@@ -224,16 +224,10 @@ module Axlsx
 
     # equality comparison to test value, type and inline style attributes
     # this is how we work out if the cell needs to be added or already exists in the shared strings table
-    def shareable(v)
-
-      #using reject becase 1.8.7 select returns an array...
-      v_hash = v.instance_values.reject { |key, val| !INLINE_STYLES.include?(key) }
+    def shareable_hash
       self_hash = self.instance_values.reject { |key, val| !INLINE_STYLES.include?(key) }
-      # required as color is an object, and the comparison will fail even though both use the same color.
-      v_hash['color'] = v_hash['color'].instance_values if v_hash['color']
       self_hash['color'] = self_hash['color'].instance_values if self_hash['color']
-
-      v_hash == self_hash
+      self_hash
     end
 
     # @return [Integer] The index of the cell in the containing row.
@@ -284,7 +278,8 @@ module Axlsx
     def run_xml_string
       str = ""
       if is_text_run?
-        keys = self.instance_values.reject{|key, value| value == nil }.keys & INLINE_STYLES
+        data = self.instance_values.reject{|key, value| value == nil }
+        keys = data.keys & INLINE_STYLES
         keys.delete ['value', 'type']
         str << "<r><rPr>"
         keys.each do |key|
@@ -292,9 +287,9 @@ module Axlsx
           when 'font_name'
             str << "<rFont val='"<< @font_name << "'/>"
           when 'color'
-            str << self.instance_values[key].to_xml_string
+            str << data[key].to_xml_string
           else
-            "<" << key << "val='" << self.instance_values[key] << "'/>"
+            "<" << key.to_s << " val='" << data[key].to_s << "'/>"
           end
         end
         str << "</rPr>" << "<t>" << value.to_s << "</t></r>"
@@ -354,11 +349,11 @@ module Axlsx
         end
       when :date
         # TODO: See if this is subject to the same restriction as Time below
-        '<c r="' << r << '" s="' << @style.to_s << '"><v>' << DateTimeConverter::date_to_serial(@value) << '</v></c>'
+        '<c r="' << r << '" s="' << @style.to_s << '"><v>' << DateTimeConverter::date_to_serial(@value).to_s << '</v></c>'
       when :time
-        '<c r="' << r << '" s="' << @style.to_s << '"><v>' << DateTimeConverter::time_to_serial(@value) << '</v></c>'
+        '<c r="' << r << '" s="' << @style.to_s << '"><v>' << DateTimeConverter::time_to_serial(@value).to_s << '</v></c>'
       when :boolean
-        '<c r="' << r << '" t="b" s="' << @style.to_s << '"><v>' << ssti << '</v></c>'
+        '<c r="' << r << '" t="b" s="' << @style.to_s << '"><v>' << @value.to_s << '</v></c>'
       else
         '<c r="' << r << '" s="' << @style.to_s << '"><v>' << @value.to_s << '</v></c>'
       end

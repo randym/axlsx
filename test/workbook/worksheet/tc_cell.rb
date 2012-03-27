@@ -206,13 +206,14 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_equality
-      c2 = @row.add_cell 1, :type=>:float, :style=>1
-      assert(c2.shareable(@c))
+    c2 = @row.add_cell 1, :type=>:float, :style=>1
+
+    assert_equal(c2.shareable_hash,@c.shareable_hash)
       c3 = @row.add_cell 2, :type=>:float, :style=>1
       c4 = @row.add_cell 1, :type=>:float, :style=>1, :color => "#FFFFFFFF"
-      assert_equal(c4.shareable(c2) ,false)
+      assert_equal(c4.shareable_hash == c2.shareable_hash,false)
       c5 = @row.add_cell 1, :type=>:float, :style=>1, :color => "#FFFFFFFF"
-      assert(c5.shareable(c4))
+      assert_equal(c5.shareable_hash, c4.shareable_hash)
 
   end
 

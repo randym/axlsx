@@ -26,7 +26,7 @@ class TestSharedStringsTable < Test::Unit::TestCase
 
   def test_valid_document
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
-    doc = Nokogiri::XML(@p.workbook.shared_strings.to_xml)
+    doc = Nokogiri::XML(@p.workbook.shared_strings.to_xml_string)
     errors = []
     schema.validate(doc).each do |error|
       puts error.message

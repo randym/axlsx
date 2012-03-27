@@ -36,7 +36,7 @@ module Axlsx
     end
 
     def to_xml_string
-      str = "<sst xmlns=\"%s\" count='%s' uniqueCount='%s'>%s</sst>" % [XML_NS, count, unique_count, @unique_cells.map {|cell| cell.run_xml_string}.join]
+      str = "<sst xmlns=\"%s\" count='%s' uniqueCount='%s'>%s</sst>" % [XML_NS, count, unique_count, @unique_cells.map {|cell| cell[:data]}.join]
     end
 
     # Generate the xml document for the Shared Strings Table
@@ -62,10 +62,13 @@ module Axlsx
     # @return [Array] unique cells
     def resolve(cells)
       cells.each do |cell|
-        index = @unique_cells.index { |item| item.shareable(cell) }
+        cell_hash = cell.shareable_hash
+        index = @unique_cells.index do |item|
+          item[:hash] == cell_hash
+        end
         if index == nil
           cell.send :ssti=, @unique_cells.size
-          @unique_cells << cell
+          @unique_cells << {:hash => cell_hash, :data => '<si>'<< cell.run_xml_string << '</si>'}
         else
           cell.send :ssti=, index
         end
