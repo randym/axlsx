@@ -160,7 +160,7 @@ module Axlsx
     end
 
 
-    # Indicates if gridlines should be shown in the sheet.
+    # Indicates if the worksheet should print in a single page.
     # This is true by default.
     # @return [Boolean]
     def fit_to_page=(v)
