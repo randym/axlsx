@@ -196,7 +196,7 @@ module Axlsx
       end
 
       if use_shared_strings
-        @parts << {:entry => "xl/#{SHARED_STRINGS_PN}", :doc => workbook.shared_strings.to_xml, :schema => SML_XSD}
+        @parts << {:entry => "xl/#{SHARED_STRINGS_PN}", :doc => workbook.shared_strings.to_xml_string, :schema => SML_XSD}
       end
 
       workbook.worksheets.each do |sheet|

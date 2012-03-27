@@ -25,10 +25,17 @@ module Axlsx
 
 
     # An array of available inline styes.
-    INLINE_STYLES = ['value', 'type', 'font_name', 'charset',
+    # TODO change this to a hash where each key defines attr name and validator (and any info the validator requires)
+    # then move it out to a module so we can re-use in in other classes.
+    # needs to define bla=(v) and bla methods on the class that hook into a
+    # set_attr method that kicks the suplied validator and updates the instance_variable
+    # for the key
+    INLINE_STYLES = ['font_name', 'charset',
                          'family', 'b', 'i', 'strike','outline',
                          'shadow', 'condense', 'extend', 'u',
                          'vertAlign', 'sz', 'color', 'scheme']
+
+    INLINE_ATTR = [:font_name => { :validator=>:validate_string}]
 
 
     # The index of the cellXfs item to be applied to this cell.
@@ -69,71 +76,85 @@ module Axlsx
       @value = cast_value(v)
     end
 
+
+    # Indicates that the cell has one or more of the custom cell styles applied.
+    # @return [Boolean]
+    def is_text_run?
+      @is_text_run ||= false
+    end
+
+
+    def set_run_style( validator, attr, value)
+      return unless INLINE_STYLES.include?(attr.to_s)
+      Axlsx.send(validator, value) unless validator == nil
+      self.instance_variable_set :"@#{attr.to_s}", value
+      @is_text_run = true
+    end
     # The inline font_name property for the cell
     # @return [String]
     attr_reader :font_name
     # @see font_name
-    def font_name=(v) Axlsx::validate_string(v); @font_name = v; end
+    def font_name=(v) set_run_style :validate_string, :font_name, v; end
 
     # The inline charset property for the cell
     # @return [String]
     attr_reader :charset
     # @see charset
-    def charset=(v) Axlsx::validate_unsigned_int(v); @charset = v; end
+    def charset=(v) set_run_style :validate_unsigned_int, :charset, v; end
 
     # The inline family property for the cell
     # @return [String]
     attr_reader :family
     # @see family
-    def family=(v) Axlsx::validate_string(v); @family = v; end
+    def family=(v) set_run_style :validate_string, :family, v; end
 
     # The inline bold property for the cell
     # @return [Boolean]
     attr_reader :b
     # @see b
-    def b=(v) Axlsx::validate_boolean(v); @b = v; end
+    def b=(v) set_run_style :validate_boolean, :b, v; end
 
     # The inline italic property for the cell
     # @return [Boolean]
     attr_reader :i
     # @see i
-    def i=(v) Axlsx::validate_boolean(v); @i = v; end
+    def i=(v) set_run_style :validate_boolean, :i, v; end
 
     # The inline strike property for the cell
     # @return [Boolean]
     attr_reader :strike
     # @see strike
-    def strike=(v) Axlsx::validate_boolean(v); @strike = v; end
+    def strike=(v) set_run_style :validate_boolean, :strike, v; end
 
     # The inline outline property for the cell
     # @return [Boolean]
     attr_reader :outline
     # @see outline
-    def outline=(v) Axlsx::validate_boolean(v); @outline = v; end
+    def outline=(v) set_run_style :validate_boolean, :outline, v; end
 
     # The inline shadow property for the cell
     # @return [Boolean]
     attr_reader :shadow
     # @see shadow
-    def shadow=(v) Axlsx::validate_boolean(v); @shadow = v; end
+    def shadow=(v) set_run_style :validate_boolean, :shadow, v; end
 
     # The inline condense property for the cell
     # @return [Boolean]
     attr_reader :condense
     # @see condense
-    def condense=(v) Axlsx::validate_boolean(v); @condense = v; end
+    def condense=(v) set_run_style :validate_boolean, :condense, v; end
 
     # The inline extend property for the cell
     # @return [Boolean]
     attr_reader :extend
     # @see extend
-    def extend=(v) Axlsx::validate_boolean(v); @extend = v; end
+    def extend=(v) set_run_style :validate_boolean, :extend, v; end
 
     # The inline underline property for the cell
     # @return [Boolean]
     attr_reader :u
     # @see u
-    def u=(v) Axlsx::validate_boolean(v); @u = v; end
+    def u=(v) set_run_style :validate_boolean, :u, v; end
 
     # The inline color property for the cell
     # @return [Color]
@@ -141,27 +162,34 @@ module Axlsx
     # @param [String] The 8 character representation for an rgb color #FFFFFFFF"
     def color=(v)
       @color = v.is_a?(Color) ? v : Color.new(:rgb=>v)
+      @has_run_style = true
     end
 
     # The inline sz property for the cell
     # @return [Boolean]
     attr_reader :sz
     # @see sz
-    def sz=(v) Axlsx::validate_unsigned_int(v); @sz = v; end
+    def sz=(v) set_run_style :validate_unsigned_int, :sz, v; end
 
     # The inline vertical alignment property for the cell
     # this must be one of [:baseline, :subscript, :superscript]
     # @return [Symbol]
     attr_reader :vertAlign
     # @see vertAlign
-    def vertAlign=(v) RestrictionValidator.validate "Cell.vertAlign", [:baseline, :subscript, :superscript], v; @vertAlign = v; end
+    def vertAlign=(v)
+      RestrictionValidator.validate "Cell.vertAlign", [:baseline, :subscript, :superscript], v
+      set_run_style nil, :vertAlign, v
+    end
 
     # The inline scheme property for the cell
     # this must be one of [:none, major, minor]
     # @return [Symbol]
     attr_reader :scheme
     # @see scheme
-    def scheme=(v) RestrictionValidator.validate "Cell.schema", [:none, :major, :minor], v; @scheme = v; end
+    def scheme=(v)
+      RestrictionValidator.validate "Cell.schema", [:none, :major, :minor], v
+      set_run_style nil, :scheme, v
+    end
 
     # @param [Row] row The row this cell belongs to.
     # @param [Any] value The value associated with this cell.
@@ -259,14 +287,23 @@ module Axlsx
       self.row.worksheet.merge_cells "#{self.r}:#{range_end}" unless range_end.nil?
     end
 
-
     def run_xml_string
-      #if (self.instance_values.keys & INLINE_STYLES).size > 0
-      #  str = "<r><rPr></rPr><r>"
-      #else
-      #  "<t>%s</t>" % value.to_s
-      #end
-      "<t>%s</t>" % value.to_s
+      str = []
+      if is_text_run?
+        keys = self.instance_values.reject{|key, value| value == nil }.keys & INLINE_STYLES
+        keys.delete 'font_name'
+        str << "<r><rPr>"
+        str << "<rFont val='%s'/>" % @font_name if @font_name
+        keys.each do |key|
+          str << "<%s val='%s'/>" % [key, self.instance_values[key]]
+        end
+        str << "</rPr>"
+        str << "<t>%s</t>" % value.to_s
+        str << "</r>"
+      else
+        str << "<t>%s</t>" % value.to_s
+      end
+      str.join
     end
     # builds an xml text run based on this cells attributes. This is extracted from to_xml so that shared strings can use it.
     # @param [Nokogiri::XML::Builder] xml The document builder instance this output will be added to.
@@ -303,7 +340,6 @@ module Axlsx
     # Serializes the cell
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String] xml text for the cell
-
     FORMULA = "<c r=\"%s\" t=\"str\" s=\"%i\"><f>%s</f></c>"
     SHARED_STRING = "<c r=\"%s\" t=\"s\" s=\"%i\"><v>%i</v></c>"
     INLINE_STRING = "<c r=\"%s\" t=\"inlineStr\" s=\"%i\"><is>%s</is></c>"
