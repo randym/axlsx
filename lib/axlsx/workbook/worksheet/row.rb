@@ -61,9 +61,9 @@ module Axlsx
 
     def to_xml_string
       if custom_height?
-        "<row r=\"%s\" customHeight=\"1\" ht=\"%s\">%s</row>" % [index+1, height, @cells.inject("") { |memo, obj| obj.to_xml_string }]
+        '<row r="' << (index+1).to_s << '" customHeight="1" ht="' << height.to_s << '">' << @cells.map { |cell| cell.to_xml_string }.join << '</row>'
       else
-        "<row r=\"%s\">%s</row>" % [index+1, @cells.map{ |obj| obj.to_xml_string }.join]
+        '<row r="' << (index+1).to_s << '">' << (@cells.map { |cell| cell.to_xml_string }.join) << '</row>'
       end
     end
     # Serializes the row
