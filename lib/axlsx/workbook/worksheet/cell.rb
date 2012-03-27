@@ -84,12 +84,6 @@ module Axlsx
     end
 
 
-    def set_run_style( validator, attr, value)
-      return unless INLINE_STYLES.include?(attr.to_s)
-      Axlsx.send(validator, value) unless validator == nil
-      self.instance_variable_set :"@#{attr.to_s}", value
-      @is_text_run = true
-    end
     # The inline font_name property for the cell
     # @return [String]
     attr_reader :font_name
@@ -291,11 +285,17 @@ module Axlsx
       str = []
       if is_text_run?
         keys = self.instance_values.reject{|key, value| value == nil }.keys & INLINE_STYLES
-        keys.delete ['font_name', 'value', 'type']
+        keys.delete ['value', 'type']
         str << "<r><rPr>"
-        str << "<rFont val='%s'/>" % @font_name if @font_name
         keys.each do |key|
-          str << "<%s val='%s'/>" % [key, self.instance_values[key]]
+          case key
+          when 'font_name'
+            str << "<rFont val='%s'/>" % @font_name if @font_name
+          when 'color'
+            str << self.instance_values[key].to_xml_string
+          else
+            "<%s val='%s'/>" % [key, self.instance_values[key]]
+          end
         end
         str << "</rPr>"
         str << "<t>%s</t>" % value.to_s
@@ -405,6 +405,14 @@ module Axlsx
     end
 
     private
+
+    # Utility method for setting inline style attributes
+    def set_run_style( validator, attr, value)
+      return unless INLINE_STYLES.include?(attr.to_s)
+      Axlsx.send(validator, value) unless validator == nil
+      self.instance_variable_set :"@#{attr.to_s}", value
+      @is_text_run = true
+    end
 
     # @see ssti
     def ssti=(v)

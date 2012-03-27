@@ -63,9 +63,9 @@ module Axlsx
 
     def to_xml_string
       str = ["<color "]
-      str << "tint='%s' " % tint if @tint
-      str << "rgb='%s' " % rgb if @rgb
-      str << "auto='%s'" % auto if @auto
+      self.instance_values.each do |key, value|
+        str << "%s='%s' " % [key, value]
+      end
       str << "/>"
       str.join
     end
