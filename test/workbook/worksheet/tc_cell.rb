@@ -69,7 +69,8 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_col_ref
-    assert_equal(@c.send(:col_ref), "A")
+    #TODO move to axlsx spec
+    assert_equal(Axlsx.col_ref(0), "A")
   end
 
   def test_cell_type_from_value
@@ -206,13 +207,14 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_equality
-      c2 = @row.add_cell 1, :type=>:float, :style=>1
-      assert(c2.shareable(@c))
+    c2 = @row.add_cell 1, :type=>:float, :style=>1
+
+    assert_equal(c2.shareable_hash,@c.shareable_hash)
       c3 = @row.add_cell 2, :type=>:float, :style=>1
       c4 = @row.add_cell 1, :type=>:float, :style=>1, :color => "#FFFFFFFF"
-      assert_equal(c4.shareable(c2) ,false)
+      assert_equal(c4.shareable_hash == c2.shareable_hash,false)
       c5 = @row.add_cell 1, :type=>:float, :style=>1, :color => "#FFFFFFFF"
-      assert(c5.shareable(c4))
+      assert_equal(c5.shareable_hash, c4.shareable_hash)
 
   end
 
@@ -222,6 +224,13 @@ class TestCell < Test::Unit::TestCase
     assert_equal(@c.ssti, 1)
   end
 
+  def test_to_xml_string
+    builder = Nokogiri::XML::Builder.new(:encoding => Axlsx::ENCODING) do |xml|
+      @c.to_xml(xml)
+    end
+    c_xml = Nokogiri::XML(builder.to_xml(:save_with => 0))
+    assert_equal(c_xml.xpath("/c[@s=1]").size, 1)
+  end
   def test_to_xml
     # TODO This could use some much more stringent testing related to the xml content generated!
     row = @ws.add_row [Time.now, Date.today, true, 1, 1.0, "text", "=sum(A1:A2)"]

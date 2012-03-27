@@ -168,27 +168,6 @@ module Axlsx
       @fit_to_page = v
     end
 
-    # Returns the cell or cells defined using excel style A1:B3 references.
-    # @param [String|Integer] cell_def the string defining the cell or range of cells, or the rownumber
-    # @return [Cell, Array]
-    def [](cell_def)
-      return rows[cell_def - 1] if cell_def.is_a? Integer
-      parts = cell_def.split(':')
-      first = name_to_cell parts[0]
-
-      if parts.size == 1
-        first
-      else
-        cells = []
-        last = name_to_cell(parts[1])
-        rows[(first.row.index..last.row.index)].each do |r|
-          r.cells[(first.index..last.index)].each do |c|
-            cells << c
-          end
-        end
-        cells
-      end
-    end
 
     # returns the column and row index for a named based cell
     # @param [String] name The cell or cell range to return. "A1" will return the first cell of the first row.
@@ -375,6 +354,7 @@ module Axlsx
       chart
     end
 
+    # needs documentation
     def add_table(ref, options={})
       table = Table.new(ref, self, options)
       @tables << table
@@ -391,14 +371,42 @@ module Axlsx
       image
     end
 
+    def to_xml_string
+      str = "<worksheet xmlns=\"%s\" xmlns:r=\"%s\">" % [XML_NS, XML_NS_R]
+      str.concat "<sheetPr><pageSetUpPr fitToPage=\"%s\"></pageSetUpPr></sheetPr>" % fit_to_page if fit_to_page
+      str.concat "<dimension ref=\"%s\"></dimension>" % dimension unless rows.size == 0
+      str.concat "<sheetViews><sheetView tabSelected='%s' workbookViewId='0' showGridLines='%s'><selection activeCell=\"A1\" sqref=\"A1\"/></sheetView></sheetViews>" % [@selected, show_gridlines]
+
+      if @auto_fit_data.size > 0
+        str.concat "<cols>"
+        @auto_fit_data.each_with_index do |col, index|
+          min_max = index+1
+          str.concat "<col min='%s' max='%s' width='%s' customWidth='1'></col>" % [min_max, min_max, auto_width(col)]
+        end
+        str.concat '</cols>'
+      end
+
+      str.concat '<sheetData>'
+      @rows.each_with_index { |row, index| row.to_xml_string(index, str) }
+      str.concat '</sheetData>'
+      str.concat page_margins.to_xml_string if @page_margins
+      str.concat "<autoFilter ref='%s'></autoFilter>" % @auto_filter if @auto_filter
+      str.concat "<mergeCells count='%s'>%s</mergeCells>" % [@merged_cells.size, @merged_cells.reduce('') { |memo, obj| "<mergeCell ref='%s'></mergeCell>" % obj } ] unless @merged_cells.empty?
+      str.concat "<drawing r:id='rId1'></drawing>" if @drawing
+      unless @tables.empty?
+        str.concat "<tableParts count='%s'>%s</tableParts>" % [@tables.size, @tables.reduce('') { |memo, obj| memo += "<tablePart r:id='%s'/>" % obj.rId }]
+      end
+      str + '</worksheet>'
+    end
+
     # Serializes the worksheet document
     # @return [String]
     def to_xml
       builder = Nokogiri::XML::Builder.new(:encoding => ENCODING) do |xml|
         xml.worksheet(:xmlns => XML_NS,
                       :'xmlns:r' => XML_NS_R) {
-           xml.sheetPr {
-             xml.pageSetUpPr :fitToPage => fit_to_page if fit_to_page
+          xml.sheetPr {
+            xml.pageSetUpPr :fitToPage => fit_to_page if fit_to_page
           }
           # another patch for the folks at rubyXL as thier parser depends on this optional element.
           xml.dimension :ref=>dimension unless rows.size == 0
@@ -450,6 +458,29 @@ module Axlsx
         r
     end
 
+    # Returns the cell or cells defined using excel style A1:B3 references.
+    # @param [String|Integer] cell_def the string defining the cell or range of cells, or the rownumber
+    # @return [Cell, Array]
+
+    def [] (cell_def)
+      return rows[cell_def] if cell_def.is_a?(Integer)
+
+      parts = cell_def.split(':')
+      first = name_to_cell parts[0]
+      if parts.size == 1
+        first
+      else
+        cells = []
+        last = name_to_cell(parts[1])
+        rows[(first.row.index..last.row.index)].each do |r|
+          r.cells[(first.index..last.index)].each do |c|
+            cells << c
+          end
+        end
+        cells
+      end
+    end
+
     private
 
     # assigns the owner workbook for this worksheet
@@ -478,6 +509,7 @@ module Axlsx
         next if width == :ignore || (item.value.is_a?(String) && item.value.start_with?('='))
         # make sure we can turn that fixed with off!
         col[:fixed] = nil if width == :auto
+        next unless self.workbook.use_autowidth
 
         cell_xf = cellXfs[item.style]
         font = fonts[cell_xf.fontId || 0]
