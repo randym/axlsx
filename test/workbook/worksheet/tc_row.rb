@@ -1,5 +1,4 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestRow < Test::Unit::TestCase
 
@@ -8,7 +7,7 @@ class TestRow < Test::Unit::TestCase
     @ws = p.workbook.add_worksheet :name=>"hmmm"
     @row = @ws.add_row
   end
-  
+
   def test_initialize
     assert(@row.cells.empty?, "no cells by default")
     assert_equal(@row.worksheet, @ws, "has a reference to the worksheet")
@@ -25,7 +24,7 @@ class TestRow < Test::Unit::TestCase
   def test_style
     r = @ws.add_row([1,2,3,4,5])
     r.style=1
-    r.cells.each { |c| assert_equal(c.style,1) }    
+    r.cells.each { |c| assert_equal(c.style,1) }
   end
 
   def test_index
@@ -59,6 +58,18 @@ class TestRow < Test::Unit::TestCase
     doc = Nokogiri::XML.parse(xml.to_xml)
     assert_equal(0, doc.xpath(".//row[@ht]").size)
     assert_equal(0, doc.xpath(".//row[@customHeight]").size)
+  end
+
+  def test_to_xml_string
+    r_s_xml = Nokogiri::XML(@row.to_xml_string)
+    assert_equal(r_s_xml.xpath(".//row[@r=1]").size, 1)
+  end
+
+  def test_to_xml_string_with_custom_height
+    @row.add_cell 1
+    @row.height = 20
+    r_s_xml = Nokogiri::XML(@row.to_xml_string)
+    assert_equal(r_s_xml.xpath(".//row[@r=1][@ht=20][@customHeight=1]").size, 1)
   end
 
   def test_to_xml_with_custom_height

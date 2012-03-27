@@ -1,11 +1,10 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestTable < Test::Unit::TestCase
-  def setup    
+  def setup
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet
-    40.times do 
+    40.times do
       @ws << ["aa","aa","aa","aa","aa","aa"]
     end
   end
@@ -13,7 +12,7 @@ class TestTable < Test::Unit::TestCase
   def test_initialization
     assert(@ws.workbook.tables.empty?)
     assert(@ws.tables.empty?)
-    
+
   end
 
   def test_add_table
@@ -25,13 +24,13 @@ class TestTable < Test::Unit::TestCase
     assert_equal(table.name, name, "options for name are applied")
 
   end
- 
+
   def test_charts
     assert(@ws.drawing.charts.empty?)
     chart = @ws.add_chart(Axlsx::Pie3DChart, :title=>"bob", :start_at=>[0,0], :end_at=>[1,1])
     assert_equal(@ws.drawing.charts.last, chart, "add chart is returned")
     chart = @ws.add_chart(Axlsx::Pie3DChart, :title=>"nancy", :start_at=>[1,5], :end_at=>[5,10])
-    assert_equal(@ws.drawing.charts.last, chart, "add chart is returned")   
+    assert_equal(@ws.drawing.charts.last, chart, "add chart is returned")
   end
 
   def test_pn
@@ -43,7 +42,7 @@ class TestTable < Test::Unit::TestCase
     table = @ws.add_table("A1:D5")
     assert_equal(@ws.tables.first.rId, "rId1")
   end
-  
+
   def test_index
     table = @ws.add_table("A1:D5")
     assert_equal(@ws.tables.first.index, @ws.workbook.tables.index(@ws.tables.first))

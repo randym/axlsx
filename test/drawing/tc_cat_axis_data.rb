@@ -1,5 +1,4 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestCatAxisData < Test::Unit::TestCase
 
@@ -9,7 +8,7 @@ class TestCatAxisData < Test::Unit::TestCase
     chart = @ws.drawing.add_chart Axlsx::Bar3DChart
     @series = chart.add_series :labels=>["zero", "one", "two"]
   end
-  
+
   def test_initialize
     assert(@series.labels.is_a?Axlsx::SimpleTypedList)
     assert_equal(@series.labels, ["zero", "one", "two"])

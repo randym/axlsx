@@ -1,14 +1,13 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestSharedStringsTable < Test::Unit::TestCase
 
-  def setup    
+  def setup
     @p = Axlsx::Package.new :use_shared_strings=>true
     ws = @p.workbook.add_worksheet
     ws.add_row ['a', 1, 'b']
     ws.add_row ['b', 1, 'c']
-    ws.add_row ['c', 1, 'd']    
+    ws.add_row ['c', 1, 'd']
   end
 
   def test_workbook_has_shared_strings
@@ -25,9 +24,9 @@ class TestSharedStringsTable < Test::Unit::TestCase
     assert_equal(sst.unique_count, 4)
   end
 
-  def test_valid_document    
+  def test_valid_document
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
-    doc = Nokogiri::XML(@p.workbook.shared_strings.to_xml)
+    doc = Nokogiri::XML(@p.workbook.shared_strings.to_xml_string)
     errors = []
     schema.validate(doc).each do |error|
       puts error.message

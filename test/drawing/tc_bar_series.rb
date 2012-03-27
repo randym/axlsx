@@ -1,5 +1,4 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestBarSeries < Test::Unit::TestCase
 
@@ -9,12 +8,12 @@ class TestBarSeries < Test::Unit::TestCase
     chart = @ws.drawing.add_chart Axlsx::Bar3DChart, :title => "fishery"
     @series = chart.add_series :data=>[0,1,2], :labels=>["zero", "one", "two"], :title=>"bob"
   end
-  
+
   def test_initialize
     assert_equal(@series.title.text, "bob", "series title has been applied")
     assert_equal(@series.data, [0,1,2], "data option applied")
-    assert_equal(@series.labels, ["zero", "one","two"], "labels option applied")    
-    assert_equal(@series.shape, :box, "series shape has been applied")   
+    assert_equal(@series.labels, ["zero", "one","two"], "labels option applied")
+    assert_equal(@series.shape, :box, "series shape has been applied")
   end
 
   def test_data

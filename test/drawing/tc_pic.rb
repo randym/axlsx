@@ -1,5 +1,4 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestPic < Test::Unit::TestCase
 
@@ -17,7 +16,7 @@ class TestPic < Test::Unit::TestCase
     assert_equal(@p.workbook.images.first, @image)
     assert_equal(@image.image_src, @test_img)
   end
-  
+
   def test_hyperlink
     assert_equal(@image.hyperlink, nil)
     @image.hyperlink = "http://axlsx.blogspot.com"
@@ -40,13 +39,13 @@ class TestPic < Test::Unit::TestCase
   def test_width
     assert_raise(ArgumentError) { @image.width = "a" }
     assert_nothing_raised { @image.width = 600 }
-    assert_equal(@image.width, 600)   
+    assert_equal(@image.width, 600)
   end
 
   def test_height
     assert_raise(ArgumentError) { @image.height = "a" }
     assert_nothing_raised { @image.height = 600 }
-    assert_equal(600, @image.height)   
+    assert_equal(600, @image.height)
   end
 
   def test_image_src
@@ -62,7 +61,7 @@ class TestPic < Test::Unit::TestCase
     assert_nothing_raised { @image.descr = "test" }
     assert_equal(@image.descr, "test")
   end
- 
+
   def test_to_xml
     schema = Nokogiri::XML::Schema(File.open(Axlsx::DRAWING_XSD))
     doc = Nokogiri::XML(@image.anchor.drawing.to_xml)
@@ -72,6 +71,6 @@ class TestPic < Test::Unit::TestCase
       puts error.message
     end
     assert(errors.empty?, "error free validation")
-  end  
-  
+  end
+
 end

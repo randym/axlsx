@@ -1,5 +1,4 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestPie3DChart < Test::Unit::TestCase
 
@@ -18,7 +17,7 @@ class TestPie3DChart < Test::Unit::TestCase
     assert_equal(@chart.view3D.perspective, 30, "view 3d default perspective incorrect")
     assert_equal(@chart.series_type, Axlsx::PieSeries, "series type incorrect")
   end
- 
+
   def test_to_xml
     schema = Nokogiri::XML::Schema(File.open(Axlsx::DRAWING_XSD))
     doc = Nokogiri::XML(@chart.to_xml)
@@ -28,6 +27,6 @@ class TestPie3DChart < Test::Unit::TestCase
       puts error.message
     end
     assert(errors.empty?, "error free validation")
-  end  
-  
+  end
+
 end

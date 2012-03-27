@@ -1,8 +1,7 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestBorder < Test::Unit::TestCase
-  def setup    
+  def setup
     @b = Axlsx::Border.new
   end
   def teardown
@@ -10,7 +9,7 @@ class TestBorder < Test::Unit::TestCase
   def test_initialiation
     assert_equal(@b.diagonalUp, nil)
     assert_equal(@b.diagonalDown, nil)
-    assert_equal(@b.outline, nil)    
+    assert_equal(@b.outline, nil)
     assert(@b.prs.is_a?(Axlsx::SimpleTypedList))
   end
 

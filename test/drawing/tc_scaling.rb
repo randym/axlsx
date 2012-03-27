@@ -1,8 +1,7 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestScaling < Test::Unit::TestCase
-  def setup    
+  def setup
     @scaling = Axlsx::Scaling.new
   end
 
@@ -33,5 +32,5 @@ class TestScaling < Test::Unit::TestCase
     assert_raise(ArgumentError) { @scaling.min = 1}
     assert_nothing_raised {@scaling.min = 10.5}
   end
-  
+
 end

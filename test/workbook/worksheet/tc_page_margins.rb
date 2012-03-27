@@ -1,5 +1,4 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestPageMargins < Test::Unit::TestCase
 
@@ -8,7 +7,7 @@ class TestPageMargins < Test::Unit::TestCase
     ws = p.workbook.add_worksheet :name=>"hmmm"
     @pm = ws.page_margins
   end
-  
+
   def test_initialize
     assert_equal(Axlsx::PageMargins::DEFAULT_LEFT_RIGHT, @pm.left)
     assert_equal(Axlsx::PageMargins::DEFAULT_LEFT_RIGHT, @pm.right)
@@ -25,7 +24,7 @@ class TestPageMargins < Test::Unit::TestCase
     assert_equal(2, optioned.top)
     assert_equal(1, optioned.bottom)
     assert_equal(0.1, optioned.header)
-    assert_equal(0.1, optioned.footer)    
+    assert_equal(0.1, optioned.footer)
   end
 
 
@@ -48,7 +47,7 @@ class TestPageMargins < Test::Unit::TestCase
     assert_equal(Axlsx::PageMargins::DEFAULT_HEADER_FOOTER, @pm.header)
     assert_equal(Axlsx::PageMargins::DEFAULT_HEADER_FOOTER, @pm.footer)
   end
-  
+
   def test_to_xml
     @pm.left = 1.1
     @pm.right = 1.2
@@ -61,7 +60,7 @@ class TestPageMargins < Test::Unit::TestCase
     doc = Nokogiri::XML.parse(xml.to_xml)
     assert_equal(1, doc.xpath(".//pageMargins[@left=1.1][@right=1.2][@top=1.3][@bottom=1.4][@header=0.8][@footer=0.9]").size)
   end
-      
+
   def test_left
     assert_raise(ArgumentError) { @pm.left = -1.2 }
     assert_nothing_raised { @pm.left = 1.5 }

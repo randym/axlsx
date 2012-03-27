@@ -12,13 +12,13 @@ module Axlsx
 
     # Default left and right margin (in inches)
     DEFAULT_LEFT_RIGHT = 0.75
-    
+
     # Default top and bottom margins (in inches)
     DEFAULT_TOP_BOTTOM = 1.00
-    
+
     # Default header and footer margins (in inches)
     DEFAULT_HEADER_FOOTER = 0.50
-    
+
     # Left margin (in inches)
     # @return [Float]
     attr_reader :left
@@ -26,23 +26,23 @@ module Axlsx
     # Right margin (in inches)
     # @return [Float]
     attr_reader :right
-    
+
     # Top margin (in inches)
     # @return [Float]
     attr_reader :top
-    
+
     # Bottom margin (in inches)
     # @return [Float]
     attr_reader :bottom
-    
+
     # Header margin (in inches)
     # @return [Float]
     attr_reader :header
-    
+
     # Footer margin (in inches)
     # @return [Float]
     attr_reader :footer
-    
+
     # Creates a new PageMargins object
     # @option options [Numeric] left The left margin in inches
     # @option options [Numeric] right The right margin in inches
@@ -60,7 +60,7 @@ module Axlsx
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
     end
-    
+
     # Set some or all margins at once.
     # @param [Hash] margins the margins to set (possible keys are :left, :right, :top, :bottom, :header and :footer).
     def set(margins)
@@ -69,7 +69,7 @@ module Axlsx
         send("#{k}=", v)
       end
     end
-    
+
     # @see left
     def left=(v); Axlsx::validate_unsigned_numeric(v); @left = v end
     # @see right
@@ -83,6 +83,9 @@ module Axlsx
     # @see footer
     def footer=(v); Axlsx::validate_unsigned_numeric(v); @footer = v end
 
+    def to_xml_string
+      "<pageMargins left='%s' right='%s' top='%s' bottom='%s' header='%s' footer='%s'/>" % [left, right, top, bottom, header, footer]
+    end
     # Serializes the page margins element
     # @note For compatibility, this is a noop unless custom margins have been specified.
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.

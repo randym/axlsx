@@ -5,6 +5,9 @@ require 'axlsx/util/simple_typed_list.rb'
 require 'axlsx/util/constants.rb'
 require 'axlsx/util/validators.rb'
 require 'axlsx/util/storage.rb'
+
+#not even close to being ready but it does not break anything so it stays for now.
+# needs a full re-write to use agile-encryption properly
 require 'axlsx/util/cbf.rb'
 require 'axlsx/util/ms_off_crypto.rb'
 

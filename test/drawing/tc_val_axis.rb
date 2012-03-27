@@ -1,8 +1,7 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestValAxis < Test::Unit::TestCase
-  def setup    
+  def setup
     @axis = Axlsx::ValAxis.new 12345, 54321
   end
   def teardown

@@ -1,9 +1,8 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestCore < Test::Unit::TestCase
-  
-  def setup    
+
+  def setup
     @core = Axlsx::Core.new
     @doc = Nokogiri::XML(@core.to_xml)
   end
@@ -21,7 +20,7 @@ class TestCore < Test::Unit::TestCase
   def test_populates_created
     assert_equal(@doc.xpath('//dcterms:created').text, Time.now.strftime('%Y-%m-%dT%H:%M:%S'), "dcterms:created incorrect")
   end
- 
+
   def test_populates_default_name
     assert_equal(@doc.xpath('//dc:creator').text, "axlsx", "Default name not populated")
   end

@@ -1,11 +1,10 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 class TestSimpleTypedList < Test::Unit::TestCase
-  def setup 
+  def setup
     @list = Axlsx::SimpleTypedList.new Fixnum
   end
 
-  def teardown 
+  def teardown
   end
 
   def test_type_is_a_class_or_array_of_class
@@ -15,18 +14,18 @@ class TestSimpleTypedList < Test::Unit::TestCase
     assert_raise(ArgumentError) { Axlsx::SimpleTypedList.new "1" }
     assert_raise(ArgumentError) { Axlsx::SimpleTypedList.new [Integer, "Class"] }
   end
-  
+
   def test_indexed_based_assignment
     #should not allow nil assignment
     assert_raise(ArgumentError) { @list[0] = nil }
     assert_raise(ArgumentError) { @list[0] = "1" }
     assert_nothing_raised { @list[0] = 1 }
   end
-  
+
   def test_concat_assignment
     assert_raise(ArgumentError) { @list << nil }
     assert_raise(ArgumentError) { @list << "1" }
-    assert_nothing_raised { @list << 1 }   
+    assert_nothing_raised { @list << 1 }
   end
 
   def test_concat_should_return_index
@@ -59,8 +58,8 @@ class TestSimpleTypedList < Test::Unit::TestCase
     assert_nothing_raised { @list.delete_at 3 }
     @list.unlock
     #ignore garbage
-    assert_nothing_raised { @list.delete 0 }   
-    assert_nothing_raised { @list.delete 9 }       
+    assert_nothing_raised { @list.delete 0 }
+    assert_nothing_raised { @list.delete 9 }
   end
 
 end

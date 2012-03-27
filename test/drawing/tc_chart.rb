@@ -1,5 +1,4 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestChart < Test::Unit::TestCase
 
@@ -16,7 +15,7 @@ class TestChart < Test::Unit::TestCase
   def test_initialization
     assert_equal(@p.workbook.charts.last,@chart, "the chart is in the workbook")
     assert_equal(@chart.title.text, "fishery", "the title option has been applied")
-    assert((@chart.series.is_a?(Axlsx::SimpleTypedList) && @chart.series.empty?), "The series is initialized and empty") 
+    assert((@chart.series.is_a?(Axlsx::SimpleTypedList) && @chart.series.empty?), "The series is initialized and empty")
   end
 
   def test_title
@@ -47,18 +46,18 @@ class TestChart < Test::Unit::TestCase
     assert_equal(@chart.graphic_frame.anchor.to.row, 90)
   end
 
-  def test_add_series    
+  def test_add_series
     s = @chart.add_series :data=>[0,1,2,3], :labels => ["one", 1, "anything"], :title=>"bob"
     assert_equal(@chart.series.last, s, "series has been added to chart series collection")
     assert_equal(s.title.text, "bob", "series title has been applied")
     assert_equal(s.data, [0,1,2,3], "data option applied")
-    assert_equal(s.labels, ["one",1,"anything"], "labels option applied")    
-  end  
-  
+    assert_equal(s.labels, ["one",1,"anything"], "labels option applied")
+  end
+
   def test_pn
     assert_equal(@chart.pn, "charts/chart1.xml")
   end
- 
+
   def test_to_xml
     schema = Nokogiri::XML::Schema(File.open(Axlsx::DRAWING_XSD))
     doc = Nokogiri::XML(@chart.to_xml)
@@ -68,6 +67,6 @@ class TestChart < Test::Unit::TestCase
       puts error.message
     end
     assert(errors.empty?, "error free validation")
-  end  
-  
+  end
+
 end

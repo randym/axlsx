@@ -1,5 +1,4 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestTableStyleElement < Test::Unit::TestCase
 
@@ -16,7 +15,7 @@ class TestTableStyleElement < Test::Unit::TestCase
     assert_equal(@item.dxfId, nil)
   end
 
-  def test_type    
+  def test_type
     assert_raise(ArgumentError) { @item.type = -1.1 }
     assert_nothing_raised { @item.type = :blankRow }
     assert_equal(@item.type, :blankRow)

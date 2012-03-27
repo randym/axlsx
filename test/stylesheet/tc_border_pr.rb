@@ -1,8 +1,7 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestBorderPr < Test::Unit::TestCase
-  def setup    
+  def setup
     @bpr = Axlsx::BorderPr.new
   end
   def teardown
@@ -10,7 +9,7 @@ class TestBorderPr < Test::Unit::TestCase
   def test_initialiation
     assert_equal(@bpr.color, nil)
     assert_equal(@bpr.style, nil)
-    assert_equal(@bpr.name, nil)    
+    assert_equal(@bpr.name, nil)
   end
 
   def test_color

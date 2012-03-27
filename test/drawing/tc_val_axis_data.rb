@@ -1,5 +1,4 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestValAxisData < Test::Unit::TestCase
 
@@ -9,7 +8,7 @@ class TestValAxisData < Test::Unit::TestCase
     chart = @ws.drawing.add_chart Axlsx::Line3DChart
     @series = chart.add_series :data=>[0,1,2]
   end
-  
+
   def test_initialize
     assert(@series.data.is_a?Axlsx::SimpleTypedList)
     assert_equal(@series.data, [0,1,2])

@@ -1,9 +1,8 @@
-require 'test/unit'
-require 'axlsx.rb'
+require 'tc_helper.rb'
 
 class TestOneCellAnchor < Test::Unit::TestCase
 
-  def setup    
+  def setup
     @p = Axlsx::Package.new
     @ws = @p.workbook.add_worksheet
     @test_img =  File.dirname(__FILE__) + "/../../examples/image1.jpeg"
@@ -22,7 +21,7 @@ class TestOneCellAnchor < Test::Unit::TestCase
   end
 
   def test_from
-    assert(@anchor.from.is_a?(Axlsx::Marker))    
+    assert(@anchor.from.is_a?(Axlsx::Marker))
   end
 
   def test_object
@@ -36,13 +35,13 @@ class TestOneCellAnchor < Test::Unit::TestCase
   def test_width
     assert_raise(ArgumentError) { @anchor.width = "a" }
     assert_nothing_raised { @anchor.width = 600 }
-    assert_equal(@anchor.width, 600)   
+    assert_equal(@anchor.width, 600)
   end
 
   def test_height
     assert_raise(ArgumentError) { @anchor.height = "a" }
     assert_nothing_raised { @anchor.height = 400 }
-    assert_equal(400, @anchor.height)   
+    assert_equal(400, @anchor.height)
   end
 
   def test_ext
@@ -63,5 +62,5 @@ class TestOneCellAnchor < Test::Unit::TestCase
     assert_equal(2, i.anchor.from.row)
     assert_equal(@test_img, i.image_src)
   end
-  
+
 end
