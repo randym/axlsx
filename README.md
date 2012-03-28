@@ -161,6 +161,20 @@ To install Axlsx, use the following command:
        end
      end
 
+##Hiding Columns
+
+     wb.styles do |s|
+       percent = s.add_style :num_fmt => 9
+       wb.add_worksheet(:name => "Hidden Column") do |sheet|
+         sheet.add_row ['col 1', 'col 2', 'col 3', 'col 4']
+         sheet.add_row [1, 2, 0.3, 4]
+         sheet.add_row [1, 2, 0.2, 4]
+         sheet.add_row [1, 2, 0.1, 4]
+         sheet.col_style 2, percent, :row_offset => 1
+         sheet.column_info[1].hidden = true
+       end
+     end
+
 ##Styling Rows
 
      wb.styles do |s|
@@ -369,7 +383,8 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
    - added option to *not* use RMagick - and default all assigned columns to the excel default of 8.43
    - added border style specification to styles#add_style - now you can pass in :border => {:style => :thin, :color =>"0000FF"} instead of creating a border object and border parts manually each time.
    - Support for tables added in - Note: Pre 2011 versions of Mac office do not support this feature.
-
+   - Support for splatter charts added
+   - Major performance updates.
 - ** March.5.12**: 1.0.18 release
    https://github.com/randym/axlsx/compare/1.0.17...1.0.18
    - bugfix custom borders are not properly applied when using styles.add_style

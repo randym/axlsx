@@ -28,7 +28,7 @@ module Axlsx
     # @return [Title]
     attr_reader :title
 
-    # The style for the chart. 
+    # The style for the chart.
     # see ECMA Part 1 §21.2.2.196
     # @return [Integer]
     attr_reader :style
@@ -36,13 +36,14 @@ module Axlsx
     # Show the legend in the chart
     # @return [Boolean]
     attr_reader :show_legend
-   
+
     # Creates a new chart object
     # @param [GraphicalFrame] frame The frame that holds this chart.
     # @option options [Cell, String] title
     # @option options [Boolean] show_legend
     def initialize(frame, options={})
       @style = 2
+      @view3D = nil
       @graphic_frame=frame
       @graphic_frame.anchor.drawing.worksheet.workbook.charts << self
       @series = SimpleTypedList.new Series
@@ -72,7 +73,7 @@ module Axlsx
     # The title object for the chart.
     # @param [String, Cell] v
     # @return [Title]
-    def title=(v) 
+    def title=(v)
       DataTypeValidator.validate "#{self.class}.title", [String, Cell], v
       if v.is_a?(String)
         @title.text = v
@@ -80,14 +81,14 @@ module Axlsx
         @title.cell = v
       end
     end
-    
+
     # Show the legend in the chart
     # @param [Boolean] v
     # @return [Boolean]
     def show_legend=(v) Axlsx::validate_boolean(v); @show_legend = v; end
 
 
-    # The style for the chart. 
+    # The style for the chart.
     # see ECMA Part 1 §21.2.2.196
     # @param [Integer] v must be between 1 and 48
     def style=(v) DataTypeValidator.validate "Chart.style", Integer, v, lambda { |arg| arg >= 1 && arg <= 48 }; @style = v; end
@@ -122,8 +123,8 @@ module Axlsx
           xml[:c].chart {
             @title.to_xml(xml)
             xml.autoTitleDeleted :val=>0
-            @view3D.to_xml(xml) unless @view3D.nil?
-            
+            @view3D.to_xml(xml) if @view3D
+
             xml.floor { xml.thickness(:val=>0) }
             xml.sideWall { xml.thickness(:val=>0) }
             xml.backWall { xml.thickness(:val=>0) }
@@ -135,14 +136,14 @@ module Axlsx
                 xml.legend {
                 xml.legendPos :val => "r"
                 xml.layout
-                xml.overlay :val => 0                  
+                xml.overlay :val => 0
               }
             end
             xml.plotVisOnly :val => 1
             xml.dispBlanksAs :val => :zero
             xml.showDLblsOverMax :val => 1
           }
-          
+
         }
       end
       builder.to_xml(:save_with => 0)

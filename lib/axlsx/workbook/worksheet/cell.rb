@@ -278,7 +278,6 @@ module Axlsx
 
     def run_xml_string(str = '')
       if is_text_run?
-        puts 'text run'
         data = self.instance_values.reject{|key, value| value == nil }
         keys = data.keys & INLINE_STYLES
         keys.delete ['value', 'type']

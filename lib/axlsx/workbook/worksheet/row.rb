@@ -83,7 +83,7 @@ module Axlsx
     # @return [Cell]
     def add_cell(value="", options={})
       c = Cell.new(self, value, options)
-      update_auto_fit_data
+      worksheet.send(:update_column_info, self.cells, self.cells.map(&:style))
       c
     end
 
@@ -116,13 +116,6 @@ module Axlsx
 
     # assigns the owning worksheet for this row
     def worksheet=(v) DataTypeValidator.validate "Row.worksheet", Worksheet, v; @worksheet=v; end
-
-    # Tell the worksheet to update autofit data for the columns based on this row's cells.
-    # @return [SimpleTypedList]
-    def update_auto_fit_data
-      worksheet.send(:update_auto_fit_data, self.cells)
-    end
-
 
     # Converts values, types, and style options into cells and associates them with this row.
     # A new cell is created for each item in the values array.

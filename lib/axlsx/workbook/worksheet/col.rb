@@ -78,8 +78,8 @@ module Axlsx
 
    # @see Col#width
     def width=(v)
-      Axlsx.validate_unsigned_numeric(v)
-      @customWidth = @bestFit = true
+      Axlsx.validate_unsigned_numeric(v) unless v == nil
+      @customWidth = @bestFit = v != nil
       @width = v
     end
 
@@ -105,7 +105,7 @@ module Axlsx
     # Serialize this columns data to an xml string
     # @return [String]
     def to_xml_string(str = '')
-      attrs = self.attribute_values.reject{ |key, value| value == nil }
+      attrs = self.instance_values.reject{ |key, value| value == nil }
       str << '<col ' << attrs.map { |key, value| "#{key}='#{value}' " }.join << '/>'
     end
 
