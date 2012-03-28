@@ -24,7 +24,7 @@ Benchmark.bm(100) do |x|
         sheet << row
       end
     end
-    p.serialize("example.xlsx")
+    p.serialize("example_noautowidth.xlsx")
   }
 
   x.report('axlsx') {
@@ -38,7 +38,7 @@ Benchmark.bm(100) do |x|
         sheet << row
       end
     end
-    p.serialize("example.xlsx")
+    p.serialize("example_autowidth.xlsx")
   }
 
   x.report('axlsx_shared') {
@@ -53,7 +53,7 @@ Benchmark.bm(100) do |x|
       end
     end
     p.use_shared_strings = true
-    p.serialize("example.xlsx")
+    p.serialize("example_shared.xlsx")
   }
 
   x.report('axlsx_stream') {
