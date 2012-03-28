@@ -2,8 +2,9 @@ require 'tc_helper.rb'
 
 class TestWorksheet < Test::Unit::TestCase
   def setup
-    p = Axlsx::Package.new
-    @ws = p.workbook.add_worksheet
+    @p = Axlsx::Package.new
+    @wb = @p.workbook
+    @ws = @wb.add_worksheet
   end
 
 
@@ -201,6 +202,8 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.auto_filter = "A1:B1"
     doc = Nokogiri::XML(@ws.to_xml_string)
     assert_equal(doc.xpath('//xmlns:worksheet/xmlns:autoFilter[@ref="A1:B1"]').size, 1)
+    doc2 = Nokogiri::XML(@wb.to_xml)    
+    assert_equal(doc2.xpath('//xmlns:workbook/xmlns:definedNames/xmlns:definedName').inner_text, @ws.abs_auto_filter)
   end
 
   def test_to_xml_string_merge_cells
@@ -232,6 +235,13 @@ class TestWorksheet < Test::Unit::TestCase
     doc = Nokogiri::XML(@ws.to_xml_string)
     assert_equal(doc.xpath('//xmlns:worksheet/xmlns:tableParts[@count="1"]').size, 1)
     assert_equal(doc.xpath('//xmlns:worksheet/xmlns:tableParts/xmlns:tablePart[@r:id="rId1"]').size, 1)
+  end
+
+  def test_abs_auto_filter
+    @ws.add_row [1, "two", 3]
+    @ws.auto_filter = "A1:C1"
+    doc = Nokogiri::XML(@wb.to_xml)    
+    assert_equal(doc.xpath('//xmlns:workbook/xmlns:definedNames/xmlns:definedName').inner_text, "'Sheet1'!$A$1:$C$1")
   end
 
   def test_to_xml
