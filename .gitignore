@@ -5,6 +5,7 @@ coverage
 .yardoc
 *.gem
 *.xlsx
+example.csv
 *.*~
 .DS_Store
 tmp
