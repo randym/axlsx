@@ -19,12 +19,12 @@ module Axlsx
     # @option options [Boolean] diagonalUp
     # @option options [Boolean] diagonalDown
     # @option options [Boolean] outline
-    # @example Making a border
-    # p = Axlsx::Package.new
-    # red_border = p.workbook.styles.add_style :border => {:style =>: thin, :color => "FFFF0000"}
-    # ws = p.workbook.add_worksheet
-    # ws.add_row [1,2,3], :style => red_border
-    # p.serialize('red_border.xlsx')
+    # @example - Making a border
+    #   p = Axlsx::Package.new
+    #   red_border = p.workbook.styles.add_style :border => {:style =>: thin, :color => "FFFF0000"}
+    #   ws = p.workbook.add_worksheet
+    #   ws.add_row [1,2,3], :style => red_border
+    #   p.serialize('red_border.xlsx')
     #
     # @note The recommended way to manage borders is with Style#add_style
     # @see Style#add_style
