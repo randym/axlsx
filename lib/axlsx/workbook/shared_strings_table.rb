@@ -32,11 +32,12 @@ module Axlsx
       cells = cells.flatten.reject { |c| c.type != :string || c.value.start_with?('=') }
       @count = cells.size
       @unique_cells = []
+      @shared_xml_string = ""
       resolve(cells)
     end
 
     def to_xml_string
-      str = "<sst xmlns=\"%s\" count='%s' uniqueCount='%s'>%s</sst>" % [XML_NS, count, unique_count, @unique_cells.map {|cell| cell[:data]}.join]
+      '<sst xmlns="' << XML_NS << '" count="' << @count.to_s << '" uniqueCount="' << unique_count.to_s << '">' << @shared_xml_string << '</sst>'
     end
 
     # Generate the xml document for the Shared Strings Table
@@ -64,11 +65,12 @@ module Axlsx
       cells.each do |cell|
         cell_hash = cell.shareable_hash
         index = @unique_cells.index do |item|
-          item[:hash] == cell_hash
+          item == cell_hash
         end
         if index == nil
           cell.send :ssti=, @unique_cells.size
-          @unique_cells << {:hash => cell_hash, :data => '<si>'<< cell.run_xml_string << '</si>'}
+          @shared_xml_string << '<si>' << cell.run_xml_string << '</si>'
+          @unique_cells << cell_hash
         else
           cell.send :ssti=, index
         end

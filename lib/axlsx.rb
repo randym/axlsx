@@ -63,4 +63,25 @@ module Axlsx
     [v[:i]-1, ((name[/[1-9][0-9]*/]).to_i)-1]
 
   end
+
+  # converts the column index into alphabetical values.
+  # @note This follows the standard spreadsheet convention of naming columns A to Z, followed by AA to AZ etc.
+  # @return [String]
+  def self.col_ref(index)
+    chars = []
+    while index >= 26 do
+      chars << ((index % 26) + 65).chr
+      index /= 26
+    end
+    chars << ((chars.empty? ? index : index-1) + 65).chr
+    chars.reverse.join
+  end
+
+  # @return [String] The alpha(column)numeric(row) reference for this sell.
+  # @example Relative Cell Reference
+  #   ws.rows.first.cells.first.r #=> "A1"
+  def self.cell_r(c_index, r_index)
+      Axlsx::col_ref(c_index).to_s << (r_index+1).to_s
+    end
+
 end
