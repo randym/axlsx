@@ -225,7 +225,8 @@ module Axlsx
     # equality comparison to test value, type and inline style attributes
     # this is how we work out if the cell needs to be added or already exists in the shared strings table
     def shareable_hash
-      self_hash = self.instance_values.reject { |key, val| !INLINE_STYLES.include?(key) }
+      self_hash = {}
+      INLINE_STYLES.each { |style| self_hash[style] = self.instance_variable_get("@" + style) }
       self_hash['color'] = self_hash['color'].instance_values if self_hash['color']
       self_hash
     end
