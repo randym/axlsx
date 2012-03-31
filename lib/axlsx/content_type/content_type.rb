@@ -10,15 +10,14 @@ module Axlsx
       super [Override, Default]
     end
 
-    # Generates the xml document for [Content_Types].xml
-    # @return [String] The document as a string.
-    def to_xml()
-      builder = Nokogiri::XML::Builder.new(:encoding => ENCODING) do |xml|
-        xml.Types(:xmlns => Axlsx::XML_NS_T) {
-          each { |type| type.to_xml(xml) }
-        }
-      end
-      builder.to_xml(:save_with => 0)
+    # serialize the content types
+    # @return [String] str
+    def to_xml_string(str = '')
+      str << '<?xml version="1.0" encoding="UTF-8"?>'
+      str << '<Types xmlns="' << XML_NS_T << '">'
+      each { |type| type.to_xml_string(str) }
+      str << '</Types>'
     end
+
   end
 end

@@ -30,9 +30,9 @@ module Axlsx
       @col, @colOff, @row, @rowOff = 0, 0, 0, 0
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? o[0]
-      end      
+      end
     end
-    
+
     # @see col
     def col=(v) Axlsx::validate_unsigned_int v; @col = v end
     # @see colOff
@@ -41,7 +41,7 @@ module Axlsx
     def row=(v) Axlsx::validate_unsigned_int v; @row = v end
     # @see rowOff
     def rowOff=(v) Axlsx::validate_int v; @rowOff = v end
-    
+
     # shortcut to set the column, row position for this marker
     # @param col the column for the marker
     # @param row the row of the marker
@@ -49,13 +49,20 @@ module Axlsx
       self.col = col
       self.row = row
     end
+
+    def to_xml_string(str = '')
+      [:col, :colOff, :row, :rowOff].each do |k|
+        str << '<' << k.to_s << '>' << self.send(k).to_s << '</' << k.to_s << '>'
+      end
+    end
+
     # Serializes the marker
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String]
     def to_xml(xml)
       [:col, :colOff, :row, :rowOff].each do |k|
         xml.send(k.to_sym, self.send(k))
-      end      
+      end
     end
   end
 

@@ -8,6 +8,23 @@ module Axlsx
       @name = name
     end
 
+
+    def to_xml_string(str = '')
+      str << '<' << @name << '>'
+      str << '<numRef>'
+      str << '<f>' << Axlsx::cell_range(@list) << '</f>'
+      str << '<numCache>'
+      str << '<formatCode>General</formatCode>'
+      str << '<ptCount val="' << size.to_s << '"/>'
+      each_with_index do |item, index|
+        v = item.is_a?(Cell) ?  item.value.to_s : item
+        str << '<pt idx="' << index.to_s << '"><v>' << v << '</v></pt>'
+      end
+      str << '</numCache>'
+      str << '</numRef>'
+      str << '</' << @name << '>'
+    end
+
     # Serializes the value axis data
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String]

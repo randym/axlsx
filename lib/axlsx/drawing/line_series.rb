@@ -5,8 +5,8 @@ module Axlsx
   # @see Worksheet#add_chart
   # @see Chart#add_series
   class LineSeries < Series
-  
-    # The data for this series. 
+
+    # The data for this series.
     # @return [ValAxisData]
     attr_reader :data
 
@@ -23,7 +23,14 @@ module Axlsx
       super(chart, options)
       @labels = CatAxisData.new(options[:labels]) unless options[:labels].nil?
       @data = ValAxisData.new(options[:data]) unless options[:data].nil?
-    end 
+    end
+
+    def to_xml_string(str = '')
+      super(str) do
+        @labels.to_xml_string(str) unless @labels.nil?
+        @data.to_xml_string(str) unless @data.nil?
+      end
+    end
 
     # Serializes the series
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
@@ -32,10 +39,10 @@ module Axlsx
       super(xml) do |xml_inner|
         @labels.to_xml(xml_inner) unless @labels.nil?
         @data.to_xml(xml_inner) unless @data.nil?
-      end      
+      end
     end
 
-    private 
+    private
 
     # assigns the data for this series
     def data=(v) DataTypeValidator.validate "Series.data", [SimpleTypedList], v; @data = v; end

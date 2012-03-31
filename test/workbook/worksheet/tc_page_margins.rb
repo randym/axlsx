@@ -55,9 +55,7 @@ class TestPageMargins < Test::Unit::TestCase
     @pm.bottom = 1.4
     @pm.header = 0.8
     @pm.footer = 0.9
-    xml = Nokogiri::XML::Builder.new
-    @pm.to_xml(xml)
-    doc = Nokogiri::XML.parse(xml.to_xml)
+    doc = Nokogiri::XML.parse(@pm.to_xml_string)
     assert_equal(1, doc.xpath(".//pageMargins[@left=1.1][@right=1.2][@top=1.3][@bottom=1.4][@header=0.8][@footer=0.9]").size)
   end
 

@@ -25,7 +25,7 @@ module Axlsx
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
-    end    
+    end
 
     # The index of this series in the chart's series.
     # @return [Integer]
@@ -44,16 +44,25 @@ module Axlsx
     def order=(v)  Axlsx::validate_unsigned_int(v); @order = v; end
 
     # @see title
-    def title=(v) 
+    def title=(v)
       v = SeriesTitle.new(v) if v.is_a?(String) || v.is_a?(Cell)
       DataTypeValidator.validate "#{self.class}.title", SeriesTitle, v
       @title = v
     end
-   
-    private 
-    
+
+    private
+
     # assigns the chart for this series
-    def chart=(v)  DataTypeValidator.validate "Series.chart", Chart, v; @chart = v; end    
+    def chart=(v)  DataTypeValidator.validate "Series.chart", Chart, v; @chart = v; end
+
+    def to_xml_string(str = '')
+      str << '<ser>'
+      str << '<idx val="' << index.to_s << '"/>'
+      str << '<order val="' << (order || index).to_s << '"/>'
+      title.to_xml_string(str) unless title.nil?
+      yeild str if block_given?
+      str << '</ser>'
+    end
 
     # Serializes the series
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.

@@ -59,6 +59,10 @@ module Axlsx
       worksheet.rows.index(self)
     end
 
+    # Serializes the row
+    # @param [Integer] r_index The row index, 0 based.
+    # @param [String] str The string this rows xml will be appended to.
+    # @return [String]
     def to_xml_string(r_index, str = '')
       str << '<row r="' << (r_index + 1 ).to_s << '" '
       if custom_height?
@@ -69,14 +73,6 @@ module Axlsx
       @cells.each_with_index { |cell, c_index| cell.to_xml_string(r_index, c_index, str) }
       str << '</row>'
       str
-    end
-    # Serializes the row
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    # @return [String]
-    def to_xml(xml)
-      attrs = {:r => index+1}
-      attrs.merge!(:customHeight => 1, :ht => height) if custom_height?
-      xml.row(attrs) { |ixml| @cells.each { |cell| cell.to_xml(ixml) } }
     end
 
     # Adds a singel sell to the row based on the data provided and updates the worksheet's autofit data.

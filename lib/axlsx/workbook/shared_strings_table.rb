@@ -37,7 +37,7 @@ module Axlsx
     end
 
     def to_xml_string
-      '<sst xmlns="' << XML_NS << '" count="' << @count.to_s << '" uniqueCount="' << unique_count.to_s << '">' << @shared_xml_string << '</sst>'
+      '<?xml version="1.0" encoding="UTF-8"?><sst xmlns="' << XML_NS << '" count="' << @count.to_s << '" uniqueCount="' << unique_count.to_s << '">' << @shared_xml_string << '</sst>'
     end
 
     # Generate the xml document for the Shared Strings Table

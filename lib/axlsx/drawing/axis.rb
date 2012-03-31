@@ -83,6 +83,29 @@ module Axlsx
     # must be one of [:autoZero, :min, :max]
     def crosses=(v) RestrictionValidator.validate "#{self.class}.crosses", [:autoZero, :min, :max], v; @crosses = v; end
 
+
+    def to_xml_string(str = '')
+      str << '<axId val="' << @axId.to_s << '"/>'
+      @scaling.to_xml_string str
+      str << '<delete val="0"/>'
+      str << '<axPos val="' << @axPos.to_s << '"/>'
+      str << '<majorGridlines>'
+      if self.gridlines == false
+        str << '<spPr>'
+        str << '<a:ln>'
+        str << '<a:noFill/>'
+        str << '</a:ln>'
+        str << '</spPr>'
+      end
+      str << '</majorGridlines>'
+      str << '<numFmt formatCode="' << @format_code << '" sourceLinked="1"/>'
+      str << '<majorTickMark val="none"/>'
+      str << '<minorTickMark val="none"/>'
+      str << '<tickLblPos val="' << @tickLblPos.to_s << '"/>'
+      str << '<crossAx val="' << @crossAx.to_s << '"/>'
+      str << '<crosses val="' << @crosses.to_s << '"/>'
+    end
+
     # Serializes the common axis
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String]

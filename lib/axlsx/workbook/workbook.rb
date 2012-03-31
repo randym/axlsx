@@ -189,34 +189,29 @@ require 'axlsx/workbook/worksheet/table.rb'
       worksheet[cell_def.gsub(/.+!/,"")]
     end
 
-    # Serializes the workbook document
+    # Serialize the workbook
+    # @param [String] str
     # @return [String]
-    def to_xml()
+    def to_xml_string(str='')
       add_worksheet unless worksheets.size > 0
-      builder = Nokogiri::XML::Builder.new(:encoding => ENCODING) do |xml|
-        xml.workbook(:xmlns => XML_NS, :'xmlns:r' => XML_NS_R) {
-          xml.workbookPr(:date1904=>@@date1904)
-          #<x:workbookProtection workbookPassword="xsd:hexBinary data" lockStructure="1" lockWindows="1" />
-          # Required to support rubyXL parsing as it requires sheetView, which requires this.
-          # and removed because it seems to cause some odd [Grouped] behaviour in excel.
-          # xml.bookViews {
-          #    xml.workbookView :activeTab=>0
-          # }
-          xml.sheets {
-            @worksheets.each_with_index do |sheet, index|
-              xml.sheet(:name=>sheet.name, :sheetId=>index+1, :"r:id"=>sheet.rId)
-            end
-          }
-          xml.definedNames {
-            @worksheets.each_with_index do |sheet, index|
-              if sheet.auto_filter
-                xml.definedName(sheet.abs_auto_filter, :name => '_xlnm._FilterDatabase', :localSheetId => index, :hidden => 1)
-              end
-            end
-          }
-        }
+      str << '<?xml version="1.0" encoding="UTF-8"?>'
+      str << '<workbook xmlns="' << XML_NS << '" xmlns:r="' << XML_NS_R << '">'
+      str << '<workbookPr date1904="' << @@date1904.to_s << '"/>'
+      str << '<sheets>'
+      @worksheets.each_with_index do |sheet, index|
+         str << '<sheet name="' << sheet.name << '" sheetId="' << (index+1).to_s << '" r:id="' << sheet.rId << '"/>'
       end
-      builder.to_xml(:save_with => 0)
+      str << '</sheets>'
+      str << '<definedNames>'
+      @worksheets.each_with_index do |sheet, index|
+        if sheet.auto_filter
+          str << '<definedName name="_xlnm._FilterDatabase" localSheetId="' << index.to_s << '" hidden="1">'
+          str << sheet.abs_auto_filter << '</definedName>'
+        end
+      end
+      str << '</definedNames>'
+      str << '</workbook>'
     end
+
   end
 end

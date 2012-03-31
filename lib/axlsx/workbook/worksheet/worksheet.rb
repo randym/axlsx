@@ -385,7 +385,8 @@ module Axlsx
     end
 
     def to_xml_string
-      str = "<worksheet xmlns=\"%s\" xmlns:r=\"%s\">" % [XML_NS, XML_NS_R]
+      str = '<?xml version="1.0" encoding="UTF-8"?>'
+      str.concat "<worksheet xmlns=\"%s\" xmlns:r=\"%s\">" % [XML_NS, XML_NS_R]
       str.concat "<sheetPr><pageSetUpPr fitToPage=\"%s\"></pageSetUpPr></sheetPr>" % fit_to_page if fit_to_page
       str.concat "<dimension ref=\"%s\"></dimension>" % dimension unless rows.size == 0
       str.concat "<sheetViews><sheetView tabSelected='%s' workbookViewId='0' showGridLines='%s'><selection activeCell=\"A1\" sqref=\"A1\"/></sheetView></sheetViews>" % [@selected, show_gridlines]
@@ -393,17 +394,12 @@ module Axlsx
       if @column_info.size > 0
         str << "<cols>"
         @column_info.each { |col| col.to_xml_string(str) }
-
-        # @auto_fit_data.each_with_index do |col, index|
-        #  min_max = index+1
-        #  str.concat "<col min='%s' max='%s' width='%s' customWidth='1'></col>" % [min_max, min_max, auto_width(col)]
-        # end
         str.concat '</cols>'
       end
       str.concat '<sheetData>'
       @rows.each_with_index { |row, index| row.to_xml_string(index, str) }
       str.concat '</sheetData>'
-      str.concat page_margins.to_xml_string if @page_margins
+      page_margins.to_xml_string(str) if @page_margins
       str.concat "<autoFilter ref='%s'></autoFilter>" % @auto_filter if @auto_filter
       str.concat "<mergeCells count='%s'>%s</mergeCells>" % [@merged_cells.size, @merged_cells.reduce('') { |memo, obj| "<mergeCell ref='%s'></mergeCell>" % obj } ] unless @merged_cells.empty?
       str.concat "<drawing r:id='rId1'></drawing>" if @drawing

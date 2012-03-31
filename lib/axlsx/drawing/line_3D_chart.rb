@@ -44,11 +44,11 @@ module Axlsx
 
     # validation regex for gap amount percent
     GAP_AMOUNT_PERCENT = /0*(([0-9])|([1-9][0-9])|([1-4][0-9][0-9])|500)%/
-    
+
     # Creates a new line chart object
     # @param [GraphicFrame] frame The workbook that owns this chart.
     # @option options [Cell, String] title
-    # @option options [Boolean] show_legend    
+    # @option options [Boolean] show_legend
     # @option options [Symbol] grouping
     # @option options [String] gapDepth
     # @option options [Integer] rotX
@@ -68,7 +68,7 @@ module Axlsx
       @catAxis = CatAxis.new(@catAxId, @valAxId)
       @valAxis = ValAxis.new(@valAxId, @catAxId)
       @serAxis = SerAxis.new(@serAxId, @valAxId)
-      super(frame, options)      
+      super(frame, options)
       @series_type = LineSeries
       @view3D = View3D.new({:perspective=>30}.merge(options))
     end
@@ -85,6 +85,31 @@ module Axlsx
       @gapDepth=(v)
     end
 
+    def to_xml_string(str = '')
+      super do |str|
+        str << '<line3DChart>'
+        str << '<grouping val="' << grouping.to_s << '"/>'
+        str << '<varyColors val="1"/>'
+        @series.each { |ser| ser.to_xml_str(str) }
+        str << '<dLbls>'
+        str << '<showLegendKey val="0"/>'
+        str << '<showVal val="0"/>'
+        str << '<showCatName val="0"/>'
+        str << '<showSerName val="0"/>'
+        str << '<showPercent val="0"/>'
+        str << '<showBubbleSize val="0"/>'
+        str << '</dLbls>'
+        str << '<gapDepth val="' << @gapDepth.to_s << '"/>' unless @gapDepth.nil?
+        str << '<axId val="' << @catAxId.to_s << '"/>'
+        str << '<axId val="' << @valAxId.to_s << '"/>'
+        str << '<axId val="' << @serAxId.to_s << '"/>'
+        str << '</line3DChart>'
+        @catAxis.to_xml_str str
+        @valAxis.to_xml_str str
+        @serAxis.to_xml_str str
+      end
+    end
+
     # Serializes the bar chart
     # @return [String]
     def to_xml
@@ -99,7 +124,7 @@ module Axlsx
             xml.showCatName :val=>0
             xml.showSerName :val=>0
             xml.showPercent :val=>0
-            xml.showBubbleSize :val=>0            
+            xml.showBubbleSize :val=>0
           }
           xml.gapDepth :val=>@gapDepth unless @gapDepth.nil?
           xml.axId :val=>@catAxId
@@ -110,6 +135,6 @@ module Axlsx
         @valAxis.to_xml(xml)
         @serAxis.to_xml(xml)
       end
-    end    
-  end  
+    end
+  end
 end

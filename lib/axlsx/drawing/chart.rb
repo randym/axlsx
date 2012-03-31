@@ -113,6 +113,37 @@ module Axlsx
       @series.last
     end
 
+
+    def to_xml_string
+      str << '<?xml version="1.0" encoding="UTF-8"?>'
+      str << '<c:chartSpace xmlns:c="' << XML_NS_C << '" xmlns:a="' << XML_NS_A << '">'
+      str << '<c:date1904 val="' << Axlsx::Workbook.date1904.to_s << '"/>'
+      str << '<c:style val="' << style.to_s << '"/>'
+      str << '<c:chart>'
+      @title.to_xml_string str
+      # do these need the c: namespace as well???
+      str << '<autoTitleDeleted val="0"/>'
+      @view3D.to_xml_string(str) if @view3D
+      str << '<floor thickness="0"/>'
+      str << '<sideWall thickness="0"/>'
+      str << '<backWall thickness="0"/>'
+      str << '<plotArea>'
+      str << '<layout/>'
+      yield str if block_given?
+      str << '</plotArea>'
+      if @show_legend
+        str << '<legend>'
+        str << '<legendPos val="r"/>'
+        str << '<layout/>'
+        str << '<overlay val="0"/>'
+        str << '</legend>'
+      end
+      str << '<plotVisOnly val="1"/>'
+      str << '<dispBlanksAs val="zero"/>'
+      str << '<showDLblsOverMax val="1"/>'
+      str << '</c:chart>'
+      str << '</c:chartSpace>'
+    end
     # Chart Serialization
     # serializes the chart
     def to_xml
@@ -133,7 +164,7 @@ module Axlsx
               yield xml if block_given?
             }
             if @show_legend
-                xml.legend {
+              xml.legend {
                 xml.legendPos :val => "r"
                 xml.layout
                 xml.overlay :val => 0

@@ -225,17 +225,14 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_to_xml_string
-    builder = Nokogiri::XML::Builder.new(:encoding => Axlsx::ENCODING) do |xml|
-      @c.to_xml(xml)
-    end
-    c_xml = Nokogiri::XML(builder.to_xml(:save_with => 0))
+    c_xml = Nokogiri::XML(@c.to_xml_string(1,1))
     assert_equal(c_xml.xpath("/c[@s=1]").size, 1)
   end
   def test_to_xml
     # TODO This could use some much more stringent testing related to the xml content generated!
     row = @ws.add_row [Time.now, Date.today, true, 1, 1.0, "text", "=sum(A1:A2)"]
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
-    doc = Nokogiri::XML(@ws.to_xml)
+    doc = Nokogiri::XML(@ws.to_xml_string)
     errors = []
     schema.validate(doc).each do |error|
       errors.push error

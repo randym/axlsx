@@ -33,7 +33,7 @@ module Axlsx
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
     end
-    
+
     # @see logBase
     def logBase=(v) DataTypeValidator.validate "Scaling.logBase", [Integer, Fixnum], v, lambda { |arg| arg >= 2 && arg <= 1000}; @logBase = v; end
     # @see orientation
@@ -43,6 +43,15 @@ module Axlsx
 
     # @see min
     def min=(v) DataTypeValidator.validate "Scaling.min", Float, v; @min = v; end
+
+    def to_xml_string(str = '')
+      str << '<c:scaling>'
+      str << '<c:logBase val="' << @logBase.to_s << '"/>'
+      str << '<c:orientation val="' << @orientation.to_s << '"/>'
+      str << '<c:min val="' << @min.to_s << '"/>'
+      str << '<c:max val="' << @max.to_s << '"/>'
+      str << '</c:scaling>'
+    end
 
     # Serializes the axId
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.

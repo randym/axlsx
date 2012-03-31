@@ -202,8 +202,6 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.auto_filter = "A1:B1"
     doc = Nokogiri::XML(@ws.to_xml_string)
     assert_equal(doc.xpath('//xmlns:worksheet/xmlns:autoFilter[@ref="A1:B1"]').size, 1)
-    doc2 = Nokogiri::XML(@wb.to_xml)    
-    assert_equal(doc2.xpath('//xmlns:workbook/xmlns:definedNames/xmlns:definedName').inner_text, @ws.abs_auto_filter)
   end
 
   def test_to_xml_string_merge_cells
@@ -240,13 +238,12 @@ class TestWorksheet < Test::Unit::TestCase
   def test_abs_auto_filter
     @ws.add_row [1, "two", 3]
     @ws.auto_filter = "A1:C1"
-    doc = Nokogiri::XML(@wb.to_xml)    
-    assert_equal(doc.xpath('//xmlns:workbook/xmlns:definedNames/xmlns:definedName').inner_text, "'Sheet1'!$A$1:$C$1")
+    assert_equal(@ws.abs_auto_filter, "'Sheet1'!$A$1:$C$1")
   end
 
-  def test_to_xml
+  def test_to_xml_string
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
-    doc = Nokogiri::XML(@ws.to_xml)
+    doc = Nokogiri::XML(@ws.to_xml_string)
     errors = []
     schema.validate(doc).each do |error|
       errors.push error
@@ -258,7 +255,7 @@ class TestWorksheet < Test::Unit::TestCase
   def test_valid_with_page_margins
     @ws.page_margins.set :left => 9
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
-    doc = Nokogiri::XML(@ws.to_xml)
+    doc = Nokogiri::XML(@ws.to_xml_string)
     errors = []
     schema.validate(doc).each do |error|
       errors.push error
@@ -286,20 +283,6 @@ class TestWorksheet < Test::Unit::TestCase
     assert_nothing_raised { @ws.name = Array.new(31, "A").join('') }
   end
 
-  def test_update_auto_with_data
-    # small = @ws.workbook.styles.add_style(:sz=>2)
-    # big = @ws.workbook.styles.add_style(:sz=>10)
-
-    # @ws.add_row ["chasing windmills", "penut"], :style=>small
-    # assert(@ws.auto_fit_data.size == 2, "a data item for each column")
-
-    # assert_equal(@ws.auto_fit_data[0], {:sz => 2, :longest => "chasing windmills", :fixed=>nil}, "adding a row updates auto_fit_data if the product of the string length and font is greater for the column")
-
-
-    # @ws.add_row ["mule"], :style=>big
-    # assert_equal(@ws.auto_fit_data[0], {:sz=>10,:longest=>"mule", :fixed=>nil}, "adding a row updates auto_fit_data if the product of the string length and font is greater for the column")
-  end
-
   def test_set_fixed_width_column
     @ws.add_row ["mule", "donkey", "horse"], :widths => [20, :ignore, nil]
     assert(@ws.column_info.size == 3, "a data item for each column")
@@ -307,34 +290,10 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(@ws.column_info[1].width, nil, ":ignore does not set any data")
   end
 
-  def test_fixed_widths_with_merged_cells
-    # @ws.add_row ["hey, I'm like really long and stuff so I think you will merge me."]
-    # @ws.merge_cells "A1:C1"
-    # @ws.add_row ["but Im Short!"], :widths=> [14.8]
-    # assert_equal(@ws.send(:auto_width, @ws.auto_fit_data[0]), 14.8)
-  end
-
-  def test_fixed_width_to_auto
-    # @ws.add_row ["hey, I'm like really long and stuff so I think you will merge me."]
-    # @ws.merge_cells "A1:C1"
-    # @ws.add_row ["but Im Short!"], :widths=> [14.8]
-    # assert_equal(@ws.send(:auto_width, @ws.auto_fit_data[0]), 14.8)
-    # @ws.add_row ["no, I like auto!"], :widths=>[:auto]
-    # assert_equal(@ws.auto_fit_data[0][:fixed], nil)
-  end
-
-  def test_auto_width
-    # assert(@ws.send(:auto_width, {:sz=>11, :longest=>"fisheries"}) > @ws.send(:auto_width, {:sz=>11, :longest=>"fish"}), "longer strings get a longer auto_width at the same font size")
-
-    # assert(@ws.send(:auto_width, {:sz=>11, :longest=>"fish"}) < @ws.send(:auto_width, {:sz=>12, :longest=>"fish"}), "larger fonts produce longer with with same string")
-    # assert_equal(@ws.send(:auto_width, {:sz=>11, :longest => "This is a really long string", :fixed=>0.2}), 0.2, "fixed rules!")
-  end
-
   def test_fixed_height
     @ws.add_row [1, 2, 3], :height => 40
     assert_equal(40, @ws.rows[-1].height)
   end
-
 
   def test_set_column_width
     @ws.add_row ["chasing windmills", "penut"]

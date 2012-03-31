@@ -4,8 +4,8 @@ module Axlsx
   require 'axlsx/drawing/series_title.rb'
   require 'axlsx/drawing/series.rb'
   require 'axlsx/drawing/pie_series.rb'
-  require 'axlsx/drawing/bar_series.rb'  
-  require 'axlsx/drawing/line_series.rb'  
+  require 'axlsx/drawing/bar_series.rb'
+  require 'axlsx/drawing/line_series.rb'
   require 'axlsx/drawing/scatter_series.rb'
 
   require 'axlsx/drawing/scaling.rb'
@@ -19,7 +19,7 @@ module Axlsx
   require 'axlsx/drawing/named_axis_data.rb'
 
   require 'axlsx/drawing/marker.rb'
- 
+
   require 'axlsx/drawing/one_cell_anchor.rb'
   require 'axlsx/drawing/two_cell_anchor.rb'
   require 'axlsx/drawing/graphic_frame.rb'
@@ -46,7 +46,7 @@ module Axlsx
     # The worksheet that owns the drawing
     # @return [Worksheet]
     attr_reader :worksheet
-   
+
     # A collection of anchors for this drawing
     # only TwoCellAnchors are supported in this version
     # @return [SimpleTypedList]
@@ -138,13 +138,20 @@ module Axlsx
       r
     end
 
+    def to_xml_string(str = '')
+      str << '<?xml version="1.0" encoding="UTF-8"?>'
+      str << '<xdr:wsDr xmlns:xdr="' << XML_NS_XDR << '" xmlns:a="' << XML_NS_A << '" xmlns:c="' << XML_NS_C << '">'
+      anchors.each { |anchor| anchor.to_xml_string(str) }
+      str << '</xdr:wsDr>'
+    end
+
     # Serializes the drawing
     # @return [String]
     def to_xml
       builder = Nokogiri::XML::Builder.new(:encoding => ENCODING) do |xml|
         xml.send('xdr:wsDr', :'xmlns:xdr'=>XML_NS_XDR, :'xmlns:a'=>XML_NS_A, :'xmlns:c'=>XML_NS_C) {
           anchors.each {|anchor| anchor.to_xml(xml) }
-        }        
+        }
       end
       builder.to_xml(:save_with => 0)
     end

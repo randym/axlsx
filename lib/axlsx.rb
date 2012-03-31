@@ -81,7 +81,7 @@ module Axlsx
   # @example Relative Cell Reference
   #   ws.rows.first.cells.first.r #=> "A1"
   def self.cell_r(c_index, r_index)
-      Axlsx::col_ref(c_index).to_s << (r_index+1).to_s
-    end
+    Axlsx::col_ref(c_index).to_s << (r_index+1).to_s
+  end
 
 end

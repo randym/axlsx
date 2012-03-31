@@ -64,13 +64,13 @@ module Axlsx
       @outlineLevel = v
     end
 
-   # @see Col#phonetic
-   def phonetic=(v)
+    # @see Col#phonetic
+    def phonetic=(v)
       Axlsx.validate_boolean(v)
       @phonetic = v
     end
 
-   # @see Col#style
+    # @see Col#style
     def style=(v)
       Axlsx.validate_unsigned_int(v)
       @style = v
@@ -103,10 +103,11 @@ module Axlsx
     end
 
     # Serialize this columns data to an xml string
+    # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
       attrs = self.instance_values.reject{ |key, value| value == nil }
-      str << '<col ' << attrs.map { |key, value| "#{key}='#{value}' " }.join << '/>'
+      str << '<col ' << attrs.map { |key, value| '' << key << '="' << value.to_s << '"' }.join(' ') << '/>'
     end
 
   end

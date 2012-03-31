@@ -50,7 +50,7 @@ class TestWorkbook < Test::Unit::TestCase
 
   def test_to_xml
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
-    doc = Nokogiri::XML(@wb.to_xml)
+    doc = Nokogiri::XML(@wb.to_xml_string)
     errors = []
     schema.validate(doc).each do |error|
       errors.push error
@@ -68,8 +68,18 @@ class TestWorkbook < Test::Unit::TestCase
 
   def test_to_xml_adds_worksheet_when_worksheets_is_empty
     assert(@wb.worksheets.empty?)
-    @wb.to_xml
+    @wb.to_xml_string
     assert(@wb.worksheets.size == 1)
+  end
+
+
+  def test_to_xml_string_defined_names
+    @wb.add_worksheet do |sheet|
+      sheet.add_row [1, "two"]
+      sheet.auto_filter = "A1:B1"
+    end
+    doc = Nokogiri::XML(@wb.to_xml_string)
+    assert_equal(doc.xpath('//xmlns:workbook/xmlns:definedNames/xmlns:definedName').inner_text, @wb.worksheets[0].abs_auto_filter)
   end
 
 

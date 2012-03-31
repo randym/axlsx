@@ -28,7 +28,7 @@ module Axlsx
 
     # The picture locking attributes for this picture
     attr_reader :picture_locking
-   
+
     # Creates a new Pic(ture) object
     # @param [Anchor] anchor the anchor that holds this image
     # @option options [String] name
@@ -50,7 +50,7 @@ module Axlsx
     end
 
     attr_reader :hyperlink
-    
+
     # sets or updates a hyperlink for this image.
     # @param [String] v The href value for the hyper link
     # @option options @see Hyperlink#initialize All options available to the Hyperlink class apply - however href will be overridden with the v parameter value.
@@ -66,7 +66,7 @@ module Axlsx
       @hyperlink
     end
 
-    def image_src=(v) 
+    def image_src=(v)
       Axlsx::validate_string(v)
       RestrictionValidator.validate 'Pic.image_src', ALLOWED_EXTENSIONS, File.extname(v).delete('.')
       raise ArgumentError, "File does not exist" unless File.exist?(v)
@@ -84,8 +84,8 @@ module Axlsx
     # @return [String]
     def file_name
       File.basename(image_src) unless image_src.nil?
-    end    
-    
+    end
+
     # returns the extension of image_src without the preceeding '.'
     # @return [String]
     def extname
@@ -93,7 +93,7 @@ module Axlsx
     end
 
     # The index of this image in the workbooks images collections
-    # @return [Index]    
+    # @return [Index]
     def index
       @anchor.drawing.worksheet.workbook.images.index(self)
     end
@@ -120,7 +120,7 @@ module Axlsx
     def width=(v)
       @anchor.width = v
     end
-    
+
     # providing access to update the anchor's height attribute
     # @param [Integer] v
     # @see OneCellAnchor.width
@@ -142,6 +142,10 @@ module Axlsx
     def start_at(x, y)
       @anchor.from.col = x
       @anchor.from.row = y
+    end
+
+    def to_xml_string(str = '')
+
     end
 
     # Serializes the picture

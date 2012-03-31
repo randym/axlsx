@@ -83,15 +83,15 @@ module Axlsx
     # @see footer
     def footer=(v); Axlsx::validate_unsigned_numeric(v); @footer = v end
 
-    def to_xml_string
-      "<pageMargins left='%s' right='%s' top='%s' bottom='%s' header='%s' footer='%s'/>" % [left, right, top, bottom, header, footer]
-    end
     # Serializes the page margins element
     # @note For compatibility, this is a noop unless custom margins have been specified.
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @see #custom_margins_specified?
-    def to_xml(xml)
-      xml.pageMargins :left => left, :right => right, :top => top, :bottom => bottom, :header => header, :footer => footer
+    # @param [String] str
+    # @retrun [String]
+    def to_xml_string(str = '')
+      str << '<pageMargins '
+      str << instance_values.map { |key, value| '' << key << '="' << value.to_s << '"' }.join(' ')
+      str << '/>'
     end
   end
 end
