@@ -3,7 +3,7 @@ notifications:
   irc: "irc.freenode.org#axlsx"
   email:
     recipients:
-      - axlsx@googlegroups.com
+      - digital.ipseity@gmail.com
     on_success: always
 rvm:
   - 1.8.7
