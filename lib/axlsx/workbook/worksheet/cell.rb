@@ -310,6 +310,7 @@ module Axlsx
     # @param [String] str The string index the cell content will be appended to. Defaults to empty string.
     # @return [String] xml text for the cell
     def to_xml_string(r_index, c_index, str = '')
+      return str if @value.nil?
       str << '<c r="' << Axlsx::cell_r(c_index, r_index) << '" s="' << @style.to_s << '" '
       case @type
       when :string
@@ -398,6 +399,7 @@ module Axlsx
       elsif @type == :boolean
         v ? 1 : 0
       else
+        return nil if v.nil?
         @type = :string
         ::CGI.escapeHTML(v.to_s)
       end
