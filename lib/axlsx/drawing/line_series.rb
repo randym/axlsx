@@ -32,16 +32,6 @@ module Axlsx
       end
     end
 
-    # Serializes the series
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    # @return [String]
-    def to_xml(xml)
-      super(xml) do |xml_inner|
-        @labels.to_xml(xml_inner) unless @labels.nil?
-        @data.to_xml(xml_inner) unless @data.nil?
-      end
-    end
-
     private
 
     # assigns the data for this series

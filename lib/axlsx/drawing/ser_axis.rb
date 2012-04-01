@@ -37,16 +37,6 @@ module Axlsx
       str << '<c:tickMarkSkip val="' << @tickMarkSkip.to_s << '"/>' unless @tickMarkSkip.nil?
       str << '</c:serAx>'
     end
-    # Serializes the series axis
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    # @return [String]
-    def to_xml(xml)
-      xml[:c].serAx {
-        super(xml)
-        xml[:c].tickLblSkip :val=>@tickLblSkip unless @tickLblSkip.nil?
-        xml[:c].tickMarkSkip :val=>@tickMarkSkip unless @tickMarkSkip.nil?
-      }
-    end
   end
 
 

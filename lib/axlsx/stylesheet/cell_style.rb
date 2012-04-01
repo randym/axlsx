@@ -7,7 +7,7 @@ module Axlsx
     # The name of this cell style
     # @return [String]
     attr_reader :name
-    
+
     # The formatting record id this named style utilizes
     # @return [Integer]
     # @see Axlsx::Xf
@@ -54,6 +54,13 @@ module Axlsx
     def hidden=(v) Axlsx::validate_boolean v; @hidden = v end
     # @see customBuiltin
     def customBuiltin=(v) Axlsx::validate_boolean v; @customBuiltin = v end
+
+
+    def to_xml_string(str = '')
+      str << '<cellStyle '
+      str << instance_values.map { |key, value| '' << key.to_s << '="' << value.to_s << '"' }.join(' ')
+      str << '/>'
+    end
 
     # Serializes the cell style
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.

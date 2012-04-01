@@ -106,57 +106,29 @@ module Axlsx
     end
 
     def to_xml_string(str = '')
-      super do |str|
-        str << '<bar3DChart>'
-        str << '<barDir val="' << barDir.to_s << '"/>'
-        str << '<grouping val="' << grouping.to_s << '"/>'
-        str << '<varyColors val="1"/>'
-        @series.each { |ser| ser.to_xml_str(str) }
-        str << '<dLbls>'
-        str << '<showLegendKey val="0"/>'
-        str << '<showVal val="0"/>'
-        str << '<showCatName val="0"/>'
-        str << '<showSerName val="0"/>'
-        str << '<showPercent val="0"/>'
-        str << '<showBubbleSize val="0"/>'
-        str << '</dLbls>'
-        str << '<gapWidth val="' << @gapWidth.to_s << '"/>' unless @gapWidth.nil?
-        str << '<gapDepth val="' << @gapDepth.to_s << '"/>' unless @gapDepth.nil?
-        str << '<shape val="' << @shape.to_s << '"/>'
-        str << '<axId val="' << @catAxId.to_s << '"/>'
-        str << '<axId val="' << @valAxId.to_s << '"/>'
-        str << '<axId val="0"/>'
-        str << '</bar3DChart>'
-        @catAxis.to_xml_str str
-        @valAxis.to_xml_str str
-      end
-    end
-    # Serializes the bar chart
-    # @return [String]
-    def to_xml
-      super() do |xml|
-        xml.bar3DChart {
-          xml.barDir :val => barDir
-          xml.grouping :val=>grouping
-          xml.varyColors :val=>1
-          @series.each { |ser| ser.to_xml(xml) }
-          xml.dLbls {
-            xml.showLegendKey :val=>0
-            xml.showVal :val=>0
-            xml.showCatName :val=>0
-            xml.showSerName :val=>0
-            xml.showPercent :val=>0
-            xml.showBubbleSize :val=>0
-          }
-          xml.gapWidth :val=>@gapWidth unless @gapWidth.nil?
-          xml.gapDepth :val=>@gapDepth unless @gapDepth.nil?
-          xml.shape :val=>@shape unless @shape.nil?
-          xml.axId :val=>@catAxId
-          xml.axId :val=>@valAxId
-          xml.axId :val=>0
-        }
-        @catAxis.to_xml(xml)
-        @valAxis.to_xml(xml)
+      super(str) do |str_inner|
+        str_inner << '<c:bar3DChart>'
+        str_inner << '<c:barDir val="' << barDir.to_s << '"/>'
+        str_inner << '<c:grouping val="' << grouping.to_s << '"/>'
+        str_inner << '<c:varyColors val="1"/>'
+        @series.each { |ser| ser.to_xml_string(str_inner) }
+        str_inner << '<c:dLbls>'
+        str_inner << '<c:showLegendKey val="0"/>'
+        str_inner << '<c:showVal val="0"/>'
+        str_inner << '<c:showCatName val="0"/>'
+        str_inner << '<c:showSerName val="0"/>'
+        str_inner << '<c:showPercent val="0"/>'
+        str_inner << '<c:showBubbleSize val="0"/>'
+        str_inner << '</c:dLbls>'
+        str_inner << '<c:gapWidth val="' << @gapWidth.to_s << '"/>' unless @gapWidth.nil?
+        str_inner << '<c:gapDepth val="' << @gapDepth.to_s << '"/>' unless @gapDepth.nil?
+        str_inner << '<c:shape val="' << @shape.to_s << '"/>' unless @shape.nil?
+        str_inner << '<c:axId val="' << @catAxId.to_s << '"/>'
+        str_inner << '<c:axId val="' << @valAxId.to_s << '"/>'
+        str_inner << '<c:axId val="0"/>'
+        str_inner << '</c:bar3DChart>'
+        @catAxis.to_xml_string str_inner
+        @valAxis.to_xml_string str_inner
       end
     end
   end

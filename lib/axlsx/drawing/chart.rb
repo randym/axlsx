@@ -114,7 +114,7 @@ module Axlsx
     end
 
 
-    def to_xml_string
+    def to_xml_string(str = '')
       str << '<?xml version="1.0" encoding="UTF-8"?>'
       str << '<c:chartSpace xmlns:c="' << XML_NS_C << '" xmlns:a="' << XML_NS_A << '">'
       str << '<c:date1904 val="' << Axlsx::Workbook.date1904.to_s << '"/>'
@@ -122,62 +122,27 @@ module Axlsx
       str << '<c:chart>'
       @title.to_xml_string str
       # do these need the c: namespace as well???
-      str << '<autoTitleDeleted val="0"/>'
+      str << '<c:autoTitleDeleted val="0"/>'
       @view3D.to_xml_string(str) if @view3D
-      str << '<floor thickness="0"/>'
-      str << '<sideWall thickness="0"/>'
-      str << '<backWall thickness="0"/>'
-      str << '<plotArea>'
-      str << '<layout/>'
+      str << '<c:floor><c:thickness val="0"/></c:floor>'
+      str << '<c:sideWall><c:thickness val="0"/></c:sideWall>'
+      str << '<c:backWall><c:thickness val="0"/></c:backWall>'
+      str << '<c:plotArea>'
+      str << '<c:layout/>'
       yield str if block_given?
-      str << '</plotArea>'
+      str << '</c:plotArea>'
       if @show_legend
-        str << '<legend>'
-        str << '<legendPos val="r"/>'
-        str << '<layout/>'
-        str << '<overlay val="0"/>'
-        str << '</legend>'
+        str << '<c:legend>'
+        str << '<c:legendPos val="r"/>'
+        str << '<c:layout/>'
+        str << '<c:overlay val="0"/>'
+        str << '</c:legend>'
       end
-      str << '<plotVisOnly val="1"/>'
-      str << '<dispBlanksAs val="zero"/>'
-      str << '<showDLblsOverMax val="1"/>'
+      str << '<c:plotVisOnly val="1"/>'
+      str << '<c:dispBlanksAs val="zero"/>'
+      str << '<c:showDLblsOverMax val="1"/>'
       str << '</c:chart>'
       str << '</c:chartSpace>'
-    end
-    # Chart Serialization
-    # serializes the chart
-    def to_xml
-      builder = Nokogiri::XML::Builder.new(:encoding => ENCODING) do |xml|
-        xml.send('c:chartSpace', :'xmlns:c' => XML_NS_C, :'xmlns:a' => XML_NS_A) {
-          xml[:c].date1904 :val => Axlsx::Workbook.date1904
-          xml[:c].style :val=>style
-          xml[:c].chart {
-            @title.to_xml(xml)
-            xml.autoTitleDeleted :val=>0
-            @view3D.to_xml(xml) if @view3D
-
-            xml.floor { xml.thickness(:val=>0) }
-            xml.sideWall { xml.thickness(:val=>0) }
-            xml.backWall { xml.thickness(:val=>0) }
-            xml.plotArea {
-              xml.layout
-              yield xml if block_given?
-            }
-            if @show_legend
-              xml.legend {
-                xml.legendPos :val => "r"
-                xml.layout
-                xml.overlay :val => 0
-              }
-            end
-            xml.plotVisOnly :val => 1
-            xml.dispBlanksAs :val => :zero
-            xml.showDLblsOverMax :val => 1
-          }
-
-        }
-      end
-      builder.to_xml(:save_with => 0)
     end
 
     # This is a short cut method to set the start anchor position

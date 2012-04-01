@@ -56,24 +56,12 @@ module Axlsx
     def chart=(v)  DataTypeValidator.validate "Series.chart", Chart, v; @chart = v; end
 
     def to_xml_string(str = '')
-      str << '<ser>'
-      str << '<idx val="' << index.to_s << '"/>'
-      str << '<order val="' << (order || index).to_s << '"/>'
+      str << '<c:ser>'
+      str << '<c:idx val="' << index.to_s << '"/>'
+      str << '<c:order val="' << (order || index).to_s << '"/>'
       title.to_xml_string(str) unless title.nil?
-      yeild str if block_given?
-      str << '</ser>'
-    end
-
-    # Serializes the series
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    # @return [String]
-    def to_xml(xml)
-      xml.ser {
-        xml.idx :val=>index
-        xml.order :val=>order || index
-        title.to_xml(xml) unless title.nil?
-        yield xml if block_given?
-      }
+      yield str if block_given?
+      str << '</c:ser>'
     end
 
   end

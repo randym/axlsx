@@ -46,23 +46,11 @@ module Axlsx
 
     def to_xml_string(str = '')
       str << '<c:scaling>'
-      str << '<c:logBase val="' << @logBase.to_s << '"/>'
-      str << '<c:orientation val="' << @orientation.to_s << '"/>'
-      str << '<c:min val="' << @min.to_s << '"/>'
-      str << '<c:max val="' << @max.to_s << '"/>'
+      str << '<c:logBase val="' << @logBase.to_s << '"/>' unless @logBase.nil?
+      str << '<c:orientation val="' << @orientation.to_s << '"/>' unless @orientation.nil?
+      str << '<c:min val="' << @min.to_s << '"/>' unless @min.nil?
+      str << '<c:max val="' << @max.to_s << '"/>' unless @max.nil?
       str << '</c:scaling>'
-    end
-
-    # Serializes the axId
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    # @return [String]
-    def to_xml(xml)
-      xml[:c].scaling {
-        xml[:c].logBase :val=> @logBase unless @logBase.nil?
-        xml[:c].orientation :val=> @orientation unless @orientation.nil?
-        xml[:c].min :val => @min unless @min.nil?
-        xml[:c].max :val => @max unless @max.nil?
-      }
     end
 
   end

@@ -1,11 +1,11 @@
 # encoding: UTF-8
 module Axlsx
-  # A NumFmt object defines an identifier and formatting code for data in cells. 
+  # A NumFmt object defines an identifier and formatting code for data in cells.
   # @note The recommended way to manage styles is Styles#add_style
   class NumFmt
     # @return [Integer] An unsinged integer referencing a standard or custom number format.
     # @note
-    #  These are the known formats I can dig up. The constant NUM_FMT_PERCENT is 9, and uses the default % formatting. Axlsx also defines a few formats for date and time that are commonly used in asia as NUM_FMT_YYYYMMDD and NUM_FRM_YYYYMMDDHHMMSS. 
+    #  These are the known formats I can dig up. The constant NUM_FMT_PERCENT is 9, and uses the default % formatting. Axlsx also defines a few formats for date and time that are commonly used in asia as NUM_FMT_YYYYMMDD and NUM_FRM_YYYYMMDDHHMMSS.
     #   1 0
     #   2 0.00
     #   3 #,##0
@@ -40,7 +40,7 @@ module Axlsx
     # @see Axlsx
     attr_reader :numFmtId
 
-    # @return [String] The formatting to use for this number format. 
+    # @return [String] The formatting to use for this number format.
     # @see http://support.microsoft.com/kb/264372
     attr_reader :formatCode
     def initialize(options={})
@@ -56,9 +56,15 @@ module Axlsx
     # @see formatCode
     def formatCode=(v) Axlsx::validate_string v; @formatCode = v end
 
+    def to_xml_string(str = '')
+      str << '<numFmt '
+      str << instance_values.map { |key, value| '' << key.to_s << '="' << value.to_s << '"' }.join(' ')
+      str << '/>'
+    end
+
     # Creates a numFmt element applying the instance values of this object as attributes.
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    def to_xml(xml) xml.numFmt(self.instance_values) end    
+    def to_xml(xml) xml.numFmt(self.instance_values) end
 
   end
 end

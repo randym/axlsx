@@ -145,15 +145,5 @@ module Axlsx
       str << '</xdr:wsDr>'
     end
 
-    # Serializes the drawing
-    # @return [String]
-    def to_xml
-      builder = Nokogiri::XML::Builder.new(:encoding => ENCODING) do |xml|
-        xml.send('xdr:wsDr', :'xmlns:xdr'=>XML_NS_XDR, :'xmlns:a'=>XML_NS_A, :'xmlns:c'=>XML_NS_C) {
-          anchors.each {|anchor| anchor.to_xml(xml) }
-        }
-      end
-      builder.to_xml(:save_with => 0)
-    end
   end
 end

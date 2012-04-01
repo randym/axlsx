@@ -52,18 +52,10 @@ module Axlsx
 
     def to_xml_string(str = '')
       [:col, :colOff, :row, :rowOff].each do |k|
-        str << '<' << k.to_s << '>' << self.send(k).to_s << '</' << k.to_s << '>'
+        str << '<xdr:' << k.to_s << '>' << self.send(k).to_s << '</xdr:' << k.to_s << '>'
       end
     end
 
-    # Serializes the marker
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    # @return [String]
-    def to_xml(xml)
-      [:col, :colOff, :row, :rowOff].each do |k|
-        xml.send(k.to_sym, self.send(k))
-      end
-    end
   end
 
 end

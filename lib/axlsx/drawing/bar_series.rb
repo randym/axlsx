@@ -41,24 +41,12 @@ module Axlsx
     end
 
     def to_xml_string(str = '')
-      super(str) do
-        @labels.to_xml_string(str) unless @labels.nil?
-        @data.to_xml_string(str) unless @data.nil?
-        str << '<shape val="' << @shape.to_s << '"/>'
+      super(str) do |str_inner|
+        @labels.to_xml_string(str_inner) unless @labels.nil?
+        @data.to_xml_string(str_inner) unless @data.nil?
+        str_inner << '<shape val="' << @shape.to_s << '"/>'
       end
     end
-
-    # Serializes the series
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    # @return [String]
-    def to_xml(xml)
-      super(xml) do |xml_inner|
-        @labels.to_xml(xml_inner) unless @labels.nil?
-        @data.to_xml(xml_inner) unless @data.nil?
-        xml_inner.shape :val=>@shape
-      end
-    end
-
 
     private
 

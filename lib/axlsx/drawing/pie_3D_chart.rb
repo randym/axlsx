@@ -11,7 +11,7 @@ module Axlsx
     # Creates a new pie chart object
     # @param [GraphicFrame] frame The workbook that owns this chart.
     # @option options [Cell, String] title
-    # @option options [Boolean] show_legend    
+    # @option options [Boolean] show_legend
     # @option options [Symbol] grouping
     # @option options [String] gapDepth
     # @option options [Integer] rotX
@@ -28,15 +28,14 @@ module Axlsx
       @view3D = View3D.new({:rotX=>30, :perspective=>30}.merge(options))
     end
 
-    # Serializes the pie chart
-    # @return [String]
-    def to_xml
-      super() do |xml|
-        xml[:c].pie3DChart {
-          xml[:c].varyColors :val=>1
-          @series.each { |ser| ser.to_xml(xml) }
-        }                      
+    def to_xml_string(str = '')
+      super(str) do |str_inner|
+        str_inner << '<c:pie3DChart>'
+        str_inner << '<c:varyColors val="1"/>'
+        @series.each { |ser| ser.to_xml_string(str_inner) }
+        str_inner << '</c:pie3DChart>'
       end
     end
+
   end
 end

@@ -29,43 +29,22 @@ module Axlsx
     end
 
     def to_xml_string(str = '')
-      str << '<graphicFrame>'
-      str << '<nvGraphicFramePr>'
-      str << '<cNvPr id="2" name="' << chart.title.text << '"/>'
-      str << '<cNvGraphicFramePr/>'
-      str << '</nvGraphicFramePr>'
-      str << '<xfrm>'
+      str << '<xdr:graphicFrame>'
+      str << '<xdr:nvGraphicFramePr>'
+      str << '<xdr:cNvPr id="2" name="' << chart.title.text << '"/>'
+      str << '<xdr:cNvGraphicFramePr/>'
+      str << '</xdr:nvGraphicFramePr>'
+      str << '<xdr:xfrm>'
       str << '<a:off x="0" y="0"/>'
       str << '<a:ext cx="0" cy="0"/>'
-      str << '</xfrm>'
+      str << '</xdr:xfrm>'
       str << '<a:graphic>'
-      str << '<graphicData uri="' << XML_NS_C << '">'
+      str << '<a:graphicData uri="' << XML_NS_C << '">'
       str << '<c:chart xmlns:c="' << XML_NS_C << '" xmlns:r="' << XML_NS_R << '" r:id="' << rId.to_s << '"/>'
-      str << '</graphicData>'
+      str << '</a:graphicData>'
       str << '</a:graphic>'
-      str << '</graphicFrame>'
+      str << '</xdr:graphicFrame>'
     end
 
-    # Serializes the graphic frame
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    # @return [String]
-    def to_xml(xml)
-      xml.graphicFrame {
-        xml.nvGraphicFramePr {
-          xml.cNvPr :id=>2, :name=>chart.title.text
-          xml.cNvGraphicFramePr
-        }
-        xml.xfrm {
-          xml[:a].off(:x=>0, :y=>0)
-          xml[:a].ext :cx=>0, :cy=>0
-        }
-        xml[:a].graphic {
-          xml.graphicData(:uri=>XML_NS_C) {
-            xml[:c].chart :'xmlns:c'=>XML_NS_C, :'xmlns:r'=>XML_NS_R, :'r:id'=>rId
-          }
-        }
-      }
-
-    end
   end
 end

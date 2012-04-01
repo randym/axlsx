@@ -61,10 +61,10 @@ module Axlsx
     # Indexed colors are for backward compatability which I am choosing not to support
     # def indexed=(v) Axlsx::validate_unsigned_integer v; @indexed = v end
 
-    def to_xml_string
-      str = "<color "
+    def to_xml_string(str = '')
+      str << "<color "
       self.instance_values.each do |key, value|
-        str << key << '="' << value.to_s << '" '
+        str << key.to_s << '="' << value.to_s << '" '
       end
       str << "/>"
     end

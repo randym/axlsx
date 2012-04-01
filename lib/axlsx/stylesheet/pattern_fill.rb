@@ -7,15 +7,15 @@ module Axlsx
 
     # The color to use for the the background in solid fills.
     # @return [Color]
-    attr_reader :fgColor 
+    attr_reader :fgColor
 
     # The color to use for the background of the fill when the type is not solid.
     # @return [Color]
     attr_reader :bgColor
 
     # The pattern type to use
-    # @note 
-    #  patternType must be one of 
+    # @note
+    #  patternType must be one of
     #   :none
     #   :solid
     #   :mediumGray
@@ -53,14 +53,34 @@ module Axlsx
     # @see bgColor
     def bgColor=(v) DataTypeValidator.validate "PatternFill.bgColor", Color, v; @bgColor=v end
     # @see patternType
-    def patternType=(v) Axlsx::validate_pattern_type v; @patternType = v end    
+    def patternType=(v) Axlsx::validate_pattern_type v; @patternType = v end
+
+    def to_xml_string(str = '')
+      str << '<patternFill patternType="' << patternType.to_s << '">'
+      if fgColor.is_a?(Color)
+        str << "<fgColor "
+        fgColor.instance_values.each do |key, value|
+          str << key.to_s << '="' << value.to_s << '" '
+        end
+        str << "/>"
+      end
+
+      if bgColor.is_a?(Color)
+        str << "<bgColor "
+        bgColor.instance_values.each do |key, value|
+          str << key.to_s << '="' << value.to_s << '" '
+        end
+        str << "/>"
+      end
+      str << '</patternFill>'
+    end
 
     # Serializes the pattern fill
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String]
-    def to_xml(xml) 
-      xml.patternFill(:patternType => self.patternType) { 
-        self.instance_values.reject { |k,v| k.to_sym == :patternType }.each { |k,v| xml.send(k, v.instance_values) }    
+    def to_xml(xml)
+      xml.patternFill(:patternType => self.patternType) {
+        self.instance_values.reject { |k,v| k.to_sym == :patternType }.each { |k,v| xml.send(k, v.instance_values) }
       }
     end
   end

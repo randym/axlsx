@@ -7,7 +7,7 @@ module Axlsx
     # The name of the font
     # @return [String]
     attr_reader :name
-    
+
     # The charset of the font
     # @return [Integer]
     # @note
@@ -32,9 +32,9 @@ module Axlsx
     #   238 EASTEUROPE_CHARSET
     #   255 OEM_CHARSET
     attr_reader :charset
-    
+
     # The font's family
-    # @note 
+    # @note
     #  The following are defined OOXML specification
     #   0 Not applicable.
     #   1 Roman
@@ -107,13 +107,13 @@ module Axlsx
       end
     end
     # @see name
-    def name=(v) Axlsx::validate_string v; @name = v end    
+    def name=(v) Axlsx::validate_string v; @name = v end
     # @see charset
     def charset=(v) Axlsx::validate_unsigned_int v; @charset = v end
     # @see family
     def family=(v) Axlsx::validate_unsigned_int v; @family = v end
     # @see b
-    def b=(v) Axlsx::validate_boolean v; @b = v end    
+    def b=(v) Axlsx::validate_boolean v; @b = v end
     # @see i
     def i=(v) Axlsx::validate_boolean v; @i = v end
     # @see u
@@ -123,7 +123,7 @@ module Axlsx
     # @see outline
     def outline=(v) Axlsx::validate_boolean v; @outline = v end
     # @see shadow
-    def shadow=(v) Axlsx::validate_boolean v; @shadow = v end    
+    def shadow=(v) Axlsx::validate_boolean v; @shadow = v end
     # @see condense
     def condense=(v) Axlsx::validate_boolean v; @condense = v end
     # @see extend
@@ -133,13 +133,22 @@ module Axlsx
     # @see sz
     def sz=(v) Axlsx::validate_unsigned_int v; @sz=v end
 
+
+    def to_xml_string(str = '')
+      str << '<font>'
+      instance_values.each do |k, v|
+        v.is_a?(Color) ? v.to_xml_string(str) : (str << '<' << k.to_s << ' val="' << v.to_s << '"/>')
+      end
+      str << '</font>'
+    end
+
     # Serializes the fill
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String]
     def to_xml(xml)
       xml.font {
         self.instance_values.each do |k, v|
-          v.is_a?(Color) ? v.to_xml(xml) : xml.send(k, {:val => v})            
+          v.is_a?(Color) ? v.to_xml(xml) : xml.send(k, {:val => v})
         end
       }
     end

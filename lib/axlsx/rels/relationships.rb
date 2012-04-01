@@ -14,7 +14,7 @@ require 'axlsx/rels/relationship.rb'
     def to_xml_string(str = '')
       str << '<?xml version="1.0" encoding="UTF-8"?>'
       str << '<Relationships xmlns="' << RELS_R << '">'
-      each_with_index { |rel, index| rel.to_xml_string(str, index+1) }
+      each_with_index { |rel, index| rel.to_xml_string(index+1, str) }
       str << '</Relationships>'
     end
     # Serializes the relationships document.

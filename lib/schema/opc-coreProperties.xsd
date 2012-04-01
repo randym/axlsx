@@ -2,13 +2,17 @@
 <xs:schema targetNamespace="http://schemas.openxmlformats.org/package/2006/metadata/core-properties"
   xmlns="http://schemas.openxmlformats.org/package/2006/metadata/core-properties"
   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dc="http://purl.org/dc/elements/1.1/"
-  xmlns:dcterms="http://purl.org/dc/terms/" elementFormDefault="qualified" blockDefault="#all">
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  elementFormDefault="qualified" blockDefault="#all">
 
   <xs:import namespace="http://purl.org/dc/elements/1.1/"
     schemaLocation="dc.xsd"/>
+
   <xs:import namespace="http://purl.org/dc/terms/"
     schemaLocation="dcterms.xsd"/>
-  <xs:import id="xml" namespace="http://www.w3.org/XML/1998/namespace"/>
+
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace"
+    schemaLocation="xml.xsd"/>
 
   <xs:element name="coreProperties" type="CT_CoreProperties"/>
 

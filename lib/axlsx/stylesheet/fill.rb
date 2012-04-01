@@ -12,12 +12,18 @@ module Axlsx
     attr_reader :fill_type
 
     # Creates a new Fill object
-    # @param [PatternFill, GradientFill] fill_type 
+    # @param [PatternFill, GradientFill] fill_type
     # @raise [ArgumentError] if the fill_type parameter is not a PatternFill or a GradientFill instance
     def initialize(fill_type)
       self.fill_type = fill_type
     end
 
+
+    def to_xml_string(str = '')
+      str << '<fill>'
+      @fill_type.to_xml_string(str)
+      str << '</fill>'
+    end
     # Serializes the fill
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String]

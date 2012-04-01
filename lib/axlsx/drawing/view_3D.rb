@@ -72,27 +72,14 @@ module Axlsx
 
     def to_xml_string(str = '')
       str << '<c:view3D>'
-      str << '<c:rotX val="' << @rotX << '"/>' unless @rotX.nil?
-      str << '<c:hPercent val="' << @hPercent << '"/>' unless @hPercent.nil?
-      str << '<c:rotY val="' << @rotY << '"/>' unless @rotY.nil?
-      str << '<c:depthPercent val="' << @depthPercent << '"/>' unless @depthPercent.nil?
-      str << '<c:rAngAx val="' << @rAngAx << '"/>' unless @rAngAx.nil?
-      str << '<c:perspective val="' << @perspective << '"/>' unless @perspective.nil?
+      str << '<c:rotX val="' << @rotX.to_s << '"/>' unless @rotX.nil?
+      str << '<c:hPercent val="' << @hPercent.to_s << '"/>' unless @hPercent.nil?
+      str << '<c:rotY val="' << @rotY.to_s << '"/>' unless @rotY.nil?
+      str << '<c:depthPercent val="' << @depthPercent.to_s << '"/>' unless @depthPercent.nil?
+      str << '<c:rAngAx val="' << @rAngAx.to_s << '"/>' unless @rAngAx.nil?
+      str << '<c:perspective val="' << @perspective.to_s << '"/>' unless @perspective.nil?
       str << '</c:view3D>'
     end
 
-    # Serializes the view3D properties
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    # @return [String]
-    def to_xml(xml)
-      xml[:c].view3D {
-        xml[:c].rotX :val=>@rotX unless @rotX.nil?
-        xml[:c].hPercent :val=>@hPercent unless @hPercent.nil?
-        xml[:c].rotY :val=>@rotY unless @rotY.nil?
-        xml[:c].depthPercent :val=>@depthPercent unless @depthPercent.nil?
-        xml[:c].rAngAx :val=>@rAngAx unless @rAngAx.nil?
-        xml[:c].perspective :val=>@perspective unless @perspective.nil?
-      }
-    end
   end
 end

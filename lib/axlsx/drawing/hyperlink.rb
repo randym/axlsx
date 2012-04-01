@@ -82,16 +82,6 @@ module Axlsx
       str << '/>'
     end
 
-    # Serializes the hyperlink
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    # @return [String]
-    def to_xml(xml)
-      h =  self.instance_values.merge({:'r:id' => "rId#{id}", :'xmlns:r' => XML_NS_R })
-      h.delete('href')
-      h.delete('parent')
-      xml[:a].hlinkClick h
-    end
-
     private
     # The relational ID for this hyperlink
     # @return [Integer]

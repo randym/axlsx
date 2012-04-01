@@ -24,6 +24,7 @@ module Axlsx
       str << '<dc:creator>' << self.creator << '</dc:creator>'
       str << '<dcterms:created xsi:type="dcterms:W3CDTF">' << Time.now.strftime('%Y-%m-%dT%H:%M:%S') << '</dcterms:created>'
       str << '<cp:revision>0</cp:revision>'
+      str << '</cp:coreProperties>'
     end
   end
 end

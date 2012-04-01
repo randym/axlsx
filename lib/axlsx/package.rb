@@ -139,7 +139,9 @@ module Axlsx
     #  p.validate.each { |error| puts error.message }
     def validate
       errors = []
-      parts.each { |part| errors.concat validate_single_doc(part[:schema], part[:doc]) unless part[:schema].nil? }
+      parts.each do |part|
+        errors.concat validate_single_doc(part[:schema], part[:doc]) unless part[:schema].nil?
+      end
       errors
     end
 
@@ -171,7 +173,7 @@ module Axlsx
     def parts
       @parts = [
        {:entry => RELS_PN, :doc => relationships.to_xml_string, :schema => RELS_XSD},
-       {:entry => "xl/#{STYLES_PN}", :doc => workbook.styles.to_xml, :schema => SML_XSD},
+       {:entry => "xl/#{STYLES_PN}", :doc => workbook.styles.to_xml_string, :schema => SML_XSD},
        {:entry => CORE_PN, :doc => @core.to_xml_string, :schema => CORE_XSD},
        {:entry => APP_PN, :doc => @app.to_xml_string, :schema => APP_XSD},
        {:entry => WORKBOOK_RELS_PN, :doc => workbook.relationships.to_xml_string, :schema => RELS_XSD},
@@ -180,7 +182,7 @@ module Axlsx
       ]
       workbook.drawings.each do |drawing|
         @parts << {:entry => "xl/#{drawing.rels_pn}", :doc => drawing.relationships.to_xml_string, :schema => RELS_XSD}
-        @parts << {:entry => "xl/#{drawing.pn}", :doc => drawing.to_xml, :schema => DRAWING_XSD}
+        @parts << {:entry => "xl/#{drawing.pn}", :doc => drawing.to_xml_string, :schema => DRAWING_XSD}
       end
 
       workbook.tables.each do |table|
@@ -188,7 +190,7 @@ module Axlsx
       end
 
       workbook.charts.each do |chart|
-        @parts << {:entry => "xl/#{chart.pn}", :doc => chart.to_xml, :schema => DRAWING_XSD}
+        @parts << {:entry => "xl/#{chart.pn}", :doc => chart.to_xml_string, :schema => DRAWING_XSD}
       end
 
       workbook.images.each do |image|
@@ -215,7 +217,6 @@ module Axlsx
     def validate_single_doc(schema, doc)
       schema = Nokogiri::XML::Schema(File.open(schema))
       doc = Nokogiri::XML(doc)
-
       errors = []
       schema.validate(doc).each do |error|
         errors << error

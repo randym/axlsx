@@ -51,7 +51,7 @@ module Axlsx
     # @param [String] str
     # @param [Integer] rId the id for this relationship
     # @return [String]
-    def to_xml_string(str = '', rId)
+    def to_xml_string(rId, str = '')
       h = self.instance_values
       h[:Id] = 'rId' << rId.to_s
       str << '<Relationship '

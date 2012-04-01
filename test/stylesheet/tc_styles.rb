@@ -9,7 +9,7 @@ class TestStyles < Test::Unit::TestCase
 
   def test_valid_document
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
-    doc = Nokogiri::XML(@styles.to_xml)
+    doc = Nokogiri::XML(@styles.to_xml_string)
     errors = []
     schema.validate(doc).each do |error|
       errors.push error

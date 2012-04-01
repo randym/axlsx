@@ -250,6 +250,14 @@ module Axlsx
       cellXfs << xf
     end
 
+    def to_xml_string(str = '')
+      str << '<styleSheet xmlns="' << XML_NS << '">'
+      [:numFmts, :fonts, :fills, :borders, :cellStyleXfs, :cellXfs, :cellStyles, :dxfs, :tableStyles].each do |key|
+        self.instance_values[key.to_s].to_xml_string(str) unless self.instance_values[key.to_s].nil?
+      end
+      str << '</styleSheet>'
+    end
+
     # Serializes the styles document
     # @return [String]
     def to_xml()

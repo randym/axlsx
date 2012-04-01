@@ -26,7 +26,7 @@ module Axlsx
     attr_reader :drawing
 
 
-    # Creates a new TwoCellAnchor object and sets up a reference to the from and to markers in the 
+    # Creates a new TwoCellAnchor object and sets up a reference to the from and to markers in the
     # graphic_frame's chart. That means that you can do stuff like
     # c = worksheet.add_chart Axlsx::Chart
     # c.start_at 5, 9
@@ -38,13 +38,13 @@ module Axlsx
     # @option options [Array] end_at the col, row to end at
     def initialize(drawing, options={})
       @drawing = drawing
-      drawing.anchors << self      
+      drawing.anchors << self
       @from, @to =  Marker.new, Marker.new(:col => 5, :row=>10)
     end
 
     # Creates a graphic frame and chart object associated with this anchor
     # @return [Chart]
-    def add_chart(chart_type, options)      
+    def add_chart(chart_type, options)
       @object = GraphicFrame.new(self, chart_type, options)
       @object.chart
     end
@@ -54,24 +54,19 @@ module Axlsx
     def index
       @drawing.anchors.index(self)
     end
-    # Serializes the two cell anchor
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    # @return [String]
-    def to_xml(xml)
-      #build it for now, break it down later!
-      xml[:xdr].twoCellAnchor {
-        xml.from {
-          from.to_xml(xml)
-        }
-        xml.to {
-          to.to_xml(xml)
-        }
-        @object.to_xml(xml)
-        xml.clientData
-      }
-    end    
 
-    private
+    def to_xml_string(str = '')
+      str << '<xdr:twoCellAnchor>'
+      str << '<xdr:from>'
+      from.to_xml_string str
+      str << '</xdr:from>'
+      str << '<xdr:to>'
+      to.to_xml_string str
+      str << '</xdr:to>'
+      object.to_xml_string(str)
+      str << '<xdr:clientData/>'
+      str << '</xdr:twoCellAnchor>'
+    end
 
   end
 end

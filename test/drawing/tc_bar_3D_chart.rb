@@ -51,9 +51,9 @@ class TestBar3DChart < Test::Unit::TestCase
     assert(@chart.shape == :cone)
   end
 
-  def test_to_xml
+  def test_to_xml_string
     schema = Nokogiri::XML::Schema(File.open(Axlsx::DRAWING_XSD))
-    doc = Nokogiri::XML(@chart.to_xml)
+    doc = Nokogiri::XML(@chart.to_xml_string)
     errors = []
     schema.validate(doc).each do |error|
       errors.push error

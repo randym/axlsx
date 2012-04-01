@@ -49,23 +49,14 @@ module Axlsx
 
 
     def to_xml_string(str = '')
-      str << '<catAx>'
+      str << '<c:catAx>'
       super(str)
-      str << '<auto val="' << @auto.to_s << '</auto>'
-      str << '</catAx>'
+      str << '<c:auto val="' << @auto.to_s << '"/>'
+      str << '<c:lblAlgn val="' << @lblAlgn.to_s << '"/>'
+      str << '<c:lblOffset val="' << @lblOffset.to_s << '"/>'
+      str << '</c:catAx>'
     end
 
-    # Serializes the category axis
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    # @return [String]
-    def to_xml(xml)
-      xml.catAx {
-        super(xml)
-        xml.auto :val=>@auto
-        xml.lblAlgn :val=>@lblAlgn
-        xml.lblOffset :val=>@lblOffset
-      }
-    end
   end
 
 

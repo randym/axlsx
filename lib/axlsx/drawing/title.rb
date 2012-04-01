@@ -54,30 +54,9 @@ module Axlsx
         str << '</c:strRef>'
         str << '</c:tx>'
       end
+      str << '<c:layout/>'
+      str << '<c:overlay val="0"/>'
       str << '</c:title>'
-    end
-
-    # Serializes the chart title
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    # @return [String]
-    def to_xml(xml)
-      xml[:c].title {
-        unless @text.empty?
-          xml[:c].tx {
-            xml[:c].strRef {
-              xml[:c].f Axlsx::cell_range([@cell])
-              xml[:c].strCache {
-                xml[:c].ptCount :val=>1
-                xml[:c].pt(:idx=>0) {
-                  xml[:c].v @text
-                }
-              }
-            }
-          }
-        end
-        xml[:c].layout
-        xml[:c].overlay :val=>0
-      }
     end
 
   end

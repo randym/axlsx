@@ -86,55 +86,29 @@ module Axlsx
     end
 
     def to_xml_string(str = '')
-      super do |str|
-        str << '<line3DChart>'
-        str << '<grouping val="' << grouping.to_s << '"/>'
-        str << '<varyColors val="1"/>'
-        @series.each { |ser| ser.to_xml_str(str) }
-        str << '<dLbls>'
-        str << '<showLegendKey val="0"/>'
-        str << '<showVal val="0"/>'
-        str << '<showCatName val="0"/>'
-        str << '<showSerName val="0"/>'
-        str << '<showPercent val="0"/>'
-        str << '<showBubbleSize val="0"/>'
-        str << '</dLbls>'
-        str << '<gapDepth val="' << @gapDepth.to_s << '"/>' unless @gapDepth.nil?
-        str << '<axId val="' << @catAxId.to_s << '"/>'
-        str << '<axId val="' << @valAxId.to_s << '"/>'
-        str << '<axId val="' << @serAxId.to_s << '"/>'
-        str << '</line3DChart>'
-        @catAxis.to_xml_str str
-        @valAxis.to_xml_str str
-        @serAxis.to_xml_str str
+      super(str) do |str_inner|
+        str_inner << '<c:line3DChart>'
+        str_inner << '<c:grouping val="' << grouping.to_s << '"/>'
+        str_inner << '<c:varyColors val="1"/>'
+        @series.each { |ser| ser.to_xml_string(str_inner) }
+        str_inner << '<c:dLbls>'
+        str_inner << '<c:showLegendKey val="0"/>'
+        str_inner << '<c:showVal val="0"/>'
+        str_inner << '<c:showCatName val="0"/>'
+        str_inner << '<c:showSerName val="0"/>'
+        str_inner << '<c:showPercent val="0"/>'
+        str_inner << '<c:showBubbleSize val="0"/>'
+        str_inner << '</c:dLbls>'
+        str_inner << '<c:gapDepth val="' << @gapDepth.to_s << '"/>' unless @gapDepth.nil?
+        str_inner << '<c:axId val="' << @catAxId.to_s << '"/>'
+        str_inner << '<c:axId val="' << @valAxId.to_s << '"/>'
+        str_inner << '<c:axId val="' << @serAxId.to_s << '"/>'
+        str_inner << '</c:line3DChart>'
+        @catAxis.to_xml_string str_inner
+        @valAxis.to_xml_string str_inner
+        @serAxis.to_xml_string str_inner
       end
     end
 
-    # Serializes the bar chart
-    # @return [String]
-    def to_xml
-      super() do |xml|
-        xml.line3DChart {
-          xml.grouping :val=>grouping
-          xml.varyColors :val=>1
-          @series.each { |ser| ser.to_xml(xml) }
-          xml.dLbls {
-            xml.showLegendKey :val=>0
-            xml.showVal :val=>0
-            xml.showCatName :val=>0
-            xml.showSerName :val=>0
-            xml.showPercent :val=>0
-            xml.showBubbleSize :val=>0
-          }
-          xml.gapDepth :val=>@gapDepth unless @gapDepth.nil?
-          xml.axId :val=>@catAxId
-          xml.axId :val=>@valAxId
-          xml.axId :val=>@serAxId
-        }
-        @catAxis.to_xml(xml)
-        @valAxis.to_xml(xml)
-        @serAxis.to_xml(xml)
-      end
-    end
   end
 end

@@ -145,40 +145,20 @@ module Axlsx
     end
 
     def to_xml_string(str = '')
+      str << '<xdr:pic>'
+      str << '<xdr:nvPicPr>'
+      str << '<xdr:cNvPr id="2" name="' << name.to_s << '" descr="' << descr.to_s << '">'
+      @hyperlink.to_xml_string(str) if @hyperlink.is_a?(Hyperlink)
+      str << '</xdr:cNvPr><xdr:cNvPicPr>'
+      picture_locking.to_xml_string(str)
+      str << '</xdr:cNvPicPr></xdr:nvPicPr>'
+      str << '<xdr:blipFill>'
+      str << '<a:blip xmlns:r ="' << XML_NS_R << '" r:embed="rId' << id.to_s <<  '"/>'
+      str << '<a:stretch><a:fillRect/></a:stretch></xdr:blipFill><xdr:spPr>'
+      str << '<a:xfrm><a:off x="0" y="0"/><a:ext cx="2336800" cy="2161540"/></a:xfrm>'
+      str << '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></xdr:spPr></xdr:pic>'
 
     end
 
-    # Serializes the picture
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    # @return [String]
-    def to_xml(xml)
-      xml.pic {
-        xml.nvPicPr {
-          xml.cNvPr(:id=>"2", :name=>name, :descr=>descr) {
-            if @hyperlink.is_a?(Hyperlink)
-              @hyperlink.to_xml(xml)
-            end
-          }
-          xml.cNvPicPr {
-            picture_locking.to_xml(xml)
-          }
-        }
-        xml.blipFill {
-          xml[:a].blip :'xmlns:r' => XML_NS_R, :'r:embed'=>"rId#{id}"
-          xml[:a].stretch {
-            xml.fillRect
-          }
-        }
-        xml.spPr {
-          xml[:a].xfrm {
-            xml.off :x=>0, :y=>0
-            xml.ext :cx=>2336800, :cy=>2161540
-          }
-          xml[:a].prstGeom(:prst=>:rect) {
-            xml.avLst
-          }
-        }
-      }
-    end
   end
 end
