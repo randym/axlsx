@@ -315,7 +315,7 @@ module Axlsx
       when :string
         #parse formula
         if @value.start_with?('=')
-          str  << 't="str"><f>' << value.to_s.gsub('=', '') << '</f>'
+          str  << 't="str"><f>' << @value.to_s.gsub('=', '') << '</f>'
         else
           #parse shared
           if @ssti
