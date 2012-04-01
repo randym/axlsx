@@ -387,7 +387,7 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
    - Support for tables added in - Note: Pre 2011 versions of Mac office do not support this feature.
    - Support for splatter charts added
    - Major performance updates.
-   - Gem now supports for JRuby 1.6.7
+   - Gem now supports for JRuby 1.6.7, as well as expirimental support for Rubinius
 
 - ** March.5.12**: 1.0.18 release
    https://github.com/randym/axlsx/compare/1.0.17...1.0.18
