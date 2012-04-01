@@ -18,7 +18,9 @@ Axlsx: Office Open XML Spreadsheet Generation
 
 **Ruby Version**: 1.8.7, 1.9.2, 1.9.3
 
-**Release Date**: March 5th 2012
+**JRuby Version**: 1.6.7
+
+**Release Date**: April 1st 2012
 
 Synopsis
 --------
@@ -385,6 +387,8 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
    - Support for tables added in - Note: Pre 2011 versions of Mac office do not support this feature.
    - Support for splatter charts added
    - Major performance updates.
+   - Gem now supports for JRuby 1.6.7
+
 - ** March.5.12**: 1.0.18 release
    https://github.com/randym/axlsx/compare/1.0.17...1.0.18
    - bugfix custom borders are not properly applied when using styles.add_style
@@ -402,13 +406,6 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
    - Added in support for fixed column_widths
    - Removed unneeded dependencies on active-support and i18n
 
-- ** February.2.12**: 1.0.16 release
-   https://github.com/randym/axlsx/compare/1.0.15...1.0.16
-   - Bug fix for schema file locations when validating in rails
-   - Added hyperlink to images
-   - date1904 now automatically set in BSD and mac environments
-   - removed whitespace/indentation from xml outputs
-   - col_style now skips rows that do not contain cells at the column index
 
 
 Please see the {file:CHANGELOG.md} document for past release information.
@@ -434,5 +431,5 @@ Please see the {file:CHANGELOG.md} document for past release information.
 #Copyright and License
 ----------
 
-Axlsx &copy; 2011 by [Randy Morgan](mailto:digial.ipseity@gmail.com). Axlsx is
+Axlsx &copy; 2011-2012 by [Randy Morgan](mailto:digial.ipseity@gmail.com). Axlsx is
 licensed under the MIT license. Please see the {file:LICENSE} document for more information.

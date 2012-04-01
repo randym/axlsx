@@ -1,5 +1,13 @@
 CHANGELOG
 ---------
+- ** February.2.12**: 1.0.16 release
+   https://github.com/randym/axlsx/compare/1.0.15...1.0.16
+   - Bug fix for schema file locations when validating in rails
+   - Added hyperlink to images
+   - date1904 now automatically set in BSD and mac environments
+   - removed whitespace/indentation from xml outputs
+   - col_style now skips rows that do not contain cells at the column index
+
 - **January.6.12**: 1.0.15 release
    https://github.com/randym/axlsx/compare/1.0.14...1.0.15
    - Bug fix add_style specified number formats must be explicity applied for libraOffice
@@ -15,7 +23,7 @@ CHANGELOG
    - Updated examples to output to a single workbook with multiple sheets
    - Added access to app and core package objects so you can set the creator and other properties of the package
    - The beginning of password protected xlsx files - roadmapped for January release.
-	
+
 - **December.8.11**: 1.0.13 release
    -  Fixing .gemspec errors that caused gem to miss the lib directory. Sorry about that.
 
@@ -62,7 +70,7 @@ CHANGELOG
 ##October.22.11: 1.0.6 release
   - Bumping version to include docs. Bug in gemspec pointing to incorrect directory.
 
-##October.22.11: 1.05  
+##October.22.11: 1.05
   - Added support for line charts
   - Updated examples and readme
   - Updated series title to be a real title ** NOTE ** If you are accessing titles directly you will need to update text assignation.
@@ -70,7 +78,7 @@ CHANGELOG
          chart.series.first.title.text = 'Your Title'
     With this change you can assign a cell for the series title
          chart.series.title = sheet.rows.first.cells.first
-    If you are using the recommended 
+    If you are using the recommended
          chart.add_series :data=>[], :labels=>[], :title
     You do not have to change anything.
   - BugFix: shape attribute for bar chart is now properly serialized
