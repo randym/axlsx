@@ -57,7 +57,7 @@ module Axlsx
   def self.name_to_indices(name)
     raise ArgumentError, 'invalid cell name' unless name.size > 1
     v = name[/[A-Z]+/].reverse.chars.reduce({:base=>1, :i=>0}) do  |val, c|
-      val[:i] += ((c.bytes.first - 65) + val[:base]); val[:base] *= 26; val
+      val[:i] += ((c.bytes.first - 64) * val[:base]); val[:base] *= 26; val
     end
 
     [v[:i]-1, ((name[/[1-9][0-9]*/]).to_i)-1]
@@ -71,9 +71,9 @@ module Axlsx
     chars = []
     while index >= 26 do
       chars << ((index % 26) + 65).chr
-      index /= 26
+      index = index / 26 - 1
     end
-    chars << ((chars.empty? ? index : index-1) + 65).chr
+    chars << (index + 65).chr
     chars.reverse.join
   end
 
