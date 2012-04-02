@@ -55,6 +55,9 @@ module Axlsx
     # assigns the chart for this series
     def chart=(v)  DataTypeValidator.validate "Series.chart", Chart, v; @chart = v; end
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << '<c:ser>'
       str << '<c:idx val="' << index.to_s << '"/>'

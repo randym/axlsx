@@ -44,6 +44,9 @@ module Axlsx
     # @see min
     def min=(v) DataTypeValidator.validate "Scaling.min", Float, v; @min = v; end
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << '<c:scaling>'
       str << '<c:logBase val="' << @logBase.to_s << '"/>' unless @logBase.nil?

@@ -55,6 +55,9 @@ module Axlsx
     # @see patternType
     def patternType=(v) Axlsx::validate_pattern_type v; @patternType = v end
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << '<patternFill patternType="' << patternType.to_s << '">'
       if fgColor.is_a?(Color)
@@ -75,13 +78,5 @@ module Axlsx
       str << '</patternFill>'
     end
 
-    # Serializes the pattern fill
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    # @return [String]
-    def to_xml(xml)
-      xml.patternFill(:patternType => self.patternType) {
-        self.instance_values.reject { |k,v| k.to_sym == :patternType }.each { |k,v| xml.send(k, v.instance_values) }
-      }
-    end
   end
 end

@@ -133,24 +133,15 @@ module Axlsx
     # @see sz
     def sz=(v) Axlsx::validate_unsigned_int v; @sz=v end
 
-
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << '<font>'
       instance_values.each do |k, v|
         v.is_a?(Color) ? v.to_xml_string(str) : (str << '<' << k.to_s << ' val="' << v.to_s << '"/>')
       end
       str << '</font>'
-    end
-
-    # Serializes the fill
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    # @return [String]
-    def to_xml(xml)
-      xml.font {
-        self.instance_values.each do |k, v|
-          v.is_a?(Color) ? v.to_xml(xml) : xml.send(k, {:val => v})
-        end
-      }
     end
   end
 end

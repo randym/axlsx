@@ -36,22 +36,11 @@ module Axlsx
       resolve(cells)
     end
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string
       '<?xml version="1.0" encoding="UTF-8"?><sst xmlns="' << XML_NS << '" count="' << @count.to_s << '" uniqueCount="' << unique_count.to_s << '">' << @shared_xml_string << '</sst>'
-    end
-
-    # Generate the xml document for the Shared Strings Table
-    # @return [String]
-    def to_xml
-
-      builder = Nokogiri::XML::Builder.new(:encoding => ENCODING) do |xml|
-        xml.sst(:xmlns => Axlsx::XML_NS, :count => count, :uniqueCount => unique_count) {
-          @unique_cells.each do |cell|
-            xml.si { cell.run_xml(xml) }
-          end
-        }
-      end
-      builder.to_xml(:save_with => 0)
     end
 
     private

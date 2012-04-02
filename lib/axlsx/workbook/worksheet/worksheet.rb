@@ -384,6 +384,9 @@ module Axlsx
       image
     end
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string
       str = '<?xml version="1.0" encoding="UTF-8"?>'
       str.concat "<worksheet xmlns=\"%s\" xmlns:r=\"%s\">" % [XML_NS, XML_NS_R]
@@ -407,54 +410,6 @@ module Axlsx
         str.concat "<tableParts count='%s'>%s</tableParts>" % [@tables.size, @tables.reduce('') { |memo, obj| memo += "<tablePart r:id='%s'/>" % obj.rId }]
       end
       str + '</worksheet>'
-    end
-
-    # Serializes the worksheet document
-    # @return [String]
-    def to_xml
-      builder = Nokogiri::XML::Builder.new(:encoding => ENCODING) do |xml|
-        xml.worksheet(:xmlns => XML_NS,
-                      :'xmlns:r' => XML_NS_R) {
-          xml.sheetPr {
-            xml.pageSetUpPr :fitToPage => fit_to_page if fit_to_page
-          }
-          # another patch for the folks at rubyXL as thier parser depends on this optional element.
-          xml.dimension :ref=>dimension unless rows.size == 0
-          # this is required by rubyXL, spec says who cares - but it seems they didnt notice
-          # grouping issue resolved by keeping tabSelected set to 0
-          xml.sheetViews {
-            xml.sheetView(:tabSelected => @selected, :workbookViewId => 0, :showGridLines => show_gridlines) {
-              xml.selection :activeCell=>"A1", :sqref => "A1"
-            }
-          }
-
-          if @auto_fit_data.size > 0
-            xml.cols {
-              @auto_fit_data.each_with_index do |col, index|
-                min_max = index+1
-                xml.col(:min=>min_max, :max=>min_max, :width => auto_width(col), :customWidth=>1)
-              end
-            }
-          end
-          xml.sheetData {
-            @rows.each do |row|
-              row.to_xml(xml)
-            end
-          }
-          xml.autoFilter :ref=>@auto_filter if @auto_filter
-          xml.mergeCells(:count=>@merged_cells.size) { @merged_cells.each { | mc | xml.mergeCell(:ref=>mc) } } unless @merged_cells.empty?
-          page_margins.to_xml(xml) if @page_margins
-          xml.drawing :"r:id"=>"rId1" if @drawing
-          unless @tables.empty?
-            xml.tableParts(:count => @tables.length) {
-              @tables.each do |table|
-                xml.tablePart :'r:id' => table.rId
-              end
-            }
-          end
-        }
-      end
-      builder.to_xml(:save_with => 0)
     end
 
     # The worksheet relationships. This is managed automatically by the worksheet

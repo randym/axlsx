@@ -28,6 +28,9 @@ module Axlsx
       "rId#{@anchor.index+1}"
     end
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << '<xdr:graphicFrame>'
       str << '<xdr:nvGraphicFramePr>'

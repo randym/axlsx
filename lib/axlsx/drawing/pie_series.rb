@@ -1,5 +1,6 @@
 # encoding: UTF-8
 module Axlsx
+
   # A PieSeries defines the data and labels and explosion for pie charts series.
   # @note The recommended way to manage series is to use Chart#add_series
   # @see Worksheet#add_chart
@@ -34,6 +35,9 @@ module Axlsx
     # @see explosion
     def explosion=(v) Axlsx::validate_unsigned_int(v); @explosion = v; end
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       super(str) do |str_inner|
         str_inner << '<c:explosion val="' << @explosion << '"/>' unless @explosion.nil?

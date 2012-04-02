@@ -36,7 +36,9 @@ module Axlsx
     # @see table
     def table=(v) Axlsx::validate_boolean v; @table=v end
 
-
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       attr = self.instance_values.select { |k, v| [:name, :pivot, :table].include? k }
       attr[:count] = self.size
@@ -47,13 +49,5 @@ module Axlsx
       str << '</tableStyle>'
     end
 
-    # Serializes the table style
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    # @return [String]
-    def to_xml(xml)
-      attr = self.instance_values.select { |k, v| [:name, :pivot, :table].include? k }
-      attr[:count] = self.size
-      xml.tableStyle(attr) { self.each { |table_style_el| table_style_el.to_xml(xml) } }
-    end
   end
 end

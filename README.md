@@ -14,13 +14,13 @@ Axlsx: Office Open XML Spreadsheet Generation
 
 **License**:      MIT License
 
-**Latest Version**: 1.0.18
+**Latest Version**: 1.1.0
 
 **Ruby Version**: 1.8.7, 1.9.2, 1.9.3
 
 **JRuby Version**: 1.6.7
 
-**Release Date**: April 1st 2012
+**Release Date**: April 2st 2012
 
 Synopsis
 --------
@@ -374,7 +374,7 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
-- ** March.??.12**: 1.0.19 release
+- ** April.2.12**: 1.1.0 release
    - bugfix patch name_to_indecies to properly handle extended ranges.
    - bugfix properly serialize chart title.
    - lower rake minimum requirement for 1.8.7 apps that don't want to move on to 0.9 NOTE this will be reverted for 2.0.0 with workbook parsing!
@@ -382,11 +382,11 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
    - added support for turning off gridlines in charts.
    - added support for turning off gridlines in worksheet.
    - bugfix some apps like libraoffice require apply[x] attributes to be true. applyAlignment is now properly set.
-   - added option to *not* use RMagick - and default all assigned columns to the excel default of 8.43
-   - added border style specification to styles#add_style - now you can pass in :border => {:style => :thin, :color =>"0000FF"} instead of creating a border object and border parts manually each time.
-   - Support for tables added in - Note: Pre 2011 versions of Mac office do not support this feature.
+   - added option use_autowidth. When this is false RMagick will not be loaded or used in the stack. However it is still a requirement in the gem.
+   - added border style specification to styles#add_style. See the example in the readme.
+   - Support for tables added in - Note: Pre 2011 versions of Mac office do not support this feature and will warn.
    - Support for splatter charts added
-   - Major performance updates.
+   - Major (like 7x faster!) performance updates.
    - Gem now supports for JRuby 1.6.7, as well as expirimental support for Rubinius
 
 - ** March.5.12**: 1.0.18 release

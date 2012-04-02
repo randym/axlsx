@@ -1,6 +1,15 @@
 # encoding: UTF-8
 module Axlsx
+
+  # The ScatterChart allows you to insert a scatter chart into your worksheet
+  # @see Worksheet#add_chart
+  # @see Chart#add_series
+  # @see README for an example
   class ScatterChart < Chart
+
+    # The Style for the scatter chart
+    # must be one of :none | :line | :lineMarker | :marker | :smooth | :smoothMarker
+    # return [Symbol]
     attr_reader :scatterStyle
 
     # the x value axis
@@ -11,6 +20,7 @@ module Axlsx
     # @return [ValAxis]
     attr_reader :yValAxis
 
+    # Creates a new scatter chart
     def initialize(frame, options={})
       @scatterStyle = :lineMarker
       @xValAxId = rand(8 ** 8)
@@ -19,8 +29,20 @@ module Axlsx
       @yValAxis = ValAxis.new(@yValAxId, @xValAxId)
       super(frame, options)
       @series_type = ScatterSeries
+      options.each do |o|
+        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
+      end
     end
 
+    # see #scatterStyle
+    def scatterStyle=(v)
+      Axlsx.validate_scatter_style(v)
+      @scatterStyle = v
+    end
+
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       super do |str|
         str << '<c:scatterChart>'

@@ -56,15 +56,15 @@ module Axlsx
     # @see formatCode
     def formatCode=(v) Axlsx::validate_string v; @formatCode = v end
 
+
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << '<numFmt '
       str << instance_values.map { |key, value| '' << key.to_s << '="' << value.to_s << '"' }.join(' ')
       str << '/>'
     end
-
-    # Creates a numFmt element applying the instance values of this object as attributes.
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    def to_xml(xml) xml.numFmt(self.instance_values) end
 
   end
 end

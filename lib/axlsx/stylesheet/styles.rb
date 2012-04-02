@@ -133,7 +133,7 @@ module Axlsx
     # @option options [String] font_name The name of the font to use
     # @option options [Integer] num_fmt The number format to apply
     # @option options [String] format_code The formatting to apply. If this is specified, num_fmt is ignored.
-    # @option options [Integer] border The border style to use. This can be the index of an existing border or a hash like {:style => :thin, :color => "FFFF0000"} to create a new border style
+    # @option options [Integer] border The border style to use.
     # @option options [String] bg_color The background color to apply to the cell
     # @option options [Boolean] hidden Indicates if the cell should be hidden
     # @option options [Boolean] locked Indicates if the cell should be locked
@@ -148,7 +148,7 @@ module Axlsx
     #   ws = p.workbook.add_worksheet
     #
     #   # black text on a white background at 14pt with thin borders!
-    #   title = ws.style.add_style(:bg_color => "FFFF0000", :fg_color=>"#FF000000", :sz=>14,  :border=>Axlsx::STYLE_THIN_BORDER
+    #   title = ws.style.add_style(:bg_color => "FFFF0000", :fg_color=>"#FF000000", :sz=>14,  :border=> {:style => :thin, :color => "FFFF0000"}
     #
     #   ws.add_row :values => ["Least Popular Pets"]
     #   ws.add_row :values => ["", "Dry Skinned Reptiles", "Bald Cats", "Violent Parrots"], :style=>title
@@ -250,25 +250,15 @@ module Axlsx
       cellXfs << xf
     end
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << '<styleSheet xmlns="' << XML_NS << '">'
       [:numFmts, :fonts, :fills, :borders, :cellStyleXfs, :cellXfs, :cellStyles, :dxfs, :tableStyles].each do |key|
         self.instance_values[key.to_s].to_xml_string(str) unless self.instance_values[key.to_s].nil?
       end
       str << '</styleSheet>'
-    end
-
-    # Serializes the styles document
-    # @return [String]
-    def to_xml()
-      builder = Nokogiri::XML::Builder.new(:encoding => ENCODING) do |xml|
-        xml.styleSheet(:xmlns => XML_NS) {
-          [:numFmts, :fonts, :fills, :borders, :cellStyleXfs, :cellXfs, :cellStyles, :dxfs, :tableStyles].each do |key|
-            self.instance_values[key.to_s].to_xml(xml) unless self.instance_values[key.to_s].nil?
-          end
-        }
-      end
-      builder.to_xml(:save_with => 0)
     end
 
     private

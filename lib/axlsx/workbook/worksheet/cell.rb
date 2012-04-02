@@ -36,9 +36,6 @@ module Axlsx
                          'shadow', 'condense', 'extend', 'u',
                          'vertAlign', 'sz', 'color', 'scheme']
 
-    INLINE_ATTR = [:font_name => { :validator=>:validate_string}]
-
-
     # The index of the cellXfs item to be applied to this cell.
     # @return [Integer]
     # @see Axlsx::Styles

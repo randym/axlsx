@@ -3,6 +3,9 @@ module Axlsx
   # A series title is a Title with a slightly different serialization than chart titles.
   class SeriesTitle < Title
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << '<c:tx>'
       str << '<c:strRef>'

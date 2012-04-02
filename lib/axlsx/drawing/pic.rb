@@ -144,6 +144,9 @@ module Axlsx
       @anchor.from.row = y
     end
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << '<xdr:pic>'
       str << '<xdr:nvPicPr>'

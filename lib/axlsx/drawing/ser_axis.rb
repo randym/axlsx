@@ -30,6 +30,9 @@ module Axlsx
     # @see tickMarkSkip
     def tickMarkSkip=(v) Axlsx::validate_unsigned_int(v); @tickMarkSkip = v; end
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << '<c:serAx>'
       super(str)

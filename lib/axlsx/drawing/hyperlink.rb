@@ -73,6 +73,9 @@ module Axlsx
 
     end
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       h =  self.instance_values.merge({:'r:id' => "rId#{id}", :'xmlns:r' => XML_NS_R })
       h.delete('href')

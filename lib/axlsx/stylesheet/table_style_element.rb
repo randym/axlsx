@@ -62,17 +62,14 @@ module Axlsx
     # @see dxfId
     def dxfId=(v) Axlsx::validate_unsigned_int v; @dxfId = v end
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << '<tableStyleElement '
       str << instance_values.map { |key, value| '' << key.to_s << '="' << value.to_s << '"' }.join(' ')
       str << '/>'
     end
 
-    # Serializes the table style element
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    # @return [String]
-    def to_xml(xml)
-      xml.tableStyleElement self.instance_values
-    end
   end
 end

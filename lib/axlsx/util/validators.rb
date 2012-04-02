@@ -103,6 +103,13 @@ module Axlsx
     RestrictionValidator.validate :gradient_type, [:linear, :path], v
   end
 
+  # Requires that the value is a valid scatterStyle
+  # must be one of :none | :line | :lineMarker | :marker | :smooth | :smoothMarker
+  # must be one of "none" | "line" | "lineMarker" | "marker" | "smooth" | "smoothMarker"
+  # @param [Symbol|String] the value to validate
+  def self.validate_scatter_style(v)
+    Axlsx::RestrictionValidator.validate "ScatterChart.scatterStyle", [:none, :line, :lineMarker, :marker, :smooth, :smoothMarker], v.to_sym
+  end
   # Requires that the value is a valid horizontal_alignment
   # :general, :left, :center, :right, :fill, :justify, :centerContinuous, :distributed are allowed
   # @param [Any] v The value validated

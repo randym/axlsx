@@ -47,7 +47,9 @@ module Axlsx
     # must be between a string between 0 and 1000
     def lblOffset=(v) RegexValidator.validate "#{self.class}.lblOffset", LBL_OFFSET_REGEX, v; @lblOffset = v; end
 
-
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << '<c:catAx>'
       super(str)

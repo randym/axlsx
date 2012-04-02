@@ -22,6 +22,9 @@ module Axlsx
     # @see crossBetween
     def crossBetween=(v) RestrictionValidator.validate "ValAxis.crossBetween", [:between, :midCat], v; @crossBetween = v; end
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << '<c:valAx>'
       super(str)

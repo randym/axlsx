@@ -28,6 +28,9 @@ module Axlsx
     # @see Axlsx#validate_content_type
     def ContentType=(v) Axlsx::validate_content_type v; @ContentType = v end
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << '<Default '
       str << instance_values.map { |key, value| '' << key.to_s << '="' << value.to_s << '"' }.join(' ')

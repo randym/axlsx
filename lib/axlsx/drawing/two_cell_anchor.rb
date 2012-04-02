@@ -55,6 +55,9 @@ module Axlsx
       @drawing.anchors.index(self)
     end
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << '<xdr:twoCellAnchor>'
       str << '<xdr:from>'

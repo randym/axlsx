@@ -95,16 +95,13 @@ module Axlsx
     # @see readingOrder
     def readingOrder=(v) Axlsx::validate_unsigned_int v; @readingOrder = v end
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << '<alignment '
       str << instance_values.map { |key, value| '' << key.to_s << '="' << value.to_s << '"' }.join(' ')
       str << '/>'
-    end
-    # Serializes the cell alignment
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    # @return [String]
-    def to_xml(xml)
-      xml.alignment(self.instance_values)
     end
 
   end

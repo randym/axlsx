@@ -28,6 +28,9 @@ module Axlsx
       @view3D = View3D.new({:rotX=>30, :perspective=>30}.merge(options))
     end
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       super(str) do |str_inner|
         str_inner << '<c:pie3DChart>'

@@ -10,8 +10,9 @@ module Axlsx
       super [Override, Default]
     end
 
-    # serialize the content types
-    # @return [String] str
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << '<?xml version="1.0" encoding="UTF-8"?>'
       str << '<Types xmlns="' << XML_NS_T << '">'

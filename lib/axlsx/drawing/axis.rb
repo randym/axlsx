@@ -84,6 +84,9 @@ module Axlsx
     def crosses=(v) RestrictionValidator.validate "#{self.class}.crosses", [:autoZero, :min, :max], v; @crosses = v; end
 
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << '<c:axId val="' << @axId.to_s << '"/>'
       @scaling.to_xml_string str

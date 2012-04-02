@@ -39,6 +39,9 @@ module Axlsx
     #def overlay=(v) Axlsx::validate_boolean v; @overlay=v; end
     #def spPr=(v) DataTypeValidator.validate 'Title.spPr', SpPr, v; @spPr = v; end
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << '<c:title>'
       unless @text.empty?

@@ -61,6 +61,9 @@ module Axlsx
     # Indexed colors are for backward compatability which I am choosing not to support
     # def indexed=(v) Axlsx::validate_unsigned_integer v; @indexed = v end
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << "<color "
       self.instance_values.each do |key, value|
@@ -69,9 +72,5 @@ module Axlsx
       str << "/>"
     end
 
-    # Serializes the color
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    # @return [String]
-    def to_xml(xml) xml.color(self.instance_values) end
   end
 end

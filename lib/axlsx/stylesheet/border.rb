@@ -42,6 +42,9 @@ module Axlsx
     # @see outline
     def outline=(v) Axlsx::validate_boolean v; @outline = v end
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << '<border '
       h = self.instance_values.select{ |k,v| [:diagonalUp, :diagonalDown, :outline].include? k }
@@ -55,16 +58,5 @@ module Axlsx
       str << '</border>'
     end
 
-    # Serializes the border element
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    def to_xml(xml)
-      xml.border(self.instance_values.select{ |k,v| [:diagonalUp, :diagonalDown, :outline].include? k }) {
-        [:start, :end, :left, :right, :top, :bottom, :diagonal, :vertical, :horizontal].each do |k|
-          @prs.select { |pr| pr.name == k }.each do |part|
-            part.to_xml(xml)
-          end
-        end
-      }
-    end
   end
 end

@@ -84,10 +84,10 @@ module Axlsx
     def footer=(v); Axlsx::validate_unsigned_numeric(v); @footer = v end
 
     # Serializes the page margins element
+    # @param [String] str
+    # @return [String]
     # @note For compatibility, this is a noop unless custom margins have been specified.
     # @see #custom_margins_specified?
-    # @param [String] str
-    # @retrun [String]
     def to_xml_string(str = '')
       str << '<pageMargins '
       str << instance_values.map { |key, value| '' << key << '="' << value.to_s << '"' }.join(' ')

@@ -3,6 +3,9 @@ module Axlsx
   # The ValAxisData class manages the values for a chart value series.
   class ValAxisData < CatAxisData
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << '<c:val>'
       str << '<c:numRef>'

@@ -11,7 +11,9 @@ module Axlsx
       data.each { |i| @list << i } if data.is_a?(SimpleTypedList)
     end
 
-
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << '<c:cat>'
       str << '<c:strRef>'

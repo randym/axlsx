@@ -63,6 +63,9 @@ module Axlsx
     # @see noChangeShapeType
     def noChangeShapeType=(v) Axlsx::validate_boolean v; @noChangeShapeType = v end
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << '<a:picLocks '
       str << instance_values.map { |key, value| '' << key.to_s << '="' << value.to_s << '"' }.join(' ')

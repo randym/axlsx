@@ -25,7 +25,9 @@ module Axlsx
     # @see defaultPivotStyle
     def defaultPivotStyle=(v) Axlsx::validate_string(v); @defaultPivotStyle = v; end
 
-
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       attr = self.instance_values.reject {|k, v| ![:defaultTableStyle, :defaultPivotStyle].include?(k.to_sym) }
       attr[:count] = self.size
@@ -36,16 +38,6 @@ module Axlsx
       str << '</tableStyles>'
     end
 
-    # Serializes the table styles element
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    # @return [String]
-    def to_xml(xml)
-      attr = self.instance_values.reject {|k, v| ![:defaultTableStyle, :defaultPivotStyle].include?(k.to_sym) }
-      attr[:count] = self.size
-      xml.tableStyles(attr) {
-        self.each { |table_style| table_style.to_xml(xml) }
-      }
-    end
   end
 
 end

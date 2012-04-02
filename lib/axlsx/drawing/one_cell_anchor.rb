@@ -62,6 +62,9 @@ module Axlsx
     end
 
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << '<xdr:oneCellAnchor>'
       str << '<xdr:from>'

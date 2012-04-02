@@ -57,19 +57,14 @@ module Axlsx
     # @see style
     def style=(v) RestrictionValidator.validate "BorderPr.style", [:none, :thin, :medium, :dashed, :dotted, :thick, :double, :hair, :mediumDashed, :dashDot, :mediumDashDot, :dashDotDot, :mediumDashDotDot, :slantDashDot], v; @style = v end
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << '<' << @name.to_s << ' style="' << @style.to_s << '">'
       @color.to_xml_string(str) if @color.is_a?(Color)
       str << '</' << @name.to_s << '>'
     end
 
-    # Serializes the border part
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    # @return [String]
-    def to_xml(xml)
-      xml.send(@name, :style => @style) {
-        @color.to_xml(xml) if @color.is_a? Color
-      }
-    end
   end
 end

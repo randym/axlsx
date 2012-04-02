@@ -25,14 +25,13 @@ module Axlsx
     # @see position
     def position=(v) DataTypeValidator.validate "GradientStop.position", Float, v, lambda { |arg| arg >= 0 && arg <= 1}; @position = v end
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << '<stop position="' << position.to_s << '">'
       self.color.to_xml_string(str)
       str << '</stop>'
     end
-    # Serializes the gradientStop
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    # @return [String]
-    def to_xml(xml) xml.stop(:position => self.position) {self.color.to_xml(xml)} end
   end
 end

@@ -126,6 +126,9 @@ module Axlsx
     # @see applyProtection
     def applyProtection=(v) Axlsx::validate_boolean v; @applyProtection = v end
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << '<xf '
       h = instance_values.reject { |k, v| [:alignment, :protection, :extList, :name].include? k.to_sym}
@@ -136,14 +139,5 @@ module Axlsx
       str << '</xf>'
     end
 
-    # Serializes the xf elemen
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    # @return [String]
-    def to_xml(xml)
-      xml.xf(self.instance_values.reject { |k, v| [:alignment, :protection, :extList, :name].include? k.to_sym}) {
-        alignment.to_xml(xml) if self.alignment
-        protection.to_xml(xml) if self.protection
-      }
-    end
   end
 end

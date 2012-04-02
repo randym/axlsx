@@ -70,6 +70,9 @@ module Axlsx
     def perspective=(v) DataTypeValidator.validate "#{self.class}.perspective", [Integer, Fixnum], v, lambda {|arg| arg >= 0 && arg <= 240 }; @perspective = v; end
 
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << '<c:view3D>'
       str << '<c:rotX val="' << @rotX.to_s << '"/>' unless @rotX.nil?
