@@ -13,30 +13,6 @@ class TestCell < Test::Unit::TestCase
     @cAA = @ws["AA2"]
   end
 
-  def setup_wide
-    # The wide row makes the test take a long time.  Add it only
-    # in test_large as adding it in setup make all the tests take
-    # longer.
-    # 
-    # For even more, but slower, testing use the 20000 cell row and
-    # uncomment the ABCD3 element below.
-    data = (0..1000).map { |index| index }
-    #data = (0..20000).map { |index| index }
-    @ws.add_row data
-
-    @wide_test_points = { "A3" =>      0,
-      "Z3"    =>                      25,
-      "B3"    =>                       1,
-      "AA3"   =>             1 * 26 +  0,
-      "AAA3"  => 1 * 26**2 + 1 * 26 +  0,
-      "AAZ3"  => 1 * 26**2 + 1 * 26 + 25,
-      "ABA3"  => 1 * 26**2 + 2 * 26 +  0,
-
-      # For additional testing, uncomment this line and uncomment the 20000 cell row above
-      #"ABCD3" => 1 * 26**3 + 2 * 26**2 + 3 * 26 + 3
-    }
-  end
-
   def test_initialize
     assert_equal(@row.cells.last, @c, "the cell was added to the row")
     assert_equal(@c.type, :float, "type option is applied")
@@ -65,20 +41,8 @@ class TestCell < Test::Unit::TestCase
     assert_equal(@c.r, "A1", "calculate cell reference")
   end
 
-  def test_wide_index
-    setup_wide
-    @wide_test_points.each_pair do |ref, index|
-      c = @ws[ref]
-      assert_equal(c.index, index, "calculate cell index for cell #{ref}")
-    end
-  end
-
   def test_wide_r
-    setup_wide
-    @wide_test_points.each_pair do |ref, index|
-      c = @ws[ref]
-      assert_equal(c.r, ref, "calculate cell reference for cell at index #{index}")
-    end
+      assert_equal(@cAA.r, "AA2", "calculate cell reference")
   end
 
   def test_r_abs
