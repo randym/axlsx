@@ -386,6 +386,7 @@ module Axlsx
     #   About Time - Time in OOXML is *different* from what you might expect. The history as to why is interesting,  but you can safely assume that if you are generating docs on a mac, you will want to specify Workbook.1904 as true when using time typed values.
     # @see Axlsx#date1904
     def cast_value(v)
+      return nil if v.nil?
       if @type == :date
         self.style = STYLE_DATE if self.style == 0
         v
@@ -399,7 +400,6 @@ module Axlsx
       elsif @type == :boolean
         v ? 1 : 0
       else
-        return nil if v.nil?
         @type = :string
         ::CGI.escapeHTML(v.to_s)
       end
