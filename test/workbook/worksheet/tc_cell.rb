@@ -94,7 +94,9 @@ class TestCell < Test::Unit::TestCase
     @c.type = :float
     assert_equal(@c.send(:cast_value, "1.0"), 1.0)
     @c.type = :string
-    assert_equal(@c.send(:cast_value, nil), "")
+    assert_equal(@c.send(:cast_value, nil), nil)
+    @c.type = :float
+    assert_equal(@c.send(:cast_value, nil), nil)
     @c.type = :boolean
     assert_equal(@c.send(:cast_value, true), 1)
     assert_equal(@c.send(:cast_value, false), 0)
