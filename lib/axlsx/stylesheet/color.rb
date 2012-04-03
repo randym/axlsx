@@ -72,5 +72,9 @@ module Axlsx
       str << "/>"
     end
 
+    def signature
+      "#{@rgb}:#{auto}:#{@tint}"
+    end
+
   end
 end

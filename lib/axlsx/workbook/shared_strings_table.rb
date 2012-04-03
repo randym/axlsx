@@ -30,8 +30,9 @@ module Axlsx
     # @param [Array] cells This is an array of all of the cells in the workbook
     def initialize(cells)
       cells = cells.flatten.reject { |c| c.type != :string || c.value.nil? || c.value.start_with?('=') }
+      @index = 0
       @count = cells.size
-      @unique_cells = []
+      @unique_cells = {}
       @shared_xml_string = ""
       resolve(cells)
     end
@@ -53,15 +54,13 @@ module Axlsx
     def resolve(cells)
       cells.each do |cell|
         cell_hash = cell.shareable_hash
-        index = @unique_cells.index do |item|
-          item == cell_hash
-        end
-        if index == nil
-          cell.send :ssti=, @unique_cells.size
-          @shared_xml_string << '<si>' << cell.run_xml_string << '</si>'
-          @unique_cells << cell_hash
-        else
+        if index = @unique_cells[cell_hash]
           cell.send :ssti=, index
+        else
+          cell.send :ssti=, @index
+          @shared_xml_string << '<si>' << cell.run_xml_string << '</si>'
+          @unique_cells[cell_hash] = @index
+          @index += 1
         end
       end
     end
