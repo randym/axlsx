@@ -10,7 +10,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 
 **Author**:       Randy Morgan
 
-**Copyright**:    2011
+**Copyright**:    2011 - 2012
 
 **License**:      MIT License
 
@@ -20,7 +20,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 
 **JRuby Version**: 1.6.7
 
-**Release Date**: April 2st 2012
+**Release Date**: April 3st 2012
 
 Synopsis
 --------
@@ -374,7 +374,7 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
-- ** April.2.12**: 1.1.0 release
+- ** April.3.12**: 1.1.0 release
    - bugfix patch name_to_indecies to properly handle extended ranges.
    - bugfix properly serialize chart title.
    - lower rake minimum requirement for 1.8.7 apps that don't want to move on to 0.9 NOTE this will be reverted for 2.0.0 with workbook parsing!

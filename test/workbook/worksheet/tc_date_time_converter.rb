@@ -113,7 +113,6 @@ class TestDateTimeConverter < Test::Unit::TestCase
   def test_timezone
     utc = Time.utc 2012 # January 1st, 2012 at 0:00 UTC
     local = begin
-     ENV["TZ"]="GMT+1"
       Time.new 2012, 1, 1, 1, 0, 0, 3600 # January 1st, 2012 at 1:00 GMT+1
     rescue ArgumentError
       Time.parse "2012-01-01 01:00:00 +0100"
