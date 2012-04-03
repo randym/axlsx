@@ -29,7 +29,7 @@ module Axlsx
     # Creates a new Shared Strings Table agains an array of cells
     # @param [Array] cells This is an array of all of the cells in the workbook
     def initialize(cells)
-      cells = cells.flatten.reject { |c| c.type != :string || c.value.start_with?('=') }
+      cells = cells.flatten.reject { |c| c.type != :string || c.value.nil? || c.value.start_with?('=') }
       @count = cells.size
       @unique_cells = []
       @shared_xml_string = ""

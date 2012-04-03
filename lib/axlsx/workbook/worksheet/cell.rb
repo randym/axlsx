@@ -307,12 +307,13 @@ module Axlsx
     # @param [String] str The string index the cell content will be appended to. Defaults to empty string.
     # @return [String] xml text for the cell
     def to_xml_string(r_index, c_index, str = '')
+      return str if @value.nil?
       str << '<c r="' << Axlsx::cell_r(c_index, r_index) << '" s="' << @style.to_s << '" '
       case @type
       when :string
         #parse formula
         if @value.start_with?('=')
-          str  << 't="str"><f>' << value.to_s.gsub('=', '') << '</f>'
+          str  << 't="str"><f>' << @value.to_s.gsub('=', '') << '</f>'
         else
           #parse shared
           if @ssti
@@ -382,6 +383,7 @@ module Axlsx
     #   About Time - Time in OOXML is *different* from what you might expect. The history as to why is interesting,  but you can safely assume that if you are generating docs on a mac, you will want to specify Workbook.1904 as true when using time typed values.
     # @see Axlsx#date1904
     def cast_value(v)
+      return nil if v.nil?
       if @type == :date
         self.style = STYLE_DATE if self.style == 0
         v

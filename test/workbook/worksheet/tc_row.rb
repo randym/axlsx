@@ -27,6 +27,19 @@ class TestRow < Test::Unit::TestCase
     r.cells.each { |c| assert_equal(c.style,1) }
   end
 
+  def test_nil_cells
+    row = @ws.add_row([nil,1,2,nil,4,5,nil])
+    r_s_xml = Nokogiri::XML(row.to_xml_string(0, ''))
+    assert_equal(r_s_xml.xpath(".//row/c").size, 4)
+  end
+  
+  def test_nil_cell_r
+    row = @ws.add_row([nil,1,2,nil,4,5,nil])
+    r_s_xml = Nokogiri::XML(row.to_xml_string(0, ''))
+    assert_equal(r_s_xml.xpath(".//row/c").first['r'], 'B1')
+    assert_equal(r_s_xml.xpath(".//row/c").last['r'], 'F1')
+  end
+
   def test_index
     assert_equal(@row.index, @row.worksheet.rows.index(@row))
   end
