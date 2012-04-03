@@ -17,7 +17,7 @@ module Axlsx
     attr_reader :Manager
 
     # @return [String] The name of the company generating the document.
-    attr_reader :Company 
+    attr_reader :Company
 
     # @return [Integer] The number of pages in the document.
     attr_reader :Pages
@@ -43,7 +43,7 @@ module Axlsx
     # @return [Integer] The number of slides that have notes.
     attr_reader :Notes
 
-    # @return [Integer] The total amount of time spent editing.   
+    # @return [Integer] The total amount of time spent editing.
     attr_reader :TotalTime
 
     # @return [Integer] The number of hidden slides.
@@ -60,11 +60,11 @@ module Axlsx
 
     # @return [Integer] The number of characters in the document including spaces.
     attr_reader :CharactersWithSpaces
-    
+
     # @return [Boolean] Indicates if the document is shared.
     attr_reader :ShareDoc
 
-    # @return [String] The base for hyper links in the document. 
+    # @return [String] The base for hyper links in the document.
     attr_reader :HyperLinkBase
 
     # @return [Boolean] Indicates that the hyper links in the document have been changed.
@@ -96,7 +96,7 @@ module Axlsx
     # @option options [Boolean] ScaleCrop
     # @option options [Boolean] LinksUpToDate
     # @option options [Integer] CharactersWithSpaces
-    # @option options [Boolean] ShareDoc    
+    # @option options [Boolean] ShareDoc
     # @option options [String] HyperLinkBase
     # @option options [String] HyperlinksChanged
     # @option options [String] Application
@@ -109,70 +109,67 @@ module Axlsx
     end
 
     # Sets the Template property of your app.xml file
-    def Template=(v) Axlsx::validate_string v; @Template = v; end 
+    def Template=(v) Axlsx::validate_string v; @Template = v; end
 
     # Sets the Manager property of your app.xml file
-    def Manager=(v) Axlsx::validate_string v; @Manager = v; end 
+    def Manager=(v) Axlsx::validate_string v; @Manager = v; end
 
     # Sets the Company property of your app.xml file
-    def Company=(v) Axlsx::validate_string v; @Company = v; end 
+    def Company=(v) Axlsx::validate_string v; @Company = v; end
 
     # Sets the Pages property of your app.xml file
-    def Pages=(v) Axlsx::validate_int v; @Pages = v; end 
+    def Pages=(v) Axlsx::validate_int v; @Pages = v; end
 
     # Sets the Words property of your app.xml file
-    def Words=(v) Axlsx::validate_int v; @Words = v; end 
+    def Words=(v) Axlsx::validate_int v; @Words = v; end
 
     # Sets the Characters property of your app.xml file
-    def Characters=(v) Axlsx::validate_int v; @Characters = v; end 
+    def Characters=(v) Axlsx::validate_int v; @Characters = v; end
 
 
     # Sets the PresentationFormat property of your app.xml file
-    def PresentationFormat=(v) Axlsx::validate_string v; @PresentationFormat = v; end 
+    def PresentationFormat=(v) Axlsx::validate_string v; @PresentationFormat = v; end
     # Sets the Lines property of your app.xml file
-    def Lines=(v) Axlsx::validate_int v; @Lines = v; end 
+    def Lines=(v) Axlsx::validate_int v; @Lines = v; end
     # Sets the Paragraphs property of your app.xml file
-    def Paragraphs=(v) Axlsx::validate_int v; @Paragraphs = v; end 
+    def Paragraphs=(v) Axlsx::validate_int v; @Paragraphs = v; end
     # Sets the Slides property of your app.xml file
-    def Slides=(v) Axlsx::validate_int v; @Slides = v; end 
+    def Slides=(v) Axlsx::validate_int v; @Slides = v; end
     # Sets the Notes property of your app.xml file
-    def Notes=(v) Axlsx::validate_int v; @Notes = v; end 
+    def Notes=(v) Axlsx::validate_int v; @Notes = v; end
     # Sets the TotalTime property of your app.xml file
-    def TotalTime=(v) Axlsx::validate_int v; @TotalTime = v; end 
+    def TotalTime=(v) Axlsx::validate_int v; @TotalTime = v; end
     # Sets the HiddenSlides property of your app.xml file
-    def HiddenSlides=(v) Axlsx::validate_int v; @HiddenSlides = v; end 
+    def HiddenSlides=(v) Axlsx::validate_int v; @HiddenSlides = v; end
     # Sets the MMClips property of your app.xml file
-    def MMClips=(v) Axlsx::validate_int v; @MMClips = v; end 
+    def MMClips=(v) Axlsx::validate_int v; @MMClips = v; end
     # Sets the ScaleCrop property of your app.xml file
-    def ScaleCrop=(v) Axlsx::validate_boolean v; @ScaleCrop = v; end 
+    def ScaleCrop=(v) Axlsx::validate_boolean v; @ScaleCrop = v; end
     # Sets the LinksUpToDate property of your app.xml file
-    def LinksUpToDate=(v) Axlsx::validate_boolean v; @LinksUpToDate = v; end 
+    def LinksUpToDate=(v) Axlsx::validate_boolean v; @LinksUpToDate = v; end
     # Sets the CharactersWithSpaces property of your app.xml file
-    def CharactersWithSpaces=(v) Axlsx::validate_int v; @CharactersWithSpaces = v; end 
+    def CharactersWithSpaces=(v) Axlsx::validate_int v; @CharactersWithSpaces = v; end
     # Sets the ShareDoc property of your app.xml file
-    def ShareDoc=(v) Axlsx::validate_boolean v; @ShareDoc = v; end 
+    def ShareDoc=(v) Axlsx::validate_boolean v; @ShareDoc = v; end
     # Sets the HyperLinkBase property of your app.xml file
-    def HyperLinkBase=(v) Axlsx::validate_string v; @HyperLinkBase = v; end 
+    def HyperLinkBase=(v) Axlsx::validate_string v; @HyperLinkBase = v; end
     # Sets the HyperLinksChanged property of your app.xml file
-    def HyperlinksChanged=(v) Axlsx::validate_boolean v; @HyperlinksChanged = v; end 
+    def HyperlinksChanged=(v) Axlsx::validate_boolean v; @HyperlinksChanged = v; end
     # Sets the Application property of your app.xml file
-    def Application=(v) Axlsx::validate_string v; @Application = v; end 
+    def Application=(v) Axlsx::validate_string v; @Application = v; end
     # Sets the AppVersion property of your app.xml file
-    def AppVersion=(v) Axlsx::validate_string v; @AppVersion = v; end 
+    def AppVersion=(v) Axlsx::validate_string v; @AppVersion = v; end
     # Sets the DocSecurity property of your app.xml file
-    def DocSecurity=(v) Axlsx::validate_int v; @DocSecurity = v; end 
+    def DocSecurity=(v) Axlsx::validate_int v; @DocSecurity = v; end
 
-    # Generate an app.xml document
-    # @return [String] The document as a string
-    def to_xml()
-      builder = Nokogiri::XML::Builder.new(:encoding => ENCODING) do |xml|
-        xml.send(:Properties, :xmlns => APP_NS, :'xmlns:vt' => APP_NS_VT) {
-          self.instance_values.each do |name, value|
-            xml.send(name, value)
-          end
-        }
-      end      
-      builder.to_xml(:save_with => 0)
+    # Serialize the app.xml document
+    # @return [String]
+    def to_xml_string(str = '')
+      str << '<?xml version="1.0" encoding="UTF-8"?>'
+      str << '<Properties xmlns="' << APP_NS << '" xmlns:vt="' << APP_NS_VT << '">'
+      str << instance_values.map { |key, value| '<' << key.to_s << '>' << value.to_s << '</' << key.to_s << '>' }.join
+      str << '</Properties>'
     end
+
   end
 end

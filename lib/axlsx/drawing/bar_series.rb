@@ -6,8 +6,8 @@ module Axlsx
   # @see Chart#add_series
   class BarSeries < Series
 
-  
-    # The data for this series. 
+
+    # The data for this series.
     # @return [Array, SimpleTypedList]
     attr_reader :data
 
@@ -31,28 +31,27 @@ module Axlsx
       super(chart, options)
       self.labels = CatAxisData.new(options[:labels]) unless options[:labels].nil?
       self.data = ValAxisData.new(options[:data]) unless options[:data].nil?
-    end 
+    end
 
     # The shabe of the bars or columns
     # must be one of  [:percentStacked, :clustered, :standard, :stacked]
-    def shape=(v) 
+    def shape=(v)
       RestrictionValidator.validate "BarSeries.shape", [:cone, :coneToMax, :box, :cylinder, :pyramid, :pyramidToMax], v
       @shape = v
     end
 
-    # Serializes the series
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
+    # Serializes the object
+    # @param [String] str
     # @return [String]
-    def to_xml(xml)
-      super(xml) do |xml_inner|
-        @labels.to_xml(xml_inner) unless @labels.nil?
-        @data.to_xml(xml_inner) unless @data.nil?
-        xml_inner.shape :val=>@shape
-      end      
+    def to_xml_string(str = '')
+      super(str) do |str_inner|
+        @labels.to_xml_string(str_inner) unless @labels.nil?
+        @data.to_xml_string(str_inner) unless @data.nil?
+        str_inner << '<shape val="' << @shape.to_s << '"/>'
+      end
     end
 
-    
-    private 
+    private
 
     # assigns the data for this series
     def data=(v) DataTypeValidator.validate "Series.data", [SimpleTypedList], v; @data = v; end

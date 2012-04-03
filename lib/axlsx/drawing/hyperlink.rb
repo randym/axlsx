@@ -31,12 +31,12 @@ module Axlsx
     # indicates that the link has already been clicked.
     # @return [Boolean]
     attr_reader :highlightClick
-    
+
     # @see highlightClick
     # @param [Boolean] v The value to assign
     def highlightClick=(v) Axlsx::validate_boolean(v); @highlightClick = v end
 
-    # From the specs: Specifies whether to add this URI to the history when navigating to it. This allows for the viewing of this presentation without the storing of history information on the viewing machine. If this attribute is omitted, then a value of 1 or true is assumed. 
+    # From the specs: Specifies whether to add this URI to the history when navigating to it. This allows for the viewing of this presentation without the storing of history information on the viewing machine. If this attribute is omitted, then a value of 1 or true is assumed.
     # @return [Boolean]
     attr_reader :history
 
@@ -52,12 +52,12 @@ module Axlsx
     # @return [String]
     attr_accessor :tooltip
 
-    #Creates a hyperlink object 
+    #Creates a hyperlink object
     # parent must be a Pic for now, although I expect that other object support this tag and its cNvPr parent
     # @param [Pic] parent
     # @option options [String] tooltip message shown when hyperlinked object is hovered over with mouse.
     # @option options [String] tgtFrame Target frame for opening hyperlink
-    # @option options [String] invalidUrl supposedly use to store the href when we know it is an invalid resource. 
+    # @option options [String] invalidUrl supposedly use to store the href when we know it is an invalid resource.
     # @option options [String] href the target resource this hyperlink links to.
     # @option options [String] action A string that can be used to perform specific actions. For excel please see this reference: http://msdn.microsoft.com/en-us/library/ff532419%28v=office.12%29.aspx
     # @option options [Boolean] endSnd terminate any sound events when processing this link
@@ -70,22 +70,23 @@ module Axlsx
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
       yield self if block_given?
-     
+
     end
 
-
-    # Serializes the hyperlink
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
+    # Serializes the object
+    # @param [String] str
     # @return [String]
-    def to_xml(xml) 
+    def to_xml_string(str = '')
       h =  self.instance_values.merge({:'r:id' => "rId#{id}", :'xmlns:r' => XML_NS_R })
       h.delete('href')
       h.delete('parent')
-      xml[:a].hlinkClick h
+      str << '<a:hlinkClick '
+      str << h.map { |key, value| '' << key.to_s << '="' << value.to_s << '"' }.join(' ')
+      str << '/>'
     end
 
     private
-    # The relational ID for this hyperlink    
+    # The relational ID for this hyperlink
     # @return [Integer]
     def id
       @parent.anchor.drawing.charts.size + @parent.anchor.drawing.images.size + @parent.anchor.drawing.hyperlinks.index(self) + 1

@@ -1,9 +1,9 @@
 # encoding: UTF-8
 module Axlsx
-  # The picture locking class defines the locking properties for pictures in your workbook. 
+  # The picture locking class defines the locking properties for pictures in your workbook.
   class PictureLocking
-    
-    
+
+
     attr_reader :noGrp
     attr_reader :noSelect
     attr_reader :noRot
@@ -31,43 +31,46 @@ module Axlsx
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
-    end        
+    end
 
     # @see noGrp
-    def noGrp=(v) Axlsx::validate_boolean v; @noGrp = v end    
+    def noGrp=(v) Axlsx::validate_boolean v; @noGrp = v end
 
     # @see noSelect
-    def noSelect=(v) Axlsx::validate_boolean v; @noSelect = v end    
+    def noSelect=(v) Axlsx::validate_boolean v; @noSelect = v end
 
     # @see noRot
-    def noRot=(v) Axlsx::validate_boolean v; @noRot = v end    
+    def noRot=(v) Axlsx::validate_boolean v; @noRot = v end
 
     # @see noChangeAspect
-    def noChangeAspect=(v) Axlsx::validate_boolean v; @noChangeAspect = v end    
+    def noChangeAspect=(v) Axlsx::validate_boolean v; @noChangeAspect = v end
 
     # @see noMove
-    def noMove=(v) Axlsx::validate_boolean v; @noMove = v end    
+    def noMove=(v) Axlsx::validate_boolean v; @noMove = v end
 
     # @see noResize
-    def noResize=(v) Axlsx::validate_boolean v; @noResize = v end    
+    def noResize=(v) Axlsx::validate_boolean v; @noResize = v end
 
     # @see noEditPoints
-    def noEditPoints=(v) Axlsx::validate_boolean v; @noEditPoints = v end    
+    def noEditPoints=(v) Axlsx::validate_boolean v; @noEditPoints = v end
 
     # @see noAdjustHandles
-    def noAdjustHandles=(v) Axlsx::validate_boolean v; @noAdjustHandles = v end    
+    def noAdjustHandles=(v) Axlsx::validate_boolean v; @noAdjustHandles = v end
 
     # @see noChangeArrowheads
-    def noChangeArrowheads=(v) Axlsx::validate_boolean v; @noChangeArrowheads = v end    
+    def noChangeArrowheads=(v) Axlsx::validate_boolean v; @noChangeArrowheads = v end
 
     # @see noChangeShapeType
-    def noChangeShapeType=(v) Axlsx::validate_boolean v; @noChangeShapeType = v end    
+    def noChangeShapeType=(v) Axlsx::validate_boolean v; @noChangeShapeType = v end
 
-    # Serializes the picture locking
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
+    # Serializes the object
+    # @param [String] str
     # @return [String]
-    def to_xml(xml)
-      xml[:a].picLocks(self.instance_values)      
+    def to_xml_string(str = '')
+      str << '<a:picLocks '
+      str << instance_values.map { |key, value| '' << key.to_s << '="' << value.to_s << '"' }.join(' ')
+      str << '/>'
     end
+
   end
 end

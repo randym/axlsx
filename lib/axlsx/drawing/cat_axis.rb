@@ -10,7 +10,7 @@ module Axlsx
     # specifies how the perpendicular axis is crossed
     # must be one of [:ctr, :l, :r]
     # @return [Symbol]
-    attr_reader :lblAlgn 
+    attr_reader :lblAlgn
 
     # The offset of the labels
     # must be between a string between 0 and 1000
@@ -20,7 +20,7 @@ module Axlsx
     # regex for validating label offset
     LBL_OFFSET_REGEX = /0*(([0-9])|([1-9][0-9])|([1-9][0-9][0-9])|1000)%/
 
-    # Creates a new CatAxis object    
+    # Creates a new CatAxis object
     # @param [Integer] axId the id of this axis. Inherited
     # @param [Integer] crossAx the id of the perpendicular axis. Inherited
     # @option options [Symbol] axPos. Inherited
@@ -28,13 +28,13 @@ module Axlsx
     # @option options [Symbol] crosses. Inherited
     # @option options [Boolean] auto
     # @option options [Symbol] lblAlgn
-    # @option options [Integer] lblOffset    
+    # @option options [Integer] lblOffset
     def initialize(axId, crossAx, options={})
       self.auto = 1
       self.lblAlgn = :ctr
       self.lblOffset = "100%"
       super(axId, crossAx, options)
-    end 
+    end
 
     # From the docs: This element specifies that this axis is a date or text axis based on the data that is used for the axis labels, not a specific choice.
     def auto=(v) Axlsx::validate_boolean(v); @auto = v; end
@@ -47,18 +47,19 @@ module Axlsx
     # must be between a string between 0 and 1000
     def lblOffset=(v) RegexValidator.validate "#{self.class}.lblOffset", LBL_OFFSET_REGEX, v; @lblOffset = v; end
 
-    # Serializes the category axis
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
+    # Serializes the object
+    # @param [String] str
     # @return [String]
-    def to_xml(xml)
-      xml.catAx {
-        super(xml)
-        xml.auto :val=>@auto
-        xml.lblAlgn :val=>@lblAlgn
-        xml.lblOffset :val=>@lblOffset
-      }
+    def to_xml_string(str = '')
+      str << '<c:catAx>'
+      super(str)
+      str << '<c:auto val="' << @auto.to_s << '"/>'
+      str << '<c:lblAlgn val="' << @lblAlgn.to_s << '"/>'
+      str << '<c:lblOffset val="' << @lblOffset.to_s << '"/>'
+      str << '</c:catAx>'
     end
+
   end
-  
+
 
 end

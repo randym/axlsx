@@ -64,7 +64,7 @@ class TestPic < Test::Unit::TestCase
 
   def test_to_xml
     schema = Nokogiri::XML::Schema(File.open(Axlsx::DRAWING_XSD))
-    doc = Nokogiri::XML(@image.anchor.drawing.to_xml)
+    doc = Nokogiri::XML(@image.anchor.drawing.to_xml_string)
     errors = []
     schema.validate(doc).each do |error|
       errors.push error

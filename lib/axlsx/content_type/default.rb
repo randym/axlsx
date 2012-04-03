@@ -8,7 +8,7 @@ module Axlsx
     attr_reader :Extension
 
     # The type of content.
-    # @return [String] 
+    # @return [String]
     attr_reader :ContentType
 
     #Creates a new Default object
@@ -19,7 +19,7 @@ module Axlsx
       raise ArgumentError, "Extension and ContentType are required" unless options[:Extension] && options[:ContentType]
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end      
+      end
     end
     # Sets the file extension for this content type.
     def Extension=(v) Axlsx::validate_string v; @Extension = v end
@@ -28,11 +28,14 @@ module Axlsx
     # @see Axlsx#validate_content_type
     def ContentType=(v) Axlsx::validate_content_type v; @ContentType = v end
 
-    # Serializes the object to xml
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
+    # Serializes the object
+    # @param [String] str
     # @return [String]
-    def to_xml(xml)
-      xml.Default(self.instance_values)
+    def to_xml_string(str = '')
+      str << '<Default '
+      str << instance_values.map { |key, value| '' << key.to_s << '="' << value.to_s << '"' }.join(' ')
+      str << '/>'
     end
+
   end
 end

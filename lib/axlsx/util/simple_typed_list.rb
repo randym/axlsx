@@ -1,6 +1,6 @@
 # encoding: UTF-8
 module Axlsx
-  # A SimpleTypedList is a type restrictive collection that allows some of the methods from Array and supports basic xml serialization.  
+  # A SimpleTypedList is a type restrictive collection that allows some of the methods from Array and supports basic xml serialization.
   # @private
   class SimpleTypedList
     # The class constants of allowed types
@@ -12,14 +12,14 @@ module Axlsx
     attr_reader :locked_at
 
     # The tag name to use when serializing this object
-    # by default the parent node for all items in the list is the classname of the first allowed type with the first letter in lowercase. 
+    # by default the parent node for all items in the list is the classname of the first allowed type with the first letter in lowercase.
     # @return [String]
     attr_reader :serialize_as
 
     # Creats a new typed list
     # @param [Array, Class] type An array of Class objects or a single Class object
     # @param [String] serialize The tag name to use in serialization
-    # @raise [ArgumentError] if all members of type are not Class objects    
+    # @raise [ArgumentError] if all members of type are not Class objects
     def initialize type, serialize_as=nil
       if type.is_a? Array
         type.each { |item| raise ArgumentError, "All members of type must be Class objects" unless item.is_a? Class }
@@ -39,7 +39,7 @@ module Axlsx
       @locked_at = @list.size
       self
     end
-    
+
     def to_ary
       @list
     end
@@ -58,7 +58,7 @@ module Axlsx
     def <<(v)
       DataTypeValidator.validate "SimpleTypedList.<<", @allowed_types, v
       @list << v
-      @list.size - 1      
+      @list.size - 1
     end
 
     # alternate of << method
@@ -104,14 +104,14 @@ module Axlsx
       return false unless @locked_at.is_a? Fixnum
       index < @locked_at
     end
-    
+
     # override the equality method so that this object can be compared to a simple array.
     # if this object's list is equal to the specifiec array, we return true.
     def ==(v)
       v == @list
     end
     # method_mission override to pass allowed methods to the list.
-    # @note 
+    # @note
     #  the following methods are not allowed
     #   :replace
     #   :insert
@@ -140,15 +140,23 @@ module Axlsx
     DELEGATES = Array.instance_methods - self.instance_methods - DESTRUCTIVE
 
     DELEGATES.each do |method|
-      class_eval %{ 
+      class_eval %{
         def #{method}(*args, &block)
           @list.send(:#{method}, *args, &block)
         end
       }
     end
 
+    def to_xml_string(str = '')
+      classname = @allowed_types[0].name.split('::').last
+      el_name = serialize_as || (classname[0,1].downcase + classname[1..-1])
+      str << '<' << el_name << ' count="' << @list.size.to_s << '">'
+      @list.each { |item| item.to_xml_string(str) }
+      str << '</' << el_name << '>'
+    end
+
     # Serializes the list
-    # If the serialize_as property is set, it is used as the parent node name. 
+    # If the serialize_as property is set, it is used as the parent node name.
     # If the serialize_as property is nil, the first item in the list of allowed_types will be used, having the first letter of the class changed to lower case.
     # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
     # @return [String]
@@ -159,6 +167,7 @@ module Axlsx
         @list.each { |item| item.to_xml(xml) }
       }
     end
+
   end
 
 

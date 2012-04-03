@@ -47,14 +47,17 @@ module Axlsx
     # @see TargetMode
     def TargetMode=(v) RestrictionValidator.validate 'Relationship.TargetMode', [:External, :Internal], v; @TargetMode = v; end
 
-    # Serializes the relationship
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    # @param [String] rId the reference id of the object.
+    # serialize relationship
+    # @param [String] str
+    # @param [Integer] rId the id for this relationship
     # @return [String]
-    def to_xml(xml, rId)
+    def to_xml_string(rId, str = '')
       h = self.instance_values
-      h[:Id] = rId
-      xml.Relationship(h)
+      h[:Id] = 'rId' << rId.to_s
+      str << '<Relationship '
+      str << h.map { |key, value| '' << key.to_s << '="' << value.to_s << '"'}.join(' ')
+      str << '/>'
     end
+
   end
 end

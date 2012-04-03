@@ -53,6 +53,11 @@ module Axlsx
     # @return Boolean
     attr_reader :fit_to_page
 
+
+    # Column info for the sheet
+    # @return [SimpleTypedList]
+    attr_reader :column_info
+
     # Page margins for printing the worksheet.
     # @example
     #      wb = Axlsx::Package.new.workbook
@@ -96,7 +101,8 @@ module Axlsx
       @page_margins = PageMargins.new options[:page_margins] if options[:page_margins]
 
       @rows = SimpleTypedList.new Row
-      @cols = SimpleTypedList.new Cell
+      @column_info = SimpleTypedList.new Col
+      # @cols = SimpleTypedList.new Cell
       @tables = SimpleTypedList.new Table
 
       if self.workbook.use_autowidth
@@ -160,7 +166,7 @@ module Axlsx
     end
 
 
-    # Indicates if gridlines should be shown in the sheet.
+    # Indicates if the worksheet should print in a single page.
     # This is true by default.
     # @return [Boolean]
     def fit_to_page=(v)
@@ -187,6 +193,12 @@ module Axlsx
       sheet_names = @workbook.worksheets.map { |s| s.name }
       raise ArgumentError, (ERR_DUPLICATE_SHEET_NAME % v) if sheet_names.include?(v)
       @name=v
+    end
+
+    # The absolute auto filter range
+    # @see auto_filter
+    def abs_auto_filter
+      Axlsx.cell_range(@auto_filter.split(':').collect { |name| name_to_cell(name)}) if @auto_filter
     end
 
     # The auto filter range for the worksheet
@@ -270,7 +282,8 @@ module Axlsx
     # @option options [Float] height the row's height (in points)
     def add_row(values=[], options={})
       Row.new(self, values, options)
-      update_auto_fit_data @rows.last.cells, options.delete(:widths) || []
+      update_column_info @rows.last.cells, options.delete(:widths) ||[], options.delete(:style) || []
+      # update_auto_fit_data @rows.last.cells, options.delete(:widths) || []
       yield @rows.last if block_given?
       @rows.last
     end
@@ -329,9 +342,9 @@ module Axlsx
     # @param [Integer|Float|Fixnum|nil] values
     def column_widths(*args)
       args.each_with_index do |value, index|
-        raise ArgumentError, "Invalid column specification" unless index < @auto_fit_data.size
+        raise ArgumentError, "Invalid column specification" unless index < @column_info.size
         Axlsx::validate_unsigned_numeric(value) unless value == nil
-        @auto_fit_data[index][:fixed] = value
+        @column_info[index].width = value
       end
     end
 
@@ -371,25 +384,25 @@ module Axlsx
       image
     end
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string
-      str = "<worksheet xmlns=\"%s\" xmlns:r=\"%s\">" % [XML_NS, XML_NS_R]
+      str = '<?xml version="1.0" encoding="UTF-8"?>'
+      str.concat "<worksheet xmlns=\"%s\" xmlns:r=\"%s\">" % [XML_NS, XML_NS_R]
       str.concat "<sheetPr><pageSetUpPr fitToPage=\"%s\"></pageSetUpPr></sheetPr>" % fit_to_page if fit_to_page
       str.concat "<dimension ref=\"%s\"></dimension>" % dimension unless rows.size == 0
       str.concat "<sheetViews><sheetView tabSelected='%s' workbookViewId='0' showGridLines='%s'><selection activeCell=\"A1\" sqref=\"A1\"/></sheetView></sheetViews>" % [@selected, show_gridlines]
 
-      if @auto_fit_data.size > 0
-        str.concat "<cols>"
-        @auto_fit_data.each_with_index do |col, index|
-          min_max = index+1
-          str.concat "<col min='%s' max='%s' width='%s' customWidth='1'></col>" % [min_max, min_max, auto_width(col)]
-        end
+      if @column_info.size > 0
+        str << "<cols>"
+        @column_info.each { |col| col.to_xml_string(str) }
         str.concat '</cols>'
       end
-
       str.concat '<sheetData>'
       @rows.each_with_index { |row, index| row.to_xml_string(index, str) }
       str.concat '</sheetData>'
-      str.concat page_margins.to_xml_string if @page_margins
+      page_margins.to_xml_string(str) if @page_margins
       str.concat "<autoFilter ref='%s'></autoFilter>" % @auto_filter if @auto_filter
       str.concat "<mergeCells count='%s'>%s</mergeCells>" % [@merged_cells.size, @merged_cells.reduce('') { |memo, obj| "<mergeCell ref='%s'></mergeCell>" % obj } ] unless @merged_cells.empty?
       str.concat "<drawing r:id='rId1'></drawing>" if @drawing
@@ -397,54 +410,6 @@ module Axlsx
         str.concat "<tableParts count='%s'>%s</tableParts>" % [@tables.size, @tables.reduce('') { |memo, obj| memo += "<tablePart r:id='%s'/>" % obj.rId }]
       end
       str + '</worksheet>'
-    end
-
-    # Serializes the worksheet document
-    # @return [String]
-    def to_xml
-      builder = Nokogiri::XML::Builder.new(:encoding => ENCODING) do |xml|
-        xml.worksheet(:xmlns => XML_NS,
-                      :'xmlns:r' => XML_NS_R) {
-          xml.sheetPr {
-            xml.pageSetUpPr :fitToPage => fit_to_page if fit_to_page
-          }
-          # another patch for the folks at rubyXL as thier parser depends on this optional element.
-          xml.dimension :ref=>dimension unless rows.size == 0
-          # this is required by rubyXL, spec says who cares - but it seems they didnt notice
-          # grouping issue resolved by keeping tabSelected set to 0
-          xml.sheetViews {
-            xml.sheetView(:tabSelected => @selected, :workbookViewId => 0, :showGridLines => show_gridlines) {
-              xml.selection :activeCell=>"A1", :sqref => "A1"
-            }
-          }
-
-          if @auto_fit_data.size > 0
-            xml.cols {
-              @auto_fit_data.each_with_index do |col, index|
-                min_max = index+1
-                xml.col(:min=>min_max, :max=>min_max, :width => auto_width(col), :customWidth=>1)
-              end
-            }
-          end
-          xml.sheetData {
-            @rows.each do |row|
-              row.to_xml(xml)
-            end
-          }
-          xml.autoFilter :ref=>@auto_filter if @auto_filter
-          xml.mergeCells(:count=>@merged_cells.size) { @merged_cells.each { | mc | xml.mergeCell(:ref=>mc) } } unless @merged_cells.empty?
-          page_margins.to_xml(xml) if @page_margins
-          xml.drawing :"r:id"=>"rId1" if @drawing
-          unless @tables.empty?
-            xml.tableParts(:count => @tables.length) {
-              @tables.each do |table|
-                xml.tablePart :'r:id' => table.rId
-              end
-            }
-          end
-        }
-      end
-      builder.to_xml(:save_with => 0)
     end
 
     # The worksheet relationships. This is managed automatically by the worksheet
@@ -486,74 +451,34 @@ module Axlsx
     # assigns the owner workbook for this worksheet
     def workbook=(v) DataTypeValidator.validate "Worksheet.workbook", Workbook, v; @workbook = v; end
 
-    # Updates auto fit data.
-    # We store an auto_fit_data item for each column. when a row is added we multiple the font size by the length of the text to
-    # attempt to identify the longest cell in the column. This is not 100% accurate as it needs to take into account
-    # any formatting that will be applied to the data, as well as the actual rendering size when the length and size is equal
-    # for two cells.
 
-    # @return [Array] of Cell objects
-    # @param [Array] cells an array of cells
-    # @param [Array] widths an array of cell widths @see Worksheet#add_row
-    def update_auto_fit_data(cells, widths=[])
-      # TODO delay this until rendering. too much work when we dont know what they are going to do to the sheet.
+    def update_column_info(cells, widths=[], style=[])
       styles = self.workbook.styles
       cellXfs, fonts = styles.cellXfs, styles.fonts
       sz = 11
-      cells.each_with_index do |item, index|
-        col = @auto_fit_data[index] ||= {:longest=>"", :sz=>sz, :fixed=>nil}
+      cells.each_with_index do |cell, index|
+        @column_info[index] ||= Col.new index+1, index+1
+        col = @column_info[index]
         width = widths[index]
-        # set fixed width and skip if numeric width is given
-        col[:fixed] = width if [Integer, Float, Fixnum].include?(width.class)
-        # ignore default column widths and formula
-        next if width == :ignore || (item.value.is_a?(String) && item.value.start_with?('='))
-        # make sure we can turn that fixed with off!
-        col[:fixed] = nil if width == :auto
-        next unless self.workbook.use_autowidth
-
-        cell_xf = cellXfs[item.style]
-        font = fonts[cell_xf.fontId || 0]
-        sz = item.sz || font.sz || fonts[0].sz
-        if (col[:longest].scan(/./mu).size * col[:sz]) < (item.value.to_s.scan(/./mu).size * sz)
-          col[:sz] =  sz
-          col[:longest] = item.value.to_s
+        col.width = width if [Integer, Float, Fixnum].include?(width.class)
+        c_style = style[index] if [Integer, Fixnum].include?(style[index].class)
+        next if width == :ignore || col.width || (cell.value.is_a?(String) && cell.value.start_with?('='))
+        if self.workbook.use_autowidth
+          cell_xf = cellXfs[(c_style || 0)]
+          font = fonts[(cell_xf.fontId || 0)]
+          sz = cell.sz || font.sz || sz
+          col.width = [(col.width || 0), calculate_width(cell.value.to_s, sz)].max
         end
       end
-      cells
     end
 
-    # Determines the proper width for a column based on content.
-    # @note
-    #   width = Truncate([!{Number of Characters} * !{Maximum Digit Width} + !{5 pixel padding}]/!{Maximum Digit Width}*256)/256
-    # @return [Float]
-    # @param [Hash] A hash of auto_fit_data
-    def auto_width(col)
-      return col[:fixed] unless col[:fixed] == nil
-      return Axlsx::FIXED_COL_WIDTH unless self.workbook.use_autowidth
-      mdw_count, font_scale, mdw = 0, col[:sz]/11.0, 6.0
-      mdw_count = col[:longest].scan(/./mu).reduce(0) do | count, char |
+    def calculate_width(text, sz)
+      mdw_count, font_scale, mdw = 0, sz/11.0, 6.0
+      mdw_count = text.scan(/./mu).reduce(0) do | count, char |
         count +=1 if @magick_draw.get_type_metrics(char).max_advance >= mdw
         count
       end
       ((mdw_count * mdw + 5) / mdw * 256) / 256.0 * font_scale
     end
-
-    # Something to look into:
-    #  width calculation actually needs to be done agains the formatted value for items that apply a
-    # format
-    # def excel_format(cell)
-    #   # The most common case.
-    #   return time.value.to_s if cell.style == 0
-    #
-    #   # The second most common case
-    #   num_fmt = workbook.styles.cellXfs[items.style].numFmtId
-    #   return value.to_s if num_fmt == 0
-    #
-    #   format_code = workbook.styles.numFmts[num_fmt]
-    #   # need to find some exceptionally fast way of parsing value according to
-    #   # an excel format_code
-    #   item.value.to_s
-    # end
-
   end
 end

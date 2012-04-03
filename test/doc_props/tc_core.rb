@@ -4,7 +4,7 @@ class TestCore < Test::Unit::TestCase
 
   def setup
     @core = Axlsx::Core.new
-    @doc = Nokogiri::XML(@core.to_xml)
+    @doc = Nokogiri::XML(@core.to_xml_string)
   end
 
   def test_valid_document
@@ -27,7 +27,7 @@ class TestCore < Test::Unit::TestCase
 
   def test_creator_as_option
     c = Axlsx::Core.new :creator => "some guy"
-    doc = Nokogiri::XML(c.to_xml)
+    doc = Nokogiri::XML(c.to_xml_string)
     assert(doc.xpath('//dc:creator').text == "some guy")
   end
 end

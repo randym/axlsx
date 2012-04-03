@@ -27,6 +27,19 @@ class TestRow < Test::Unit::TestCase
     r.cells.each { |c| assert_equal(c.style,1) }
   end
 
+  def test_nil_cells
+    row = @ws.add_row([nil,1,2,nil,4,5,nil])
+    r_s_xml = Nokogiri::XML(row.to_xml_string(0, ''))
+    assert_equal(r_s_xml.xpath(".//row/c").size, 4)
+  end
+  
+  def test_nil_cell_r
+    row = @ws.add_row([nil,1,2,nil,4,5,nil])
+    r_s_xml = Nokogiri::XML(row.to_xml_string(0, ''))
+    assert_equal(r_s_xml.xpath(".//row/c").first['r'], 'B1')
+    assert_equal(r_s_xml.xpath(".//row/c").last['r'], 'F1')
+  end
+
   def test_index
     assert_equal(@row.index, @row.worksheet.rows.index(@row))
   end
@@ -53,9 +66,7 @@ class TestRow < Test::Unit::TestCase
   end
 
   def test_to_xml_without_custom_height
-    xml = Nokogiri::XML::Builder.new
-    @row.to_xml(xml)
-    doc = Nokogiri::XML.parse(xml.to_xml)
+    doc = Nokogiri::XML.parse(@row.to_xml_string(0))
     assert_equal(0, doc.xpath(".//row[@ht]").size)
     assert_equal(0, doc.xpath(".//row[@customHeight]").size)
   end
@@ -70,14 +81,6 @@ class TestRow < Test::Unit::TestCase
     @row.height = 20
     r_s_xml = Nokogiri::XML(@row.to_xml_string(0, ''))
     assert_equal(r_s_xml.xpath(".//row[@r=1][@ht=20][@customHeight=1]").size, 1)
-  end
-
-  def test_to_xml_with_custom_height
-    @row.height = 20
-    xml = Nokogiri::XML::Builder.new
-    @row.to_xml(xml)
-    doc = Nokogiri::XML.parse(xml.to_xml)
-    assert_equal(1, doc.xpath(".//row[@ht=20][@customHeight=1]").size)
   end
 
 end

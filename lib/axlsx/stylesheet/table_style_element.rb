@@ -1,7 +1,7 @@
 # encoding: UTF-8
 module Axlsx
-  # an element of style that belongs to a table style. 
-  # @note tables and table styles are not supported in this version. This class exists in preparation for that support. 
+  # an element of style that belongs to a table style.
+  # @note tables and table styles are not supported in this version. This class exists in preparation for that support.
   class TableStyleElement
     # The type of style element. The following type are allowed
     #   :wholeTable
@@ -39,7 +39,7 @@ module Axlsx
     # @return [Integer]
     attr_reader :size
 
-    # The dxfId this style element points to 
+    # The dxfId this style element points to
     # @return [Integer]
     attr_reader :dxfId
 
@@ -62,11 +62,14 @@ module Axlsx
     # @see dxfId
     def dxfId=(v) Axlsx::validate_unsigned_int v; @dxfId = v end
 
-    # Serializes the table style element
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
+    # Serializes the object
+    # @param [String] str
     # @return [String]
-    def to_xml(xml)
-      xml.tableStyleElement self.instance_values
+    def to_xml_string(str = '')
+      str << '<tableStyleElement '
+      str << instance_values.map { |key, value| '' << key.to_s << '="' << value.to_s << '"' }.join(' ')
+      str << '/>'
     end
+
   end
 end

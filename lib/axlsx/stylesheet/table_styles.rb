@@ -11,13 +11,13 @@ module Axlsx
     # The default pivot table style. The default value is  'PivotStyleLight6'
     # @return [String]
     attr_reader :defaultPivotStyle
-    
+
     # Creates a new TableStyles object that is a container for TableStyle objects
     # @option options [String] defaultTableStyle
     # @option options [String] defaultPivotStyle
     def initialize(options={})
       @defaultTableStyle = options[:defaultTableStyle] || "TableStyleMedium9"
-      @defaultPivotStyle = options[:defaultPivotStyle] || "PivotStyleLight16"      
+      @defaultPivotStyle = options[:defaultPivotStyle] || "PivotStyleLight16"
       super TableStyle
     end
     # @see defaultTableStyle
@@ -25,16 +25,19 @@ module Axlsx
     # @see defaultPivotStyle
     def defaultPivotStyle=(v) Axlsx::validate_string(v); @defaultPivotStyle = v; end
 
-    # Serializes the table styles element
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
+    # Serializes the object
+    # @param [String] str
     # @return [String]
-    def to_xml(xml)
+    def to_xml_string(str = '')
       attr = self.instance_values.reject {|k, v| ![:defaultTableStyle, :defaultPivotStyle].include?(k.to_sym) }
       attr[:count] = self.size
-      xml.tableStyles(attr) {
-        self.each { |table_style| table_style.to_xml(xml) }
-      }
+      str << '<tableStyles '
+      str << attr.map { |key, value| '' << key.to_s << '="' << value.to_s << '"' }.join(' ')
+      str << '>'
+      each { |table_style| table_style.to_xml_string(str) }
+      str << '</tableStyles>'
     end
+
   end
 
 end

@@ -83,29 +83,31 @@ module Axlsx
     # must be one of [:autoZero, :min, :max]
     def crosses=(v) RestrictionValidator.validate "#{self.class}.crosses", [:autoZero, :min, :max], v; @crosses = v; end
 
-    # Serializes the common axis
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
+
+    # Serializes the object
+    # @param [String] str
     # @return [String]
-    def to_xml(xml)
-      xml.axId :val=>@axId
-      @scaling.to_xml(xml)
-      xml.delete :val=>0
-      xml.axPos :val=>@axPos
-      xml.majorGridlines {
-        if self.gridlines == false
-          xml.spPr {
-            xml[:a].ln {
-              xml[:a].noFill
-            }
-          }
-        end
-      }
-      xml.numFmt :formatCode => @format_code, :sourceLinked=>"1"
-      xml.majorTickMark :val=>"none"
-      xml.minorTickMark :val=>"none"
-      xml.tickLblPos :val=>@tickLblPos
-      xml.crossAx :val=>@crossAx
-      xml.crosses :val=>@crosses
+    def to_xml_string(str = '')
+      str << '<c:axId val="' << @axId.to_s << '"/>'
+      @scaling.to_xml_string str
+      str << '<c:delete val="0"/>'
+      str << '<c:axPos val="' << @axPos.to_s << '"/>'
+      str << '<c:majorGridlines>'
+      if self.gridlines == false
+        str << '<c:spPr>'
+        str << '<a:ln>'
+        str << '<a:noFill/>'
+        str << '</a:ln>'
+        str << '</c:spPr>'
+      end
+      str << '</c:majorGridlines>'
+      str << '<c:numFmt formatCode="' << @format_code << '" sourceLinked="1"/>'
+      str << '<c:majorTickMark val="none"/>'
+      str << '<c:minorTickMark val="none"/>'
+      str << '<c:tickLblPos val="' << @tickLblPos.to_s << '"/>'
+      str << '<c:crossAx val="' << @crossAx.to_s << '"/>'
+      str << '<c:crosses val="' << @crosses.to_s << '"/>'
     end
+
   end
 end

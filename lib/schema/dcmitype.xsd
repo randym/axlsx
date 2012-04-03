@@ -5,6 +5,8 @@
            elementFormDefault="qualified"
            attributeFormDefault="unqualified">
 
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+
   <xs:annotation>
     <xs:documentation xml:lang="en">
       DCMI Type Vocabulary XML Schema
@@ -12,7 +14,7 @@
 
       Created 2003-04-02
 
-      Created by 
+      Created by
 
       Tim Cole (t-cole3@uiuc.edu)
       Tom Habing (thabing@uiuc.edu)
@@ -24,7 +26,7 @@
       the allowable values for the DCMI Type Vocabulary.
     </xs:documentation>
 
- 
+
   </xs:annotation>
 
 
@@ -43,7 +45,7 @@
 		<xs:enumeration value="Text"/>
 		<xs:enumeration value="PhysicalObject"/>
             </xs:restriction>
-        </xs:simpleType> 
+        </xs:simpleType>
      </xs:union>
   </xs:simpleType>
 

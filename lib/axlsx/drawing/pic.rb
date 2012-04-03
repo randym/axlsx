@@ -28,7 +28,7 @@ module Axlsx
 
     # The picture locking attributes for this picture
     attr_reader :picture_locking
-   
+
     # Creates a new Pic(ture) object
     # @param [Anchor] anchor the anchor that holds this image
     # @option options [String] name
@@ -50,7 +50,7 @@ module Axlsx
     end
 
     attr_reader :hyperlink
-    
+
     # sets or updates a hyperlink for this image.
     # @param [String] v The href value for the hyper link
     # @option options @see Hyperlink#initialize All options available to the Hyperlink class apply - however href will be overridden with the v parameter value.
@@ -66,7 +66,7 @@ module Axlsx
       @hyperlink
     end
 
-    def image_src=(v) 
+    def image_src=(v)
       Axlsx::validate_string(v)
       RestrictionValidator.validate 'Pic.image_src', ALLOWED_EXTENSIONS, File.extname(v).delete('.')
       raise ArgumentError, "File does not exist" unless File.exist?(v)
@@ -84,8 +84,8 @@ module Axlsx
     # @return [String]
     def file_name
       File.basename(image_src) unless image_src.nil?
-    end    
-    
+    end
+
     # returns the extension of image_src without the preceeding '.'
     # @return [String]
     def extname
@@ -93,7 +93,7 @@ module Axlsx
     end
 
     # The index of this image in the workbooks images collections
-    # @return [Index]    
+    # @return [Index]
     def index
       @anchor.drawing.worksheet.workbook.images.index(self)
     end
@@ -120,7 +120,7 @@ module Axlsx
     def width=(v)
       @anchor.width = v
     end
-    
+
     # providing access to update the anchor's height attribute
     # @param [Integer] v
     # @see OneCellAnchor.width
@@ -144,37 +144,24 @@ module Axlsx
       @anchor.from.row = y
     end
 
-    # Serializes the picture
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
+    # Serializes the object
+    # @param [String] str
     # @return [String]
-    def to_xml(xml)
-      xml.pic {
-        xml.nvPicPr {
-          xml.cNvPr(:id=>"2", :name=>name, :descr=>descr) {
-            if @hyperlink.is_a?(Hyperlink)
-              @hyperlink.to_xml(xml)
-            end
-          }
-          xml.cNvPicPr {
-            picture_locking.to_xml(xml)
-          }
-        }
-        xml.blipFill {
-          xml[:a].blip :'xmlns:r' => XML_NS_R, :'r:embed'=>"rId#{id}"
-          xml[:a].stretch {
-            xml.fillRect
-          }
-        }
-        xml.spPr {
-          xml[:a].xfrm {
-            xml.off :x=>0, :y=>0
-            xml.ext :cx=>2336800, :cy=>2161540
-          }
-          xml[:a].prstGeom(:prst=>:rect) {
-            xml.avLst
-          }
-        }
-      }
+    def to_xml_string(str = '')
+      str << '<xdr:pic>'
+      str << '<xdr:nvPicPr>'
+      str << '<xdr:cNvPr id="2" name="' << name.to_s << '" descr="' << descr.to_s << '">'
+      @hyperlink.to_xml_string(str) if @hyperlink.is_a?(Hyperlink)
+      str << '</xdr:cNvPr><xdr:cNvPicPr>'
+      picture_locking.to_xml_string(str)
+      str << '</xdr:cNvPicPr></xdr:nvPicPr>'
+      str << '<xdr:blipFill>'
+      str << '<a:blip xmlns:r ="' << XML_NS_R << '" r:embed="rId' << id.to_s <<  '"/>'
+      str << '<a:stretch><a:fillRect/></a:stretch></xdr:blipFill><xdr:spPr>'
+      str << '<a:xfrm><a:off x="0" y="0"/><a:ext cx="2336800" cy="2161540"/></a:xfrm>'
+      str << '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></xdr:spPr></xdr:pic>'
+
     end
+
   end
 end

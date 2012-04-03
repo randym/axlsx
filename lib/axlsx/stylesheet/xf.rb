@@ -22,7 +22,7 @@ module Axlsx
     # index (0 based) of the font to be used in this style
     # @return [Integer]
     attr_reader :fontId
-    
+
     # index (0 based) of the fill to be used in this style
     # @return [Integer]
     attr_reader :fillId
@@ -50,7 +50,7 @@ module Axlsx
     # indicates if the fontId should be applied
     # @return [Boolean]
     attr_reader :applyFont
-    
+
     # indicates if the fillId should be applied
     # @return [Boolean]
     attr_reader :applyFill
@@ -75,7 +75,7 @@ module Axlsx
     # @option options [Integer] xfId
     # @option options [Boolean] quotePrefix
     # @option options [Boolean] pivotButton
-    # @option options [Boolean] applyNumberFormat 
+    # @option options [Boolean] applyNumberFormat
     # @option options [Boolean] applyFont
     # @option options [Boolean] applyFill
     # @option options [Boolean] applyBorder
@@ -87,8 +87,8 @@ module Axlsx
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
-    end    
-    
+    end
+
     # @see Xf#alignment
     def alignment=(v) DataTypeValidator.validate "Xf.alignment", CellAlignment, v; @alignment = v end
 
@@ -96,44 +96,48 @@ module Axlsx
     def protection=(v) DataTypeValidator.validate "Xf.protection", CellProtection, v; @protection = v end
 
     # @see numFmtId
-    def numFmtId=(v) Axlsx::validate_unsigned_int v; @numFmtId = v end    
+    def numFmtId=(v) Axlsx::validate_unsigned_int v; @numFmtId = v end
 
     # @see fontId
-    def fontId=(v) Axlsx::validate_unsigned_int v; @fontId = v end    
+    def fontId=(v) Axlsx::validate_unsigned_int v; @fontId = v end
     # @see fillId
-    def fillId=(v) Axlsx::validate_unsigned_int v; @fillId = v end    
+    def fillId=(v) Axlsx::validate_unsigned_int v; @fillId = v end
     # @see borderId
-    def borderId=(v) Axlsx::validate_unsigned_int v; @borderId = v end    
+    def borderId=(v) Axlsx::validate_unsigned_int v; @borderId = v end
     # @see xfId
-    def xfId=(v) Axlsx::validate_unsigned_int v; @xfId = v end    
+    def xfId=(v) Axlsx::validate_unsigned_int v; @xfId = v end
     # @see quotePrefix
-    def quotePrefix=(v) Axlsx::validate_boolean v; @quotePrefix = v end    
+    def quotePrefix=(v) Axlsx::validate_boolean v; @quotePrefix = v end
     # @see pivotButton
-    def pivotButton=(v) Axlsx::validate_boolean v; @pivotButton = v end    
+    def pivotButton=(v) Axlsx::validate_boolean v; @pivotButton = v end
     # @see applyNumberFormat
-    def applyNumberFormat=(v) Axlsx::validate_boolean v; @applyNumberFormat = v end    
+    def applyNumberFormat=(v) Axlsx::validate_boolean v; @applyNumberFormat = v end
     # @see applyFont
-    def applyFont=(v) Axlsx::validate_boolean v; @applyFont = v end    
+    def applyFont=(v) Axlsx::validate_boolean v; @applyFont = v end
     # @see applyFill
-    def applyFill=(v) Axlsx::validate_boolean v; @applyFill = v end    
+    def applyFill=(v) Axlsx::validate_boolean v; @applyFill = v end
 
     # @see applyBorder
-    def applyBorder=(v) Axlsx::validate_boolean v; @applyBorder = v end    
+    def applyBorder=(v) Axlsx::validate_boolean v; @applyBorder = v end
 
     # @see applyAlignment
-    def applyAlignment=(v) Axlsx::validate_boolean v; @applyAlignment = v end    
+    def applyAlignment=(v) Axlsx::validate_boolean v; @applyAlignment = v end
 
     # @see applyProtection
-    def applyProtection=(v) Axlsx::validate_boolean v; @applyProtection = v end    
+    def applyProtection=(v) Axlsx::validate_boolean v; @applyProtection = v end
 
-    # Serializes the xf elemen
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
+    # Serializes the object
+    # @param [String] str
     # @return [String]
-    def to_xml(xml)
-      xml.xf(self.instance_values.reject { |k, v| [:alignment, :protection, :extList, :name].include? k.to_sym}) {
-        alignment.to_xml(xml) if self.alignment
-        protection.to_xml(xml) if self.protection
-      }
+    def to_xml_string(str = '')
+      str << '<xf '
+      h = instance_values.reject { |k, v| [:alignment, :protection, :extList, :name].include? k.to_sym}
+      str << h.map { |key, value| '' << key.to_s << '="' << value.to_s << '"' }.join(' ')
+      str << '>'
+      alignment.to_xml_string(str) if self.alignment
+      protection.to_xml_string(str) if self.protection
+      str << '</xf>'
     end
+
   end
 end

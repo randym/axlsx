@@ -3,25 +3,25 @@ module Axlsx
   # The ValAxisData class manages the values for a chart value series.
   class ValAxisData < CatAxisData
 
-    # Serializes the value axis data
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
+    # Serializes the object
+    # @param [String] str
     # @return [String]
-    def to_xml(xml)
-      xml.val {
-        xml.numRef {
-          xml.f Axlsx::cell_range(@list)
-          xml.numCache {
-            xml.formatCode 'General'
-            xml.ptCount :val=>size
-            each_with_index do |item, index|
-              v = item.is_a?(Cell) ? item.value : item
-              xml.pt(:idx=>index) { xml.v v }
-            end
-          }                        
-        }
-      }
+    def to_xml_string(str = '')
+      str << '<c:val>'
+      str << '<c:numRef>'
+      str << '<c:f>' << Axlsx::cell_range(@list) << '</c:f>'
+      str << '<c:numCache>'
+      str << '<c:formatCode>General</c:formatCode>'
+      str << '<c:ptCount val="' << size.to_s << '"/>'
+      each_with_index do |item, index|
+        v = item.is_a?(Cell) ?  item.value.to_s : item
+        str << '<c:pt idx="' << index.to_s << '"><c:v>' << v << '</c:v></c:pt>'
+      end
+      str << '</c:numCache>'
+      str << '</c:numRef>'
+      str << '</c:val>'
     end
 
   end
-  
+
 end

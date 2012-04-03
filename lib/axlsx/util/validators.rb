@@ -5,11 +5,11 @@ module Axlsx
     # Perform validation
     # @param [String] name The name of what is being validatied. This is included in the error message
     # @param [Array] choices The list of choices to validate against
-    # @param [Any] v The value to be validated  
+    # @param [Any] v The value to be validated
     # @raise [ArgumentError] Raised if the value provided is not in the list of choices.
     # @return [Boolean] true if validation succeeds.
     def self.validate(name, choices, v)
-      raise ArgumentError, (ERR_RESTRICTION % [v.to_s, name, choices.inspect]) unless choices.include?(v)      
+      raise ArgumentError, (ERR_RESTRICTION % [v.to_s, name, choices.inspect]) unless choices.include?(v)
       true
     end
   end
@@ -55,7 +55,7 @@ module Axlsx
 
   # Requires that the value is a Fixnum Integer or Float and is greater or equal to 0
   # @param [Any] v The value validated
-  # @raise [ArgumentError] raised if the value is not a Fixnum or Integer value greater or equal to 0
+  # @raise [ArgumentError] raised if the value is not a Fixnun, Integer, Float value greater or equal to 0
   # @return [Boolean] true if the data is valid
   def self.validate_unsigned_numeric(v)
     DataTypeValidator.validate("Invalid column width", [Fixnum, Integer, Float], v, lambda { |arg| arg.respond_to?(:>=) && arg >= 0 })
@@ -68,7 +68,7 @@ module Axlsx
   end
 
   # Requires that the value is a form that can be evaluated as a boolean in an xml document.
-  # The value must be an instance of Fixnum, String, Integer, Symbol, TrueClass or FalseClass and 
+  # The value must be an instance of Fixnum, String, Integer, Symbol, TrueClass or FalseClass and
   # it must be one of 0, 1, "true", "false", :true, :false, true, false, "0", or "1"
   # @param [Any] v The value validated
   def self.validate_boolean(v)
@@ -79,13 +79,13 @@ module Axlsx
   # @param [Any] v The value validated
   def self.validate_string(v)
     DataTypeValidator.validate :string, String, v
-  end   
+  end
 
   # Requires that the value is a Float
   # @param [Any] v The value validated
   def self.validate_float(v)
     DataTypeValidator.validate :float, Float, v
-  end   
+  end
 
   # Requires that the value is valid pattern type.
   # valid pattern types must be one of :none, :solid, :mediumGray, :darkGray, :lightGray, :darkHorizontal, :darkVertical, :darkDown,
@@ -103,6 +103,13 @@ module Axlsx
     RestrictionValidator.validate :gradient_type, [:linear, :path], v
   end
 
+  # Requires that the value is a valid scatterStyle
+  # must be one of :none | :line | :lineMarker | :marker | :smooth | :smoothMarker
+  # must be one of "none" | "line" | "lineMarker" | "marker" | "smooth" | "smoothMarker"
+  # @param [Symbol|String] the value to validate
+  def self.validate_scatter_style(v)
+    Axlsx::RestrictionValidator.validate "ScatterChart.scatterStyle", [:none, :line, :lineMarker, :marker, :smooth, :smoothMarker], v.to_sym
+  end
   # Requires that the value is a valid horizontal_alignment
   # :general, :left, :center, :right, :fill, :justify, :centerContinuous, :distributed are allowed
   # @param [Any] v The value validated

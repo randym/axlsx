@@ -19,12 +19,12 @@ module Axlsx
     # @option options [Boolean] diagonalUp
     # @option options [Boolean] diagonalDown
     # @option options [Boolean] outline
-    # @example Making a border
-    # p = Axlsx::Package.new
-    # red_border = p.workbook.styles.add_style :border => {:style =>: thin, :color => "FFFF0000"}
-    # ws = p.workbook.add_worksheet
-    # ws.add_row [1,2,3], :style => red_border
-    # p.serialize('red_border.xlsx')
+    # @example - Making a border
+    #   p = Axlsx::Package.new
+    #   red_border = p.workbook.styles.add_style :border => { :style => :thin, :color => "FFFF0000" }
+    #   ws = p.workbook.add_worksheet
+    #   ws.add_row [1,2,3], :style => red_border
+    #   p.serialize('red_border.xlsx')
     #
     # @note The recommended way to manage borders is with Style#add_style
     # @see Style#add_style
@@ -42,16 +42,21 @@ module Axlsx
     # @see outline
     def outline=(v) Axlsx::validate_boolean v; @outline = v end
 
-    # Serializes the border element
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    def to_xml(xml)
-      xml.border(self.instance_values.select{ |k,v| [:diagonalUp, :diagonalDown, :outline].include? k }) {
-        [:start, :end, :left, :right, :top, :bottom, :diagonal, :vertical, :horizontal].each do |k|
-          @prs.select { |pr| pr.name == k }.each do |part|
-            part.to_xml(xml)
-          end
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
+    def to_xml_string(str = '')
+      str << '<border '
+      h = self.instance_values.select{ |k,v| [:diagonalUp, :diagonalDown, :outline].include? k }
+      str << h.map { |key, value| '' << key.to_s << '="' << value.to_s << '"' }.join(' ')
+      str << '>'
+      [:start, :end, :left, :right, :top, :bottom, :diagonal, :vertical, :horizontal].each do |k|
+        @prs.select { |pr| pr.name == k }.each do |part|
+          part.to_xml_string(str)
         end
-      }
+      end
+      str << '</border>'
     end
+
   end
 end

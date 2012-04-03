@@ -95,6 +95,20 @@ wb.styles do |s|
   end
 end
 
+##Hiding Columns
+
+wb.styles do |s|
+  percent = s.add_style :num_fmt => 9
+  wb.add_worksheet(:name => "Hidden Column") do |sheet|
+    sheet.add_row ['col 1', 'col 2', 'col 3', 'col 4']
+    sheet.add_row [1, 2, 0.3, 4]
+    sheet.add_row [1, 2, 0.2, 4]
+    sheet.add_row [1, 2, 0.1, 4]
+    sheet.col_style 2, percent, :row_offset => 1
+    sheet.column_info[1].hidden = true
+  end
+end
+
 ##Styling Rows
 
 wb.styles do |s|
@@ -252,7 +266,8 @@ end
 
 wb.add_worksheet(:name => "custom column widths") do |sheet|
   sheet.add_row ["I use autowidth and am very wide", "I use a custom width and am narrow"]
-  sheet.column_widths nil, 3
+  sheet.add_row ['abcdefg', 'This is a very long text and should flow into the right cell', nil, 'xxx' ]
+  sheet.column_widths nil, 3, 5, nil
 end
 
 ##Fit to page printing

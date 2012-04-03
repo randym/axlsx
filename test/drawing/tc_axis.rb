@@ -36,4 +36,9 @@ class TestAxis < Test::Unit::TestCase
     assert_nothing_raised("accepts valid crosses") { @axis.crosses = :min }
   end
 
+  def test_gridlines
+    assert_raise(ArgumentError, "requires valid gridlines") { @axis.gridlines = 'alice' }
+    assert_nothing_raised("accepts valid crosses") { @axis.gridlines = false }
+  end
+
 end

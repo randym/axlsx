@@ -2,10 +2,7 @@
 require 'tc_helper.rb'
 
 class TestOverride < Test::Unit::TestCase
-  def setup
-  end
-  def teardown
-  end
+
   def test_initialization_requires_Extension_and_ContentType
     err = "requires PartName and ContentType options"
     assert_raise(ArgumentError, err) { Axlsx::Override.new }
@@ -19,20 +16,10 @@ class TestOverride < Test::Unit::TestCase
   end
 
   def test_to_xml
-    schema = Nokogiri::XML::Schema(File.open(Axlsx::CONTENT_TYPES_XSD))
     type = Axlsx::Override.new :PartName=>"somechart.xml", :ContentType=>Axlsx::CHART_CT
-    builder = Nokogiri::XML::Builder.new(:encoding => Axlsx::ENCODING) do |xml|
-      xml.Types(:xmlns => Axlsx::XML_NS_T) {
-        type.to_xml(xml)
-      }
-    end
-    doc = Nokogiri::XML(builder.to_xml)
-    errors = []
-    schema.validate(doc).each do |error|
-      puts error.message
-      errors << error
-    end
-    assert_equal(errors.size, 0, "Override content type caused invalid content_type doc" + errors.map{ |e| e.message }.to_s)
+    doc = Nokogiri::XML(type.to_xml_string)
+    assert_equal(doc.xpath("Override[@ContentType='#{Axlsx::CHART_CT}']").size, 1)
+    assert_equal(doc.xpath("Override[@PartName='somechart.xml']").size, 1)
 
   end
 

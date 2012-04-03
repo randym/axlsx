@@ -1,4 +1,5 @@
 # encoding: UTF-8
+require 'cgi'
 module Axlsx
   # A cell in a worksheet.
   # Cell stores inforamation requried to serialize a single worksheet cell to xml. You must provde the Row that the cell belongs to and the cells value. The data type will automatically be determed if you do not specify the :type option. The default style will be applied if you do not supply the :style option. Changing the cell's type will recast the value to the type specified. Altering the cell's value via the property accessor will also automatically cast the provided value to the cell's type.
@@ -34,9 +35,6 @@ module Axlsx
                          'family', 'b', 'i', 'strike','outline',
                          'shadow', 'condense', 'extend', 'u',
                          'vertAlign', 'sz', 'color', 'scheme']
-
-    INLINE_ATTR = [:font_name => { :validator=>:validate_string}]
-
 
     # The index of the cellXfs item to be applied to this cell.
     # @return [Integer]
@@ -225,7 +223,8 @@ module Axlsx
     # equality comparison to test value, type and inline style attributes
     # this is how we work out if the cell needs to be added or already exists in the shared strings table
     def shareable_hash
-      self_hash = self.instance_values.reject { |key, val| !INLINE_STYLES.include?(key) }
+      self_hash = {}
+      INLINE_STYLES.each { |style| self_hash[style] = self.instance_variable_get("@" + style) }
       self_hash['color'] = self_hash['color'].instance_values if self_hash['color']
       self_hash
     end
@@ -276,9 +275,11 @@ module Axlsx
       self.row.worksheet.merge_cells "#{self.r}:#{range_end}" unless range_end.nil?
     end
 
+    # builds an xml text run based on this cells attributes.
+    # @param [String] str The string instance this run will be concated to.
+    # @return [String]
     def run_xml_string(str = '')
       if is_text_run?
-        puts 'text run'
         data = self.instance_values.reject{|key, value| value == nil }
         keys = data.keys & INLINE_STYLES
         keys.delete ['value', 'type']
@@ -299,52 +300,24 @@ module Axlsx
       end
       str
     end
-    # builds an xml text run based on this cells attributes. This is extracted from to_xml so that shared strings can use it.
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this output will be added to.
-    # @return [String] the xml for this cell's text run
-    def run_xml(xml)
-      if (self.instance_values.keys & INLINE_STYLES).size > 0
-        xml.r {
-          xml.rPr {
-            xml.rFont(:val=>@font_name) if @font_name
-            xml.charset(:val=>@charset) if @charset
-            xml.family(:val=>@family) if @family
-            xml.b(:val=>@b) if @b
-            xml.i(:val=>@i) if @i
-            xml.strike(:val=>@strike) if @strike
-            xml.outline(:val=>@outline) if @outline
-            xml.shadow(:val=>@shadow) if @shadow
-            xml.condense(:val=>@condense) if @condense
-            xml.extend(:val=>@extend) if @extend
-            @color.to_xml(xml) if @color
-            xml.sz(:val=>@sz) if @sz
-            xml.u(:val=>@u) if @u
-            # :baseline, :subscript, :superscript
-            xml.vertAlign(:val=>@vertAlign) if @vertAlign
-            # :none, major, :minor
-            xml.scheme(:val=>@scheme) if @scheme
-          }
-          xml.t @value.to_s
-        }
-      else
-        xml.t @value.to_s
-      end
-    end
 
     # Serializes the cell
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
+    # @param [Integer] r_index The row index for the cell
+    # @param [Integer] c_index The cell index in the row.
+    # @param [String] str The string index the cell content will be appended to. Defaults to empty string.
     # @return [String] xml text for the cell
     def to_xml_string(r_index, c_index, str = '')
+      return str if @value.nil?
       str << '<c r="' << Axlsx::cell_r(c_index, r_index) << '" s="' << @style.to_s << '" '
       case @type
       when :string
         #parse formula
         if @value.start_with?('=')
-          str  << 't="str"><f>' << value.to_s.gsub('=', '') << '</f>'
+          str  << 't="str"><f>' << @value.to_s.gsub('=', '') << '</f>'
         else
           #parse shared
           if @ssti
-            str << 't="s"><v>' << ssti << '</v>'
+            str << 't="s"><v>' << @ssti.to_s << '</v>'
           else
             str << 't="inlineStr"><is>' << run_xml_string << '</is>'
           end
@@ -360,40 +333,6 @@ module Axlsx
         str << '><v>' << @value.to_s << '</v>'
       end
       str << '</c>'
-    end
-
-    def to_xml(xml)
-      if @type == :string
-        #parse formula
-        if @value.start_with?('=')
-          xml.c(:r => r, :s=>style, :t=>:str) {
-            xml.f @value.to_s.gsub('=', '')
-          }
-        else
-          #parse shared
-          if @ssti
-            xml.c(:r => r, :s=>style, :t => :s) { xml.v ssti }
-          else
-            #parse inline string
-            xml.c(:r => r, :s=>style, :t => :inlineStr) {
-              xml.is {
-                run_xml(xml)
-              }
-            }
-          end
-        end
-      elsif @type == :date
-        # TODO: See if this is subject to the same restriction as Time below
-        v = DateTimeConverter::date_to_serial @value
-        xml.c(:r => r, :s => style) { xml.v v }
-      elsif @type == :time
-        v = DateTimeConverter::time_to_serial @value
-        xml.c(:r => r, :s => style) { xml.v v }
-      elsif @type == :boolean
-        xml.c(:r => r, :s => style, :t => :b) { xml.v value }
-      else
-        xml.c(:r => r, :s => style) { xml.v value }
-      end
     end
 
     private
@@ -444,6 +383,7 @@ module Axlsx
     #   About Time - Time in OOXML is *different* from what you might expect. The history as to why is interesting,  but you can safely assume that if you are generating docs on a mac, you will want to specify Workbook.1904 as true when using time typed values.
     # @see Axlsx#date1904
     def cast_value(v)
+      return nil if v.nil?
       if @type == :date
         self.style = STYLE_DATE if self.style == 0
         v
@@ -458,7 +398,7 @@ module Axlsx
         v ? 1 : 0
       else
         @type = :string
-        v.to_s
+        ::CGI.escapeHTML(v.to_s)
       end
     end
   end

@@ -4,7 +4,7 @@ module Axlsx
   # @note Using Styles#add_style is the recommended way to manage cell protection.
   # @see Styles#add_style
   class CellProtection
-    
+
     # specifies locking for cells that have the style containing this protection
     # @return [Boolean]
     attr_reader :hidden
@@ -23,15 +23,18 @@ module Axlsx
     end
 
     # @see hidden
-    def hidden=(v) Axlsx::validate_boolean v; @hidden = v end    
+    def hidden=(v) Axlsx::validate_boolean v; @hidden = v end
     # @see locked
-    def locked=(v) Axlsx::validate_boolean v; @locked = v end    
+    def locked=(v) Axlsx::validate_boolean v; @locked = v end
 
-    # Serializes the cell protection
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
+    # Serializes the object
+    # @param [String] str
     # @return [String]
-    def to_xml(xml)
-      xml.protection(self.instance_values)
+    def to_xml_string(str = '')
+      str << '<protection '
+      str << instance_values.map { |key, value| '' << key.to_s << '="' << value.to_s << '"' }.join(' ')
+      str << '/>'
     end
+
   end
 end

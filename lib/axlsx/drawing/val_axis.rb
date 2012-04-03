@@ -22,14 +22,15 @@ module Axlsx
     # @see crossBetween
     def crossBetween=(v) RestrictionValidator.validate "ValAxis.crossBetween", [:between, :midCat], v; @crossBetween = v; end
 
-    # Serializes the value axis
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
+    # Serializes the object
+    # @param [String] str
     # @return [String]
-    def to_xml(xml)
-      xml.valAx {
-        super(xml)
-        xml.crossBetween :val=>@crossBetween
-      }
+    def to_xml_string(str = '')
+      str << '<c:valAx>'
+      super(str)
+      str << '<c:crossBetween val="' << @crossBetween.to_s << '"/>'
+      str << '</c:valAx>'
     end
+
   end
 end

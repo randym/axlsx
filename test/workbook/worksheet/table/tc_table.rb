@@ -56,10 +56,10 @@ class TestTable < Test::Unit::TestCase
     assert_equal(@ws.relationships.size, 2, "adding a table adds a relationship")
   end
 
-  def test_to_xml
+  def test_to_xml_string
     table = @ws.add_table("A1:D5")
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
-    doc = Nokogiri::XML(table.to_xml)
+    doc = Nokogiri::XML(table.to_xml_string)
     errors = []
     schema.validate(doc).each do |error|
       errors.push error

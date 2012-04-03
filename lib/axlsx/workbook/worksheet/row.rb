@@ -59,6 +59,10 @@ module Axlsx
       worksheet.rows.index(self)
     end
 
+    # Serializes the row
+    # @param [Integer] r_index The row index, 0 based.
+    # @param [String] str The string this rows xml will be appended to.
+    # @return [String]
     def to_xml_string(r_index, str = '')
       str << '<row r="' << (r_index + 1 ).to_s << '" '
       if custom_height?
@@ -70,20 +74,12 @@ module Axlsx
       str << '</row>'
       str
     end
-    # Serializes the row
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    # @return [String]
-    def to_xml(xml)
-      attrs = {:r => index+1}
-      attrs.merge!(:customHeight => 1, :ht => height) if custom_height?
-      xml.row(attrs) { |ixml| @cells.each { |cell| cell.to_xml(ixml) } }
-    end
 
     # Adds a singel sell to the row based on the data provided and updates the worksheet's autofit data.
     # @return [Cell]
     def add_cell(value="", options={})
       c = Cell.new(self, value, options)
-      update_auto_fit_data
+      worksheet.send(:update_column_info, self.cells, self.cells.map(&:style))
       c
     end
 
@@ -116,13 +112,6 @@ module Axlsx
 
     # assigns the owning worksheet for this row
     def worksheet=(v) DataTypeValidator.validate "Row.worksheet", Worksheet, v; @worksheet=v; end
-
-    # Tell the worksheet to update autofit data for the columns based on this row's cells.
-    # @return [SimpleTypedList]
-    def update_auto_fit_data
-      worksheet.send(:update_auto_fit_data, self.cells)
-    end
-
 
     # Converts values, types, and style options into cells and associates them with this row.
     # A new cell is created for each item in the values array.

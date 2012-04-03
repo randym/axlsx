@@ -5,7 +5,7 @@ class TestRelationships < Test::Unit::TestCase
   def test_valid_document
     @rels = Axlsx::Relationships.new
     schema = Nokogiri::XML::Schema(File.open(Axlsx::RELS_XSD))
-    doc = Nokogiri::XML(@rels.to_xml)
+    doc = Nokogiri::XML(@rels.to_xml_string)
     errors = []
     schema.validate(doc).each do |error|
       puts error.message
@@ -13,7 +13,7 @@ class TestRelationships < Test::Unit::TestCase
     end
 
     @rels << Axlsx::Relationship.new(Axlsx::WORKSHEET_R, "bar")
-    doc = Nokogiri::XML(@rels.to_xml)
+    doc = Nokogiri::XML(@rels.to_xml_string)
     errors = []
     schema.validate(doc).each do |error|
       puts error.message

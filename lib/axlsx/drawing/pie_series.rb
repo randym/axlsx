@@ -1,12 +1,13 @@
 # encoding: UTF-8
 module Axlsx
+
   # A PieSeries defines the data and labels and explosion for pie charts series.
   # @note The recommended way to manage series is to use Chart#add_series
   # @see Worksheet#add_chart
   # @see Chart#add_series
   class PieSeries < Series
 
-    # The data for this series. 
+    # The data for this series.
     # @return [SimpleTypedList]
     attr_reader :data
 
@@ -29,22 +30,24 @@ module Axlsx
       super(chart, options)
       self.labels = CatAxisData.new(options[:labels]) unless options[:labels].nil?
       self.data = ValAxisData.new(options[:data]) unless options[:data].nil?
-    end 
-    
+    end
+
     # @see explosion
     def explosion=(v) Axlsx::validate_unsigned_int(v); @explosion = v; end
 
-    # Serializes the series
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
+    # Serializes the object
+    # @param [String] str
     # @return [String]
-    def to_xml(xml)
-      super(xml) do  |xml_inner|
-        xml_inner.explosion :val=>@explosion unless @explosion.nil?
-        @labels.to_xml(xml_inner) unless @labels.nil?
-        @data.to_xml(xml_inner) unless @data.nil?
-      end      
+    def to_xml_string(str = '')
+      super(str) do |str_inner|
+        str_inner << '<c:explosion val="' << @explosion << '"/>' unless @explosion.nil?
+        @labels.to_xml_string str_inner unless @labels.nil?
+        @data.to_xml_string str_inner unless @data.nil?
+      end
+      str
     end
-    private 
+
+    private
 
     # assigns the data for this series
     def data=(v) DataTypeValidator.validate "Series.data", [SimpleTypedList], v; @data = v; end

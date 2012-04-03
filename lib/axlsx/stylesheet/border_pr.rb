@@ -1,22 +1,22 @@
 # encoding: UTF-8
 module Axlsx
-  # A border part. 
+  # A border part.
   class BorderPr
-    
+
     # @return [Color] The color of this border part.
     attr_reader :color
 
-    # @return [Symbol] The syle of this border part. 
-    # @note 
+    # @return [Symbol] The syle of this border part.
+    # @note
     #  The following are allowed
-    #   :none 
+    #   :none
     #   :thin
     #   :medium
     #   :dashed
     #   :dotted
     #   :thick
     #   :double
-    #   :hair 
+    #   :hair
     #   :mediumDashed
     #   :dashDot
     #   :mediumDashDot
@@ -26,7 +26,7 @@ module Axlsx
     attr_reader :style
 
     # @return [Symbol] The name of this border part
-    # @note 
+    # @note
     #  The following are allowed
     #   :start
     #   :end
@@ -38,7 +38,7 @@ module Axlsx
     #   :vertical
     #   :horizontal
     attr_reader :name
-    
+
     # Creates a new Border Part Object
     # @option options [Color] color
     # @option options [Symbol] name
@@ -53,17 +53,18 @@ module Axlsx
     # @see name
     def name=(v) RestrictionValidator.validate "BorderPr.name", [:start, :end, :left, :right, :top, :bottom, :diagonal, :vertical, :horizontal], v; @name = v end
     # @see color
-    def color=(v) DataTypeValidator.validate(:color, Color, v); @color = v end    
+    def color=(v) DataTypeValidator.validate(:color, Color, v); @color = v end
     # @see style
     def style=(v) RestrictionValidator.validate "BorderPr.style", [:none, :thin, :medium, :dashed, :dotted, :thick, :double, :hair, :mediumDashed, :dashDot, :mediumDashDot, :dashDotDot, :mediumDashDotDot, :slantDashDot], v; @style = v end
 
-    # Serializes the border part
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
+    # Serializes the object
+    # @param [String] str
     # @return [String]
-    def to_xml(xml)
-      xml.send(@name, :style => @style) {
-        @color.to_xml(xml) if @color.is_a? Color
-      } 
+    def to_xml_string(str = '')
+      str << '<' << @name.to_s << ' style="' << @style.to_s << '">'
+      @color.to_xml_string(str) if @color.is_a?(Color)
+      str << '</' << @name.to_s << '>'
     end
+
   end
 end

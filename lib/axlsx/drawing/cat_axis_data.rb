@@ -11,26 +11,24 @@ module Axlsx
       data.each { |i| @list << i } if data.is_a?(SimpleTypedList)
     end
 
-    # Serializes the category axis data
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
+    # Serializes the object
+    # @param [String] str
     # @return [String]
-    def to_xml(xml)
-      xml.cat {
-        xml.strRef {
-          xml.f Axlsx::cell_range(@list)
-          xml.strCache {
-            xml.ptCount :val=>size
-            each_with_index do |item, index|
-              v = item.is_a?(Cell) ? item.value : item
-              xml.pt(:idx=>index) {
-                xml.v v
-              }                          
-            end
-          }
-        }
-      }
+    def to_xml_string(str = '')
+      str << '<c:cat>'
+      str << '<c:strRef>'
+      str << '<c:f>' << Axlsx::cell_range(@list) << '</c:f>'
+      str << '<c:strCache>'
+      str << '<c:ptCount val="' << size.to_s << '"/>'
+      each_with_index do |item, index|
+        v = item.is_a?(Cell) ?  item.value.to_s : item
+        str << '<c:pt idx="' << index.to_s << '"><c:v>' << v << '</c:v></c:pt>'
+      end
+      str << '</c:strCache>'
+      str << '</c:strRef>'
+      str << '</c:cat>'
     end
 
   end
-  
+
 end

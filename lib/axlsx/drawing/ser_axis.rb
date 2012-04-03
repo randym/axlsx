@@ -22,7 +22,7 @@ module Axlsx
     def initialize(axId, crossAx, options={})
       @tickLblSkip, @tickMarkSkip = nil, nil
       super(axId, crossAx, options)
-    end 
+    end
 
     # @see tickLblSkip
     def tickLblSkip=(v) Axlsx::validate_unsigned_int(v); @tickLblSkip = v; end
@@ -30,17 +30,17 @@ module Axlsx
     # @see tickMarkSkip
     def tickMarkSkip=(v) Axlsx::validate_unsigned_int(v); @tickMarkSkip = v; end
 
-    # Serializes the series axis
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
+    # Serializes the object
+    # @param [String] str
     # @return [String]
-    def to_xml(xml)
-      xml[:c].serAx {
-        super(xml)
-        xml[:c].tickLblSkip :val=>@tickLblSkip unless @tickLblSkip.nil?
-        xml[:c].tickMarkSkip :val=>@tickMarkSkip unless @tickMarkSkip.nil?
-      }
+    def to_xml_string(str = '')
+      str << '<c:serAx>'
+      super(str)
+      str << '<c:tickLblSkip val="' << @tickLblSkip.to_s << '"/>' unless @tickLblSkip.nil?
+      str << '<c:tickMarkSkip val="' << @tickMarkSkip.to_s << '"/>' unless @tickMarkSkip.nil?
+      str << '</c:serAx>'
     end
   end
-  
+
 
 end

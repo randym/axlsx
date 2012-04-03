@@ -33,15 +33,15 @@ module Axlsx
     # @param [Drawing] drawing
     # @option options [Array] start_at the col, row to start at
     # @option options [Integer] width
-    # @option options [Integer] height    
+    # @option options [Integer] height
     # @option options [String] image_src the file location of the image you will render
     # @option options [String] name the name attribute for the rendered image
-    # @option options [String] descr the description of the image rendered    
+    # @option options [String] descr the description of the image rendered
     def initialize(drawing, options={})
       @drawing = drawing
       @width = 0
       @height = 0
-      drawing.anchors << self      
+      drawing.anchors << self
       @from = Marker.new
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
@@ -61,23 +61,24 @@ module Axlsx
       @drawing.anchors.index(self)
     end
 
-    # Serializes the anchor
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
+
+    # Serializes the object
+    # @param [String] str
     # @return [String]
-    def to_xml(xml)
-      xml[:xdr].oneCellAnchor {
-        xml.from {
-          from.to_xml(xml)
-        }
-        xml.ext ext
-        @object.to_xml(xml)
-        xml.clientData
-      }
-    end    
+    def to_xml_string(str = '')
+      str << '<xdr:oneCellAnchor>'
+      str << '<xdr:from>'
+      from.to_xml_string(str)
+      str << '</xdr:from>'
+      str << '<xdr:ext cx="' << ext[:cx].to_s << '" cy="' << ext[:cy].to_s << '"/>'
+      @object.to_xml_string(str)
+      str << '<xdr:clientData/>'
+      str << '</xdr:oneCellAnchor>'
+    end
 
     private
 
-    # converts the pixel width and height to EMU units and returns a hash of 
+    # converts the pixel width and height to EMU units and returns a hash of
     # !{:cx=>[Integer], :cy=>[Integer]
     # @return [Hash]
     def ext

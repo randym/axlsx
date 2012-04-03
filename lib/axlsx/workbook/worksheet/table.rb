@@ -63,28 +63,27 @@ module Axlsx
       end
     end
 
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
+    def to_xml_string(str = '')
+      str << '<?xml version="1.0" encoding="UTF-8"?>'
+      str << '<table xmlns="' << XML_NS << '" id="' << (index+1).to_s << '" name="' << @name << '" displayName="' << @name.gsub(/\s/,'_') << '" '
+      str << 'ref="' << @ref << '" totalsRowShown="0">'
+      str << '<autoFilter ref="' << @ref << '"/>'
+      str << '<tableColumns count="' << header_cells.length.to_s << '">'
+      header_cells.each_with_index do |cell,index|
+        str << '<tableColumn id ="' << (index+1).to_s << '" name="' << cell.value << '"/>'
+      end
+      str << '</tableColumns>'
+      #TODO implement tableStyleInfo
+      str << '<tableStyleInfo showFirstColumn="0" showLastColumn="0" showRowStripes="1" showColumnStripes="0" name="TableStyleMedium9" />'
+      str << '</table>'
+    end
 
     # The style for the table.
     # TODO
     # def style=(v) DataTypeValidator.validate "Table.style", Integer, v, lambda { |arg| arg >= 1 && arg <= 48 }; @style = v; end
-
-    # Table Serialization
-    # serializes the table
-    def to_xml
-      builder = Nokogiri::XML::Builder.new(:encoding => ENCODING) do |xml|
-        xml.table(:xmlns => XML_NS, :id => index+1, :name => @name, :displayName => @name.gsub(/\s/,'_'), :ref => @ref, :totalsRowShown => 0) {
-          xml.autoFilter :ref=>@ref
-          xml.tableColumns(:count => header_cells.length) {
-            header_cells.each_with_index do |cell,index|
-              xml.tableColumn :id => index+1, :name => cell.value
-            end
-          }
-          xml.tableStyleInfo :showFirstColumn=>"0", :showLastColumn=>"0", :showRowStripes=>"1", :showColumnStripes=>"0", :name=>"TableStyleMedium9"
-          #TODO implement tableStyleInfo
-        }
-      end
-      builder.to_xml(:save_with => 0)
-    end
 
     private
 

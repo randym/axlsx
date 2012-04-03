@@ -4,11 +4,11 @@ module Axlsx
   class Override
 
     # The type of content.
-    # @return [String] 
+    # @return [String]
     attr_reader :ContentType
 
     # The name and location of the part.
-    # @return [String] 
+    # @return [String]
     attr_reader :PartName
 
     #Creates a new Override object
@@ -19,20 +19,24 @@ module Axlsx
       raise ArgumentError, "PartName and ContentType are required" unless options[:PartName] && options[:ContentType]
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end      
+      end
     end
 
     # The name and location of the part.
     def PartName=(v) Axlsx::validate_string v; @PartName = v end
 
-    # The content type. 
+    # The content type.
     # @see Axlsx#validate_content_type
     def ContentType=(v) Axlsx::validate_content_type v; @ContentType = v end
 
-    # Serializes the Override object to xml
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    def to_xml(xml)
-      xml.Override(self.instance_values)
+    # Serializes the object
+    # @param [String] str
+    # @return [String]
+    def to_xml_string(str = '')
+      str << '<Override '
+      str << instance_values.map { |key, value| '' << key.to_s << '="' << value.to_s << '"' }.join(' ')
+      str << '/>'
     end
+
   end
 end
