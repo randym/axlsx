@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'nokogiri', '>= 1.4.1'
   s.add_runtime_dependency 'rmagick', '>= 2.12.2' unless Object.const_defined? :JRUBY_VERSION
   s.add_runtime_dependency 'rmagick4j', '>= 0.3.7' if Object.const_defined? :JRUBY_VERSION
-  s.add_runtime_dependency 'rubyzip', '~> 0.9'
+  s.add_runtime_dependency 'rubyzip', '>= 0.9.5'
 
   s.add_runtime_dependency 'rake', '0.8.7'  if RUBY_VERSION == "1.9.2"
   s.add_runtime_dependency 'rake', '>= 0.8.7' if ["1.9.3", "1.8.7"].include?(RUBY_VERSION)
