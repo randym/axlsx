@@ -204,10 +204,12 @@ module Axlsx
       if borderId.is_a?(Hash)
         raise ArgumentError, "border hash definitions must include both style and color" unless borderId.keys.include?(:style) && borderId.keys.include?(:color)
 
-        s = borderId.delete :style
-        c = borderId.delete :color
+        s = borderId[:style]
+        c = borderId[:color]
+        edges = borderId[:edges] || [:left, :right, :top, :bottom]
+
         border = Border.new
-        [:left, :right, :top, :bottom].each {|pr| border.prs << BorderPr.new(:name => pr, :style=>s, :color => Color.new(:rgb => c))}
+        edges.each {|pr| border.prs << BorderPr.new(:name => pr, :style=>s, :color => Color.new(:rgb => c))}
         borderId = self.borders << border
       end
 
