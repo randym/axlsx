@@ -252,8 +252,14 @@ class TestWorksheet < Test::Unit::TestCase
     assert(errors.empty?, "error free validation")
   end
 
-  def test_valid_with_page_margins
+  # Make sure the XML for all optional elements (like pageMargins, autoFilter, ...)
+  # is generated in correct order.
+  def test_valid_with_optional_elements
     @ws.page_margins.set :left => 9
+    @ws.auto_filter = "A1:C3"
+    @ws.merge_cells "A4:A5"
+    @ws.add_chart Axlsx::Pie3DChart
+    @ws.add_table "E1:F3"
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@ws.to_xml_string)
     errors = []
