@@ -207,8 +207,10 @@ class TestWorksheet < Test::Unit::TestCase
   def test_to_xml_string_merge_cells
     @ws.add_row [1, "two"]
     @ws.merge_cells "A1:D1"
+    @ws.merge_cells "E1:F1"
     doc = Nokogiri::XML(@ws.to_xml_string)
     assert_equal(doc.xpath('//xmlns:worksheet/xmlns:mergeCells/xmlns:mergeCell[@ref="A1:D1"]').size, 1)
+    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:mergeCells/xmlns:mergeCell[@ref="E1:F1"]').size, 1)
   end
 
   def test_to_xml_string_page_margins
