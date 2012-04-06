@@ -402,9 +402,9 @@ module Axlsx
       str.concat '<sheetData>'
       @rows.each_with_index { |row, index| row.to_xml_string(index, str) }
       str.concat '</sheetData>'
-      page_margins.to_xml_string(str) if @page_margins
       str.concat "<autoFilter ref='%s'></autoFilter>" % @auto_filter if @auto_filter
-      str.concat "<mergeCells count='%s'>%s</mergeCells>" % [@merged_cells.size, @merged_cells.reduce('') { |memo, obj| "<mergeCell ref='%s'></mergeCell>" % obj } ] unless @merged_cells.empty?
+      str.concat "<mergeCells count='%s'>%s</mergeCells>" % [@merged_cells.size, @merged_cells.reduce('') { |memo, obj| memo += "<mergeCell ref='%s'></mergeCell>" % obj } ] unless @merged_cells.empty?
+      page_margins.to_xml_string(str) if @page_margins
       str.concat "<drawing r:id='rId1'></drawing>" if @drawing
       unless @tables.empty?
         str.concat "<tableParts count='%s'>%s</tableParts>" % [@tables.size, @tables.reduce('') { |memo, obj| memo += "<tablePart r:id='%s'/>" % obj.rId }]

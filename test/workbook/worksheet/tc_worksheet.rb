@@ -207,8 +207,10 @@ class TestWorksheet < Test::Unit::TestCase
   def test_to_xml_string_merge_cells
     @ws.add_row [1, "two"]
     @ws.merge_cells "A1:D1"
+    @ws.merge_cells "E1:F1"
     doc = Nokogiri::XML(@ws.to_xml_string)
     assert_equal(doc.xpath('//xmlns:worksheet/xmlns:mergeCells/xmlns:mergeCell[@ref="A1:D1"]').size, 1)
+    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:mergeCells/xmlns:mergeCell[@ref="E1:F1"]').size, 1)
   end
 
   def test_to_xml_string_page_margins
@@ -252,8 +254,14 @@ class TestWorksheet < Test::Unit::TestCase
     assert(errors.empty?, "error free validation")
   end
 
-  def test_valid_with_page_margins
+  # Make sure the XML for all optional elements (like pageMargins, autoFilter, ...)
+  # is generated in correct order.
+  def test_valid_with_optional_elements
     @ws.page_margins.set :left => 9
+    @ws.auto_filter = "A1:C3"
+    @ws.merge_cells "A4:A5"
+    @ws.add_chart Axlsx::Pie3DChart
+    @ws.add_table "E1:F3"
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@ws.to_xml_string)
     errors = []

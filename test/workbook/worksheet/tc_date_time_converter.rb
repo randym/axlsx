@@ -111,12 +111,18 @@ class TestDateTimeConverter < Test::Unit::TestCase
   end
 
   def test_timezone
+
     utc = Time.utc 2012 # January 1st, 2012 at 0:00 UTC
-    local = begin
-      Time.new 2012, 1, 1, 1, 0, 0, 3600 # January 1st, 2012 at 1:00 GMT+1
-    rescue ArgumentError
-      Time.parse "2012-01-01 01:00:00 +0100"
-    end
+
+    # JRuby makes no assumption on time zone. randym
+    #local = begin
+    #  Time.new 2012, 1, 1, 1, 0, 0, 3600 # January 1st, 2012 at 1:00 GMT+1
+    #rescue ArgumentError
+    #  Time.parse "2012-01-01 01:00:00 +0100"
+    #end
+
+    local = Time.parse "2012-01-01 01:00:00 +0100"
+
     assert_equal local, utc
     assert_equal Axlsx::DateTimeConverter::time_to_serial(local), Axlsx::DateTimeConverter::time_to_serial(utc)
     Axlsx::Workbook.date1904 = true
