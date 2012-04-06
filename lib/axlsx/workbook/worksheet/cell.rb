@@ -74,13 +74,20 @@ module Axlsx
       @value = cast_value(v)
     end
 
-
     # Indicates that the cell has one or more of the custom cell styles applied.
     # @return [Boolean]
     def is_text_run?
       @is_text_run ||= false
     end
 
+    # Indicates if the cell is good for shared string table
+    def plain_string?
+      @type == :string &&         # String typed
+        !@is_text_run &&          # No inline styles
+        !@value.nil? &&           # Not nil
+        !@value.empty? &&         # Not empty
+        !@value.start_with?('=')  # Not a formula
+    end
 
     # The inline font_name property for the cell
     # @return [String]
@@ -203,7 +210,6 @@ module Axlsx
     # @option options [String] color an 8 letter rgb specification
     # @option options [Symbol] scheme must be one of :none, major, :minor
     def initialize(row, value="", options={})
-      @signature = 0
       self.row=row
       @font_name = @charset = @family = @b = @i = @strike = @outline = @shadow = nil
       @condense = @u = @vertAlign = @sz = @color = @scheme = @extend = @ssti = nil
@@ -220,12 +226,6 @@ module Axlsx
     # The Shared Strings Table index for this cell
     # @return [Integer]
     attr_reader :ssti
-
-    # equality comparison to test value, type and inline style attributes
-    # this is how we work out if the cell needs to be added or already exists in the shared strings table
-    def shareable_hash
-      "#{@signature} & #{@value} & #{@color && @color.signature}"
-    end
 
     # @return [Integer] The index of the cell in the containing row.
     def index
@@ -337,9 +337,8 @@ module Axlsx
 
     # Utility method for setting inline style attributes
     def set_run_style( validator, attr, value)
-      return unless idx = INLINE_STYLES.index(attr.to_s)
+      return unless INLINE_STYLES.include?(attr.to_s)
       Axlsx.send(validator, value) unless validator == nil
-      @signature += 2**idx
       self.instance_variable_set :"@#{attr.to_s}", value
       @is_text_run = true
     end
