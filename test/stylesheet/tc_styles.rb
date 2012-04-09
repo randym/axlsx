@@ -19,19 +19,26 @@ class TestStyles < Test::Unit::TestCase
   end
   def test_add_style_border_hash
     border_count = @styles.borders.size
-    s = @styles.add_style :border => {:style=>:thin, :color => "FFFF0000"}
+    s = @styles.add_style :border => {:style => :thin, :color => "FFFF0000"}
     assert_equal(@styles.borders.size, border_count + 1)
     assert_equal(@styles.borders.last.prs.last.color.rgb, "FFFF0000")
     assert_raise(ArgumentError) { @styles.add_style :border => {:color => "FFFF0000"} }
-    [:top,:bottom,:left,:right].each {|edge| assert(@styles.borders.last.edges.include?(edge))}
+    assert_equal @styles.borders.last.prs.size, 4
+  end
 
-    s2 = @styles.add_style :border => {:style=>:thin, :color => "0000FFFF", :edges => [:top, :bottom]}
-    assert_equal(@styles.borders.size, border_count + 2)
-    assert_equal(@styles.borders.last.prs.last.color.rgb, "0000FFFF")
-    assert(@styles.borders.last.edges.include?(:top))
-    assert(@styles.borders.last.edges.include?(:bottom))
-    assert(! @styles.borders.last.edges.include?(:left))
-    assert(! @styles.borders.last.edges.include?(:right))
+  def test_add_style_border_edges
+    s = @styles.add_style :border => { :style => :thin, :color => "0000FFFF", :edges => [:top, :bottom] }
+    parts = @styles.borders.last.prs
+    parts.each { |pr| assert_equal(pr.color.rgb, "0000FFFF", "Style is applied to #{pr.name} properly") }
+    assert((parts.map { |pr| pr.name }.sort && [:bottom, :top]).size == 2, "specify two edges, and you get two border prs")
+  end
+
+  def test_do_not_alter_options_in_add_style
+    #This should test all options, but for now - just the bits that we know caused some pain
+    options = { :border => { :style => :thin, :color =>"FF000000" } }
+    @styles.add_style options
+    assert_equal options[:border][:style], :thin, 'thin style is stil in option'
+    assert_equal options[:border][:color], "FF000000", 'color is stil in option'
   end
 
   def test_add_style
