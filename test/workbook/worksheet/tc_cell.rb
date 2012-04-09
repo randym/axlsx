@@ -212,22 +212,32 @@ class TestCell < Test::Unit::TestCase
     assert_equal(@c.row.worksheet.merged_cells.last, "A1:C1")
   end
 
-  def test_equality
-    c2 = @row.add_cell 1, :type=>:float, :style=>1
-
-    assert_equal(c2.shareable_hash,@c.shareable_hash)
-      c3 = @row.add_cell 2, :type=>:float, :style=>1
-      c4 = @row.add_cell 1, :type=>:float, :style=>1, :color => "#FFFFFFFF"
-      assert_equal(c4.shareable_hash == c2.shareable_hash,false)
-      c5 = @row.add_cell 1, :type=>:float, :style=>1, :color => "#FFFFFFFF"
-      assert_equal(c5.shareable_hash, c4.shareable_hash)
-
-  end
-
   def test_ssti
     assert_raise(ArgumentError, "ssti must be an unsigned integer!") { @c.send(:ssti=, -1) }
     @c.send :ssti=, 1
     assert_equal(@c.ssti, 1)
+  end
+
+  def test_plain_string
+    @c.type = :integer
+    assert_equal(@c.plain_string?, false)
+
+    @c.type = :string
+    @c.value = 'plain string'
+    assert_equal(@c.plain_string?, true)
+
+    @c.value = nil
+    assert_equal(@c.plain_string?, false)
+
+    @c.value = ''
+    assert_equal(@c.plain_string?, false)
+
+    @c.value = '=sum'
+    assert_equal(@c.plain_string?, false)
+
+    @c.value = 'plain string'
+    @c.font_name = 'Arial'
+    assert_equal(@c.plain_string?, false)
   end
 
   def test_to_xml_string

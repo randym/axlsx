@@ -71,6 +71,5 @@ module Axlsx
       end
       str << "/>"
     end
-
   end
 end
