@@ -35,6 +35,13 @@ module Axlsx
       end
     end
 
+    # Return list of edge names applied to this border
+    def edges
+      edges = []
+      @prs.each {|pr| edges << pr.name}
+      edges
+    end
+
     # @see diagonalUp
     def diagonalUp=(v) Axlsx::validate_boolean v; @diagonalUp = v end
     # @see diagonalDown

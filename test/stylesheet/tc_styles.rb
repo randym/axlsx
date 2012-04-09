@@ -23,7 +23,15 @@ class TestStyles < Test::Unit::TestCase
     assert_equal(@styles.borders.size, border_count + 1)
     assert_equal(@styles.borders.last.prs.last.color.rgb, "FFFF0000")
     assert_raise(ArgumentError) { @styles.add_style :border => {:color => "FFFF0000"} }
+    [:top,:bottom,:left,:right].each {|edge| assert(@styles.borders.last.edges.include?(edge))}
 
+    s2 = @styles.add_style :border => {:style=>:thin, :color => "0000FFFF", :edges => [:top, :bottom]}
+    assert_equal(@styles.borders.size, border_count + 2)
+    assert_equal(@styles.borders.last.prs.last.color.rgb, "0000FFFF")
+    assert(@styles.borders.last.edges.include?(:top))
+    assert(@styles.borders.last.edges.include?(:bottom))
+    assert(! @styles.borders.last.edges.include?(:left))
+    assert(! @styles.borders.last.edges.include?(:right))
   end
 
   def test_add_style
