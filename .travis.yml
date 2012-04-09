@@ -1,5 +1,4 @@
 language: ruby
-before_script: "gem install rake"
 notifications:
   irc: "irc.freenode.org#axlsx"
   email:

@@ -525,6 +525,8 @@ Please see the {file:CHANGELOG.md} document for past release information.
 
 [joekain](https://github.com/joekain) - for keeping our references working even in the double digits!
 
+[moskrin](https://github.com/moskrin) - for keeping border creation on the edge.
+
 #Copyright and License
 ----------
 

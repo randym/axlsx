@@ -133,7 +133,7 @@ module Axlsx
     # @option options [String] font_name The name of the font to use
     # @option options [Integer] num_fmt The number format to apply
     # @option options [String] format_code The formatting to apply. If this is specified, num_fmt is ignored.
-    # @option options [Integer] border The border style to use.
+    # @option options [Integer|Hash] border The border style to use.
     # @option options [String] bg_color The background color to apply to the cell
     # @option options [Boolean] hidden Indicates if the cell should be hidden
     # @option options [Boolean] locked Indicates if the cell should be locked
