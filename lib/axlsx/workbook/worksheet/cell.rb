@@ -74,13 +74,20 @@ module Axlsx
       @value = cast_value(v)
     end
 
-
     # Indicates that the cell has one or more of the custom cell styles applied.
     # @return [Boolean]
     def is_text_run?
       @is_text_run ||= false
     end
 
+    # Indicates if the cell is good for shared string table
+    def plain_string?
+      @type == :string &&         # String typed
+        !@is_text_run &&          # No inline styles
+        !@value.nil? &&           # Not nil
+        !@value.empty? &&         # Not empty
+        !@value.start_with?('=')  # Not a formula
+    end
 
     # The inline font_name property for the cell
     # @return [String]
@@ -154,7 +161,7 @@ module Axlsx
     # @param [String] The 8 character representation for an rgb color #FFFFFFFF"
     def color=(v)
       @color = v.is_a?(Color) ? v : Color.new(:rgb=>v)
-      @has_run_style = true
+      @is_text_run = true
     end
 
     # The inline sz property for the cell
@@ -219,15 +226,6 @@ module Axlsx
     # The Shared Strings Table index for this cell
     # @return [Integer]
     attr_reader :ssti
-
-    # equality comparison to test value, type and inline style attributes
-    # this is how we work out if the cell needs to be added or already exists in the shared strings table
-    def shareable_hash
-      self_hash = {}
-      INLINE_STYLES.each { |style| self_hash[style] = self.instance_variable_get("@" + style) }
-      self_hash['color'] = self_hash['color'].instance_values if self_hash['color']
-      self_hash
-    end
 
     # @return [Integer] The index of the cell in the containing row.
     def index

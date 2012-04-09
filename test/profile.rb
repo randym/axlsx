@@ -15,11 +15,12 @@ require 'perftools'
 row = []
 input = (32..126).to_a.pack('U*').chars.to_a
 20.times { row << input.shuffle.join}
-times = 1000
+times = 3000
 
 PerfTools::CpuProfiler.start("/tmp/axlsx_noautowidth") do
   p = Axlsx::Package.new
   p.use_autowidth = false
+  p.use_shared_strings = true
   wb = p.workbook
   
   #A Simple Workbook

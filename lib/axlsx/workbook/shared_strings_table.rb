@@ -29,11 +29,12 @@ module Axlsx
     # Creates a new Shared Strings Table agains an array of cells
     # @param [Array] cells This is an array of all of the cells in the workbook
     def initialize(cells)
-      cells = cells.flatten.reject { |c| c.type != :string || c.value.nil? || c.value.start_with?('=') }
-      @count = cells.size
-      @unique_cells = []
+      @index = 0
+      @unique_cells = {}
       @shared_xml_string = ""
-      resolve(cells)
+      shareable_cells = cells.flatten.select{ |cell| cell.plain_string? }
+      @count = shareable_cells.size
+      resolve(shareable_cells)
     end
 
     # Serializes the object
@@ -52,16 +53,14 @@ module Axlsx
     # @return [Array] unique cells
     def resolve(cells)
       cells.each do |cell|
-        cell_hash = cell.shareable_hash
-        index = @unique_cells.index do |item|
-          item == cell_hash
-        end
-        if index == nil
-          cell.send :ssti=, @unique_cells.size
-          @shared_xml_string << '<si>' << cell.run_xml_string << '</si>'
-          @unique_cells << cell_hash
-        else
+        cell_hash = cell.value
+        if index = @unique_cells[cell_hash]
           cell.send :ssti=, index
+        else
+          cell.send :ssti=, @index
+          @shared_xml_string << '<si>' << cell.run_xml_string << '</si>'
+          @unique_cells[cell_hash] = @index
+          @index += 1
         end
       end
     end
