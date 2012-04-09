@@ -30,7 +30,7 @@ class TestStyles < Test::Unit::TestCase
     s = @styles.add_style :border => { :style => :thin, :color => "0000FFFF", :edges => [:top, :bottom] }
     parts = @styles.borders.last.prs
     parts.each { |pr| assert_equal(pr.color.rgb, "0000FFFF", "Style is applied to #{pr.name} properly") }
-    assert((parts.map { |pr| pr.name }.sort && [:bottom, :top]).size == 2, "specify two edges, and you get two border prs")
+    assert((parts.map { |pr| pr.name.to_s }.sort && ['bottom', 'top']).size == 2, "specify two edges, and you get two border prs")
   end
 
   def test_do_not_alter_options_in_add_style
