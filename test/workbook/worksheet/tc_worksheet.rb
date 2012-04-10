@@ -307,7 +307,6 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.add_row ["chasing windmills", "penut"]
     @ws.column_widths nil, 0.5
     assert_equal(@ws.column_info[1].width, 0.5, 'eat my width')
-    assert_raise(ArgumentError, 'reject invalid columns') { @ws.column_widths 2, 7, nil }
     assert_raise(ArgumentError, 'only accept unsigned ints') { @ws.column_widths 2, 7, -1 }
     assert_raise(ArgumentError, 'only accept Integer, Float or Fixnum') { @ws.column_widths 2, 7, "-1" }
   end

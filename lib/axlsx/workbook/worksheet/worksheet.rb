@@ -147,7 +147,9 @@ module Axlsx
     # but at least a few other document readers expect this for conversion
     # @return [String] the A1:B2 style reference for the first and last row column intersection in the workbook
     def dimension
-      "#{rows.first.cells.first.r}:#{rows.last.cells.last.r}"
+      dim_start = rows.first.cells.first == nil ? 'A1' : rows.first.cells.first.r
+      dim_end = rows.last.cells.last == nil ? 'AA:200' : rows.last.cells.last.r
+      "#{dim_start}:#{dim_end}"
     end
 
     # Indicates if gridlines should be shown in the sheet.
@@ -342,8 +344,8 @@ module Axlsx
     # @param [Integer|Float|Fixnum|nil] values
     def column_widths(*args)
       args.each_with_index do |value, index|
-        raise ArgumentError, "Invalid column specification" unless index < @column_info.size
         Axlsx::validate_unsigned_numeric(value) unless value == nil
+        @column_info[index] ||= Col.new index+1, index+1
         @column_info[index].width = value
       end
     end
@@ -456,13 +458,15 @@ module Axlsx
       styles = self.workbook.styles
       cellXfs, fonts = styles.cellXfs, styles.fonts
       sz = 11
+
       cells.each_with_index do |cell, index|
         @column_info[index] ||= Col.new index+1, index+1
         col = @column_info[index]
         width = widths[index]
         col.width = width if [Integer, Float, Fixnum].include?(width.class)
         c_style = style[index] if [Integer, Fixnum].include?(style[index].class)
-        next if width == :ignore || col.width || (cell.value.is_a?(String) && cell.value.start_with?('='))
+        #BUG - col.width wil only be nil the first time the column object is created. Subsequent row adds will not update the width of the column! col.width ||
+        next if width == :ignore ||  col.width || (cell.value.is_a?(String) && cell.value.start_with?('='))
         if self.workbook.use_autowidth
           cell_xf = cellXfs[(c_style || 0)]
           font = fonts[(cell_xf.fontId || 0)]
