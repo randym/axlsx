@@ -466,7 +466,7 @@ module Axlsx
         col.width = width if [Integer, Float, Fixnum].include?(width.class)
         c_style = style[index] if [Integer, Fixnum].include?(style[index].class)
         #BUG - col.width wil only be nil the first time the column object is created. Subsequent row adds will not update the width of the column! col.width ||
-        next if width == :ignore ||  col.width || (cell.value.is_a?(String) && cell.value.start_with?('='))
+        next if width == :ignore || col.width || (cell.value.is_a?(String) && cell.value.start_with?('=') || cell.value == nil)
         if self.workbook.use_autowidth
           cell_xf = cellXfs[(c_style || 0)]
           font = fonts[(cell_xf.fontId || 0)]
