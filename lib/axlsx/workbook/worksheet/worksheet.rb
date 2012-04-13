@@ -340,10 +340,11 @@ module Axlsx
     # Setting a fixed column width to nil will revert the behaviour back to calculating the width for you.
     # @example This would set the first and third column widhts but leave the second column in autofit state.
     #      ws.column_widths 7.2, nil, 3
-    # @note For updating only a single column it is probably easier to just set ws.auto_fit_data[col_index][:fixed] directly
+    # @note For updating only a single column it is probably easier to just set the width of the ws.column_info[col_index].width directly
     # @param [Integer|Float|Fixnum|nil] values
     def column_widths(*args)
       args.each_with_index do |value, index|
+        next if value == nil
         Axlsx::validate_unsigned_numeric(value) unless value == nil
         @column_info[index] ||= Col.new index+1, index+1
         @column_info[index].width = value
@@ -466,7 +467,7 @@ module Axlsx
         col.width = width if [Integer, Float, Fixnum].include?(width.class)
         c_style = style[index] if [Integer, Fixnum].include?(style[index].class)
         #BUG - col.width wil only be nil the first time the column object is created. Subsequent row adds will not update the width of the column! col.width ||
-        next if width == :ignore || col.width || (cell.value.is_a?(String) && cell.value.start_with?('=') || cell.value == nil)
+        next if width == :ignore || (cell.value.is_a?(String) && cell.value.start_with?('=') || cell.value == nil)
         if self.workbook.use_autowidth
           cell_xf = cellXfs[(c_style || 0)]
           font = fonts[(cell_xf.fontId || 0)]
