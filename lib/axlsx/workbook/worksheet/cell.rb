@@ -3,22 +3,6 @@ require 'cgi'
 module Axlsx
   # A cell in a worksheet.
   # Cell stores inforamation requried to serialize a single worksheet cell to xml. You must provde the Row that the cell belongs to and the cells value. The data type will automatically be determed if you do not specify the :type option. The default style will be applied if you do not supply the :style option. Changing the cell's type will recast the value to the type specified. Altering the cell's value via the property accessor will also automatically cast the provided value to the cell's type.
-  # @example Manually creating and manipulating Cell objects
-  #   ws = Workbook.new.add_worksheet
-  #   # This is the simple, and recommended way to create cells. Data types will automatically be determined for you.
-  #   ws.add_row :values => [1,"fish",Time.now]
-  #
-  #   # but you can also do this
-  #   r = ws.add_row
-  #   r.add_cell 1
-  #
-  #   # or even this
-  #   r = ws.add_row
-  #   c = Cell.new row, 1, :value=>integer
-  #
-  #   # cells can also be accessed via Row#cells. The example here changes the cells type, which will automatically updated the value from 1 to 1.0
-  #   r.cells.last.type = :float
-  #
   # @note The recommended way to generate cells is via Worksheet#add_row
   #
   # @see Worksheet#add_row
@@ -235,9 +219,8 @@ module Axlsx
     # @return [String] The alpha(column)numeric(row) reference for this sell.
     # @example Relative Cell Reference
     #   ws.rows.first.cells.first.r #=> "A1"
-    # @note this will be discontinued in 1.1.0 -  prefer Axlsx.cell_r
     def r
-      "#{Axlsx::col_ref(index)}#{@row.index+1}"
+      Axlsx::cell_r index, @row.index
     end
 
     # @return [String] The absolute alpha(column)numeric(row) reference for this sell.
