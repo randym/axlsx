@@ -471,6 +471,8 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
+- ** April.?.12**: 1.1.1 release
+   - bugfix for autowidth calculations across multiple rows
 - ** April.3.12**: 1.1.0 release
    - bugfix patch name_to_indecies to properly handle extended ranges.
    - bugfix properly serialize chart title.
