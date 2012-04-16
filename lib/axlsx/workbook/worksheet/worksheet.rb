@@ -81,6 +81,10 @@ module Axlsx
 
     end
 
+    def self.thin_chars
+      @thin_chars ||= "^.acefijklrstxyzFIJL()-"
+    end
+
     # Creates a new worksheet.
     # @note the recommended way to manage worksheets is Workbook#add_worksheet
     # @see Workbook#add_worksheet
@@ -88,7 +92,6 @@ module Axlsx
     # @option options [Hash] page_margins A hash containing page margins for this worksheet. @see PageMargins
     # @option options [Boolean] show_gridlines indicates if gridlines should be shown for this sheet.
     def initialize(wb, options={})
-      @thin_chars = ".acefijklrstxyzFIJL()-"
       self.workbook = wb
       @workbook.worksheets << self
 
@@ -447,7 +450,6 @@ module Axlsx
     # assigns the owner workbook for this worksheet
     def workbook=(v) DataTypeValidator.validate "Worksheet.workbook", Workbook, v; @workbook = v; end
 
-
     def update_column_info(cells, widths=[], style=[])
       styles = self.workbook.styles
       cellXfs, fonts = styles.cellXfs, styles.fonts
@@ -469,17 +471,11 @@ module Axlsx
       end
     end
 
-
     def calculate_width(text, sz)
       mdw_count = 0
       mdw = 1.78
       font_scale = sz/10.0
-      text.scan(/./mu).each do |char|
-        #TODO generate < mdw lists for other fonts and calculate widths based on the font in use.
-        # this is all arial for now. I need to workout the width of all characters in 10px font and remove any characters that are equal to or greater than the largest of 0 thru 9
-        mdw_count +=1 unless @thin_chars.include?(char)
-      end
-      ((mdw_count * mdw + 5) / mdw * 256) / 256.0 * font_scale
+      ((text.count(Worksheet.thin_chars) * mdw + 5) / mdw * 256) / 256.0 * font_scale
     end
   end
 end
