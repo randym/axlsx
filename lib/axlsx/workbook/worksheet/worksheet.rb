@@ -88,6 +88,7 @@ module Axlsx
     # @option options [Hash] page_margins A hash containing page margins for this worksheet. @see PageMargins
     # @option options [Boolean] show_gridlines indicates if gridlines should be shown for this sheet.
     def initialize(wb, options={})
+      @thin_chars = ".acefijklrstxyzFIJL()-"
       self.workbook = wb
       @workbook.worksheets << self
 
@@ -105,17 +106,9 @@ module Axlsx
       # @cols = SimpleTypedList.new Cell
       @tables = SimpleTypedList.new Table
 
-      if self.workbook.use_autowidth
-        require 'RMagick' unless defined?(Magick)
-        @magick_draw = Magick::Draw.new
-      else
-        @magick_draw = nil
-      end
-
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
-
     end
 
     # convinience method to access all cells in this worksheet
@@ -466,7 +459,6 @@ module Axlsx
         width = widths[index]
         col.width = width if [Integer, Float, Fixnum].include?(width.class)
         c_style = style[index] if [Integer, Fixnum].include?(style[index].class)
-        #BUG - col.width wil only be nil the first time the column object is created. Subsequent row adds will not update the width of the column! col.width ||
         next if width == :ignore || (cell.value.is_a?(String) && cell.value.start_with?('=') || cell.value == nil)
         if self.workbook.use_autowidth
           cell_xf = cellXfs[(c_style || 0)]
@@ -477,11 +469,15 @@ module Axlsx
       end
     end
 
+
     def calculate_width(text, sz)
-      mdw_count, font_scale, mdw = 0, sz/11.0, 6.0
-      mdw_count = text.scan(/./mu).reduce(0) do | count, char |
-        count +=1 if @magick_draw.get_type_metrics(char).max_advance >= mdw
-        count
+      mdw_count = 0
+      mdw = 1.78
+      font_scale = sz/10.0
+      text.scan(/./mu).each do |char|
+        #TODO generate < mdw lists for other fonts and calculate widths based on the font in use.
+        # this is all arial for now. I need to workout the width of all characters in 10px font and remove any characters that are equal to or greater than the largest of 0 thru 9
+        mdw_count +=1 unless @thin_chars.include?(char)
       end
       ((mdw_count * mdw + 5) / mdw * 256) / 256.0 * font_scale
     end

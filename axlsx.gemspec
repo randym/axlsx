@@ -19,8 +19,6 @@ Gem::Specification.new do |s|
   s.test_files  = Dir.glob("{test/**/*}")
 
   s.add_runtime_dependency 'nokogiri', '>= 1.4.1'
-  s.add_runtime_dependency 'rmagick', '>= 2.12.2' unless Object.const_defined? :JRUBY_VERSION
-  s.add_runtime_dependency 'rmagick4j', '>= 0.3.7' if Object.const_defined? :JRUBY_VERSION
   s.add_runtime_dependency 'rubyzip', '>= 0.9.5'
 
 # REQUIRED by Travis-ci please do not alter these lines

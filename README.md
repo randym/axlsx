@@ -34,10 +34,6 @@ http://github.com/randym/acts_as_xlsx
 There are guides for using axlsx and acts_as_xlsx here:
 [http://axlsx.blogspot.com](http://axlsx.blogspot.com)
 
-Help Wanted
------------
-
-I'd really like to get rid of the dependency on RMagick in this gem. RMagic is being used to calculate the column widths in a worksheet based on the content the user specified. If there happens to be anyone out there with the background and c skills to write an extension that can determine the width of a single character rendered with a specific font at a specific font size please give me a shout.
 
 Feature List
 ------------
@@ -473,6 +469,7 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 ---------
 - ** April.?.12**: 1.1.1 release
    - bugfix for autowidth calculations across multiple rows
+   - REMOVED RMAGICK dependency WOOT!
 - ** April.3.12**: 1.1.0 release
    - bugfix patch name_to_indecies to properly handle extended ranges.
    - bugfix properly serialize chart title.
