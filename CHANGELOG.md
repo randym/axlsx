@@ -1,5 +1,23 @@
 CHANGELOG
 ---------
+
+- ** March.5.12**: 1.0.18 release
+   https://github.com/randym/axlsx/compare/1.0.17...1.0.18
+   - bugfix custom borders are not properly applied when using styles.add_style
+   - interop worksheet names must be 31 characters or less or some versions of office complain about repairs
+   - added type support for :boolean and :date types cell values
+   - added support for fixed column widths
+   - added support for page_margins
+   - added << alias for add_row
+   - removed presetting of date1904 based on authoring platform. Now defaults to use 1900 epoch (date1904 = false)
+
+- ** February.14.12**: 1.0.17 release
+   https://github.com/randym/axlsx/compare/1.0.16...1.0.17
+   - Added in support for serializing to StringIO
+   - Added in support for using shared strings table. This makes most of the features in axlsx interoperable with iWorks Numbers
+   - Added in support for fixed column_widths
+   - Removed unneeded dependencies on active-support and i18n
+
 - ** February.2.12**: 1.0.16 release
    https://github.com/randym/axlsx/compare/1.0.15...1.0.16
    - Bug fix for schema file locations when validating in rails

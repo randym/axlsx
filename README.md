@@ -6,7 +6,9 @@ Axlsx: Office Open XML Spreadsheet Generation
 
 **Git**:[http://github.com/randym/axlsx](http://github.com/randym/axlsx)
 
-**Twitter**: [https://twitter.com/#!/morgan_randy](https://twitter.com/#!/morgan_randy) release announcements and news will be published here
+**Twitter**: [https://twitter.com/#!/morgan_randy](https://twitter.com/#!/morgan_randy)
+
+**Google Group**: [https://groups.google.com/forum/?fromgroups#!forum/axlsx](https://groups.google.com/forum/?fromgroups#!forum/axlsx)
 
 **Author**:  Randy Morgan
 
@@ -20,13 +22,15 @@ Axlsx: Office Open XML Spreadsheet Generation
 
 **JRuby Version**: 1.6.7
 
-**Release Date**: April ?? 2012
+**Release Date**: April 18th 2012
 
 Synopsis
 --------
 
 Axlsx is an Office Open XML Spreadsheet generator for the Ruby programming language.
 With Axlsx you can create excel worksheets with charts, images (with links), automated and fixed column widths, customized styles, functions, merged cells, auto filters, file and stream serialization  as well as full schema validation. Axlsx excels at helping you generate beautiful Office Open XML Spreadsheet documents without having to understand the entire ECMA specification.
+
+![Screen 1](https://github.com/randym/axlsx/examples/sample.png)
 
 If you are working in rails, or with active record see:
 http://github.com/randym/acts_as_xlsx
@@ -111,8 +115,8 @@ end
 
 ```ruby
 wb.styles do |s|
-  red_border =  s.add_style :border => {:style=>:thin, :color =>"FFFF0000"}
-  blue_border =  s.add_style :border => {:style=>:thin, :color =>"FF0000FF"}
+  red_border =  s.add_style :border => { :style => :thin, :color =>"FFFF0000" }
+  blue_border =  s.add_style :border => { :style => :thin, :color =>"FF0000FF" }
 
   wb.add_worksheet(:name => "Custom Borders") do |sheet|
     sheet.add_row ["wrap", "me", "Up in Red"], :style => red_border
@@ -467,10 +471,13 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
-- ** April.?.12**: 1.1.1 release
+- ** April.18.12**: 1.1.1 release
    - bugfix for autowidth calculations across multiple rows
    - bugfix for dimension calculations with nil cells.
    - REMOVED RMAGICK dependency WOOT!
+   - Update readme to show screenshot of gem output.
+   - Cleanup benchmark and add benchmark rake task
+
 - ** April.3.12**: 1.1.0 release
    - bugfix patch name_to_indecies to properly handle extended ranges.
    - bugfix properly serialize chart title.
@@ -485,25 +492,6 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
    - Support for splatter charts added
    - Major (like 7x faster!) performance updates.
    - Gem now supports for JRuby 1.6.7, as well as expirimental support for Rubinius
-
-- ** March.5.12**: 1.0.18 release
-   https://github.com/randym/axlsx/compare/1.0.17...1.0.18
-   - bugfix custom borders are not properly applied when using styles.add_style
-   - interop worksheet names must be 31 characters or less or some versions of office complain about repairs
-   - added type support for :boolean and :date types cell values
-   - added support for fixed column widths
-   - added support for page_margins
-   - added << alias for add_row
-   - removed presetting of date1904 based on authoring platform. Now defaults to use 1900 epoch (date1904 = false)
-
-- ** February.14.12**: 1.0.17 release
-   https://github.com/randym/axlsx/compare/1.0.16...1.0.17
-   - Added in support for serializing to StringIO
-   - Added in support for using shared strings table. This makes most of the features in axlsx interoperable with iWorks Numbers
-   - Added in support for fixed column_widths
-   - Removed unneeded dependencies on active-support and i18n
-
-
 
 Please see the {file:CHANGELOG.md} document for past release information.
 
