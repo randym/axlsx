@@ -14,13 +14,13 @@ Axlsx: Office Open XML Spreadsheet Generation
 
 **License**: MIT License
 
-**Latest Version**: 1.1.0
+**Latest Version**: 1.1.1
 
 **Ruby Version**: 1.8.7, 1.9.2, 1.9.3
 
 **JRuby Version**: 1.6.7
 
-**Release Date**: April 3st 2012
+**Release Date**: April ?? 2012
 
 Synopsis
 --------
@@ -469,6 +469,7 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 ---------
 - ** April.?.12**: 1.1.1 release
    - bugfix for autowidth calculations across multiple rows
+   - bugfix for dimension calculations with nil cells.
    - REMOVED RMAGICK dependency WOOT!
 - ** April.3.12**: 1.1.0 release
    - bugfix patch name_to_indecies to properly handle extended ranges.
