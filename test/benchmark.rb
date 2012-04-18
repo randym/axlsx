@@ -3,39 +3,34 @@
 $:.unshift "#{File.dirname(__FILE__)}/../lib"
 require 'axlsx'
 require 'csv'
-
 require 'benchmark'
+
 row = []
 input = (32..126).to_a.pack('U*').chars.to_a
 20.times { row << input.shuffle.join}
-times = 1000
-Benchmark.bm(100) do |x|
-  # No Autowidth
+times = 2000
+Benchmark.bmbm(30) do |x|
+
   x.report('axlsx_noautowidth') {
-
     p = Axlsx::Package.new
-    p.use_autowidth = false
-    wb = p.workbook
-
-    #A Simple Workbook
-
-    wb.add_worksheet do |sheet|
-      times.times do
-        sheet << row
+    p.workbook do |wb|
+      wb.add_worksheet do |sheet|
+        times.times do
+          sheet << row
+        end
       end
     end
+    p.use_autowidth = false
     p.serialize("example_noautowidth.xlsx")
   }
 
   x.report('axlsx') {
     p = Axlsx::Package.new
-    wb = p.workbook
-
-    #A Simple Workbook
-
-    wb.add_worksheet do |sheet|
-      times.times do
-        sheet << row
+    p.workbook do |wb|
+      wb.add_worksheet do |sheet|
+        times.times do
+          sheet << row
+        end
       end
     end
     p.serialize("example_autowidth.xlsx")
@@ -43,13 +38,11 @@ Benchmark.bm(100) do |x|
 
   x.report('axlsx_shared') {
     p = Axlsx::Package.new
-    wb = p.workbook
-
-    #A Simple Workbook
-
-    wb.add_worksheet do |sheet|
-      times.times do
-        sheet << row
+    p.workbook do |wb|
+      wb.add_worksheet do |sheet|
+        times.times do
+          sheet << row
+        end
       end
     end
     p.use_shared_strings = true
@@ -58,19 +51,17 @@ Benchmark.bm(100) do |x|
 
   x.report('axlsx_stream') {
     p = Axlsx::Package.new
-    wb = p.workbook
-
-    #A Simple Workbook
-
-    wb.add_worksheet do |sheet|
-      times.times do
-        sheet << row
+    p.workbook do |wb|
+      wb.add_worksheet do |sheet|
+        times.times do
+          sheet << row
+        end
       end
     end
-
     s = p.to_stream()
     File.open('example_streamed.xlsx', 'w') { |f| f.write(s.read) }
   }
+
   x.report('csv') {
     CSV.open("example.csv", "wb") do |csv|
       times.times do
@@ -79,3 +70,4 @@ Benchmark.bm(100) do |x|
     end
   }
 end
+File.delete("example.csv", "example_streamed.xlsx", "example_shared.xlsx", "example_autowidth.xlsx", "example_noautowidth.xlsx")
