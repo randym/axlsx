@@ -30,7 +30,7 @@ Synopsis
 Axlsx is an Office Open XML Spreadsheet generator for the Ruby programming language.
 With Axlsx you can create excel worksheets with charts, images (with links), automated and fixed column widths, customized styles, functions, merged cells, auto filters, file and stream serialization  as well as full schema validation. Axlsx excels at helping you generate beautiful Office Open XML Spreadsheet documents without having to understand the entire ECMA specification.
 
-![Screen 1](https://github.com/randym/axlsx/examples/sample.png)
+![Screen 1](https://github.com/randym/axlsx/raw/master/examples/sample.png)
 
 If you are working in rails, or with active record see:
 http://github.com/randym/acts_as_xlsx
