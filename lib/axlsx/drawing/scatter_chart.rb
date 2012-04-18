@@ -44,24 +44,24 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      super do |str|
-        str << '<c:scatterChart>'
-        str << '<c:scatterStyle val="' << scatterStyle.to_s << '"/>'
-        str << '<c:varyColors val="1"/>'
-        @series.each { |ser| ser.to_xml_string(str) }
-        str << '<c:dLbls>'
-        str << '<c:showLegendKey val="0"/>'
-        str << '<c:showVal val="0"/>'
-        str << '<c:showCatName val="0"/>'
-        str << '<c:showSerName val="0"/>'
-        str << '<c:showPercent val="0"/>'
-        str << '<c:showBubbleSize val="0"/>'
-        str << '</c:dLbls>'
-        str << '<c:axId val="' << @xValAxId.to_s << '"/>'
-        str << '<c:axId val="' << @yValAxId.to_s << '"/>'
-        str << '</c:scatterChart>'
-        @xValAxis.to_xml_string str
-        @yValAxis.to_xml_string str
+      super(str) do |str_inner|
+        str_inner << '<c:scatterChart>'
+        str_inner << '<c:scatterStyle val="' << scatterStyle.to_s << '"/>'
+        str_inner << '<c:varyColors val="1"/>'
+        @series.each { |ser| ser.to_xml_string(str_inner) }
+        str_inner << '<c:dLbls>'
+        str_inner << '<c:showLegendKey val="0"/>'
+        str_inner << '<c:showVal val="0"/>'
+        str_inner << '<c:showCatName val="0"/>'
+        str_inner << '<c:showSerName val="0"/>'
+        str_inner << '<c:showPercent val="0"/>'
+        str_inner << '<c:showBubbleSize val="0"/>'
+        str_inner << '</c:dLbls>'
+        str_inner << '<c:axId val="' << @xValAxId.to_s << '"/>'
+        str_inner << '<c:axId val="' << @yValAxId.to_s << '"/>'
+        str_inner << '</c:scatterChart>'
+        @xValAxis.to_xml_string str_inner
+        @yValAxis.to_xml_string str_inner
       end
       str
     end
