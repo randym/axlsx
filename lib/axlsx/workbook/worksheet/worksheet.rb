@@ -81,6 +81,9 @@ module Axlsx
 
     end
 
+    # definition of characters which are less than the maximum width of 0-9 in the default font for use in String#count.
+    # This is used for autowidth calculations
+    # @return [String]
     def self.thin_chars
       @thin_chars ||= "^.acefijklrstxyzFIJL()-"
     end
@@ -425,7 +428,6 @@ module Axlsx
     # Returns the cell or cells defined using excel style A1:B3 references.
     # @param [String|Integer] cell_def the string defining the cell or range of cells, or the rownumber
     # @return [Cell, Array]
-
     def [] (cell_def)
       return rows[cell_def] if cell_def.is_a?(Integer)
 
@@ -450,6 +452,8 @@ module Axlsx
     # assigns the owner workbook for this worksheet
     def workbook=(v) DataTypeValidator.validate "Worksheet.workbook", Workbook, v; @workbook = v; end
 
+
+    # TODO this needs cleanup!
     def update_column_info(cells, widths=[], style=[])
       styles = self.workbook.styles
       cellXfs, fonts = styles.cellXfs, styles.fonts
@@ -471,9 +475,10 @@ module Axlsx
       end
     end
 
+
+    # If you *REALLY* want to know what this does, check the spec for how column width is specified.
     def calculate_width(text, sz)
-      mdw_count = 0
-      mdw = 1.78
+      mdw = 1.78 #magic numbers ftw! This is the widest width of 0..9 in the "standard" font (arial@10px)
       font_scale = sz/10.0
       ((text.count(Worksheet.thin_chars) * mdw + 5) / mdw * 256) / 256.0 * font_scale
     end
