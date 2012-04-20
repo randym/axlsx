@@ -101,7 +101,8 @@ module Axlsx
       @drawing = @page_margins = @auto_filter = nil
       @merged_cells = []
       @auto_fit_data = []
-
+      @conditional_formattings = []
+      
       @selected = false
       @show_gridlines = true
       self.name = "Sheet" + (index+1).to_s
@@ -123,6 +124,22 @@ module Axlsx
       rows.flatten
     end
 
+    # Add conditional formatting to this worksheet.
+    # 
+    # @param [String] cells The range to apply the formatting to
+    # @param [Array|Hash] rules An array of hashes (or just one) to create Conditional formatting rules from.
+    # @example This would format column A whenever it is FALSE.
+    #        # for a longer example, see examples/example_conditional_formatting.rb (link below)
+    #        worksheet.add_conditional_formatting( "A1:A1048576", { :type => :cellIs, :operator => :equal, :formula => "FALSE", :dxfId => 1, :priority => 1 }
+    #
+    # @see ConditionalFormattingRule#initialize
+    # @see file:examples/example_conditional_formatting.rb
+    def add_conditional_formatting(cells, rules)
+      cf = ConditionalFormatting.new( :sqref => cells )
+      cf.add_rules rules
+      @conditional_formattings << cf
+    end
+    
     # Creates merge information for this worksheet.
     # Cells can be merged by calling the merge_cells method on a worksheet.
     # @example This would merge the three cells C1..E1    #
@@ -410,6 +427,9 @@ module Axlsx
       str.concat "<drawing r:id='rId1'></drawing>" if @drawing
       unless @tables.empty?
         str.concat "<tableParts count='%s'>%s</tableParts>" % [@tables.size, @tables.reduce('') { |memo, obj| memo += "<tablePart r:id='%s'/>" % obj.rId }]
+      end
+      @conditional_formattings.each do |cf|
+        str.concat cf.to_xml_string
       end
       str + '</worksheet>'
     end

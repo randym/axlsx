@@ -73,5 +73,49 @@ class TestStyles < Test::Unit::TestCase
     assert_equal(xf.applyNumberFormat, true, "number format applied")
     assert_equal(xf.applyAlignment, true, "alignment applied")
   end
+  
+  def test_basic_add_style_dxf
+    border_count = @styles.borders.size
+    s = @styles.add_style :border => {:style => :thin, :color => "FFFF0000"}, :type => :dxf
+    assert_equal(@styles.borders.size, border_count, "styles borders not affected")
+    assert_equal(@styles.dxfs.last.border.prs.last.color.rgb, "FFFF0000")
+    assert_raise(ArgumentError) { @styles.add_style :border => {:color => "FFFF0000"}, :type => :dxf }
+    assert_equal @styles.borders.last.prs.size, 4
+  end
 
+  def test_add_style_dxf
+    fill_count = @styles.fills.size
+    font_count = @styles.fonts.size
+    dxf_count = @styles.dxfs.size
+
+    style = @styles.add_style :bg_color=>"FF000000", :fg_color=>"FFFFFFFF", :sz=>13, :alignment=>{:horizontal=>:left}, :border=>{:style => :thin, :color => "FFFF0000"}, :hidden=>true, :locked=>true, :type => :dxf
+    assert_equal(@styles.dxfs.size, dxf_count+1)
+    assert_equal(0, style, "returns the zero-based dxfId")
+    
+    dxf = @styles.dxfs.last
+    assert_equal(@styles.dxfs.last.fill.fill_type.fgColor.rgb, "FF000000", "fill created with color")
+
+    assert_equal(font_count, (@styles.fonts.size), "font not created under styles")
+    assert_equal(fill_count, (@styles.fills.size), "fill not created under styles")
+
+    assert(dxf.border.is_a?(Axlsx::Border), "border is set")
+    assert_equal(nil, dxf.numFmt, "number format is not set")
+
+    assert(dxf.alignment.is_a?(Axlsx::CellAlignment), "alignment was created")
+    assert_equal(dxf.alignment.horizontal, :left, "horizontal alignment applied")
+    assert_equal(dxf.protection.hidden, true, "hidden protection set")
+    assert_equal(dxf.protection.locked, true, "cell locking set")
+    assert_raise(ArgumentError, "should reject invalid borderId") { @styles.add_style :border => 3 }
+    assert_raise(ArgumentError, "should reject num_fmt option") {
+      @styles.add_style :type=>:dxf, :num_fmt=>Axlsx::NUM_FMT_PERCENT
+    }
+  end
+
+  def test_multiple_dxf
+    # add a second style
+    style = @styles.add_style :bg_color=>"00000000", :fg_color=>"FFFFFFFF", :sz=>13, :alignment=>{:horizontal=>:left}, :border=>{:style => :thin, :color => "FFFF0000"}, :hidden=>true, :locked=>true, :type => :dxf
+    assert_equal(0, style, "returns the first dxfId")
+    style = @styles.add_style :bg_color=>"FF000000", :fg_color=>"FFFFFFFF", :sz=>13, :alignment=>{:horizontal=>:left}, :border=>{:style => :thin, :color => "FFFF0000"}, :hidden=>true, :locked=>true, :type => :dxf
+    assert_equal(1, style, "returns the second dxfId")
+  end
 end
