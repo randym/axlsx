@@ -4,8 +4,9 @@ module Axlsx
   #
   # @note The recommended way to manage these rules is via Worksheet#add_conditional_formatting
   # @see Worksheet#add_conditional_formatting
+  # @see ConditionalFormattingRule#initialize
   class ConditionalFormattingRule
-    @@child_elements = [:formula]
+    CHILD_ELEMENTS = [:formula]
     
     # Formula
     # @return [String]
@@ -61,13 +62,13 @@ module Axlsx
     attr_reader :priority
 
     # Text
-    # The text value in a "text contains" conditional formatting
+    # used in a "text contains" conditional formatting
     # rule.
     # @return [String]
     attr_reader :text
     
     # percent (Top 10 Percent)
-    # Indicates whether a "top/bottom n" rule is a "top/bottom n
+    # indicates whether a "top/bottom n" rule is a "top/bottom n
     # percent" rule. This attribute is ignored if type is not equal to
     # top10.
     # @return [Boolean]
@@ -158,9 +159,9 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       str << '<cfRule '
-      str << instance_values.map { |key, value| '' << key << '="' << value.to_s << '"' unless @@child_elements.include?(key.to_sym) }.join(' ')
+      str << instance_values.map { |key, value| '' << key << '="' << value.to_s << '"' unless CHILD_ELEMENTS.include?(key.to_sym) }.join(' ')
       str << '>'
-      @@child_elements.each do |el|
+      CHILD_ELEMENTS.each do |el|
         str << "<#{el}>" << self.send(el) << "</#{el}>" if self.send(el)
       end
       str << '</cfRule>'
