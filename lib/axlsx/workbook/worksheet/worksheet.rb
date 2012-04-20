@@ -128,10 +128,12 @@ module Axlsx
     # 
     # @param [String] cells The range to apply the formatting to
     # @param [Array|Hash] rules An array of hashes (or just one) to create Conditional formatting rules from.
-    # @example This would format column A whenever it is FALSE
+    # @example This would format column A whenever it is FALSE.
+    #        # for a longer example, see examples/example_conditional_formatting.rb (link below)
     #        worksheet.add_conditional_formatting( "A1:A1048576", { :type => :cellIs, :operator => :equal, :formula => "FALSE", :dxfId => 1, :priority => 1 }
     #
     # @see ConditionalFormattingRule#initialize
+    # @see file:examples/example_conditional_formatting.rb
     def add_conditional_formatting(cells, rules)
       cf = ConditionalFormatting.new( :sqref => cells )
       cf.add_rules rules
