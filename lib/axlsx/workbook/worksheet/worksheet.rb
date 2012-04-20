@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module Axlsx
 
   # The Worksheet class represents a worksheet in the workbook.
