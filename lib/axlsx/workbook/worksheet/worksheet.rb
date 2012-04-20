@@ -124,14 +124,14 @@ module Axlsx
       rows.flatten
     end
 
-    # Add conditinoal formatting to this worksheet.
+    # Add conditional formatting to this worksheet.
     # 
-    # @option cells [String] The range to apply the formatting to
-    # @option rules [Array, Hash]  An array of hashes (or just one) to create Conditional formatting rules from
-    # @example This would color column A whenever it is FALSE
-    #        worksheet.add_conditional_formatting( "A1:A1048576", { :type => :cellIs, :operator => :equal, :formula => "FALSE", :dxfId => 0, priority => 1 }
+    # @param [String] cells The range to apply the formatting to
+    # @param [Array|Hash] rules An array of hashes (or just one) to create Conditional formatting rules from.
+    # @example This would format column A whenever it is FALSE
+    #        worksheet.add_conditional_formatting( "A1:A1048576", { :type => :cellIs, :operator => :equal, :formula => "FALSE", :dxfId => 1, :priority => 1 }
     #
-    # @see ConditionalFormattingRule.#initialize
+    # @see ConditionalFormattingRule#initialize
     def add_conditional_formatting(cells, rules)
       cf = ConditionalFormatting.new( :sqref => cells )
       cf.add_rules rules
