@@ -4,6 +4,8 @@ module Axlsx
 require 'axlsx/workbook/worksheet/date_time_converter.rb'
 require 'axlsx/workbook/worksheet/cell.rb'
 require 'axlsx/workbook/worksheet/page_margins.rb'
+require 'axlsx/workbook/worksheet/conditional_formatting.rb'
+require 'axlsx/workbook/worksheet/conditional_formatting_rule.rb'    
 require 'axlsx/workbook/worksheet/row.rb'
 require 'axlsx/workbook/worksheet/col.rb'
 require 'axlsx/workbook/worksheet/worksheet.rb'

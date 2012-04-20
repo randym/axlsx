@@ -96,6 +96,35 @@ module Axlsx
        :darkTrellis, :lightHorizontal, :lightVertical, :lightDown, :lightUp, :lightGrid, :lightTrellis, :gray125, :gray0625], v
   end
 
+  # Requires that the value is one of the ST_TimePeriod types
+  # valid time period types are today, yesterday, tomorrow, last7Days,
+  # thisMonth, lastMonth, nextMonth, thisWeek, lastWeek, nextWeek
+  def self.validate_time_period_type(v)
+    RestrictionValidator.validate :time_period_type, [:today, :yesterday, :tomorrow, :last7Days, :thisMonth, :lastMonth, :nextMonth, :thisWeek, :lastWeek, :nextWeek], v
+  
+    
+  end
+  
+  # Requires that the value is valid conditional formatting type.
+  # valid types must be one of expression, cellIs, colorScale,
+  # dataBar, iconSet, top10, uniqueValues, duplicateValues,
+  # containsText, notContainsText, beginsWith, endsWith,
+  # containsBlanks, notContainsBlanks, containsErrors,
+  # notContainsErrors, timePeriod, aboveAverage   
+  # @param [Any] v The value validated
+  def self.validate_conditional_formatting_type(v)
+    RestrictionValidator.validate :conditional_formatting_type, [:expression, :cellIs, :colorScale, :dataBar, :iconSet, :top10, :uniqueValues, :duplicateValues, :containsText, :notContainsText, :beginsWith, :endsWith, :containsBlanks, :notContainsBlanks, :containsErrors, :notContainsErrors, :timePeriod, :aboveAverage], v
+  end
+
+  # Requires that the value is valid conditional formatting operator.
+  # valid operators must be one of lessThan, lessThanOrEqual, equal,
+  # notEqual, greaterThanOrEqual, greaterThan, between, notBetween,
+  # containsText, notContains, beginsWith, endsWith
+  # @param [Any] v The value validated
+  def self.validate_conditional_formatting_operator(v)
+    RestrictionValidator.validate :conditional_formatting_type, [:lessThan, :lessThanOrEqual, :equal, :notEqual, :greaterThanOrEqual, :greaterThan, :between, :notBetween, :containsText, :notContains, :beginsWith, :endsWith], v
+  end
+  
   # Requires that the value is a gradient_type.
   # valid types are :linear and :path
   # @param [Any] v The value validated
