@@ -443,15 +443,14 @@ p.use_shared_strings = true
 p.serialize("shared_strings_example.xlsx")
 ```
 
-
 ##Disabling Autowidth
 
 ```ruby
 p = Axlsx::Package.new
 p.use_autowidth = false
 wb = p.workbook
-wb.add_worksheet(:name => "No Magick") do | sheet |
-  sheet.add_row ['oh look! no autowidth - and no magick loaded in your process']
+wb.add_worksheet(:name => "Manual Widths") do | sheet |
+  sheet.add_row ['oh look! no autowidth']
 end
 p.validate.each { |e| puts e.message }
 p.serialize("no-use_autowidth.xlsx")
@@ -491,7 +490,7 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
    - Support for tables added in - Note: Pre 2011 versions of Mac office do not support this feature and will warn.
    - Support for splatter charts added
    - Major (like 7x faster!) performance updates.
-   - Gem now supports for JRuby 1.6.7, as well as expirimental support for Rubinius
+   - Gem now supports for JRuby 1.6.7, as well as experimental support for Rubinius
 
 Please see the {file:CHANGELOG.md} document for past release information.
 
@@ -515,7 +514,7 @@ Please see the {file:CHANGELOG.md} document for past release information.
 
 [moskrin](https://github.com/moskrin) - for keeping border creation on the edge.
 
-[scpike](https://github.com/scpike) - for keeping numbers fixed even when they are rational.
+[scpike](https://github.com/scpike) - for keeping numbers fixed even when they are rational and a super clean implementation of conditional formatting.
 
 #Copyright and License
 ----------
