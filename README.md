@@ -515,6 +515,8 @@ Please see the {file:CHANGELOG.md} document for past release information.
 
 [moskrin](https://github.com/moskrin) - for keeping border creation on the edge.
 
+[scpike](https://github.com/scpike) - for keeping numbers fixed even when they are rational.
+
 #Copyright and License
 ----------
 
