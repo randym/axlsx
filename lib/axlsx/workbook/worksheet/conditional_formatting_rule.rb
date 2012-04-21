@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 module Axlsx
   # Conditional formatting rules specify formulas whose evaluations
   # format cells
@@ -6,18 +7,18 @@ module Axlsx
   # @see Worksheet#add_conditional_formatting
   # @see ConditionalFormattingRule#initialize
   class ConditionalFormattingRule
-    CHILD_ELEMENTS = [:formula]
-    
+    CHILD_ELEMENTS = [:formula, :color_scale]
+
     # Formula
     # @return [String]
     attr_reader :formula
-    
+
     # Type (ST_CfType)
     # options are expression, cellIs, colorScale, dataBar, iconSet,
     # top10, uniqueValues, duplicateValues, containsText,
     # notContainsText, beginsWith, endsWith, containsBlanks,
     # notContainsBlanks, containsErrors, notContainsErrors,
-    # timePeriod, aboveAverage 
+    # timePeriod, aboveAverage
     # @return [Symbol]
     attr_reader :type
 
@@ -48,7 +49,7 @@ module Axlsx
     # rule. This attribute is ignored if type is not equal to cellIs
     #
     # Operator must be one of lessThan, lessThanOrEqual, equal,
-    # notEqual, greaterThanOrEqual, greaterThan, between, notBetween, 
+    # notEqual, greaterThanOrEqual, greaterThan, between, notBetween,
     # containsText, notContains, beginsWith, endsWith
     # @return [Symbol]
     attr_reader :operator
@@ -66,7 +67,7 @@ module Axlsx
     # rule.
     # @return [String]
     attr_reader :text
-    
+
     # percent (Top 10 Percent)
     # indicates whether a "top/bottom n" rule is a "top/bottom n
     # percent" rule. This attribute is ignored if type is not equal to
@@ -77,9 +78,9 @@ module Axlsx
     # rank (Rank)
     # The value of "n" in a "top/bottom n" conditional formatting
     # rule. This attribute is ignored if type is not equal to top10.
-    # @return [Integer] 
+    # @return [Integer]
     attr_reader :rank
-    
+
     # stdDev (StdDev)
     # The number of standard deviations to include above or below the
     # average in the conditional formatting rule. This attribute is
@@ -89,13 +90,13 @@ module Axlsx
     # rule.
     # @return [Integer]
     attr_reader :stdDev
-    
+
     # stopIfTrue (Stop If True)
     # If this flag is '1', no rules with lower priority shall be
     # applied over this rule, when this rule evaluates to true.
     # @return [Boolean]
     attr_reader :stopIfTrue
-    
+
     # timePeriod (Time Period)
     # The applicable time period in a "date occurring…" conditional
     # formatting rule. This attribute is ignored if type is not equal
@@ -103,13 +104,21 @@ module Axlsx
     # Valid types are today, yesterday, tomorrow, last7Days,
     # thisMonth, lastMonth, nextMonth, thisWeek, lastWeek, nextWeek
     attr_reader :timePeriod
-    
+
+
+    # colorScale (Color Scale)
+    # The color scale to apply to this conditional formatting
+    # @return [ColorScale]
+    def color_scale
+      @color_scale ||= ColorScale.new
+    end
+
     # Creates a new Conditional Formatting Rule object
     # @option options [Symbol] type The type of this formatting rule
     # @option options [Boolean] aboveAverage This is an aboveAverage rule
     # @option options [Boolean] bottom This is a bottom N rule.
     # @option options [Integer] dxfId The formatting id to apply to matches
-    # @option options [Boolean] equalAverage Is the aboveAverage or belowAverage rule inclusive 
+    # @option options [Boolean] equalAverage Is the aboveAverage or belowAverage rule inclusive
     # @option options [Integer] priority The priority of the rule, 1 is highest
     # @option options [Symbol] operator Which operator to apply
     # @option options [String] text The value to apply a text operator against
@@ -127,11 +136,11 @@ module Axlsx
 
     # @see type
     def type=(v); Axlsx::validate_conditional_formatting_type(v); @type = v end
-    # @see aboveAverage    
+    # @see aboveAverage
     def aboveAverage=(v); Axlsx::validate_boolean(v); @aboveAverage = v end
     # @see bottom
     def bottom=(v); Axlsx::validate_boolean(v); @bottom = v end
-    # @see dxfId    
+    # @see dxfId
     def dxfId=(v); Axlsx::validate_unsigned_numeric(v); @dxfId = v end
     # @see equalAverage
     def equalAverage=(v); Axlsx::validate_boolean(v); @equalAverage = v end
@@ -154,6 +163,11 @@ module Axlsx
     # @see formula
     def formula=(v); Axlsx::validate_string(v); @formula = v end
 
+    # @see color_scale
+    def color_scale=(v)
+      Axlsx::DataTypeValidator.validate 'conditional_formatting_rule.color scale', ColorScale, v
+      @color_scale = v
+    end
     # Serializes the conditional formatting rule
     # @param [String] str
     # @return [String]
@@ -161,9 +175,8 @@ module Axlsx
       str << '<cfRule '
       str << instance_values.map { |key, value| '' << key << '="' << value.to_s << '"' unless CHILD_ELEMENTS.include?(key.to_sym) }.join(' ')
       str << '>'
-      CHILD_ELEMENTS.each do |el|
-        str << "<#{el}>" << self.send(el) << "</#{el}>" if self.send(el)
-      end
+      str << '<formula>' << self.formula << '</formula>' if @formula
+      @color_scale.to_xml_string(str) if @color_scale
       str << '</cfRule>'
     end
   end
