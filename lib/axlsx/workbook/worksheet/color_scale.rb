@@ -46,6 +46,9 @@ module Axlsx
       @colors.delete_at index
     end
 
+    # Serialize this color_scale object data to an xml string
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << '<colorScale>'
       @value_objects.each { |cfvo| cfvo.to_xml_string(str) }
@@ -53,7 +56,7 @@ module Axlsx
       str << '</colorScale>'
     end
 
-    protected
+    private
 
     # creates the initial cfvo objects
     def initialize_value_objects
