@@ -74,7 +74,7 @@ module Axlsx
     # I am keeping this private for now as I am not sure what impact changes to the required two cfvo objects will do.
     def initialize_value_objects
       @value_objects = SimpleTypedList.new Cfvo
-      @value_objects.concat [Cfvo.new(:type => :min, :val => 0), Cfvo.new(:type => :max, :val => 0)]
+      @value_objects.concat [Cfvo.new(:type => :percent, :val => 0), Cfvo.new(:type => :percent, :val => 33), Cfvo.new(:type => :percent, :val => 67)]
       @value_objects.lock
     end
   end
