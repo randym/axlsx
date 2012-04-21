@@ -14,6 +14,7 @@ module Axlsx
   require 'axlsx/stylesheet/table_style.rb'
   require 'axlsx/stylesheet/table_styles.rb'
   require 'axlsx/stylesheet/table_style_element.rb'
+  require 'axlsx/stylesheet/dxf.rb'  
   require 'axlsx/stylesheet/xf.rb'
   require 'axlsx/stylesheet/cell_protection.rb'
 
@@ -137,6 +138,7 @@ module Axlsx
     # @option options [String] bg_color The background color to apply to the cell
     # @option options [Boolean] hidden Indicates if the cell should be hidden
     # @option options [Boolean] locked Indicates if the cell should be locked
+    # @option options [Symbol] type What type of style is this. Options are [:dxf, :xf]. :xf is default
     # @option options [Hash] alignment A hash defining any of the attributes used in CellAlignment
     # @see CellAlignment
     #
@@ -189,67 +191,112 @@ module Axlsx
     #   ws.add_row :values => ["Q4", 2000, 20], :style=>[title, currency, percent]
     #   f = File.open('example_you_got_style.xlsx', 'w')
     #   p.serialize(f)
+    #
+    # @example Differential styling
+    #   # Differential styles apply on top of cell styles. Used in Conditional Formatting. Must specify :type => :dxf, and you can't use :num_fmt.
+    #   require "rubygems" # if that is your preferred way to manage gems!
+    #   require "axlsx"
+    #
+    #   p = Axlsx::Package.new
+    #   wb = p.workbook
+    #   ws = wb.add_worksheet
+    #
+    #   # define your styles
+    #   profitable = wb.styles.add_style(:bg_color => "FFFF0000",
+    #                              :fg_color=>"#FF000000",
+    #                              :type => :dxf)
+    # 
+    #   ws.add_row :values => ["Genreated At:", Time.now], :styles=>[nil, date_time]
+    #   ws.add_row :values => ["Previous Year Quarterly Profits (JPY)"], :style=>title
+    #   ws.add_row :values => ["Quarter", "Profit", "% of Total"], :style=>title
+    #   ws.add_row :values => ["Q1", 4000, 40], :style=>[title, currency, percent]
+    #   ws.add_row :values => ["Q2", 3000, 30], :style=>[title, currency, percent]
+    #   ws.add_row :values => ["Q3", 1000, 10], :style=>[title, currency, percent]
+    #   ws.add_row :values => ["Q4", 2000, 20], :style=>[title, currency, percent]
+    # 
+    #   ws.add_conditional_formatting("A1:A7", { :type => :cellIs, :operator => :greaterThan, :formula => "2000", :dxfId => profitable, :priority => 1 })
+    #   f = File.open('example_differential_styling', 'w')
+    #   p.serialize(f)
+    #
     def add_style(options={})
+      # Default to :xf
+      options[:type] ||= :xf
+      raise ArgumentError, "Type must be one of [:xf, :dxf]" unless [:xf, :dxf].include?(options[:type] )
+      
+      numFmt = if options[:format_code]
+                 n = @numFmts.map{ |f| f.numFmtId }.max + 1
+                 NumFmt.new(:numFmtId => n, :formatCode=> options[:format_code])                   
+               elsif options[:type] == :xf
+                 options[:num_fmt] || 0
+               elsif options[:type] == :dxf and options[:num_fmt]
+                 raise ArgumentError, "Can't use :num_fmt with :dxf"
+               end
+      
+      border = options[:border]
 
-      numFmtId = if options[:format_code]
-                   n = @numFmts.map{ |f| f.numFmtId }.max + 1
-                   numFmts << NumFmt.new(:numFmtId => n, :formatCode=> options[:format_code])
-                   n
-                 else
-                   options[:num_fmt] || 0
-                 end
+      if border.is_a?(Hash)
+        raise ArgumentError, "border hash definitions must include both style and color" unless border.keys.include?(:style) && border.keys.include?(:color)
 
-      borderId = options[:border] || 0
-
-      if borderId.is_a?(Hash)
-        raise ArgumentError, "border hash definitions must include both style and color" unless borderId.keys.include?(:style) && borderId.keys.include?(:color)
-
-        s = borderId[:style]
-        c = borderId[:color]
-        edges = borderId[:edges] || [:left, :right, :top, :bottom]
+        s = border[:style]
+        c = border[:color]
+        edges = border[:edges] || [:left, :right, :top, :bottom]
 
         border = Border.new
         edges.each {|pr| border.prs << BorderPr.new(:name => pr, :style=>s, :color => Color.new(:rgb => c))}
-        borderId = self.borders << border
+      elsif border.is_a? Integer
+        raise ArgumentError, "Must pass border options directly if specifying dxf" if options[:type] == :dxf
+        raise ArgumentError, "Invalid borderId" unless border < borders.size
       end
-
-      raise ArgumentError, "Invalid borderId" unless borderId < borders.size
 
       fill = if options[:bg_color]
                color = Color.new(:rgb=>options[:bg_color])
                pattern = PatternFill.new(:patternType =>:solid, :fgColor=>color)
-               fills << Fill.new(pattern)
-             else
-               0
+               Fill.new(pattern)
              end
 
-      fontId = if (options.values_at(:fg_color, :sz, :b, :i, :u, :strike, :outline, :shadow, :charset, :family, :font_name).length)
+      font = if (options.values_at(:fg_color, :sz, :b, :i, :u, :strike, :outline, :shadow, :charset, :family, :font_name).length)
                  font = Font.new()
                  [:b, :i, :u, :strike, :outline, :shadow, :charset, :family, :sz].each { |k| font.send("#{k}=", options[k]) unless options[k].nil? }
                  font.color = Color.new(:rgb => options[:fg_color]) unless options[:fg_color].nil?
                  font.name = options[:font_name] unless options[:font_name].nil?
-                 fonts << font
-               else
-                 0
+                 font
                end
 
       applyProtection = (options[:hidden] || options[:locked]) ? 1 : 0
 
-      xf = Xf.new(:fillId => fill, :fontId=>fontId, :applyFill=>1, :applyFont=>1, :numFmtId=>numFmtId, :borderId=>borderId, :applyProtection=>applyProtection)
-
-      xf.applyNumberFormat = true if xf.numFmtId > 0
-      xf.applyBorder = true if borderId > 0
-
+      if options[:type] == :dxf
+        style = Dxf.new
+        style.fill = fill if fill
+        style.font = font if font
+        style.numFmt = numFmt if numFmt
+        style.border = border if border
+      else
+        # Only add styles if we're adding to Xf. They're embedded inside the Dxf pieces directly
+        fontId = font ? fonts << font : 0
+        fillId = fill ? fills << fill : 0
+        # Default to borderId = 0 rather than no border
+        border ||= 0
+        borderId = border.is_a?(Border) ? borders << border : border
+        numFmtId = numFmt.is_a?(NumFmt) ? numFmts << numFmt : numFmt 
+        style = Xf.new(:fillId=>fillId, :fontId=>fontId, :applyFill=>1, :applyFont=>1, :numFmtId=>numFmtId, :borderId=>borderId, :applyProtection=>applyProtection)
+        style.applyNumberFormat = true if style.numFmtId > 0
+        style.applyBorder = true if borderId > 0
+      end
+        
       if options[:alignment]
-        xf.alignment = CellAlignment.new(options[:alignment])
-        xf.applyAlignment = true
+        style.alignment = CellAlignment.new(options[:alignment])
+        style.applyAlignment = true if style.is_a? Xf
       end
 
       if applyProtection
-        xf.protection = CellProtection.new(options)
+        style.protection = CellProtection.new(options)
       end
 
-      cellXfs << xf
+      if style.is_a? Dxf
+        dxfs << style
+      else
+        cellXfs << style if style.is_a? Xf
+      end
     end
 
     # Serializes the object
@@ -306,7 +353,7 @@ module Axlsx
       @cellXfs << Xf.new(:borderId=>0, :xfId=>0, :numFmtId=>14, :fontId=>0, :fillId=>0, :applyNumberFormat=>1)
       @cellXfs.lock
 
-      @dxfs = SimpleTypedList.new(Xf, "dxfs"); @dxfs.lock
+      @dxfs = SimpleTypedList.new(Dxf, "dxfs"); @dxfs.lock
       @tableStyles = TableStyles.new(:defaultTableStyle => "TableStyleMedium9", :defaultPivotStyle => "PivotStyleLight16"); @tableStyles.lock
     end
   end
