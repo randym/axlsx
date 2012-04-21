@@ -3,7 +3,7 @@ module Axlsx
   #
   # @note The recommended way to manage conditional formatting is via Worksheet#add_conditional_formatting
   # @see Worksheet#add_conditional_formatting
-  # @see ConditionalFormattingRule  
+  # @see ConditionalFormattingRule
   class ConditionalFormatting
 
     # Range over which the formatting is applied, in "A1:B2" format
@@ -17,7 +17,7 @@ module Axlsx
     # @see ConditionalFormattingRule#initialize
     # @return [Array]
     attr_reader :rules
-    
+
     # Creates a new {ConditionalFormatting} object
     # @option options [Array] rules The rules to apply
     # @option options [String] sqref The range to apply the rules to
@@ -36,13 +36,13 @@ module Axlsx
     # @example This would apply formatting "1" to cells > 20, and formatting "2" to cells < 1
     #        conditional_formatting.add_rules [
     #            { :type => :cellIs, :operator => :greaterThan, :formula => "20", :dxfId => 1, :priority=> 1 },
-    #            { :type => :cellIs, :operator => :lessThan, :formula => "10", :dxfId => 2, :priority=> 2 } ]    
+    #            { :type => :cellIs, :operator => :lessThan, :formula => "10", :dxfId => 2, :priority=> 2 } ]
     #
     # @param [Array|Hash] rules the rules to apply, can be just one in hash form
-    # @see ConditionalFormattingRule#initialize    
+    # @see ConditionalFormattingRule#initialize
     def add_rules(rules)
       rules = [rules] if rules.is_a? Hash
-      conditional_rules = rules.each do |rule|
+      rules.each do |rule|
         add_rule rule
       end
     end
@@ -58,7 +58,7 @@ module Axlsx
         @rules << ConditionalFormattingRule.new(rule)
       end
     end
-    
+
     # @see rules
     def rules=(v); @rules = v end
     # @see sqref
@@ -68,7 +68,7 @@ module Axlsx
     # @example Conditional Formatting XML looks like:
     #    <conditionalFormatting sqref="E3:E9">
     #        <cfRule type="cellIs" dxfId="0" priority="1" operator="greaterThan">
-    #             <formula>0.5</formula> 
+    #             <formula>0.5</formula>
     #        </cfRule>
     #    </conditionalFormatting>
     # @param [String] str

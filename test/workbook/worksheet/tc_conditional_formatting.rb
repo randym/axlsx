@@ -25,15 +25,35 @@ class TestConditionalFormatting < Test::Unit::TestCase
       cs.value_objects.first.val = 5
     end
 
+    data_bar = Axlsx::DataBar.new :color => "FFFF0000"
+    icon_set = Axlsx::IconSet.new :iconSet => "5Rating"
+
     cfs = @ws.add_conditional_formatting( "B2:B2", [{ :type => :containsText, :text => "TRUE",
                                                       :dxfId => 0, :priority => 1,
                                                       :formula => 'NOT(ISERROR(SEARCH("FALSE",AB1)))',
-                                                      :color_scale => color_scale}])
+                                                      :color_scale => color_scale,
+                                                      :data_bar => data_bar,
+                                                      :icon_set => icon_set}])
     doc = Nokogiri::XML.parse(cfs.last.to_xml_string)
     assert_equal(1, doc.xpath(".//conditionalFormatting[@sqref='B2:B2']//cfRule[@type='containsText'][@dxfId=0][@priority=1]").size)
     assert doc.xpath(".//conditionalFormatting//cfRule[@type='containsText'][@dxfId=0][@priority=1]//formula='NOT(ISERROR(SEARCH(\"FALSE\",AB1)))'")
+
+    cfs.last.rules.last.type = :colorScale
+    doc = Nokogiri::XML.parse(cfs.last.to_xml_string)
     assert_equal(doc.xpath(".//conditionalFormatting//cfRule//colorScale//cfvo").size, 2)
     assert_equal(doc.xpath(".//conditionalFormatting//cfRule//colorScale//color").size, 2)
+
+    cfs.last.rules.last.type = :dataBar
+    doc = Nokogiri::XML.parse(cfs.last.to_xml_string)
+    assert_equal(doc.xpath(".//conditionalFormatting//cfRule//dataBar").size, 1)
+    assert_equal(doc.xpath(".//conditionalFormatting//cfRule//dataBar//cfvo").size, 2)
+    assert_equal(doc.xpath(".//conditionalFormatting//cfRule//dataBar//color[@rgb='FFFF0000']").size, 1)
+
+    cfs.last.rules.last.type = :iconSet
+    doc = Nokogiri::XML.parse(cfs.last.to_xml_string)
+    assert_equal(doc.xpath(".//conditionalFormatting//cfRule//iconSet//cfvo").size, 2)
+    assert_equal(doc.xpath(".//conditionalFormatting//cfRule//iconSet[@iconSet='5Rating']").size, 1)
+
   end
 
   def test_single_rule

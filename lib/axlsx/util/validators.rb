@@ -105,6 +105,12 @@ module Axlsx
 
   end
 
+  # Requires that the value is one of the valid ST_IconSet types
+  # Allowed values are: 3Arrows, 3ArrowsGray, 3Flags, 3TrafficLights1, 3TrafficLights2, 3Signs, 3Symbols, 3Symbols2, 4Arrows, 4ArrowsGray, 4RedToBlack, 4Rating, 4TrafficLights, 5Arrows, 5ArrowsGray, 5Rating, 5Quarters
+  def self.validate_icon_set(v)
+    RestrictionValidator.validate :iconSet, ["3Arrows", "3ArrowsGray", "3Flags", "3TrafficLights1", "3TrafficLights2", "3Signs", "3Symbols", "3Symbols2", "4Arrows", "4ArrowsGray", "4RedToBlack", "4Rating", "4TrafficLights", "5Arrows", "5ArrowsGray", "5Rating", "5Quarters"], v
+  end
+
   # Requires that the value is valid conditional formatting type.
   # valid types must be one of expression, cellIs, colorScale,
   # dataBar, iconSet, top10, uniqueValues, duplicateValues,

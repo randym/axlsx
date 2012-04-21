@@ -7,7 +7,7 @@ module Axlsx
   # @see Worksheet#add_conditional_formatting
   # @see ConditionalFormattingRule#initialize
   class ConditionalFormattingRule
-    CHILD_ELEMENTS = [:formula, :color_scale]
+    CHILD_ELEMENTS = [:formula, :color_scale, :data_bar, :icon_set]
 
     # Formula
     # @return [String]
@@ -113,6 +113,20 @@ module Axlsx
       @color_scale ||= ColorScale.new
     end
 
+    # dataBar (Data Bar)
+    # The data bar to apply to this conditional formatting
+    # @return [DataBar]
+    def data_bar
+      @data_bar ||= DataBar.new
+    end
+
+    # iconSet (Icon Set)
+    # The icon set to apply to this conditional formatting
+    # @return [IconSet]
+    def icon_set
+      @icon_set ||= IconSet.new
+    end
+
     # Creates a new Conditional Formatting Rule object
     # @option options [Symbol] type The type of this formatting rule
     # @option options [Boolean] aboveAverage This is an aboveAverage rule
@@ -129,6 +143,7 @@ module Axlsx
     # @option options [Symbol]  timePeriod The time period in a date occuring... rule
     # @option options [String] formula The formula to match against in i.e. an equal rule
     def initialize(options={})
+      @color_scale = @data_bar = @icon_set = @formula = nil
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
@@ -165,9 +180,23 @@ module Axlsx
 
     # @see color_scale
     def color_scale=(v)
-      Axlsx::DataTypeValidator.validate 'conditional_formatting_rule.color scale', ColorScale, v
+      Axlsx::DataTypeValidator.validate 'conditional_formatting_rule.color_scale', ColorScale, v
       @color_scale = v
     end
+
+    # @see data_bar
+    def data_bar=(v)
+      Axlsx::DataTypeValidator.validate 'conditional_formatting_rule.data_bar', DataBar, v
+      @data_bar = v
+    end
+
+    # @see icon_set
+    def icon_set=(v)
+      Axlsx::DataTypeValidator.validate 'conditional_formatting_rule.icon_set', IconSet, v
+      @icon_set = v
+    end
+
+
     # Serializes the conditional formatting rule
     # @param [String] str
     # @return [String]
@@ -176,7 +205,9 @@ module Axlsx
       str << instance_values.map { |key, value| '' << key << '="' << value.to_s << '"' unless CHILD_ELEMENTS.include?(key.to_sym) }.join(' ')
       str << '>'
       str << '<formula>' << self.formula << '</formula>' if @formula
-      @color_scale.to_xml_string(str) if @color_scale
+      @color_scale.to_xml_string(str) if @color_scale && @type == :colorScale
+      @data_bar.to_xml_string(str) if @data_bar && @type == :dataBar
+      @icon_set.to_xml_string(str) if @icon_set && @type == :iconSet
       str << '</cfRule>'
     end
   end
