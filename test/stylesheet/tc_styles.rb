@@ -41,6 +41,43 @@ class TestStyles < Test::Unit::TestCase
     assert_equal options[:border][:color], "FF000000", 'color is stil in option'
   end
 
+  def test_parse_num_fmt
+    f_code = {:format_code => "YYYY/MM"}
+    num_fmt = {:num_fmt => 5}
+    both = { :format_code => "#000", :num_fmt => 0 }
+    assert_equal(@styles.parse_num_fmt_options, nil, 'noop if neither :format_code or :num_fmt exist')
+    assert_equal(@styles.parse_num_fmt_options(f_code).numFmtId, ((@styles.numFmts.map{ |nf| nf.numFmtId }).max + 1), "new numfmts gets next available id")
+    assert(@styles.parse_num_fmt_options(f_code).is_a?(Axlsx::NumFmt), "Must create a NumFmt object when format_code key exists.")
+    assert(@styles.parse_num_fmt_options(num_fmt).is_a?(Integer), "Should return the provided num_fmt if not dxf and format_code is not set")
+    assert(@styles.parse_num_fmt_options(num_fmt.merge({:type => :dxf})).is_a?(Axlsx::NumFmt), "Makes a new NumFmt if dxf and only num_fmt specified")
+    assert(@styles.parse_num_fmt_options(both).is_a?(Axlsx::NumFmt), "builds a new number format if format_code and num_fmt are specified")
+  end
+
+  def test_parse_border_options_hash
+    b_opts = {:border => { :edges => [:left, :right], :color => "FFDADADA", :style => :thick } }
+    b = @styles.parse_border_options b_opts
+    assert(b.is_a? Axlsx::Border)
+    assert_raise(ArgumentError, "Require color key") { @styles.parse_border_options({:border => {:style => :thin}}) }
+    assert_raise(ArgumentError, "Require style key") { @styles.parse_border_options({:border => {:color => "FF0d0d0d"}}) }
+    left = b.prs.select { |bpr| bpr.name == :left }[0]
+    right = b.prs.select { |bpr| bpr.name == :right }[0]
+    top = b.prs.select { |bpr| bpr.name == :top }[0]
+    bottom = b.prs.select { |bpr| bpr.name == :bottom }[0]
+    assert_equal(top, nil)
+    assert_equal(bottom, nil)
+    assert left.is_a? Axlsx::BorderPr
+    assert right.is_a? Axlsx::BorderPr
+    assert_equal(left.style,right.style)
+    assert_equal(left.style, :thick)
+    assert_equal(right.color.rgb,left.color.rgb)
+    assert_equal(right.color.rgb,"FFDADADA")
+    assert_equal(@styles.parse_border_options({}), nil)
+  end
+
+  def test_parse_border_options_integer
+
+  end
+
   def test_add_style
     fill_count = @styles.fills.size
     font_count = @styles.fonts.size
@@ -69,11 +106,11 @@ class TestStyles < Test::Unit::TestCase
 
 
     assert_equal(xf.applyProtection, 1, "protection applied")
-    assert_equal(xf.applyBorder, true, "border applied")
-    assert_equal(xf.applyNumberFormat, true, "number format applied")
-    assert_equal(xf.applyAlignment, true, "alignment applied")
+    assert_equal(xf.applyBorder, 1, "border applied")
+    assert_equal(xf.applyNumberFormat,1, "number format applied")
+    assert_equal(xf.applyAlignment, 1, "alignment applied")
   end
-  
+
   def test_basic_add_style_dxf
     border_count = @styles.borders.size
     s = @styles.add_style :border => {:style => :thin, :color => "FFFF0000"}, :type => :dxf
@@ -91,7 +128,7 @@ class TestStyles < Test::Unit::TestCase
     style = @styles.add_style :bg_color=>"FF000000", :fg_color=>"FFFFFFFF", :sz=>13, :alignment=>{:horizontal=>:left}, :border=>{:style => :thin, :color => "FFFF0000"}, :hidden=>true, :locked=>true, :type => :dxf
     assert_equal(@styles.dxfs.size, dxf_count+1)
     assert_equal(0, style, "returns the zero-based dxfId")
-    
+
     dxf = @styles.dxfs.last
     assert_equal(@styles.dxfs.last.fill.fill_type.fgColor.rgb, "FF000000", "fill created with color")
 
@@ -106,9 +143,6 @@ class TestStyles < Test::Unit::TestCase
     assert_equal(dxf.protection.hidden, true, "hidden protection set")
     assert_equal(dxf.protection.locked, true, "cell locking set")
     assert_raise(ArgumentError, "should reject invalid borderId") { @styles.add_style :border => 3 }
-    assert_raise(ArgumentError, "should reject num_fmt option") {
-      @styles.add_style :type=>:dxf, :num_fmt=>Axlsx::NUM_FMT_PERCENT
-    }
   end
 
   def test_multiple_dxf

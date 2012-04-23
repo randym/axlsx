@@ -43,6 +43,7 @@ module Axlsx
     # @option options [CellProtection] protection
     def initialize(options={})
       options.each do |o|
+        next if o[1].nil?
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
     end
@@ -74,4 +75,5 @@ module Axlsx
     end
 
   end
+
 end

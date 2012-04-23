@@ -42,7 +42,7 @@ require 'date'
 wb.styles do |s|
   date = s.add_style(:format_code => "yyyy-mm-dd", :border => Axlsx::STYLE_THIN_BORDER)
   padded = s.add_style(:format_code => "00#", :border => Axlsx::STYLE_THIN_BORDER)
-  percent = s.add_style(:format_code => "0000%", :border => Axlsx::STYLE_THIN_BORDER)
+  percent = s.add_style(:format_code => "###0%", :border => Axlsx::STYLE_THIN_BORDER)
   # wb.date1904 = true # Use the 1904 date system (Used by Excel for Mac < 2011)
   wb.add_worksheet(:name => "Formatting Data") do |sheet|
     sheet.add_row ["Custom Formatted Date", "Percent Formatted Float", "Padded Numbers"], :style => Axlsx::STYLE_THIN_BORDER

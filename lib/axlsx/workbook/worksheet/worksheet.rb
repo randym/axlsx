@@ -102,7 +102,7 @@ module Axlsx
       @merged_cells = []
       @auto_fit_data = []
       @conditional_formattings = []
-      
+
       @selected = false
       @show_gridlines = true
       self.name = "Sheet" + (index+1).to_s
@@ -125,7 +125,7 @@ module Axlsx
     end
 
     # Add conditional formatting to this worksheet.
-    # 
+    #
     # @param [String] cells The range to apply the formatting to
     # @param [Array|Hash] rules An array of hashes (or just one) to create Conditional formatting rules from.
     # @example This would format column A whenever it is FALSE.
@@ -139,7 +139,7 @@ module Axlsx
       cf.add_rules rules
       @conditional_formattings << cf
     end
-    
+
     # Creates merge information for this worksheet.
     # Cells can be merged by calling the merge_cells method on a worksheet.
     # @example This would merge the three cells C1..E1    #
@@ -496,10 +496,12 @@ module Axlsx
     end
 
 
-    # If you *REALLY* want to know what this does, check the spec for how column width is specified.
+    # This is still not perfect...
+    #  - scaling is not linear as font sizes increst
+    #  - different fonts have different mdw and char widths
     def calculate_width(text, sz)
-      mdw = 1.78 #magic numbers ftw! This is the widest width of 0..9 in the "standard" font (arial@10px)
-      font_scale = sz/10.0
+      mdw = 1.78 #This is the widest width of 0..9 in arial@10px)
+      font_scale = (sz/10.0).to_f
       ((text.count(Worksheet.thin_chars) * mdw + 5) / mdw * 256) / 256.0 * font_scale
     end
   end

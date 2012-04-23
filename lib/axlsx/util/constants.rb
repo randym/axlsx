@@ -232,4 +232,11 @@ module Axlsx
   # error message for duplicate sheet names
   ERR_DUPLICATE_SHEET_NAME = "There is already a worksheet in this workbook named '%s'. Please use a unique name"
 
+  # error message when user does not provide color and or style options for border in Style#add_sytle
+  ERR_INVALID_BORDER_OPTIONS = "border hash must include both style and color. e.g. :border => { :color => 'FF000000', :style => :thin }. You provided: %s"
+
+  ERR_INVALID_DXF_BORDER_OPTIONS = "border options required for dxf style stypes. e.g. :border => { :color => 'FF000000', :style => :thin }. You provided: %s"
+
+  ERR_INVALID_BORDER_ID = "The border id you specified (%s) does not exist. Please add a border with Style#add_style before referencing its index."
+
 end
