@@ -51,7 +51,7 @@ class TestConditionalFormatting < Test::Unit::TestCase
 
     cfs.last.rules.last.type = :iconSet
     doc = Nokogiri::XML.parse(cfs.last.to_xml_string)
-    assert_equal(doc.xpath(".//conditionalFormatting//cfRule//iconSet//cfvo").size, 2)
+    assert_equal(doc.xpath(".//conditionalFormatting//cfRule//iconSet//cfvo").size, 3)
     assert_equal(doc.xpath(".//conditionalFormatting//cfRule//iconSet[@iconSet='5Rating']").size, 1)
 
   end
