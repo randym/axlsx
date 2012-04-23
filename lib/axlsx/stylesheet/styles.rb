@@ -223,88 +223,97 @@ module Axlsx
       options[:type] ||= :xf
       raise ArgumentError, "Type must be one of [:xf, :dxf]" unless [:xf, :dxf].include?(options[:type] )
 
-      numFmt = parse_num_fmt_options options
-      applyProtection = (options[:hidden] || options[:locked]) ? 1 : 0
-      border = parse_border_options options
       fill = parse_fill_options options
       font = parse_font_options options
+      numFmt = parse_num_fmt_options options
+      border = parse_border_options options
       alignment = parse_alignment_options options
       protection = parse_protection_options options
 
-      if options[:type] == :dxf
+      case options[:type]
+      when :dxf
         style = Dxf.new :fill => fill, :font => font, :numFmt => numFmt, :border => border, :alignment => alignment, :protection => protection
       else
-        # Only add styles if we're adding to Xf. They're embedded inside the Dxf pieces directly
-        # Default to borderId = 0 rather than no border
-        borderId = border.is_a?(Border) ? borders << border : border || 0
-        numFmtId = numFmt.is_a?(NumFmt) ? numFmt.numFmtId : options[:num_fmt] || 0
-        numFmts << numFmt if numFmt.is_a?(NumFmt)
-        style = Xf.new(:fillId=>fill || 0, :fontId=>font || 0, :applyNumberFormat => 1, :applyFill=>1, :applyFont=>1, :numFmtId=>numFmtId, :borderId=>borderId, :applyProtection=>applyProtection, :applyBorder=>1, :alignment => alignment, :protection => protection)
-        style.applyAlignment = 1 if style.alignment
-        style.applyProtection = 1 if style.protection
+        style = Xf.new :fillId=>fill || 0, :fontId=>font || 0, :numFmtId=>numFmt || 0, :borderId=>border || 0, :alignment => alignment, :protection => protection, :applyFill=>!fill.nil?, :applyFont=>!font.nil?, :applyNumberFormat =>!numFmt.nil?, :applyBorder=>!border.nil?, :applyAlignment => !alignment.nil?, :applyProtection => !protection.nil?
       end
 
-      if style.is_a? Dxf
-        dxfs << style
-      else
-        cellXfs << style if style.is_a? Xf
-      end
+      options[:type] == :xf ? cellXfs << style : dxfs << style
     end
 
+    # parses add_style options for protection styles
+    # noop if options hash does not include :hide or :locked key
+
+    # @option options [Boolean] hide boolean value defining cell protection attribute for hiding.
+    # @option options [Boolean] locked boolean value defining cell protection attribute for locking.
+    # @return [CellProtection]
     def parse_protection_options(options={})
-      CellProtection.new(options) if options[:hide] || options[:locked]
+      return if (options.keys & [:hidden, :locked]).empty?
+      CellProtection.new(options)
     end
 
+    # parses add_style options for alignment
+    # noop if options hash does not include :alignment key
+    # @option options [Hash] alignment A hash of options to prive the CellAlignment intializer
+    # @return [CellAlignment]
+    # @see CellAlignment
     def parse_alignment_options(options={})
-      CellAlignment.new(options[:alignment]) if options[:alignment]
+      return unless options[:alignment]
+      CellAlignment.new options[:alignment]
     end
 
+    # parses add_style options for fonts. If the options hash contains :type => :dxf we return a new Font object.
+    # if not, we return the index of the newly created font object in the styles.fonts collection.
+    # @note noop if none of the options described here are set on the options parameter.
+    # @option options [Symbol] type The type of style object we are working with (dxf or xf)
+    # @option options [String] fg_color The text color
+    # @option options [Integer] sz The text size
+    # @option options [Boolean] b Indicates if the text should be bold
+    # @option options [Boolean] i Indicates if the text should be italicised
+    # @option options [Boolean] u Indicates if the text should be underlined
+    # @option options [Boolean] strike Indicates if the text should be rendered with a strikethrough
+    # @option options [Boolean] outline Indicates if the text should be rendered with a shadow
+    # @option options [Integer] charset The character set to use.
+    # @option options [Integer] family The font family to use.
+    # @option options [String] font_name The name of the font to use
+    # @return [Font|Integer]
     def parse_font_options(options={})
-      if (options.values_at(:fg_color, :sz, :b, :i, :u, :strike, :outline, :shadow, :charset, :family, :font_name).length)
-        # it would be better to pass a hash of what is allowed to the constructor and only set color and font name conditionally
-        font = Font.new()
-        [:b, :i, :u, :strike, :outline, :shadow, :charset, :family, :sz, :fg_color, :font_name].each do |key|
-          next if options[key].nil?
-          case key
-          when :fg_color
-            font.color = Color.new(:rgb => options[:fg_color])
-          when :font_name
-            font.name = options[:font_name]
-          else
-            font.send("#{key}=", options[key])
-          end
-        end
-        font = fonts << font if options[:type] != :dxf
-      end
+      return if (options.keys & [:fg_color, :sz, :b, :i, :u, :strike, :outline, :shadow, :charset, :family, :font_name]).empty?
+      font = Font.new(options)
+      font.color = Color.new(:rgb => options[:fg_color]) if options[:fg_color]
+      font.name = options[:font_name] if options[:font_name]
+      options[:type] == :dxf ? font : fonts << font
     end
 
+    # parses add_style options for fills. If the options hash contains :type => :dxf we return a Fill object. If not, we return the index of the fill after being added to the fills collection.
+    # @note noop if :bg_color is not specified in options
+    # @option options [String] bg_color The rgb color to apply to the fill
+    # @return [Fill|Integer]
     def parse_fill_options(options={})
-      if options[:bg_color]
-        color = Color.new(:rgb=>options[:bg_color])
-        pattern = PatternFill.new(:patternType =>:solid, :fgColor=>color)
-        fill = Fill.new(pattern)
-        fill = fills << fill if options[:type] != :dxf
-        fill
-      end
+      return unless options[:bg_color]
+      color = Color.new(:rgb=>options[:bg_color])
+      pattern = PatternFill.new(:patternType =>:solid, :fgColor=>color)
+      fill = Fill.new(pattern)
+      options[:type] == :dxf ? fill : fills << fill
     end
+
     # parses Style#add_style options for borders.
-    # @option options [Hash|Integer] A border style definition hash. Border style definition hashes must include :style and color: key-value entries and may include an :edges entry that references an array of symbols identifying which border edges you wish to apply the style to. If the :edges entity is not provided the style is applied to all edges of cells that reference this style.
+    # @note noop if :border is not specified in options
+    # @option options [Hash|Integer] A border style definition hash or the index of an existing border. Border style definition hashes must include :style and color: key-value entries and may include an :edges entry that references an array of symbols identifying which border edges you wish to apply the style or any other valid Border initializer options. If the :edges entity is not provided the style is applied to all edges of cells that reference this style.
     # @example
     #   #apply a thick red border to the top and bottom
     #   { :border => { :style => :thick, :color => "FFFF0000", :edges => [:top, :bottom] }
-    # When options is an Integer it is expected to reference a predefined border entry in styles and must be a valid index withing the Style#borders list.
-    # @note An error will be raised if you attempt to use an Integer border reference with a dxf style
-    # @return [Border|Integer|nil]
+    # @return [Border|Integer]
     def parse_border_options(options={})
+      return unless options[:border]
       b_opts = options[:border]
       if b_opts.is_a?(Hash)
-        raise ArgumentError, (ERR_INVALID_BORDER_OPTIONS % b_opts) unless (b_opts.keys & [:style, :color]).size == 2
-        border = Border.new
+        raise ArgumentError, (ERR_INVALID_BORDER_OPTIONS % b_opts) unless b_opts.values_at(:style, :color).size == 2
+        border = Border.new b_opts
         (b_opts[:edges] || [:left, :right, :top, :bottom]).each do |edge|
           b_options = { :name => edge, :style => b_opts[:style], :color => Color.new(:rgb => b_opts[:color]) }
           border.prs << BorderPr.new(b_options)
         end
-        border
+        options[:type] == :dxf ? border : borders << border
       elsif b_opts.is_a? Integer
         raise ArgumentError, (ERR_INVALID_BORDER_ID % b_opts) unless b_opts < borders.size
         if options[:type] == :dxf
@@ -320,10 +329,16 @@ module Axlsx
     # @option options [Hash] A hash describing the :format_code and/or :num_fmt integer for the style.
     # @return [NumFmt|Integer]
     def parse_num_fmt_options(options={})
-      return unless options.values_at([:format_code,:num_fmt]).length
-      if options[:format_code] || (options[:type] == :dxf && options[:num_fmt])
+      return if (options.keys & [:format_code, :num_fmt]).empty?
+
+      #When the user provides format_code - we always need to create a new numFmt object
+      #When the type is :dxf we always need to create a new numFmt object
+      if options[:format_code] || options[:type] == :dxf
+        #If this is a standard xf we pull from numFmts the highest current and increment for num_fmt
         options[:num_fmt] ||= (@numFmts.map{ |num_fmt| num_fmt.numFmtId }.max + 1) if options[:type] != :dxf
-        NumFmt.new(:numFmtId => options[:num_fmt] || 0, :formatCode=> options[:format_code].to_s)
+        #BUG? should we be pulling the max from xdfs.numFmt when the type is :dxf?
+        numFmt = NumFmt.new(:numFmtId => options[:num_fmt] || 0, :formatCode=> options[:format_code].to_s)
+        options[:type] == :dxf ? numFmt : numFmts << numFmt
       else
         options[:num_fmt]
       end
