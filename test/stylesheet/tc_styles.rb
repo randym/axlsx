@@ -46,7 +46,7 @@ class TestStyles < Test::Unit::TestCase
     num_fmt = {:num_fmt => 5}
     both = { :format_code => "#000", :num_fmt => 0 }
     assert_equal(@styles.parse_num_fmt_options, nil, 'noop if neither :format_code or :num_fmt exist')
-    max = @styles.numFmts.map{ |num_fmt| num_fmt.numFmtId }.max
+    max = @styles.numFmts.map{ |nf| nf.numFmtId }.max
     @styles.parse_num_fmt_options(f_code)
     assert_equal(@styles.numFmts.last.numFmtId, max + 1, "new numfmts gets next available id")
     assert(@styles.parse_num_fmt_options(num_fmt).is_a?(Integer), "Should return the provided num_fmt if not dxf")

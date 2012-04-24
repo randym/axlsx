@@ -103,7 +103,8 @@ module Axlsx
     # @option options [Integer] sz
     def initialize(options={})
       options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? o[0]
+        next if o[1].nil?
+        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
     end
     # @see name
