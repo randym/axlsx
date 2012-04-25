@@ -16,7 +16,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 
 **License**: MIT License
 
-**Latest Version**: 1.1.2
+**Latest Version**: 1.1.3
 
 **Ruby Version**: 1.8.7, 1.9.2, 1.9.3
 
@@ -474,6 +474,9 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
+- ** April.25.12:*: 1.1.3 release
+   - Primarily because I am stupid.....Updates to readme to properly report version, add in missing docs and restructure example directory.
+
 - ** April.25.12:*: 1.1.2 release
    - Conditional Formatting completely implemented.
    - refactoring / documentation for Style#add_style
