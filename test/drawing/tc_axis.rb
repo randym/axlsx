@@ -21,6 +21,14 @@ class TestAxis < Test::Unit::TestCase
     assert_nothing_raised("accepts valid axis position") { @axis.axPos = :r }
   end
 
+  def test_label_rotation
+    assert_raise(ArgumentError, "requires valid angle") { @axis.label_rotation = :nowhere }
+    assert_raise(ArgumentError, "requires valid angle") { @axis.label_rotation = 91 }
+    assert_raise(ArgumentError, "requires valid angle") { @axis.label_rotation = -91 }
+    assert_nothing_raised("accepts valid angle") { @axis.label_rotation = 45 }
+    assert_equal(@axis.label_rotation, 45 * 60000)
+  end
+
   def test_tick_label_position
     assert_raise(ArgumentError, "requires valid tick label position") { @axis.tickLblPos = :nowhere }
     assert_nothing_raised("accepts valid tick label position") { @axis.tickLblPos = :high }

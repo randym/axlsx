@@ -36,6 +36,10 @@ module Axlsx
     # @return [Symbol]
     attr_reader :crosses
 
+    # specifies how the degree of label rotation
+    # @return [Integer]
+    attr_reader :label_rotation
+
     # specifies if gridlines should be shown in the chart
     # @return [Boolean]
     attr_reader :gridlines
@@ -53,6 +57,7 @@ module Axlsx
       @axId = axId
       @crossAx = crossAx
       @format_code = "General"
+      @label_rotation = 0
       @scaling = Scaling.new(:orientation=>:minMax)
       self.axPos = :b
       self.tickLblPos = :nextTo
@@ -83,6 +88,15 @@ module Axlsx
     # must be one of [:autoZero, :min, :max]
     def crosses=(v) RestrictionValidator.validate "#{self.class}.crosses", [:autoZero, :min, :max], v; @crosses = v; end
 
+    # Specify the degree of label rotation to apply to labels
+    # default true
+    def label_rotation=(v)
+      Axlsx::validate_int(v)
+      adjusted = v.to_i * 60000
+      Axlsx::validate_angle(adjusted)
+      @label_rotation = adjusted
+    end
+
 
     # Serializes the object
     # @param [String] str
@@ -105,6 +119,8 @@ module Axlsx
       str << '<c:majorTickMark val="none"/>'
       str << '<c:minorTickMark val="none"/>'
       str << '<c:tickLblPos val="' << @tickLblPos.to_s << '"/>'
+      # some potential value in implementing this in full. Very detailed!
+      str << "<c:txPr><a:bodyPr rot='#{@label_rotation}'/><a:lstStyle/><a:p><a:pPr><a:defRPr/></a:pPr><a:endParaRPr/></a:p></c:txPr>"
       str << '<c:crossAx val="' << @crossAx.to_s << '"/>'
       str << '<c:crosses val="' << @crosses.to_s << '"/>'
     end

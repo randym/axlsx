@@ -235,8 +235,9 @@ module Axlsx
   # error message when user does not provide color and or style options for border in Style#add_sytle
   ERR_INVALID_BORDER_OPTIONS = "border hash must include both style and color. e.g. :border => { :color => 'FF000000', :style => :thin }. You provided: %s"
 
-  ERR_INVALID_DXF_BORDER_OPTIONS = "border options required for dxf style stypes. e.g. :border => { :color => 'FF000000', :style => :thin }. You provided: %s"
-
+  # error message for invalid border id reference
   ERR_INVALID_BORDER_ID = "The border id you specified (%s) does not exist. Please add a border with Style#add_style before referencing its index."
 
+  # error message for invalid angles
+  ERR_ANGLE = "Angles must be a value between -90 and 90. You provided: %s"
 end

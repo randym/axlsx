@@ -45,6 +45,9 @@ module Axlsx
     true
   end
 
+  def self.validate_angle(v)
+    raise ArgumentError, (ERR_ANGLE % v.inspect) unless (v >= -5400000 && v <= 5400000)
+  end
   # Requires that the value is a Fixnum or Integer and is greater or equal to 0
   # @param [Any] v The value validated
   # @raise [ArgumentError] raised if the value is not a Fixnum or Integer value greater or equal to 0
