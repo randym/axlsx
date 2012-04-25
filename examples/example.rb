@@ -146,7 +146,9 @@ end
 
 wb.add_worksheet(:name => "Automatic cell types") do |sheet|
   sheet.add_row ["Date", "Time", "String", "Boolean", "Float", "Integer"]
-  sheet.add_row [Date.today, Time.now, "value", true, 0.1, 1]
+  date_format = wb.styles.add_style :format_code => 'YYYY-MMM-DD'
+  time_format = wb.styles.add_style :format_code => 'HH:MM:SS'
+  sheet.add_row [Date.today, Time.now, "value", true, 0.1, 1], :style => [date_format, time_format, nil, nil, nil, nil]
 end
 
 ##Merging Cells.
@@ -170,6 +172,8 @@ wb.add_worksheet(:name => "Bar Chart") do |sheet|
   sheet.add_row [1, 2, 3]
   sheet.add_chart(Axlsx::Bar3DChart, :start_at => "A4", :end_at => "F17") do |chart|
     chart.add_series :data => sheet["A3:C3"], :labels => sheet["A2:C2"], :title => sheet["A1"]
+    chart.valAxis.label_rotation = -45
+    chart.catAxis.label_rotation = 45
   end
 end
 
