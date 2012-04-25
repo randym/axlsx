@@ -285,6 +285,8 @@ wb.add_worksheet(:name => "Bar Chart") do |sheet|
   sheet.add_row [1, 2, 3]
   sheet.add_chart(Axlsx::Bar3DChart, :start_at => "A4", :end_at => "F17") do |chart|
     chart.add_series :data => sheet["A3:C3"], :labels => sheet["A2:C2"], :title => sheet["A1"]
+    chart.valAxis.label_rotation = -45
+    chart.catAxis.label_rotation = 45
   end
 end
 ```
