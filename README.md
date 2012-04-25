@@ -24,7 +24,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 
 **Rubinius Version**: rubinius 2.0.0dev * lower versions may run, this gem always tests against head.
 
-**Release Date**: April 18th 2012
+**Release Date**: April 25th 2012
 
 Synopsis
 --------
@@ -478,7 +478,7 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
    - Conditional Formatting completely implemented.
    - refactoring / documentation for Style#add_style
    - added in label rotation for chart axis labels
-   - bugfix to porperly assign style and type info to cells when only partial information is provided in the types/style option
+   - bugfix to properly assign style and type info to cells when only partial information is provided in the types/style option
 
 - ** April.18.12**: 1.1.1 release
    - bugfix for autowidth calculations across multiple rows
@@ -530,4 +530,4 @@ Please see the {file:CHANGELOG.md} document for past release information.
 ----------
 
 Axlsx &copy; 2011-2012 by [Randy Morgan](mailto:digial.ipseity@gmail.com). Axlsx is
-licensed under the MIT license. Please see the {file:LICENSE} document for more information.
+licensed under the MIT license. Please see the LICENSE document for more information.

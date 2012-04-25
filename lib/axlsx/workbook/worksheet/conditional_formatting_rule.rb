@@ -7,6 +7,8 @@ module Axlsx
   # @see Worksheet#add_conditional_formatting
   # @see ConditionalFormattingRule#initialize
   class ConditionalFormattingRule
+
+    # instance values that must be serialized as their own elements - e.g. not attributes.
     CHILD_ELEMENTS = [:formula, :color_scale, :data_bar, :icon_set]
 
     # Formula

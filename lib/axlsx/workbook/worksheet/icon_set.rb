@@ -6,6 +6,8 @@ module Axlsx
   # @see Worksheet#add_conditional_formatting
   # @see ConditionalFormattingRule#initialize
   class IconSet
+
+    # instance values that must be serialized as their own elements - e.g. not attributes.
     CHILD_ELEMENTS = [:value_objects]
 
     # The icon set to display.
