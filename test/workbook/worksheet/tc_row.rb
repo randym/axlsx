@@ -32,7 +32,7 @@ class TestRow < Test::Unit::TestCase
     r_s_xml = Nokogiri::XML(row.to_xml_string(0, ''))
     assert_equal(r_s_xml.xpath(".//row/c").size, 4)
   end
-  
+
   def test_nil_cell_r
     row = @ws.add_row([nil,1,2,nil,4,5,nil])
     r_s_xml = Nokogiri::XML(row.to_xml_string(0, ''))
@@ -50,8 +50,15 @@ class TestRow < Test::Unit::TestCase
   end
 
   def test_array_to_cells
-    r = @ws.add_row [1,2,3], :style=>0, :types=>:integer
+    r = @ws.add_row [1,2,3], :style=>1, :types=>[:integer, :string, :float]
     assert_equal(r.cells.size, 3)
+    r.cells.each do |c|
+      assert_equal(c.style, 1)
+    end
+    r = @ws.add_row [1,2,3], :style=>[1]
+    assert_equal(r.cells.first.style, 1, "only apply style to cells with at the same index of of the style array")
+    assert_equal(r.cells.last.style, 0, "only apply style to cells with at the same index of of the style array")
+
   end
 
   def test_custom_height

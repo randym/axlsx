@@ -132,6 +132,8 @@ module Axlsx
         cell_type = types.is_a?(Array)? types[index] : types
         options[:type] = cell_type if cell_type
         Cell.new(self, value, options)
+        options.delete(:style)
+        options.delete(:type)
       end
     end
   end
