@@ -20,18 +20,26 @@ module Axlsx
     # @return [Symbol]
     attr_reader :shape
 
+    # An array of rgb colors to apply to your bar chart.
+    attr_reader :colors
+
     # Creates a new series
     # @option options [Array, SimpleTypedList] data
     # @option options [Array, SimpleTypedList] labels
     # @option options [String] title
     # @option options [String] shape
+    # @option options [String] colors an array of colors to use when rendering each data point
     # @param [Chart] chart
     def initialize(chart, options={})
       @shape = :box
+      @colors = []
       super(chart, options)
       self.labels = CatAxisData.new(options[:labels]) unless options[:labels].nil?
       self.data = ValAxisData.new(options[:data]) unless options[:data].nil?
     end
+
+    # @see colors
+    def colors=(v) DataTypeValidator.validate "BarSeries.colors", [Array], v; @colors = v end
 
     # The shabe of the bars or columns
     # must be one of  [:percentStacked, :clustered, :standard, :stacked]
@@ -45,9 +53,16 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       super(str) do |str_inner|
+        colors.each_with_index do |c, index|
+          str << '<c:dPt>'
+          str << '<c:idx val="' << index.to_s << '"/>'
+          str << '<c:spPr><a:solidFill>'
+          str << '<a:srgbClr val="' << c << '"/>'
+          str << '</a:solidFill></c:spPr></c:dPt>'
+        end
         @labels.to_xml_string(str_inner) unless @labels.nil?
         @data.to_xml_string(str_inner) unless @data.nil?
-        str_inner << '<shape val="' << @shape.to_s << '"/>'
+        str_inner << '<c:shape val="' << @shape.to_s << '"/>'
       end
     end
 

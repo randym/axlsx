@@ -19,6 +19,9 @@ module Axlsx
     # @return [Integert]
     attr_reader :explosion
 
+    # An array of rgb colors to apply to your bar chart.
+    attr_reader :colors
+
     # Creates a new series
     # @option options [Array, SimpleTypedList] data
     # @option options [Array, SimpleTypedList] labels
@@ -27,10 +30,14 @@ module Axlsx
     # @param [Chart] chart
     def initialize(chart, options={})
       @explosion = nil
+      @colors = []
       super(chart, options)
       self.labels = CatAxisData.new(options[:labels]) unless options[:labels].nil?
       self.data = ValAxisData.new(options[:data]) unless options[:data].nil?
     end
+
+    # @see colors
+    def colors=(v) DataTypeValidator.validate "BarSeries.colors", [Array], v; @colors = v end
 
     # @see explosion
     def explosion=(v) Axlsx::validate_unsigned_int(v); @explosion = v; end
@@ -41,6 +48,13 @@ module Axlsx
     def to_xml_string(str = '')
       super(str) do |str_inner|
         str_inner << '<c:explosion val="' << @explosion << '"/>' unless @explosion.nil?
+        colors.each_with_index do |c, index|
+          str << '<c:dPt>'
+          str << '<c:idx val="' << index.to_s << '"/>'
+          str << '<c:spPr><a:solidFill>'
+          str << '<a:srgbClr val="' << c << '"/>'
+          str << '</a:solidFill></c:spPr></c:dPt>'
+        end
         @labels.to_xml_string str_inner unless @labels.nil?
         @data.to_xml_string str_inner unless @data.nil?
       end
