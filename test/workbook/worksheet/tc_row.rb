@@ -49,6 +49,12 @@ class TestRow < Test::Unit::TestCase
     assert_equal(@row.cells.last, c)
   end
 
+  def test_add_cell_autowidth_info
+    width = @ws.send :calculate_width, 'this is the cell of cells', @ws.workbook.styles.fonts.first.sz
+    c = @row.add_cell("this is the cell of cells")
+    assert_equal(@ws.column_info.last.width, width)
+  end
+
   def test_array_to_cells
     r = @ws.add_row [1,2,3], :style=>1, :types=>[:integer, :string, :float]
     assert_equal(r.cells.size, 3)
