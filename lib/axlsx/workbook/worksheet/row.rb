@@ -79,7 +79,7 @@ module Axlsx
     # @return [Cell]
     def add_cell(value="", options={})
       c = Cell.new(self, value, options)
-      worksheet.send(:update_column_info, self.cells, self.cells.map(&:style))
+      worksheet.send(:update_column_info, self.cells, [], self.cells.map(&:style))
       c
     end
 
