@@ -14,6 +14,11 @@ module Axlsx
     # @return [CatAxisData]
     attr_reader :labels
 
+    # The fill color for this series.
+    # Red, green, and blue is expressed as sequence of hex digits, RRGGBB. A perceptual gamma of 2.2 is used.
+    # @return [String]
+    attr_reader :color
+
     # Creates a new series
     # @option options [Array, SimpleTypedList] data
     # @option options [Array, SimpleTypedList] labels
@@ -22,7 +27,12 @@ module Axlsx
       @labels, @data = nil, nil
       super(chart, options)
       @labels = CatAxisData.new(options[:labels]) unless options[:labels].nil?
-      @data = ValAxisData.new(options[:data]) unless options[:data].nil?
+      @data = NamedAxisData.new('val', options[:data]) unless options[:data].nil?
+    end
+
+    # @see color
+    def color=(v)
+      @color = v
     end
 
     # Serializes the object
@@ -30,6 +40,12 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       super(str) do
+        if color
+          str << '<c:spPr><a:solidFill>'
+          str << '<a:srgbClr val="' << color << '"/>'
+          str << '</a:solidFill></c:spPr>'
+        end
+
         @labels.to_xml_string(str) unless @labels.nil?
         @data.to_xml_string(str) unless @data.nil?
       end

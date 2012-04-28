@@ -33,7 +33,7 @@ module Axlsx
       @colors = []
       super(chart, options)
       self.labels = CatAxisData.new(options[:labels]) unless options[:labels].nil?
-      self.data = ValAxisData.new(options[:data]) unless options[:data].nil?
+      self.data = NamedAxisData.new(:val, options[:data]) unless options[:data].nil?
     end
 
     # @see colors

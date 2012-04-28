@@ -16,13 +16,22 @@ module Axlsx
     # @return [NamedAxisData]
     attr_reader :yData
 
+    # The fill color for this series.
+    # Red, green, and blue is expressed as sequence of hex digits, RRGGBB. A perceptual gamma of 2.2 is used.
+    # @return [String]
+    attr_reader :color
+
     # Creates a new ScatterSeries
     def initialize(chart, options={})
       @xData, @yData = nil
       super(chart, options)
-
       @xData = NamedAxisData.new("xVal", options[:xData]) unless options[:xData].nil?
       @yData = NamedAxisData.new("yVal", options[:yData]) unless options[:yData].nil?
+    end
+
+    # @see color
+    def color=(v)
+      @color = v
     end
 
     # Serializes the object
@@ -30,6 +39,23 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       super(str) do |inner_str|
+        # needs to override the super color here to push in ln/and something else!
+        if color
+          str << '<c:spPr><a:solidFill>'
+          str << '<a:srgbClr val="' << color << '"/>'
+          str << '</a:solidFill>'
+          str << '<a:ln><a:solidFill>'
+          str << '<a:srgbClr val="' << color << '"/></a:solidFill></a:ln>'
+          str << '</c:spPr>'
+          str << '<c:marker>'
+          str << '<c:spPr><a:solidFill>'
+          str << '<a:srgbClr val="' << color << '"/>'
+          str << '</a:solidFill>'
+          str << '<a:ln><a:solidFill>'
+          str << '<a:srgbClr val="' << color << '"/></a:solidFill></a:ln>'
+          str << '</c:spPr>'
+          str << '</c:marker>'
+        end
         @xData.to_xml_string(inner_str) unless @xData.nil?
         @yData.to_xml_string(inner_str) unless @yData.nil?
       end

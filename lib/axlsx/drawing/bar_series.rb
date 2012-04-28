@@ -35,7 +35,7 @@ module Axlsx
       @colors = []
       super(chart, options)
       self.labels = CatAxisData.new(options[:labels]) unless options[:labels].nil?
-      self.data = ValAxisData.new(options[:data]) unless options[:data].nil?
+      self.data = NamedAxisData.new(:val, options[:data]) unless options[:data].nil?
     end
 
     # @see colors
@@ -53,16 +53,18 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       super(str) do |str_inner|
+
         colors.each_with_index do |c, index|
-          str << '<c:dPt>'
-          str << '<c:idx val="' << index.to_s << '"/>'
-          str << '<c:spPr><a:solidFill>'
-          str << '<a:srgbClr val="' << c << '"/>'
-          str << '</a:solidFill></c:spPr></c:dPt>'
+          str_inner << '<c:dPt>'
+          str_inner << '<c:idx val="' << index.to_s << '"/>'
+          str_inner << '<c:spPr><a:solidFill>'
+          str_inner << '<a:srgbClr val="' << c << '"/>'
+          str_inner << '</a:solidFill></c:spPr></c:dPt>'
         end
+
         @labels.to_xml_string(str_inner) unless @labels.nil?
         @data.to_xml_string(str_inner) unless @data.nil?
-        str_inner << '<c:shape val="' << @shape.to_s << '"/>'
+        str_inner << '<c:shape val="' << shape.to_s << '"></c:shape>'
       end
     end
 
