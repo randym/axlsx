@@ -120,7 +120,7 @@ module Axlsx
       str << '<c:minorTickMark val="none"/>'
       str << '<c:tickLblPos val="' << @tickLblPos.to_s << '"/>'
       # some potential value in implementing this in full. Very detailed!
-      str << "<c:txPr><a:bodyPr rot='#{@label_rotation}'/><a:lstStyle/><a:p><a:pPr><a:defRPr/></a:pPr><a:endParaRPr/></a:p></c:txPr>"
+      str << '<c:txPr><a:bodyPr rot="' << @label_rotation.to_s << '"/><a:lstStyle/><a:p><a:pPr><a:defRPr/></a:pPr><a:endParaRPr/></a:p></c:txPr>'
       str << '<c:crossAx val="' << @crossAx.to_s << '"/>'
       str << '<c:crosses val="' << @crosses.to_s << '"/>'
     end
