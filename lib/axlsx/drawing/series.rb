@@ -10,11 +10,6 @@ module Axlsx
     # @return [Chart]
     attr_reader :chart
 
-    # The fill color for this series.
-    # Red, green, and blue is expressed as sequence of hex digits, RRGGBB. A perceptual gamma of 2.2 is used.
-    # @return [String]
-    attr_reader :color
-
     # The title of the series
     # @return [SeriesTitle]
     attr_reader :title
@@ -32,10 +27,6 @@ module Axlsx
       end
     end
 
-    # @see color
-    def color=(v)
-      @color = v
-    end
 
     # The index of this series in the chart's series.
     # @return [Integer]
@@ -73,11 +64,6 @@ module Axlsx
       str << '<c:idx val="' << index.to_s << '"/>'
       str << '<c:order val="' << (order || index).to_s << '"/>'
       title.to_xml_string(str) unless title.nil?
-      if color
-        str << '<c:spPr><a:solidFill>'
-        str << '<a:srgbClr val="' << color << '"/>'
-        str << '</a:solidFill></c:spPr>'
-      end
       yield str if block_given?
       str << '</c:ser>'
     end
