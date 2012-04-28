@@ -5,8 +5,8 @@ class TestScatterSeries < Test::Unit::TestCase
   def setup
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet :name=>"hmmm"
-    chart = @ws.drawing.add_chart Axlsx::ScatterChart, :title => "Scatter Chart"
-    @series = chart.add_series :xData=>[1,2,4], :yData=>[1,3,9], :title=>"exponents"
+    @chart = @ws.drawing.add_chart Axlsx::ScatterChart, :title => "Scatter Chart"
+    @series = @chart.add_series :xData=>[1,2,4], :yData=>[1,3,9], :title=>"exponents", :color => 'FF0000'
   end
 
   def test_initialize
@@ -17,4 +17,11 @@ class TestScatterSeries < Test::Unit::TestCase
     assert_equal(@series.xData, [1,2,4])
     assert_equal(@series.yData, [1,3,9])
   end
+
+  def test_to_xml_string
+    doc = Nokogiri::XML(@chart.to_xml_string)
+    assert_equal(doc.xpath("//a:srgbClr[@val='#{@series.color}']").size,4)
+
+  end
+
 end
