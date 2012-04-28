@@ -474,10 +474,15 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
-- ** April.25.12:*: 1.1.3 release
+- ** April.??.12:**: 1.1.4 release
+   - bugfix in val_axis_data to properly serialize value axis data. Excel does not mind as it reads from the sheet, but nokogiri has a fit if the elements are empty.
+   - Added support for specifying the color of data series in charts.
+   - bugfix using add_cell on row mismanaged calls to update_column_info.
+
+- ** April.25.12:**: 1.1.3 release
    - Primarily because I am stupid.....Updates to readme to properly report version, add in missing docs and restructure example directory.
 
-- ** April.25.12:*: 1.1.2 release
+- ** April.25.12:**: 1.1.2 release
    - Conditional Formatting completely implemented.
    - refactoring / documentation for Style#add_style
    - added in label rotation for chart axis labels
