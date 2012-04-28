@@ -53,7 +53,7 @@ wb.add_worksheet(:name => "Scatter Chart") do |sheet|
   sheet.add_chart(Axlsx::ScatterChart, :title => "example 7: Scatter Chart") do |chart|
     chart.start_at 0, 4
     chart.end_at 10, 19
-    chart.add_series :xData => sheet["B1:E1"], :yData => sheet["B2:E2"], :title => sheet["A1"], :color => '0000FF'
+    chart.add_series :xData => sheet["B1:E1"], :yData => sheet["B2:E2"], :title => sheet["A1"], :color => '00FF00'
     chart.add_series :xData => sheet["B3:E3"], :yData => sheet["B4:E4"], :title => sheet["A3"], :color => 'FF0000'
   end
 end
