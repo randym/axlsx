@@ -89,7 +89,7 @@ module Axlsx
 
     # get the header cells (hackish)
     def header_cells
-      header = @ref.gsub(/^(\w+)(\d+)\:(\w+)\d+$/, '\1\2:\3\2')
+      header = @ref.gsub(/^(\w+?)(\d+)\:(\w+?)\d+$/, '\1\2:\3\2')
       @sheet[header]
     end
   end
