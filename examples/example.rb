@@ -211,7 +211,7 @@ wb.add_worksheet(:name=>'Charting Dates') do |sheet|
   sheet.add_chart(Axlsx::Bar3DChart) do |chart|
     chart.start_at "B7"
     chart.end_at "H27"
-    chart.add_series(:data => sheet["B2:B5"], :labels => sheet["A2:A5"], :title => sheet["B1"])
+    chart.add_series(:data => sheet["B2:B5"], :labels => sheet["A2:A5"], :title => sheet["B1"], :color => 'FF0000')
   end
 end
 
@@ -223,8 +223,8 @@ wb.add_worksheet(:name => "Line Chart") do |sheet|
   sheet.add_chart(Axlsx::Line3DChart, :title => "example 6: Line Chart", :rotX => 30, :rotY => 20) do |chart|
     chart.start_at 0, 2
     chart.end_at 10, 15
-    chart.add_series :data => sheet["B1:E1"], :title => sheet["A1"]
-    chart.add_series :data => sheet["B2:E2"], :title => sheet["A2"]
+    chart.add_series :data => sheet["B1:E1"], :title => sheet["A1"], :color => "FF0000"
+    chart.add_series :data => sheet["B2:E2"], :title => sheet["A2"], :color => "DEDEDE"
   end
 end
 
