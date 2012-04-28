@@ -22,7 +22,7 @@ module Axlsx
       str << '<c:ptCount val="' << size.to_s << '"/>'
       each_with_index do |item, index|
         v = item.is_a?(Cell) ?  item.value.to_s : item
-        str << '<c:pt idx="' << index.to_s << '"><c:v>' << v << '</c:v></c:pt>'
+        str << '<c:pt idx="' << index.to_s << '"><c:v>' << v.to_s << '</c:v></c:pt>'
       end
       str << '</c:strCache>'
       str << '</c:strRef>'

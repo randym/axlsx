@@ -1,7 +1,6 @@
 # encoding: UTF-8
-# TODO: review cat, val and named access data to extend this and reduce replicated code.
 module Axlsx
-  # The ValAxisData class manages the values for a chart value series.
+  # The NamedAxisData class manages the values for a chart value series.
   class NamedAxisData < CatAxisData
 
     # creates a new NamedAxisData Object
@@ -24,7 +23,7 @@ module Axlsx
       str << '<c:ptCount val="' << size.to_s << '"/>'
       each_with_index do |item, index|
         v = item.is_a?(Cell) ?  item.value.to_s : item
-        str << '<c:pt idx="' << index.to_s << '"><c:v>' << v << '</c:v></c:pt>'
+        str << '<c:pt idx="' << index.to_s << '"><c:v>' << v.to_s << '</c:v></c:pt>'
       end
       str << '</c:numCache>'
       str << '</c:numRef>'
