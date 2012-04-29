@@ -5,6 +5,7 @@ module Axlsx
   # @see Worksheet#add_row
   class Row
 
+    SERIALIZABLE_ATTRIBUTES = [:hidden, :outlineLevel, :collapsed, :style]
     # The worksheet this row belongs to
     # @return [Worksheet]
     attr_reader :worksheet
@@ -17,13 +18,29 @@ module Axlsx
     # @return [Float]
     attr_reader :height
 
+    # Flag indicating if the outlining of the affected column(s) is in the collapsed state.
+    # @return [Boolean]
+    attr_reader :collapsed
+
+    # Flag indicating if the affected column(s) are hidden on this worksheet.
+    # @return [Boolean]
+    attr_reader :hidden
+
+    # Outline level of affected column(s). Range is 0 to 7.
+    # @return [Integer]
+    attr_reader :outlineLevel
+
+    # Default style for the affected column(s). Affects cells not yet allocated in the column(s). In other words, this style applies to new columns.
+    # @return [Integer]
+    attr_reader :style
+
     # TODO  18.3.1.73
-    # collapsed
+    # # collapsed
     # customFormat
-    # hidden
-    # outlineLevel
+    # # hidden
+    # # outlineLevel
     # ph
-    # s (style)
+    # # s (style)
     # spans
     # thickTop
     # thickBottom
@@ -53,6 +70,25 @@ module Axlsx
       array_to_cells(values, options)
     end
 
+    # @see Row#collapsed
+    def collapsed=(v)
+      Axlsx.validate_boolean(v)
+      @collapsed = v
+    end
+
+    # @see Row#hidden
+    def hidden=(v)
+      Axlsx.validate_boolean(v)
+      @hidden = v
+    end
+
+    # @see Row#outline
+    def outlineLevel=(v)
+      Axlsx.validate_unsigned_numeric(v)
+      @outlineLevel = v
+    end
+
+
     # The index of this row in the worksheet
     # @return [Integer]
     def index
@@ -65,6 +101,9 @@ module Axlsx
     # @return [String]
     def to_xml_string(r_index, str = '')
       str << '<row r="' << (r_index + 1 ).to_s << '" '
+      instance_values.select { |key, value| SERIALIZABLE_ATTRIBUTES.include? key.to_sym }.each do |key, value|
+        str << key << '="' << value.to_s << '" '
+      end
       if custom_height?
         str << 'customHeight="1" ht="' << height.to_s << '">'
       else

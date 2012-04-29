@@ -16,7 +16,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 
 **License**: MIT License
 
-**Latest Version**: 1.1.3
+**Latest Version**: 1.1.4
 
 **Ruby Version**: 1.8.7, 1.9.2, 1.9.3
 
@@ -46,7 +46,7 @@ Feature List
 
 **1. Author xlsx documents: Axlsx is made to let you easily and quickly generate professional xlsx based reports that can be validated before serialization.
 
-**2. Generate 3D Pie, Line and Bar Charts: With Axlsx chart generation and management is as easy as a few lines of code. You can build charts based off data in your worksheet or generate charts without any data in your sheet at all.
+**2. Generate 3D Pie, Line, Scatter and Bar Charts: With Axlsx chart generation and management is as easy as a few lines of code. You can build charts based off data in your worksheet or generate charts without any data in your sheet at all. Customize gridlines, label rotation and series colors as well.
 
 **3. Custom Styles: With guaranteed document validity, you can style borders, alignment, fills, fonts, and number formats in a single line of code. Those styles can be applied to an entire row, or a single cell anywhere in your workbook.
 
@@ -66,7 +66,7 @@ Feature List
 
 **11. Support for cell merging via worksheet.merged_cells
 
-**12. Auto filtering tables with worksheet.auto_filter
+**12. Auto filtering tables with worksheet.auto_filter as well as support for Tables
 
 **13. Export using shared strings or inline strings so we can inter-op with iWork Numbers (sans charts for now).
 
@@ -103,22 +103,47 @@ end
 #Using Custom Styles
 
 ```ruby
+#Each cell allows a single, predified style. When using add_row, the value in the :style array at the same index as the cell's column will be applied to that cell. Alternatively, you can apply a style to an entire row by using an integer value for :style.
+
 wb.styles do |s|
   black_cell = s.add_style :bg_color => "00", :fg_color => "FF", :sz => 14, :alignment => { :horizontal=> :center }
   blue_cell =  s.add_style  :bg_color => "0000FF", :fg_color => "FF", :sz => 20, :alignment => { :horizontal=> :center }
   wb.add_worksheet(:name => "Custom Styles") do |sheet|
+
+    # Applies the black_cell style to the first and third cell, and the blue_cell style to the second.
     sheet.add_row ["Text Autowidth", "Second", "Third"], :style => [black_cell, blue_cell, black_cell]
+
+    # Applies the thin border to all three cells
     sheet.add_row [1, 2, 3], :style => Axlsx::STYLE_THIN_BORDER
   end
+end
+```
+
+##Styling Cell Overrides
+
+```ruby
+#Some of the style attributes can also be set at the cell level. Cell level styles take precedence over Custom Styles shown in the previous example.
+
+wb.add_worksheet(:name => "Cell Level Style Overrides") do |sheet|
+
+  # this will set the font size for each cell.
+  sheet.add_row ['col 1', 'col 2', 'col 3', 'col 4'], :sz => 16
+
+  sheet.add_row [1, 2, 3, "=SUM(A2:C2)"]
+
+  # You can also apply cell style overrides to a range of cells
+  sheet["A1:D1"].each { |c| c.color = "FF0000" }
+  sheet['A1:D2'].each { |c| c.style = Axlsx::STYLE_THIN_BORDER }
 end
 ```
 
 #Using Custom Border Styles
 
 ```ruby
+#Axlsx defines a thin border style, but you can easily create and use your own.
 wb.styles do |s|
-  red_border =  s.add_style :border => { :style => :thin, :color =>"FFFF0000" }
-  blue_border =  s.add_style :border => { :style => :thin, :color =>"FF0000FF" }
+  red_border =  s.add_style :border => { :style => :thick, :color =>"FFFF0000" }
+  blue_border =  s.add_style :border => { :style => :thick, :color =>"FF0000FF" }
 
   wb.add_worksheet(:name => "Custom Borders") do |sheet|
     sheet.add_row ["wrap", "me", "Up in Red"], :style => red_border
@@ -127,137 +152,41 @@ wb.styles do |s|
 end
 ```
 
-
-##Using Custom Formatting and date1904
-
-```ruby
-require 'date'
-wb.styles do |s|
-  date = s.add_style(:format_code => "yyyy-mm-dd", :border => Axlsx::STYLE_THIN_BORDER)
-  padded = s.add_style(:format_code => "00#", :border => Axlsx::STYLE_THIN_BORDER)
-  percent = s.add_style(:format_code => "0000%", :border => Axlsx::STYLE_THIN_BORDER)
-  # wb.date1904 = true # Use the 1904 date system (Used by Excel for Mac < 2011)
-  wb.add_worksheet(:name => "Formatting Data") do |sheet|
-    sheet.add_row ["Custom Formatted Date", "Percent Formatted Float", "Padded Numbers"], :style => Axlsx::STYLE_THIN_BORDER
-    sheet.add_row [Date::strptime('2012-01-19','%Y-%m-%d'), 0.2, 32], :style => [date, percent, padded]
-  end
-end
-```
-
-
-##Add an Image
-
-```ruby
-wb.add_worksheet(:name => "Images") do |sheet|
-  img = File.expand_path('../image1.jpeg', __FILE__)
-  sheet.add_image(:image_src => img, :noSelect => true, :noMove => true) do |image|
-    image.width=720
-    image.height=666
-    image.start_at 2, 2
-  end
-end
-```
-
-##Add an Image with a hyperlink
-
-```ruby
-wb.add_worksheet(:name => "Image with Hyperlink") do |sheet|
-  img = File.expand_path('../image1.jpeg', __FILE__)
-  sheet.add_image(:image_src => img, :noSelect => true, :noMove => true, :hyperlink=>"http://axlsx.blogspot.com") do |image|
-    image.width=720
-    image.height=666
-    image.hyperlink.tooltip = "Labeled Link"
-    image.start_at 2, 2
-  end
-end
-```
-
-##Asian Language Support
-
-```ruby
-wb.add_worksheet(:name => "日本語でのシート名") do |sheet|
-  sheet.add_row ["日本語"]
-  sheet.add_row ["华语/華語"]
-  sheet.add_row ["한국어/조선말"]
-end
-```
-
-##Styling Columns
-
-```ruby
-wb.styles do |s|
-  percent = s.add_style :num_fmt => 9
-  wb.add_worksheet(:name => "Styling Columns") do |sheet|
-    sheet.add_row ['col 1', 'col 2', 'col 3', 'col 4']
-    sheet.add_row [1, 2, 0.3, 4]
-    sheet.add_row [1, 2, 0.2, 4]
-    sheet.add_row [1, 2, 0.1, 4]
-    sheet.col_style 2, percent, :row_offset => 1
-  end
-end
-```
-
-##Hiding Columns
-
-```ruby
-wb.styles do |s|
-  percent = s.add_style :num_fmt => 9
-  wb.add_worksheet(:name => "Hidden Column") do |sheet|
-    sheet.add_row ['col 1', 'col 2', 'col 3', 'col 4']
-    sheet.add_row [1, 2, 0.3, 4]
-    sheet.add_row [1, 2, 0.2, 4]
-    sheet.add_row [1, 2, 0.1, 4]
-    sheet.col_style 2, percent, :row_offset => 1
-    sheet.column_info[1].hidden = true
-  end
-end
-```
-
-##Styling Rows
+##Styling Rows and Columns
 
 ```ruby
 wb.styles do |s|
   head = s.add_style :bg_color => "00", :fg_color => "FF"
   percent = s.add_style :num_fmt => 9
-  wb.add_worksheet(:name => "Styling Rows") do |sheet|
-    sheet.add_row ['col 1', 'col 2', 'col 3', 'col 4']
-    sheet.add_row [1, 2, 0.3, 4]
-    sheet.add_row [1, 2, 0.2, 4]
-    sheet.add_row [1, 2, 0.1, 4]
+  wb.add_worksheet(:name => "Hidden Column") do |sheet|
+    sheet.add_row ['col 1', 'col 2', 'col 3', 'col 4', 'col5']
+    sheet.add_row [1, 2, 0.3, 4, 5.0]
+    sheet.add_row [1, 2, 0.2, 4, 5.0]
+    sheet.add_row [1, 2, 0.1, 4, 5.0]
+
+    #apply the percent style to the column at index 2 skipping the first row.
     sheet.col_style 2, percent, :row_offset => 1
+
+    # apply the head style to the first row.
     sheet.row_style 0, head
+
+    #Hide the 5th column
+    sheet.column_info[4].hidden = true
+
+    #Set the second column outline level
+    sheet.column_info[1].outlineLevel = 2
+
   end
 end
 ```
 
-##Styling Cell Overrides
+##Specifying Column Widths
 
 ```ruby
-wb.add_worksheet(:name => "Cell Level Style Overrides") do |sheet|
-  # cell level style overides when adding cells
-  sheet.add_row ['col 1', 'col 2', 'col 3', 'col 4'], :sz => 16
-  sheet.add_row [1, 2, 3, "=SUM(A2:C2)"]
-  # cell level style overrides via sheet range
-  sheet["A1:D1"].each { |c| c.color = "FF0000"}
-  sheet['A1:D2'].each { |c| c.style = Axlsx::STYLE_THIN_BORDER }
-end
-```
-
-##Using formula
-
-```ruby
-wb.add_worksheet(:name => "Using Formulas") do |sheet|
-  sheet.add_row ['col 1', 'col 2', 'col 3', 'col 4']
-  sheet.add_row [1, 2, 3, "=SUM(A2:C2)"]
-end
-```
-
-##Automatic cell types
-
-```ruby
-wb.add_worksheet(:name => "Automatic cell types") do |sheet|
-  sheet.add_row ["Date", "Time", "String", "Boolean", "Float", "Integer"]
-  sheet.add_row [Date.today, Time.now, "value", true, 0.1, 1]
+wb.add_worksheet(:name => "custom column widths") do |sheet|
+  sheet.add_row ["I use autowidth and am very wide", "I use a custom width and am narrow"]
+  sheet.add_row ['abcdefg', 'This is a very long text and should flow into the right cell', nil, 'xxx' ]
+  sheet.column_widths nil, 3, 5, nil
 end
 ```
 
@@ -275,6 +204,80 @@ wb.add_worksheet(:name => 'Merging Cells') do |sheet|
   sheet["A1:D4"].each { |c| c.style = Axlsx::STYLE_THIN_BORDER }
 end
 ```
+
+##Add an Image with a hyperlink
+
+```ruby
+wb.add_worksheet(:name => "Image with Hyperlink") do |sheet|
+  img = File.expand_path('../image1.jpeg', __FILE__)
+  # specifying the :hyperlink option will add a hyper link to your image.
+  # @note - Numbers does not support this part of the specification.
+  sheet.add_image(:image_src => img, :noSelect => true, :noMove => true, :hyperlink=>"http://axlsx.blogspot.com") do |image|
+    image.width=720
+    image.height=666
+    image.hyperlink.tooltip = "Labeled Link"
+    image.start_at 2, 2
+  end
+end
+```
+
+##Using Custom Formatting and date1904
+
+```ruby
+require 'date'
+wb.styles do |s|
+  date = s.add_style(:format_code => "yyyy-mm-dd", :border => Axlsx::STYLE_THIN_BORDER)
+  padded = s.add_style(:format_code => "00#", :border => Axlsx::STYLE_THIN_BORDER)
+  percent = s.add_style(:format_code => "0000%", :border => Axlsx::STYLE_THIN_BORDER)
+  # wb.date1904 = true # Use the 1904 date system (Used by Excel for Mac < 2011)
+  wb.add_worksheet(:name => "Formatting Data") do |sheet|
+    sheet.add_row ["Custom Formatted Date", "Percent Formatted Float", "Padded Numbers"], :style => Axlsx::STYLE_THIN_BORDER
+    sheet.add_row [Date::strptime('2012-01-19','%Y-%m-%d'), 0.2, 32], :style => [date, percent, padded]
+  end
+end
+```
+
+##Asian Language Support
+
+```ruby
+wb.add_worksheet(:name => "日本語でのシート名") do |sheet|
+  sheet.add_row ["日本語"]
+  sheet.add_row ["华语/華語"]
+  sheet.add_row ["한국어/조선말"]
+end
+```
+
+##Using formula
+
+```ruby
+wb.add_worksheet(:name => "Using Formulas") do |sheet|
+  sheet.add_row ['col 1', 'col 2', 'col 3', 'col 4']
+  sheet.add_row [1, 2, 3, "=SUM(A2:C2)"]
+end
+```
+
+##Auto Filter
+
+```ruby
+wb.add_worksheet(:name => "Auto Filter") do |sheet|
+  sheet.add_row ["Build Matrix"]
+  sheet.add_row ["Build", "Duration", "Finished", "Rvm"]
+  sheet.add_row ["19.1", "1 min 32 sec", "about 10 hours ago", "1.8.7"]
+  sheet.add_row ["19.2", "1 min 28 sec", "about 10 hours ago", "1.9.2"]
+  sheet.add_row ["19.3", "1 min 35 sec", "about 10 hours ago", "1.9.3"]
+  sheet.auto_filter = "A2:D5"
+end
+```
+
+##Automatic cell types
+
+```ruby
+wb.add_worksheet(:name => "Automatic cell types") do |sheet|
+  sheet.add_row ["Date", "Time", "String", "Boolean", "Float", "Integer"]
+  sheet.add_row [Date.today, Time.now, "value", true, 0.1, 1]
+end
+```
+
 
 ##Generating A Bar Chart
 
@@ -368,18 +371,6 @@ wb.add_worksheet(:name => "Scatter Chart") do |sheet|
 end
 ```
 
-##Auto Filter
-
-```ruby
-wb.add_worksheet(:name => "Auto Filter") do |sheet|
-  sheet.add_row ["Build Matrix"]
-  sheet.add_row ["Build", "Duration", "Finished", "Rvm"]
-  sheet.add_row ["19.1", "1 min 32 sec", "about 10 hours ago", "1.8.7"]
-  sheet.add_row ["19.2", "1 min 28 sec", "about 10 hours ago", "1.9.2"]
-  sheet.add_row ["19.3", "1 min 35 sec", "about 10 hours ago", "1.9.3"]
-  sheet.auto_filter = "A2:D5"
-end
-```
 
 ##Tables
 
@@ -394,15 +385,6 @@ wb.add_worksheet(:name => "Table") do |sheet|
 end
 ```
 
-##Specifying Column Widths
-
-```ruby
-wb.add_worksheet(:name => "custom column widths") do |sheet|
-  sheet.add_row ["I use autowidth and am very wide", "I use a custom width and am narrow"]
-  sheet.add_row ['abcdefg', 'This is a very long text and should flow into the right cell', nil, 'xxx' ]
-  sheet.column_widths nil, 3, 5, nil
-end
-```
 
 ##Fit to page printing
 
@@ -413,6 +395,7 @@ wb.add_worksheet(:name => "fit to page") do |sheet|
 end
 ```
 
+
 ##Hide Gridlines in worksheet
 
 ```ruby
@@ -421,6 +404,7 @@ wb.add_worksheet(:name => "No Gridlines") do |sheet|
   sheet.show_gridlines = false
 end
 ```
+
 
 ##Specify Page Margins for printing
 
@@ -431,11 +415,16 @@ wb.add_worksheet(:name => "print margins", :page_margins => margins) do |sheet|
 end
 ```
 
+
 ##Validate and Serialize
 
 ```ruby
+# Serialize directly to file
 p.serialize("example.xlsx")
 
+# or
+
+#Serialize to a stream
 s = p.to_stream()
 File.open('example_streamed.xlsx', 'w') { |f| f.write(s.read) }
 ```
@@ -443,9 +432,11 @@ File.open('example_streamed.xlsx', 'w') { |f| f.write(s.read) }
 ##Using Shared Strings
 
 ```ruby
+# This is required by Numbers
 p.use_shared_strings = true
 p.serialize("shared_strings_example.xlsx")
 ```
+
 
 ##Disabling Autowidth
 
@@ -459,6 +450,8 @@ end
 p.validate.each { |e| puts e.message }
 p.serialize("no-use_autowidth.xlsx")
 ```
+
+There is much, much more you can do with this gem. If you get stuck, grab me on IRC or submit an issue to Github. Chances are that it has already been implemented. If it hasn't - let's take a look at adding it in.
 
 #Documentation
 --------------
@@ -474,7 +467,7 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
-- ** April.??.12:**: 1.1.4 release
+- ** April.29.12:**: 1.1.4 release
    - bugfix in val_axis_data to properly serialize value axis data. Excel does not mind as it reads from the sheet, but nokogiri has a fit if the elements are empty.
    - Added support for specifying the color of data series in charts.
    - bugfix using add_cell on row mismanaged calls to update_column_info.
