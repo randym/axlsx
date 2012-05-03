@@ -25,6 +25,17 @@ class TestWorksheet < Test::Unit::TestCase
     end
   end
 
+  def test_print_options
+    assert(@ws.print_options.is_a? Axlsx::PrintOptions)
+  end
+
+  def test_print_options_yield
+    @ws.print_options do |po|
+      assert(po.is_a? Axlsx::PrintOptions)
+      assert(@ws.print_options == po)
+    end
+  end
+
   def test_no_autowidth
     @ws.workbook.use_autowidth = false
     @ws.add_row [1,2,3,4]
@@ -33,13 +44,18 @@ class TestWorksheet < Test::Unit::TestCase
 
   def test_initialization_options
     page_margins = {:left => 2, :right => 2, :bottom => 2, :top => 2, :header => 2, :footer => 2}
-    optioned = @ws.workbook.add_worksheet(:name => 'bob', :page_margins => page_margins, :selected => true, :show_gridlines => false)
+    print_options = {:grid_lines => true, :headings => true, :horizontal_centered => true, :vertical_centered => true}
+    optioned = @ws.workbook.add_worksheet(:name => 'bob', :page_margins => page_margins, :print_options => print_options, :selected => true, :show_gridlines => false)
     assert_equal(optioned.page_margins.left, page_margins[:left])
     assert_equal(optioned.page_margins.right, page_margins[:right])
     assert_equal(optioned.page_margins.top, page_margins[:top])
     assert_equal(optioned.page_margins.bottom, page_margins[:bottom])
     assert_equal(optioned.page_margins.header, page_margins[:header])
     assert_equal(optioned.page_margins.footer, page_margins[:footer])
+    assert_equal(optioned.print_options.grid_lines, print_options[:grid_lines])
+    assert_equal(optioned.print_options.headings, print_options[:headings])
+    assert_equal(optioned.print_options.horizontal_centered, print_options[:horizontal_centered])
+    assert_equal(optioned.print_options.vertical_centered, print_options[:vertical_centered])
     assert_equal(optioned.name, 'bob')
     assert_equal(optioned.selected, true)
     assert_equal(optioned.show_gridlines, false)
@@ -222,6 +238,15 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(doc.xpath('//xmlns:worksheet/xmlns:pageMargins[@left="9"][@right="7"]').size, 1)
   end
 
+  def test_to_xml_string_print_options
+    @ws.print_options do |po|
+      po.grid_lines = true
+      po.horizontal_centered = true
+    end
+    doc = Nokogiri::XML(@ws.to_xml_string)
+    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:printOptions[@gridLines="true"][@horizontalCentered="true"]').size, 1)
+  end
+
   def test_to_xml_string_drawing
     c = @ws.add_chart Axlsx::Pie3DChart
     doc = Nokogiri::XML(@ws.to_xml_string)
@@ -258,6 +283,7 @@ class TestWorksheet < Test::Unit::TestCase
   # is generated in correct order.
   def test_valid_with_optional_elements
     @ws.page_margins.set :left => 9
+    @ws.print_options.set :headings => true
     @ws.auto_filter = "A1:C3"
     @ws.merge_cells "A4:A5"
     @ws.add_chart Axlsx::Pie3DChart

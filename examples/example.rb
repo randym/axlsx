@@ -333,12 +333,13 @@ end
 #```
 
 
-##Specify Page Margins for printing
+##Specify page margins and other options for printing
 
 #```ruby
 margins = {:left => 3, :right => 3, :top => 1.2, :bottom => 1.2, :header => 0.7, :footer => 0.7}
-wb.add_worksheet(:name => "print margins", :page_margins => margins) do |sheet|
-  sheet.add_row ["this sheet uses customized page margins for printing"]
+options = {:grid_lines => true, :headings => true, :horizontal_centered => true}
+wb.add_worksheet(:name => "print margins", :page_margins => margins, :print_options => options) do |sheet|
+  sheet.add_row ["this sheet uses customized print settings"]
 end
 #```
 
