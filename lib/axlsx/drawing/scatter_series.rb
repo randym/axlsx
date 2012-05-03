@@ -25,8 +25,8 @@ module Axlsx
     def initialize(chart, options={})
       @xData, @yData = nil
       super(chart, options)
-      @xData = NamedAxisData.new("xVal", options[:xData]) unless options[:xData].nil?
-      @yData = NamedAxisData.new("yVal", options[:yData]) unless options[:yData].nil?
+      @xData = AxDataSource.new(:tag_name => :xVal, :data => options[:xData]) unless options[:xData].nil?
+      @yData = NumDataSource.new({:tag_name => :yVal, :data => options[:yData]}) unless options[:yData].nil?
     end
 
     # @see color

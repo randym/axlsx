@@ -50,8 +50,6 @@ class TestChart < Test::Unit::TestCase
     s = @chart.add_series :data=>[0,1,2,3], :labels => ["one", 1, "anything"], :title=>"bob"
     assert_equal(@chart.series.last, s, "series has been added to chart series collection")
     assert_equal(s.title.text, "bob", "series title has been applied")
-    assert_equal(s.data, [0,1,2,3], "data option applied")
-    assert_equal(s.labels, ["one",1,"anything"], "labels option applied")
   end
 
   def test_pn

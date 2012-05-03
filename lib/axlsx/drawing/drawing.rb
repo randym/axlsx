@@ -10,16 +10,17 @@ module Axlsx
 
   require 'axlsx/drawing/scaling.rb'
   require 'axlsx/drawing/axis.rb'
+
+  require 'axlsx/drawing/str_val.rb'
+  require 'axlsx/drawing/num_val.rb'
+  require 'axlsx/drawing/str_data.rb'
+  require 'axlsx/drawing/num_data.rb'
+  require 'axlsx/drawing/num_data_source.rb'
+  require 'axlsx/drawing/ax_data_source.rb'
+
   require 'axlsx/drawing/ser_axis.rb'
   require 'axlsx/drawing/cat_axis.rb'
   require 'axlsx/drawing/val_axis.rb'
-
-
-  #TODO rewrite these classes to fully implement:
-  # CT_AxDataSource for xVal and cat(Category Axis Data)
-  # CT_NumDataSource for yVal and val(Values)
-  require 'axlsx/drawing/cat_axis_data.rb'
-  require 'axlsx/drawing/named_axis_data.rb'
 
   require 'axlsx/drawing/marker.rb'
 

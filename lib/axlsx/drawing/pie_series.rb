@@ -32,8 +32,8 @@ module Axlsx
       @explosion = nil
       @colors = []
       super(chart, options)
-      self.labels = CatAxisData.new(options[:labels]) unless options[:labels].nil?
-      self.data = NamedAxisData.new(:val, options[:data]) unless options[:data].nil?
+      self.labels = AxDataSource.new(:data => options[:labels]) unless options[:labels].nil?
+      self.data = NumDataSource.new(options) unless options[:data].nil?
     end
 
     # @see colors
@@ -64,10 +64,10 @@ module Axlsx
     private
 
     # assigns the data for this series
-    def data=(v) DataTypeValidator.validate "Series.data", [SimpleTypedList], v; @data = v; end
+    def data=(v) DataTypeValidator.validate "Series.data", [NumDataSource], v; @data = v; end
 
     # assigns the labels for this series
-    def labels=(v) DataTypeValidator.validate "Series.labels", [SimpleTypedList], v; @labels = v; end
+    def labels=(v) DataTypeValidator.validate "Series.labels", [AxDataSource], v; @labels = v; end
 
   end
 

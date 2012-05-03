@@ -11,18 +11,9 @@ class TestPieSeries < Test::Unit::TestCase
 
   def test_initialize
     assert_equal(@series.title.text, "bob", "series title has been applied")
-    assert_equal(@series.data, [0,1,2], "data option applied")
-    assert_equal(@series.labels, ["zero", "one","two"], "labels option applied")
+    assert_equal(@series.labels.class, Axlsx::AxDataSource)
+    assert_equal(@series.data.class, Axlsx::NumDataSource)
     assert_equal(@series.explosion, nil, "series shape has been applied")
-  end
-
-  def test_data
-    assert_equal(@series.data, [0,1,2])
-  end
-
-  def test_labels
-    assert_equal(@series.labels, ["zero", "one", "two"])
-
   end
 
   def test_explosion
@@ -30,5 +21,7 @@ class TestPieSeries < Test::Unit::TestCase
     assert_nothing_raised("allow valid explosion") { @series.explosion = 20 }
     assert(@series.explosion == 20)
   end
+
+  #TODO test unique serialization parts
 
 end

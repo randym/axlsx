@@ -13,15 +13,9 @@ class TestScatterSeries < Test::Unit::TestCase
     assert_equal(@series.title.text, "exponents", "series title has been applied")
   end
 
-  def test_data
-    assert_equal(@series.xData, [1,2,4])
-    assert_equal(@series.yData, [1,3,9])
-  end
-
   def test_to_xml_string
     doc = Nokogiri::XML(@chart.to_xml_string)
     assert_equal(doc.xpath("//a:srgbClr[@val='#{@series.color}']").size,4)
-
   end
 
 end

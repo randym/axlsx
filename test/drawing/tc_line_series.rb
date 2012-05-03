@@ -11,16 +11,10 @@ class TestLineSeries < Test::Unit::TestCase
 
   def test_initialize
     assert_equal(@series.title.text, "bob", "series title has been applied")
-    assert_equal(@series.data, [0,1,2], "data option applied")
-    assert_equal(@series.labels, ["zero", "one","two"], "labels option applied")
+    assert_equal(@series.labels.class, Axlsx::AxDataSource)
+    assert_equal(@series.data.class, Axlsx::NumDataSource)
+
   end
 
-  def test_data
-    assert_equal(@series.data, [0,1,2])
-  end
-
-  def test_labels
-    assert_equal(@series.labels, ["zero", "one", "two"])
-  end
-
+  #TODO serialization testing
 end

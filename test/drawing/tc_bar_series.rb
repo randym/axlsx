@@ -11,21 +11,14 @@ class TestBarSeries < Test::Unit::TestCase
 
   def test_initialize
     assert_equal(@series.title.text, "bob", "series title has been applied")
-    assert_equal(@series.data, [0,1,2], "data option applied")
-    assert_equal(@series.labels, ["zero", "one","two"], "labels option applied")
+    assert_equal(@series.data.class, Axlsx::NumDataSource, "data option applied")
     assert_equal(@series.shape, :cone, "series shape has been applied")
+    assert(@series.data.is_a?(Axlsx::NumDataSource))
+    assert(@series.labels.is_a?(Axlsx::AxDataSource))
   end
 
   def test_colors
     assert_equal(@series.colors.size, 3)
-  end
-
-  def test_data
-    assert_equal(@series.data, [0,1,2])
-  end
-
-  def test_labels
-    assert_equal(@series.labels, ["zero", "one", "two"])
   end
 
   def test_shape
