@@ -4,10 +4,10 @@ module Axlsx
   class View3D
 
     # Validation for hPercent
-    H_PERCENT_REGEX = /0*(([5-9])|([1-9][0-9])|([1-4][0-9][0-9])|500)%/
+    H_PERCENT_REGEX = /0*(([5-9])|([1-9][0-9])|([1-4][0-9][0-9])|500)/
 
     # validation for depthPercent
-    DEPTH_PERCENT_REGEX = /0*(([2-9][0-9])|([1-9][0-9][0-9])|(1[0-9][0-9][0-9])|2000)%/
+    DEPTH_PERCENT_REGEX = /0*(([2-9][0-9])|([1-9][0-9][0-9])|(1[0-9][0-9][0-9])|2000)/
 
     # x rotation for the chart
     # must be between -90 and 90
@@ -55,7 +55,10 @@ module Axlsx
     def rotX=(v) DataTypeValidator.validate "#{self.class}.rotX", [Integer, Fixnum], v, lambda {|arg| arg >= -90 && arg <= 90 }; @rotX = v; end
 
     # @see hPercent
-    def hPercent=(v) RegexValidator.validate "#{self.class}.rotX", H_PERCENT_REGEX, v; @hPercent = v; end
+    def hPercent=(v)
+      RegexValidator.validate "#{self.class}.hPercent", H_PERCENT_REGEX, v
+      @hPercent = v
+    end
 
     # @see rotY
     def rotY=(v) DataTypeValidator.validate "#{self.class}.rotY", [Integer, Fixnum], v, lambda {|arg| arg >= 0 && arg <= 360 }; @rotY = v; end
