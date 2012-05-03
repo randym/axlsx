@@ -20,7 +20,7 @@ module Axlsx
     # @param [Regexp] regex The regular expression to evaluate
     # @param [Any] v The value to validate.
     def self.validate(name, regex, v)
-      raise ArgumentError, (ERR_REGEX % [v.inspect, regex.to_s]) unless (v.respond_to?(:=~) && v =~ regex)
+      raise ArgumentError, (ERR_REGEX % [v.inspect, regex.to_s]) unless (v.respond_to?(:to_s) && v.to_s.match(regex))
     end
   end
   # Validate that the class of the value provided is either an instance or the class of the allowed types and that any specified additional validation returns true.
