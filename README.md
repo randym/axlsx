@@ -85,9 +85,11 @@ To install Axlsx, use the following command:
 #Examples
 ------
 
-{include:file:examples/example.rb}
+The example listing is getting overly large to maintain here.
+If you are using Yard, you will be able to see the examples inline below.
+If not, please refer to the Please see the {file:examples/example.rb} file.
 
-There are more examples in the examples directory.
+{include:file:examples/example.rb}
 
 There is much, much more you can do with this gem. If you get stuck, grab me on IRC or submit an issue to Github. Chances are that it has already been implemented. If it hasn't - let's take a look at adding it in.
 
