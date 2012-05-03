@@ -90,6 +90,22 @@ module Axlsx
     DataTypeValidator.validate :float, Float, v
   end
 
+  # Requires that the value is a string containing a positive decimal number followed by one of the following units:
+  # "mm", "cm", "in", "pt", "pc", "pi"
+  def self.validate_number_with_unit(v)
+    RegexValidator.validate "number_with_unit", /\A[0-9]+(\.[0-9]+)?(mm|cm|in|pt|pc|pi)\Z/, v
+  end
+
+  # Requires that the value is an integer ranging from 10 to 400.
+  def self.validate_page_scale(v)
+    DataTypeValidator.validate "page_scale", [Fixnum, Integer], v, lambda { |arg| arg >= 10 && arg <= 400 }
+  end
+
+  # Requires that the value is one of :default, :landscape, or :portrait.
+  def self.validate_page_orientation(v)
+    RestrictionValidator.validate "page_orientation", [:default, :landscape, :portrait], v
+  end
+
   # Requires that the value is valid pattern type.
   # valid pattern types must be one of :none, :solid, :mediumGray, :darkGray, :lightGray, :darkHorizontal, :darkVertical, :darkDown,
   # :darkUp, :darkGrid, :darkTrellis, :lightHorizontal, :lightVertical, :lightDown, :lightUp, :lightGrid, :lightTrellis, :gray125, or :gray0625.

@@ -81,6 +81,29 @@ module Axlsx
 
     end
 
+    # Page setup settings for printing the worksheet.
+    # @example
+    #      wb = Axlsx::Package.new.workbook
+    #
+    #      # using options when creating the worksheet.
+    #      ws = wb.add_worksheet :page_setup => {:fit_to_width => 1, :orientation => :landscape}
+    #
+    #      # use the set method of the page_setup object
+    #      ws.page_setup.set(:paper_width => "297mm", :paper_height => "210mm")
+    #
+    #      # setup page in a block
+    #      ws.page_setup do |page|
+    #        page.scale = 80
+    #        page.orientation = :portrait
+    #      end
+    # @see PageSetup#initialize
+    # @return [PageSetup]
+    def page_setup
+      @page_setup ||= PageSetup.new
+      yield @page_setup if block_given?
+      @page_setup
+    end
+
     # Options for printing the worksheet.
     # @example
     #      wb = Axlsx::Package.new.workbook
@@ -130,6 +153,7 @@ module Axlsx
       @show_gridlines = true
       self.name = "Sheet" + (index+1).to_s
       @page_margins = PageMargins.new options[:page_margins] if options[:page_margins]
+      @page_setup = PageSetup.new options[:page_setup] if options[:page_setup]
       @print_options = PrintOptions.new options[:print_options] if options[:print_options]
 
       @rows = SimpleTypedList.new Row
@@ -449,6 +473,7 @@ module Axlsx
       str.concat "<mergeCells count='%s'>%s</mergeCells>" % [@merged_cells.size, @merged_cells.reduce('') { |memo, obj| memo += "<mergeCell ref='%s'></mergeCell>" % obj } ] unless @merged_cells.empty?
       print_options.to_xml_string(str) if @print_options
       page_margins.to_xml_string(str) if @page_margins
+      page_setup.to_xml_string(str) if @page_setup
       str.concat "<drawing r:id='rId1'></drawing>" if @drawing
       unless @tables.empty?
         str.concat "<tableParts count='%s'>%s</tableParts>" % [@tables.size, @tables.reduce('') { |memo, obj| memo += "<tablePart r:id='%s'/>" % obj.rId }]

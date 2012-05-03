@@ -70,6 +70,35 @@ class TestValidators < Test::Unit::TestCase
     assert_raise(ArgumentError) { Axlsx.validate_relationship_type "http://some.url" }
     assert_raise(ArgumentError) { Axlsx.validate_relationship_type false }
 
+    #number_with_unit
+    assert_nothing_raised { Axlsx.validate_number_with_unit "210mm" }
+    assert_nothing_raised { Axlsx.validate_number_with_unit "8.5in" }
+    assert_nothing_raised { Axlsx.validate_number_with_unit "29.7cm" }
+    assert_nothing_raised { Axlsx.validate_number_with_unit "120pt" }
+    assert_nothing_raised { Axlsx.validate_number_with_unit "0pc" }
+    assert_nothing_raised { Axlsx.validate_number_with_unit "12.34pi" }
+    assert_raise(ArgumentError) { Axlsx.validate_number_with_unit nil }
+    assert_raise(ArgumentError) { Axlsx.validate_number_with_unit "210" }
+    assert_raise(ArgumentError) { Axlsx.validate_number_with_unit 210 }
+    assert_raise(ArgumentError) { Axlsx.validate_number_with_unit "mm" }
+    assert_raise(ArgumentError) { Axlsx.validate_number_with_unit "-29cm" }
+
+    #page_scale
+    assert_nothing_raised { Axlsx.validate_page_scale 10 }
+    assert_nothing_raised { Axlsx.validate_page_scale 100 }
+    assert_nothing_raised { Axlsx.validate_page_scale 400 }
+    assert_raise(ArgumentError) { Axlsx.validate_page_scale 9 }
+    assert_raise(ArgumentError) { Axlsx.validate_page_scale 10.0 }
+    assert_raise(ArgumentError) { Axlsx.validate_page_scale 400.1 }
+    assert_raise(ArgumentError) { Axlsx.validate_page_scale "99" }
+
+    #page_orientation
+    assert_nothing_raised { Axlsx.validate_page_orientation :default }
+    assert_nothing_raised { Axlsx.validate_page_orientation :landscape }
+    assert_nothing_raised { Axlsx.validate_page_orientation :portrait }
+    assert_raise(ArgumentError) { Axlsx.validate_page_orientation nil }
+    assert_raise(ArgumentError) { Axlsx.validate_page_orientation 1 }
+    assert_raise(ArgumentError) { Axlsx.validate_page_orientation "landscape" }
   end
 end
 
