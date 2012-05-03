@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby -w -s
 # -*- coding: utf-8 -*-
-$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../lib"
+# $LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../lib"
 
 #```ruby
 require 'axlsx'
@@ -21,7 +21,9 @@ end
 #Using Custom Styles
 
 #```ruby
-#Each cell allows a single, predified style. When using add_row, the value in the :style array at the same index as the cell's column will be applied to that cell. Alternatively, you can apply a style to an entire row by using an integer value for :style.
+# Each cell allows a single, predified style.
+# When using add_row, the value in the :style array at the same index as the cell's column will be applied to that cell.
+# Alternatively, you can apply a style to an entire row by using an integer value for :style.
 
 wb.styles do |s|
   black_cell = s.add_style :bg_color => "00", :fg_color => "FF", :sz => 14, :alignment => { :horizontal=> :center }

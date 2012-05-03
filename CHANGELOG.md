@@ -1,5 +1,26 @@
 CHANGELOG
 ---------
+- ** April.18.12**: 1.1.1 release
+   - bugfix for autowidth calculations across multiple rows
+   - bugfix for dimension calculations with nil cells.
+   - REMOVED RMAGICK dependency WOOT!
+   - Update readme to show screenshot of gem output.
+   - Cleanup benchmark and add benchmark rake task
+
+- ** April.3.12**: 1.1.0 release
+   - bugfix patch name_to_indecies to properly handle extended ranges.
+   - bugfix properly serialize chart title.
+   - lower rake minimum requirement for 1.8.7 apps that don't want to move on to 0.9 NOTE this will be reverted for 2.0.0 with workbook parsing!
+   - Added Fit to Page printing
+   - added support for turning off gridlines in charts.
+   - added support for turning off gridlines in worksheet.
+   - bugfix some apps like libraoffice require apply[x] attributes to be true. applyAlignment is now properly set.
+   - added option use_autowidth. When this is false RMagick will not be loaded or used in the stack. However it is still a requirement in the gem.
+   - added border style specification to styles#add_style. See the example in the readme.
+   - Support for tables added in - Note: Pre 2011 versions of Mac office do not support this feature and will warn.
+   - Support for splatter charts added
+   - Major (like 7x faster!) performance updates.
+   - Gem now supports for JRuby 1.6.7, as well as experimental support for Rubinius
 
 - ** March.5.12**: 1.0.18 release
    https://github.com/randym/axlsx/compare/1.0.17...1.0.18
