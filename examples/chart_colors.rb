@@ -16,7 +16,6 @@ wb.add_worksheet(:name => "Bar Chart") do |sheet|
     chart.add_series :data => sheet["A3:C3"], :labels => sheet["A2:C2"], :colors => ['FF0000', '00FF00', '0000FF'], :color => "000000"
     chart.valAxis.label_rotation = -45
     chart.catAxis.label_rotation = 45
-    puts chart.to_xml_string
   end
 end
 
@@ -27,7 +26,6 @@ wb.add_worksheet(:name => "Hard Bar Chart") do |sheet|
     chart.add_series :data => [1,3,5], :labels => ['a', 'b', 'c'], :colors => ['FF0000', '00FF00', '0000FF']
     chart.valAxis.label_rotation = -45
     chart.catAxis.label_rotation = 45
-    puts chart.to_xml_string
   end
 end
 
