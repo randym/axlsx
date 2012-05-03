@@ -17,6 +17,16 @@ module Axlsx
     # @return [Integer]
     attr_reader :lblOffset
 
+
+    # The number of tick lables to skip between labels
+    # @return [Integer]
+    attr_reader :tickLblSkip
+
+    # The number of tickmarks to be skipped before the next one is rendered.
+    # @return [Boolean]
+    attr_reader :tickMarkSkip
+
+
     # regex for validating label offset
     LBL_OFFSET_REGEX = /0*(([0-9])|([1-9][0-9])|([1-9][0-9][0-9])|1000)%/
 
@@ -29,12 +39,24 @@ module Axlsx
     # @option options [Boolean] auto
     # @option options [Symbol] lblAlgn
     # @option options [Integer] lblOffset
+    # @option options [Integer] tickLblSkip
+    # @option options [Integer] tickMarkSkip
     def initialize(axId, crossAx, options={})
+      @tickLblSkip = 1
+      @tickMarkSkip = 1
       self.auto = 1
       self.lblAlgn = :ctr
       self.lblOffset = "100%"
       super(axId, crossAx, options)
     end
+
+
+    # @see tickLblSkip
+    def tickLblSkip=(v) Axlsx::validate_unsigned_int(v); @tickLblSkip = v; end
+
+    # @see tickMarkSkip
+    def tickMarkSkip=(v) Axlsx::validate_unsigned_int(v); @tickMarkSkip = v; end
+
 
     # From the docs: This element specifies that this axis is a date or text axis based on the data that is used for the axis labels, not a specific choice.
     def auto=(v) Axlsx::validate_boolean(v); @auto = v; end
@@ -56,6 +78,8 @@ module Axlsx
       str << '<c:auto val="' << @auto.to_s << '"/>'
       str << '<c:lblAlgn val="' << @lblAlgn.to_s << '"/>'
       str << '<c:lblOffset val="' << @lblOffset.to_s << '"/>'
+      str << '<c:tickLblSkip val="' << @tickLblSkip.to_s << '"/>'
+      str << '<c:tickMarkSkip val="' << @tickMarkSkip.to_s << '"/>'
       str << '</c:catAx>'
     end
 

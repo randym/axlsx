@@ -41,6 +41,8 @@ module Axlsx
     # @param [GraphicalFrame] frame The frame that holds this chart.
     # @option options [Cell, String] title
     # @option options [Boolean] show_legend
+    # @option options [Array|String|Cell] start_at The X, Y coordinates defining the top left corner of the chart.
+    # @option options [Array|String|Cell] end_at The X, Y coordinates defining the bottom right corner of the chart.
     def initialize(frame, options={})
       @style = 2
       @view3D = nil
@@ -153,7 +155,7 @@ module Axlsx
     # @param [Integer] x The column
     # @param [Integer] y The row
     # @return [Marker]
-    def start_at(x, y=0)
+    def start_at(x=0, y=0)
       x, y = *parse_coord_args(x, y)
       @graphic_frame.anchor.from.col = x
       @graphic_frame.anchor.from.row = y
@@ -162,10 +164,10 @@ module Axlsx
     # This is a short cut method to set the end anchor position
     # If you need finer granularity in positioning use
     # graphic_frame.anchor.to.colOff / rowOff
-    # @param [Integer] x The column
-    # @param [Integer] y The row
+    # @param [Integer] x The column - default 10
+    # @param [Integer] y The row - default 10
     # @return [Marker]
-    def end_at(x, y=0)
+    def end_at(x=10, y=10)
       x, y = *parse_coord_args(x, y)
       @graphic_frame.anchor.to.col = x
       @graphic_frame.anchor.to.row = y

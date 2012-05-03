@@ -20,7 +20,7 @@ module Axlsx
     # @option options [Integer] tickLblSkip
     # @option options [Integer] tickMarkSkip
     def initialize(axId, crossAx, options={})
-      @tickLblSkip, @tickMarkSkip = nil, nil
+      @tickLblSkip, @tickMarkSkip = 1, 1
       super(axId, crossAx, options)
     end
 

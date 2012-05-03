@@ -44,6 +44,10 @@ module Axlsx
     # @return [Boolean]
     attr_reader :gridlines
 
+    # specifies if gridlines should be shown in the chart
+    # @return [Boolean]
+    attr_reader :delete
+
     # Creates an Axis object
     # @param [Integer] axId the id of this axis
     # @param [Integer] crossAx the id of the perpendicular axis
@@ -57,7 +61,7 @@ module Axlsx
       @axId = axId
       @crossAx = crossAx
       @format_code = "General"
-      @label_rotation = 0
+      @delete = @label_rotation = 0
       @scaling = Scaling.new(:orientation=>:minMax)
       self.axPos = :b
       self.tickLblPos = :nextTo
@@ -84,6 +88,11 @@ module Axlsx
     # default true
     def gridlines=(v) Axlsx::validate_boolean(v); @gridlines = v; end
 
+
+    # Specify if axis should be removed from the chart
+    # default false
+    def delete=(v) Axlsx::validate_boolean(v); @delete = v; end
+
     # specifies how the perpendicular axis is crossed
     # must be one of [:autoZero, :min, :max]
     def crosses=(v) RestrictionValidator.validate "#{self.class}.crosses", [:autoZero, :min, :max], v; @crosses = v; end
@@ -104,7 +113,7 @@ module Axlsx
     def to_xml_string(str = '')
       str << '<c:axId val="' << @axId.to_s << '"/>'
       @scaling.to_xml_string str
-      str << '<c:delete val="0"/>'
+      str << '<c:delete val="'<< @delete.to_s << '"/>'
       str << '<c:axPos val="' << @axPos.to_s << '"/>'
       str << '<c:majorGridlines>'
       if self.gridlines == false
