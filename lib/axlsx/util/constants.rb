@@ -184,6 +184,9 @@ module Axlsx
   # chart part
   IMAGE_PN = "media/image%d.%s"
 
+  # comment part
+  COMMENT_PN = "xl/comments%d.xml"
+
   # location of schema files for validation
   SCHEMA_BASE = File.dirname(__FILE__)+'/../../schema/'
 

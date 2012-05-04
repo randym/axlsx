@@ -43,6 +43,7 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(optioned.name, 'bob')
     assert_equal(optioned.selected, true)
     assert_equal(optioned.show_gridlines, false)
+
   end
 
 
@@ -274,11 +275,16 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   def test_relationships
+    @ws.add_row [1,2,3]
     assert(@ws.relationships.empty?, "No Drawing relationship until you add a chart")
     c = @ws.add_chart Axlsx::Pie3DChart
     assert_equal(@ws.relationships.size, 1, "adding a chart creates the relationship")
     c = @ws.add_chart Axlsx::Pie3DChart
     assert_equal(@ws.relationships.size, 1, "multiple charts still only result in one relationship")
+    c = @ws.add_comment :text => 'builder', :author => 'bob', :ref => @ws.rows.last.cells.last
+    assert_equal(@ws.relationships.size, 2, "adding a comment adds a relationship")
+    c = @ws.add_comment :text => 'not that is a comment!', :author => 'travis', :ref => "A1"
+    assert_equal(@ws.relationships.size, 3, "adding multiple comments result in multiple relationships")
   end
 
 

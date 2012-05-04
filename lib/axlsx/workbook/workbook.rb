@@ -12,6 +12,7 @@ require 'axlsx/workbook/worksheet/conditional_formatting.rb'
 require 'axlsx/workbook/worksheet/conditional_formatting_rule.rb'
 require 'axlsx/workbook/worksheet/row.rb'
 require 'axlsx/workbook/worksheet/col.rb'
+require 'axlsx/workbook/worksheet/comments.rb'
 require 'axlsx/workbook/worksheet/worksheet.rb'
 require 'axlsx/workbook/shared_strings_table.rb'
 require 'axlsx/workbook/worksheet/table.rb'
@@ -90,6 +91,14 @@ require 'axlsx/workbook/worksheet/table.rb'
     attr_reader :tables
 
 
+    # A colllection of comments associated with this workbook
+    # @note The recommended way to manage comments is Worksheet#add_comment
+    # @see Worksheet#add_comment
+    # @see Comment
+    # @return [SimpleTypedList]
+    attr_reader :comments
+
+
     # The styles associated with this workbook
     # @note The recommended way to manage styles is Styles#add_style
     # @see Style#add_style
@@ -123,7 +132,12 @@ require 'axlsx/workbook/worksheet/table.rb'
       @drawings = SimpleTypedList.new Drawing
       @charts = SimpleTypedList.new Chart
       @images = SimpleTypedList.new Pic
+
+      # Are these even used????? Check package serialization parts
       @tables = SimpleTypedList.new Table
+      @comments = SimpleTypedList.new Comments
+
+
       @use_autowidth = true
 
       self.date1904= !options[:date1904].nil? && options[:date1904]

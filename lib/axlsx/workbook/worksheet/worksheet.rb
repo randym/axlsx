@@ -102,7 +102,7 @@ module Axlsx
       @merged_cells = []
       @auto_fit_data = []
       @conditional_formattings = []
-
+      @comments = Comments.new(self)
       @selected = false
       @show_gridlines = true
       self.name = "Sheet" + (index+1).to_s
@@ -394,6 +394,12 @@ module Axlsx
       table
     end
 
+
+    # Shortcut to comments#add_comment
+    def add_comment(options={})
+      @comments.add_comment(options)
+    end
+
     # Adds a media item to the worksheets drawing
     # @param [Class] media_type
     # @option options [] unknown
@@ -437,12 +443,15 @@ module Axlsx
     # The worksheet relationships. This is managed automatically by the worksheet
     # @return [Relationships]
     def relationships
-        r = Relationships.new
-        @tables.each do |table|
-          r << Relationship.new(TABLE_R, "../#{table.pn}")
-        end
-        r << Relationship.new(DRAWING_R, "../#{@drawing.pn}") if @drawing
-        r
+      r = Relationships.new
+      @tables.each do |table|
+        r << Relationship.new(TABLE_R, "../#{table.pn}")
+      end
+      @comments.comment_list.each do |comment|
+        r << Relationship.new(COMMENT_R, "#{comment.pn}")
+      end
+      r << Relationship.new(DRAWING_R, "../#{@drawing.pn}") if @drawing
+      r
     end
 
     # Returns the cell or cells defined using excel style A1:B3 references.
