@@ -179,7 +179,7 @@ module Axlsx
   # XML_NS_R, TABLE_R, WORKBOOK_R, WORKSHEET_R, APP_R, RELS_R, CORE_R, STYLES_R, CHART_R, DRAWING_R, IMAGE_R, HYPERLINK_R, SHARED_STRINGS_R are allowed
   # @param [Any] v The value validated
   def self.validate_relationship_type(v)
-    RestrictionValidator.validate :relationship_type, [XML_NS_R, TABLE_R, WORKBOOK_R, WORKSHEET_R, APP_R, RELS_R, CORE_R, STYLES_R, CHART_R, DRAWING_R, IMAGE_R, HYPERLINK_R, SHARED_STRINGS_R], v
+    RestrictionValidator.validate :relationship_type, [XML_NS_R, TABLE_R, WORKBOOK_R, WORKSHEET_R, APP_R, RELS_R, CORE_R, STYLES_R, CHART_R, DRAWING_R, IMAGE_R, HYPERLINK_R, SHARED_STRINGS_R, COMMENT_R], v
   end
 
   # Requires that the value is a valid table element type

@@ -79,6 +79,9 @@ module Axlsx
   # image rels namespace
   HYPERLINK_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink"
 
+  # comment rels namespace
+  COMMENT_R = "http://purl.oclc.org/ooxml/officeDocument/relationships/comments"
+
   # table content type
   TABLE_CT = "application/vnd.openxmlformats-officedocument.spreadsheetml.table+xml"
 
