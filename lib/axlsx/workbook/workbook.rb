@@ -83,6 +83,9 @@ require 'axlsx/workbook/worksheet/table.rb'
     # @return [SimpleTypedList]
     attr_reader :drawings
 
+    # pretty sure this two are always empty and can be removed.
+
+
     # A colllection of tables associated with this workbook
     # @note The recommended way to manage drawings is Worksheet#add_table
     # @see Worksheet#add_table
