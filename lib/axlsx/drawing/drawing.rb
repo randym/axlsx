@@ -146,8 +146,10 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      str << '<?xml version="1.0" encoding="UTF-8"?>'
-      str << '<xdr:wsDr xmlns:xdr="' << XML_NS_XDR << '" xmlns:a="' << XML_NS_A << '" xmlns:c="' << XML_NS_C << '">'
+      str << '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+#      str << '<xdr:wsDr xmlns:xdr="' << XML_NS_XDR << '" xmlns:a="' << XML_NS_A << '" xmlns:c="' << XML_NS_C << '">'
+      str << '<xdr:wsDr xmlns:xdr="' << XML_NS_XDR << '" xmlns:a="' << XML_NS_A << '">'
+
       anchors.each { |anchor| anchor.to_xml_string(str) }
       str << '</xdr:wsDr>'
     end
