@@ -88,7 +88,8 @@ module Axlsx
     # by default, all columns are 5 columns wide and 5 rows high
     def initialize_vml_shape
       ws = self.comments.worksheet
-      @vml_shape = VmlShape.new(self, :row => ws[ref].row.index, :column => ws[ref].index) do |vml|
+      pos = Axlsx::name_to_indices(ref)
+      @vml_shape = VmlShape.new(self, :row => pos[1], :column => pos[0]) do |vml|
         vml.left_column = vml.row + 1
         vml.right_column = vml.column + 4
         vml.top_row = vml.row

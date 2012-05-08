@@ -288,9 +288,11 @@ module Axlsx
     # @param [String] str The string index the cell content will be appended to. Defaults to empty string.
     # @return [String] xml text for the cell
     def to_xml_string(r_index, c_index, str = '')
-      return str if @value.nil?
       str << '<c r="' << Axlsx::cell_r(c_index, r_index) << '" s="' << @style.to_s << '" '
+      return str << '/>' if @value.nil?
+
       case @type
+
       when :string
         #parse formula
         if @value.start_with?('=')
