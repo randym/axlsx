@@ -4,6 +4,8 @@ class TestCore < Test::Unit::TestCase
 
   def setup
     @core = Axlsx::Core.new
+    # could still see some false positives if the second changes between the next two calls
+    @time = Time.now.strftime('%Y-%m-%dT%H:%M:%S')
     @doc = Nokogiri::XML(@core.to_xml_string)
   end
 
@@ -18,7 +20,7 @@ class TestCore < Test::Unit::TestCase
   end
 
   def test_populates_created
-    assert_equal(@doc.xpath('//dcterms:created').text, Time.now.strftime('%Y-%m-%dT%H:%M:%S'), "dcterms:created incorrect")
+    assert_equal(@doc.xpath('//dcterms:created').text, @time, "dcterms:created incorrect")
   end
 
   def test_populates_default_name
