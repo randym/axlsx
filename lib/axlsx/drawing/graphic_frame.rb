@@ -32,7 +32,8 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      str << '<xdr:graphicFrame>'
+      # macro attribute should be optional!
+      str << '<xdr:graphicFrame macro="">'
       str << '<xdr:nvGraphicFramePr>'
       str << '<xdr:cNvPr id="2" name="' << chart.title.text << '"/>'
       str << '<xdr:cNvGraphicFramePr/>'

@@ -1,21 +1,62 @@
 module Axlsx
 
+  # A VmlShape is used to position and render a comment.
   class VmlShape
 
-    attr_accessor :row
+    # The row anchor position for this shape determined by the comment's ref value
+    # @return [Integer]
+    attr_reader :row
 
-    attr_accessor :column
+    # The column anchor position for this shape determined by the comment's ref value
+    # @return [Integer]
+    attr_reader :column
 
-    attr_accessor :left_column
-    attr_accessor :left_offset
-    attr_accessor :top_row
-    attr_accessor :top_offset
-    attr_accessor :right_column
-    attr_accessor :right_offset
-    attr_accessor :bottom_row
-    attr_accessor :bottom_offset
+    # The left column for this shape
+    # @return [Integer]
+    attr_reader :left_column
+
+    # The left offset for this shape
+    # @return [Integer]
+    attr_reader :left_offset
+
+    # The top row for this shape
+    # @return [Integer]
+    attr_reader :top_row
+
+    # The top offset for this shape
+    # @return [Integer]
+    attr_reader :top_offset
+
+    # The right column for this shape
+    # @return [Integer]
+    attr_reader :right_column
+
+    # The right offset for this shape
+    # @return [Integer]
+    attr_reader :right_offset
+
+    # The botttom row for this shape
+    # @return [Integer]
+    attr_reader :bottom_row
+
+    # The bottom offset for this shape
+    # @return [Integer]
+    attr_reader :bottom_offset
+
+    # The id of this shape derrived from teh comment's worksheet index and the index of this comment
+    # @return [String]
     attr_reader   :id
 
+    # Creates a new VmlShape object for the comment provided.
+    # @param [Comment] comment
+    # @option options [Integer|String] left_column
+    # @option options [Integer|String] left_offset
+    # @option options [Integer|String] top_row
+    # @option options [Integer|String] top_offset
+    # @option options [Integer|String] right_column
+    # @option options [Integer|String] right_offset
+    # @option options [Integer|String] bottom_row
+    # @option options [Integer|String] bottom_offset
     def initialize(comment, options={})
       @id = "_x0000_s#{comment.comments.worksheet.index+1}08#{comment.index+1}"
       @row = @column = @left_column = @top_row = @right_column = @bottom_row = 0
@@ -29,6 +70,33 @@ module Axlsx
       yield self if block_given?
     end
 
+    # @see left_column
+    def left_column=(v); Axlsx::validate_integerish(v); @left_column = v.to_i end
+
+    # @see left_offset
+    def left_offset=(v); Axlsx::validate_integerish(v); @left_offset = v.to_i end
+
+    # @see top_row
+    def top_row=(v); Axlsx::validate_integerish(v); @top_row = v.to_i end
+
+    # @see top_offset
+    def top_offset=(v); Axlsx::validate_integerish(v); @top_offset = v.to_i end
+
+    # @see right_column
+    def right_column=(v); Axlsx::validate_integerish(v); @right_column = v.to_i end
+
+    # @see right_offset
+    def right_offset=(v); Axlsx::validate_integerish(v); @right_offset = v.to_i end
+
+    # @see bottom_row
+    def bottom_row=(v); Axlsx::validate_integerish(v); @bottom_row = v.to_i end
+
+    # @see_bottom_offset
+    def bottom_offset=(v); Axlsx::validate_integerish(v); @bottom_offset = v.to_i end
+
+    # serialize the shape to a string
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str ='')
 str << <<SHAME_ON_YOU
 
