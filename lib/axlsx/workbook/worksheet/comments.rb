@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 module Axlsx
 
   class Comments
@@ -10,19 +11,33 @@ module Axlsx
     # @return [SimpleTypedList]
     attr_reader :comment_list
 
+    attr_reader :vml_drawing
 
     # The worksheet that these comments belong to
     # @return [Worksheet]
     attr_reader :worksheet
 
+    def index
+      @worksheet.index
+    end
+
+    def pn
+      "#{COMMENT_PN % (index+1)}"
+    end
+
     # Creates a new Comments object
     # @param [Worksheet] worksheet The sheet that these comments belong to.
     def initialize(worksheet)
       raise ArgumentError, "you must provide a worksheet" unless worksheet.is_a?(Worksheet)
+
       @worksheet = worksheet
       @authors = SimpleTypedList.new String
       @comment_list = SimpleTypedList.new Comment
+      @vml_drawing = VmlDrawing.new(self)
     end
+
+    # LeftColumn, LeftOffset, TopRow, TopOffset, RightColumn, RightOffset, BottomRow, BottomOffset.
+
 
     # Adds a new comment to the worksheet that owns these comments.
     # @note the author, text and ref options are required
@@ -50,7 +65,7 @@ module Axlsx
       comment_list.each do |comment|
         comment.to_xml_string str
       end
-      str << '<commentList></comments>'
+      str << '</commentList></comments>'
 
     end
 
@@ -65,6 +80,7 @@ module Axlsx
     attr_reader :comments
 
     attr_reader :ref
+
     # TODO
     # r (Rich Text Run)
     # rPh (Phonetic Text Run)
@@ -80,6 +96,20 @@ module Axlsx
 
     def pn
       "#{COMMENT_PN % (index+1)}"
+    end
+
+    def vml_shape
+      @vml_shape ||= initialize_vml_shape
+    end
+
+    def initialize_vml_shape
+      ws = self.comments.worksheet
+      @vml_shape = VmlShape.new(self, :row => ws[ref].row.index, :column => ws[ref].index) do |vml|
+        vml.left_column = vml.row + 1
+        vml.right_column = vml.column + 4
+        vml.top_row = vml.row
+        vml.bottom_row = vml.row + 4
+      end
     end
 
     # The index of this comment
@@ -105,8 +135,15 @@ module Axlsx
     end
 
     def to_xml_string(str = "")
-      str << '<comment ref="' << ref << '" authorId="' << author_index << '">'
-      str << '<t xml:space="preserve">' << text << '</t>'
+      author = @comments.authors[author_index]
+      str << '<comment ref="' << ref << '" authorId="' << author_index.to_s << '">'
+      str << '<text><r>'
+      str << '<rPr> <b/><color indexed="81"/></rPr>'
+      str << '<t>' << author.to_s << ':
+</t></r>'
+      str << '<r>'
+      str << '<rPr><color indexed="81"/></rPr>'
+      str << '<t>' << text << '</t></r></text>'
       str << '</comment>'
     end
 

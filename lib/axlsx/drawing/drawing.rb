@@ -39,6 +39,9 @@ module Axlsx
   require 'axlsx/drawing/pic.rb'
   require 'axlsx/drawing/hyperlink.rb'
 
+  require 'axlsx/drawing/vml_drawing.rb'
+  require 'axlsx/drawing/vml_shape.rb'
+
   # A Drawing is a canvas for charts. Each worksheet has a single drawing that manages anchors.
   # The anchors reference the charts via graphical frames. This is not a trivial relationship so please do follow the advice in the note.
   # @note The recommended way to manage drawings is to use the Worksheet.add_chart method.

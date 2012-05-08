@@ -16,6 +16,8 @@ module Axlsx
     # @return [Array] of Table
     attr_reader :tables
 
+    attr_reader :comments
+
     # The rows in this worksheet
     # @note The recommended way to manage rows is Worksheet#add_row
     # @return [SimpleTypedList]
@@ -143,7 +145,7 @@ module Axlsx
     def initialize(wb, options={})
       self.workbook = wb
       @workbook.worksheets << self
-
+      @page_marging = @page_setup = @print_options = nil
       @drawing = @page_margins = @auto_filter = nil
       @merged_cells = []
       @auto_fit_data = []
@@ -155,7 +157,6 @@ module Axlsx
       @page_margins = PageMargins.new options[:page_margins] if options[:page_margins]
       @page_setup = PageSetup.new options[:page_setup] if options[:page_setup]
       @print_options = PrintOptions.new options[:print_options] if options[:print_options]
-
       @rows = SimpleTypedList.new Row
       @column_info = SimpleTypedList.new Col
       # @cols = SimpleTypedList.new Cell
@@ -487,6 +488,7 @@ module Axlsx
       @conditional_formattings.each do |cf|
         str.concat cf.to_xml_string
       end
+      str << '<legacyDrawing r:id="rId1"/>' if @comments.comment_list.size > 0
       str + '</worksheet>'
     end
 
@@ -497,9 +499,11 @@ module Axlsx
       @tables.each do |table|
         r << Relationship.new(TABLE_R, "../#{table.pn}")
       end
-      @comments.comment_list.each do |comment|
-        r << Relationship.new(COMMENT_R, "#{comment.pn}")
-      end
+
+      r << Relationship.new(VML_DRAWING_R, "../#{@comments.vml_drawing.pn}") if @comments.comment_list.size > 0
+      r << Relationship.new(COMMENT_R, "../#{@comments.pn}") if @comments.comment_list.size > 0
+      r << Relationship.new(COMMENT_R_NULL, "NULL") if @comments.comment_list.size > 0
+
       r << Relationship.new(DRAWING_R, "../#{@drawing.pn}") if @drawing
       r
     end

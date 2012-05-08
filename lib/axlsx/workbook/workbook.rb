@@ -100,9 +100,10 @@ require 'axlsx/workbook/worksheet/table.rb'
     # @note The recommended way to manage comments is Worksheet#add_comment
     # @see Worksheet#add_comment
     # @see Comment
-    # @return [SimpleTypedList]
-    attr_reader :comments
-
+    # @return [Comments]
+    def comments
+      self.worksheets.map { |ws| ws.comments }.compact
+    end
 
     # The styles associated with this workbook
     # @note The recommended way to manage styles is Styles#add_style

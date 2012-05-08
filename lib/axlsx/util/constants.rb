@@ -80,7 +80,16 @@ module Axlsx
   HYPERLINK_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink"
 
   # comment rels namespace
-  COMMENT_R = "http://purl.oclc.org/ooxml/officeDocument/relationships/comments"
+  COMMENT_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/comments"
+  COMMENT_R_NULL = "http://purl.oclc.org/ooxml/officeDocument/relationships/comments"
+
+  #vml drawing relation namespace
+  VML_DRAWING_R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/vmlDrawing'
+
+
+
+  # VML Drawing content type
+  VML_DRAWING_CT = "application/vnd.openxmlformats-officedocument.vmlDrawing"
 
   # table content type
   TABLE_CT = "application/vnd.openxmlformats-officedocument.spreadsheetml.table+xml"
@@ -111,6 +120,9 @@ module Axlsx
 
   # chart content type
   CHART_CT = "application/vnd.openxmlformats-officedocument.drawingml.chart+xml"
+
+  # comments content type
+  COMMENT_CT = "application/vnd.openxmlformats-officedocument.spreadsheetml.comments+xml"
 
   # jpeg content type
   JPEG_CT = "image/jpeg"
@@ -175,6 +187,9 @@ module Axlsx
   # drawing rels part
   DRAWING_RELS_PN = "drawings/_rels/drawing%d.xml.rels"
 
+  # vml drawing part
+  VML_DRAWING_PN = "drawings/vmlDrawing%d.vml"
+
   # drawing part
   TABLE_PN = "tables/table%d.xml"
 
@@ -185,7 +200,7 @@ module Axlsx
   IMAGE_PN = "media/image%d.%s"
 
   # comment part
-  COMMENT_PN = "xl/comments%d.xml"
+  COMMENT_PN = "comments%d.xml"
 
   # location of schema files for validation
   SCHEMA_BASE = File.dirname(__FILE__)+'/../../schema/'

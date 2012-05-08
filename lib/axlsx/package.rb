@@ -180,13 +180,22 @@ module Axlsx
        {:entry => CONTENT_TYPES_PN, :doc => content_types.to_xml_string, :schema => CONTENT_TYPES_XSD},
        {:entry => WORKBOOK_PN, :doc => workbook.to_xml_string, :schema => SML_XSD}
       ]
+
       workbook.drawings.each do |drawing|
         @parts << {:entry => "xl/#{drawing.rels_pn}", :doc => drawing.relationships.to_xml_string, :schema => RELS_XSD}
         @parts << {:entry => "xl/#{drawing.pn}", :doc => drawing.to_xml_string, :schema => DRAWING_XSD}
       end
 
+
       workbook.tables.each do |table|
         @parts << {:entry => "xl/#{table.pn}", :doc => table.to_xml_string, :schema => SML_XSD}
+      end
+
+      workbook.comments.each do|comment|
+        if comment.comment_list.size > 0
+          @parts << { :entry => "xl/#{comment.pn}", :doc => comment.to_xml_string, :schema => SML_XSD }
+          @parts << { :entry => "xl/#{comment.vml_drawing.pn}", :doc => comment.vml_drawing.to_xml_string, :schema => nil }
+        end
       end
 
       workbook.charts.each do |chart|
@@ -229,18 +238,33 @@ module Axlsx
     # @private
     def content_types
       c_types = base_content_types
+
       workbook.drawings.each do |drawing|
         c_types << Axlsx::Override.new(:PartName => "/xl/#{drawing.pn}",
                                        :ContentType => DRAWING_CT)
       end
+
       workbook.charts.each do |chart|
         c_types << Axlsx::Override.new(:PartName => "/xl/#{chart.pn}",
                                        :ContentType => CHART_CT)
       end
+
       workbook.tables.each do |table|
         c_types << Axlsx::Override.new(:PartName => "/xl/#{table.pn}",
                                        :ContentType => TABLE_CT)
       end
+
+      workbook.comments.each do |comment|
+        if comment.comment_list.size > 0
+        c_types << Axlsx::Override.new(:PartName => "/xl/#{comment.pn}",
+                                       :ContentType => COMMENT_CT)
+        end
+      end
+
+      if workbook.comments.size > 0
+        c_types << Axlsx::Default.new(:Extension => "vml", :ContentType => VML_DRAWING_CT)
+      end
+
       workbook.worksheets.each do |sheet|
         c_types << Axlsx::Override.new(:PartName => "/xl/#{sheet.pn}",
                                          :ContentType => WORKSHEET_CT)

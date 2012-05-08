@@ -185,17 +185,17 @@ module Axlsx
   end
 
   # Requires that the value is a valid content_type
-  # TABLE_CT, WORKBOOK_CT, APP_CT, RELS_CT, STYLES_CT, XML_CT, WORKSHEET_CT, SHARED_STRINGS_CT, CORE_CT, CHART_CT, DRAWING_CT are allowed
+  # TABLE_CT, WORKBOOK_CT, APP_CT, RELS_CT, STYLES_CT, XML_CT, WORKSHEET_CT, SHARED_STRINGS_CT, CORE_CT, CHART_CT, DRAWING_CT, COMMENT_CT are allowed
   # @param [Any] v The value validated
   def self.validate_content_type(v)
-    RestrictionValidator.validate :content_type, [TABLE_CT, WORKBOOK_CT, APP_CT, RELS_CT, STYLES_CT, XML_CT, WORKSHEET_CT, SHARED_STRINGS_CT, CORE_CT, CHART_CT, JPEG_CT, GIF_CT, PNG_CT, DRAWING_CT], v
+    RestrictionValidator.validate :content_type, [TABLE_CT, WORKBOOK_CT, APP_CT, RELS_CT, STYLES_CT, XML_CT, WORKSHEET_CT, SHARED_STRINGS_CT, CORE_CT, CHART_CT, JPEG_CT, GIF_CT, PNG_CT, DRAWING_CT, COMMENT_CT, VML_DRAWING_CT], v
   end
 
   # Requires that the value is a valid relationship_type
   # XML_NS_R, TABLE_R, WORKBOOK_R, WORKSHEET_R, APP_R, RELS_R, CORE_R, STYLES_R, CHART_R, DRAWING_R, IMAGE_R, HYPERLINK_R, SHARED_STRINGS_R are allowed
   # @param [Any] v The value validated
   def self.validate_relationship_type(v)
-    RestrictionValidator.validate :relationship_type, [XML_NS_R, TABLE_R, WORKBOOK_R, WORKSHEET_R, APP_R, RELS_R, CORE_R, STYLES_R, CHART_R, DRAWING_R, IMAGE_R, HYPERLINK_R, SHARED_STRINGS_R, COMMENT_R], v
+    RestrictionValidator.validate :relationship_type, [XML_NS_R, TABLE_R, WORKBOOK_R, WORKSHEET_R, APP_R, RELS_R, CORE_R, STYLES_R, CHART_R, DRAWING_R, IMAGE_R, HYPERLINK_R, SHARED_STRINGS_R, COMMENT_R, VML_DRAWING_R, COMMENT_R_NULL], v
   end
 
   # Requires that the value is a valid table element type
