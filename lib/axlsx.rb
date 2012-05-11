@@ -54,6 +54,7 @@ module Axlsx
     ref
   end
 
+  # returns the x, y position of a cell
   def self.name_to_indices(name)
     raise ArgumentError, 'invalid cell name' unless name.size > 1
     v = name[/[A-Z]+/].reverse.chars.reduce({:base=>1, :i=>0}) do  |val, c|
