@@ -66,4 +66,8 @@ class TestHyperlink < Test::Unit::TestCase
     assert_equal(@hyperlink.history, false )
   end
 
+  def test_to_xml_string
+    doc = Nokogiri::XML(@p.workbook.worksheets.first.drawing.to_xml_string)
+    assert(doc.xpath("//a:hlinkClick"))
+  end
 end

@@ -66,7 +66,25 @@ class TestRow < Test::Unit::TestCase
     assert_equal(15, @row.height)
   end
 
-  def test_to_xml_without_custom_height
+  def test_hidden
+    assert_raise(ArgumentError) { @row.hidden = -3 }
+    assert_nothing_raised { @row.hidden = true }
+    assert_equal(true, @row.hidden)
+  end
+
+  def test_collapsed
+    assert_raise(ArgumentError) { @row.collapsed = -3 }
+    assert_nothing_raised { @row.collapsed = true }
+    assert_equal(true, @row.collapsed)
+  end
+
+  def test_outlineLevel
+    assert_raise(ArgumentError) { @row.outlineLevel = -3 }
+    assert_nothing_raised { @row.outlineLevel = 2 }
+    assert_equal(2, @row.outlineLevel)
+  end
+
+ def test_to_xml_without_custom_height
     doc = Nokogiri::XML.parse(@row.to_xml_string(0))
     assert_equal(0, doc.xpath(".//row[@ht]").size)
     assert_equal(0, doc.xpath(".//row[@customHeight]").size)

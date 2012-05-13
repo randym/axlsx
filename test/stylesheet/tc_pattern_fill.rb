@@ -33,5 +33,11 @@ class TestPatternFill < Test::Unit::TestCase
     assert_nothing_raised { @item.patternType = :lightUp }
     assert_equal(@item.patternType, :lightUp)
   end
-
+ 
+  def test_to_xml_string
+    @item = Axlsx::PatternFill.new :bgColor => Axlsx::Color.new(:rgb => "FF0000"), :fgColor => Axlsx::Color.new(:rgb=>"00FF00") 
+    doc = Nokogiri::XML(@item.to_xml_string)
+    assert(doc.xpath('//color[@rgb="FFFF0000"]'))
+    assert(doc.xpath('//color[@rgb="FF00FF00"]'))
+  end
 end

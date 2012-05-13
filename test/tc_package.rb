@@ -4,10 +4,23 @@ class TestPackage < Test::Unit::TestCase
   def setup
     @package = Axlsx::Package.new
     ws = @package.workbook.add_worksheet
+    ws.add_row ['yes', 'we', 'can']
+    ws.add_comment :author => 'bob', :text => 'penny!', :ref => 'A1'
     chart = ws.add_chart Axlsx::Pie3DChart
     chart.add_series :data=>[1,2,3], :labels=>["a", "b", "c"]
     @fname = 'axlsx_test_serialization.xlsx'
+    img = File.expand_path('../../examples/image1.jpeg', __FILE__)
+    ws.add_image(:image_src => img, :noSelect => true, :noMove => true, :hyperlink=>"http://axlsx.blogspot.com") do |image|
+      image.width=720
+      image.height=666
+      image.hyperlink.tooltip = "Labeled Link"
+      image.start_at 2, 2
+    end
+  end
 
+  def test_use_autowidth
+    @package.use_autowidth = false
+    assert(@package.workbook.use_autowidth == false)
   end
 
   def test_core_accessor
@@ -55,10 +68,6 @@ class TestPackage < Test::Unit::TestCase
 
   def test_parts
     p = @package.send(:parts)
-    p.each do |part|
-      #all parts must have :doc, :entry, :schema
-      assert(part.keys.size == 3 && part.keys.reject{ |k| [:doc, :entry, :schema].include? k}.empty?)
-    end
     #all parts have an entry
     assert_equal(p.select{ |part| part[:entry] =~ /_rels\/\.rels/ }.size, 1, "rels missing")
     assert_equal(p.select{ |part| part[:entry] =~ /docProps\/core\.xml/ }.size, 1, "core missing")
@@ -72,9 +81,11 @@ class TestPackage < Test::Unit::TestCase
     assert_equal(p.select{ |part| part[:entry] =~ /xl\/charts\/chart\d\.xml/ }.size, @package.workbook.charts.size, "one or more charts missing")
     assert_equal(p.select{ |part| part[:entry] =~ /xl\/worksheets\/sheet\d\.xml/ }.size, @package.workbook.worksheets.size, "one or more sheet missing")
     assert_equal(p.select{ |part| part[:entry] =~ /xl\/worksheets\/_rels\/sheet\d\.xml\.rels/ }.size, @package.workbook.worksheets.size, "one or more sheet rels missing")
+    assert_equal(p.select{ |part| part[:entry] =~ /xl\/comments\d\.xml/ }.size, @package.workbook.worksheets.size, "one or more sheet rels missing")
+
 
     #no mystery parts
-    assert_equal(p.size, 12)
+    assert_equal(p.size, 15)
 
   end
 
