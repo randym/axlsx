@@ -57,7 +57,7 @@ wb.add_worksheet(:name => "Cell Level Style Overrides") do |sheet|
 end
 #```
 
-#Using Custom Border Styles
+##Using Custom Border Styles
 
 #```ruby
 #Axlsx defines a thin border style, but you can easily create and use your own.
@@ -97,7 +97,6 @@ wb.styles do |s|
     #Set the second column outline level
     sheet.column_info[1].outlineLevel = 2
 
-    #TODO rows hidden, outline etc.
     sheet.rows[3].hidden = true
     sheet.rows[1].outlineLevel = 2
   end
@@ -344,6 +343,12 @@ wb.add_worksheet(:name => "print margins", :page_margins => margins, :page_setup
 end
 #```
 
+## Add Comments to your spreadsheet 
+#``` ruby
+wb.add_worksheet(:name => 'comments') do |sheet|
+  sheet.add_row ['Can we build it?']
+  sheet.add_comment :ref => 'A1', :author => 'Bob', :text => 'Yes We Can!'
+end
 
 ##Validate and Serialize
 
