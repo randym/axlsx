@@ -192,7 +192,7 @@ module Axlsx
       end
 
       workbook.comments.each do|comment|
-        if comment.comment_list.size > 0
+        if comment.size > 0
           @parts << { :entry => "xl/#{comment.pn}", :doc => comment.to_xml_string, :schema => SML_XSD }
           @parts << { :entry => "xl/#{comment.vml_drawing.pn}", :doc => comment.vml_drawing.to_xml_string, :schema => nil }
         end
@@ -255,7 +255,7 @@ module Axlsx
       end
 
       workbook.comments.each do |comment|
-        if comment.comment_list.size > 0
+        if comment.size > 0
         c_types << Axlsx::Override.new(:PartName => "/xl/#{comment.pn}",
                                        :ContentType => COMMENT_CT)
         end

@@ -1,15 +1,7 @@
 # -*- coding: utf-8 -*-
 module Axlsx
 
-  class Comments
-
-    # a collection of the comment authors
-    # @return [SimpleTypedList]
-    attr_reader :authors
-
-    # a collection of comment objects
-    # @return [SimpleTypedList]
-    attr_reader :comment_list
+  class Comments < SimpleTypedList
 
     # the vml_drawing that holds the shapes for comments
     # @return [VmlDrawing]
@@ -35,9 +27,8 @@ module Axlsx
     # @param [Worksheet] worksheet The sheet that these comments belong to.
     def initialize(worksheet)
       raise ArgumentError, "you must provide a worksheet" unless worksheet.is_a?(Worksheet)
+      super(Comment)
       @worksheet = worksheet
-      @authors = SimpleTypedList.new String
-      @comment_list = SimpleTypedList.new Comment
       @vml_drawing = VmlDrawing.new(self)
     end
 
@@ -50,10 +41,13 @@ module Axlsx
       raise ArgumentError, "Comment require an author" unless options[:author]
       raise ArgumentError, "Comment requires text" unless options[:text]
       raise ArgumentError, "Comment requires ref" unless options[:ref]
-      options[:author_index] = @authors.index(options[:author]) || @authors << options[:author]
-      @comment_list << Comment.new(self, options)
-      yield @comment_list.last if block_given?
-      @comment_list.last
+      @list << Comment.new(self, options)
+      yield @list.last if block_given?
+      @list.last
+    end
+
+    def authors
+      @list.map { |comment| comment.author.to_s }.uniq.sort
     end
 
     # serialize the object
@@ -68,7 +62,7 @@ module Axlsx
       end
       str << '</authors>'
       str << '<commentList>'
-      comment_list.each do |comment|
+      @list.each do |comment|
         comment.to_xml_string str
       end
       str << '</commentList></comments>'

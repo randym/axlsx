@@ -7,10 +7,10 @@ module Axlsx
     # @return [String]
     attr_reader :text
 
-    # The index of the the author for this comment in the owning Comments object
+    # The author of this comment
     # @see Comments
-    # @return [Integer]
-    attr_reader :author_index
+    # @return [String]
+    attr_reader :author
 
     # The owning Comments object
     # @return [Comments]
@@ -44,7 +44,15 @@ module Axlsx
     # The index of this comment
     # @return [Integer]
     def index
-      @comments.comment_list.index(self)
+      @comments.index(self)
+    end
+
+    #
+    # The index of this author in a unique sorted list of all authors in
+    # the comment.
+    # @return [Integer]
+    def author_index
+      @comments.authors.index(author)
     end
 
     # @see ref
@@ -60,10 +68,9 @@ module Axlsx
       @text = v
     end
 
-    # @see author_index
-    def author_index=(v)
-      Axlsx::validate_unsigned_int(v)
-      @author_index = v
+    # @see author
+    def author=(v)
+      @author = v
     end
 
     # serialize the object
@@ -87,9 +94,8 @@ module Axlsx
     # initialize the vml shape based on this comment's ref/position in the worksheet.
     # by default, all columns are 5 columns wide and 5 rows high
     def initialize_vml_shape
-      ws = self.comments.worksheet
       pos = Axlsx::name_to_indices(ref)
-      @vml_shape = VmlShape.new(self, :row => pos[1], :column => pos[0]) do |vml|
+      @vml_shape = VmlShape.new(:row => pos[1], :column => pos[0]) do |vml|
         vml.left_column = vml.row + 1
         vml.right_column = vml.column + 4
         vml.top_row = vml.row

@@ -33,7 +33,7 @@ module Axlsx
   <v:path gradientshapeok="t" o:connecttype="rect"/>
  </v:shapetype>
 BAD_PROGRAMMER
-      @comments.comment_list.each { |comment| comment.vml_shape.to_xml_string str }
+      @comments.each { |comment| comment.vml_shape.to_xml_string str }
       str << "</xml>"
 
     end

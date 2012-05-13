@@ -43,12 +43,7 @@ module Axlsx
     # @return [Integer]
     attr_reader :bottom_offset
 
-    # The id of this shape derrived from teh comment's worksheet index and the index of this comment
-    # @return [String]
-    attr_reader   :id
-
-    # Creates a new VmlShape object for the comment provided.
-    # @param [Comment] comment
+    # Creates a new VmlShape
     # @option options [Integer|String] left_column
     # @option options [Integer|String] left_offset
     # @option options [Integer|String] top_row
@@ -57,8 +52,7 @@ module Axlsx
     # @option options [Integer|String] right_offset
     # @option options [Integer|String] bottom_row
     # @option options [Integer|String] bottom_offset
-    def initialize(comment, options={})
-      @id = "_x0000_s#{comment.comments.worksheet.index+1}08#{comment.index+1}"
+    def initialize(options={})
       @row = @column = @left_column = @top_row = @right_column = @bottom_row = 0
       @left_offset = 15
       @top_offset = 2
@@ -70,6 +64,11 @@ module Axlsx
       yield self if block_given?
     end
 
+    # @see column
+    def column=(v); Axlsx::validate_integerish(v); @column = v.to_i end
+ 
+    # @see row
+    def row=(v); Axlsx::validate_integerish(v); @row = v.to_i end
     # @see left_column
     def left_column=(v); Axlsx::validate_integerish(v); @left_column = v.to_i end
 
@@ -100,7 +99,7 @@ module Axlsx
     def to_xml_string(str ='')
 str << <<SHAME_ON_YOU
 
-<v:shape id="#{id}" type="#_x0000_t202"
+<v:shape id="" type="#_x0000_t202"
 style='position:absolute;margin-left:104pt;margin-top:2pt;width:800px;height:27pt;z-index:1;mso-wrap-style:tight'
  fillcolor="#ffffa1 [80]" o:insetmode="auto">
 

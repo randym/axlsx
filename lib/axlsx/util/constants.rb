@@ -261,4 +261,7 @@ module Axlsx
 
   # error message for invalid angles
   ERR_ANGLE = "Angles must be a value between -90 and 90. You provided: %s"
+
+  # error message for non 'integerish' value
+  ERR_INTEGERISH = "You value must be, or be castable via to_i, an Integer. You provided %s"
 end

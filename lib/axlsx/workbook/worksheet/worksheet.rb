@@ -488,7 +488,7 @@ module Axlsx
       @conditional_formattings.each do |cf|
         str.concat cf.to_xml_string
       end
-      str << '<legacyDrawing r:id="rId1"/>' if @comments.comment_list.size > 0
+      str << '<legacyDrawing r:id="rId1"/>' if @comments.size > 0
       str + '</worksheet>'
     end
 
@@ -500,9 +500,9 @@ module Axlsx
         r << Relationship.new(TABLE_R, "../#{table.pn}")
       end
 
-      r << Relationship.new(VML_DRAWING_R, "../#{@comments.vml_drawing.pn}") if @comments.comment_list.size > 0
-      r << Relationship.new(COMMENT_R, "../#{@comments.pn}") if @comments.comment_list.size > 0
-      r << Relationship.new(COMMENT_R_NULL, "NULL") if @comments.comment_list.size > 0
+      r << Relationship.new(VML_DRAWING_R, "../#{@comments.vml_drawing.pn}") if @comments.size > 0
+      r << Relationship.new(COMMENT_R, "../#{@comments.pn}") if @comments.size > 0
+      r << Relationship.new(COMMENT_R_NULL, "NULL") if @comments.size > 0
 
       r << Relationship.new(DRAWING_R, "../#{@drawing.pn}") if @drawing
       r

@@ -6,6 +6,7 @@ class TestVmlDrawing < Test::Unit::TestCase
     p = Axlsx::Package.new
     wb = p.workbook
     @ws = wb.add_worksheet
+    @ws.add_comment :ref => 'A1', :text => 'penut machine', :author => 'crank'
     @ws.add_comment :ref => 'C3', :text => 'rust bucket', :author => 'PO'
     @vml_drawing = @ws.comments.vml_drawing
   end
@@ -15,10 +16,10 @@ class TestVmlDrawing < Test::Unit::TestCase
   end
 
   def test_to_xml_string
-    str = '<?xml version="1.0" encoding="UTF-8"?>'
-    str << '<c:chartSpace xmlns:c="' << Axlsx::XML_NS_C << '">'
-    str << @vml_drawing.to_xml_string(0)
+    str = @vml_drawing.to_xml_string()
     doc = Nokogiri::XML(str)
+    assert_equal(doc.xpath("//v:shape").size, 2)
+    assert(doc.xpath("//o:idmap[@o:data='#{@ws.index+1}']"))
   end
 
 end

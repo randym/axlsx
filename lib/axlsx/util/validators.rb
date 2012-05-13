@@ -50,7 +50,7 @@ module Axlsx
   # @para, [Any] v the value to validate
   # @raise [ArgumentError] raised if the value cannot be converted to an integer
   def self.validate_integerish(v)
-    raise ArugumentError, (ERR_INTEGERISH % v.inspect) unless (v.to_i.is_a?(Integer))
+    raise ArgumentError, (ERR_INTEGERISH % v.inspect) unless (v.respond_to?(:to_i) && v.to_i.is_a?(Integer))
   end
 
   # Requires that the value is between -54000000 and 54000000
