@@ -5,7 +5,9 @@ module Axlsx
   # @see Worksheet#add_row
   class Row
 
+    # A list of serilizable attributes.
     SERIALIZABLE_ATTRIBUTES = [:hidden, :outlineLevel, :collapsed, :style]
+
     # The worksheet this row belongs to
     # @return [Worksheet]
     attr_reader :worksheet
@@ -35,10 +37,8 @@ module Axlsx
     attr_reader :style
 
     # TODO  18.3.1.73
-    # # collapsed
     # customFormat
     # # hidden
-    # # outlineLevel
     # ph
     # # s (style)
     # spans

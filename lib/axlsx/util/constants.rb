@@ -81,12 +81,12 @@ module Axlsx
 
   # comment rels namespace
   COMMENT_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/comments"
+
+  # comment relation for nil target
   COMMENT_R_NULL = "http://purl.oclc.org/ooxml/officeDocument/relationships/comments"
 
   #vml drawing relation namespace
   VML_DRAWING_R = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/vmlDrawing'
-
-
 
   # VML Drawing content type
   VML_DRAWING_CT = "application/vnd.openxmlformats-officedocument.vmlDrawing"

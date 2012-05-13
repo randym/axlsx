@@ -1,4 +1,5 @@
 module Axlsx
+
   # A numeric data source for use by charts.
   class NumDataSource
 
@@ -41,6 +42,8 @@ module Axlsx
       @tag_name = v
     end
 
+    # serialize the object
+    # @param [String] str
     def to_xml_string(str="")
       str << '<c:' << tag_name.to_s << '>'
       if @f

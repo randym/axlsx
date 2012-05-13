@@ -90,7 +90,7 @@ module Axlsx
     # @see bottom_row
     def bottom_row=(v); Axlsx::validate_integerish(v); @bottom_row = v.to_i end
 
-    # @see_bottom_offset
+    # @see bottom_offset
     def bottom_offset=(v); Axlsx::validate_integerish(v); @bottom_offset = v.to_i end
 
     # serialize the shape to a string

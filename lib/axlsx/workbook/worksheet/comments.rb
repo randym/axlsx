@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 module Axlsx
 
+  # Comments is a collection of Comment objects for a worksheet
   class Comments < SimpleTypedList
 
     # the vml_drawing that holds the shapes for comments
@@ -46,6 +47,8 @@ module Axlsx
       @list.last
     end
 
+    # A sorted list of the unique authors in the contained comments
+    # @return [Array]
     def authors
       @list.map { |comment| comment.author.to_s }.uniq.sort
     end
