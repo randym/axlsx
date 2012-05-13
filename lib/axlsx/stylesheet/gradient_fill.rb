@@ -68,7 +68,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      str << '<gradientFill'
+      str << '<gradientFill '
       h = self.instance_values.reject { |k,v| k.to_sym == :stop }
       str << h.map { |key, value| '' << key.to_s << '="' << value.to_s << '"' }.join(' ')
       str << '>'
