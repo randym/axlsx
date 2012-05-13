@@ -3,6 +3,7 @@ doc
 unzip
 coverage
 .yardoc
+coverage.data
 *.gem
 *.xlsx
 example.csv
