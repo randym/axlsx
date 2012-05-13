@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestVmlDrawing < Test::Unit::TestCase
+class TestVmlShape < Test::Unit::TestCase
 
   def setup
     p = Axlsx::Package.new
