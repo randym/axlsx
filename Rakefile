@@ -10,6 +10,7 @@ end
 
 task :gendoc do
   system "yardoc"
+  system "yard stats --list-undoc"
 end
 
 task :test do
@@ -19,6 +20,11 @@ task :test do
        t.test_files = FileList['test/**/tc_*.rb']
        t.verbose = true
      end
+end
+
+task :report do
+  require 'cover_me'
+  CoverMe.complete!
 end
 
 task :release => :build do
