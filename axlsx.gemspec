@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'rake', '>= 0.8.7' unless RUBY_VERSION == "1.9.2"
 #  s.add_development_dependency 'yard'
 # s.add_development_dependency 'rdiscount'
-  s.add_development_dependency 'cover_me'
+  s.add_development_dependency 'cover_me' unless RUBY_VERSION == '1.8.7'
   s.required_ruby_version = '>= 1.8.7'
   s.require_path = 'lib'
 end
