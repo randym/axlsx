@@ -1,9 +1,6 @@
 module Axlsx
   # Page setup settings for printing a worksheet. All settings are optional.
   #
-  # When using {#fit_to_width} and/or {#fit_to_height}, make sure to also set {Worksheet#fit_to_page} to true –
-  # otherwise this setting will not have any effect.
-  #
   # @note The recommended way to manage print options is via Worksheet#page_setup
   # @see Worksheet#print_options
   # @see Worksheet#initialize
@@ -26,12 +23,10 @@ module Axlsx
     
     # Number of vertical pages to fit on.
     # @return [Integer]
-    # @note Make sure to also set {Worksheet#fit_to_page} to true – otherwise this setting will not have any effect.
     attr_reader :fit_to_height
 
     # Number of horizontal pages to fit on.
     # @return [Integer]
-    # @note Make sure to also set {Worksheet#fit_to_page} to true – otherwise this setting will not have any effect.
     attr_reader :fit_to_width
 
     # Orientation of the page (:default, :landscape, :portrait)
@@ -50,6 +45,8 @@ module Axlsx
     # @return [Integer]
     attr_reader :scale
 
+    # The worksheet that owns this page_setup.
+    attr_reader :worksheet
 
     # Creates a new PageSetup object
     # @option options [Integer] fit_to_height Number of vertical pages to fit on
@@ -59,6 +56,8 @@ module Axlsx
     # @option options [String] paper_width Width of paper (number followed by unit identifier: "210mm", "8.5in")
     # @option options [Integer] scale Print scaling (percent value, integer ranging from 10 to 400)
     def initialize(options = {})
+      raise ArgumentError, "Worksheet option is required" unless options[:worksheet].is_a?(Worksheet)
+      @worksheet = options[:worksheet]
       set(options)
     end
 
@@ -71,9 +70,9 @@ module Axlsx
     end
 
     # @see fit_to_height
-    def fit_to_height=(v); Axlsx::validate_unsigned_int(v); @fit_to_height = v; end
+    def fit_to_height=(v); Axlsx::validate_unsigned_int(v); @fit_to_height = v; @worksheet.fit_to_page = true; end
     # @see fit_to_width
-    def fit_to_width=(v); Axlsx::validate_unsigned_int(v); @fit_to_width = v; end
+    def fit_to_width=(v); Axlsx::validate_unsigned_int(v); @fit_to_width = v; @worksheet.fit_to_page = true; end
     # @see orientation
     def orientation=(v); Axlsx::validate_page_orientation(v); @orientation = v; end
     # @see paper_height
@@ -88,7 +87,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       str << '<pageSetup '
-      str << instance_values.map{ |k,v| k.gsub(/_(.)/){ $1.upcase } << %{="#{v}"} }.join(' ')
+      str << instance_values.reject{ |k, v| k == 'worksheet' }.map{ |k,v| k.gsub(/_(.)/){ $1.upcase } << %{="#{v}"} }.join(' ')
       str << '/>'
     end
   end

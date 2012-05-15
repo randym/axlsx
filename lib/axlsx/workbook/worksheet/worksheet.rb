@@ -90,7 +90,6 @@ module Axlsx
     #
     #      # using options when creating the worksheet.
     #      ws = wb.add_worksheet :page_setup => {:fit_to_width => 2, :orientation => :landscape}
-    #      ws.fit_to_page = true # otherwise fit_to_width will be ignored
     #
     #      # use the set method of the page_setup object
     #      ws.page_setup.set(:paper_width => "297mm", :paper_height => "210mm")
@@ -103,7 +102,7 @@ module Axlsx
     # @see PageSetup#initialize
     # @return [PageSetup]
     def page_setup
-      @page_setup ||= PageSetup.new
+      @page_setup ||= PageSetup.new(:worksheet => self)
       yield @page_setup if block_given?
       @page_setup
     end
@@ -157,7 +156,7 @@ module Axlsx
       @show_gridlines = true
       self.name = "Sheet" + (index+1).to_s
       @page_margins = PageMargins.new options[:page_margins] if options[:page_margins]
-      @page_setup = PageSetup.new options[:page_setup] if options[:page_setup]
+      @page_setup = PageSetup.new options[:page_setup].merge(:worksheet=>self)  if options[:page_setup]
       @print_options = PrintOptions.new options[:print_options] if options[:print_options]
       @rows = SimpleTypedList.new Row
       @column_info = SimpleTypedList.new Col
