@@ -72,9 +72,9 @@ module Axlsx
     end
 
     # @see fit_to_height
-    def fit_to_height=(v); Axlsx::validate_unsigned_int(v); @fit_to_height = v; @worksheet.fit_to_page = true; end
+    def fit_to_height=(v); Axlsx::validate_unsigned_int(v); @fit_to_height = v; @worksheet.fit_to_page = (@fit_to_height.to_i + @fit_to_width.to_i > 0); end
     # @see fit_to_width
-    def fit_to_width=(v); Axlsx::validate_unsigned_int(v); @fit_to_width = v; @worksheet.fit_to_page = true; end
+    def fit_to_width=(v); Axlsx::validate_unsigned_int(v); @fit_to_width = v; @worksheet.fit_to_page = (@fit_to_height.to_i + @fit_to_width.to_i > 0); end
     # @see orientation
     def orientation=(v); Axlsx::validate_page_orientation(v); @orientation = v; end
     # @see paper_height
