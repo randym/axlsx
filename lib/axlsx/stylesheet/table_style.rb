@@ -40,10 +40,10 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      attr = self.instance_values.select { |k, v| [:name, :pivot, :table].include? k }
-      attr[:count] = self.size
+      attrs = instance_values.reject { |k, v| ![:name, :pivot, :table].include?(k) }
+      attrs[:count] = self.size
       str << '<tableStyle '
-      str << attr.map { |key, value| '' << key.to_s << '="' << value.to_s << '"' }.join(' ')
+      str << attrs.map { |key, value| '' << key.to_s << '="' << value.to_s << '"' }.join(' ')
       str << '>'
       each { |table_style_el| table_style_el.to_xml_string(str) }
       str << '</tableStyle>'
