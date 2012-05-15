@@ -1,6 +1,9 @@
 module Axlsx
   # Page setup settings for printing a worksheet. All settings are optional.
   #
+  # When using {#fit_to_width} and/or {#fit_to_height}, make sure to also set {Worksheet#fit_to_page} to true –
+  # otherwise this setting will not have any effect.
+  #
   # @note The recommended way to manage print options is via Worksheet#page_setup
   # @see Worksheet#print_options
   # @see Worksheet#initialize
@@ -23,10 +26,12 @@ module Axlsx
     
     # Number of vertical pages to fit on.
     # @return [Integer]
+    # @note Make sure to also set {Worksheet#fit_to_page} to true – otherwise this setting will not have any effect.
     attr_reader :fit_to_height
 
     # Number of horizontal pages to fit on.
     # @return [Integer]
+    # @note Make sure to also set {Worksheet#fit_to_page} to true – otherwise this setting will not have any effect.
     attr_reader :fit_to_width
 
     # Orientation of the page (:default, :landscape, :portrait)

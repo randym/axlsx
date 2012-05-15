@@ -51,8 +51,9 @@ module Axlsx
     # @return Boolean
     attr_reader :selected
 
-    # Indicates if the worksheet should print in a single page
+    # Indicates if the worksheet should be fitted to a single page when printed. If you want the worksheet to fit on more pages (e.g. 2x2), set {PageSetup#fit_to_width} and {PageSetup#fit_to_height} accordingly.
     # @return Boolean
+    # @see #page_setup
     attr_reader :fit_to_page
 
 
@@ -88,7 +89,8 @@ module Axlsx
     #      wb = Axlsx::Package.new.workbook
     #
     #      # using options when creating the worksheet.
-    #      ws = wb.add_worksheet :page_setup => {:fit_to_width => 1, :orientation => :landscape}
+    #      ws = wb.add_worksheet :page_setup => {:fit_to_width => 2, :orientation => :landscape}
+    #      ws.fit_to_page = true # otherwise fit_to_width will be ignored
     #
     #      # use the set method of the page_setup object
     #      ws.page_setup.set(:paper_width => "297mm", :paper_height => "210mm")
@@ -110,15 +112,15 @@ module Axlsx
     # @example
     #      wb = Axlsx::Package.new.workbook
     #      # using options when creating the worksheet.
-    #      ws = wb.add_worksheet :print_options => {:gridLines => true, :horizontalCentered => true}
+    #      ws = wb.add_worksheet :print_options => {:grid_lines => true, :horizontal_centered => true}
     #
     #      # use the set method of the page_margins object
     #      ws.print_options.set(:headings => true)
     #
     #      # set page margins in a block
     #      ws.print_options do |options|
-    #        options.horizontalCentered = true
-    #        options.verticalCentered = true
+    #        options.horizontal_centered = true
+    #        options.vertical_centered = true
     #      end
     # @see PrintOptions#initialize
     # @return [PrintOptions]
@@ -233,8 +235,7 @@ module Axlsx
     end
 
 
-    # Indicates if the worksheet should print in a single page.
-    # This is true by default.
+    # (see #fit_to_page)
     # @return [Boolean]
     def fit_to_page=(v)
       Axlsx::validate_boolean v
