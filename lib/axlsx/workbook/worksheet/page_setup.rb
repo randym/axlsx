@@ -46,9 +46,11 @@ module Axlsx
     attr_reader :scale
 
     # The worksheet that owns this page_setup.
+    # @return [Worksheet]
     attr_reader :worksheet
 
     # Creates a new PageSetup object
+    # @option options [Worksheet] worksheet The worksheet that owns this page_setup **required**
     # @option options [Integer] fit_to_height Number of vertical pages to fit on
     # @option options [Integer] fit_to_width Number of horizontal pages to fit on
     # @option options [Symbol] orientation Orientation of the page (:default, :landscape, :portrait)
