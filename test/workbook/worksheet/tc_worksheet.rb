@@ -382,7 +382,15 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(@ws.merged_cells.size, 3)
     assert_equal(@ws.merged_cells.last, "A3:B3")
   end
-
+  
+  def test_merge_cells_sorts_correctly_by_row_when_given_array
+    10.times do |i|
+      @ws.add_row [i]
+    end
+    @ws.merge_cells [@ws.rows[8].cells.first, @ws.rows[9].cells.first]
+    assert_equal "A9:A10", @ws.merged_cells.first
+  end
+  
   def test_auto_filter
     assert(@ws.auto_filter.nil?)
     assert_raise(ArgumentError) { @ws.auto_filter = 123 }

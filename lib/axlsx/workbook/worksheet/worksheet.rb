@@ -204,7 +204,7 @@ module Axlsx
       @merged_cells << if cells.is_a?(String)
                          cells
                        elsif cells.is_a?(Array)
-                         cells = cells.sort { |x, y| x.r <=> y.r }
+                         cells = cells.sort { |x, y| [x.index, x.row.index] <=> [y.index, y.row.index] }
                          "#{cells.first.r}:#{cells.last.r}"
                        end
     end
