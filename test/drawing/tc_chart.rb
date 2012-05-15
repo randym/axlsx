@@ -22,9 +22,14 @@ class TestChart < Test::Unit::TestCase
     @chart.title.text = 'wowzer'
     assert_equal(@chart.title.text, "wowzer", "the title text via a string")
     assert_equal(@chart.title.cell, nil, "the title cell is nil as we set the title with text.")
-    @chart.title.cell = @row.cells.first
+    @chart.title = @row.cells.first
     assert_equal(@chart.title.text, "one", "the title text was set via cell reference")
     assert_equal(@chart.title.cell, @row.cells.first)
+  end
+
+  def test_to_from_marker_access
+    assert(@chart.to.is_a?(Axlsx::Marker))
+    assert(@chart.from.is_a?(Axlsx::Marker))
   end
 
   def test_style
@@ -34,16 +39,29 @@ class TestChart < Test::Unit::TestCase
   end
 
   def test_start_at
-    @chart.start_at 15,25
+    @chart.start_at 15, 25
     assert_equal(@chart.graphic_frame.anchor.from.col, 15)
     assert_equal(@chart.graphic_frame.anchor.from.row, 25)
-
+    @chart.start_at @row.cells.first
+    assert_equal(@chart.graphic_frame.anchor.from.col, 0)
+    assert_equal(@chart.graphic_frame.anchor.from.row, 0)
+    @chart.start_at [5,6]
+    assert_equal(@chart.graphic_frame.anchor.from.col, 5)
+    assert_equal(@chart.graphic_frame.anchor.from.row, 6)
+    
   end
 
   def test_end_at
     @chart.end_at 25, 90
     assert_equal(@chart.graphic_frame.anchor.to.col, 25)
     assert_equal(@chart.graphic_frame.anchor.to.row, 90)
+    @chart.end_at @row.cells.last
+    assert_equal(@chart.graphic_frame.anchor.to.col, 2)
+    assert_equal(@chart.graphic_frame.anchor.to.row, 0)
+    @chart.end_at [10,11]
+    assert_equal(@chart.graphic_frame.anchor.to.col, 10)
+    assert_equal(@chart.graphic_frame.anchor.to.row, 11)
+  
   end
 
   def test_add_series

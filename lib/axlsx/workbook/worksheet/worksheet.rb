@@ -482,13 +482,13 @@ module Axlsx
       page_margins.to_xml_string(str) if @page_margins
       page_setup.to_xml_string(str) if @page_setup
       str.concat "<drawing r:id='rId1'></drawing>" if @drawing
-      unless @tables.empty?
+     str << '<legacyDrawing r:id="rId1"/>' if @comments.size > 0
+     unless @tables.empty?
         str.concat "<tableParts count='%s'>%s</tableParts>" % [@tables.size, @tables.reduce('') { |memo, obj| memo += "<tablePart r:id='%s'/>" % obj.rId }]
       end
       @conditional_formattings.each do |cf|
         str.concat cf.to_xml_string
       end
-      str << '<legacyDrawing r:id="rId1"/>' if @comments.size > 0
       str + '</worksheet>'
     end
 

@@ -15,6 +15,50 @@ class TestConditionalFormatting < Test::Unit::TestCase
     assert_equal("AA1:AB100", optioned.sqref)
     assert_equal([1, 2], optioned.rules)
   end
+  def test_add_as_rule
+
+    color_scale = Axlsx::ColorScale.new do |cs|
+      cs.colors.first.rgb = "FFDFDFDF"
+      cs.colors.last.rgb = "FF00FF00"
+      cs.value_objects.first.type = :percentile
+      cs.value_objects.first.val = 5
+    end
+
+    data_bar = Axlsx::DataBar.new :color => "FFFF0000"
+    icon_set = Axlsx::IconSet.new :iconSet => "5Rating"
+    cfr = Axlsx::ConditionalFormattingRule.new( { :type => :containsText, :text => "TRUE",
+                                                      :dxfId => 0, :priority => 1,
+                                                      :formula => 'NOT(ISERROR(SEARCH("FALSE",AB1)))',
+                                                      :color_scale => color_scale,
+                                                      :data_bar => data_bar,
+                                                      :icon_set => icon_set})
+
+    assert(cfr.data_bar.is_a?(Axlsx::DataBar))
+    assert(cfr.icon_set.is_a?(Axlsx::IconSet))
+    assert(cfr.color_scale.is_a?(Axlsx::ColorScale))
+    cfs = @ws.add_conditional_formatting( "B2:B2", [cfr])
+    doc = Nokogiri::XML.parse(cfs.last.to_xml_string)
+    assert_equal(1, doc.xpath(".//conditionalFormatting[@sqref='B2:B2']//cfRule[@type='containsText'][@dxfId=0][@priority=1]").size)
+    assert doc.xpath(".//conditionalFormatting//cfRule[@type='containsText'][@dxfId=0][@priority=1]//formula='NOT(ISERROR(SEARCH(\"FALSE\",AB1)))'")
+
+    cfs.last.rules.last.type = :colorScale
+    doc = Nokogiri::XML.parse(cfs.last.to_xml_string)
+    assert_equal(doc.xpath(".//conditionalFormatting//cfRule//colorScale//cfvo").size, 2)
+    assert_equal(doc.xpath(".//conditionalFormatting//cfRule//colorScale//color").size, 2)
+
+    cfs.last.rules.last.type = :dataBar
+    doc = Nokogiri::XML.parse(cfs.last.to_xml_string)
+    assert_equal(doc.xpath(".//conditionalFormatting//cfRule//dataBar").size, 1)
+    assert_equal(doc.xpath(".//conditionalFormatting//cfRule//dataBar//cfvo").size, 2)
+    assert_equal(doc.xpath(".//conditionalFormatting//cfRule//dataBar//color[@rgb='FFFF0000']").size, 1)
+
+    cfs.last.rules.last.type = :iconSet
+    doc = Nokogiri::XML.parse(cfs.last.to_xml_string)
+    assert_equal(doc.xpath(".//conditionalFormatting//cfRule//iconSet//cfvo").size, 3)
+    assert_equal(doc.xpath(".//conditionalFormatting//cfRule//iconSet[@iconSet='5Rating']").size, 1)
+
+  end
+
 
   def test_add_as_hash
 

@@ -180,6 +180,12 @@ class TestWorksheet < Test::Unit::TestCase
     end
     assert_equal(@ws.rows[1].cells[0].style, 0)
     assert_equal(@ws.rows[2].cells[1].style, 0)
+    @ws.row_style( 1..2, 1, :col_offset => 2)
+    @ws.rows[(1..2)].each do |r|
+      r.cells[(2..-1)].each do |c|
+        assert_equal(c.style, 1)
+      end
+    end
   end
 
   def test_to_xml_string_fit_to_page

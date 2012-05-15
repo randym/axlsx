@@ -61,5 +61,18 @@ class TestSimpleTypedList < Test::Unit::TestCase
     assert_nothing_raised { @list.delete 0 }
     assert_nothing_raised { @list.delete 9 }
   end
+  
+  def test_delete
+    @list.push 1
+    assert(@list.size == 1)
+    @list.delete 1
+    assert(@list.empty?)
+  end
 
+  def test_equality
+    @list.push 1
+    @list.push 2
+    assert_equal(@list, [1,2])
+    
+  end
 end

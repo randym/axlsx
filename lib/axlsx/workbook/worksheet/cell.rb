@@ -261,9 +261,8 @@ module Axlsx
     # @return [String]
     def run_xml_string(str = '')
       if is_text_run?
-        data = self.instance_values.reject{|key, value| value == nil }
+        data = instance_values.reject{|key, value| value == nil || key == 'value' || key == 'type' }
         keys = data.keys & INLINE_STYLES
-        keys.delete ['value', 'type']
         str << "<r><rPr>"
         keys.each do |key|
           case key
@@ -272,7 +271,7 @@ module Axlsx
           when 'color'
             str << data[key].to_xml_string
           else
-            "<" << key.to_s << " val='" << data[key].to_s << "'/>"
+            str << "<" << key.to_s << " val='" << data[key].to_s << "'/>"
           end
         end
         str << "</rPr>" << "<t>" << value.to_s << "</t></r>"

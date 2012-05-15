@@ -91,6 +91,11 @@ class TestRow < Test::Unit::TestCase
   end
 
   def test_to_xml_string
+    @row.height = 20
+    @row.style = 1
+    @row.outlineLevel = 2
+    @row.collapsed = true
+    @row.hidden = true
     r_s_xml = Nokogiri::XML(@row.to_xml_string(0, ''))
     assert_equal(r_s_xml.xpath(".//row[@r=1]").size, 1)
   end

@@ -155,19 +155,6 @@ module Axlsx
       str << '</' << el_name << '>'
     end
 
-    # Serializes the list
-    # If the serialize_as property is set, it is used as the parent node name.
-    # If the serialize_as property is nil, the first item in the list of allowed_types will be used, having the first letter of the class changed to lower case.
-    # @param [Nokogiri::XML::Builder] xml The document builder instance this objects xml will be added to.
-    # @return [String]
-    def to_xml(xml)
-      classname = @allowed_types[0].name.split('::').last
-      el_name = serialize_as || (classname[0,1].downcase + classname[1..-1])
-      xml.send(el_name, :count=>@list.size) {
-        @list.each { |item| item.to_xml(xml) }
-      }
-    end
-
   end
 
 

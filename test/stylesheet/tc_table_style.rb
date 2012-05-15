@@ -13,6 +13,10 @@ class TestTableStyle < Test::Unit::TestCase
     assert_equal(@item.name, "fisher")
     assert_equal(@item.pivot, nil)
     assert_equal(@item.table, nil)
+    ts = Axlsx::TableStyle.new 'price', :pivot => true, :table => true
+    assert_equal(ts.name, 'price')
+    assert_equal(ts.pivot, true)
+    assert_equal(ts.table, true)
   end
 
   def test_name
@@ -33,4 +37,8 @@ class TestTableStyle < Test::Unit::TestCase
     assert_equal(@item.table, true)
   end
 
+  def test_to_xml_string
+    doc = Nokogiri::XML(@item.to_xml_string)
+    assert(doc.xpath("//tableStyle[@name='#{@item.name}']"))
+  end
 end

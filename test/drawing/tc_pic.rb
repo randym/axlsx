@@ -6,7 +6,7 @@ class TestPic < Test::Unit::TestCase
     @p = Axlsx::Package.new
     ws = @p.workbook.add_worksheet
     @test_img =  File.dirname(__FILE__) + "/../../examples/image1.jpeg"
-    @image = ws.add_image :image_src => @test_img
+    @image = ws.add_image :image_src => @test_img, :hyperlink => 'https://github.com/randym', :tooltip => "What's up doc?"
   end
 
   def teardown
@@ -14,11 +14,12 @@ class TestPic < Test::Unit::TestCase
 
   def test_initialization
     assert_equal(@p.workbook.images.first, @image)
+    assert_equal(@image.file_name, 'image1.jpeg')
     assert_equal(@image.image_src, @test_img)
   end
 
   def test_hyperlink
-    assert_equal(@image.hyperlink, nil)
+    assert_equal(@image.hyperlink.href, "https://github.com/randym")
     @image.hyperlink = "http://axlsx.blogspot.com"
     assert_equal(@image.hyperlink.href, "http://axlsx.blogspot.com")
   end

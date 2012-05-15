@@ -58,6 +58,7 @@ module Axlsx
       @top_offset = 2
       @right_offset = 50
       @bottom_offset = 5
+      @id = (0...8).map{65.+(rand(25)).chr}.join
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
@@ -99,7 +100,7 @@ module Axlsx
     def to_xml_string(str ='')
 str << <<SHAME_ON_YOU
 
-<v:shape id="" type="#_x0000_t202"
+<v:shape id="#{@id}" type="#_x0000_t202"
 style='position:absolute;margin-left:104pt;margin-top:2pt;width:800px;height:27pt;z-index:1;mso-wrap-style:tight'
  fillcolor="#ffffa1 [80]" o:insetmode="auto">
 

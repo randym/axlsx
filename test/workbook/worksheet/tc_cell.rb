@@ -250,7 +250,15 @@ class TestCell < Test::Unit::TestCase
     c_xml = Nokogiri::XML(@c.to_xml_string(1,1))
     assert_equal(c_xml.xpath("/c[@s=1]").size, 1)
   end
-
+  def test_to_xml_string_with_run
+    @c.b = true
+    @c.type = :string
+    @c.value = "a"
+    @c.font_name = 'arial'
+    @c.color = 'FF0000'
+    c_xml = Nokogiri::XML(@c.to_xml_string(1,1))
+    assert(c_xml.xpath("//b"))
+  end
   def test_to_xml_string_formula
     p = Axlsx::Package.new
     ws = p.workbook.add_worksheet do |ws|

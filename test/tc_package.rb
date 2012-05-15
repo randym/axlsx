@@ -16,6 +16,9 @@ class TestPackage < Test::Unit::TestCase
       image.hyperlink.tooltip = "Labeled Link"
       image.start_at 2, 2
     end
+    ws.add_image :image_src => File.expand_path('../../examples/image1.gif', __FILE__) 
+    ws.add_image :image_src => File.expand_path('../../examples/image1.png', __FILE__) 
+    ws.add_table 'A1:C1'
   end
 
   def test_use_autowidth
@@ -63,7 +66,11 @@ class TestPackage < Test::Unit::TestCase
 
   def test_validation
     assert_equal(@package.validate.size, 0, @package.validate)
-    #how to test for failure? the internal validations on the models are so strict I cant break anthing.....
+    parts =  @package.send(:parts)
+    workbook = parts.select { |part| part[:entry] =~ /xl\/workbook\.xml/ }.first
+    workbook[:doc] = workbook[:doc].gsub('definedNames', 'defineNames')
+    errors = @package.send(:validate_single_doc, workbook[:schema], workbook[:doc]  )
+    assert_equal(errors.size, 1)
   end
 
   def test_parts
@@ -85,7 +92,7 @@ class TestPackage < Test::Unit::TestCase
 
 
     #no mystery parts
-    assert_equal(p.size, 15)
+    assert_equal(p.size, 18)
 
   end
 
@@ -119,5 +126,18 @@ class TestPackage < Test::Unit::TestCase
   def test_name_to_indices
     assert(Axlsx::name_to_indices('A1') == [0,0])
     assert(Axlsx::name_to_indices('A100') == [0,99], 'needs to axcept rows that contain 0')
+  end
+
+  def test_to_stream
+    stream = @package.to_stream
+    assert(stream.is_a?(StringIO))
+    # this is just a roundabout guess for a package as it is build now
+    # in testing.
+    assert(stream.size > 80000)
+  end
+  
+  def test_encrypt
+    # this is no where near close to ready yet
+    assert(@package.encrypt('your_mom.xlsxl', 'has a password') == false)
   end
 end

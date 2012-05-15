@@ -116,7 +116,7 @@ module Axlsx
       str << '<c:delete val="'<< @delete.to_s << '"/>'
       str << '<c:axPos val="' << @axPos.to_s << '"/>'
       str << '<c:majorGridlines>'
-      if self.gridlines == false
+      if gridlines == false
         str << '<c:spPr>'
         str << '<a:ln>'
         str << '<a:noFill/>'

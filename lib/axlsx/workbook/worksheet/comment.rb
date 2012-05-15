@@ -41,12 +41,6 @@ module Axlsx
       @vml_shape ||= initialize_vml_shape
     end
 
-    # The index of this comment
-    # @return [Integer]
-    def index
-      @comments.index(self)
-    end
-
     #
     # The index of this author in a unique sorted list of all authors in
     # the comment.

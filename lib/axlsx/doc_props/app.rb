@@ -62,10 +62,10 @@ module Axlsx
     attr_reader :CharactersWithSpaces
 
     # @return [Boolean] Indicates if the document is shared.
-    attr_reader :ShareDoc
+    attr_reader :SharedDoc
 
     # @return [String] The base for hyper links in the document.
-    attr_reader :HyperLinkBase
+    attr_reader :HyperlinkBase
 
     # @return [Boolean] Indicates that the hyper links in the document have been changed.
     attr_reader :HyperlinksChanged

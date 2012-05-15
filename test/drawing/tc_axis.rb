@@ -2,7 +2,7 @@ require 'tc_helper.rb'
 
 class TestAxis < Test::Unit::TestCase
   def setup
-    @axis = Axlsx::Axis.new 12345, 54321
+    @axis = Axlsx::Axis.new 12345, 54321, :gridlines => false
   end
   def teardown
   end
@@ -48,5 +48,15 @@ class TestAxis < Test::Unit::TestCase
     assert_raise(ArgumentError, "requires valid gridlines") { @axis.gridlines = 'alice' }
     assert_nothing_raised("accepts valid crosses") { @axis.gridlines = false }
   end
+  
+  def test_to_xml_string
+    str  = '<?xml version="1.0" encoding="UTF-8"?>'
+    str << '<c:chartSpace xmlns:c="' << Axlsx::XML_NS_C << '" xmlns:a="' << Axlsx::XML_NS_A << '">'
+    doc = Nokogiri::XML(@axis.to_xml_string(str)) 
+    assert(doc.xpath('//a:noFill'))
+    assert(doc.xpath("//c:crosses[@val='#{@crosses.to_s}']"))
+    assert(doc.xpath("//c:crossAx[@val='#{@crossAx.to_s}']"))
+    assert(doc.xpath("//a:bodyPr[@rot='#{@label_rotation.to_s}']"))
 
+  end
 end
