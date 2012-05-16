@@ -19,8 +19,8 @@ module Axlsx
     attr_reader :style
 
     # Creates a new Table object
-    # @param [String] ref The reference to the table data.
-    # @param [Sheet] ref The sheet containing the table data.
+    # @param [String] ref The reference to the table data like 'A1:G24'.
+    # @param [Worksheet] sheet The sheet containing the table data.
     # @option options [Cell, String] name
     # @option options [TableStyle] style
     def initialize(ref, sheet, options={})

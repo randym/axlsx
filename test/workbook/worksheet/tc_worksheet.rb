@@ -189,7 +189,7 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   def test_to_xml_string_fit_to_page
-    @ws.fit_to_page = true
+    @ws.page_setup.fit_to_width = 1
     doc = Nokogiri::XML(@ws.to_xml_string)
     assert_equal(doc.xpath('//xmlns:worksheet/xmlns:sheetPr/xmlns:pageSetUpPr[@fitToPage="true"]').size, 1)
   end
@@ -198,6 +198,11 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.add_row [1,2,3]
     doc = Nokogiri::XML(@ws.to_xml_string)
     assert_equal(doc.xpath('//xmlns:worksheet/xmlns:dimension[@ref="A1:C1"]').size, 1)
+  end
+
+  def test_fit_to_page_assignation_does_nothing
+    @ws.fit_to_page = false
+    assert_equal(@ws.fit_to_page, false)
   end
 
   def test_to_xml_string_selected

@@ -28,7 +28,6 @@ class TestPageSetup < Test::Unit::TestCase
     optioned = @p.workbook.add_worksheet(:name => 'optioned', :page_setup => page_setup).page_setup
     assert_equal(1, optioned.fit_to_height)
     assert_equal(2, optioned.fit_to_width)
-    assert_equal(true, optioned.worksheet.fit_to_page)
     assert_equal(:landscape, optioned.orientation)
     assert_equal("297mm", optioned.paper_height)
     assert_equal("210mm", optioned.paper_width)
@@ -39,7 +38,6 @@ class TestPageSetup < Test::Unit::TestCase
     @ps.set(:fit_to_height => 1, :fit_to_width => 2, :orientation => :landscape, :paper_height => "297mm", :paper_width => "210mm", :scale => 50)
     assert_equal(1, @ps.fit_to_height)
     assert_equal(2, @ps.fit_to_width)
-    assert_equal(true, @ps.worksheet.fit_to_page)
     assert_equal(:landscape, @ps.orientation)
     assert_equal("297mm", @ps.paper_height)
     assert_equal("210mm", @ps.paper_width)
@@ -77,14 +75,12 @@ class TestPageSetup < Test::Unit::TestCase
     assert_raise(ArgumentError) { @ps.fit_to_height = 1.5 }
     assert_nothing_raised { @ps.fit_to_height = 2 }
     assert_equal(2, @ps.fit_to_height)
-    assert_equal(true, @ps.worksheet.fit_to_page)
   end
 
   def test_fit_to_width
     assert_raise(ArgumentError) { @ps.fit_to_width = false }
     assert_nothing_raised { @ps.fit_to_width = 1 }
     assert_equal(1, @ps.fit_to_width)
-    assert_equal(true, @ps.worksheet.fit_to_page)
   end
 
   def test_orientation

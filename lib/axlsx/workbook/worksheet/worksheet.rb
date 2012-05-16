@@ -51,10 +51,14 @@ module Axlsx
     # @return Boolean
     attr_reader :selected
 
-    # Indicates if the worksheet should be fitted to a single page when printed. If you want the worksheet to fit on more pages (e.g. 2x2), set {PageSetup#fit_to_width} and {PageSetup#fit_to_height} accordingly.
+    # Indicates if the worksheet will be fit by witdh or height to a specific number of pages.
+    # To alter the width or height for page fitting, please use page_setup.fit_to_widht or page_setup.fit_to_height.
+    # If you want the worksheet to fit on more pages (e.g. 2x2), set {PageSetup#fit_to_width} and {PageSetup#fit_to_height} accordingly.
     # @return Boolean
     # @see #page_setup
-    attr_reader :fit_to_page
+    def fit_to_page
+      (@page_setup != nil && (@page_setup.fit_to_width != nil || @page_setup.fit_to_height != nil))
+    end
 
 
     # Column info for the sheet
@@ -102,7 +106,7 @@ module Axlsx
     # @see PageSetup#initialize
     # @return [PageSetup]
     def page_setup
-      @page_setup ||= PageSetup.new(:worksheet => self)
+      @page_setup ||= PageSetup.new
       yield @page_setup if block_given?
       @page_setup
     end
@@ -156,7 +160,7 @@ module Axlsx
       @show_gridlines = true
       self.name = "Sheet" + (index+1).to_s
       @page_margins = PageMargins.new options[:page_margins] if options[:page_margins]
-      @page_setup = PageSetup.new options[:page_setup].merge(:worksheet=>self)  if options[:page_setup]
+      @page_setup = PageSetup.new options[:page_setup]  if options[:page_setup]
       @print_options = PrintOptions.new options[:print_options] if options[:print_options]
       @rows = SimpleTypedList.new Row
       @column_info = SimpleTypedList.new Col
@@ -237,8 +241,8 @@ module Axlsx
     # (see #fit_to_page)
     # @return [Boolean]
     def fit_to_page=(v)
-      Axlsx::validate_boolean v
-      @fit_to_page = v
+      warn('DEPRECIATED: fit_to_page has been depreciated. This value will automatically be set for you when page_setup.fit_to_width or page_setup.fit_to_height are specified.')
+      fit_to_page
     end
 
 
