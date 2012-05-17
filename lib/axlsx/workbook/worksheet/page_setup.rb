@@ -65,17 +65,28 @@ module Axlsx
     end
 
     # @see fit_to_height
-    def fit_to_height=(v); Axlsx::validate_unsigned_int(v); @fit_to_height = v end
+    def fit_to_height=(v); Axlsx::validate_unsigned_int(v); @fit_to_height = v; end
     # @see fit_to_width
-    def fit_to_width=(v); Axlsx::validate_unsigned_int(v); @fit_to_width = v end
+    def fit_to_width=(v); Axlsx::validate_unsigned_int(v); @fit_to_width = v; end
     # @see orientation
-    def orientation=(v); Axlsx::validate_page_orientation(v); @orientation = v end
+    def orientation=(v); Axlsx::validate_page_orientation(v); @orientation = v; end
     # @see paper_height
-    def paper_height=(v); Axlsx::validate_number_with_unit(v); @paper_height = v end
+    def paper_height=(v); Axlsx::validate_number_with_unit(v); @paper_height = v; end
     # @see paper_width
-    def paper_width=(v); Axlsx::validate_number_with_unit(v); @paper_width = v end
+    def paper_width=(v); Axlsx::validate_number_with_unit(v); @paper_width = v; end
     # @see scale
     def scale=(v); Axlsx::validate_page_scale(v); @scale = v; end
+    
+    # convenience method to achieve sanity when setting fit_to_width and fit_to_height 
+    # as they both default to 1 if only their counterpart is specified.
+    # @note This method will overwrite any value you explicitly set via the fit_to_height or fit_to_width methods.
+    # @option options [Integer] width The number of pages to fit this worksheet on horizontally. Default 9999
+    # @option options [Integer] height The number of pages to fit this worksheet on vertically. Default 9999
+    def fit_to(options={})
+      self.fit_to_width = options[:width] || 9999
+      self.fit_to_height = options[:height] || 9999
+      [@fit_to_width, @fit_to_height]
+    end
 
     # Serializes the page settings element.
     # @param [String] str

@@ -106,5 +106,16 @@ class TestPageSetup < Test::Unit::TestCase
     assert_nothing_raised { @ps.scale = 99 }
     assert_equal(99, @ps.scale)
   end
-
+  
+  def test_fit_to
+    fits = @ps.fit_to(:width => 1)
+    assert_equal([1, 9999], fits)
+    fits = @ps.fit_to :height => 1
+    assert_equal(fits, [9999,1])
+    fits = @ps.fit_to :height => 7, :width => 2
+    assert_equal(fits, [2, 7])
+    assert_raise(ArgumentError) { puts @ps.fit_to(:width => true)}
+    
+    
+  end
 end
