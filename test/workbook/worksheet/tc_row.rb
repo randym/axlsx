@@ -66,6 +66,13 @@ class TestRow < Test::Unit::TestCase
     assert_equal(15, @row.height)
   end
 
+
+  def test_ph
+    assert_raise(ArgumentError) { @row.ph = -3 }
+    assert_nothing_raised { @row.ph = true }
+    assert_equal(true, @row.ph)
+  end
+
   def test_hidden
     assert_raise(ArgumentError) { @row.hidden = -3 }
     assert_nothing_raised { @row.hidden = true }
@@ -92,7 +99,7 @@ class TestRow < Test::Unit::TestCase
 
   def test_to_xml_string
     @row.height = 20
-    @row.style = 1
+    @row.s = 1
     @row.outlineLevel = 2
     @row.collapsed = true
     @row.hidden = true

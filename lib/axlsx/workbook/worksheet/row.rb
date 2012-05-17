@@ -5,9 +5,16 @@ module Axlsx
   # @see Worksheet#add_row
   class Row
 
-    # A list of serilizable attributes.
-    SERIALIZABLE_ATTRIBUTES = [:hidden, :outlineLevel, :collapsed, :style]
+    # No support is provided for the following attributes
+    # spans
+    # thickTop
+    # thickBottom
 
+
+    # A list of serilizable attributes.
+    # @note height(ht) and customHeight are manages separately for now. Have a look at Row#height
+    SERIALIZABLE_ATTRIBUTES = [:hidden, :outlineLevel, :collapsed, :s, :customFormat, :ph]
+    
     # The worksheet this row belongs to
     # @return [Worksheet]
     attr_reader :worksheet
@@ -16,36 +23,40 @@ module Axlsx
     # @return [SimpleTypedList]
     attr_reader :cells
 
-    # The height of this row in points, if set explicitly.
+    # Row height measured in point size. There is no margin padding on row height.
     # @return [Float]
     attr_reader :height
 
-    # Flag indicating if the outlining of the affected column(s) is in the collapsed state.
+    # Flag indicating if the outlining of row.
     # @return [Boolean]
     attr_reader :collapsed
 
-    # Flag indicating if the affected column(s) are hidden on this worksheet.
+    # Flag indicating if the the row is hidden.
     # @return [Boolean]
     attr_reader :hidden
 
-    # Outline level of affected column(s). Range is 0 to 7.
+    # Outlining level of the row, when outlining is on
     # @return [Integer]
     attr_reader :outlineLevel
 
-    # Default style for the affected column(s). Affects cells not yet allocated in the column(s). In other words, this style applies to new columns.
+    # The style applied ot the row. This affects the entire row.
     # @return [Integer]
-    attr_reader :style
+    attr_reader :s
 
-    # TODO  18.3.1.73
-    # customFormat
-    # # hidden
-    # ph
-    # # s (style)
-    # spans
-    # thickTop
-    # thickBottom
+    # indicates that a style has been applied directly to the row via Row#s
+    # @return [Boolean]
+    attr_reader :customFormat
 
+    # indicates if the row should show phonetic
+    # @return [Boolean]
+    attr_reader :ph
 
+    # NOTE removing this from the api as it is actually incorrect. 
+    # having a method to style a row's cells is fine, but it is not an attribute on the row. 
+    # The proper attribute is ':s'
+    # attr_reader style
+    #
+    
     # Creates a new row. New Cell objects are created based on the values, types and style options.
     # A new cell is created for each item in the values array. style and types options are applied as follows:
     #   If the types option is defined and is a symbol it is applied to all the cells created.
@@ -81,13 +92,18 @@ module Axlsx
       Axlsx.validate_boolean(v)
       @hidden = v
     end
+   
+    # @see Row#ph
+    def ph=(v) Axlsx.validate_boolean(v); @ph = v end
+
+    # @see Row#s
+    def s=(v) Axlsx.validate_unsigned_numeric(v); @s = v; @customFormat = true end
 
     # @see Row#outline
     def outlineLevel=(v)
       Axlsx.validate_unsigned_numeric(v)
       @outlineLevel = v
     end
-
 
     # The index of this row in the worksheet
     # @return [Integer]
