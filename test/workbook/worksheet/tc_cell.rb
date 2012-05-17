@@ -33,7 +33,7 @@ class TestCell < Test::Unit::TestCase
     assert_equal(@c.index, @row.cells.index(@c))
   end
 
-  def test_index
+  def test_pos
     assert_equal(@c.pos, [@c.index, @c.row.index])
   end
 
@@ -250,6 +250,7 @@ class TestCell < Test::Unit::TestCase
     c_xml = Nokogiri::XML(@c.to_xml_string(1,1))
     assert_equal(c_xml.xpath("/c[@s=1]").size, 1)
   end
+  
   def test_to_xml_string_with_run
     @c.b = true
     @c.type = :string
@@ -261,17 +262,17 @@ class TestCell < Test::Unit::TestCase
   end
   def test_to_xml_string_formula
     p = Axlsx::Package.new
-    ws = p.workbook.add_worksheet do |ws|
-      ws.add_row ["=IF(2+2=4,4,5)"]
+    ws = p.workbook.add_worksheet do |sheet|
+      sheet.add_row ["=IF(2+2=4,4,5)"]
     end
     doc = Nokogiri::XML(ws.to_xml_string)
-    assert("//f[text()=['IF(2+2=4,4,5)']")
+    assert(doc.xpath("//f[@text()='IF(2+2=4,4,5)']"))
 
   end
 
   def test_to_xml
     # TODO This could use some much more stringent testing related to the xml content generated!
-    row = @ws.add_row [Time.now, Date.today, true, 1, 1.0, "text", "=sum(A1:A2)"]
+    @ws.add_row [Time.now, Date.today, true, 1, 1.0, "text", "=sum(A1:A2)"]
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@ws.to_xml_string)
     errors = []

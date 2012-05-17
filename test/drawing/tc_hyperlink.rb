@@ -19,11 +19,6 @@ class TestHyperlink < Test::Unit::TestCase
     assert_equal(@hyperlink.href, "http://axlsx.blogspot.com")
   end
 
-  def test_invalidUrl
-    assert_nothing_raised { @hyperlink.invalidUrl = "http://axlsx.blogspot.com" }
-    assert_equal(@hyperlink.invalidUrl, "http://axlsx.blogspot.com")
-  end
-
   def test_tgtFrame
     assert_nothing_raised { @hyperlink.tgtFrame = "http://axlsx.blogspot.com" }
     assert_equal(@hyperlink.tgtFrame, "http://axlsx.blogspot.com")

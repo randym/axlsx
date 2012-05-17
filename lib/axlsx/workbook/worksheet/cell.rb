@@ -195,7 +195,7 @@ module Axlsx
     # @option options [Symbol] scheme must be one of :none, major, :minor
     def initialize(row, value="", options={})
       self.row=row
-      @font_name = @charset = @family = @b = @i = @strike = @outline = @shadow = nil
+      @value = @font_name = @charset = @family = @b = @i = @strike = @outline = @shadow = nil
       @condense = @u = @vertAlign = @sz = @color = @scheme = @extend = @ssti = nil
       @styles = row.worksheet.workbook.styles
       @row.cells << self

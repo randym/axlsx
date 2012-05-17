@@ -39,7 +39,7 @@ class TestRow < Test::Unit::TestCase
 
   def test_add_cell_autowidth_info
     width = @ws.send :calculate_width, 'this is the cell of cells', @ws.workbook.styles.fonts.first.sz
-    c = @row.add_cell("this is the cell of cells")
+    @row.add_cell("this is the cell of cells")
     assert_equal(@ws.column_info.last.width, width)
   end
 
@@ -91,7 +91,7 @@ class TestRow < Test::Unit::TestCase
     assert_equal(2, @row.outlineLevel)
   end
 
- def test_to_xml_without_custom_height
+  def test_to_xml_without_custom_height
     doc = Nokogiri::XML.parse(@row.to_xml_string(0))
     assert_equal(0, doc.xpath(".//row[@ht]").size)
     assert_equal(0, doc.xpath(".//row[@customHeight]").size)

@@ -51,18 +51,17 @@ class TestPackage < Test::Unit::TestCase
   end
 
   def test_serialization
-    fname = 'axlsx_test_serialization.xlsx'
     assert_nothing_raised do
       begin
-         z= @package.serialize(@fname)
-         zf = Zip::ZipFile.open(@fname)
-         @package.send(:parts).each{ |part| zf.get_entry(part[:entry]) }
-         File.delete(@fname)
+        @package.serialize(@fname)
+        zf = Zip::ZipFile.open(@fname)
+        @package.send(:parts).each{ |part| zf.get_entry(part[:entry]) }
+        File.delete(@fname)
       rescue Errno::EACCES
-         puts "WARNING:: test_serialization requires write access."
+        puts "WARNING:: test_serialization requires write access."
       end
-     end
-   end
+    end
+  end
 
   def test_validation
     assert_equal(@package.validate.size, 0, @package.validate)
@@ -120,7 +119,7 @@ class TestPackage < Test::Unit::TestCase
   def test_content_type_added_with_shared_strings
     @package.use_shared_strings = true
     ct = @package.send(:content_types)
-    assert(ct.select { |ct| ct.ContentType == Axlsx::SHARED_STRINGS_CT }.size == 1)
+    assert(ct.select { |type| type.ContentType == Axlsx::SHARED_STRINGS_CT }.size == 1)
   end
 
   def test_name_to_indices

@@ -280,7 +280,7 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   def test_to_xml_string_drawing
-    c = @ws.add_chart Axlsx::Pie3DChart
+    @ws.add_chart Axlsx::Pie3DChart
     doc = Nokogiri::XML(@ws.to_xml_string)
     assert_equal(doc.xpath('//xmlns:worksheet/xmlns:drawing[@r:id="rId1"]').size, 1)
   end
@@ -347,7 +347,7 @@ class TestWorksheet < Test::Unit::TestCase
 
 
   def test_name_unique
-    assert_raise(ArgumentError, "worksheet name must be unique") { n = @ws.name; @ws.workbook.add_worksheet(:name=> @ws) }
+    assert_raise(ArgumentError, "worksheet name must be unique") { n = @ws.name; @ws.workbook.add_worksheet(:name=> n) }
   end
 
   def test_name_size

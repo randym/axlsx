@@ -37,9 +37,16 @@ class TestComments < Test::Unit::TestCase
   def test_index
     assert_equal(@ws.index, @ws.comments.index)
   end
+
   def test_to_xml_string
     doc = Nokogiri::XML(@ws.comments.to_xml_string)
-    # puts doc.xpath("comments").to_xml
+    schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
+    errors = []
+    schema.validate(doc).each do |error|
+      errors << error
+    end
+    assert_equal(0, errors.length)
+
     # TODO figure out why these xpath expressions dont work!
     # assert(doc.xpath("//comments"))
     # assert_equal(doc.xpath("//xmlns:author").size, @ws.comments.authors.size)

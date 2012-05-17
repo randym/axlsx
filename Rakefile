@@ -18,7 +18,8 @@ task :test do
      Rake::TestTask.new do |t|
        t.libs << 'test'
        t.test_files = FileList['test/**/tc_*.rb']
-       t.verbose = true
+       t.verbose = false
+       t.warning = true
      end
 end
 

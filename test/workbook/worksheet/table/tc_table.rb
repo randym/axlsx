@@ -34,17 +34,17 @@ class TestTable < Test::Unit::TestCase
   end
 
   def test_pn
-    table = @ws.add_table("A1:D5")
+    @ws.add_table("A1:D5")
     assert_equal(@ws.tables.first.pn, "tables/table1.xml")
   end
 
   def test_rId
-    table = @ws.add_table("A1:D5")
+    @ws.add_table("A1:D5")
     assert_equal(@ws.tables.first.rId, "rId1")
   end
 
   def test_index
-    table = @ws.add_table("A1:D5")
+    @ws.add_table("A1:D5")
     assert_equal(@ws.tables.first.index, @ws.workbook.tables.index(@ws.tables.first))
   end
 

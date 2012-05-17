@@ -23,7 +23,7 @@ class TestDataBar < Test::Unit::TestCase
     assert_equal(@data_bar.maxLength, 0)
   end
 
-  def test_maxLength
+  def test_showValue
     assert_raise(ArgumentError) { @data_bar.showValue = :invalid_type }
     assert_nothing_raised { @data_bar.showValue =  false}
     assert_equal(@data_bar.showValue, false)

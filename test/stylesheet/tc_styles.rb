@@ -19,7 +19,7 @@ class TestStyles < Test::Unit::TestCase
   end
   def test_add_style_border_hash
     border_count = @styles.borders.size
-    s = @styles.add_style :border => {:style => :thin, :color => "FFFF0000"}
+    @styles.add_style :border => {:style => :thin, :color => "FFFF0000"}
     assert_equal(@styles.borders.size, border_count + 1)
     assert_equal(@styles.borders.last.prs.last.color.rgb, "FFFF0000")
     assert_raise(ArgumentError) { @styles.add_style :border => {:color => "FFFF0000"} }
@@ -27,7 +27,7 @@ class TestStyles < Test::Unit::TestCase
   end
 
   def test_add_style_border_edges
-    s = @styles.add_style :border => { :style => :thin, :color => "0000FFFF", :edges => [:top, :bottom] }
+    @styles.add_style :border => { :style => :thin, :color => "0000FFFF", :edges => [:top, :bottom] }
     parts = @styles.borders.last.prs
     parts.each { |pr| assert_equal(pr.color.rgb, "0000FFFF", "Style is applied to #{pr.name} properly") }
     assert((parts.map { |pr| pr.name.to_s }.sort && ['bottom', 'top']).size == 2, "specify two edges, and you get two border prs")
@@ -44,7 +44,6 @@ class TestStyles < Test::Unit::TestCase
   def test_parse_num_fmt
     f_code = {:format_code => "YYYY/MM"}
     num_fmt = {:num_fmt => 5}
-    both = { :format_code => "#000", :num_fmt => 0 }
     assert_equal(@styles.parse_num_fmt_options, nil, 'noop if neither :format_code or :num_fmt exist')
     max = @styles.numFmts.map{ |nf| nf.numFmtId }.max
     @styles.parse_num_fmt_options(f_code)
@@ -181,7 +180,7 @@ class TestStyles < Test::Unit::TestCase
 
   def test_basic_add_style_dxf
     border_count = @styles.borders.size
-    s = @styles.add_style :border => {:style => :thin, :color => "FFFF0000"}, :type => :dxf
+    @styles.add_style :border => {:style => :thin, :color => "FFFF0000"}, :type => :dxf
     assert_equal(@styles.borders.size, border_count, "styles borders not affected")
     assert_equal(@styles.dxfs.last.border.prs.last.color.rgb, "FFFF0000")
     assert_raise(ArgumentError) { @styles.add_style :border => {:color => "FFFF0000"}, :type => :dxf }

@@ -4,7 +4,7 @@ class TestScatterChart < Test::Unit::TestCase
   def setup
     @p = Axlsx::Package.new
     @chart = nil
-    ws = @p.workbook.add_worksheet do |sheet|
+    @p.workbook.add_worksheet do |sheet|
       sheet.add_row ["First",  1,  5,  7,  9]
       sheet.add_row ["",       1, 25, 49, 81]
       sheet.add_row ["Second", 5,  2, 14,  9]

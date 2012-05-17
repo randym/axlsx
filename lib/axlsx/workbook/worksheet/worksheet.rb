@@ -488,12 +488,12 @@ module Axlsx
       str.concat "<drawing r:id='rId1'></drawing>" if @drawing
      str << '<legacyDrawing r:id="rId1"/>' if @comments.size > 0
      unless @tables.empty?
-        str.concat "<tableParts count='%s'>%s</tableParts>" % [@tables.size, @tables.reduce('') { |memo, obj| memo += "<tablePart r:id='%s'/>" % obj.rId }]
-      end
-      @conditional_formattings.each do |cf|
-        str.concat cf.to_xml_string
-      end
-      str + '</worksheet>'
+       str.concat "<tableParts count='%s'>%s</tableParts>" % [@tables.size, @tables.reduce('') { |memo, obj| memo += "<tablePart r:id='%s'/>" % obj.rId }]
+     end
+     @conditional_formattings.each do |cf|
+       str.concat cf.to_xml_string
+     end
+     str + '</worksheet>'
     end
 
     # The worksheet relationships. This is managed automatically by the worksheet
