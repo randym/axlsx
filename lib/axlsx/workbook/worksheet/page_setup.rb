@@ -22,10 +22,14 @@ module Axlsx
     # * verticalDpi
     
     # Number of vertical pages to fit on.
-    # @return [Integer]
+    # @note PageSetup#fit_to is the recomended way to manage page fitting as only specifying one of fit_to_width/fit_to_height will result in the counterpart
+    # being set to 1.
+     # @return [Integer]
     attr_reader :fit_to_height
 
     # Number of horizontal pages to fit on.
+    # @note PageSetup#fit_to is the recomended way to manage page fitting as only specifying one of width/height will result in the counterpart
+    # being set to 1. 
     # @return [Integer]
     attr_reader :fit_to_width
 
