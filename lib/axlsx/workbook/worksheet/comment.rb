@@ -90,10 +90,10 @@ module Axlsx
     def initialize_vml_shape
       pos = Axlsx::name_to_indices(ref)
       @vml_shape = VmlShape.new(:row => pos[1], :column => pos[0]) do |vml|
-        vml.left_column = vml.row + 1
-        vml.right_column = vml.column + 4
+        vml.left_column = vml.column
+        vml.right_column = vml.column + 2 
         vml.top_row = vml.row
-        vml.bottom_row = vml.row + 4
+         vml.bottom_row = vml.row + 4
       end
     end
 

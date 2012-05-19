@@ -100,14 +100,10 @@ module Axlsx
     def to_xml_string(str ='')
 str << <<SHAME_ON_YOU
 
-<v:shape id="#{@id}" type="#_x0000_t202"
-style='position:absolute;margin-left:104pt;margin-top:2pt;width:800px;height:27pt;z-index:1;mso-wrap-style:tight'
- fillcolor="#ffffa1 [80]" o:insetmode="auto">
-
+<v:shape id="#{@id}" type="#_x0000_t202" fillcolor="#ffffa1 [80]" o:insetmode="auto">
   <v:fill color2="#ffffa1 [80]"/>
   <v:shadow on="t" obscured="t"/>
   <v:path o:connecttype="none"/>
-
   <v:textbox style='mso-fit-text-with-word-wrap:t'>
    <div style='text-align:left'></div>
   </v:textbox>

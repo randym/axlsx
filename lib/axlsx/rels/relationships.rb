@@ -10,7 +10,7 @@ require 'axlsx/rels/relationship.rb'
     def initialize
       super Relationship
     end
-
+    
     def to_xml_string(str = '')
       str << '<?xml version="1.0" encoding="UTF-8"?>'
       str << '<Relationships xmlns="' << RELS_R << '">'

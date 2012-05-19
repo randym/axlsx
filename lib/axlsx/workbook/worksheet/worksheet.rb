@@ -241,7 +241,7 @@ module Axlsx
     # (see #fit_to_page)
     # @return [Boolean]
     def fit_to_page=(v)
-      warn('DEPRECIATED: fit_to_page has been depreciated. This value will automatically be set for you when page_setup.fit_to_width or page_setup.fit_to_height are specified.')
+      warn('axlsx::DEPRECIATED: Worksheet#fit_to_page has been depreciated. This value will automatically be set for you when you use PageSetup#fit_to.')
       fit_to_page
     end
 
@@ -466,6 +466,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string
+      rels = relationships
       str = '<?xml version="1.0" encoding="UTF-8"?>'
       str.concat "<worksheet xmlns=\"%s\" xmlns:r=\"%s\">" % [XML_NS, XML_NS_R]
       str.concat "<sheetPr><pageSetUpPr fitToPage=\"%s\"></pageSetUpPr></sheetPr>" % fit_to_page if fit_to_page
@@ -485,8 +486,8 @@ module Axlsx
       print_options.to_xml_string(str) if @print_options
       page_margins.to_xml_string(str) if @page_margins
       page_setup.to_xml_string(str) if @page_setup
-      str.concat "<drawing r:id='rId1'></drawing>" if @drawing
-     str << '<legacyDrawing r:id="rId1"/>' if @comments.size > 0
+      str << "<drawing r:id='rId" << (rels.index{ |r| r.Type == DRAWING_R } + 1).to_s << "'/>" if @drawing
+      str << "<legacyDrawing r:id='rId" << (rels.index{ |r| r.Type == VML_DRAWING_R } + 1).to_s << "'/>" if @comments.size > 0
      unless @tables.empty?
        str.concat "<tableParts count='%s'>%s</tableParts>" % [@tables.size, @tables.reduce('') { |memo, obj| memo += "<tablePart r:id='%s'/>" % obj.rId }]
      end

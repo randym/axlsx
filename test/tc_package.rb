@@ -1,12 +1,16 @@
+# encoding: UTF-8
 require 'tc_helper.rb'
 
 class TestPackage < Test::Unit::TestCase
   def setup
     @package = Axlsx::Package.new
     ws = @package.workbook.add_worksheet
-    ws.add_row ['yes', 'we', 'can']
-    ws.add_comment :author => 'bob', :text => 'penny!', :ref => 'A1'
-    chart = ws.add_chart Axlsx::Pie3DChart
+    ws.add_row ['Can', 'we', 'build it?']
+    ws.add_row ['Yes!', 'We', 'can!']
+    ws.add_comment :author => 'alice', :text => 'Hi Bob', :ref => 'A12'
+    ws.add_comment :author => 'bob', :text => 'Hi Alice', :ref => 'F19'
+
+    chart = ws.add_chart Axlsx::Pie3DChart, :title => "これは？", :start_at => [0,3]
     chart.add_series :data=>[1,2,3], :labels=>["a", "b", "c"]
     @fname = 'axlsx_test_serialization.xlsx'
     img = File.expand_path('../../examples/image1.jpeg', __FILE__)
@@ -14,10 +18,18 @@ class TestPackage < Test::Unit::TestCase
       image.width=720
       image.height=666
       image.hyperlink.tooltip = "Labeled Link"
-      image.start_at 2, 2
+      image.start_at 5, 5
     end
-    ws.add_image :image_src => File.expand_path('../../examples/image1.gif', __FILE__) 
-    ws.add_image :image_src => File.expand_path('../../examples/image1.png', __FILE__) 
+    ws.add_image :image_src => File.expand_path('../../examples/image1.gif', __FILE__) do |image|
+      image.start_at 0, 20
+      image.width=360
+      image.height=333 
+    end
+    ws.add_image :image_src => File.expand_path('../../examples/image1.png', __FILE__) do |image|
+      image.start_at 9, 20
+      image.width = 180
+      image.height = 167
+    end
     ws.add_table 'A1:C1'
   end
 
@@ -65,11 +77,8 @@ class TestPackage < Test::Unit::TestCase
 
   def test_validation
     assert_equal(@package.validate.size, 0, @package.validate)
-    parts =  @package.send(:parts)
-    workbook = parts.select { |part| part[:entry] =~ /xl\/workbook\.xml/ }.first
-    workbook[:doc] = workbook[:doc].gsub('definedNames', 'defineNames')
-    errors = @package.send(:validate_single_doc, workbook[:schema], workbook[:doc]  )
-    assert_equal(errors.size, 1)
+    Axlsx::Workbook.class_variable_set(:@@date1904, 9900)
+    assert_equal(@package.validate.size, 2,  @package.validate)
   end
 
   def test_parts

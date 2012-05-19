@@ -34,14 +34,15 @@ class TestComment < Test::Unit::TestCase
   end
 
   def test_vml_shape
+    pos = Axlsx::name_to_indices(@c1.ref)
     assert(@c1.vml_shape.is_a?(Axlsx::VmlShape))
-    assert(@c1.vml_shape.column == Axlsx::name_to_indices(@c1.ref)[0])
-    assert(@c1.vml_shape.row == Axlsx::name_to_indices(@c1.ref)[1])
-    assert(@c1.vml_shape.row == Axlsx::name_to_indices(@c1.ref)[1])
-    assert(@c1.vml_shape.left_column == Axlsx::name_to_indices(@c1.ref)[1]+1)
-    assert(@c1.vml_shape.top_row == Axlsx::name_to_indices(@c1.ref)[1])
-    assert(@c1.vml_shape.right_column == Axlsx::name_to_indices(@c1.ref)[0]+4)
-    assert(@c1.vml_shape.bottom_row == Axlsx::name_to_indices(@c1.ref)[1]+4)
+    assert(@c1.vml_shape.column == pos[0])
+    assert(@c1.vml_shape.row == pos[1])
+    assert(@c1.vml_shape.row == pos[1])
+    assert_equal(pos[0], @c1.vml_shape.left_column)
+    assert(@c1.vml_shape.top_row == pos[1])
+    assert_equal(pos[0] + 2 , @c1.vml_shape.right_column)
+    assert(@c1.vml_shape.bottom_row == pos[1]+4)
   end
 
   def to_xml_string
