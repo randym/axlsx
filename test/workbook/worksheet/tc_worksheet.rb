@@ -252,6 +252,12 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(doc.xpath('//xmlns:worksheet/xmlns:mergeCells/xmlns:mergeCell[@ref="E1:F1"]').size, 1)
   end
 
+  def test_to_xml_string_sheet_protection
+    @ws.sheet_protection.password = 'fish'
+    doc = Nokogiri::XML(@ws.to_xml_string)
+    assert(doc.xpath('//sheetProtection'))
+  end
+
   def test_to_xml_string_page_margins
     @ws.page_margins do |pm|
       pm.left = 9

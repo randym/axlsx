@@ -8,6 +8,13 @@ module Axlsx
     # @return [String]
     attr_reader :name
 
+    # The sheet protection object for this workbook
+    # @return [SheetProtection]
+    # @see SheetProtection
+    def sheet_protection
+      @sheet_protection ||= SheetProtection.new
+    end
+
     # The workbook that owns this worksheet
     # @return [Workbook]
     attr_reader :workbook
@@ -151,7 +158,7 @@ module Axlsx
       self.workbook = wb
       @workbook.worksheets << self
       @page_marging = @page_setup = @print_options = nil
-      @drawing = @page_margins = @auto_filter = nil
+      @drawing = @page_margins = @auto_filter = @sheet_protection = nil
       @merged_cells = []
       @auto_fit_data = []
       @conditional_formattings = []
@@ -482,6 +489,7 @@ module Axlsx
       @rows.each_with_index { |row, index| row.to_xml_string(index, str) }
       str.concat '</sheetData>'
       str.concat "<autoFilter ref='%s'></autoFilter>" % @auto_filter if @auto_filter
+      @sheet_protection.to_xml_string(str) if @sheet_protection
       str.concat "<mergeCells count='%s'>%s</mergeCells>" % [@merged_cells.size, @merged_cells.reduce('') { |memo, obj| memo += "<mergeCell ref='%s'></mergeCell>" % obj } ] unless @merged_cells.empty?
       print_options.to_xml_string(str) if @print_options
       page_margins.to_xml_string(str) if @page_margins
