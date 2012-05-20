@@ -163,12 +163,11 @@ module Axlsx
        @salt_value = @spin_count = @hash_value = v if v == nil
        return if v == nil
        require 'digest/sha1'
-       @spin_count = 0
-       @salt_value = Digest::SHA1.new << rand(36**8).to_s(36)
-       @hash_value = @salt_value.to_s + v
-       @hash_value = Digest::SHA1.new << @hash_value
+       @spin_count = 10000
+       @salt_value = Digest::SHA1.hexdigest(rand(36**8).to_s(36))
+       @hash_value = nil
        @spin_count.times do |count|
-        @hash_value = @hash_value.update(count.to_s.bytes.to_a.pack('L'))
+         @hash_value = Digest::SHA1.hexdigest((@hash_value || (@salt_value + v.to_s)) + count.to_s.bytes.to_a.pack('l'))
        end
      end
 
