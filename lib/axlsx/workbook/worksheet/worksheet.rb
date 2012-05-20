@@ -13,6 +13,8 @@ module Axlsx
     # @see SheetProtection
     def sheet_protection
       @sheet_protection ||= SheetProtection.new
+      yield @sheet_protection if block_given?
+      @sheet_protection
     end
 
     # The workbook that owns this worksheet
