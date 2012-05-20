@@ -89,31 +89,31 @@ module Axlsx
     # If 1 or true then Scenarios should not be edited when the sheet is protected.
     # If 0 or false then Scenarios are allowed to be edited when the sheet is protected.
     # @return [Boolean]
-    # default false
+    # @default false
     attr_reader :scenarios
 
     # If 1 or true then selection of locked cells should not be allowed when the sheet is protected.
     # If 0 or false then selection of locked cells should be allowed when the sheet is protected.
     # @return [Boolean]
-    # default false
+    # @default false
     attr_reader :select_locked_cells
 
     # If 1 or true then selection of unlocked cells should not be allowed when the sheet is protected.
     # If 0 or false then selection of unlocked cells should be allowed when the sheet is protected.
     # @return [Boolean]
-    # default false
+    # @default false
     attr_reader :select_unlocked_cells
 
     # If 1 or true then the sheet is protected. 
     # If 0 or false then the sheet is not protected. 
     # @return [Boolean]
-    # default true
+    # @default true
     attr_reader :sheet
 
     # If 1 or true then sorting should not be allowed when the sheet is protected.
     # If 0 or false then sorting should be allowed when the sheet is protected.
     # @return [Boolean]
-    # default true
+    # @default true
     attr_reader :sort
 
     # Specifies the number of times the hashing function shall be iteratively run

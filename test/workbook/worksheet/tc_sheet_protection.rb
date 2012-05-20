@@ -27,7 +27,7 @@ require 'tc_helper.rb'
 class TestSheetProtection < Test::Unit::TestCase
   def setup
     #inverse defaults
-    @options = { :sheet => true, :objects => true, :scenarios => true, :format_cells => false,
+    @options = { :sheet => false, :objects => true, :scenarios => true, :format_cells => false,
                 :format_columns => false, :format_rows => false, :insert_columns => false, :insert_rows => false,
                 :insert_hyperlinks => false, :delete_columns => false, :delete_rows => false, :select_locked_cells => true,
                 :sort => false, :auto_filter => false, :pivot_tables => false, :select_unlocked_cells => true }
