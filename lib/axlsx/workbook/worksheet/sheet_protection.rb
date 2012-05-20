@@ -107,7 +107,7 @@ module Axlsx
     # If 1 or true then the sheet is protected. 
     # If 0 or false then the sheet is not protected. 
     # @return [Boolean]
-    # default false
+    # default true
     attr_reader :sheet
 
     # If 1 or true then sorting should not be allowed when the sheet is protected.
@@ -141,8 +141,8 @@ module Axlsx
     # @option options [String] password. The password required for unlocking. @see SheetProtection#password=
     # @option options [Boolean] objects @see SheetProtection#objects
     def initialize(options={})
-      @sheet = @objects = @scenarios = @select_locked_cells = @select_unlocked_cells = false
-      @format_cells = @format_rows = @format_columns = @insert_columns = @insert_rows = @insert_hyperlinks = @delete_columns = @delete_rows = @sort = @auto_filter = @pivot_tables = true
+      @objects = @scenarios = @select_locked_cells = @select_unlocked_cells = false
+      @sheet = @format_cells = @format_rows = @format_columns = @insert_columns = @insert_rows = @insert_hyperlinks = @delete_columns = @delete_rows = @sort = @auto_filter = @pivot_tables = true
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
@@ -163,19 +163,18 @@ module Axlsx
        @salt_value = @spin_count = @hash_value = v if v == nil
        return if v == nil
        require 'digest/sha1'
-       @spin_count = 10000
-       @salt_value = Digest::SHA1.hexdigest(rand(36**8).to_s(36))
-
-       salty = @salt_value + v.to_s
-       @hash_value = Digest::SHA1.hexdigest(salty)
+       @spin_count = 0
+       @salt_value = Digest::SHA1.new << rand(36**8).to_s(36)
+       @hash_value = @salt_value.to_s + v
+       @hash_value = Digest::SHA1.new << @hash_value
        @spin_count.times do |count|
-         @hash_value = Digest::SHA1.hexdigest(@hash_value) + count.to_s
+        @hash_value = @hash_value.update(count.to_s.bytes.to_a.pack('L'))
        end
      end
 
      def to_xml_string(str = '')
        str << '<sheetProtection '
-       str << instance_values.map{ |k,v| k.gsub(/_(.)/){ $1.upcase } << %{="#{v}"} }.join(' ')
+       str << instance_values.map{ |k,v| k.gsub(/_(.)/){ $1.upcase } << %{="#{v.to_s}"} }.join(' ')
        str << '/>'
      end 
   end
