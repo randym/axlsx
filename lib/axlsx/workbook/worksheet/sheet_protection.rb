@@ -4,14 +4,6 @@ module Axlsx
   # The SheetProtection object manages worksheet protection options per sheet.
   class SheetProtection
 
-    # Specifies the specific cryptographic hashing algorithm which shall be used along
-    # with the salt attribute and input password in order to compute the hash value.
-    # This value is automatically set to 'SHA-1' when password= is called.
-    # @note only SHA-1 is supported.
-    # @return [String]
-    attr_reader :algorithm_name
-
-
     # If 1 or true then AutoFilters should not be allowed to operate when the sheet is protected.
     # If 0 or false then AutoFilters should be allowed to operate when the sheet is protected.
     # @return [Boolean]
@@ -115,11 +107,12 @@ module Axlsx
     # @return [Boolean]
     # @default true
     attr_reader :sort
-
-    # Specifies the number of times the hashing function shall be iteratively run
-    # @return [Integer]
-    # @default 10000
-    attr_reader :spin_count
+    
+    
+    # Password hash
+    # @return [String]
+    # @default nil
+    attr_reader :password
 
     # Creates a new SheetProtection instance
     # @option options [Boolean] sheet @see SheetProtection#sheet
@@ -143,6 +136,8 @@ module Axlsx
     def initialize(options={})
       @objects = @scenarios = @select_locked_cells = @select_unlocked_cells = false
       @sheet = @format_cells = @format_rows = @format_columns = @insert_columns = @insert_rows = @insert_hyperlinks = @delete_columns = @delete_rows = @sort = @auto_filter = @pivot_tables = true
+      @password = nil
+      
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
@@ -159,22 +154,51 @@ module Axlsx
      end
 
      def password=(v)
-       @algorithm_name = v == nil ? nil : 'SHA-1'
-       @salt_value = @spin_count = @hash_value = v if v == nil
        return if v == nil
-       require 'digest/sha1'
-       @spin_count = 10000
-       @salt_value = Digest::SHA1.hexdigest(rand(36**8).to_s(36))
-       @hash_value = nil
-       @spin_count.times do |count|
-         @hash_value = Digest::SHA1.hexdigest((@hash_value || (@salt_value + v.to_s)) + count.to_s.bytes.to_a.pack('l'))
-       end
+        @hash_value = create_password_hash(v)
      end
 
      def to_xml_string(str = '')
        str << '<sheetProtection '
        str << instance_values.map{ |k,v| k.gsub(/_(.)/){ $1.upcase } << %{="#{v.to_s}"} }.join(' ')
        str << '/>'
-     end 
+     end
+  
+  private
+    # Creates a password hash for a given password
+    # @return [String]
+    def create_password_hash(password)
+      encoded_password = encode_password(password)
+      
+      password_as_hex = [encoded_password].pack("v")
+      password_as_string = password_as_hex.unpack("H*").first.upcase
+      
+      password_as_string[2..3] + password_as_string[0..1]
+    end
+    
+    
+    # Encodes a given password
+    # Based on the algorithm provided by Daniel Rentz of OpenOffice.
+    # http://www.openoffice.org/sc/excelfileformat.pdf, Revision 1.42, page 115 (21.05.2012)
+    # @return [String]
+    def encode_password(password)
+      i = 0
+      chars = password.split(//)
+      count = chars.size
+  
+      chars.collect! do |char|
+        i += 1
+        char     = char.ord << i
+        low_15   = char & 0x7fff
+        high_15  = char & 0x7fff << 15
+        high_15  = high_15 >> 15
+        char     = low_15 | high_15
+      end
+      
+      encoded_password  = 0x0000
+      chars.each { |c| encoded_password ^= c }
+      encoded_password ^= count
+      encoded_password ^= 0xCE4B
+    end
   end
 end
