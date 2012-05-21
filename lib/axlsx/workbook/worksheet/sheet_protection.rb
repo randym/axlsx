@@ -40,10 +40,6 @@ module Axlsx
     # @default true
     attr_reader :format_rows
 
-    # Specifies the hash value for the password required to edit this worksheet. 
-    # @return [String]
-    attr_reader :hash_value
-
     # If 1 or true then inserting columns should not be allowed when the sheet is protected. 
     # If 0 or false then inserting columns should be allowed when the sheet is protected.
     # @return [Boolean]
@@ -155,7 +151,7 @@ module Axlsx
 
      def password=(v)
        return if v == nil
-        @hash_value = create_password_hash(v)
+        @password = create_password_hash(v)
      end
 
      def to_xml_string(str = '')
