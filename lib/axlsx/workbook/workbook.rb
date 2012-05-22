@@ -20,6 +20,7 @@ require 'axlsx/workbook/worksheet/sheet_protection.rb'
 require 'axlsx/workbook/worksheet/worksheet.rb'
 require 'axlsx/workbook/shared_strings_table.rb'
 require 'axlsx/workbook/worksheet/table.rb'
+require 'axlsx/workbook/worksheet/data_validation.rb'
 
   # The Workbook class is an xlsx workbook that manages worksheets, charts, drawings and styles.
   # The following parts of the Office Open XML spreadsheet specification are not implimented in this version.
