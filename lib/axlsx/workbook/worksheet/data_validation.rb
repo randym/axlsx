@@ -134,8 +134,8 @@ module Axlsx
     def initialize(options={})
       # defaults
       @formula1 = @formula2 = @error = @errorTitle = @operator = @prompt = @promptTitle = @sqref = nil
-      @allowBlank = true
-      @showDropDown = @showErrorMessage = @showInputMessage = false
+      @allowBlank = @showErrorMessage = true
+      @showDropDown = @showInputMessage = false
       @type = :none
       @errorStyle = :stop
       
