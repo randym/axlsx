@@ -4,5 +4,8 @@ $LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../lib"
 require 'axlsx'
 
 p = Axlsx::Package.new
-p.workbook.add_worksheet { |ws| ws.sheet_protection.propper_password = 'fish' }
+p.workbook.add_worksheet(:name => 'ECMA-376') { |ws| ws.sheet_protection.propper_password = 'fish' }
+p.workbook.add_worksheet(:name => 'Open Office') { |ws| ws.sheet_protection.password = 'fish' }
 p.serialize 'sheet_protection.xlsx'
+
+
