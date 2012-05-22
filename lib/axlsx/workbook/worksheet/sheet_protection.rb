@@ -139,7 +139,10 @@ module Axlsx
       end
     end
 
-    [:sheet, :objects, :scenarios, :select_locked_cells, :sort,
+
+     # create validating setters for boolean values
+     # @return [Boolean] 
+     [:sheet, :objects, :scenarios, :select_locked_cells, :sort,
      :select_unlocked_cells, :format_cells, :format_rows, :format_columns,
      :insert_columns, :insert_rows, :insert_hyperlinks, :delete_columns, 
      :delete_rows, :auto_filter, :pivot_tables].each do |f_name|
@@ -149,11 +152,30 @@ module Axlsx
        end
      end
 
+     def propper_password=(v)
+       @algorithm_name = v == nil ? nil : 'SHA-1'
+       @salt_value = @spin_count = @hash_value = v if v == nil
+       return if v == nil
+       require 'digest/sha1'
+       @spin_count = 10000
+       @salt_value = Digest::SHA1.hexdigest(rand(36**8).to_s(36))
+       @hash_value = nil
+       @spin_count.times do |count|
+         @hash_value = Digest::SHA1.hexdigest((@hash_value || (@salt_value + v.to_s)) + Array(count).pack('V'))
+       end
+     end
+
+
+
+     # encodes password for protection locking
      def password=(v)
        return if v == nil
         @password = create_password_hash(v)
      end
 
+     # Serialize the object
+     # @param [String] str
+     # @return [String]
      def to_xml_string(str = '')
        str << '<sheetProtection '
        str << instance_values.map{ |k,v| k.gsub(/_(.)/){ $1.upcase } << %{="#{v.to_s}"} }.join(' ')
