@@ -10,11 +10,15 @@ module Axlsx
     CHILD_ELEMENTS = [:formula1, :formula2]
     
     # Formula1
+    # Available for type whole, decimal, date, time, textLength, list, custom
+    # @see type
     # @return [String]
     # @default nil
     attr_reader :formula1
     
     # Formula2
+    # Available for type whole, decimal, date, time, textLength
+    # @see type
     # @return [String]
     # @default nil
     attr_reader :formula2
@@ -22,14 +26,16 @@ module Axlsx
     # Allow Blank
     # A boolean value indicating whether the data validation allows the use of empty or blank
     # entries. 1 means empty entries are OK and do not violate the validation constraints.
-    # The possible values for this attribute are defined by the W3C XML Schema boolean
-    # datatype.
+    # Available for type whole, decimal, date, time, textLength, list, custom
+    # @see type
     # @return [Boolean]
     # @default true
     attr_reader :allowBlank
     
     # Error Message
     # Message text of error alert.
+    # Available for type whole, decimal, date, time, textLength, list, custom
+    # @see type
     # @return [String]
     # @default nil
     attr_reader :error
@@ -40,12 +46,16 @@ module Axlsx
     #  * information: This data validation error style uses an information icon in the error alert.
     #  * stop: This data validation error style uses a stop icon in the error alert.
     #  * warning: This data validation error style uses a warning icon in the error alert.
+    # Available for type whole, decimal, date, time, textLength, list, custom
+    # @see type
     # @return [Symbol]
     # @default :stop
     attr_reader :errorStyle
     
     # Error Title
     # Title bar text of error alert.
+    # Available for type whole, decimal, date, time, textLength, list, custom
+    # @see type
     # @return [String]
     # @default nil
     attr_reader :errorTitle
@@ -61,18 +71,24 @@ module Axlsx
     #  * less_than_or_equal: Data validation which checks if a value is less than or equal to a specified value.
     #  * not_between: Data validation which checks if a value is not between two other values.
     #  * not_equal: Data validation which checks if a value is not equal to a specified value.
+    # Available for type whole, decimal, date, time, textLength
+    # @see type
     # @return [Symbol]
     # @default nil
     attr_reader :operator
     
     # Input prompt
     # Message text of input prompt.
+    # Available for type whole, decimal, date, time, textLength, list, custom
+    # @see type
     # @return [String]
     # @default nil
     attr_reader :prompt
     
     # Prompt title
     # Title bar text of input prompt.
+    # Available for type whole, decimal, date, time, textLength, list, custom
+    # @see type
     # @return [String]
     # @default nil
     attr_reader :promptTitle
@@ -80,6 +96,8 @@ module Axlsx
     # Show drop down
     # A boolean value indicating whether to display a dropdown combo box for a list type data
     # validation.
+    # Available for type list
+    # @see type
     # @return [Boolean]
     # @default false
     attr_reader :showDropDown
@@ -87,17 +105,23 @@ module Axlsx
     # Show error message
     # A boolean value indicating whether to display the error alert message when an invalid
     # value has been entered, according to the criteria specified.
+    # Available for type whole, decimal, date, time, textLength, list, custom
+    # @see type
     # @return [Boolean]
     # @default false
     attr_reader :showErrorMessage
     
     # Show input message
     # A boolean value indicating whether to display the input prompt message.
+    # Available for type whole, decimal, date, time, textLength, list, custom
+    # @see type
     # @return [Boolean]
     # @default false
     attr_reader :showInputMessage
     
     # Range over which data validation is applied, in "A1:B2" format
+    # Available for type whole, decimal, date, time, textLength, list, custom
+    # @see type
     # @return [String]
     # @default nil
     attr_reader :sqref
