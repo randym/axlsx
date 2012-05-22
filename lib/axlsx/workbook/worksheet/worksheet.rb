@@ -213,7 +213,7 @@ module Axlsx
     # @see
     def add_data_validation(cells, data_validation)
       dv = DataValidation.new(data_validation)
-      data_validation.sqref = cells
+      dv.sqref = cells
       @data_validations << data_validation
     end
 

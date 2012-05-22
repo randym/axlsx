@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module Axlsx
   # Data validation allows the validation of cell data
   #
