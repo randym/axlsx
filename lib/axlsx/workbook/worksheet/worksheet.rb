@@ -214,7 +214,7 @@ module Axlsx
     def add_data_validation(cells, data_validation)
       dv = DataValidation.new(data_validation)
       dv.sqref = cells
-      @data_validations << data_validation
+      @data_validations << dv
     end
 
     # Creates merge information for this worksheet.
@@ -519,8 +519,12 @@ module Axlsx
        str.concat cf.to_xml_string
      end
      
-     @data_validations.each do |df|
-       str.concat df.to_xml_string
+     unless @data_validations.empty?
+       str.concat "<dataValidations count=\"#{@data_validations.size}\">"
+       @data_validations.each do |df|
+         str.concat df.to_xml_string
+       end
+       str.concat '</dataValidations>'
      end
      str + '</worksheet>'
     end
