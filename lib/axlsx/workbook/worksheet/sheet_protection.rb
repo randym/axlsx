@@ -103,8 +103,7 @@ module Axlsx
     # @return [Boolean]
     # @default true
     attr_reader :sort
-    
-    
+
     # Password hash
     # @return [String]
     # @default nil
@@ -133,7 +132,7 @@ module Axlsx
       @objects = @scenarios = @select_locked_cells = @select_unlocked_cells = false
       @sheet = @format_cells = @format_rows = @format_columns = @insert_columns = @insert_rows = @insert_hyperlinks = @delete_columns = @delete_rows = @sort = @auto_filter = @pivot_tables = true
       @password = nil
-      
+
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
@@ -144,9 +143,9 @@ module Axlsx
      # @return [Boolean] 
      [:sheet, :objects, :scenarios, :select_locked_cells, :sort,
      :select_unlocked_cells, :format_cells, :format_rows, :format_columns,
-     :insert_columns, :insert_rows, :insert_hyperlinks, :delete_columns, 
+     :insert_columns, :insert_rows, :insert_hyperlinks, :delete_columns,
      :delete_rows, :auto_filter, :pivot_tables].each do |f_name|
-       define_method "#{f_name.to_s}=".to_sym do |v| 
+       define_method "#{f_name.to_s}=".to_sym do |v|
          Axlsx::validate_boolean(v)
          instance_variable_set "@#{f_name.to_s}".to_sym, v
        end
@@ -184,20 +183,20 @@ module Axlsx
        str << instance_values.map{ |k,v| k.gsub(/_(.)/){ $1.upcase } << %{="#{v.to_s}"} }.join(' ')
        str << '/>'
      end
-  
+
   private
     # Creates a password hash for a given password
     # @return [String]
     def create_password_hash(password)
       encoded_password = encode_password(password)
-      
+
       password_as_hex = [encoded_password].pack("v")
       password_as_string = password_as_hex.unpack("H*").first.upcase
-      
+
       password_as_string[2..3] + password_as_string[0..1]
     end
-    
-    
+
+
     # Encodes a given password
     # Based on the algorithm provided by Daniel Rentz of OpenOffice.
     # http://www.openoffice.org/sc/excelfileformat.pdf, Revision 1.42, page 115 (21.05.2012)
@@ -206,7 +205,7 @@ module Axlsx
       i = 0
       chars = password.split(//)
       count = chars.size
-  
+
       chars.collect! do |char|
         i += 1
         char     = char.unpack('c')[0] << i #ord << i
@@ -215,7 +214,7 @@ module Axlsx
         high_15  = high_15 >> 15
         char     = low_15 | high_15
       end
-      
+
       encoded_password  = 0x0000
       chars.each { |c| encoded_password ^= c }
       encoded_password ^= count
