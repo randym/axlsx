@@ -84,4 +84,8 @@ module Axlsx
     Axlsx::col_ref(c_index).to_s << (r_index+1).to_s
   end
 
+  def self.camel(s="")
+    s = s.capitalize.gsub(/_(.)/){ $1.upcase }
+  end
+
 end

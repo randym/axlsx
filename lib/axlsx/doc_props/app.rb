@@ -11,163 +11,216 @@ module Axlsx
   class App
 
     # @return [String] The name of the document template.
-    attr_reader :Template
+    attr_reader :template
+    alias :Template :template
 
     # @return [String] The name of the manager for the document.
-    attr_reader :Manager
+    attr_reader :manager
+    alias :Manager :manager
 
     # @return [String] The name of the company generating the document.
-    attr_reader :Company
+    attr_reader :company
+    alias :Company :company
 
     # @return [Integer] The number of pages in the document.
-    attr_reader :Pages
+    attr_reader :pages
+    alias :Pages :pages
 
     # @return [Integer] The number of words in the document.
-    attr_reader :Words
+    attr_reader :words
+    alias :Words :words
 
     # @return [Integer] The number of characters in the document.
-    attr_reader :Characters
+    attr_reader :characters
+    alias :Characters :characters
 
     # @return [String] The intended format of the presentation.
-    attr_reader :PresentationFormat
+    attr_reader :presentation_format
+    alias :PresentationFormat :presentation_format
 
     # @return [Integer] The number of lines in the document.
-    attr_reader :Lines
+    attr_reader :lines
+    alias :Lines :lines
 
     # @return [Integer] The number of paragraphs in the document
-    attr_reader :Paragraphs
+    attr_reader :paragraphs
+    alias :Paragraphs :paragraphs
 
     # @return [Intger] The number of slides in the document.
-    attr_reader :Slides
+    attr_reader :slides
+    alias :Slides :slides
 
     # @return [Integer] The number of slides that have notes.
-    attr_reader :Notes
+    attr_reader :notes
+    alias :Notes :notes
 
     # @return [Integer] The total amount of time spent editing.
-    attr_reader :TotalTime
+    attr_reader :total_time
+    alias :TotalTime :total_time
 
     # @return [Integer] The number of hidden slides.
-    attr_reader :HiddenSlides
+    attr_reader :hidden_slides
+    alias :HiddenSlides :hidden_slides
 
     # @return [Integer] The total number multimedia clips
-    attr_reader :MMClips
+    attr_reader :m_m_clips
+    alias :MMClips :m_m_clips
 
     # @return [Boolean] The display mode for the document thumbnail.
-    attr_reader :ScaleCrop
+    attr_reader :scale_crop
+    alias :ScaleCrop :scale_crop
 
     # @return [Boolean] The links in the document are up to date.
-    attr_reader :LinksUpToDate
+    attr_reader :links_up_to_date
+    alias :LinksUpToDate :links_up_to_date
 
     # @return [Integer] The number of characters in the document including spaces.
-    attr_reader :CharactersWithSpaces
+    attr_reader :characters_with_spaces
+    alias :CharactersWithSpaces :characters_with_spaces
 
     # @return [Boolean] Indicates if the document is shared.
-    attr_reader :SharedDoc
+    attr_reader :shared_doc
+    alias :SharedDoc :shared_doc
 
     # @return [String] The base for hyper links in the document.
-    attr_reader :HyperlinkBase
+    attr_reader :hyperlink_base
+    alias :HyperlinkBase :hyperlink_base
 
     # @return [Boolean] Indicates that the hyper links in the document have been changed.
-    attr_reader :HyperlinksChanged
-
+    attr_reader :hyperlinks_changed
+    alias :HyperlinksChanged :hyperlinks_changed
+    
     # @return [String] The name of the application
-    attr_reader :Application
+    attr_reader :application
+    alias :Applicatoin :application
 
     # @return [String] The version of the application.
-    attr_reader :AppVersion
+    attr_reader :app_version
+    alias :AppVersion :app_version
 
     # @return [Integer] Document security
-    attr_reader :DocSecurity
+    attr_reader :doc_security
+    alias :DocSecurity :doc_security
 
     # Creates an App object
-    # @option options [String] Template
-    # @option options [String] Manager
-    # @option options [Integer] Pages
-    # @option options [Integer] Words
-    # @option options [Integer] Characters
-    # @option options [String] PresentationFormat
-    # @option options [Integer] Lines
-    # @option options [Integer] Paragraphs
-    # @option options [Integer] Slides
-    # @option options [Integer] Notes
-    # @option options [Integer] TotalTime
-    # @option options [Integer] HiddenSlides
-    # @option options [Integer] MMClips
-    # @option options [Boolean] ScaleCrop
-    # @option options [Boolean] LinksUpToDate
-    # @option options [Integer] CharactersWithSpaces
-    # @option options [Boolean] ShareDoc
-    # @option options [String] HyperLinkBase
-    # @option options [String] HyperlinksChanged
-    # @option options [String] Application
-    # @option options [String] AppVersion
-    # @option options [Integer] DocSecurity
+    # @option options [String] template
+    # @option options [String] manager
+    # @option options [Integer] pages
+    # @option options [Integer] words
+    # @option options [Integer] characters
+    # @option options [String] presentation_format
+    # @option options [Integer] lines
+    # @option options [Integer] paragraphs
+    # @option options [Integer] slides
+    # @option options [Integer] notes
+    # @option options [Integer] total_time
+    # @option options [Integer] hidden_slides
+    # @option options [Integer] m_m_clips
+    # @option options [Boolean] scale_crop
+    # @option options [Boolean] links_up_to_date
+    # @option options [Integer] characters_with_spaces
+    # @option options [Boolean] share_doc
+    # @option options [String] hyperlink_base
+    # @option options [String] hyperlinks_changed
+    # @option options [String] application
+    # @option options [String] app_version
+    # @option options [Integer] doc_security
     def initialize(options={})
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
     end
 
-    # Sets the Template property of your app.xml file
-    def Template=(v) Axlsx::validate_string v; @Template = v; end
+    # Sets the template property of your app.xml file
+    def template=(v) Axlsx::validate_string v; @template = v; end
 
-    # Sets the Manager property of your app.xml file
-    def Manager=(v) Axlsx::validate_string v; @Manager = v; end
+    # Sets the manager property of your app.xml file
+    def manager=(v) Axlsx::validate_string v; @manager = v; end
 
-    # Sets the Company property of your app.xml file
-    def Company=(v) Axlsx::validate_string v; @Company = v; end
+    # Sets the company property of your app.xml file
+    def company=(v) Axlsx::validate_string v; @company = v; end
 
-    # Sets the Pages property of your app.xml file
-    def Pages=(v) Axlsx::validate_int v; @Pages = v; end
+    # Sets the pages property of your app.xml file
+    def pages=(v) Axlsx::validate_int v; @pages = v; end
 
-    # Sets the Words property of your app.xml file
-    def Words=(v) Axlsx::validate_int v; @Words = v; end
+    # Sets the words property of your app.xml file
+    def words=(v) Axlsx::validate_int v; @words = v; end
+    alias :Words= :words=
 
-    # Sets the Characters property of your app.xml file
-    def Characters=(v) Axlsx::validate_int v; @Characters = v; end
+    # Sets the characters property of your app.xml file
+    def characters=(v) Axlsx::validate_int v; @characters = v; end
+    alias :Characters= :characters=
 
+    # Sets the presentation_format property of your app.xml file
+    def presentation_format=(v) Axlsx::validate_string v; @presentation_format = v; end
+    alias :PresentationFormat= :presentation_format=
 
-    # Sets the PresentationFormat property of your app.xml file
-    def PresentationFormat=(v) Axlsx::validate_string v; @PresentationFormat = v; end
-    # Sets the Lines property of your app.xml file
-    def Lines=(v) Axlsx::validate_int v; @Lines = v; end
-    # Sets the Paragraphs property of your app.xml file
-    def Paragraphs=(v) Axlsx::validate_int v; @Paragraphs = v; end
-    # Sets the Slides property of your app.xml file
-    def Slides=(v) Axlsx::validate_int v; @Slides = v; end
-    # Sets the Notes property of your app.xml file
-    def Notes=(v) Axlsx::validate_int v; @Notes = v; end
-    # Sets the TotalTime property of your app.xml file
-    def TotalTime=(v) Axlsx::validate_int v; @TotalTime = v; end
-    # Sets the HiddenSlides property of your app.xml file
-    def HiddenSlides=(v) Axlsx::validate_int v; @HiddenSlides = v; end
-    # Sets the MMClips property of your app.xml file
-    def MMClips=(v) Axlsx::validate_int v; @MMClips = v; end
-    # Sets the ScaleCrop property of your app.xml file
-    def ScaleCrop=(v) Axlsx::validate_boolean v; @ScaleCrop = v; end
-    # Sets the LinksUpToDate property of your app.xml file
-    def LinksUpToDate=(v) Axlsx::validate_boolean v; @LinksUpToDate = v; end
-    # Sets the CharactersWithSpaces property of your app.xml file
-    def CharactersWithSpaces=(v) Axlsx::validate_int v; @CharactersWithSpaces = v; end
-    # Sets the ShareDoc property of your app.xml file
-    def ShareDoc=(v) Axlsx::validate_boolean v; @ShareDoc = v; end
-    # Sets the HyperLinkBase property of your app.xml file
-    def HyperLinkBase=(v) Axlsx::validate_string v; @HyperLinkBase = v; end
+    # Sets the lines property of your app.xml file
+    def lines=(v) Axlsx::validate_int v; @lines = v; end
+    alias :Lines= :lines=
+
+    # Sets the paragraphs property of your app.xml file
+    def paragraphs=(v) Axlsx::validate_int v; @paragraphs = v; end
+    alias :Paragraphs= :paragraphs=
+
+    # sets the slides property of your app.xml file
+    def slides=(v) Axlsx::validate_int v; @slides = v; end
+    alias :Slides= :slides=
+
+    # sets the notes property of your app.xml file
+    def notes=(v) Axlsx::validate_int v; @notes = v; end
+    alias :Notes= :notes=
+
+    # Sets the total_time property of your app.xml file
+    def total_time=(v) Axlsx::validate_int v; @total_time = v; end
+    alias :TotalTime= :total_time=
+
+    # Sets the hidden_slides property of your app.xml file
+    def hidden_slides=(v) Axlsx::validate_int v; @hidden_slides = v; end
+    alias :HiddenSlides= :hidden_slides=
+
+    # Sets the m_m_clips property of your app.xml file
+    def m_m_clips=(v) Axlsx::validate_int v; @m_m_clips = v; end
+    alias :MMClips= :m_m_clips=
+
+    # Sets the scale_crop property of your app.xml file
+    def scale_crop=(v) Axlsx::validate_boolean v; @scale_crop = v; end
+    alias :ScaleCrop= :scale_crop=
+
+    # Sets the links_up_to_date property of your app.xml file
+    def links_up_to_date=(v) Axlsx::validate_boolean v; @links_up_to_date = v; end
+    alias :LinksUpToDate= :links_up_to_date=
+
+    # Sets the characters_with_spaces property of your app.xml file
+    def characters_with_spaces=(v) Axlsx::validate_int v; @characters_with_spaces = v; end
+    alias :CharactersWithSpaces= :characters_with_spaces=
+
+    # Sets the share_doc property of your app.xml file
+    def shared_doc=(v) Axlsx::validate_boolean v; @shared_doc = v; end
+    alias :SharedDoc= :shared_doc=
+
+    # Sets the hyperlink_base property of your app.xml file
+    def hyperlink_base=(v) Axlsx::validate_string v; @hyperlink_base = v; end
+    alias :HyperlinkBase= :hyperlink_base=
+
     # Sets the HyperLinksChanged property of your app.xml file
-    def HyperlinksChanged=(v) Axlsx::validate_boolean v; @HyperlinksChanged = v; end
-    # Sets the Application property of your app.xml file
-    def Application=(v) Axlsx::validate_string v; @Application = v; end
-    # Sets the AppVersion property of your app.xml file
-    def AppVersion=(v) Axlsx::validate_string v; @AppVersion = v; end
-    # Sets the DocSecurity property of your app.xml file
-    def DocSecurity=(v) Axlsx::validate_int v; @DocSecurity = v; end
+    def hyperlinks_changed=(v) Axlsx::validate_boolean v; @hyperlinks_changed = v; end
+    alias :HyperLinksChanged= :hyperlinks_changed=
 
+    # Sets the app_version property of your app.xml file
+    def app_version=(v) Axlsx::validate_string v; @app_version = v; end
+    alias :AppVersion= :app_version=
+
+    # Sets the doc_security property of your app.xml file
+    def doc_security=(v) Axlsx::validate_int v; @doc_security = v; end
+    alias :DocSecurity= :doc_security=
+     
     # Serialize the app.xml document
     # @return [String]
     def to_xml_string(str = '')
       str << '<?xml version="1.0" encoding="UTF-8"?>'
       str << '<Properties xmlns="' << APP_NS << '" xmlns:vt="' << APP_NS_VT << '">'
-      str << instance_values.map { |key, value| '<' << key.to_s << '>' << value.to_s << '</' << key.to_s << '>' }.join
+      str << instance_values.map { |key, value| '<' << Axlsx.camel(key) << '>' << value.to_s << '</' << Axlsx.camel(key) << '>' }.join
       str << '</Properties>'
     end
 
