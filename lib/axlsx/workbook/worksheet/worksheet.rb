@@ -164,6 +164,7 @@ module Axlsx
       @merged_cells = []
       @auto_fit_data = []
       @conditional_formattings = []
+      @data_validations = []
       @comments = Comments.new(self)
       @selected = false
       @show_gridlines = true
@@ -201,6 +202,19 @@ module Axlsx
       cf = ConditionalFormatting.new( :sqref => cells )
       cf.add_rules rules
       @conditional_formattings << cf
+    end
+    
+    # Add data validation to this worksheet.
+    #
+    # @param
+    # @example
+    #
+    # @see
+    # @see
+    def add_data_validation(cells, data_validation)
+      dv = DataValidation.new(data_validation)
+      dv.sqref = cells
+      @data_validations << dv
     end
 
     # Creates merge information for this worksheet.
@@ -503,6 +517,14 @@ module Axlsx
      end
      @conditional_formattings.each do |cf|
        str.concat cf.to_xml_string
+     end
+     
+     unless @data_validations.empty?
+       str.concat "<dataValidations count=\"#{@data_validations.size}\">"
+       @data_validations.each do |df|
+         str.concat df.to_xml_string
+       end
+       str.concat '</dataValidations>'
      end
      str + '</worksheet>'
     end
