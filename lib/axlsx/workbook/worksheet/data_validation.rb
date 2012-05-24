@@ -181,7 +181,7 @@ module Axlsx
     def error=(v); Axlsx::validate_string(v); @error = v end
     
     # @see errorStyle
-    def errorStyle=(v); Axlsx::validate_data_validation_errorStyle(v); @errorStyle = v end
+    def errorStyle=(v); Axlsx::validate_data_validation_error_style(v); @errorStyle = v end
     
     # @see errorTitle
     def errorTitle=(v); Axlsx::validate_string(v); @errorTitle = v end
@@ -214,12 +214,31 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
+      valid_attributes = get_valid_attributes
+      
       str << '<dataValidation '
-      str << instance_values.map { |key, value| '' << key << '="' << value.to_s << '"' unless CHILD_ELEMENTS.include?(key.to_sym) }.join(' ')
+      str << instance_values.map { |key, value| '' << key << '="' << value.to_s << '"' if (valid_attributes.include?(key.to_sym) and not CHILD_ELEMENTS.include?(key.to_sym)) }.join(' ')
       str << '>'
-      str << '<formula1>' << self.formula1 << '</formula1>' if @formula1
-      str << '<formula2>' << self.formula2 << '</formula2>' if @formula2
+      str << '<formula1>' << self.formula1 << '</formula1>' if @formula1 and valid_attributes.include?(:formula1)
+      str << '<formula2>' << self.formula2 << '</formula2>' if @formula2 and valid_attributes.include?(:formula2)
       str << '</dataValidation>'
+    end
+    
+  private
+    def get_valid_attributes
+      attributes = [:allowBlank, :error, :errorStyle, :errorTitle, :prompt, :promptTitle, :showErrorMessage, :showInputMessage, :sqref, :type ]
+      
+      if [:whole, :decimal, :data, :time, :textLength].include?(@type)
+        attributes << [:operator, :formula1, :formula2]
+      elsif @type == :list
+        attributes << [:showDropDown, :formula1]
+      elsif @type == :custom
+        attributes << :formula1
+      else
+        attributes = []
+      end
+      
+      attributes.flatten!
     end
   end
 end
