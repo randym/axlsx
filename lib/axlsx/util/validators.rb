@@ -221,7 +221,7 @@ module Axlsx
   # :information, :stop, :warning
   # @param [Any] v The value validated
   def self.validate_data_validation_error_style(v)
-    RestrictionValidator.validate :validate_data_validation_error_style, [:informatiom, :stop, :warning]
+    RestrictionValidator.validate :validate_data_validation_error_style, [:information, :stop, :warning], v
   end
   
   # Requires that the value is valid data validation operator.
