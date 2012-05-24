@@ -233,7 +233,7 @@ module Axlsx
       elsif @type == :list
         attributes << [:showDropDown, :formula1]
       elsif @type == :custom
-        attributes << :formula1
+        attributes << [:formula1]
       else
         attributes = []
       end
