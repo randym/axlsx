@@ -95,7 +95,7 @@ module Axlsx
     
     # Show drop down
     # A boolean value indicating whether to display a dropdown combo box for a list type data
-    # validation.
+    # validation. Be careful: false shows the dropdown list!
     # Available for type list
     # @see type
     # @return [Boolean]
