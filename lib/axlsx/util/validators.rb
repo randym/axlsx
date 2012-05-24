@@ -217,4 +217,25 @@ module Axlsx
     RestrictionValidator.validate :table_element_type, [:wholeTable, :headerRow, :totalRow, :firstColumn, :lastColumn, :firstRowStripe, :secondRowStripe, :firstColumnStripe, :secondColumnStripe, :firstHeaderCell, :lastHeaderCell, :firstTotalCell, :lastTotalCell, :firstSubtotalColumn, :secondSubtotalColumn, :thirdSubtotalColumn, :firstSubtotalRow, :secondSubtotalRow, :thirdSubtotalRow, :blankRow, :firstColumnSubheading, :secondColumnSubheading, :thirdColumnSubheading, :firstRowSubheading, :secondRowSubheading, :thirdRowSubheading, :pageFieldLabels, :pageFieldValues], v
   end
 
+  # Requires that the value is a valid data_validation_error_style
+  # :information, :stop, :warning
+  # @param [Any] v The value validated
+  def self.validate_data_validation_error_style(v)
+    RestrictionValidator.validate :validate_data_validation_error_style, [:information, :stop, :warning], v
+  end
+  
+  # Requires that the value is valid data validation operator.
+  # valid operators must be one of lessThan, lessThanOrEqual, equal,
+  # notEqual, greaterThanOrEqual, greaterThan, between, notBetween
+  # @param [Any] v The value validated
+  def self.validate_data_validation_operator(v)
+    RestrictionValidator.validate :data_validation_operator, [:lessThan, :lessThanOrEqual, :equal, :notEqual, :greaterThanOrEqual, :greaterThan, :between, :notBetween], v
+  end
+  
+  # Requires that the value is valid data validation type.
+  # valid types must be one of custom, data, decimal, list, none, textLength, time, whole
+  # @param [Any] v The value validated
+  def self.validate_data_validation_type(v)
+    RestrictionValidator.validate :data_validation_type, [:custom, :data, :decimal, :list, :none, :textLength, :time, :whole], v
+  end
 end
