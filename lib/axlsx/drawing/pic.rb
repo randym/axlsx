@@ -113,23 +113,29 @@ module Axlsx
     # @param [Integer] v
     # @see OneCellAnchor.width
     def width
+      return unless @anchor.is_a?(OneCellAnchor)
       @anchor.width
     end
 
     # @see width
     def width=(v)
+      return unless @anchor.is_a?(OneCellAnchor)
       @anchor.width = v
     end
 
     # providing access to update the anchor's height attribute
     # @param [Integer] v
     # @see OneCellAnchor.width
+    # @note this is a noop if you are using a TwoCellAnchor
     def height
+      return unless @anchor.is_a?(OneCellAnchor)
       @anchor.height
     end
 
     # @see height
+    # @note This is a noop if you are using a TwoCellAnchor
     def height=(v)
+      return unless @anchor.is_a?(OneCellAnchor)
       @anchor.height = v
     end
 
@@ -142,6 +148,18 @@ module Axlsx
     def start_at(x, y)
       @anchor.from.col = x
       @anchor.from.row = y
+      @anchor.from
+    end
+    
+    # noop if not using a two cell anchor
+    # @param [Integer] x The column
+    # @param [Integer] y The row
+    # @return [Marker]
+    def end_at(x, y)
+      return unless @anchor.is_a?(TwoCellAnchor)
+      @anchor.to.col = x
+      @anchor.to.row = y
+      @anchor.to
     end
 
     # Serializes the object

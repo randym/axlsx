@@ -32,7 +32,12 @@ class TestDrawing < Test::Unit::TestCase
     assert_equal(600, image.width)
     assert_equal(400, image.height)
   end
-
+  def test_add_two_cell_anchor_image
+     src = File.dirname(__FILE__) + "/../../examples/image1.jpeg"
+     image = @ws.add_image(:image_src => src, :start_at=>[0,0], :end_at => [15,0])
+    assert(@ws.drawing.anchors.last.is_a?(Axlsx::TwoCellAnchor))
+    assert(image.is_a?(Axlsx::Pic))
+  end
   def test_charts
     assert(@ws.drawing.charts.empty?)
     chart = @ws.add_chart(Axlsx::Pie3DChart, :title=>"bob", :start_at=>[0,0], :end_at=>[1,1])

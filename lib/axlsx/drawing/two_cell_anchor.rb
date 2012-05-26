@@ -34,7 +34,7 @@ module Axlsx
     # @param [Drawing] drawing
     # @param [Class] chart_type This is passed to the graphic frame for instantiation. must be Chart or a subclass of Chart
     # @param object The object this anchor holds.
-    # @option options [Array] start_at the col, row to start at
+    # @option options [Array] start_at the col, row to start at THIS IS DOCUMENTED BUT NOT IMPLEMENTED HERE!
     # @option options [Array] end_at the col, row to end at
     def initialize(drawing, options={})
       @drawing = drawing
@@ -47,6 +47,11 @@ module Axlsx
     def add_chart(chart_type, options)
       @object = GraphicFrame.new(self, chart_type, options)
       @object.chart
+    end
+
+    # Creates an image associated with this anchor.
+    def add_pic(options={})
+      @object = Pic.new(self, options)
     end
 
     # The index of this anchor in the drawing
