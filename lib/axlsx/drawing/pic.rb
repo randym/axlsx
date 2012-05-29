@@ -90,8 +90,7 @@ module Axlsx
     # @return [String]
     def extname
       File.extname(image_src).delete('.') unless image_src.nil?
-    end
-
+    end 
     # The index of this image in the workbooks images collections
     # @return [Index]
     def index
@@ -119,7 +118,7 @@ module Axlsx
 
     # @see width
     def width=(v)
-      return unless @anchor.is_a?(OneCellAnchor)
+      use_one_cell_anchor unless @anchor.is_a?(OneCellAnchor)
       @anchor.width = v
     end
 
@@ -128,18 +127,17 @@ module Axlsx
     # @see OneCellAnchor.width
     # @note this is a noop if you are using a TwoCellAnchor
     def height
-      return unless @anchor.is_a?(OneCellAnchor)
       @anchor.height
     end
 
     # @see height
     # @note This is a noop if you are using a TwoCellAnchor
     def height=(v)
-      return unless @anchor.is_a?(OneCellAnchor)
+      use_one_cell_anchor unless @anchor.is_a?(OneCellAnchor)
       @anchor.height = v
     end
-
-    # This is a short cut method to set the start anchor position
+    
+       # This is a short cut method to set the start anchor position
     # If you need finer granularity in positioning use
     # graphic_frame.anchor.from.colOff / rowOff
     # @param [Integer] x The column
@@ -156,7 +154,7 @@ module Axlsx
     # @param [Integer] y The row
     # @return [Marker]
     def end_at(x, y)
-      return unless @anchor.is_a?(TwoCellAnchor)
+      use_two_cell_anchor unless @anchor.is_a?(TwoCellAnchor)
       @anchor.to.col = x
       @anchor.to.row = y
       @anchor.to
@@ -179,6 +177,30 @@ module Axlsx
       str << '<a:xfrm><a:off x="0" y="0"/><a:ext cx="2336800" cy="2161540"/></a:xfrm>'
       str << '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></xdr:spPr></xdr:pic>'
 
+    end
+     
+    private
+
+    # Changes the anchor to a one cell anchor.
+    def use_one_cell_anchor
+      return if @anchor.is_a?(OneCellAnchor)
+      swap_anchor(OneCellAnchor.new(@anchor.drawing, :from => @anchor.from))
+    end
+    
+    #changes the anchor type to a two cell anchor
+    def use_two_cell_anchor
+      return if @anchor.is_a?(TwoCellAnchor)
+      swap_anchor(TwoCellAnchor.new(@anchor.drawing)).tap do |new_anchor|
+        new_anchor.from.col = @anchor.from.col
+        new_anchor.from.row = @anchor.from.row
+      end
+    end
+
+    # refactoring of swapping code, law of demeter be damned!
+    def swap_anchor(new_anchor)
+      new_anchor.drawing.anchors.pop
+      @anchor.drawing.anchors[@anchor.drawing.anchors.index(@anchor)] = new_anchor
+      @anchor = new_anchor
     end
 
   end
