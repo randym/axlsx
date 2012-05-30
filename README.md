@@ -79,6 +79,8 @@ cell level input data validation.
 
 **15. Support for page margins and print options
 
+**16. Support for password and non password based sheet protection.
+
 Installing
 ----------
 
@@ -90,12 +92,12 @@ To install Axlsx, use the following command:
 ------
 
 The example listing is getting overly large to maintain here.
-If you are using Yard, you will be able to see the examples inline below.
+If you are using Yard, you will be able to see the examples in line below.
 If not, please refer to the Please see the {file:examples/example.rb} file.
 
 {include:file:examples/example.rb}
 
-There is much, much more you can do with this gem. If you get stuck, grab me on IRC or submit an issue to Github. Chances are that it has already been implemented. If it hasn't - let's take a look at adding it in.
+There is much, much more you can do with this gem. If you get stuck, grab me on IRC or submit an issue to GitHub. Chances are that it has already been implemented. If it hasn't - let's take a look at adding it in.
 
 #Documentation
 --------------
@@ -125,9 +127,9 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 - ** May.13.12**: 1.1.5 release
    - MOAR print options! You can now specify paper size, orientation,
      fit to width, page margings and gridlines for printing.
-   - Support for adding comments ot your worksheets
+   - Support for adding comments to your worksheets
    - bugfix for applying style to empty cells
-   - bugfix for parsing formula with multipe '='
+   - bugfix for parsing formula with multiple '='
 
 - ** May.3.12:**: 1.1.4 release
    - MOAR examples
