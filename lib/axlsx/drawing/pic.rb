@@ -198,7 +198,7 @@ module Axlsx
 
     # refactoring of swapping code, law of demeter be damned!
     def swap_anchor(new_anchor)
-      new_anchor.drawing.anchors.pop
+      new_anchor.drawing.anchors.delete(new_anchor)
       @anchor.drawing.anchors[@anchor.drawing.anchors.index(@anchor)] = new_anchor
       @anchor = new_anchor
     end
