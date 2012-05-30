@@ -84,6 +84,9 @@ module Axlsx
     Axlsx::col_ref(c_index).to_s << (r_index+1).to_s
   end
 
+  # performs the increadible feat of changing snake_case to CamelCase
+  # @param [String] s The snake case string to camelize
+  # @return [String]
   def self.camel(s="")
     s = s.capitalize.gsub(/_(.)/){ $1.upcase }
   end

@@ -13,14 +13,14 @@ module Axlsx
     # Available for type whole, decimal, date, time, textLength, list, custom
     # @see type
     # @return [String]
-    # @default nil
+    # default nil
     attr_reader :formula1
     
     # Formula2
     # Available for type whole, decimal, date, time, textLength
     # @see type
     # @return [String]
-    # @default nil
+    # default nil
     attr_reader :formula2
     
     # Allow Blank
@@ -29,7 +29,7 @@ module Axlsx
     # Available for type whole, decimal, date, time, textLength, list, custom
     # @see type
     # @return [Boolean]
-    # @default true
+    # default true
     attr_reader :allowBlank
     
     # Error Message
@@ -37,7 +37,7 @@ module Axlsx
     # Available for type whole, decimal, date, time, textLength, list, custom
     # @see type
     # @return [String]
-    # @default nil
+    # default nil
     attr_reader :error
     
     # Error Style (ST_DataValidationErrorStyle)
@@ -49,7 +49,7 @@ module Axlsx
     # Available for type whole, decimal, date, time, textLength, list, custom
     # @see type
     # @return [Symbol]
-    # @default :stop
+    # default :stop
     attr_reader :errorStyle
     
     # Error Title
@@ -57,7 +57,7 @@ module Axlsx
     # Available for type whole, decimal, date, time, textLength, list, custom
     # @see type
     # @return [String]
-    # @default nil
+    # default nil
     attr_reader :errorTitle
     
     # Operator (ST_DataValidationOperator)
@@ -74,7 +74,7 @@ module Axlsx
     # Available for type whole, decimal, date, time, textLength
     # @see type
     # @return [Symbol]
-    # @default nil
+    # default nil
     attr_reader :operator
     
     # Input prompt
@@ -82,7 +82,7 @@ module Axlsx
     # Available for type whole, decimal, date, time, textLength, list, custom
     # @see type
     # @return [String]
-    # @default nil
+    # default nil
     attr_reader :prompt
     
     # Prompt title
@@ -90,7 +90,7 @@ module Axlsx
     # Available for type whole, decimal, date, time, textLength, list, custom
     # @see type
     # @return [String]
-    # @default nil
+    # default nil
     attr_reader :promptTitle
     
     # Show drop down
@@ -99,7 +99,7 @@ module Axlsx
     # Available for type list
     # @see type
     # @return [Boolean]
-    # @default false
+    # default false
     attr_reader :showDropDown
     
     # Show error message
@@ -108,7 +108,7 @@ module Axlsx
     # Available for type whole, decimal, date, time, textLength, list, custom
     # @see type
     # @return [Boolean]
-    # @default false
+    # default false
     attr_reader :showErrorMessage
     
     # Show input message
@@ -116,14 +116,14 @@ module Axlsx
     # Available for type whole, decimal, date, time, textLength, list, custom
     # @see type
     # @return [Boolean]
-    # @default false
+    # default false
     attr_reader :showInputMessage
     
     # Range over which data validation is applied, in "A1:B2" format
     # Available for type whole, decimal, date, time, textLength, list, custom
     # @see type
     # @return [String]
-    # @default nil
+    # default nil
     attr_reader :sqref
     
     # The type (ST_DataValidationType) of data validation.
@@ -137,7 +137,7 @@ module Axlsx
     #  * time: Data validation which checks for time values satisfying the given condition.
     #  * whole: Data validation which checks for whole number values satisfying the given condition.
     # @return [Symbol]
-    # @default none
+    # default none
     attr_reader :type
     
     # Creates a new {DataValidation} object

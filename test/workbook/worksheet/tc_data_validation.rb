@@ -256,4 +256,10 @@ class TestDataValidation < Test::Unit::TestCase
       [@promptTitle='Be carful!'][@prompt='Only values from list'][@errorTitle='Wrong input'][@error='Only values from list']
       [@showErrorMessage='true'][@allowBlank='true'][@showInputMessage='true'][@showDropDown='true'][@type='list'][@errorStyle='stop']")
   end
+  
+  def test_empty_attributes
+     v = Axlsx::DataValidation.new
+     assert_equal(nil, v.send(:get_valid_attributes))
+
+  end
 end

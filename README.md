@@ -16,7 +16,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 
 **License**: MIT License
 
-**Latest Version**: 1.1.5
+**Latest Version**: 1.1.6
 
 **Ruby Version**: 1.8.7, 1.9.2, 1.9.3
 
@@ -24,13 +24,16 @@ Axlsx: Office Open XML Spreadsheet Generation
 
 **Rubinius Version**: rubinius 2.0.0dev * lower versions may run, this gem always tests against head.
 
-**Release Date**: May 13rd 2012
+**Release Date**: May 30th 2012
 
 If you are working in rails, or with active record see:
 http://github.com/randym/acts_as_xlsx
 
 There are guides for using axlsx and acts_as_xlsx here:
 [http://axlsx.blogspot.com](http://axlsx.blogspot.com)
+
+The examples directory contains a number of more specific examples as
+well.
 
 Synopsis
 --------
@@ -63,7 +66,8 @@ Feature List
 
 **9. Cell level style overrides for default and customized style objects
 
-**10. Support for formulas
+**10. Support for formulas, merging, row and column outlining as well as
+cell level input data validation.
 
 **11. Support for cell merging as well as column and row outline
 
@@ -107,6 +111,17 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
+- ** May.30.12**: 1.1.6 release
+   - data protection with passwords for sheets
+   - cell level input validators
+   - added support for two cell anchors for images
+   - test coverage now back up to 100%
+   - bugfix for merge cell sorting algorithm
+   - added fit_to method for page_setup to simplify managing witdh/height
+   - added ph (phonetics) and s (style) attributes for row.
+   - resolved all warnings generating from this gem.
+   - improved comment relationship management for multiple comments
+
 - ** May.13.12**: 1.1.5 release
    - MOAR print options! You can now specify paper size, orientation,
      fit to width, page margings and gridlines for printing.
@@ -158,6 +173,8 @@ Please see the {file:CHANGELOG.md} document for past release information.
 [moskrin](https://github.com/moskrin) - for keeping border creation on the edge.
 
 [scpike](https://github.com/scpike) - for keeping numbers fixed even when they are rational and a super clean implementation of conditional formatting.
+
+[janhuehne](https://github.com/janhuehne) - for working out the decoder ring and adding in cell level validation.
 
 #Copyright and License
 ----------

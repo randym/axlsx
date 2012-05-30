@@ -7,67 +7,67 @@ module Axlsx
     # If 1 or true then AutoFilters should not be allowed to operate when the sheet is protected.
     # If 0 or false then AutoFilters should be allowed to operate when the sheet is protected.
     # @return [Boolean]
-    # @default true 
+    # default true 
     attr_reader :auto_filter
 
     # If 1 or true then deleting columns should not be allowed when the sheet is protected. 
     # If 0 or false then deleting columns should be allowed when the sheet is protected.
     # @return [Boolean]
-    # @default true
+    # default true
     attr_reader :delete_columns
 
     # If 1 or true then deleting rows should not be allowed when the sheet is protected.
     # If 0 or false then deleting rows should be allowed when the sheet is protected.
     # @return [Boolean]
-    # @default true
+    # default true
     attr_reader :delete_rows
 
     # If 1 or true then formatting cells should not be allowed when the sheet is protected.
     # If 0 or false then formatting cells should be allowed when the sheet is protected.
     # @return [Boolean]
-    # @default true
+    # default true
     attr_reader :format_cells
 
     # If 1 or true then formatting columns should not be allowed when the sheet is protected.
     # If 0 or false then formatting columns should be allowed when the sheet is protected.
     # @return [Boolean]
-    # @default true
+    # default true
     attr_reader :format_columns
 
     # If 1 or true then formatting rows should not be allowed when the sheet is protected. 
     # If 0 or false then formatting rows should be allowed when the sheet is protected.
     # @return [Boolean]
-    # @default true
+    # default true
     attr_reader :format_rows
 
     # If 1 or true then inserting columns should not be allowed when the sheet is protected. 
     # If 0 or false then inserting columns should be allowed when the sheet is protected.
     # @return [Boolean]
-    # @default true
+    # default true
     attr_reader :insert_columns
 
     # If 1 or true then inserting hyperlinks should not be allowed when the sheet is protected. 
     # If 0 or false then inserting hyperlinks should be allowed when the sheet is protected.
     # @return [Boolean]
-    # @default true
+    # default true
     attr_reader :insert_hyperlinks
 
     # If 1 or true then inserting rows should not be allowed when the sheet is protected. 
     # If 0 or false then inserting rows should be allowed when the sheet is protected.
     # @return [Boolean]
-    # @default true
+    # default true
     attr_reader :insert_rows
 
     # If 1 or true then editing of objects should not be allowed when the sheet is protected. 
     # If 0 or false then objects are allowed to be edited when the sheet is protected.
     # @return [Boolean]
-    # @default false
+    # default false
     attr_reader :objects
 
     # If 1 or true then PivotTables should not be allowed to operate when the sheet is protected.
     # If 0 or false then PivotTables should be allowed to operate when the sheet is protected.
     # @return [Boolean]
-    # @default true
+    # default true
     attr_reader :pivot_tables
 
     # Specifies the salt which was prepended to the user-supplied password before it was hashed using the hashing algorithm
@@ -77,36 +77,36 @@ module Axlsx
     # If 1 or true then Scenarios should not be edited when the sheet is protected.
     # If 0 or false then Scenarios are allowed to be edited when the sheet is protected.
     # @return [Boolean]
-    # @default false
+    # default false
     attr_reader :scenarios
 
     # If 1 or true then selection of locked cells should not be allowed when the sheet is protected.
     # If 0 or false then selection of locked cells should be allowed when the sheet is protected.
     # @return [Boolean]
-    # @default false
+    # default false
     attr_reader :select_locked_cells
 
     # If 1 or true then selection of unlocked cells should not be allowed when the sheet is protected.
     # If 0 or false then selection of unlocked cells should be allowed when the sheet is protected.
     # @return [Boolean]
-    # @default false
+    # default false
     attr_reader :select_unlocked_cells
 
     # If 1 or true then the sheet is protected. 
     # If 0 or false then the sheet is not protected. 
     # @return [Boolean]
-    # @default true
+    # default true
     attr_reader :sheet
 
     # If 1 or true then sorting should not be allowed when the sheet is protected.
     # If 0 or false then sorting should be allowed when the sheet is protected.
     # @return [Boolean]
-    # @default true
+    # default true
     attr_reader :sort
 
     # Password hash
     # @return [String]
-    # @default nil
+    # default nil
     attr_reader :password
 
     # Creates a new SheetProtection instance
