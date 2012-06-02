@@ -33,9 +33,9 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       # macro attribute should be optional!
-      str << '<xdr:graphicFrame macro="">'
+      str << '<xdr:graphicFrame>'
       str << '<xdr:nvGraphicFramePr>'
-      str << '<xdr:cNvPr id="2" name="' << chart.title.text << '"/>'
+      str << '<xdr:cNvPr id="' << @anchor.drawing.worksheet.workbook.drawings.index(@anchor.drawing).to_s << '" name="' << chart.title.text << '"/>'
       str << '<xdr:cNvGraphicFramePr/>'
       str << '</xdr:nvGraphicFramePr>'
       str << '<xdr:xfrm>'
