@@ -95,6 +95,8 @@ The example listing is getting overly large to maintain here.
 If you are using Yard, you will be able to see the examples in line below.
 If not, please refer to the Please see the {file:examples/example.rb} file.
 
+![examples](https://github.com/randym/axlsx/raw/master/examples/examples.rb)
+
 {include:file:examples/example.rb}
 
 There is much, much more you can do with this gem. If you get stuck, grab me on IRC or submit an issue to GitHub. Chances are that it has already been implemented. If it hasn't - let's take a look at adding it in.

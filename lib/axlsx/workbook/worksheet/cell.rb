@@ -317,6 +317,10 @@ module Axlsx
       str << '</c>'
     end
 
+    def is_formula?
+      @type == :string && @value.start_with('=')
+    end
+
     private
 
     # Utility method for setting inline style attributes
