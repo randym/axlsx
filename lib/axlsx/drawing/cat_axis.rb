@@ -77,7 +77,7 @@ module Axlsx
       super(str)
       str << '<c:auto val="' << @auto.to_s << '"/>'
       str << '<c:lblAlgn val="' << @lblAlgn.to_s << '"/>'
-      str << '<c:lblOffset val="' << @lblOffset.to_s << '"/>'
+      str << '<c:lblOffset val="' << @lblOffset.to_i.to_s << '"/>'
       str << '<c:tickLblSkip val="' << @tickLblSkip.to_s << '"/>'
       str << '<c:tickMarkSkip val="' << @tickMarkSkip.to_s << '"/>'
       str << '</c:catAx>'
