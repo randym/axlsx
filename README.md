@@ -16,7 +16,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 
 **License**: MIT License
 
-**Latest Version**: 1.1.6
+**Latest Version**: 1.1.7
 
 **Ruby Version**: 1.8.7, 1.9.2, 1.9.3
 
@@ -24,7 +24,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 
 **Rubinius Version**: rubinius 2.0.0dev * lower versions may run, this gem always tests against head.
 
-**Release Date**: May 30th 2012
+**Release Date**: June 4th 2012
 
 If you are working in rails, or with active record see:
 http://github.com/randym/acts_as_xlsx
@@ -115,7 +115,10 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
-- ** May.30.12**: 1.1.6 release
+- **June.4.12**: 1.1.7 release
+   - fix chart rendering issue when label offset is specified as a
+     percentage in serialization.
+- **May.30.12**: 1.1.6 release
    - data protection with passwords for sheets
    - cell level input validators
    - added support for two cell anchors for images
@@ -126,14 +129,14 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
    - resolved all warnings generating from this gem.
    - improved comment relationship management for multiple comments
 
-- ** May.13.12**: 1.1.5 release
+- **May.13.12**: 1.1.5 release
    - MOAR print options! You can now specify paper size, orientation,
      fit to width, page margings and gridlines for printing.
    - Support for adding comments to your worksheets
    - bugfix for applying style to empty cells
    - bugfix for parsing formula with multiple '='
 
-- ** May.3.12:**: 1.1.4 release
+- **May.3.12:**: 1.1.4 release
    - MOAR examples
    - added outline level for rows and columns
    - rebuild of numeric and axis data sources for charts
