@@ -28,7 +28,7 @@ module Axlsx
 
 
     # regex for validating label offset
-    LBL_OFFSET_REGEX = /0*(([0-9])|([1-9][0-9])|([1-9][0-9][0-9])|1000)%/
+    LBL_OFFSET_REGEX = /0*(([0-9])|([1-9][0-9])|([1-9][0-9][0-9])|1000)/
 
     # Creates a new CatAxis object
     # @param [Integer] axId the id of this axis. Inherited
@@ -46,7 +46,7 @@ module Axlsx
       @tickMarkSkip = 1
       self.auto = 1
       self.lblAlgn = :ctr
-      self.lblOffset = "100%"
+      self.lblOffset = "100"
       super(axId, crossAx, options)
     end
 

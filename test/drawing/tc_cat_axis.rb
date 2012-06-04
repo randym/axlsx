@@ -10,7 +10,7 @@ class TestCatAxis < Test::Unit::TestCase
   def test_initialization
     assert_equal(@axis.auto, 1, "axis auto default incorrect")
     assert_equal(@axis.lblAlgn, :ctr, "label align default incorrect")
-    assert_equal(@axis.lblOffset, "100%", "label offset default incorrect")
+    assert_equal(@axis.lblOffset, "100", "label offset default incorrect")
   end
 
   def test_auto
@@ -24,8 +24,8 @@ class TestCatAxis < Test::Unit::TestCase
   end
 
   def test_lblOffset
-    assert_raise(ArgumentError, "requires valid label offset") { @axis.lblOffset = 100 }
-    assert_nothing_raised("accepts valid label offset") { @axis.lblOffset = "20%" }
+    assert_raise(ArgumentError, "requires valid label offset") { @axis.lblOffset = 'foo' }
+    assert_nothing_raised("accepts valid label offset") { @axis.lblOffset = "20" }
   end
 
 end
