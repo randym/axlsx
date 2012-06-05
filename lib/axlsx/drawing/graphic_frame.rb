@@ -35,7 +35,7 @@ module Axlsx
       # macro attribute should be optional!
       str << '<xdr:graphicFrame>'
       str << '<xdr:nvGraphicFramePr>'
-      str << '<xdr:cNvPr id="' << @anchor.drawing.worksheet.workbook.drawings.index(@anchor.drawing).to_s << '" name="' << chart.title.text << '"/>'
+      str << '<xdr:cNvPr id="' << @anchor.drawing.index.to_s << '" name="' << 'item_' << @anchor.drawing.index.to_s << '"/>'
       str << '<xdr:cNvGraphicFramePr/>'
       str << '</xdr:nvGraphicFramePr>'
       str << '<xdr:xfrm>'
