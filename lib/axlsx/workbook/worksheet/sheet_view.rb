@@ -6,6 +6,19 @@ module Axlsx
   # @see Worksheet#sheet_view
   class SheetView
     
+    # instance values that must be serialized as their own elements - e.g. not attributes.
+    CHILD_ELEMENTS = [ :pane ]
+    
+    # The pane object for the sheet view
+    # @return [Pane]
+    # @see [Pane]
+    def pane
+      @pane ||= Pane.new
+      yield @pane if block_given?
+      @pane
+    end
+    
+    
     # Color Id
     # Index to the color value for row/column
     # text headings and gridlines. This is an 
@@ -241,7 +254,7 @@ module Axlsx
     # @option options [Integer] zoom_scale_sheet_layout_view Zoom Scale Page Break Preview
     def initialize(options={})
       #defaults
-      @color_id = @top_left_cell = nil
+      @color_id = @top_left_cell = @pane = nil
       @right_to_left = @show_formulas = @show_outline_symbols = @show_white_space = @tab_selected = false
       @default_grid_color = @show_grid_lines = @show_row_col_headers = @show_ruler = @show_zeros = @window_protection = true
       @zoom_scale = 100
@@ -340,9 +353,9 @@ module Axlsx
     def to_xml_string(str = '')
       str << '<sheetViews>'
       str << '<sheetView '
-      str << instance_values.map { |key, value| '' << key.gsub(/_(.)/){ $1.upcase } << %{="#{value}"} }.join(' ')
-#      str << instance_values.map { |key, value| '' << key << '="' << value.to_s << '"' unless CHILD_ELEMENTS.include?(key.to_sym) }.join(' ')
+      str << instance_values.map { |key, value| '' << key.gsub(/_(.)/){ $1.upcase } << %{="#{value}"} unless CHILD_ELEMENTS.include?(key.to_sym) }.join(' ')
       str << '>'
+      @pane.to_xml_string(str) if @pane
       str << '<selection activeCell="A1" sqref="A1" />'
       str << '</sheetView>'
       str << '</sheetViews>'
