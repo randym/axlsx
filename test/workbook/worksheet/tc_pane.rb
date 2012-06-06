@@ -75,7 +75,6 @@ class TestPane < Test::Unit::TestCase
     assert_equal(@pane.top_left_cell, "A2")
   end
   
-  
   def test_to_xml
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet :name => "sheetview"
