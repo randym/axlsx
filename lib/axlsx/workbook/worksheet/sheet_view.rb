@@ -7,7 +7,7 @@ module Axlsx
   class SheetView
     
     # instance values that must be serialized as their own elements - e.g. not attributes.
-    CHILD_ELEMENTS = [ :pane ]
+    CHILD_ELEMENTS = [ :pane, :selections ]
     
     # The pane object for the sheet view
     # @return [Pane]
@@ -259,6 +259,7 @@ module Axlsx
       @default_grid_color = @show_grid_lines = @show_row_col_headers = @show_ruler = @show_zeros = true
       @zoom_scale = 100
       @zoom_scale_normal = @zoom_scale_page_layout_view = @zoom_scale_sheet_layout_view = @workbook_view_id = 0
+      @selections = {}
       
       # write options to instance variables
       options.each do |o|
@@ -266,6 +267,14 @@ module Axlsx
       end
     end
     
+    
+    # Adds a new selection
+    # param [Symbol] pane
+    # param [Hash] options
+    # return [Selection]
+    def add_selection(pane, options = {})
+      @selections[pane] = Selection.new(options.merge(:pane => pane))
+    end
     
     # @see color_id
     def color_id=(v); Axlsx::validate_unsigned_int(v); @color_id = v end
@@ -356,6 +365,9 @@ module Axlsx
       str << instance_values.map { |key, value| '' << key.gsub(/_(.)/){ $1.upcase } << %{="#{value}"} unless CHILD_ELEMENTS.include?(key.to_sym) }.join(' ')
       str << '>'
       @pane.to_xml_string(str) if @pane
+      @selections.each do |key, selection|
+        selection.to_xml_string(str)
+      end
       str << '<selection activeCell="A1" sqref="A1" />'
       str << '</sheetView>'
       str << '</sheetViews>'
