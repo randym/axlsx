@@ -163,7 +163,7 @@ module Axlsx
     # to a workbookView element in the bookViews collection.
     # @see type
     # @return [Integer] 
-    # @default nil
+    # @default 0
     attr_reader :workbook_view_id
     
     
@@ -241,11 +241,11 @@ module Axlsx
     # @option options [Integer] zoom_scale_sheet_layout_view Zoom Scale Page Break Preview
     def initialize(options={})
       #defaults
-      @color_id = @top_left_cell = @workbook_view_id = nil
-      @right_to_left = @show_formulas = @show_outline_symbol = 0@show_white_space = @tab_selected = false
+      @color_id = @top_left_cell = nil
+      @right_to_left = @show_formulas = @show_outline_symbols = @show_white_space = @tab_selected = false
       @default_grid_color = @show_grid_lines = @show_row_col_headers = @show_ruler = @show_zeros = @window_protection = true
       @zoom_scale = 100
-      @zoom_scale_normal = @zoom_scale_page_layout_view = @zoom_scale_sheet_layout_view = 0
+      @zoom_scale_normal = @zoom_scale_page_layout_view = @zoom_scale_sheet_layout_view = @workbook_view_id = 0
       
       # write options to instance variables
       options.each do |o|
@@ -318,16 +318,20 @@ module Axlsx
     def workbook_view_id=(v); Axlsx::validate_unsigned_int(v); @workbook_view_id = v end
     
     
+    # @see zoom_scale
+    def zoom_scale=(v); Axlsx::validate_scale_0_10_400(v); @zoom_scale = v end
+    
+    
     # @see zoom_scale_normal
-    def zoom_scale_normal=(v); Axlsx::validate_scale_10_400(v); @zoom_scale_normal = v end
+    def zoom_scale_normal=(v); Axlsx::validate_scale_0_10_400(v); @zoom_scale_normal = v end
     
     
     # @see zoom_scale_page_layout_view
-    def zoom_scale_page_layout_view=(v); Axlsx::validate_scale_10_400(v); @zoom_scale_page_layout_view = v end
+    def zoom_scale_page_layout_view=(v); Axlsx::validate_scale_0_10_400(v); @zoom_scale_page_layout_view = v end
     
     
     # @see zoom_scale_sheet_layout_view
-    def zoom_scale_sheet_layout_view=(v); Axlsx::validate_scale_10_400(v); @zoom_scale_sheet_layout_view = v end
+    def zoom_scale_sheet_layout_view=(v); Axlsx::validate_scale_0_10_400(v); @zoom_scale_sheet_layout_view = v end
     
     
     # Serializes the data validation
@@ -336,9 +340,11 @@ module Axlsx
     def to_xml_string(str = '')
       str << '<sheetViews>'
       str << '<sheetView '
-      str << instance_values.map { |key, value| '' << key.camelize(:lower) << '="' << value.to_s << '"' }.join(' ')
+      str << instance_values.map { |key, value| '' << key.gsub(/_(.)/){ $1.upcase } << %{="#{value}"} }.join(' ')
 #      str << instance_values.map { |key, value| '' << key << '="' << value.to_s << '"' unless CHILD_ELEMENTS.include?(key.to_sym) }.join(' ')
-      str << '></sheetView>'
+      str << '>'
+      str << '<selection activeCell="A1" sqref="A1" />'
+      str << '</sheetView>'
       str << '</sheetViews>'
     end
   end
