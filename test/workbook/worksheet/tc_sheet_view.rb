@@ -203,20 +203,21 @@ class TestSheetView < Test::Unit::TestCase
       [@zoomScale='100'][@workbookViewId='0'][@zoomScaleSheetLayoutView='0'][@zoomScalePageLayoutView='0']
       [@zoomScaleNormal='0'][@view='page_break_preview']").size)
     
-    assert doc.xpath("//xmlns:worksheet/xmlns:sheetViews/xmlns:sheetView[@topLeftCell=''][@colorId='']
+    assert_equal(1, doc.xpath("//xmlns:worksheet/xmlns:sheetViews/xmlns:sheetView[@topLeftCell=''][@colorId='']
         [@tabSelected='false'][@showWhiteSpace='false'][@showOutlineSymbols='false'][@showFormulas='false']
         [@rightToLeft='false'][@windowProtection='false'][@showZeros='true'][@showRuler='true']
         [@showRowColHeaders='true'][@showGridLines='true'][@defaultGridColor='true']
         [@zoomScale='100'][@workbookViewId='0'][@zoomScaleSheetLayoutView='0'][@zoomScalePageLayoutView='0']
-        [@zoomScaleNormal='0'][@view='page_break_preview']")
+        [@zoomScaleNormal='0'][@view='page_break_preview']").size)
   end
   
   def test_to_xml_string_show_selection
     p = Axlsx::Package.new
-    @ws = p.workbook.add_worksheet :name => "sheetview"
-    
-    doc = Nokogiri::XML(@ws.to_xml_string)
-    assert_equal(1, doc.xpath('//xmlns:worksheet/xmlns:sheetViews/xmlns:sheetView/xmlns:selection[@activeCell="A1"]').size)
-    assert_equal(1, doc.xpath('//xmlns:worksheet/xmlns:sheetViews/xmlns:sheetView/xmlns:selection[@sqref="A1"]').size)
+    sheet_view = p.workbook.add_worksheet(:name => "sheetview") do |ws|
+      ws.sheet_view { |sv| sv.view = :page_break_preview }
+    end.sheet_view
+    doc = Nokogiri::XML(sheet_view.to_xml_string)
+    assert_equal(1, doc.xpath('//selection[@activeCell="A1"]').size)
+    assert_equal(1, doc.xpath('//selection[@sqref="A1"]').size)
   end
 end

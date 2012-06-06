@@ -82,24 +82,7 @@ class TestPane < Test::Unit::TestCase
   end
   
   def test_to_xml
-    p = Axlsx::Package.new
-    @ws = p.workbook.add_worksheet :name => "sheetview"
-    @ws.sheet_view do |vs|
-      vs.pane do |p|
-        p.active_pane = :top_left
-        p.state = :frozen_split
-        p.x_split = 255
-        p.y_split = 563
-        p.top_left_cell = 'B5'
-      end
-    end
-    
-    doc = Nokogiri::XML.parse(@ws.to_xml_string)
-    
-    assert_equal(1, doc.xpath("//xmlns:worksheet/xmlns:sheetViews/xmlns:sheetView/xmlns:pane[@ySplit='563']
-      [@xSplit='255'][@topLeftCell='B5'][@state='frozenSplit'][@activePane='topLeftCell']").size)
-    
-    assert doc.xpath(  "//xmlns:worksheet/xmlns:sheetViews/xmlns:sheetView/xmlns:pane[@ySplit='563']
-      [@xSplit='255'][@topLeftCell='B5'][@state='frozenSplit'][@activePane='topLeftCell']")
+    doc = Nokogiri::XML.parse(@pane.to_xml_string)
+    assert_equal(1, doc.xpath("//pane[@ySplit=2][@xSplit='2'][@topLeftCell='A2'][@state='frozen'][@activePane='bottomLeft']").size)
   end
 end
