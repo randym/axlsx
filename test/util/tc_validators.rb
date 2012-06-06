@@ -141,6 +141,21 @@ class TestValidators < Test::Unit::TestCase
     assert_raise(ArgumentError) { Axlsx.validate_data_validation_error_style :other_symbol }
     assert_raise(ArgumentError) { Axlsx.validate_data_validation_error_style 'page_layout' }
     assert_raise(ArgumentError) { Axlsx.validate_data_validation_error_style 0 }
+    
+    #active_pane_type
+    [:bottom_left, :bottom_right, :top_left, :top_right].each do |sym|
+      assert_nothing_raised { Axlsx.validate_active_pane_type sym }
+    end
+    assert_raise(ArgumentError) { Axlsx.validate_active_pane_type :other_symbol }
+    assert_raise(ArgumentError) { Axlsx.validate_active_pane_type 'bottom_left' }
+    assert_raise(ArgumentError) { Axlsx.validate_active_pane_type 0 }
+    
+    #split_state_type
+    [:frozen, :frozen_split, :split].each do |sym|
+      assert_nothing_raised { Axlsx.validate_split_state_type sym }
+    end
+    assert_raise(ArgumentError) { Axlsx.validate_split_state_type :other_symbol }
+    assert_raise(ArgumentError) { Axlsx.validate_split_state_type 'frozen_split' }
+    assert_raise(ArgumentError) { Axlsx.validate_split_state_type 0 }
   end
 end
-

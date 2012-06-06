@@ -248,4 +248,18 @@ module Axlsx
   def self.validate_sheet_view_type(v)
     RestrictionValidator.validate :sheet_view_type, [:normal, :page_break_preview, :page_layout], v
   end
+  
+  # Requires that the value is a valid active pane type.
+  # valid types must be one of bottom_left, bottom_right, top_left, top_right
+  # @param [Any] v The value validated
+  def self.validate_active_pane_type(v)
+    RestrictionValidator.validate :active_pane_type, [:bottom_left, :bottom_right, :top_left, :top_right], v
+  end
+  
+  # Requires that the value is a valid split state type.
+  # valid types must be one of frozen, frozen_split, split
+  # @param [Any] v The value validated
+  def self.validate_split_state_type(v)
+    RestrictionValidator.validate :split_state_type, [:frozen, :frozen_split, :split], v
+  end
 end
