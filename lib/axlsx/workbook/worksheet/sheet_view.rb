@@ -2,7 +2,7 @@
 module Axlsx
   # View options for a worksheet.
   #
-  # @note The recommended way to manage data validations is via Worksheet#sheet_view
+  # @note The recommended way to manage the sheet view is via Worksheet#sheet_view
   # @see Worksheet#sheet_view
   class SheetView
     
