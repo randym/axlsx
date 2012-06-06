@@ -217,13 +217,6 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(doc.xpath('//xmlns:worksheet/xmlns:sheetViews/xmlns:sheetView[@showGridLines="false"]').size, 1)
   end
 
-
-  def test_to_xml_string_show_selection
-    doc = Nokogiri::XML(@ws.to_xml_string)
-    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:sheetViews/xmlns:sheetView/xmlns:selection[@activeCell="A1"]').size, 1)
-    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:sheetViews/xmlns:sheetView/xmlns:selection[@sqref="A1"]').size, 1)
-  end
-
   def test_to_xml_string_auto_fit_data
     @ws.add_row [1, "two"]
     doc = Nokogiri::XML(@ws.to_xml_string)
