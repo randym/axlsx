@@ -252,7 +252,7 @@ module Axlsx
   # Requires that the value is a valid active pane type.
   # valid types must be one of bottom_left, bottom_right, top_left, top_right
   # @param [Any] v The value validated
-  def self.validate_active_pane_type(v)
+  def self.validate_pane_type(v)
     RestrictionValidator.validate :active_pane_type, [:bottom_left, :bottom_right, :top_left, :top_right], v
   end
   

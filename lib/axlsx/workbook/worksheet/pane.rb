@@ -101,7 +101,7 @@ module Axlsx
     
     
     # @see active_pane
-    def active_pane=(v); Axlsx::validate_active_pane_type(v); @active_pane = v end
+    def active_pane=(v); Axlsx::validate_pane_type(v); @active_pane = v end
     
     
     # @see state

@@ -144,11 +144,11 @@ class TestValidators < Test::Unit::TestCase
     
     #active_pane_type
     [:bottom_left, :bottom_right, :top_left, :top_right].each do |sym|
-      assert_nothing_raised { Axlsx.validate_active_pane_type sym }
+      assert_nothing_raised { Axlsx.validate_pane_type sym }
     end
-    assert_raise(ArgumentError) { Axlsx.validate_active_pane_type :other_symbol }
-    assert_raise(ArgumentError) { Axlsx.validate_active_pane_type 'bottom_left' }
-    assert_raise(ArgumentError) { Axlsx.validate_active_pane_type 0 }
+    assert_raise(ArgumentError) { Axlsx.validate_pane_type :other_symbol }
+    assert_raise(ArgumentError) { Axlsx.validate_pane_type 'bottom_left' }
+    assert_raise(ArgumentError) { Axlsx.validate_pane_type 0 }
     
     #split_state_type
     [:frozen, :frozen_split, :split].each do |sym|
