@@ -4,13 +4,14 @@ require 'tc_helper.rb'
 class TestPane < Test::Unit::TestCase
   def setup
     #inverse defaults for booleans
-    @nil_options = { :active_pane => :bottom_left, :state => :frozen, :x_split => 2, :y_split => 2, :top_left_cell => 'A2' }
+    @nil_options = { :active_pane => :bottom_left, :state => :frozen, :top_left_cell => 'A2' }
+    @int_0_options = { :x_split => 2, :y_split => 2 }
     
     @string_options = { :top_left_cell => 'A2' }
     @integer_options = { :x_split => 2, :y_split => 2 }
     @symbol_options = { :active_pane => :bottom_left, :state => :frozen }
     
-    @options = @nil_options
+    @options = @nil_options.merge(@int_0_options)
     
     @pane = Axlsx::Pane.new(@options)
   end
@@ -20,6 +21,11 @@ class TestPane < Test::Unit::TestCase
     
     @nil_options.each do |key, value|
       assert_equal(nil, pane.send(key.to_sym), "initialized default #{key} should be nil")
+      assert_equal(value, @pane.send(key.to_sym), "initialized options #{key} should be #{value}")
+    end
+    
+    @int_0_options.each do |key, value|
+      assert_equal(0, pane.send(key.to_sym), "initialized default #{key} should be 0")
       assert_equal(value, @pane.send(key.to_sym), "initialized options #{key} should be #{value}")
     end
   end

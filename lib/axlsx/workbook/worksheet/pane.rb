@@ -68,7 +68,7 @@ module Axlsx
     # of columns visible in the top pane.
     # @see type
     # @return [Integer]
-    # @default nil
+    # @default 0
     attr_reader :x_split
     
     
@@ -78,7 +78,7 @@ module Axlsx
     # of rows visible in the left pane.
     # @see type
     # @return [Integer]
-    # @default nil
+    # @default 0
     attr_reader :y_split
     
     
@@ -90,7 +90,8 @@ module Axlsx
     # @option options [Integer] y_split Vertical Split Position
     def initialize(options={})
       #defaults
-      @active_pane = @state = @top_left_cell = @x_split = @y_split = nil
+      @active_pane = @state = @top_left_cell = nil
+      @x_split = @y_split = 0
       
       # write options to instance variables
       options.each do |o|
