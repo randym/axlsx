@@ -16,6 +16,15 @@ module Axlsx
       yield @sheet_protection if block_given?
       @sheet_protection
     end
+    
+    # The sheet view object for this worksheet
+    # @return [SheetView]
+    # @see [SheetView]
+    def sheet_view
+      @sheet_view ||= SheetView.new
+      yield @sheet_view if block_given?
+      @sheet_view
+    end
 
     # The workbook that owns this worksheet
     # @return [Workbook]
@@ -51,14 +60,21 @@ module Axlsx
 
     # Indicates if the worksheet should show gridlines or not
     # @return Boolean
-    attr_reader :show_gridlines
-
+    # @deprecated Use {SheetView#show_grid_lines} instead.
+    def show_gridlines
+      warn('axlsx::DEPRECIATED: Worksheet#show_gridlines has been depreciated. This value can get over SheetView#show_grid_lines.')
+      sheet_view.show_grid_lines
+    end
 
     # Indicates if the worksheet is selected in the workbook
     # It is possible to have more than one worksheet selected, however it might cause issues
     # in some older versions of excel when using copy and paste.
     # @return Boolean
-    attr_reader :selected
+    # @deprecated Use {SheetView#tab_selected} instead.
+    def selected
+      warn('axlsx::DEPRECIATED: Worksheet#selected has been depreciated. This value can get over SheetView#tab_selected.')
+      sheet_view.tab_selected
+    end
 
     # Indicates if the worksheet will be fit by witdh or height to a specific number of pages.
     # To alter the width or height for page fitting, please use page_setup.fit_to_widht or page_setup.fit_to_height.
@@ -160,14 +176,12 @@ module Axlsx
       self.workbook = wb
       @workbook.worksheets << self
       @page_marging = @page_setup = @print_options = nil
-      @drawing = @page_margins = @auto_filter = @sheet_protection = nil
+      @drawing = @page_margins = @auto_filter = @sheet_protection = @sheet_view = nil
       @merged_cells = []
       @auto_fit_data = []
       @conditional_formattings = []
       @data_validations = []
       @comments = Comments.new(self)
-      @selected = false
-      @show_gridlines = true
       self.name = "Sheet" + (index+1).to_s
       @page_margins = PageMargins.new options[:page_margins] if options[:page_margins]
       @page_setup = PageSetup.new options[:page_setup]  if options[:page_setup]
@@ -248,16 +262,20 @@ module Axlsx
     # Indicates if gridlines should be shown in the sheet.
     # This is true by default.
     # @return [Boolean]
+    # @deprecated Use {SheetView#show_grid_lines=} instead.
     def show_gridlines=(v)
+      warn('axlsx::DEPRECIATED: Worksheet#show_gridlines= has been depreciated. This value can be set over SheetView#show_grid_lines=.')
       Axlsx::validate_boolean v
-      @show_gridlines = v
+      sheet_view.show_grid_lines = v
     end
 
     # @see selected
     # @return [Boolean]
+    # @deprecated Use {SheetView#tab_selected=} instead.
     def selected=(v)
+      warn('axlsx::DEPRECIATED: Worksheet#selected= has been depreciated. This value can be set over SheetView#tab_selected=.')
       Axlsx::validate_boolean v
-      @selected = v
+      sheet_view.tab_selected = v
     end
 
 
@@ -494,8 +512,7 @@ module Axlsx
       str.concat "<worksheet xmlns=\"%s\" xmlns:r=\"%s\">" % [XML_NS, XML_NS_R]
       str.concat "<sheetPr><pageSetUpPr fitToPage=\"%s\"></pageSetUpPr></sheetPr>" % fit_to_page if fit_to_page
       str.concat "<dimension ref=\"%s\"></dimension>" % dimension unless rows.size == 0
-      str.concat "<sheetViews><sheetView tabSelected='%s' workbookViewId='0' showGridLines='%s'><selection activeCell=\"A1\" sqref=\"A1\"/></sheetView></sheetViews>" % [@selected, show_gridlines]
-
+      @sheet_view.to_xml_string(str) if @sheet_view
       if @column_info.size > 0
         str << "<cols>"
         @column_info.each { |col| col.to_xml_string(str) }
