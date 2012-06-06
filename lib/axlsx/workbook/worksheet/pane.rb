@@ -128,13 +128,9 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       str << '<pane '
-      instance_values.map { |key, value| '' << key.gsub(/_(.)/){ $1.upcase } << %{="#{format_value(key, value)}"} unless value.nil? }.join(' ')
+      str << instance_values.map { |key, value| '' << key.gsub(/_(.)/){ $1.upcase } << 
+        %{="#{[:active_pane, :state].include?(key.to_sym) ? value.to_s.gsub(/_(.)/){ $1.upcase } : value}"} unless value.nil? }.join(' ')
       str << '/>'
     end
-  end
-  
-private
-  def format_value(key, value)
-    [:active_pane, :state].include?(key) ? value.gsub(/_(.)/){ $1.upcase } : value
   end
 end
