@@ -6,7 +6,7 @@ class TestSheetView < Test::Unit::TestCase
     #inverse defaults for booleans
     @boolean_options = { :right_to_left => true, :show_formulas => true, :show_outline_symbols => true, 
       :show_white_space => true, :tab_selected => true, :default_grid_color => false, :show_grid_lines => false,
-      :show_row_col_headers => false, :show_ruler => false, :show_zeros => false, :window_protection => false }
+      :show_row_col_headers => false, :show_ruler => false, :show_zeros => false, :window_protection => true }
     @symbol_options = { :view => :page_break_preview }
     @nil_options = { :color_id => 2, :top_left_cell => 'A2' }
     @int_0 = { :zoom_scale_normal => 100, :zoom_scale_page_layout_view => 100, :zoom_scale_sheet_layout_view => 100, :workbook_view_id => 2 }
@@ -198,14 +198,14 @@ class TestSheetView < Test::Unit::TestCase
     
     assert_equal(1, doc.xpath("//xmlns:worksheet/xmlns:sheetViews/xmlns:sheetView[@topLeftCell=''][@colorId='']
       [@tabSelected='false'][@showWhiteSpace='false'][@showOutlineSymbols='false'][@showFormulas='false']
-      [@rightToLeft='false'][@windowProtection='true'][@showZeros='true'][@showRuler='true']
+      [@rightToLeft='false'][@windowProtection='false'][@showZeros='true'][@showRuler='true']
       [@showRowColHeaders='true'][@showGridLines='true'][@defaultGridColor='true']
       [@zoomScale='100'][@workbookViewId='0'][@zoomScaleSheetLayoutView='0'][@zoomScalePageLayoutView='0']
       [@zoomScaleNormal='0'][@view='page_break_preview']").size)
     
     assert doc.xpath("//xmlns:worksheet/xmlns:sheetViews/xmlns:sheetView[@topLeftCell=''][@colorId='']
         [@tabSelected='false'][@showWhiteSpace='false'][@showOutlineSymbols='false'][@showFormulas='false']
-        [@rightToLeft='false'][@windowProtection='true'][@showZeros='true'][@showRuler='true']
+        [@rightToLeft='false'][@windowProtection='false'][@showZeros='true'][@showRuler='true']
         [@showRowColHeaders='true'][@showGridLines='true'][@defaultGridColor='true']
         [@zoomScale='100'][@workbookViewId='0'][@zoomScaleSheetLayoutView='0'][@zoomScalePageLayoutView='0']
         [@zoomScaleNormal='0'][@view='page_break_preview']")

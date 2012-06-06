@@ -255,8 +255,8 @@ module Axlsx
     def initialize(options={})
       #defaults
       @color_id = @top_left_cell = @pane = nil
-      @right_to_left = @show_formulas = @show_outline_symbols = @show_white_space = @tab_selected = false
-      @default_grid_color = @show_grid_lines = @show_row_col_headers = @show_ruler = @show_zeros = @window_protection = true
+      @right_to_left = @show_formulas = @show_outline_symbols = @show_white_space = @tab_selected = @window_protection = false
+      @default_grid_color = @show_grid_lines = @show_row_col_headers = @show_ruler = @show_zeros = true
       @zoom_scale = 100
       @zoom_scale_normal = @zoom_scale_page_layout_view = @zoom_scale_sheet_layout_view = @workbook_view_id = 0
       
