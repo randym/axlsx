@@ -67,7 +67,7 @@ class TestSheetView < Test::Unit::TestCase
   end
   
   def test_integer_attribute_validation
-    @symbol_options.each do |key, value|
+    @integer_options.each do |key, value|
       assert_raise(ArgumentError, "#{key} must be integer") { @sv.send("#{key}=".to_sym, "foo") }
       assert_nothing_raised { @sv.send("#{key}=".to_sym, value) }
     end
