@@ -128,6 +128,13 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
+      if @state == :frozen && @top_left_cell.nil?
+        row = @y_split || 0
+        column = @x_split || 0
+        
+        @top_left_cell = "#{('A'..'ZZ').to_a[column]}#{row+1}"
+      end
+      
       str << '<pane '
       str << instance_values.map { |key, value| '' << key.gsub(/_(.)/){ $1.upcase } << 
         %{="#{[:active_pane, :state].include?(key.to_sym) ? value.to_s.gsub(/_(.)/){ $1.upcase } : value}"} unless value.nil? }.join(' ')
