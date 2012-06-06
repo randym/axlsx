@@ -109,7 +109,7 @@ module Axlsx
   end
 
   # Requires that the value is an integer ranging from 10 to 400.
-  def self.validate_page_scale(v)
+  def self.validate_scale_10_400(v)
     DataTypeValidator.validate "page_scale", [Fixnum, Integer], v, lambda { |arg| arg >= 10 && arg <= 400 }
   end
 
@@ -237,5 +237,12 @@ module Axlsx
   # @param [Any] v The value validated
   def self.validate_data_validation_type(v)
     RestrictionValidator.validate :data_validation_type, [:custom, :data, :decimal, :list, :none, :textLength, :time, :whole], v
+  end
+  
+  # Requires that the value is a valid sheet view type.
+  # valid types must be one of normal, page_break_preview, page_layout
+  # @param [Any] v The value validated
+  def self.validate_sheet_view_type(v)
+    RestrictionValidator.validate :sheet_view_type, [:normal, :page_break_preview, :page_layout], v
   end
 end

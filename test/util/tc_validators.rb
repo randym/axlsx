@@ -84,13 +84,13 @@ class TestValidators < Test::Unit::TestCase
     assert_raise(ArgumentError) { Axlsx.validate_number_with_unit "-29cm" }
 
     #page_scale
-    assert_nothing_raised { Axlsx.validate_page_scale 10 }
-    assert_nothing_raised { Axlsx.validate_page_scale 100 }
-    assert_nothing_raised { Axlsx.validate_page_scale 400 }
-    assert_raise(ArgumentError) { Axlsx.validate_page_scale 9 }
-    assert_raise(ArgumentError) { Axlsx.validate_page_scale 10.0 }
-    assert_raise(ArgumentError) { Axlsx.validate_page_scale 400.1 }
-    assert_raise(ArgumentError) { Axlsx.validate_page_scale "99" }
+    assert_nothing_raised { Axlsx.validate_scale_10_400 10 }
+    assert_nothing_raised { Axlsx.validate_scale_10_400 100 }
+    assert_nothing_raised { Axlsx.validate_scale_10_400 400 }
+    assert_raise(ArgumentError) { Axlsx.validate_scale_10_400 9 }
+    assert_raise(ArgumentError) { Axlsx.validate_scale_10_400 10.0 }
+    assert_raise(ArgumentError) { Axlsx.validate_scale_10_400 400.1 }
+    assert_raise(ArgumentError) { Axlsx.validate_scale_10_400 "99" }
 
     #page_orientation
     assert_nothing_raised { Axlsx.validate_page_orientation :default }

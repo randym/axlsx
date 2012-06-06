@@ -79,7 +79,7 @@ module Axlsx
     # @see paper_width
     def paper_width=(v); Axlsx::validate_number_with_unit(v); @paper_width = v; end
     # @see scale
-    def scale=(v); Axlsx::validate_page_scale(v); @scale = v; end
+    def scale=(v); Axlsx::validate_scale_10_400(v); @scale = v; end
     
     # convenience method to achieve sanity when setting fit_to_width and fit_to_height 
     # as they both default to 1 if only their counterpart is specified.
