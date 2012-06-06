@@ -83,7 +83,7 @@ class TestValidators < Test::Unit::TestCase
     assert_raise(ArgumentError) { Axlsx.validate_number_with_unit "mm" }
     assert_raise(ArgumentError) { Axlsx.validate_number_with_unit "-29cm" }
 
-    #page_scale
+    #scale_10_400
     assert_nothing_raised { Axlsx.validate_scale_10_400 10 }
     assert_nothing_raised { Axlsx.validate_scale_10_400 100 }
     assert_nothing_raised { Axlsx.validate_scale_10_400 400 }
@@ -91,7 +91,17 @@ class TestValidators < Test::Unit::TestCase
     assert_raise(ArgumentError) { Axlsx.validate_scale_10_400 10.0 }
     assert_raise(ArgumentError) { Axlsx.validate_scale_10_400 400.1 }
     assert_raise(ArgumentError) { Axlsx.validate_scale_10_400 "99" }
-
+    
+    #scale_0_10_400
+    assert_nothing_raised { Axlsx.validate_scale_0_10_400 0 }
+    assert_nothing_raised { Axlsx.validate_scale_0_10_400 10 }
+    assert_nothing_raised { Axlsx.validate_scale_0_10_400 100 }
+    assert_nothing_raised { Axlsx.validate_scale_0_10_400 400 }
+    assert_raise(ArgumentError) { Axlsx.validate_scale_0_10_400 9 }
+    assert_raise(ArgumentError) { Axlsx.validate_scale_0_10_400 10.0 }
+    assert_raise(ArgumentError) { Axlsx.validate_scale_0_10_400 400.1 }
+    assert_raise(ArgumentError) { Axlsx.validate_scale_0_10_400 "99" }
+    
     #page_orientation
     assert_nothing_raised { Axlsx.validate_page_orientation :default }
     assert_nothing_raised { Axlsx.validate_page_orientation :landscape }
@@ -99,6 +109,38 @@ class TestValidators < Test::Unit::TestCase
     assert_raise(ArgumentError) { Axlsx.validate_page_orientation nil }
     assert_raise(ArgumentError) { Axlsx.validate_page_orientation 1 }
     assert_raise(ArgumentError) { Axlsx.validate_page_orientation "landscape" }
+    
+    #data_validation_error_style
+    [:information, :stop, :warning].each do |sym|
+      assert_nothing_raised { Axlsx.validate_data_validation_error_style sym }
+    end
+    assert_raise(ArgumentError) { Axlsx.validate_data_validation_error_style :other_symbol }
+    assert_raise(ArgumentError) { Axlsx.validate_data_validation_error_style 'warning' }
+    assert_raise(ArgumentError) { Axlsx.validate_data_validation_error_style 0 }
+    
+    #data_validation_operator
+    [:lessThan, :lessThanOrEqual, :equal, :notEqual, :greaterThanOrEqual, :greaterThan, :between, :notBetween].each do |sym|
+      assert_nothing_raised { Axlsx.validate_data_validation_operator sym }
+    end
+    assert_raise(ArgumentError) { Axlsx.validate_data_validation_error_style :other_symbol }
+    assert_raise(ArgumentError) { Axlsx.validate_data_validation_error_style 'lessThan' }
+    assert_raise(ArgumentError) { Axlsx.validate_data_validation_error_style 0 }
+    
+    #data_validation_type
+    [:custom, :data, :decimal, :list, :none, :textLength, :time, :whole].each do |sym|
+      assert_nothing_raised { Axlsx.validate_data_validation_type sym }
+    end
+    assert_raise(ArgumentError) { Axlsx.validate_data_validation_error_style :other_symbol }
+    assert_raise(ArgumentError) { Axlsx.validate_data_validation_error_style 'decimal' }
+    assert_raise(ArgumentError) { Axlsx.validate_data_validation_error_style 0 }
+    
+    #sheet_view_type
+    [:normal, :page_break_preview, :page_layout].each do |sym|
+      assert_nothing_raised { Axlsx.validate_sheet_view_type sym }
+    end
+    assert_raise(ArgumentError) { Axlsx.validate_data_validation_error_style :other_symbol }
+    assert_raise(ArgumentError) { Axlsx.validate_data_validation_error_style 'page_layout' }
+    assert_raise(ArgumentError) { Axlsx.validate_data_validation_error_style 0 }
   end
 end
 

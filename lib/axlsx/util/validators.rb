@@ -112,6 +112,11 @@ module Axlsx
   def self.validate_scale_10_400(v)
     DataTypeValidator.validate "page_scale", [Fixnum, Integer], v, lambda { |arg| arg >= 10 && arg <= 400 }
   end
+  
+  # Requires that the value is an integer ranging from 10 to 400 or 0.
+  def self.validate_scale_0_10_400(v)
+    DataTypeValidator.validate "page_scale", [Fixnum, Integer], v, lambda { |arg| arg == 0 || (arg >= 10 && arg <= 400) }
+  end
 
   # Requires that the value is one of :default, :landscape, or :portrait.
   def self.validate_page_orientation(v)
@@ -132,8 +137,6 @@ module Axlsx
   # thisMonth, lastMonth, nextMonth, thisWeek, lastWeek, nextWeek
   def self.validate_time_period_type(v)
     RestrictionValidator.validate :time_period_type, [:today, :yesterday, :tomorrow, :last7Days, :thisMonth, :lastMonth, :nextMonth, :thisWeek, :lastWeek, :nextWeek], v
-
-
   end
 
   # Requires that the value is one of the valid ST_IconSet types
