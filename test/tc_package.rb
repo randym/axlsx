@@ -9,6 +9,20 @@ class TestPackage < Test::Unit::TestCase
     ws.add_row ['Yes!', 'We', 'can!']
     ws.add_comment :author => 'alice', :text => 'Hi Bob', :ref => 'A12'
     ws.add_comment :author => 'bob', :text => 'Hi Alice', :ref => 'F19'
+    ws.sheet_view do |vs|
+      vs.pane do |p|
+        p.active_pane = :top_right
+        p.state = :split
+        p.x_split = 11080
+        p.y_split = 5000
+        p.top_left_cell = 'C44'
+      end
+
+      vs.add_selection(:top_left, { :active_cell => 'A2', :sqref => 'A2' })
+      vs.add_selection(:top_right, { :active_cell => 'I10', :sqref => 'I10' })
+      vs.add_selection(:bottom_left, { :active_cell => 'E55', :sqref => 'E55' })
+      vs.add_selection(:bottom_right, { :active_cell => 'I57', :sqref => 'I57' })
+    end
 
     chart = ws.add_chart Axlsx::Pie3DChart, :title => "これは？", :start_at => [0,3]
     chart.add_series :data=>[1,2,3], :labels=>["a", "b", "c"]
@@ -143,7 +157,7 @@ class TestPackage < Test::Unit::TestCase
     # in testing.
     assert(stream.size > 80000)
   end
-  
+
   def test_encrypt
     # this is no where near close to ready yet
     assert(@package.encrypt('your_mom.xlsxl', 'has a password') == false)
