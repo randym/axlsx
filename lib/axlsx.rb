@@ -87,8 +87,9 @@ module Axlsx
   # performs the increadible feat of changing snake_case to CamelCase
   # @param [String] s The snake case string to camelize
   # @return [String]
-  def self.camel(s="")
-    s = s.capitalize.gsub(/_(.)/){ $1.upcase }
+  def self.camel(s="", all_caps = true)
+    s = s.capitalize if all_caps
+    s.gsub(/_(.)/){ $1.upcase }
   end
 
 end
