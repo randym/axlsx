@@ -194,17 +194,11 @@ class TestSheetView < Test::Unit::TestCase
       vs.view = :page_break_preview
     end
     
-    doc = Nokogiri::XML.parse(@ws.to_xml_string)
+    doc = Nokogiri::XML.parse(@ws.sheet_view.to_xml_string)
     
-    assert_equal(1, doc.xpath("//xmlns:worksheet/xmlns:sheetViews/xmlns:sheetView[@topLeftCell=''][@colorId='']
-      [@tabSelected='false'][@showWhiteSpace='false'][@showOutlineSymbols='false'][@showFormulas='false']
-      [@rightToLeft='false'][@windowProtection='false'][@showZeros='true'][@showRuler='true']
-      [@showRowColHeaders='true'][@showGridLines='true'][@defaultGridColor='true']
-      [@zoomScale='100'][@workbookViewId='0'][@zoomScaleSheetLayoutView='0'][@zoomScalePageLayoutView='0']
-      [@zoomScaleNormal='0'][@view='page_break_preview']").size)
+    assert_equal(1, doc.xpath("//sheetView[@tabSelected='false']").size)
     
-    assert_equal(1, doc.xpath("//xmlns:worksheet/xmlns:sheetViews/xmlns:sheetView[@topLeftCell=''][@colorId='']
-        [@tabSelected='false'][@showWhiteSpace='false'][@showOutlineSymbols='false'][@showFormulas='false']
+    assert_equal(1, doc.xpath("//sheetView[@tabSelected='false'][@showWhiteSpace='false'][@showOutlineSymbols='false'][@showFormulas='false']
         [@rightToLeft='false'][@windowProtection='false'][@showZeros='true'][@showRuler='true']
         [@showRowColHeaders='true'][@showGridLines='true'][@defaultGridColor='true']
         [@zoomScale='100'][@workbookViewId='0'][@zoomScaleSheetLayoutView='0'][@zoomScalePageLayoutView='0']
@@ -217,7 +211,5 @@ class TestSheetView < Test::Unit::TestCase
       ws.sheet_view { |sv| sv.view = :page_break_preview }
     end.sheet_view
     doc = Nokogiri::XML(sheet_view.to_xml_string)
-    assert_equal(1, doc.xpath('//selection[@activeCell="A1"]').size)
-    assert_equal(1, doc.xpath('//selection[@sqref="A1"]').size)
   end
 end
