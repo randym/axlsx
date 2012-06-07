@@ -362,13 +362,12 @@ module Axlsx
     def to_xml_string(str = '')
       str << '<sheetViews>'
       str << '<sheetView '
-      str << instance_values.map { |key, value| (Axlsx::camel(key.to_s, false) << '="' << value.to_s << '"') unless CHILD_ELEMENTS.include?(key.to_sym) }.join(' ')
+      str << instance_values.map { |key, value| (Axlsx::camel(key.to_s, false) << '="' << value.to_s << '"') unless CHILD_ELEMENTS.include?(key.to_sym) || value == nil }.join(' ')
       str << '>'
       @pane.to_xml_string(str) if @pane
       @selections.each do |key, selection|
         selection.to_xml_string(str)
       end
-      str << '<selection activeCell="A1" sqref="A1" />'
       str << '</sheetView>'
       str << '</sheetViews>'
     end
