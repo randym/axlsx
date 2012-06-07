@@ -44,7 +44,7 @@ module Axlsx
     # @option options [Array|String|Cell] start_at The X, Y coordinates defining the top left corner of the chart.
     # @option options [Array|String|Cell] end_at The X, Y coordinates defining the bottom right corner of the chart.
     def initialize(frame, options={})
-      @style = 2
+      @style = 18  
       @view3D = nil
       @graphic_frame=frame
       @graphic_frame.anchor.drawing.worksheet.workbook.charts << self
@@ -120,13 +120,13 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       str << '<?xml version="1.0" encoding="UTF-8"?>'
-      str << '<c:chartSpace xmlns:c="' << XML_NS_C << '" xmlns:a="' << XML_NS_A << '">'
+      str << '<c:chartSpace xmlns:c="' << XML_NS_C << '" xmlns:a="' << XML_NS_A << '" xmlns:r="' << XML_NS_R << '">'
       str << '<c:date1904 val="' << Axlsx::Workbook.date1904.to_s << '"/>'
       str << '<c:style val="' << style.to_s << '"/>'
       str << '<c:chart>'
       @title.to_xml_string str
       # do these need the c: namespace as well???
-      str << '<c:autoTitleDeleted val="0"/>'
+      str << '<c:autoTitleDeleted val="' << (@title == nil).to_s << '"/>'
       @view3D.to_xml_string(str) if @view3D
       str << '<c:floor><c:thickness val="0"/></c:floor>'
       str << '<c:sideWall><c:thickness val="0"/></c:sideWall>'

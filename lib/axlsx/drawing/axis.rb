@@ -5,11 +5,13 @@ module Axlsx
 
     # the id of the axis.
     # @return [Integer]
-    attr_reader :axId
+    attr_reader :ax_id
+    alias :axID :ax_id
 
     # The perpendicular axis
     # @return [Integer]
-    attr_reader :crossAx
+    attr_reader :cross_ax
+    alias :crossAx :cross_ax
 
     # The scaling of the axis
     # @see Scaling
@@ -19,12 +21,14 @@ module Axlsx
     # The position of the axis
     # must be one of [:l, :r, :t, :b]
     # @return [Symbol]
-    attr_reader :axPos
+    attr_reader :ax_pos
+    alias :axPos :ax_pos
 
     # the position of the tick labels
     # must be one of [:nextTo, :high, :low]
     # @return [Symbol]
-    attr_reader :tickLblPos
+    attr_reader :tick_lbl_pos
+    alias :tickLblPos :tick_lbl_pos
 
     # The number format format code for this axis
     # default :General
@@ -49,22 +53,22 @@ module Axlsx
     attr_reader :delete
 
     # Creates an Axis object
-    # @param [Integer] axId the id of this axis
-    # @param [Integer] crossAx the id of the perpendicular axis
-    # @option options [Symbol] axPos
+    # @param [Integer] ax_id the id of this axis
+    # @param [Integer] cross_ax the id of the perpendicular axis
+    # @option options [Symbol] ax_pos
     # @option options [Symbol] crosses
-    # @option options [Symbol] tickLblPos
-    # @raise [ArgumentError] If axId or crossAx are not unsigned integers
-    def initialize(axId, crossAx, options={})
-      Axlsx::validate_unsigned_int(axId)
-      Axlsx::validate_unsigned_int(crossAx)
-      @axId = axId
-      @crossAx = crossAx
+    # @option options [Symbol] tick_lbl_pos
+    # @raise [ArgumentError] If axi_id or cross_ax are not unsigned integers
+    def initialize(ax_id, cross_ax, options={})
+      Axlsx::validate_unsigned_int(ax_id)
+      Axlsx::validate_unsigned_int(cross_ax)
+      @ax_id = ax_id
+      @cross_ax = cross_ax
       @format_code = "General"
       @delete = @label_rotation = 0
       @scaling = Scaling.new(:orientation=>:minMax)
-      self.axPos = :b
-      self.tickLblPos = :nextTo
+      self.ax_pos = :b
+      self.tick_lbl_pos = :nextTo
       self.format_code = "General"
       self.crosses = :autoZero
       self.gridlines = true
@@ -72,13 +76,16 @@ module Axlsx
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
     end
+
     # The position of the axis
     # must be one of [:l, :r, :t, :b]
-    def axPos=(v) RestrictionValidator.validate "#{self.class}.axPos", [:l, :r, :b, :t], v; @axPos = v; end
+    def ax_pos=(v) RestrictionValidator.validate "#{self.class}.ax_pos", [:l, :r, :b, :t], v; @ax_pos = v; end
+    alias :axPos= :ax_pos=
 
     # the position of the tick labels
     # must be one of [:nextTo, :high, :low1]
-    def tickLblPos=(v) RestrictionValidator.validate "#{self.class}.tickLblPos", [:nextTo, :high, :low], v; @tickLblPos = v; end
+    def tick_lbl_pos=(v) RestrictionValidator.validate "#{self.class}.tick_lbl_pos", [:nextTo, :high, :low], v; @tick_lbl_pos = v; end
+    alias :tickLblPos= :tick_lbl_pos=
 
     # The number format format code for this axis
     # default :General
@@ -111,10 +118,10 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      str << '<c:axId val="' << @axId.to_s << '"/>'
+      str << '<c:axId val="' << @ax_id.to_s << '"/>'
       @scaling.to_xml_string str
       str << '<c:delete val="'<< @delete.to_s << '"/>'
-      str << '<c:axPos val="' << @axPos.to_s << '"/>'
+      str << '<c:axPos val="' << @ax_pos.to_s << '"/>'
       str << '<c:majorGridlines>'
       if gridlines == false
         str << '<c:spPr>'
@@ -127,10 +134,10 @@ module Axlsx
       str << '<c:numFmt formatCode="' << @format_code << '" sourceLinked="1"/>'
       str << '<c:majorTickMark val="none"/>'
       str << '<c:minorTickMark val="none"/>'
-      str << '<c:tickLblPos val="' << @tickLblPos.to_s << '"/>'
+      str << '<c:tickLblPos val="' << @tick_lbl_pos.to_s << '"/>'
       # some potential value in implementing this in full. Very detailed!
       str << '<c:txPr><a:bodyPr rot="' << @label_rotation.to_s << '"/><a:lstStyle/><a:p><a:pPr><a:defRPr/></a:pPr><a:endParaRPr/></a:p></c:txPr>'
-      str << '<c:crossAx val="' << @crossAx.to_s << '"/>'
+      str << '<c:crossAx val="' << @cross_ax.to_s << '"/>'
       str << '<c:crosses val="' << @crosses.to_s << '"/>'
     end
 

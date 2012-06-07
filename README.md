@@ -16,7 +16,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 
 **License**: MIT License
 
-**Latest Version**: 1.1.5
+**Latest Version**: 1.1.7
 
 **Ruby Version**: 1.8.7, 1.9.2, 1.9.3
 
@@ -24,13 +24,16 @@ Axlsx: Office Open XML Spreadsheet Generation
 
 **Rubinius Version**: rubinius 2.0.0dev * lower versions may run, this gem always tests against head.
 
-**Release Date**: May 13rd 2012
+**Release Date**: June 5th 2012
 
 If you are working in rails, or with active record see:
 http://github.com/randym/acts_as_xlsx
 
 There are guides for using axlsx and acts_as_xlsx here:
 [http://axlsx.blogspot.com](http://axlsx.blogspot.com)
+
+The examples directory contains a number of more specific examples as
+well.
 
 Synopsis
 --------
@@ -63,7 +66,8 @@ Feature List
 
 **9. Cell level style overrides for default and customized style objects
 
-**10. Support for formulas
+**10. Support for formulas, merging, row and column outlining as well as
+cell level input data validation.
 
 **11. Support for cell merging as well as column and row outline
 
@@ -74,6 +78,8 @@ Feature List
 **14. Output to file or StringIO
 
 **15. Support for page margins and print options
+
+**16. Support for password and non password based sheet protection.
 
 Installing
 ----------
@@ -86,12 +92,14 @@ To install Axlsx, use the following command:
 ------
 
 The example listing is getting overly large to maintain here.
-If you are using Yard, you will be able to see the examples inline below.
+If you are using Yard, you will be able to see the examples in line below.
 If not, please refer to the Please see the {file:examples/example.rb} file.
+
+![examples](https://github.com/randym/axlsx/raw/master/examples/examples.rb)
 
 {include:file:examples/example.rb}
 
-There is much, much more you can do with this gem. If you get stuck, grab me on IRC or submit an issue to Github. Chances are that it has already been implemented. If it hasn't - let's take a look at adding it in.
+There is much, much more you can do with this gem. If you get stuck, grab me on IRC or submit an issue to GitHub. Chances are that it has already been implemented. If it hasn't - let's take a look at adding it in.
 
 #Documentation
 --------------
@@ -107,14 +115,31 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
-- ** May.13.12**: 1.1.5 release
+- **June.5.12**: 1.1.7 release
+   - fix chart rendering issue when label offset is specified as a
+     percentage in serialization and ensure that formula are not stored
+in value caches
+   - fix bug that causes repair warnings when using a text only title reference.
+
+- **May.30.12**: 1.1.6 release
+   - data protection with passwords for sheets
+   - cell level input validators
+   - added support for two cell anchors for images
+   - test coverage now back up to 100%
+   - bugfix for merge cell sorting algorithm
+   - added fit_to method for page_setup to simplify managing witdh/height
+   - added ph (phonetics) and s (style) attributes for row.
+   - resolved all warnings generating from this gem.
+   - improved comment relationship management for multiple comments
+
+- **May.13.12**: 1.1.5 release
    - MOAR print options! You can now specify paper size, orientation,
      fit to width, page margings and gridlines for printing.
-   - Support for adding comments ot your worksheets
+   - Support for adding comments to your worksheets
    - bugfix for applying style to empty cells
-   - bugfix for parsing formula with multipe '='
+   - bugfix for parsing formula with multiple '='
 
-- ** May.3.12:**: 1.1.4 release
+- **May.3.12:**: 1.1.4 release
    - MOAR examples
    - added outline level for rows and columns
    - rebuild of numeric and axis data sources for charts
@@ -158,6 +183,8 @@ Please see the {file:CHANGELOG.md} document for past release information.
 [moskrin](https://github.com/moskrin) - for keeping border creation on the edge.
 
 [scpike](https://github.com/scpike) - for keeping numbers fixed even when they are rational and a super clean implementation of conditional formatting.
+
+[janhuehne](https://github.com/janhuehne) - for working out the decoder ring and adding in cell level validation.
 
 #Copyright and License
 ----------

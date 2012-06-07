@@ -220,11 +220,9 @@ module Axlsx
     
     # Add data validation to this worksheet.
     #
-    # @param
-    # @example
-    #
-    # @see
-    # @see
+    # @param [String] cells The cells the validation will apply to.
+    # @param [hash] data_validation options defining the validation to apply.
+    # @see  examples/data_validation.rb for an example
     def add_data_validation(cells, data_validation)
       dv = DataValidation.new(data_validation)
       dv.sqref = cells

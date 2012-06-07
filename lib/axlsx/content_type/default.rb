@@ -5,35 +5,41 @@ module Axlsx
 
     # The extension of the content type.
     # @return [String]
-    attr_reader :Extension
+    attr_reader :extension
+    alias :Extension :extension
 
     # The type of content.
     # @return [String]
-    attr_reader :ContentType
+    attr_reader :content_type
+    alias :ContentType :content_type
 
     #Creates a new Default object
-    # @option options [String] Extension
-    # @option options [String] ContentType
-    # @raise [ArgumentError] An argument error is raised if both Extension and ContentType are not specified.
+    # @option options [String] extension
+    # @option options [String] content_type
+    # @raise [ArgumentError] An argument error is raised if both extension and content_type are not specified.
     def initialize(options={})
-      raise ArgumentError, "Extension and ContentType are required" unless options[:Extension] && options[:ContentType]
+      raise ArgumentError, "extension and content_type are required" unless (options[:Extension] || options[:extension]) && (options[:content_type] || options[:ContentType])
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
     end
+
+
     # Sets the file extension for this content type.
-    def Extension=(v) Axlsx::validate_string v; @Extension = v end
+    def extension=(v) Axlsx::validate_string v; @extension = v end
+    alias :Extension= :extension=
 
     # Sets the content type
     # @see Axlsx#validate_content_type
-    def ContentType=(v) Axlsx::validate_content_type v; @ContentType = v end
+    def content_type=(v) Axlsx::validate_content_type v; @content_type = v end
+    alias :ContentType= :content_type=
 
     # Serializes the object
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
       str << '<Default '
-      str << instance_values.map { |key, value| '' << key.to_s << '="' << value.to_s << '"' }.join(' ')
+      str << instance_values.map { |key, value| '' << Axlsx::camel(key) << '="' << value.to_s << '"' }.join(' ')
       str << '/>'
     end
 

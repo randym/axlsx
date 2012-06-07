@@ -42,7 +42,7 @@ module Axlsx
     def colors=(v) DataTypeValidator.validate "BarSeries.colors", [Array], v; @colors = v end
 
     # The shabe of the bars or columns
-    # must be one of  [:percentStacked, :clustered, :standard, :stacked]
+    # must be one of  [:cone, :coneToMax, :box, :cylinder, :pyramid, :pyramidToMax]
     def shape=(v)
       RestrictionValidator.validate "BarSeries.shape", [:cone, :coneToMax, :box, :cylinder, :pyramid, :pyramidToMax], v
       @shape = v

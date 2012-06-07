@@ -18,6 +18,25 @@ class TestPic < Test::Unit::TestCase
     assert_equal(@image.image_src, @test_img)
   end
 
+  def test_anchor_swapping
+    #swap from one cell to two cell when end_at is specified
+    assert(@image.anchor.is_a?(Axlsx::OneCellAnchor))
+    start_at = @image.anchor.from 
+    @image.end_at 10,5
+    assert(@image.anchor.is_a?(Axlsx::TwoCellAnchor))
+    assert_equal(start_at.col, @image.anchor.from.col)
+    assert_equal(start_at.row, @image.anchor.from.row)
+    assert_equal(10,@image.anchor.to.col)
+    assert_equal(5, @image.anchor.to.row)
+  
+    #swap from two cell to one cell when width or height are specified
+    @image.width = 200
+    assert(@image.anchor.is_a?(Axlsx::OneCellAnchor))
+    assert_equal(start_at.col, @image.anchor.from.col)
+    assert_equal(start_at.row, @image.anchor.from.row)
+    assert_equal(200, @image.width)
+  
+  end
   def test_hyperlink
     assert_equal(@image.hyperlink.href, "https://github.com/randym")
     @image.hyperlink = "http://axlsx.blogspot.com"

@@ -25,8 +25,8 @@ module Axlsx
     def data=(values=[])
       @tag_name = values.first.is_a?(Cell) ? :numCache : :numLit
       values.each do |value|
-        v = value.is_a?(Cell) ? value.value : value
-        @pt << NumVal.new(:v => v)
+        value = value.is_formula? ? 0 : value.value if value.is_a?(Cell)
+        @pt << NumVal.new(:v => value)
       end
     end
 

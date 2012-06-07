@@ -9,7 +9,11 @@ class TestNumData < Test::Unit::TestCase
   def test_initialize
     assert_equal(@num_data.format_code, "General")
   end
-
+ 
+  def test_formula_based_cell
+  
+  end
+ 
   def test_format_code
     assert_raise(ArgumentError) {@num_data.format_code = 7}
     assert_nothing_raised {@num_data.format_code = 'foo_bar'}

@@ -68,11 +68,16 @@ module Axlsx
       @anchors = SimpleTypedList.new [TwoCellAnchor, OneCellAnchor]
     end
 
-    # Adds an image to the chart
+    # Adds an image to the chart If th end_at option is specified we create a two cell anchor. By default we use a one cell anchor.
     # @note The recommended way to manage images is to use Worksheet.add_image. Please refer to that method for documentation.
     # @see Worksheet#add_image
+    # @return [Pic]
     def add_image(options={})
-      OneCellAnchor.new(self, options)
+      if options[:end_at]
+        TwoCellAnchor.new(self, options).add_pic(options)
+      else
+        OneCellAnchor.new(self, options)
+      end 
       @anchors.last.object
     end
 
@@ -150,7 +155,6 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       str << '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
-#      str << '<xdr:wsDr xmlns:xdr="' << XML_NS_XDR << '" xmlns:a="' << XML_NS_A << '" xmlns:c="' << XML_NS_C << '">'
       str << '<xdr:wsDr xmlns:xdr="' << XML_NS_XDR << '" xmlns:a="' << XML_NS_A << '">'
 
       anchors.each { |anchor| anchor.to_xml_string(str) }
