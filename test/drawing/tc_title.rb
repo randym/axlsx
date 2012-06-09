@@ -33,18 +33,17 @@ class TestTitle < Test::Unit::TestCase
   end
 
   def test_to_xml_string_text
-    @title.text = 'foo'
-    doc = Nokogiri::XML(@title.to_xml_string)
-    assert_equal(1, doc.xpath('//rich').size)
-    assert_equal(1, doc.xpath('//t[text()="foo"]').size)
+    @chart.title.text = 'foo'
+    doc = Nokogiri::XML(@chart.to_xml_string)
+    assert_equal(1, doc.xpath('//c:rich').size)
+    assert_equal(1, doc.xpath("//a:t[text()='foo']").size)
   end
 
   def test_to_xml_string_cell
-    @title.cell = @row.cells.first
-    doc = Nokogiri::XML(@title.to_xml_string)
-    assert_equal(1, doc.xpath('//strCache').size)
-    assert_equal(1, doc.xpath('//v[text()="one"]').size)
+    @chart.title.cell = @row.cells.first
+    doc = Nokogiri::XML(@chart.to_xml_string)
+    assert_equal(1, doc.xpath('//c:strCache').size)
+    assert_equal(1, doc.xpath('//c:v[text()="one"]').size)
   end
-
 
 end
