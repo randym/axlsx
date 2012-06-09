@@ -18,7 +18,11 @@ module Axlsx
       @pane
     end
     
-    
+    # A hash of selection objects keyed by pane type associated with this sheet view.
+    # @return [Hash]
+    attr_reader :selections
+
+    #  
     # Color Id
     # Index to the color value for row/column
     # text headings and gridlines. This is an 
