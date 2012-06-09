@@ -1,3 +1,5 @@
+$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../"
+
 require 'tc_helper.rb'
 
 class TestTitle < Test::Unit::TestCase
@@ -29,5 +31,21 @@ class TestTitle < Test::Unit::TestCase
     @title.cell = @row.cells.first
     assert(@title.text == "one")
   end
+
+  def test_to_xml_string_text
+    @title.text = 'foo'
+    doc = Nokogiri::XML(@title.to_xml_string)
+    assert_equal(1, doc.xpath('//rich').size)
+    assert_equal(1, doc.xpath('//t[text()="foo"]').size)
+  end
+
+ def test_to_xml_string_cell
+    @title.cell = @row.cells.first
+    doc = Nokogiri::XML(@title.to_xml_string)
+    puts doc.to_xml
+    assert_equal(1, doc.xpath('//strCache').size)
+    assert_equal(1, doc.xpath('//v[text()="one"]').size)
+  end
+
 
 end
