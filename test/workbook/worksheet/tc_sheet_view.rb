@@ -1,4 +1,5 @@
 # encoding: UTF-8
+$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../../"
 require 'tc_helper.rb'
 
 class TestSheetView < Test::Unit::TestCase
@@ -205,11 +206,9 @@ class TestSheetView < Test::Unit::TestCase
         [@zoomScaleNormal='0'][@view='page_break_preview']").size)
   end
   
-  def test_to_xml_string_show_selection
-    p = Axlsx::Package.new
-    sheet_view = p.workbook.add_worksheet(:name => "sheetview") do |ws|
-      ws.sheet_view { |sv| sv.view = :page_break_preview }
-    end.sheet_view
-    doc = Nokogiri::XML(sheet_view.to_xml_string)
+  def test_add_selection
+     @sv.add_selection(:top_left, :active_cell => "A1")
+     assert_equal('A1', @sv.selections[:top_left].active_cell)
   end
+
 end
