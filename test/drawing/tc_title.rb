@@ -39,10 +39,9 @@ class TestTitle < Test::Unit::TestCase
     assert_equal(1, doc.xpath('//t[text()="foo"]').size)
   end
 
- def test_to_xml_string_cell
+  def test_to_xml_string_cell
     @title.cell = @row.cells.first
     doc = Nokogiri::XML(@title.to_xml_string)
-    puts doc.to_xml
     assert_equal(1, doc.xpath('//strCache').size)
     assert_equal(1, doc.xpath('//v[text()="one"]').size)
   end
