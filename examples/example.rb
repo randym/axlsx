@@ -276,6 +276,8 @@ wb.add_worksheet(:name => "Line Chart") do |sheet|
     chart.end_at 10, 15
     chart.add_series :data => sheet["B1:E1"], :title => sheet["A1"]
     chart.add_series :data => sheet["B2:E2"], :title => sheet["A2"]
+    chart.catAxis.title = 'Y Axis'
+    chart.valAxis.title = 'X Axis'
   end
 end
 #```

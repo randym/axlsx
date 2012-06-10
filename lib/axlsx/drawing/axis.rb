@@ -52,6 +52,9 @@ module Axlsx
     # @return [Boolean]
     attr_reader :delete
 
+    # the title for the axis. This can be a cell or a fixed string.
+    attr_reader :title
+
     # Creates an Axis object
     # @param [Integer] ax_id the id of this axis
     # @param [Integer] cross_ax the id of the perpendicular axis
@@ -67,6 +70,7 @@ module Axlsx
       @format_code = "General"
       @delete = @label_rotation = 0
       @scaling = Scaling.new(:orientation=>:minMax)
+      @title = nil
       self.ax_pos = :b
       self.tick_lbl_pos = :nextTo
       self.format_code = "General"
@@ -113,6 +117,19 @@ module Axlsx
       @label_rotation = adjusted
     end
 
+    
+    # The title object for the chart.
+    # @param [String, Cell] v
+    # @return [Title]
+    def title=(v)
+      DataTypeValidator.validate "#{self.class}.title", [String, Cell], v
+      @title ||= Title.new
+      if v.is_a?(String)
+        @title.text = v
+      elsif v.is_a?(Cell)
+        @title.cell = v
+      end
+    end
 
     # Serializes the object
     # @param [String] str
@@ -131,6 +148,7 @@ module Axlsx
         str << '</c:spPr>'
       end
       str << '</c:majorGridlines>'
+      @title.to_xml_string(str) unless @title == nil
       str << '<c:numFmt formatCode="' << @format_code << '" sourceLinked="1"/>'
       str << '<c:majorTickMark val="none"/>'
       str << '<c:minorTickMark val="none"/>'

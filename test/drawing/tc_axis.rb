@@ -2,8 +2,9 @@ require 'tc_helper.rb'
 
 class TestAxis < Test::Unit::TestCase
   def setup
-    @axis = Axlsx::Axis.new 12345, 54321, :gridlines => false
+    @axis = Axlsx::Axis.new 12345, 54321, :gridlines => false, :title => 'Foo'
   end
+
   def teardown
   end
 
@@ -14,6 +15,7 @@ class TestAxis < Test::Unit::TestCase
     assert_equal(@axis.crosses, :autoZero, "tick label position default incorrect")
     assert(@axis.scaling.is_a?(Axlsx::Scaling) && @axis.scaling.orientation == :minMax, "scaling default incorrect")
     assert_raise(ArgumentError) { Axlsx::Axis.new( -1234, 'abcd') }
+    assert_equal('Foo', @axis.title.text)
   end
 
   def test_axis_position
@@ -57,6 +59,6 @@ class TestAxis < Test::Unit::TestCase
     assert(doc.xpath("//c:crosses[@val='#{@axis.crosses.to_s}']"))
     assert(doc.xpath("//c:crossAx[@val='#{@axis.crossAx.to_s}']"))
     assert(doc.xpath("//a:bodyPr[@rot='#{@axis.label_rotation.to_s}']"))
-
+    assert(doc.xpath("//a:t[text()='Foo']"))
   end
 end

@@ -24,8 +24,14 @@ class TestPackage < Test::Unit::TestCase
       vs.add_selection(:bottom_right, { :active_cell => 'I57', :sqref => 'I57' })
     end
 
-    chart = ws.add_chart Axlsx::Pie3DChart, :title => "これは？", :start_at => [0,3]
-    chart.add_series :data=>[1,2,3], :labels=>["a", "b", "c"]
+    ws.add_chart(Axlsx::Pie3DChart, :title => "これは？", :start_at => [0,3]) do |chart|
+      chart.add_series :data=>[1,2,3], :labels=>["a", "b", "c"]
+    end
+
+    ws.add_chart(Axlsx::Line3DChart, :title => "axis labels") do |chart|
+      chart.valAxis.title = 'bob'
+    end 
+
     @fname = 'axlsx_test_serialization.xlsx'
     img = File.expand_path('../../examples/image1.jpeg', __FILE__)
     ws.add_image(:image_src => img, :noSelect => true, :noMove => true, :hyperlink=>"http://axlsx.blogspot.com") do |image|
@@ -114,7 +120,7 @@ class TestPackage < Test::Unit::TestCase
 
 
     #no mystery parts
-    assert_equal(p.size, 18)
+    assert_equal(p.size, 19)
 
   end
 
