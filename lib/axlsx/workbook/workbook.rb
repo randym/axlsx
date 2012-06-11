@@ -171,12 +171,14 @@ require 'axlsx/workbook/worksheet/selection.rb'
     def self.date1904() @@date1904; end
 
     # Indicates if the workbook should use autowidths or not.
-    # this must be set before instantiating a worksheet to avoid Rmagix inclusion
+    # @note This gem no longer depends on RMagick for autowidth
+    #     calculation. Thus the performance benefits of turning this off are
+    #     marginal unless you are creating a very large sheet.
     # @return [Boolean]
     def use_autowidth() @use_autowidth; end
 
     # see @use_autowidth
-    def use_autowidth=(v) Axlsx::validate_boolean v; @use_autowidth = v; end
+    def use_autowidth=(v=true) Axlsx::validate_boolean v; @use_autowidth = v; end
 
     # Adds a worksheet to this workbook
     # @return [Worksheet]

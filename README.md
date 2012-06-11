@@ -24,7 +24,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 
 **Rubinius Version**: rubinius 2.0.0dev * lower versions may run, this gem always tests against head.
 
-**Release Date**: June 5th 2012
+**Release Date**: June 11th 2012
 
 If you are working in rails, or with active record see:
 http://github.com/randym/acts_as_xlsx
@@ -115,7 +115,7 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
-- **June.5.12**: 1.1.7 release
+- **June.11.12**: 1.1.7 release
    - fix chart rendering issue when label offset is specified as a
      percentage in serialization and ensure that formula are not stored
 in value caches

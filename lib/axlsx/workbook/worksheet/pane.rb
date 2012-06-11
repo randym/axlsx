@@ -30,7 +30,7 @@ module Axlsx
     #                  specifies the right pane.
     # @see type
     # @return [Symbol]
-    # @default nil
+    # default nil
     attr_reader :active_pane
     
     
@@ -49,7 +49,7 @@ module Axlsx
     #                  bars are adjustable by the user.
     # @see type
     # @return [Symbol]
-    # @default nil
+    # default nil
     attr_reader :state
     
     
@@ -58,7 +58,7 @@ module Axlsx
     # right pane (when in Left-To-Right mode).
     # @see type
     # @return [String]
-    # @default nil
+    # default nil
     attr_reader :top_left_cell
     
     
@@ -68,7 +68,7 @@ module Axlsx
     # of columns visible in the top pane.
     # @see type
     # @return [Integer]
-    # @default 0
+    # default 0
     attr_reader :x_split
     
     
@@ -78,7 +78,7 @@ module Axlsx
     # of rows visible in the left pane.
     # @see type
     # @return [Integer]
-    # @default 0
+    # default 0
     attr_reader :y_split
     
     

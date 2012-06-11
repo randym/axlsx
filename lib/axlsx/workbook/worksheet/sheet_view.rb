@@ -30,7 +30,7 @@ module Axlsx
     # rgb value.
     # @see type
     # @return [Integer]
-    # @default nil
+    # default nil
     attr_reader :color_id
     
     
@@ -41,7 +41,7 @@ module Axlsx
     # specified in colorId.
     # @see type
     # @return [Boolean]
-    # @default true
+    # default true
     attr_reader :default_grid_color
     
     
@@ -54,7 +54,7 @@ module Axlsx
     # to Left format.
     # @see type
     # @return [Boolean]
-    # @default false
+    # default false
     attr_reader :right_to_left
     
     
@@ -63,7 +63,7 @@ module Axlsx
     # display formulas.
     # @see type
     # @return [Boolean]
-    # @default false
+    # default false
     attr_reader :show_formulas
     
     
@@ -72,7 +72,7 @@ module Axlsx
     # should display gridlines.
     # @see type
     # @return [Boolean]
-    # @default true
+    # default true
     attr_reader :show_grid_lines
     
     
@@ -84,7 +84,7 @@ module Axlsx
     # when there is a conflict.
     # @see type
     # @return [Boolean]
-    # @default false
+    # default false
     attr_reader :show_outline_symbols
     
     
@@ -93,7 +93,7 @@ module Axlsx
     # display row and column headings.
     # @see type
     # @return [Boolean]
-    # @default true
+    # default true
     attr_reader :show_row_col_headers
     
     
@@ -101,7 +101,7 @@ module Axlsx
     # Show the ruler in Page Layout View.
     # @see type
     # @return [Boolean]
-    # @default true
+    # default true
     attr_reader :show_ruler
     
     
@@ -113,7 +113,7 @@ module Axlsx
     # there is data in the header or footer).
     # @see type
     # @return [Boolean]
-    # @default false
+    # default false
     attr_reader :show_white_space
     
     
@@ -124,7 +124,7 @@ module Axlsx
     # blank instead of showing the number zero.
     # @see type
     # @return [Boolean]
-    # @default true
+    # default true
     attr_reader :show_zeros
     
     
@@ -138,7 +138,7 @@ module Axlsx
     # be active at one time.
     # @see type
     # @return [Boolean]
-    # @default false
+    # default false
     attr_reader :tab_selected
     
     
@@ -148,7 +148,7 @@ module Axlsx
     # pane (when in Left-to-Right mode).
     # @see type
     # @return [String]
-    # @default nil
+    # default nil
     attr_reader :top_left_cell
     
     
@@ -160,7 +160,7 @@ module Axlsx
     #  * page_layout: Page Layout View
     # @see type
     # @return [Symbol]
-    # @default :normal
+    # default :normal
     attr_reader :view
     
     
@@ -171,7 +171,7 @@ module Axlsx
     # protected.
     # @see type
     # @return [Boolean] 
-    # @default true
+    # default true
     attr_reader :window_protection
     
     
@@ -180,7 +180,7 @@ module Axlsx
     # to a workbookView element in the bookViews collection.
     # @see type
     # @return [Integer] 
-    # @default 0
+    # default 0
     attr_reader :workbook_view_id
     
     
@@ -193,7 +193,7 @@ module Axlsx
     # Page Break Preview.
     # @see type
     # @return [Integer] 
-    # @default 100
+    # default 100
     attr_reader :zoom_scale
     
     
@@ -206,7 +206,7 @@ module Axlsx
     # automatic setting.
     # @see type
     # @return [Integer] 
-    # @default 0
+    # default 0
     attr_reader :zoom_scale_normal
     
     
@@ -219,7 +219,7 @@ module Axlsx
     # the automatic setting.
     # @see type
     # @return [Integer] 
-    # @default 0
+    # default 0
     attr_reader :zoom_scale_page_layout_view
     
     
@@ -233,7 +233,7 @@ module Axlsx
     # the automatic setting.
     # @see type
     # @return [Integer] 
-    # @default 0
+    # default 0
     attr_reader :zoom_scale_sheet_layout_view
     
     
@@ -260,7 +260,7 @@ module Axlsx
       #defaults
       @color_id = @top_left_cell = @pane = nil
       @right_to_left = @show_formulas = @show_outline_symbols = @show_white_space = @tab_selected = @window_protection = false
-      @default_grid_color = @show_grid_lines = @show_row_col_headers = @show_ruler = @show_zeros = true
+      default_grid_color = @show_grid_lines = @show_row_col_headers = @show_ruler = @show_zeros = true
       @zoom_scale = 100
       @zoom_scale_normal = @zoom_scale_page_layout_view = @zoom_scale_sheet_layout_view = @workbook_view_id = 0
       @selections = {}
@@ -285,7 +285,7 @@ module Axlsx
     
     
     # @see default_grid_color
-    def default_grid_color=(v); Axlsx::validate_boolean(v); @default_grid_color = v end
+    def default_grid_color=(v); Axlsx::validate_boolean(v); default_grid_color = v end
     
     
     # @see right_to_left

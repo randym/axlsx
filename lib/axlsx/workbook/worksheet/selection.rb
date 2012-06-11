@@ -10,7 +10,7 @@ module Axlsx
     # Location of the active cell.
     # @see type
     # @return [String]
-    # @default nil
+    # default nil
     attr_reader :active_cell
     
     
@@ -22,7 +22,7 @@ module Axlsx
     # When this value is out of range then activeCell can be used.
     # @see type
     # @return [Integer]
-    # @default nil
+    # default nil
     attr_reader :active_cell_id
     
     
@@ -50,7 +50,7 @@ module Axlsx
     #                  specifies the right pane.
     # @see type
     # @return [Symbol]
-    # @default nil
+    # default nil
     attr_reader :pane
     
     
@@ -58,7 +58,7 @@ module Axlsx
     # Range of the selection. Can be non-contiguous set of ranges.
     # @see type
     # @return [String]
-    # @default nil
+    # default nil
     attr_reader :sqref
     
     

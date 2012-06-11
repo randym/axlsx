@@ -80,9 +80,8 @@ module Axlsx
 
     # Serialize your workbook to disk as an xlsx document.
     #
-    # @param [File] output The file you want to serialize your package to
+    # @param [String] output The name of the file you want to serialize your package to
     # @param [Boolean] confirm_valid Validate the package prior to serialization.
-    # @option options stream indicates if we should be writing to a stream or a file. True for stream, nil for file
     # @return [Boolean] False if confirm_valid and validation errors exist. True if the package was serialized
     # @note A tremendous amount of effort has gone into ensuring that you cannot create invalid xlsx documents.
     #   confirm_valid should be used in the rare case that you cannot open the serialized file.
@@ -90,10 +89,15 @@ module Axlsx
     # @example
     #   # This is how easy it is to create a valid xlsx file. Of course you might want to add a sheet or two, and maybe some data, styles and charts.
     #   # Take a look at the README for an example of how to do it!
-    #   f = File.open('test.xlsx', 'w')
-    #   Package.new.serialize(f)
     #
-    #   # You will find a file called test.xlsx
+    #   #serialize to a file
+    #   p = Axlsx::Package.new
+    #   # ......add cool stuff to your workbook......
+    #   p.serialize("example.xlsx")
+    #
+    #   # Serialize to a stream
+    #   s = p.to_stream()
+    #   File.open('example_streamed.xlsx', 'w') { |f| f.write(s.read) }
     def serialize(output, confirm_valid=false)
       return false unless !confirm_valid || self.validate.empty?
       Zip::ZipOutputStream.open(output) do |zip|
