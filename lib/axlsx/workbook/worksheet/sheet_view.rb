@@ -260,7 +260,7 @@ module Axlsx
       #defaults
       @color_id = @top_left_cell = @pane = nil
       @right_to_left = @show_formulas = @show_outline_symbols = @show_white_space = @tab_selected = @window_protection = false
-      default_grid_color = @show_grid_lines = @show_row_col_headers = @show_ruler = @show_zeros = true
+      @default_grid_color = @show_grid_lines = @show_row_col_headers = @show_ruler = @show_zeros = true
       @zoom_scale = 100
       @zoom_scale_normal = @zoom_scale_page_layout_view = @zoom_scale_sheet_layout_view = @workbook_view_id = 0
       @selections = {}
@@ -285,7 +285,7 @@ module Axlsx
     
     
     # @see default_grid_color
-    def default_grid_color=(v); Axlsx::validate_boolean(v); default_grid_color = v end
+    def default_grid_color=(v); Axlsx::validate_boolean(v); @default_grid_color = v end
     
     
     # @see right_to_left
