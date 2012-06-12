@@ -93,9 +93,7 @@ To install Axlsx, use the following command:
 
 The example listing is getting overly large to maintain here.
 If you are using Yard, you will be able to see the examples in line below.
-If not, please refer to the Please see the {file:examples/example.rb} file.
-
-![examples](https://github.com/randym/axlsx/raw/master/examples/examples.rb)
+If not, please refer to the Please see the [examples](examples/example.rb) here.
 
 {include:file:examples/example.rb}
 
@@ -120,6 +118,9 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
      percentage in serialization and ensure that formula are not stored
 in value caches
    - fix bug that causes repair warnings when using a text only title reference.
+   - Add title property to axis so you can lable the x/y/series axis for
+     charts.
+   - Add sheet views with panes
 
 - **May.30.12**: 1.1.6 release
    - data protection with passwords for sheets
@@ -163,6 +164,10 @@ in value caches
 Please see the {file:CHANGELOG.md} document for past release information.
 
 #Thanks!
+
+Open source software is a community effort. None of this could have been
+done without the help of the people below.
+
 --------
 [ochko](https://github.com/ochko) - for performance fixes, kicking the crap out of axlsx and helping to maintain my general sanity.
 
@@ -184,7 +189,7 @@ Please see the {file:CHANGELOG.md} document for past release information.
 
 [scpike](https://github.com/scpike) - for keeping numbers fixed even when they are rational and a super clean implementation of conditional formatting.
 
-[janhuehne](https://github.com/janhuehne) - for working out the decoder ring and adding in cell level validation.
+[janhuehne](https://github.com/janhuehne) - for working out the decoder ring and adding in cell level validation, and providing a support for window panes.
 
 #Copyright and License
 ----------
