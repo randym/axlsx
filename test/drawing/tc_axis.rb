@@ -2,6 +2,7 @@ require 'tc_helper.rb'
 
 class TestAxis < Test::Unit::TestCase
   def setup
+    
     @axis = Axlsx::Axis.new 12345, 54321, :gridlines => false, :title => 'Foo'
   end
 
@@ -16,6 +17,20 @@ class TestAxis < Test::Unit::TestCase
     assert(@axis.scaling.is_a?(Axlsx::Scaling) && @axis.scaling.orientation == :minMax, "scaling default incorrect")
     assert_raise(ArgumentError) { Axlsx::Axis.new( -1234, 'abcd') }
     assert_equal('Foo', @axis.title.text)
+  end
+
+  def test_cell_based_axis_title
+    p = Axlsx::Package.new
+    p.workbook.add_worksheet(:name=>'foosheet') do |sheet|
+      sheet.add_row ['battle victories']
+      sheet.add_row ['bird', 1, 2, 1]
+      sheet.add_row ['cat', 7, 9, 10]
+      sheet.add_chart(Axlsx::Line3DChart) do |chart|
+        chart.add_series :data => sheet['B2:D2'], :labels => sheet['B1']
+        chart.valAxis.title = sheet['A1']
+        assert_equal('battle victories', chart.valAxis.title.text)  
+      end
+    end
   end
 
   def test_axis_position
