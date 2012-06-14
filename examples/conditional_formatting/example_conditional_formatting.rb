@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby -w -s
 # -*- coding: utf-8 -*-
-$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../lib"
+$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../../lib"
 require 'axlsx'
 
 p = Axlsx::Package.new
@@ -12,6 +12,7 @@ money = book.styles.add_style(:format_code => '0,000', :border => Axlsx::STYLE_T
 
 # define the style for conditional formatting
 profitable = book.styles.add_style( :fg_color=>"FF428751",
+                                    :bg_color=>"FFCDC5BF",
                                     :type => :dxf)
 
 book.add_worksheet(:name => "Cell Is") do |ws|
