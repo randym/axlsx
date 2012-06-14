@@ -291,7 +291,7 @@ module Axlsx
     def parse_fill_options(options={})
       return unless options[:bg_color]
       color = Color.new(:rgb=>options[:bg_color])
-      pattern = PatternFill.new(:patternType =>:solid, :fgColor=>color)
+      pattern = PatternFill.new(:patternType =>:solid, :fgColor=>color, :bgColor=>color)
       fill = Fill.new(pattern)
       options[:type] == :dxf ? fill : fills << fill
     end
