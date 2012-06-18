@@ -541,7 +541,8 @@ module Axlsx
        end
        str.concat '</dataValidations>'
      end
-     str + '</worksheet>'
+     str.concat '</worksheet>'
+     str.tr("\u0000-\u001f\u007f\u0028", '')
     end
 
     # The worksheet relationships. This is managed automatically by the worksheet

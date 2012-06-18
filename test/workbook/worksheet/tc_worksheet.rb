@@ -310,6 +310,14 @@ class TestWorksheet < Test::Unit::TestCase
     assert(errors.empty?, "error free validation")
   end
 
+  def test_to_xml_string_with_illegal_chars
+    nasties =  "\u2028\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008\u001f"
+    @ws.add_row [nasties]
+    assert_equal(nasties, @ws.rows.last.cells.last.value)
+    schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
+    doc = Nokogiri::XML(@ws.to_xml_string)
+    assert(schema.validate(doc).map { |e| e.error }.empty?)
+  end
   # Make sure the XML for all optional elements (like pageMargins, autoFilter, ...)
   # is generated in correct order.
   def test_valid_with_optional_elements
