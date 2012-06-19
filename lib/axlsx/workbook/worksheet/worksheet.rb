@@ -542,7 +542,15 @@ module Axlsx
        str.concat '</dataValidations>'
      end
      str.concat '</worksheet>'
-     str.tr("\u0000-\u001f\u007f\u0028", '')
+     # todo figure out how to remove any characters that are not allowed in xml
+     # [#x1-#x8], [#xB-#xC], [#xE-#x1F], [#x7F-#x84], [#x86-#x9F], [#xFDD0-#xFDDF],
+     # [#x1FFFE-#x1FFFF], [#x2FFFE-#x2FFFF], [#x3FFFE-#x3FFFF],
+     # [#x4FFFE-#x4FFFF], [#x5FFFE-#x5FFFF], [#x6FFFE-#x6FFFF],
+     # [#x7FFFE-#x7FFFF], [#x8FFFE-#x8FFFF], [#x9FFFE-#x9FFFF],
+     # [#xAFFFE-#xAFFFF], [#xBFFFE-#xBFFFF], [#xCFFFE-#xCFFFF],
+     # [#xDFFFE-#xDFFFF], [#xEFFFE-#xEFFFF], [#xFFFFE-#xFFFFF],
+     # [#x10FFFE-#x10FFFF].
+     # str.tr("", '')
     end
 
     # The worksheet relationships. This is managed automatically by the worksheet
