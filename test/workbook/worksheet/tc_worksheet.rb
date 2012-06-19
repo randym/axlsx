@@ -248,7 +248,7 @@ class TestWorksheet < Test::Unit::TestCase
   def test_to_xml_string_sheet_protection
     @ws.sheet_protection.password = 'fish'
     doc = Nokogiri::XML(@ws.to_xml_string)
-    assert(doc.xpath('//sheetProtection'))
+    assert(doc.xpath('//xmlns:sheetProtection'))
   end
 
   def test_to_xml_string_page_margins
@@ -302,21 +302,18 @@ class TestWorksheet < Test::Unit::TestCase
   def test_to_xml_string
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@ws.to_xml_string)
-    errors = []
-    schema.validate(doc).each do |error|
-      errors.push error
-      puts error.message
-    end
-    assert(errors.empty?, "error free validation")
+    assert(schema.validate(doc).map{ |e| puts e.message; e }.empty?, "error free validation")
   end
 
   def test_to_xml_string_with_illegal_chars
-    nasties =  "\u2028\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008\u001f"
+    nasties =  "\v\u2028\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008\u001f"
     @ws.add_row [nasties]
     assert_equal(nasties, @ws.rows.last.cells.last.value)
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@ws.to_xml_string)
-    assert(schema.validate(doc).map { |e| e.error }.empty?)
+
+    puts @ws.to_xml_string
+    assert(schema.validate(doc).map { |e| puts e.message; e }.empty?)
   end
   # Make sure the XML for all optional elements (like pageMargins, autoFilter, ...)
   # is generated in correct order.
@@ -330,13 +327,7 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.add_table "E1:F3"
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@ws.to_xml_string)
-    errors = []
-    schema.validate(doc).each do |error|
-      errors.push error
-      puts error.message
-    end
-    assert(errors.empty?, "error free validation")
-
+    assert(schema.validate(doc).map { |e| puts e.message; e }.empty?, schema.validate(doc).map { |e| e.message }.join('\n'))
   end
 
   def test_relationships
@@ -358,8 +349,8 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   def test_name_size
-    assert_raise(ArgumentError, "name too long!") { @ws.name = Array.new(32, "A").join('') }
-    assert_nothing_raised { @ws.name = Array.new(31, "A").join('') }
+    assert_raise(ArgumentError, "name too long!") { @ws.name = Array.new(32, "A").join() }
+    assert_nothing_raised { @ws.name = Array.new(31, "A").join() }
   end
 
   def test_set_fixed_width_column
