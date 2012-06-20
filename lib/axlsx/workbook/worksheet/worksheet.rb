@@ -575,7 +575,8 @@ module Axlsx
      # [#xAFFFE-#xAFFFF], [#xBFFFE-#xBFFFF], [#xCFFFE-#xCFFFF],
      # [#xDFFFE-#xDFFFF], [#xEFFFE-#xEFFFF], [#xFFFFE-#xFFFFF],
      # [#x10FFFE-#x10FFFF].
-     str.tr("\u0001-\u0008", '')
+     # This will crunch 1.8.7
+     # str.tr("\u0001-\u0008", '')
     end
 
     # The worksheet relationships. This is managed automatically by the worksheet
