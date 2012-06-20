@@ -2,6 +2,7 @@
 module Axlsx
 
 require 'axlsx/workbook/worksheet/date_time_converter.rb'
+require 'axlsx/workbook/worksheet/protected_range.rb'
 require 'axlsx/workbook/worksheet/cell.rb'
 require 'axlsx/workbook/worksheet/page_margins.rb'
 require 'axlsx/workbook/worksheet/page_setup.rb'
@@ -100,7 +101,6 @@ require 'axlsx/workbook/worksheet/selection.rb'
     # @return [SimpleTypedList]
     attr_reader :tables
 
-
     # A colllection of comments associated with this workbook
     # @note The recommended way to manage comments is Worksheet#add_comment
     # @see Worksheet#add_comment
@@ -143,7 +143,6 @@ require 'axlsx/workbook/worksheet/selection.rb'
       @drawings = SimpleTypedList.new Drawing
       @charts = SimpleTypedList.new Chart
       @images = SimpleTypedList.new Pic
-
       # Are these even used????? Check package serialization parts
       @tables = SimpleTypedList.new Table
       @comments = SimpleTypedList.new Comments

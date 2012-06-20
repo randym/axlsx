@@ -17,6 +17,12 @@ module Axlsx
       @sheet_protection
     end
     
+    # A collection of protected ranges in the worksheet
+    # @note The recommended way to manage protected ranges is with Worksheet#protect_range
+    # @see Worksheet#protect_range
+    # @return [SimpleTypedList] The protected ranges for this worksheet
+    attr_reader :protected_ranges
+
     # The sheet view object for this worksheet
     # @return [SheetView]
     # @see [SheetView]
@@ -188,7 +194,7 @@ module Axlsx
       @print_options = PrintOptions.new options[:print_options] if options[:print_options]
       @rows = SimpleTypedList.new Row
       @column_info = SimpleTypedList.new Col
-      # @cols = SimpleTypedList.new Cell
+      @protected_ranges = SimpleTypedList.new ProtectedRange
       @tables = SimpleTypedList.new Table
 
       options.each do |o|
@@ -247,7 +253,21 @@ module Axlsx
                        end
     end
 
-
+    # Adds a new protected cell range to the worksheet. Note that protected ranges are only in effect when sheet protection is enabled.
+    # @param [String|Array] The string reference for the cells to protect or an array of cells.
+    # @retrun [ProtectedRange]
+    # @note When using an array of cells, a contiguous range is created from the minimum top left to the maximum top bottom of the cells provided.
+    def protect_range(cells)
+      sqref = if cells.is_a?(String)
+                cells
+              elsif cells.is_a?(SimpleTypedList)
+                cells = cells.sort { |x, y| [x.index, x.row.index] <=> [y.index, y.row.index] }
+                "#{cells.first.r}:#{cells.last.r}"
+              end
+      @protected_ranges << ProtectedRange.new(:sqref => sqref, :name => 'Range#{@protected_ranges.size}')
+      @protected_ranges.last
+    end
+    
     # The demensions of a worksheet. This is not actually a required element by the spec,
     # but at least a few other document readers expect this for conversion
     # @return [String] the A1:B2 style reference for the first and last row column intersection in the workbook
@@ -550,7 +570,7 @@ module Axlsx
      # [#xAFFFE-#xAFFFF], [#xBFFFE-#xBFFFF], [#xCFFFE-#xCFFFF],
      # [#xDFFFE-#xDFFFF], [#xEFFFE-#xEFFFF], [#xFFFFE-#xFFFFF],
      # [#x10FFFE-#x10FFFF].
-     # str.tr("", '')
+     str.tr("\u0001-\u0008", '')
     end
 
     # The worksheet relationships. This is managed automatically by the worksheet

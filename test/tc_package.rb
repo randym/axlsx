@@ -7,6 +7,8 @@ class TestPackage < Test::Unit::TestCase
     ws = @package.workbook.add_worksheet
     ws.add_row ['Can', 'we', 'build it?']
     ws.add_row ['Yes!', 'We', 'can!']
+    ws.protect_range('A1:C1')
+    ws.protect_range(ws.rows.last.cells)
     ws.add_comment :author => 'alice', :text => 'Hi Bob', :ref => 'A12'
     ws.add_comment :author => 'bob', :text => 'Hi Alice', :ref => 'F19'
     ws.sheet_view do |vs|

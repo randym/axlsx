@@ -334,6 +334,14 @@ end
 #```
 
 
+# Sheet Protection and excluding cells from locking.
+unlocked = wb.styles.add_style :locked => false
+wb.add_worksheet(:name => 'Sheet Protection') do |sheet|
+  sheet.sheet_protection.password = 'fish'
+  sheet.add_row [1, 2 ,3] # These cells will be locked
+  sheet.add_row [4, 5, 6], :style => unlocked # these cells will not!
+end
+
 ##Specify page margins and other options for printing
 
 #```ruby
@@ -355,7 +363,7 @@ end
 ## Frozen/Split panes
 ## ``` ruby
 wb.add_worksheet(:name => 'fixed headers') do |sheet|
-  sheet.add_row(['',  (0..99).map { |i| "column header #{i}" }].flatten )
+ sheet.add_row(['',  (0..99).map { |i| "column header #{i}" }].flatten )
   100.times.with_index { |index| sheet << ["row header", (0..index).to_a].flatten }
   sheet.sheet_view.pane do |pane|
     pane.top_left_cell = "B2"

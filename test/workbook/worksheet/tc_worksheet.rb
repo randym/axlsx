@@ -312,7 +312,6 @@ class TestWorksheet < Test::Unit::TestCase
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@ws.to_xml_string)
 
-    puts @ws.to_xml_string
     assert(schema.validate(doc).map { |e| puts e.message; e }.empty?)
   end
   # Make sure the XML for all optional elements (like pageMargins, autoFilter, ...)
@@ -373,6 +372,19 @@ class TestWorksheet < Test::Unit::TestCase
     assert_raise(ArgumentError, 'only accept Integer, Float or Fixnum') { @ws.column_widths 2, 7, "-1" }
   end
 
+  def test_protect_range
+    assert(@ws.protected_ranges.is_a?(Axlsx::SimpleTypedList))
+    assert_equal(0, @ws.protected_ranges.size)
+    @ws.protect_range('A1:A3')
+    assert_equal('A1:A3', @ws.protected_ranges.last.sqref)
+  end
+
+  def test_protect_range_with_cells
+    @ws.add_row [1, 2, 3]
+    assert_nothing_raised {@ws.protect_range(@ws.rows.first.cells) }
+    assert_equal('A1:C1', @ws.protected_ranges.last.sqref)
+    
+  end
   def test_merge_cells
     assert(@ws.merged_cells.is_a?(Array))
     assert_equal(@ws.merged_cells.size, 0)
