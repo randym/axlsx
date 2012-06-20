@@ -541,6 +541,11 @@ module Axlsx
       str.concat '</sheetData>'
       str.concat "<autoFilter ref='%s'></autoFilter>" % @auto_filter if @auto_filter
       @sheet_protection.to_xml_string(str) if @sheet_protection
+      unless @protected_ranges.empty?
+        str << '<protectedRanges>'
+        @protected_ranges.each { |pr| pr.to_xml_string(str) }
+        str << '</protectedRanges>'
+      end
       str.concat "<mergeCells count='%s'>%s</mergeCells>" % [@merged_cells.size, @merged_cells.reduce('') { |memo, obj| memo += "<mergeCell ref='%s'></mergeCell>" % obj } ] unless @merged_cells.empty?
       print_options.to_xml_string(str) if @print_options
       page_margins.to_xml_string(str) if @page_margins

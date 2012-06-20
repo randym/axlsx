@@ -149,7 +149,7 @@ module Axlsx
 
     def to_xml_string(str = '')
       classname = @allowed_types[0].name.split('::').last
-      el_name = serialize_as || (classname[0,1].downcase + classname[1..-1])
+      el_name = serialize_as.to_s || (classname[0,1].downcase + classname[1..-1])
       str << '<' << el_name << ' count="' << @list.size.to_s << '">'
       @list.each { |item| item.to_xml_string(str) }
       str << '</' << el_name << '>'

@@ -342,6 +342,7 @@ wb.add_worksheet(:name => 'Sheet Protection') do |sheet|
   sheet.add_row [4, 5, 6], :style => unlocked # these cells will not!
 end
 
+
 ##Specify page margins and other options for printing
 
 #```ruby
