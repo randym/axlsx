@@ -22,7 +22,7 @@ module Axlsx
       str << 'xmlns:dcmitype="' << CORE_NS_DCMIT << '" xmlns:dcterms="' << CORE_NS_DCT << '" '
       str << 'xmlns:xsi="' << CORE_NS_XSI << '">'
       str << '<dc:creator>' << self.creator << '</dc:creator>'
-      str << '<dcterms:created xsi:type="dcterms:W3CDTF">' << Time.now.strftime('%Y-%m-%dT%H:%M:%S') << '</dcterms:created>'
+      str << '<dcterms:created xsi:type="dcterms:W3CDTF">' << Time.now.strftime('%Y-%m-%dT%H:%M:%S') << 'Z</dcterms:created>'
       str << '<cp:revision>0</cp:revision>'
       str << '</cp:coreProperties>'
     end
