@@ -164,6 +164,13 @@ module Axlsx
       @print_options
     end
 
+    # Header and footer of the worksheet
+    def header_footer
+      @header_footer ||= HeaderFooter.new
+      yield @header_footer if block_given?
+      @header_footer
+    end
+
     # definition of characters which are less than the maximum width of 0-9 in the default font for use in String#count.
     # This is used for autowidth calculations
     # @return [String]
@@ -191,6 +198,7 @@ module Axlsx
       self.name = "Sheet" + (index+1).to_s
       @page_margins = PageMargins.new options[:page_margins] if options[:page_margins]
       @page_setup = PageSetup.new options[:page_setup]  if options[:page_setup]
+      @header_footer = HeaderFooter.new options[:header_footer] if options[:header_footer]
       @print_options = PrintOptions.new options[:print_options] if options[:print_options]
       @rows = SimpleTypedList.new Row
       @column_info = SimpleTypedList.new Col
@@ -566,6 +574,9 @@ module Axlsx
        end
        str.concat '</dataValidations>'
      end
+
+     @header_footer.to_xml_string(str) if @header_footer
+
      str.concat '</worksheet>'
      # todo figure out how to remove any characters that are not allowed in xml
      # [#x1-#x8], [#xB-#xC], [#xE-#x1F], [#x7F-#x84], [#x86-#x9F], [#xFDD0-#xFDDF],
