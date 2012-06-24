@@ -70,7 +70,8 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       str << '<headerFooter>'
-      ['even','odd'].each do |which|
+      # By spec: ['odd','even','all']
+      ['odd'].each do |which|
         str << "<#{which}Header>"
         if @left_header
           str << '&amp;L'
