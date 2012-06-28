@@ -113,6 +113,9 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
+- **June.??.12**: 1.1.8 release
+   - new - google docs interoperability
+   - added filter to strip out control characters from cell data.
 - **June.11.12**: 1.1.7 release
    - fix chart rendering issue when label offset is specified as a
      percentage in serialization and ensure that formula are not stored
@@ -190,6 +193,8 @@ done without the help of the people below.
 [scpike](https://github.com/scpike) - for keeping numbers fixed even when they are rational and a super clean implementation of conditional formatting.
 
 [janhuehne](https://github.com/janhuehne) - for working out the decoder ring and adding in cell level validation, and providing a support for window panes.
+
+[rfc2616](https://github.com/rfc2616) - for FINALLY working out the interop issues with google docs.
 
 #Copyright and License
 ----------
