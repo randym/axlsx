@@ -156,18 +156,18 @@ module Axlsx
     # @return [Zip::ZipOutputStream]
     def write_parts(zip)
       p = parts
-        p.each do |part|
-          unless part[:doc].nil?
-            zip.put_next_entry(part[:entry]);
-            entry = ['1.9.2', '1.9.3'].include?(RUBY_VERSION) ? part[:doc].force_encoding('BINARY') : part[:doc]
-            zip.puts(entry)
-          end
-          unless part[:path].nil?
-            zip.put_next_entry(part[:entry]);
-            # binread for 1.9.3
-            zip.write IO.respond_to?(:binread) ? IO.binread(part[:path]) : IO.read(part[:path])
-          end
+      p.each do |part|
+        unless part[:doc].nil?
+          zip.put_next_entry(part[:entry])
+          entry = ['1.9.2', '1.9.3'].include?(RUBY_VERSION) ? part[:doc].force_encoding('BINARY') : part[:doc]
+          zip.puts(entry)
         end
+        unless part[:path].nil?
+          zip.put_next_entry(part[:entry]);
+          # binread for 1.9.3
+          zip.write IO.respond_to?(:binread) ? IO.binread(part[:path]) : IO.read(part[:path])
+        end
+      end
       zip
     end
 
