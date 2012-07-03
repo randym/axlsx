@@ -25,7 +25,7 @@ module Axlsx
     def initialize(frame, options={})
       super(frame, options)
       @series_type = PieSeries
-      @view_3D = View3D.new({:rotX =>30, :perspective=>30}.merge(options))
+      @view_3D = View3D.new({:rot_x =>30, :perspective=>30}.merge(options))
     end
 
     # Serializes the object

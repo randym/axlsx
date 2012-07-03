@@ -15,15 +15,15 @@ class TestBar3DChart < Test::Unit::TestCase
   def test_initialization
     assert_equal(@chart.grouping, :clustered, "grouping defualt incorrect")
     assert_equal(@chart.series_type, Axlsx::BarSeries, "series type incorrect")
-    assert_equal(@chart.barDir, :bar, " bar direction incorrect")
-    assert(@chart.catAxis.is_a?(Axlsx::CatAxis), "category axis not created")
-    assert(@chart.valAxis.is_a?(Axlsx::ValAxis), "value access not created")
+    assert_equal(@chart.bar_dir, :bar, " bar direction incorrect")
+    assert(@chart.cat_axis.is_a?(Axlsx::CatAxis), "category axis not created")
+    assert(@chart.val_axis.is_a?(Axlsx::ValAxis), "value access not created")
   end
 
   def test_bar_direction
-    assert_raise(ArgumentError, "require valid bar direction") { @chart.barDir = :left }
-    assert_nothing_raised("allow valid bar direction") { @chart.barDir = :col }
-    assert(@chart.barDir == :col)
+    assert_raise(ArgumentError, "require valid bar direction") { @chart.bar_dir = :left }
+    assert_nothing_raised("allow valid bar direction") { @chart.bar_dir = :col }
+    assert(@chart.bar_dir == :col)
   end
 
  def test_grouping
@@ -34,15 +34,15 @@ class TestBar3DChart < Test::Unit::TestCase
 
 
  def test_gapWidth
-   assert_raise(ArgumentError, "require valid gap width") { @chart.gapWidth = 200 }
-   assert_nothing_raised("allow valid gapWidth") { @chart.gapWidth = "200%" }
-   assert(@chart.gapWidth == "200%")
+   assert_raise(ArgumentError, "require valid gap width") { @chart.gap_width = 200 }
+   assert_nothing_raised("allow valid gapWidth") { @chart.gap_width = "200%" }
+   assert(@chart.gap_width == "200%")
  end
 
  def test_gapDepth
-   assert_raise(ArgumentError, "require valid gapDepth") { @chart.gapDepth = 200 }
-   assert_nothing_raised("allow valid gapDepth") { @chart.gapDepth = "200%" }
-   assert(@chart.gapDepth == "200%")
+   assert_raise(ArgumentError, "require valid gap_depth") { @chart.gap_depth = 200 }
+   assert_nothing_raised("allow valid gap_depth") { @chart.gap_depth = "200%" }
+   assert(@chart.gap_depth == "200%")
  end
 
   def test_shape
