@@ -113,9 +113,13 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
-- **June.??.12**: 1.1.8 release
+- **July.??.12**: 1.1.8 release
    - new - google docs interoperability
    - added filter to strip out control characters from cell data.
+   - added in interop requirements so that charts are properly exported
+     to PDF from Libra Office
+   - The beginnings of 'The Great Rename' so that all attributes use
+     snake case, and parse to the proper camel case
 - **June.11.12**: 1.1.7 release
    - fix chart rendering issue when label offset is specified as a
      percentage in serialization and ensure that formula are not stored
