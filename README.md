@@ -93,7 +93,7 @@ To install Axlsx, use the following command:
 
 The example listing is getting overly large to maintain here.
 If you are using Yard, you will be able to see the examples in line below.
-If not, please refer to the Please see the [examples](examples/example.rb) here.
+If not, please refer to the Please see the [examples](https://github.com/randym/axlsx/tree/master/examples/examples.rb) here.
 
 {include:file:examples/example.rb}
 

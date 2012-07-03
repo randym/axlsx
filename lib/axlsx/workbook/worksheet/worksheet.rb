@@ -40,6 +40,8 @@ module Axlsx
     # @return [Array] of Table
     attr_reader :tables
 
+    # The comments associated with this worksheet
+    # @return [SimpleTypedList]
     attr_reader :comments
 
     # The rows in this worksheet
