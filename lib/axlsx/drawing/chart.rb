@@ -7,7 +7,8 @@ module Axlsx
 
 
     # The 3D view properties for the chart
-    attr_reader :view3D
+    attr_reader :view_3D
+    alias :view3D :view_3D
 
     # A reference to the graphic frame that owns this chart
     # @return [GraphicFrame]
@@ -45,7 +46,7 @@ module Axlsx
     # @option options [Array|String|Cell] end_at The X, Y coordinates defining the bottom right corner of the chart.
     def initialize(frame, options={})
       @style = 18  
-      @view3D = nil
+      @view_3D = nil
       @graphic_frame=frame
       @graphic_frame.anchor.drawing.worksheet.workbook.charts << self
       @series = SimpleTypedList.new Series
@@ -127,7 +128,7 @@ module Axlsx
       @title.to_xml_string str
       # do these need the c: namespace as well???
       str << '<c:autoTitleDeleted val="' << (@title == nil).to_s << '"/>'
-      @view3D.to_xml_string(str) if @view3D
+      @view_3D.to_xml_string(str) if @view_3D
       str << '<c:floor><c:thickness val="0"/></c:floor>'
       str << '<c:sideWall><c:thickness val="0"/></c:sideWall>'
       str << '<c:backWall><c:thickness val="0"/></c:backWall>'
@@ -188,7 +189,8 @@ module Axlsx
       [x, y]
     end
 
-    def view3D=(v) DataTypeValidator.validate "#{self.class}.view3D", View3D, v; @view3D = v; end
+    def view_3D=(v) DataTypeValidator.validate "#{self.class}.view_3D", View3D, v; @view_3D = v; end
+    alias :view3D= :view_3D=
 
   end
 end

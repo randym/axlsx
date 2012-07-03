@@ -10,24 +10,29 @@ module Axlsx
 
     # the category axis
     # @return [CatAxis]
-    attr_reader :catAxis
+    attr_reader :cat_axis
+    alias :catAxis :cat_axis
 
-    # the valueaxis
+    # the value axis
     # @return [ValAxis]
-    attr_reader :valAxis
+    attr_reader :val_axis
+    alias :valAxis :val_axis
 
     # The direction of the bars in the chart
     # must be one of [:bar, :col]
     # @return [Symbol]
-    attr_reader :barDir
+    attr_reader :bar_dir
+    alias :barDir :bar_dir
 
     # space between bar or column clusters, as a percentage of the bar or column width.
     # @return [String]
-    attr_reader :gapDepth
+    attr_reader :gap_depth
+    alias :gapDepth :gap_depth
 
     # space between bar or column clusters, as a percentage of the bar or column width.
     # @return [String]
-    attr_reader :gapWidth
+    attr_reader :gap_width 
+    alias :gapWidth :gap_width
 
     #grouping for a column, line, or area chart.
     # must be one of  [:percentStacked, :clustered, :standard, :stacked]
@@ -46,38 +51,39 @@ module Axlsx
     # @param [GraphicFrame] frame The workbook that owns this chart.
     # @option options [Cell, String] title
     # @option options [Boolean] show_legend
-    # @option options [Symbol] barDir
+    # @option options [Symbol] bar_dir
     # @option options [Symbol] grouping
-    # @option options [String] gapWidth
-    # @option options [String] gapDepth
+    # @option options [String] gap_width
+    # @option options [String] gap_depth
     # @option options [Symbol] shape
-    # @option options [Integer] rotX
-    # @option options [String] hPercent
-    # @option options [Integer] rotY
-    # @option options [String] depthPercent
-    # @option options [Boolean] rAngAx
+    # @option options [Integer] rot_x
+    # @option options [String] h_percent
+    # @option options [Integer] rot_y
+    # @option options [String] depth_percent
+    # @option options [Boolean] r_ang_ax
     # @option options [Integer] perspective
     # @see Chart
     # @see View3D
     def initialize(frame, options={})
-      @barDir = :bar
+      @bar_dir = :bar
       @grouping = :clustered
-      @gapWidth, @gapDepth, @shape = nil, nil, nil
-      @catAxId = rand(8 ** 8)
-      @valAxId = rand(8 ** 8)
-      @catAxis = CatAxis.new(@catAxId, @valAxId)
-      @valAxis = ValAxis.new(@valAxId, @catAxId, :tickLblPos => :low)
+      @gap_width, @gap_depth, @shape = nil, nil, nil
+      @cat_ax_id = rand(8 ** 8)
+      @val_ax_id = rand(8 ** 8)
+      @cat_axis = CatAxis.new(@cat_ax_id, @val_ax_id)
+      @val_axis = ValAxis.new(@val_ax_id, @cat_ax_id, :tick_lbl_pos => :low)
       super(frame, options)
       @series_type = BarSeries
-      @view3D = View3D.new({:rAngAx=>1}.merge(options))
+      @view_3D = View3D.new({:r_ang_ax=>1}.merge(options))
     end
 
     # The direction of the bars in the chart
     # must be one of [:bar, :col]
-    def barDir=(v)
-      RestrictionValidator.validate "Bar3DChart.barDir", [:bar, :col], v
-      @barDir = v
+    def bar_dir=(v)
+      RestrictionValidator.validate "Bar3DChart.bar_dir", [:bar, :col], v
+      @bar_dir = v
     end
+    alias :barDir= :bar_dir=
 
     #grouping for a column, line, or area chart.
     # must be one of  [:percentStacked, :clustered, :standard, :stacked]
@@ -87,16 +93,18 @@ module Axlsx
     end
 
     # space between bar or column clusters, as a percentage of the bar or column width.
-    def gapWidth=(v)
-      RegexValidator.validate "Bar3DChart.gapWidth", GAP_AMOUNT_PERCENT, v
-      @gapWidth=(v)
+    def gap_width=(v)
+      RegexValidator.validate "Bar3DChart.gap_width", GAP_AMOUNT_PERCENT, v
+      @gap_width=(v)
     end
+    alias :gapWidth= :gap_width=
 
     # space between bar or column clusters, as a percentage of the bar or column width.
-    def gapDepth=(v)
-      RegexValidator.validate "Bar3DChart.gapWidth", GAP_AMOUNT_PERCENT, v
-      @gapDepth=(v)
+    def gap_depth=(v)
+      RegexValidator.validate "Bar3DChart.gap_didth", GAP_AMOUNT_PERCENT, v
+      @gap_depth=(v)
     end
+    alias :gapDepth= :gap_depth=
 
     # The shabe of the bars or columns
     # must be one of  [:cone, :coneToMax, :box, :cylinder, :pyramid, :pyramidToMax]
@@ -111,7 +119,7 @@ module Axlsx
     def to_xml_string(str = '')
       super(str) do |str_inner|
         str_inner << '<c:bar3DChart>'
-        str_inner << '<c:barDir val="' << barDir.to_s << '"/>'
+        str_inner << '<c:barDir val="' << bar_dir.to_s << '"/>'
         str_inner << '<c:grouping val="' << grouping.to_s << '"/>'
         str_inner << '<c:varyColors val="1"/>'
         @series.each { |ser| ser.to_xml_string(str_inner) }
@@ -123,15 +131,15 @@ module Axlsx
         str_inner << '<c:showPercent val="0"/>'
         str_inner << '<c:showBubbleSize val="0"/>'
         str_inner << '</c:dLbls>'
-        str_inner << '<c:gapWidth val="' << @gapWidth.to_s << '"/>' unless @gapWidth.nil?
-        str_inner << '<c:gapDepth val="' << @gapDepth.to_s << '"/>' unless @gapDepth.nil?
+        str_inner << '<c:gapWidth val="' << @gap_width.to_s << '"/>' unless @gap_width.nil?
+        str_inner << '<c:gapDepth val="' << @gap_depth.to_s << '"/>' unless @gap_depth.nil?
         str_inner << '<c:shape val="' << @shape.to_s << '"/>' unless @shape.nil?
-        str_inner << '<c:axId val="' << @catAxId.to_s << '"/>'
-        str_inner << '<c:axId val="' << @valAxId.to_s << '"/>'
+        str_inner << '<c:axId val="' << @cat_ax_id.to_s << '"/>'
+        str_inner << '<c:axId val="' << @val_ax_id.to_s << '"/>'
         str_inner << '<c:axId val="0"/>'
         str_inner << '</c:bar3DChart>'
-        @catAxis.to_xml_string str_inner
-        @valAxis.to_xml_string str_inner
+        @cat_axis.to_xml_string str_inner
+        @val_axis.to_xml_string str_inner
       end
     end
   end

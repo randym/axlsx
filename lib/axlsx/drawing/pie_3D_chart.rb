@@ -13,19 +13,19 @@ module Axlsx
     # @option options [Cell, String] title
     # @option options [Boolean] show_legend
     # @option options [Symbol] grouping
-    # @option options [String] gapDepth
-    # @option options [Integer] rotX
-    # @option options [String] hPercent
-    # @option options [Integer] rotY
-    # @option options [String] depthPercent
-    # @option options [Boolean] rAngAx
+    # @option options [String] gap_depth
+    # @option options [Integer] rot_x
+    # @option options [String] h_percent
+    # @option options [Integer] rot_y
+    # @option options [String] depth_percent
+    # @option options [Boolean] r_ang_ax
     # @option options [Integer] perspective
     # @see Chart
     # @see View3D
     def initialize(frame, options={})
       super(frame, options)
       @series_type = PieSeries
-      @view3D = View3D.new({:rotX=>30, :perspective=>30}.merge(options))
+      @view_3D = View3D.new({:rotX =>30, :perspective=>30}.merge(options))
     end
 
     # Serializes the object
