@@ -54,6 +54,23 @@ class TestPageSetup < Test::Unit::TestCase
     assert_equal(nil, @ps.scale)
   end
 
+  def test_default_fit_to_page?
+    assert(@ps.fit_to_width == nil && @ps.fit_to_height == nil)
+    assert(@ps.fit_to_page? == false)
+  end
+
+  def test_with_height_fit_to_page?
+    assert(@ps.fit_to_width == nil && @ps.fit_to_height == nil)
+    @ps.set(:fit_to_height => 1)
+    assert(@ps.fit_to_page?)
+  end
+
+  def test_with_width_fit_to_page?
+    assert(@ps.fit_to_width == nil && @ps.fit_to_height == nil)
+    @ps.set(:fit_to_width => 1)
+    assert(@ps.fit_to_page?)
+  end
+
   def test_to_xml_all_values
     @ps.set(:fit_to_height => 1, :fit_to_width => 2, :orientation => :landscape, :paper_height => "297mm", :paper_width => "210mm", :scale => 50)
     doc = Nokogiri::XML.parse(@ps.to_xml_string)
@@ -106,7 +123,7 @@ class TestPageSetup < Test::Unit::TestCase
     assert_nothing_raised { @ps.scale = 99 }
     assert_equal(99, @ps.scale)
   end
-  
+
   def test_fit_to
     fits = @ps.fit_to(:width => 1)
     assert_equal([1, 9999], fits)
@@ -115,7 +132,7 @@ class TestPageSetup < Test::Unit::TestCase
     fits = @ps.fit_to :height => 7, :width => 2
     assert_equal(fits, [2, 7])
     assert_raise(ArgumentError) { puts @ps.fit_to(:width => true)}
-    
-    
+
+
   end
 end

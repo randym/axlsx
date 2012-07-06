@@ -89,8 +89,9 @@ module Axlsx
     # If you want the worksheet to fit on more pages (e.g. 2x2), set {PageSetup#fit_to_width} and {PageSetup#fit_to_height} accordingly.
     # @return Boolean
     # @see #page_setup
-    def fit_to_page
-      (@page_setup != nil && (@page_setup.fit_to_width != nil || @page_setup.fit_to_height != nil))
+    def fit_to_page?
+      return false unless @page_setup
+      @page_setup.fit_to_page?
     end
 
 
@@ -303,7 +304,7 @@ module Axlsx
     # @return [Boolean]
     def fit_to_page=(v)
       warn('axlsx::DEPRECIATED: Worksheet#fit_to_page has been depreciated. This value will automatically be set for you when you use PageSetup#fit_to.')
-      fit_to_page
+      fit_to_page?
     end
 
 
@@ -530,7 +531,7 @@ module Axlsx
       rels = relationships
       str = '<?xml version="1.0" encoding="UTF-8"?>'
       str.concat "<worksheet xmlns=\"%s\" xmlns:r=\"%s\">" % [XML_NS, XML_NS_R]
-      str.concat "<sheetPr><pageSetUpPr fitToPage=\"%s\"></pageSetUpPr></sheetPr>" % fit_to_page if fit_to_page
+      str.concat "<sheetPr><pageSetUpPr fitToPage=\"%s\"></pageSetUpPr></sheetPr>" % fit_to_page? if fit_to_page?
       str.concat "<dimension ref=\"%s\"></dimension>" % dimension unless rows.size == 0
       @sheet_view.to_xml_string(str) if @sheet_view
       if @column_info.size > 0
