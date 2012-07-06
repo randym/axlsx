@@ -16,7 +16,7 @@ module Axlsx
       yield @sheet_protection if block_given?
       @sheet_protection
     end
-    
+
     # A collection of protected ranges in the worksheet
     # @note The recommended way to manage protected ranges is with Worksheet#protect_range
     # @see Worksheet#protect_range
@@ -119,7 +119,6 @@ module Axlsx
       @page_margins ||= PageMargins.new
       yield @page_margins if block_given?
       @page_margins
-
     end
 
     # Page setup settings for printing the worksheet.
@@ -226,7 +225,7 @@ module Axlsx
       cf.add_rules rules
       @conditional_formattings << cf
     end
-    
+
     # Add data validation to this worksheet.
     #
     # @param [String] cells The cells the validation will apply to.
@@ -250,10 +249,10 @@ module Axlsx
     def merge_cells(cells)
       @merged_cells << if cells.is_a?(String)
                          cells
-                       elsif cells.is_a?(Array)
-                         cells = cells.sort { |x, y| [x.index, x.row.index] <=> [y.index, y.row.index] }
-                         "#{cells.first.r}:#{cells.last.r}"
-                       end
+      elsif cells.is_a?(Array)
+        cells = cells.sort { |x, y| [x.index, x.row.index] <=> [y.index, y.row.index] }
+        "#{cells.first.r}:#{cells.last.r}"
+      end
     end
 
     # Adds a new protected cell range to the worksheet. Note that protected ranges are only in effect when sheet protection is enabled.
@@ -270,7 +269,7 @@ module Axlsx
       @protected_ranges << ProtectedRange.new(:sqref => sqref, :name => 'Range#{@protected_ranges.size}')
       @protected_ranges.last
     end
-    
+
     # The demensions of a worksheet. This is not actually a required element by the spec,
     # but at least a few other document readers expect this for conversion
     # @return [String] the A1:B2 style reference for the first and last row column intersection in the workbook
@@ -524,61 +523,117 @@ module Axlsx
       image
     end
 
+    def worksheet_node
+      "<worksheet xmlns=\"%s\" xmlns:r=\"%s\">" % [XML_NS, XML_NS_R]
+    end
+
+    def sheet_pr_node
+      return '' unless fit_to_page?
+      "<sheetPr><pageSetUpPr fitToPage=\"%s\"></pageSetUpPr></sheetPr>" % fit_to_page?
+    end
+
+    def dimension_node
+      return '' if rows.size == 0
+      "<dimension ref=\"%s\"></dimension>" % dimension
+    end
+
+    def sheet_data_node
+      str = '<sheetData>'
+      @rows.each_with_index { |row, index| row.to_xml_string(index, str) }
+      str << '</sheetData>'
+    end
+
+    def auto_filter_node
+      return '' unless @auto_filter
+      "<autoFilter ref='%s'></autoFilter>" % @auto_filter
+    end
+    def cols_node
+      return '' if @column_info.empty?
+      str = "<cols>"
+      @column_info.each { |col| col.to_xml_string(str) }
+      str << '</cols>'
+    end 
+    def protected_ranges_node
+      return '' if @protected_ranges.empty?
+      str = '<protectedRanges>'
+      @protected_ranges.each { |pr| pr.to_xml_string(str) }
+      str << '</protectedRanges>'
+    end
+
+    def merged_cells_node
+      return '' if @merged_cells.size == 0
+      #This is rediculous do it cleaner...
+      str = "<mergeCells count='#{@merged_cells.size}'>"
+      @merged_cells.each { |merged_cell| str << "<mergeCell ref='#{merged_cell}'></mergeCel>" }
+      str << '</mergedCells>'
+    end
+
+    def drawing_node
+      return '' unless @drawing
+      "<drawing r:id='rId" << (relationships.index{ |r| r.Type == DRAWING_R } + 1).to_s << "'/>" 
+    end
+
+    def legacy_drawing_node
+      return '' if @comments.empty?
+      "<legacyDrawing r:id='rId" << (relationships.index{ |r| r.Type == VML_DRAWING_R } + 1).to_s << "'/>" 
+    end
+
+    def table_parts_node
+      return '' if @tables.empty?
+      str = "<tableParts count='#{@tables.size}'>"
+      @tables.each { |table| str << "<tablePart r:id='#{table.rId}'/>" }
+      str << '</tableParts>'
+    end
+
+    def conditional_formattings_node
+      return '' if @conditional_formattings.size == 0
+      str = ''
+      @conditional_formattings.each { |conditional_formatting| str << conditional_formatting.to_xml_string }
+      str
+    end
+
+    def data_validations_node
+      return '' if @data_validations.size == 0
+      str = "<dataValidations count='#{@data_validations.size}'>"
+      @data_validations.each { |data_validation| str << data_validation.to_xml_string }
+      str << '</dataValidations>'
+    end
+
     # Serializes the object
     # @param [String] str
     # @return [String]
     def to_xml_string
       rels = relationships
       str = '<?xml version="1.0" encoding="UTF-8"?>'
-      str.concat "<worksheet xmlns=\"%s\" xmlns:r=\"%s\">" % [XML_NS, XML_NS_R]
-      str.concat "<sheetPr><pageSetUpPr fitToPage=\"%s\"></pageSetUpPr></sheetPr>" % fit_to_page? if fit_to_page?
-      str.concat "<dimension ref=\"%s\"></dimension>" % dimension unless rows.size == 0
+      str << worksheet_node
+      str << sheet_pr_node
+      str << dimension_node
       @sheet_view.to_xml_string(str) if @sheet_view
-      if @column_info.size > 0
-        str << "<cols>"
-        @column_info.each { |col| col.to_xml_string(str) }
-        str.concat '</cols>'
-      end
-      str.concat '<sheetData>'
-      @rows.each_with_index { |row, index| row.to_xml_string(index, str) }
-      str.concat '</sheetData>'
-      str.concat "<autoFilter ref='%s'></autoFilter>" % @auto_filter if @auto_filter
+      str << cols_node
+      str << sheet_data_node
+
+      str << auto_filter_node
       @sheet_protection.to_xml_string(str) if @sheet_protection
-      unless @protected_ranges.empty?
-        str << '<protectedRanges>'
-        @protected_ranges.each { |pr| pr.to_xml_string(str) }
-        str << '</protectedRanges>'
-      end
-      str.concat "<mergeCells count='%s'>%s</mergeCells>" % [@merged_cells.size, @merged_cells.reduce('') { |memo, obj| memo += "<mergeCell ref='%s'></mergeCell>" % obj } ] unless @merged_cells.empty?
-      print_options.to_xml_string(str) if @print_options
+      str << protected_ranges_node
+      str << merged_cells_node
+      @print_options.to_xml_string(str) if @print_options
       page_margins.to_xml_string(str) if @page_margins
       page_setup.to_xml_string(str) if @page_setup
-      str << "<drawing r:id='rId" << (rels.index{ |r| r.Type == DRAWING_R } + 1).to_s << "'/>" if @drawing
-      str << "<legacyDrawing r:id='rId" << (rels.index{ |r| r.Type == VML_DRAWING_R } + 1).to_s << "'/>" if @comments.size > 0
-     unless @tables.empty?
-       str.concat "<tableParts count='%s'>%s</tableParts>" % [@tables.size, @tables.reduce('') { |memo, obj| memo += "<tablePart r:id='%s'/>" % obj.rId }]
-     end
-     @conditional_formattings.each do |cf|
-       str.concat cf.to_xml_string
-     end
-     
-     unless @data_validations.empty?
-       str.concat "<dataValidations count=\"#{@data_validations.size}\">"
-       @data_validations.each do |df|
-         str.concat df.to_xml_string
-       end
-       str.concat '</dataValidations>'
-     end
-     str.concat '</worksheet>'
-     # todo figure out how to remove any characters that are not allowed in xml
-     # [#x1-#x8], [#xB-#xC], [#xE-#x1F], [#x7F-#x84], [#x86-#x9F], [#xFDD0-#xFDDF],
-     # [#x1FFFE-#x1FFFF], [#x2FFFE-#x2FFFF], [#x3FFFE-#x3FFFF],
-     # [#x4FFFE-#x4FFFF], [#x5FFFE-#x5FFFF], [#x6FFFE-#x6FFFF],
-     # [#x7FFFE-#x7FFFF], [#x8FFFE-#x8FFFF], [#x9FFFE-#x9FFFF],
-     # [#xAFFFE-#xAFFFF], [#xBFFFE-#xBFFFF], [#xCFFFE-#xCFFFF],
-     # [#xDFFFE-#xDFFFF], [#xEFFFE-#xEFFFF], [#xFFFFE-#xFFFFF],
-     # [#x10FFFE-#x10FFFF].
-     str.gsub(/[[:cntrl:]]/,'')
+      str << drawing_node
+      str << legacy_drawing_node
+      str << table_parts_node
+      str << conditional_formattings_node
+      str << data_validations_node 
+      str << '</worksheet>'
+      # todo figure out how to remove any characters that are not allowed in xml
+      # [#x1-#x8], [#xB-#xC], [#xE-#x1F], [#x7F-#x84], [#x86-#x9F], [#xFDD0-#xFDDF],
+      # [#x1FFFE-#x1FFFF], [#x2FFFE-#x2FFFF], [#x3FFFE-#x3FFFF],
+      # [#x4FFFE-#x4FFFF], [#x5FFFE-#x5FFFF], [#x6FFFE-#x6FFFF],
+      # [#x7FFFE-#x7FFFF], [#x8FFFE-#x8FFFF], [#x9FFFE-#x9FFFF],
+      # [#xAFFFE-#xAFFFF], [#xBFFFE-#xBFFFF], [#xCFFFE-#xCFFFF],
+      # [#xDFFFE-#xDFFFF], [#xEFFFE-#xEFFFF], [#xFFFFE-#xFFFFF],
+      # [#x10FFFE-#x10FFFF].
+      str.gsub(/[[:cntrl:]]/,'')
     end
 
     # The worksheet relationships. This is managed automatically by the worksheet
