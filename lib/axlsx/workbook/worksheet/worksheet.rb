@@ -562,9 +562,8 @@ module Axlsx
 
     def merged_cells_node
       return '' if @merged_cells.size == 0
-      #This is rediculous do it cleaner...
       str = "<mergeCells count='#{@merged_cells.size}'>"
-      @merged_cells.each { |merged_cell| str << "<mergeCell ref='#{merged_cell}'></mergeCel>" }
+      @merged_cells.each { |merged_cell| str << "<mergeCell ref='#{merged_cell}'></mergeCell>" }
       str << '</mergedCells>'
     end
 
