@@ -321,7 +321,7 @@ wb.add_worksheet(:name => "fit to page") do |sheet|
   sheet.add_row ['this all goes on one page']
   sheet.fit_to_page = true
 end
-#```
+##```
 
 
 ##Hide Gridlines in worksheet
@@ -331,7 +331,7 @@ wb.add_worksheet(:name => "No Gridlines") do |sheet|
   sheet.add_row ["This", "Sheet", "Hides", "Gridlines"]
   sheet.show_gridlines = false
 end
-#```
+##```
 
 
 # Sheet Protection and excluding cells from locking.

@@ -4,6 +4,7 @@ module Axlsx
   # @note Packages manage their own core object.
   # @see Package#core
   class Core
+    #
     # The author of the document. By default this is 'axlsx'
     # @return [String]
     attr_accessor :creator

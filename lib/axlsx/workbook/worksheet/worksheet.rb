@@ -582,7 +582,7 @@ module Axlsx
       return '' if @merged_cells.size == 0
       str = "<mergeCells count='#{@merged_cells.size}'>"
       @merged_cells.each { |merged_cell| str << "<mergeCell ref='#{merged_cell}'></mergeCell>" }
-      str << '</mergedCells>'
+      str << '</mergeCells>'
     end
 
     # Helper method for parsing out the drawing node
