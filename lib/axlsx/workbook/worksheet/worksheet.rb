@@ -522,37 +522,53 @@ module Axlsx
       yield image if block_given?
       image
     end
-
+   
+    # Helper method for parsingout the root node for worksheet
+    # @return [String]
     def worksheet_node
       "<worksheet xmlns=\"%s\" xmlns:r=\"%s\">" % [XML_NS, XML_NS_R]
     end
 
+    # Helper method fo parsing out the sheetPr node
+    # @return [String]
     def sheet_pr_node
       return '' unless fit_to_page?
       "<sheetPr><pageSetUpPr fitToPage=\"%s\"></pageSetUpPr></sheetPr>" % fit_to_page?
     end
 
+    # Helper method for parsing out the demension node
+    # @return [String]
     def dimension_node
       return '' if rows.size == 0
       "<dimension ref=\"%s\"></dimension>" % dimension
     end
 
+    # Helper method for parsing out the sheetData node
+    # @return [String]
     def sheet_data_node
       str = '<sheetData>'
       @rows.each_with_index { |row, index| row.to_xml_string(index, str) }
       str << '</sheetData>'
     end
 
+    # Helper method for parsing out the autoFilter node
+    # @return [String]
     def auto_filter_node
       return '' unless @auto_filter
       "<autoFilter ref='%s'></autoFilter>" % @auto_filter
     end
+
+    # Helper method for parsing out the cols node
+    # @return [String]
     def cols_node
       return '' if @column_info.empty?
       str = "<cols>"
       @column_info.each { |col| col.to_xml_string(str) }
       str << '</cols>'
     end 
+
+    # Helper method for parsing out the protectedRanges node
+    # @return [String]
     def protected_ranges_node
       return '' if @protected_ranges.empty?
       str = '<protectedRanges>'
@@ -560,6 +576,8 @@ module Axlsx
       str << '</protectedRanges>'
     end
 
+    # Helper method for parsing out the mergedCells node
+    # @return [String]
     def merged_cells_node
       return '' if @merged_cells.size == 0
       str = "<mergeCells count='#{@merged_cells.size}'>"
@@ -567,16 +585,22 @@ module Axlsx
       str << '</mergedCells>'
     end
 
+    # Helper method for parsing out the drawing node
+    # @return [String]
     def drawing_node
       return '' unless @drawing
       "<drawing r:id='rId" << (relationships.index{ |r| r.Type == DRAWING_R } + 1).to_s << "'/>" 
     end
 
+    # Helper method for parsing out the legacyDrawing node required for comments
+    # @return [String]
     def legacy_drawing_node
       return '' if @comments.empty?
       "<legacyDrawing r:id='rId" << (relationships.index{ |r| r.Type == VML_DRAWING_R } + 1).to_s << "'/>" 
     end
 
+    # Helper method for parsing out the tableParts node
+    # @return [String]
     def table_parts_node
       return '' if @tables.empty?
       str = "<tableParts count='#{@tables.size}'>"
@@ -584,6 +608,8 @@ module Axlsx
       str << '</tableParts>'
     end
 
+    # Helper method for parsing out the conditional formattings
+    # @return [String]
     def conditional_formattings_node
       return '' if @conditional_formattings.size == 0
       str = ''
@@ -591,6 +617,8 @@ module Axlsx
       str
     end
 
+    # Helper method for parsing out the dataValidations node
+    # @return [String]
     def data_validations_node
       return '' if @data_validations.size == 0
       str = "<dataValidations count='#{@data_validations.size}'>"
@@ -598,8 +626,8 @@ module Axlsx
       str << '</dataValidations>'
     end
 
-    # Serializes the object
-    # @param [String] str
+    # Serializes the worksheet object to an xml string
+    # This intentionally does not use nokogiri for performance reasons
     # @return [String]
     def to_xml_string
       rels = relationships
@@ -624,7 +652,9 @@ module Axlsx
       str << conditional_formattings_node
       str << data_validations_node 
       str << '</worksheet>'
-      # todo figure out how to remove any characters that are not allowed in xml
+      # User reported that when parsing some old data that had control characters excel chokes.
+      # All of the following are defined as illegal xml characters in the xml spec, but for now I am only dealing with control 
+      # characters. Thanks to asakusarb and @hsbt's flash of code on the screen!
       # [#x1-#x8], [#xB-#xC], [#xE-#x1F], [#x7F-#x84], [#x86-#x9F], [#xFDD0-#xFDDF],
       # [#x1FFFE-#x1FFFF], [#x2FFFE-#x2FFFF], [#x3FFFE-#x3FFFF],
       # [#x4FFFE-#x4FFFF], [#x5FFFE-#x5FFFF], [#x6FFFE-#x6FFFF],
