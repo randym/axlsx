@@ -275,7 +275,7 @@ module Axlsx
     # @return [String] the A1:B2 style reference for the first and last row column intersection in the workbook
     def dimension
       dim_start = rows.first.cells.first == nil ? 'A1' : rows.first.cells.first.r
-      dim_end = rows.last.cells.last == nil ? 'AA:200' : rows.last.cells.last.r
+      dim_end = rows.last.cells.last == nil ? 'AA200' : rows.last.cells.last.r
       "#{dim_start}:#{dim_end}"
     end
 

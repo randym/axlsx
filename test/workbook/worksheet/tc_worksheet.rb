@@ -108,6 +108,11 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal @ws.dimension, "A1:C2"
   end
 
+  def test_dimension_with_empty_row
+    @ws.add_row
+    assert_equal "A1:AA200", @ws.dimension
+  end
+
   def test_referencing
     @ws.add_row [1, 2, 3]
     @ws.add_row [4, 5, 6]
