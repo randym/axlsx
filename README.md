@@ -170,6 +170,29 @@ in value caches
 
 Please see the {file:CHANGELOG.md} document for past release information.
 
+# Known interoperability issues.
+As axslx implements the Office Open XML (ECMA-376 spec) much of the
+functionality is interoperable with other spreadsheet software. Below is
+a listing of some known issues.
+
+1. Libra Office
+   -  You must specify colors for your series. see examples/chart_colors.rb
+for an example.
+   - You must use data in your sheet for charts. You cannot use hard coded
+values.
+   -  Chart axis and gridlines do not render. I have a feeling this is
+related to themes, which axlsx does not implement at this time.
+
+2. Google Docs
+   - Images are known to not work with google docs
+   - border colors do not work
+   - Charts, for the most part, do not work. Google docs has some specific requirements about how the worksheet is set up to create a chart. 
+
+3. Numbers
+   - you must set 'use_shared_strings' to true
+   - charts do not render
+
+
 #Thanks!
 
 Open source software is a community effort. None of this could have been
