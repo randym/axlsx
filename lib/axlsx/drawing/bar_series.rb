@@ -64,8 +64,8 @@ module Axlsx
 
         @labels.to_xml_string(str_inner) unless @labels.nil?
         @data.to_xml_string(str_inner) unless @data.nil?
-        # looking at the output from excel - this may not be needed
-        # str_inner << '<c:shape val="' << shape.to_s << '"></c:shape>'
+        # this is actually only required for shapes other than box 
+        str_inner << '<c:shape val="' << shape.to_s << '"></c:shape>'
       end
     end
 
