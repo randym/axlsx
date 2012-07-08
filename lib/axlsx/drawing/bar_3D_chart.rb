@@ -67,11 +67,13 @@ module Axlsx
     def initialize(frame, options={})
       @bar_dir = :bar
       @grouping = :clustered
+      @shape = :box
+      @gap_width = 150
       @gap_width, @gap_depth, @shape = nil, nil, nil
       @cat_ax_id = rand(8 ** 8)
       @val_ax_id = rand(8 ** 8)
       @cat_axis = CatAxis.new(@cat_ax_id, @val_ax_id)
-      @val_axis = ValAxis.new(@val_ax_id, @cat_ax_id, :tick_lbl_pos => :low)
+      @val_axis = ValAxis.new(@val_ax_id, @cat_ax_id, :tick_lbl_pos => :low, :ax_pos => :l)
       super(frame, options)
       @series_type = BarSeries
       @view_3D = View3D.new({:r_ang_ax=>1}.merge(options))

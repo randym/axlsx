@@ -33,6 +33,5 @@ class TestBarSeries < Test::Unit::TestCase
       assert_equal(doc.xpath("//c:dPt/c:idx[@val='#{index}']").size,1)
       assert_equal(doc.xpath("//c:dPt/c:spPr/a:solidFill/a:srgbClr[@val='#{@series.colors[index]}']").size,1)
     end
-    assert_equal(doc.xpath("//c:shape[@val='#{@series.shape.to_s}']").size, 1)
   end
 end
