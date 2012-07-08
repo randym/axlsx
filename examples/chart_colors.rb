@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby -w -s
 # -*- coding: utf-8 -*-
-# $LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../lib"
+$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../lib"
 require 'axlsx'
 
 p = Axlsx::Package.new
@@ -36,7 +36,7 @@ end
    sheet.add_row ["First", "Second", "Third", "Fourth"]
    sheet.add_row [1, 2, 3, "=PRODUCT(A2:C2)"]
   sheet.add_chart(Axlsx::Pie3DChart, :start_at => [0,2], :end_at => [5, 15], :title => "example 3: Pie Chart") do |chart|
-     chart.add_series :data => sheet["A2:D2"], :labels => sheet["A1:D1"], :colors => ['FF0000', '00FF00', '0000FF']
+     chart.add_series :data => sheet["A2:D2"], :labels => sheet["A1:D1"], :colors => ['FF0000', '00FF00', '0000FF', '000000']
    end
  end
 
@@ -45,12 +45,27 @@ end
 wb.add_worksheet(:name => "Line Chart") do |sheet|
   sheet.add_row ["First", 1, 5, 7, 9]
   sheet.add_row ["Second", 5, 2, 14, 9]
-  sheet.add_chart(Axlsx::Line3DChart, :title => "example 6: Line Chart", :rotX => 30, :rotY => 20) do |chart|
+  sheet.add_chart(Axlsx::Line3DChart, :title => "example 6: Line Chart", :rotX => 30, :rotY => 30) do |chart|
     chart.start_at 0, 2
     chart.end_at 10, 15
     chart.add_series :data => sheet["B1:E1"], :title => sheet["A1"], :color => "FF0000"
     chart.add_series :data => sheet["B2:E2"], :title => sheet["A2"], :color => "00FF00"
   end
+end
+
+wb.add_worksheet(:name => 'Line Chart with Axis colors') do |sheet|
+  sheet.add_row ["First", 1, 5, 7, 9]
+  sheet.add_row ["Second", 5, 2, 14, 9]
+  sheet.add_chart(Axlsx::Line3DChart, :title => "example 7: Flat Line Chart", :rot_x => 0, :perspective => 0) do |chart|
+    chart.valAxis.color = "FFFF00"
+    chart.catAxis.color = "00FFFF"
+    chart.serAxis.delete = true
+    chart.start_at 0, 2
+    chart.end_at 10, 15
+    chart.add_series :data => sheet["B1:E1"], :title => sheet["A1"], :color => "FF0000"
+    chart.add_series :data => sheet["B2:E2"], :title => sheet["A2"], :color => "00FF00"
+  end
+
 end
 
 ##Generating A Scatter Chart

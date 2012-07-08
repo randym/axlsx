@@ -70,7 +70,7 @@ module Axlsx
       @serAxis = SerAxis.new(@serAxId, @valAxId)
       super(frame, options)
       @series_type = LineSeries
-      @view3D = View3D.new({:perspective=>30}.merge(options))
+      @view_3D = View3D.new({:perspective=>30}.merge(options))
     end
 
     # @see grouping

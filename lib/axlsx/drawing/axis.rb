@@ -3,6 +3,13 @@ module Axlsx
  # the access class defines common properties and values for a chart axis.
   class Axis
 
+
+
+    # the fill color to use in the axis shape properties. This should be a 6 character long hex string
+    # e.g. FF0000 for red
+    # @return [String]
+    attr_reader :color
+
     # the id of the axis.
     # @return [Integer]
     attr_reader :ax_id
@@ -70,7 +77,7 @@ module Axlsx
       @format_code = "General"
       @delete = @label_rotation = 0
       @scaling = Scaling.new(:orientation=>:minMax)
-      @title = nil
+      @title = @color = nil
       self.ax_pos = :b
       self.tick_lbl_pos = :nextTo
       self.format_code = "General"
@@ -81,6 +88,9 @@ module Axlsx
       end
     end
 
+    def color=(color_rgb)
+      @color = color_rgb
+    end
     # The position of the axis
     # must be one of [:l, :r, :t, :b]
     def ax_pos=(v) RestrictionValidator.validate "#{self.class}.ax_pos", [:l, :r, :b, :t], v; @ax_pos = v; end
@@ -140,6 +150,7 @@ module Axlsx
       str << '<c:delete val="'<< @delete.to_s << '"/>'
       str << '<c:axPos val="' << @ax_pos.to_s << '"/>'
       str << '<c:majorGridlines>'
+      # TODO shape properties need to be extracted into a class
       if gridlines == false
         str << '<c:spPr>'
         str << '<a:ln>'
@@ -153,6 +164,13 @@ module Axlsx
       str << '<c:majorTickMark val="none"/>'
       str << '<c:minorTickMark val="none"/>'
       str << '<c:tickLblPos val="' << @tick_lbl_pos.to_s << '"/>'
+      # TODO - this is also being used for series colors
+      # time to extract this into a class spPr - Shape Properties
+      if @color
+        str << '<c:spPr><a:ln><a:solidFill>'
+        str << '<a:srgbClr val="' << @color << '"/>'
+        str << '</a:solidFill></a:ln></c:spPr>'
+      end
       # some potential value in implementing this in full. Very detailed!
       str << '<c:txPr><a:bodyPr rot="' << @label_rotation.to_s << '"/><a:lstStyle/><a:p><a:pPr><a:defRPr/></a:pPr><a:endParaRPr/></a:p></c:txPr>'
       str << '<c:crossAx val="' << @cross_ax.to_s << '"/>'

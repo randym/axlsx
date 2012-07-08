@@ -19,6 +19,14 @@ class TestAxis < Test::Unit::TestCase
     assert_equal('Foo', @axis.title.text)
   end
 
+  def test_color
+    @axis.color = "00FF00"
+    str  = '<?xml version="1.0" encoding="UTF-8"?>'
+    str << '<c:chartSpace xmlns:c="' << Axlsx::XML_NS_C << '" xmlns:a="' << Axlsx::XML_NS_A << '">'
+    doc = Nokogiri::XML(@axis.to_xml_string(str)) 
+    assert(doc.xpath("//a:srgbClr[@val='00FF00']"))
+  end
+
   def test_cell_based_axis_title
     p = Axlsx::Package.new
     p.workbook.add_worksheet(:name=>'foosheet') do |sheet|
