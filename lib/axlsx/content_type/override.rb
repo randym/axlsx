@@ -1,7 +1,22 @@
 # encoding: UTF-8
 module Axlsx
+
   # An override content part. These parts are automatically created by for you based on the content of your package.
   class Override
+
+    #Creates a new Override object
+    # @option options [String] PartName
+    # @option options [String] ContentType
+    # @raise [ArgumentError] An argument error is raised if both PartName and ContentType are not specified.
+    def initialize(options={})
+      raise ArgumentError, INVALID_ARGUMENTS unless validate_options(options)
+      options.each do |name, value|
+        self.send("#{name}=", value) if self.respond_to? "#{name}="
+      end
+    end
+
+    # Error message for invalid options
+    INVALID_ARGUMENTS = 'part_name and content_type are required'
 
     # The type of content.
     # @return [String]
@@ -12,17 +27,6 @@ module Axlsx
     # @return [String]
     attr_reader :part_name
     alias :PartName :part_name
-
-    #Creates a new Override object
-    # @option options [String] PartName
-    # @option options [String] ContentType
-    # @raise [ArgumentError] An argument error is raised if both PartName and ContentType are not specified.
-    def initialize(options={})
-      raise ArgumentError, "PartName and ContentType are required" unless (options[:PartName] || options[:part_name]) && (options[:ContentType] || options[:content_type])
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
-    end
 
     # The name and location of the part.
     def part_name=(v) Axlsx::validate_string v; @part_name = v end
@@ -42,5 +46,12 @@ module Axlsx
       str << '/>'
     end
 
+    private 
+
+    def validate_options(options)
+      (options[:PartName] || options[:part_name]) && (options[:ContentType] || options[:content_type])
+    end
+
   end
+
 end

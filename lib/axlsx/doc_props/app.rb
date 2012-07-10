@@ -1,5 +1,6 @@
 # encoding: UTF-8
 module Axlsx
+
   # App represents the app.xml document. The attributes for this object are primarily managed by the application the end user uses to edit the document. None of the attributes are required to serialize a valid xlsx object.
   # @see shared-documentPropertiesExtended.xsd
   # @note Support is not implemented for the following complex types:
@@ -118,7 +119,7 @@ module Axlsx
     # @return [Boolean] Indicates that the hyper links in the document have been changed.
     attr_reader :hyperlinks_changed
     alias :HyperlinksChanged :hyperlinks_changed
-    
+
     # @return [String] The name of the application
     attr_reader :application
     alias :Applicatoin :application
@@ -216,7 +217,7 @@ module Axlsx
     # Sets the doc_security property of your app.xml file
     def doc_security=(v) Axlsx::validate_int v; @doc_security = v; end
     alias :DocSecurity= :doc_security=
-     
+
     # Serialize the app.xml document
     # @return [String]
     def to_xml_string(str = '')
@@ -227,4 +228,5 @@ module Axlsx
     end
 
   end
+
 end

@@ -15,8 +15,9 @@ module Axlsx
       end
     end
 
+    # Error string for option validation
     INVALID_ARGUMENTS = "extension and content_type are required"
-    #
+
     # The extension of the content type.
     # @return [String]
     attr_reader :extension
@@ -49,5 +50,7 @@ module Axlsx
     def validate_options(options)
       (options[:Extension] || options[:extension]) && (options[:content_type] || options[:ContentType])
     end
+
   end
+
 end

@@ -1,19 +1,20 @@
 # encoding: UTF-8
 module Axlsx
+
   # The core object for the package.
   # @note Packages manage their own core object.
   # @see Package#core
   class Core
-    #
-    # The author of the document. By default this is 'axlsx'
-    # @return [String]
-    attr_accessor :creator
-
+ 
     # Creates a new Core object.
     # @option options [String] creator
     def initialize(options={})
       @creator = options[:creator] || 'axlsx'
     end
+
+    # The author of the document. By default this is 'axlsx'
+    # @return [String]
+    attr_accessor :creator
 
     # serializes the core.xml document
     # @return [String]
@@ -27,5 +28,7 @@ module Axlsx
       str << '<cp:revision>0</cp:revision>'
       str << '</cp:coreProperties>'
     end
+
   end
+
 end

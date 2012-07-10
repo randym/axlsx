@@ -522,7 +522,86 @@ module Axlsx
       yield image if block_given?
       image
     end
-   
+
+    # Serializes the worksheet object to an xml string
+    # This intentionally does not use nokogiri for performance reasons
+    # @return [String]
+    def to_xml_string
+      rels = relationships
+      str = '<?xml version="1.0" encoding="UTF-8"?>'
+      str << worksheet_node
+      str << sheet_pr_node
+      str << dimension_node
+      @sheet_view.to_xml_string(str) if @sheet_view
+      str << cols_node
+      str << sheet_data_node
+
+      str << auto_filter_node
+      @sheet_protection.to_xml_string(str) if @sheet_protection
+      str << protected_ranges_node
+      str << merged_cells_node
+      @print_options.to_xml_string(str) if @print_options
+      page_margins.to_xml_string(str) if @page_margins
+      page_setup.to_xml_string(str) if @page_setup
+      str << drawing_node
+      str << legacy_drawing_node
+      str << table_parts_node
+      str << conditional_formattings_node
+      str << data_validations_node 
+      str << '</worksheet>'
+      # User reported that when parsing some old data that had control characters excel chokes.
+      # All of the following are defined as illegal xml characters in the xml spec, but for now I am only dealing with control 
+      # characters. Thanks to asakusarb and @hsbt's flash of code on the screen!
+      # [#x1-#x8], [#xB-#xC], [#xE-#x1F], [#x7F-#x84], [#x86-#x9F], [#xFDD0-#xFDDF],
+      # [#x1FFFE-#x1FFFF], [#x2FFFE-#x2FFFF], [#x3FFFE-#x3FFFF],
+      # [#x4FFFE-#x4FFFF], [#x5FFFE-#x5FFFF], [#x6FFFE-#x6FFFF],
+      # [#x7FFFE-#x7FFFF], [#x8FFFE-#x8FFFF], [#x9FFFE-#x9FFFF],
+      # [#xAFFFE-#xAFFFF], [#xBFFFE-#xBFFFF], [#xCFFFE-#xCFFFF],
+      # [#xDFFFE-#xDFFFF], [#xEFFFE-#xEFFFF], [#xFFFFE-#xFFFFF],
+      # [#x10FFFE-#x10FFFF].
+      str.gsub(/[[:cntrl:]]/,'')
+    end
+
+    # The worksheet relationships. This is managed automatically by the worksheet
+    # @return [Relationships]
+    def relationships
+      r = Relationships.new
+      @tables.each do |table|
+        r << Relationship.new(TABLE_R, "../#{table.pn}")
+      end
+
+      r << Relationship.new(VML_DRAWING_R, "../#{@comments.vml_drawing.pn}") if @comments.size > 0
+      r << Relationship.new(COMMENT_R, "../#{@comments.pn}") if @comments.size > 0
+      r << Relationship.new(COMMENT_R_NULL, "NULL") if @comments.size > 0
+
+      r << Relationship.new(DRAWING_R, "../#{@drawing.pn}") if @drawing
+      r
+    end
+
+    # Returns the cell or cells defined using excel style A1:B3 references.
+    # @param [String|Integer] cell_def the string defining the cell or range of cells, or the rownumber
+    # @return [Cell, Array]
+    def [] (cell_def)
+      return rows[cell_def] if cell_def.is_a?(Integer)
+
+      parts = cell_def.split(':')
+      first = name_to_cell parts[0]
+      if parts.size == 1
+        first
+      else
+        cells = []
+        last = name_to_cell(parts[1])
+        rows[(first.row.index..last.row.index)].each do |r|
+          r.cells[(first.index..last.index)].each do |c|
+            cells << c
+          end
+        end
+        cells
+      end
+    end
+
+    private
+
     # Helper method for parsingout the root node for worksheet
     # @return [String]
     def worksheet_node
@@ -626,84 +705,6 @@ module Axlsx
       str << '</dataValidations>'
     end
 
-    # Serializes the worksheet object to an xml string
-    # This intentionally does not use nokogiri for performance reasons
-    # @return [String]
-    def to_xml_string
-      rels = relationships
-      str = '<?xml version="1.0" encoding="UTF-8"?>'
-      str << worksheet_node
-      str << sheet_pr_node
-      str << dimension_node
-      @sheet_view.to_xml_string(str) if @sheet_view
-      str << cols_node
-      str << sheet_data_node
-
-      str << auto_filter_node
-      @sheet_protection.to_xml_string(str) if @sheet_protection
-      str << protected_ranges_node
-      str << merged_cells_node
-      @print_options.to_xml_string(str) if @print_options
-      page_margins.to_xml_string(str) if @page_margins
-      page_setup.to_xml_string(str) if @page_setup
-      str << drawing_node
-      str << legacy_drawing_node
-      str << table_parts_node
-      str << conditional_formattings_node
-      str << data_validations_node 
-      str << '</worksheet>'
-      # User reported that when parsing some old data that had control characters excel chokes.
-      # All of the following are defined as illegal xml characters in the xml spec, but for now I am only dealing with control 
-      # characters. Thanks to asakusarb and @hsbt's flash of code on the screen!
-      # [#x1-#x8], [#xB-#xC], [#xE-#x1F], [#x7F-#x84], [#x86-#x9F], [#xFDD0-#xFDDF],
-      # [#x1FFFE-#x1FFFF], [#x2FFFE-#x2FFFF], [#x3FFFE-#x3FFFF],
-      # [#x4FFFE-#x4FFFF], [#x5FFFE-#x5FFFF], [#x6FFFE-#x6FFFF],
-      # [#x7FFFE-#x7FFFF], [#x8FFFE-#x8FFFF], [#x9FFFE-#x9FFFF],
-      # [#xAFFFE-#xAFFFF], [#xBFFFE-#xBFFFF], [#xCFFFE-#xCFFFF],
-      # [#xDFFFE-#xDFFFF], [#xEFFFE-#xEFFFF], [#xFFFFE-#xFFFFF],
-      # [#x10FFFE-#x10FFFF].
-      str.gsub(/[[:cntrl:]]/,'')
-    end
-
-    # The worksheet relationships. This is managed automatically by the worksheet
-    # @return [Relationships]
-    def relationships
-      r = Relationships.new
-      @tables.each do |table|
-        r << Relationship.new(TABLE_R, "../#{table.pn}")
-      end
-
-      r << Relationship.new(VML_DRAWING_R, "../#{@comments.vml_drawing.pn}") if @comments.size > 0
-      r << Relationship.new(COMMENT_R, "../#{@comments.pn}") if @comments.size > 0
-      r << Relationship.new(COMMENT_R_NULL, "NULL") if @comments.size > 0
-
-      r << Relationship.new(DRAWING_R, "../#{@drawing.pn}") if @drawing
-      r
-    end
-
-    # Returns the cell or cells defined using excel style A1:B3 references.
-    # @param [String|Integer] cell_def the string defining the cell or range of cells, or the rownumber
-    # @return [Cell, Array]
-    def [] (cell_def)
-      return rows[cell_def] if cell_def.is_a?(Integer)
-
-      parts = cell_def.split(':')
-      first = name_to_cell parts[0]
-      if parts.size == 1
-        first
-      else
-        cells = []
-        last = name_to_cell(parts[1])
-        rows[(first.row.index..last.row.index)].each do |r|
-          r.cells[(first.index..last.index)].each do |c|
-            cells << c
-          end
-        end
-        cells
-      end
-    end
-
-    private
 
     # assigns the owner workbook for this worksheet
     def workbook=(v) DataTypeValidator.validate "Worksheet.workbook", Workbook, v; @workbook = v; end
