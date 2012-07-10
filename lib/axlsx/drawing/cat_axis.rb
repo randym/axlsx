@@ -3,6 +3,26 @@ module Axlsx
   #A CatAxis object defines a chart category axis
   class CatAxis < Axis
 
+    # Creates a new CatAxis object
+    # @param [Integer] ax_id the id of this axis. Inherited
+    # @param [Integer] cross_ax the id of the perpendicular axis. Inherited
+    # @option options [Symbol] ax_pos. Inherited
+    # @option options [Symbol] tick_lbl_pos. Inherited
+    # @option options [Symbol] crosses. Inherited
+    # @option options [Boolean] auto
+    # @option options [Symbol] lbl_algn
+    # @option options [Integer] lbl_offset
+    # @option options [Integer] tick_lbl_skip
+    # @option options [Integer] tick_mark_skip
+    def initialize(ax_id, cross_ax, options={})
+      @tick_lbl_skip = 1
+      @tick_mark_skip = 1
+      self.auto = 1
+      self.lbl_algn = :ctr
+      self.lbl_offset = "100"
+      super(ax_id, cross_ax, options)
+    end
+
     # From the docs: This element specifies that this axis is a date or text axis based on the data that is used for the axis labels, not a specific choice.
     # @return [Boolean]
     attr_reader :auto
@@ -10,64 +30,48 @@ module Axlsx
     # specifies how the perpendicular axis is crossed
     # must be one of [:ctr, :l, :r]
     # @return [Symbol]
-    attr_reader :lblAlgn
+    attr_reader :lbl_algn
+    alias :lblAlgn :lbl_algn
 
     # The offset of the labels
     # must be between a string between 0 and 1000
     # @return [Integer]
-    attr_reader :lblOffset
-
+    attr_reader :lbl_offset
+    alias :lblOffset :lbl_offset
 
     # The number of tick lables to skip between labels
     # @return [Integer]
-    attr_reader :tickLblSkip
+    attr_reader :tick_lbl_skip
+    alias :tickLblSkip :tick_lbl_skip
 
     # The number of tickmarks to be skipped before the next one is rendered.
     # @return [Boolean]
-    attr_reader :tickMarkSkip
-
+    attr_reader :tick_mark_skip
+    alias :tickMarkSkip :tick_mark_skip
 
     # regex for validating label offset
     LBL_OFFSET_REGEX = /0*(([0-9])|([1-9][0-9])|([1-9][0-9][0-9])|1000)/
 
-    # Creates a new CatAxis object
-    # @param [Integer] axId the id of this axis. Inherited
-    # @param [Integer] crossAx the id of the perpendicular axis. Inherited
-    # @option options [Symbol] axPos. Inherited
-    # @option options [Symbol] tickLblPos. Inherited
-    # @option options [Symbol] crosses. Inherited
-    # @option options [Boolean] auto
-    # @option options [Symbol] lblAlgn
-    # @option options [Integer] lblOffset
-    # @option options [Integer] tickLblSkip
-    # @option options [Integer] tickMarkSkip
-    def initialize(axId, crossAx, options={})
-      @tickLblSkip = 1
-      @tickMarkSkip = 1
-      self.auto = 1
-      self.lblAlgn = :ctr
-      self.lblOffset = "100"
-      super(axId, crossAx, options)
-    end
+    # @see tick_lbl_skip
+    def tick_lbl_skip=(v) Axlsx::validate_unsigned_int(v); @tick_lbl_skip = v; end
+    alias :tickLblSkip= :tick_lbl_skip=
 
-
-    # @see tickLblSkip
-    def tickLblSkip=(v) Axlsx::validate_unsigned_int(v); @tickLblSkip = v; end
-
-    # @see tickMarkSkip
-    def tickMarkSkip=(v) Axlsx::validate_unsigned_int(v); @tickMarkSkip = v; end
-
+    # @see tick_mark_skip
+    def tick_mark_skip=(v) Axlsx::validate_unsigned_int(v); @tick_mark_skip = v; end
+    alias :tickMarkSkip= :tick_mark_skip=
 
     # From the docs: This element specifies that this axis is a date or text axis based on the data that is used for the axis labels, not a specific choice.
     def auto=(v) Axlsx::validate_boolean(v); @auto = v; end
 
     # specifies how the perpendicular axis is crossed
     # must be one of [:ctr, :l, :r]
-    def lblAlgn=(v) RestrictionValidator.validate "#{self.class}.lblAlgn", [:ctr, :l, :r], v; @lblAlgn = v; end
+    def lbl_algn=(v) RestrictionValidator.validate "#{self.class}.lbl_algn", [:ctr, :l, :r], v; @lbl_algn = v; end
+    alias :lblAlgn= :lbl_algn=
 
     # The offset of the labels
     # must be between a string between 0 and 1000
-    def lblOffset=(v) RegexValidator.validate "#{self.class}.lblOffset", LBL_OFFSET_REGEX, v; @lblOffset = v; end
+    def lbl_offset=(v) RegexValidator.validate "#{self.class}.lbl_offset", LBL_OFFSET_REGEX, v; @lbl_offset = v; end
+    alias :lblOffset= :lbl_offset=
 
     # Serializes the object
     # @param [String] str
@@ -76,10 +80,10 @@ module Axlsx
       str << '<c:catAx>'
       super(str)
       str << '<c:auto val="' << @auto.to_s << '"/>'
-      str << '<c:lblAlgn val="' << @lblAlgn.to_s << '"/>'
-      str << '<c:lblOffset val="' << @lblOffset.to_i.to_s << '"/>'
-      str << '<c:tickLblSkip val="' << @tickLblSkip.to_s << '"/>'
-      str << '<c:tickMarkSkip val="' << @tickMarkSkip.to_s << '"/>'
+      str << '<c:lblAlgn val="' << @lbl_algn.to_s << '"/>'
+      str << '<c:lblOffset val="' << @lbl_offset.to_i.to_s << '"/>'
+      str << '<c:tickLblSkip val="' << @tick_lbl_skip.to_s << '"/>'
+      str << '<c:tickMarkSkip val="' << @tick_mark_skip.to_s << '"/>'
       str << '</c:catAx>'
     end
 
