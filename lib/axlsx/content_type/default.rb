@@ -1,8 +1,22 @@
 # encoding: UTF-8
 module Axlsx
+
   # An default content part. These parts are automatically created by for you based on the content of your package.
   class Default
 
+    #Creates a new Default object
+    # @option options [String] extension
+    # @option options [String] content_type
+    # @raise [ArgumentError] An argument error is raised if both extension and content_type are not specified.
+    def initialize(options={})
+      raise ArgumentError, INVALID_ARGUMENTS unless validate_options(options)
+      options.each do |name, value|
+        self.send("#{name}=", value) if self.respond_to? "#{name}="
+      end
+    end
+
+    INVALID_ARGUMENTS = "extension and content_type are required"
+    #
     # The extension of the content type.
     # @return [String]
     attr_reader :extension
@@ -12,18 +26,6 @@ module Axlsx
     # @return [String]
     attr_reader :content_type
     alias :ContentType :content_type
-
-    #Creates a new Default object
-    # @option options [String] extension
-    # @option options [String] content_type
-    # @raise [ArgumentError] An argument error is raised if both extension and content_type are not specified.
-    def initialize(options={})
-      raise ArgumentError, "extension and content_type are required" unless (options[:Extension] || options[:extension]) && (options[:content_type] || options[:ContentType])
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
-    end
-
 
     # Sets the file extension for this content type.
     def extension=(v) Axlsx::validate_string v; @extension = v end
@@ -43,5 +45,9 @@ module Axlsx
       str << '/>'
     end
 
+    private
+    def validate_options(options)
+      (options[:Extension] || options[:extension]) && (options[:content_type] || options[:ContentType])
+    end
   end
 end

@@ -10,6 +10,35 @@ module Axlsx
   #    DigSig (DigSigBlob)
   class App
 
+    # Creates an App object
+    # @option options [String] template
+    # @option options [String] manager
+    # @option options [Integer] pages
+    # @option options [Integer] words
+    # @option options [Integer] characters
+    # @option options [String] presentation_format
+    # @option options [Integer] lines
+    # @option options [Integer] paragraphs
+    # @option options [Integer] slides
+    # @option options [Integer] notes
+    # @option options [Integer] total_time
+    # @option options [Integer] hidden_slides
+    # @option options [Integer] m_m_clips
+    # @option options [Boolean] scale_crop
+    # @option options [Boolean] links_up_to_date
+    # @option options [Integer] characters_with_spaces
+    # @option options [Boolean] share_doc
+    # @option options [String] hyperlink_base
+    # @option options [String] hyperlinks_changed
+    # @option options [String] application
+    # @option options [String] app_version
+    # @option options [Integer] doc_security
+    def initialize(options={})
+      options.each do |name, value|
+        self.send("#{name}=", value) if self.respond_to? "#{name}="
+      end
+    end
+
     # @return [String] The name of the document template.
     attr_reader :template
     alias :Template :template
@@ -101,35 +130,6 @@ module Axlsx
     # @return [Integer] Document security
     attr_reader :doc_security
     alias :DocSecurity :doc_security
-
-    # Creates an App object
-    # @option options [String] template
-    # @option options [String] manager
-    # @option options [Integer] pages
-    # @option options [Integer] words
-    # @option options [Integer] characters
-    # @option options [String] presentation_format
-    # @option options [Integer] lines
-    # @option options [Integer] paragraphs
-    # @option options [Integer] slides
-    # @option options [Integer] notes
-    # @option options [Integer] total_time
-    # @option options [Integer] hidden_slides
-    # @option options [Integer] m_m_clips
-    # @option options [Boolean] scale_crop
-    # @option options [Boolean] links_up_to_date
-    # @option options [Integer] characters_with_spaces
-    # @option options [Boolean] share_doc
-    # @option options [String] hyperlink_base
-    # @option options [String] hyperlinks_changed
-    # @option options [String] application
-    # @option options [String] app_version
-    # @option options [Integer] doc_security
-    def initialize(options={})
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
-    end
 
     # Sets the template property of your app.xml file
     def template=(v) Axlsx::validate_string v; @template = v; end

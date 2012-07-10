@@ -114,7 +114,7 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 #Change log
 ---------
 - **July.??.12**: 1.1.8 release
-   - new - google docs interoperability
+   - new - first round google docs interoperability
    - added filter to strip out control characters from cell data.
    - added in interop requirements so that charts are properly exported
      to PDF from Libra Office
