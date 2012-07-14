@@ -9,8 +9,9 @@ task :benchmark do
 end
 
 task :gendoc do
-  system "yardoc"
-  system "yard stats --list-undoc"
+  puts 'yard doc generation disabled until JRuby build native extensions for redcarpet or yard removes the dependency.'
+  #  system "yardoc"
+  #  system "yard stats --list-undoc"
 end
 
 task :test do
