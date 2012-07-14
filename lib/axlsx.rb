@@ -1,4 +1,5 @@
 # encoding: UTF-8
+require 'htmlentities'
 require 'axlsx/version.rb'
 
 require 'axlsx/util/simple_typed_list.rb'
@@ -47,6 +48,12 @@ module Axlsx
     ref
   end
 
+  #global reference html entity encoding
+  # @return [HtmlEntities]
+  def self.coder
+    @@coder ||= ::HTMLEntities.new
+  end
+  
   # returns the x, y position of a cell
   def self.name_to_indices(name)
     raise ArgumentError, 'invalid cell name' unless name.size > 1

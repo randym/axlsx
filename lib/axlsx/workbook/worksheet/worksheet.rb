@@ -322,6 +322,7 @@ module Axlsx
     def name=(v)
       DataTypeValidator.validate "Worksheet.name", String, v
       raise ArgumentError, (ERR_SHEET_NAME_TOO_LONG % v) if v.size > 31
+      v = Axlsx::coder.encode(v) 
       sheet_names = @workbook.worksheets.map { |s| s.name }
       raise ArgumentError, (ERR_DUPLICATE_SHEET_NAME % v) if sheet_names.include?(v)
       @name=v
@@ -527,7 +528,6 @@ module Axlsx
     # This intentionally does not use nokogiri for performance reasons
     # @return [String]
     def to_xml_string
-      rels = relationships
       str = '<?xml version="1.0" encoding="UTF-8"?>'
       str << worksheet_node
       str << sheet_pr_node

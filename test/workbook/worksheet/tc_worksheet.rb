@@ -14,6 +14,11 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(ws.pn, "worksheets/sheet2.xml")
   end
 
+  def test_name_is_html_encoded
+    @ws.name = '<foo> & <bar>'
+    assert_equal(@ws.name, '&lt;foo&gt; &amp; &lt;bar%gt;')
+  end
+
   def test_page_margins
     assert(@ws.page_margins.is_a? Axlsx::PageMargins)
   end
