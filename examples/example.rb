@@ -356,6 +356,70 @@ wb.add_worksheet(:name => 'fixed headers') do |sheet|
   end
 end
 
+# conditional formatting
+#
+percent = wb.styles.add_style(:format_code => "0.00%", :border => Axlsx::STYLE_THIN_BORDER)
+money = wb.styles.add_style(:format_code => '0,000', :border => Axlsx::STYLE_THIN_BORDER)
+
+# define the style for conditional formatting
+profitable = wb.styles.add_style( :fg_color=>"FF428751",
+                                    :type => :dxf)
+
+wb.add_worksheet(:name => "Conditional Formatting: Cell Is") do |ws|
+
+  # Generate 20 rows of data
+  ws.add_row ["Previous Year Quarterly Profits (JPY)"]
+  ws.add_row ["Quarter", "Profit", "% of Total"]
+  offset = 3
+  rows = 20
+  offset.upto(rows + offset) do |i|
+    ws.add_row ["Q#{i}", 10000*((rows/2-i) * (rows/2-i)), "=100*B#{i}/SUM(B3:B#{rows+offset})"], :style=>[nil, money, percent]
+  end
+
+# Apply conditional formatting to range B3:B100 in the worksheet
+  ws.add_conditional_formatting("B3:B100", { :type => :cellIs, :operator => :greaterThan, :formula => "100000", :dxfId => profitable, :priority => 1 })
+end
+
+wb.add_worksheet(:name => "Conditional Formatting: Color Scale") do |ws|
+  ws.add_row ["Previous Year Quarterly Profits (JPY)"]
+  ws.add_row ["Quarter", "Profit", "% of Total"]
+  offset = 3
+  rows = 20
+  offset.upto(rows + offset) do |i|
+    ws.add_row ["Q#{i}", 10000*((rows/2-i) * (rows/2-i)), "=100*B#{i}/SUM(B3:B#{rows+offset})"], :style=>[nil, money, percent]
+  end
+# Apply conditional formatting to range B3:B100 in the worksheet
+  color_scale = Axlsx::ColorScale.new
+  ws.add_conditional_formatting("B3:B100", { :type => :colorScale, :operator => :greaterThan, :formula => "100000", :dxfId => profitable, :priority => 1, :color_scale => color_scale })
+end
+
+
+wb.add_worksheet(:name => "Conditional Formatting: Data Bar") do |ws|
+  ws.add_row ["Previous Year Quarterly Profits (JPY)"]
+  ws.add_row ["Quarter", "Profit", "% of Total"]
+  offset = 3
+  rows = 20
+  offset.upto(rows + offset) do |i|
+    ws.add_row ["Q#{i}", 10000*((rows/2-i) * (rows/2-i)), "=100*B#{i}/SUM(B3:B#{rows+offset})"], :style=>[nil, money, percent]
+  end
+# Apply conditional formatting to range B3:B100 in the worksheet
+  data_bar = Axlsx::DataBar.new
+  ws.add_conditional_formatting("B3:B100", { :type => :dataBar, :dxfId => profitable, :priority => 1, :data_bar => data_bar })
+end
+
+wb.add_worksheet(:name => "Conditional Formatting: Icon Set") do |ws|
+  ws.add_row ["Previous Year Quarterly Profits (JPY)"]
+  ws.add_row ["Quarter", "Profit", "% of Total"]
+  offset = 3
+  rows = 20
+  offset.upto(rows + offset) do |i|
+    ws.add_row ["Q#{i}", 10000*((rows/2-i) * (rows/2-i)), "=100*B#{i}/SUM(B3:B#{rows+offset})"], :style=>[nil, money, percent]
+  end
+# Apply conditional formatting to range B3:B100 in the worksheet
+  icon_set = Axlsx::IconSet.new
+  ws.add_conditional_formatting("B3:B100", { :type => :iconSet, :dxfId => profitable, :priority => 1, :icon_set => icon_set })
+end
+
 ##Validate and Serialize
 
 #```ruby

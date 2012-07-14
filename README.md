@@ -17,7 +17,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 
 **License**: MIT License
 
-**Latest Version**: 1.1.7
+**Latest Version**: 1.1.8
 
 **Ruby Version**: 1.8.7, 1.9.2, 1.9.3
 
@@ -25,7 +25,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 
 **Rubinius Version**: rubinius 2.0.0dev * lower versions may run, this gem always tests against head.
 
-**Release Date**: June 11th 2012
+**Release Date**: July 14th 2012
 
 If you are working in rails, or with active record see:
 http://github.com/randym/acts_as_xlsx
@@ -70,8 +70,6 @@ Feature List
 **10. Support for formulas, merging, row and column outlining as well as
 cell level input data validation.
 
-**11. Support for cell merging as well as column and row outline
-
 **12. Auto filtering tables with worksheet.auto_filter as well as support for Tables
 
 **13. Export using shared strings or inline strings so we can inter-op with iWork Numbers (sans charts for now).
@@ -81,6 +79,9 @@ cell level input data validation.
 **15. Support for page margins and print options
 
 **16. Support for password and non password based sheet protection.
+
+**17. First stage interoperability support for GoogleDocs, LibraOffice,
+and Numbers
 
 Installing
 ----------
@@ -114,13 +115,15 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
-- **July.??.12**: 1.1.8 release
+- **July.14.12**: 1.1.8 release
+   - added html entity encoding for sheet names. This allows you to use
+     characters like '<' and '&' in your sheet names.
    - new - first round google docs interoperability
    - added filter to strip out control characters from cell data.
    - added in interop requirements so that charts are properly exported
      to PDF from Libra Office
-   - The beginnings of 'The Great Rename' so that all attributes use
-     snake case, and parse to the proper camel case
+   - various readability improvements and work standardizing attribute
+     names to snake_case. Aliases are provided for backward compatiblity 
 - **June.11.12**: 1.1.7 release
    - fix chart rendering issue when label offset is specified as a
      percentage in serialization and ensure that formula are not stored
