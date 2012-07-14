@@ -245,7 +245,7 @@ module Axlsx
     #        worksheet.merge_cells worksheet.rows.first.cells[(2..4)]
     #        #alternatively you can do it from a single cell
     #        worksheet["C1"].merge worksheet["E1"]
-    # @param [Array, string]
+    # @param [Array, string] cells
     def merge_cells(cells)
       @merged_cells << if cells.is_a?(String)
                          cells
@@ -256,8 +256,8 @@ module Axlsx
     end
 
     # Adds a new protected cell range to the worksheet. Note that protected ranges are only in effect when sheet protection is enabled.
-    # @param [String|Array] The string reference for the cells to protect or an array of cells.
-    # @retrun [ProtectedRange]
+    # @param [String|Array] cells The string reference for the cells to protect or an array of cells.
+    # @return [ProtectedRange]
     # @note When using an array of cells, a contiguous range is created from the minimum top left to the maximum top bottom of the cells provided.
     def protect_range(cells)
       sqref = if cells.is_a?(String)
@@ -425,8 +425,9 @@ module Axlsx
 
     # Set the style for cells in a specific row
     # @param [Integer] index or range of indexes in the table
-    # @param [Integer] the cellXfs index
-    # @option options [Integer] col_offset only cells after this column will be updated.
+    # @param [Integer] style the cellXfs index
+    # @param [Hash] options the options used when applying the style
+    # @option [Integer] :col_offset only cells after this column will be updated.
     # @note You can also specify the style in the add_row call
     # @see Worksheet#add_row
     # @see README.md for an example
@@ -448,8 +449,9 @@ module Axlsx
 
     # Set the style for cells in a specific column
     # @param [Integer] index the index of the column
-    # @param [Integer] the cellXfs index
-    # @option options [Integer] row_offset only cells after this column will be updated.
+    # @param [Integer] style the cellXfs index
+    # @param [Hash] options
+    # @option [Integer] :row_offset only cells after this column will be updated.
     # @note You can also specify the style for specific columns in the call to add_row by using an array for the :styles option
     # @see Worksheet#add_row
     # @see README.md for an example
@@ -472,9 +474,9 @@ module Axlsx
     # @example This would set the first and third column widhts but leave the second column in autofit state.
     #      ws.column_widths 7.2, nil, 3
     # @note For updating only a single column it is probably easier to just set the width of the ws.column_info[col_index].width directly
-    # @param [Integer|Float|Fixnum|nil] values
-    def column_widths(*args)
-      args.each_with_index do |value, index|
+    # @param [Integer|Float|Fixnum|nil] widths
+    def column_widths(*widths)
+      widths.each_with_index do |value, index|
         next if value == nil
         Axlsx::validate_unsigned_numeric(value) unless value == nil
         @column_info[index] ||= Col.new index+1, index+1
@@ -516,8 +518,7 @@ module Axlsx
     end
 
     # Adds a media item to the worksheets drawing
-    # @param [Class] media_type
-    # @option options [] unknown
+    # @option [Hash] options options passed to drawing.add_image
     def add_image(options={})
       image = drawing.add_image(options)
       yield image if block_given?

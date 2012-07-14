@@ -36,7 +36,7 @@ module Axlsx
     end
 
     # sets the tag name for this data source
-    # @param [Symbol] One of the allowed_tag_names
+    # @param [Symbol] v One of the allowed_tag_names
     def tag_name=(v)
       Axlsx::RestrictionValidator.validate "#{self.class.name}.tag_name", self.class.allowed_tag_names, v
       @tag_name = v

@@ -142,7 +142,7 @@ module Axlsx
     # The inline color property for the cell
     # @return [Color]
     attr_reader :color
-    # @param [String] The 8 character representation for an rgb color #FFFFFFFF"
+    # @param [String] v The 8 character representation for an rgb color #FFFFFFFF"
     def color=(v)
       @color = v.is_a?(Color) ? v : Color.new(:rgb=>v)
       @is_text_run = true

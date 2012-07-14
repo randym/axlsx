@@ -30,9 +30,9 @@ module Axlsx
     attr_reader :TargetMode
 
     # creates a new relationship
-    # @param [String] Type The type of the relationship
-    # @param [String] Target The target for the relationship
-    # @option [Symbol] target_mode only accepts :external.
+    # @param [String] type The type of the relationship
+    # @param [String] target The target for the relationship
+    # @option [Symbol] :target_mode only accepts :external.
     def initialize(type, target, options={})
       self.Target=target
       self.Type=type

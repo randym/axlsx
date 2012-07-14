@@ -18,7 +18,7 @@ module Axlsx
 
     # Creats a new typed list
     # @param [Array, Class] type An array of Class objects or a single Class object
-    # @param [String] serialize The tag name to use in serialization
+    # @param [String] serialize_as The tag name to use in serialization
     # @raise [ArgumentError] if all members of type are not Class objects
     def initialize type, serialize_as=nil
       if type.is_a? Array

@@ -26,16 +26,11 @@ module Axlsx
     attr_reader :drawing
 
 
-    # Creates a new TwoCellAnchor object and sets up a reference to the from and to markers in the
-    # graphic_frame's chart. That means that you can do stuff like
-    # c = worksheet.add_chart Axlsx::Chart
+    # Creates a new TwoCellAnchor object
     # c.start_at 5, 9
-    # @note the chart_type parameter will be replaced with object in v. 2.0.0
     # @param [Drawing] drawing
-    # @param [Class] chart_type This is passed to the graphic frame for instantiation. must be Chart or a subclass of Chart
-    # @param object The object this anchor holds.
-    # @option options [Array] start_at the col, row to start at THIS IS DOCUMENTED BUT NOT IMPLEMENTED HERE!
-    # @option options [Array] end_at the col, row to end at
+    # @option options [Array] :start_at the col, row to start at THIS IS DOCUMENTED BUT NOT IMPLEMENTED HERE!
+    # @option options [Array] :end_at the col, row to end at
     def initialize(drawing, options={})
       @drawing = drawing
       drawing.anchors << self

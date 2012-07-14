@@ -181,7 +181,7 @@ module Axlsx
   # Requires that the value is a valid scatterStyle
   # must be one of :none | :line | :lineMarker | :marker | :smooth | :smoothMarker
   # must be one of "none" | "line" | "lineMarker" | "marker" | "smooth" | "smoothMarker"
-  # @param [Symbol|String] the value to validate
+  # @param [Symbol|String] v the value to validate
   def self.validate_scatter_style(v)
     Axlsx::RestrictionValidator.validate "ScatterChart.scatterStyle", [:none, :line, :lineMarker, :marker, :smooth, :smoothMarker], v.to_sym
   end

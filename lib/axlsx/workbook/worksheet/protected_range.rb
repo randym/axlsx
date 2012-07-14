@@ -21,17 +21,23 @@ module Axlsx
       end
       yield self if block_given?
     end
-
+    
+    # @see sqref
     def sqref=(v)
       Axlsx.validate_string(v)
       @sqref = v
     end
 
+    # @see name
     def name=(v)
       Axlsx.validate_string(v)
       @name = v
     end
    
+    # serializes the proteted range
+    # @param [String] str if this string object is provided we append
+    # our output to that object. Use this - it helps limit the number of
+    # objects created during serialization
     def to_xml_string(str="")
       attrs = self.instance_values.reject{ |key, value| value == nil }
       str << '<protectedRange ' << attrs.map { |key, value| '' << key << '="' << value.to_s << '"' }.join(' ') << '/>'

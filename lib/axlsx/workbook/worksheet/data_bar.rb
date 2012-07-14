@@ -65,7 +65,7 @@ module Axlsx
     def showValue=(v); Axlsx.validate_boolean(v); @showValue = v end
 
     # Sets the color for the data bars.
-    # @param [Color|String] The color object, or rgb string value to apply
+    # @param [Color|String] v The color object, or rgb string value to apply
     def color=(v)
       @color = v if v.is_a? Color
       self.color.rgb = v if v.is_a? String

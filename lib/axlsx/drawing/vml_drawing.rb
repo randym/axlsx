@@ -4,7 +4,7 @@ module Axlsx
   class VmlDrawing
 
     # creates a new Vml Drawing object.
-    # @param [Comments] the comments object this drawing is associated with
+    # @param [Comments] comments the comments object this drawing is associated with
     def initialize(comments)
       raise ArgumentError, "you must provide a comments object" unless comments.is_a?(Comments)
       @comments = comments
