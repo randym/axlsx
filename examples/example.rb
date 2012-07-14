@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby -w -s
 # -*- coding: utf-8 -*-
-$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../lib"
+# $LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../lib"
 
 #```ruby
 require 'axlsx'
