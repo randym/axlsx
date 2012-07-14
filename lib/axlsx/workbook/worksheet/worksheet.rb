@@ -274,11 +274,10 @@ module Axlsx
     # but at least a few other document readers expect this for conversion
     # @return [String] the A1:B2 style reference for the first and last row column intersection in the workbook
     def dimension
-      dim_start = rows.first.cells.first == nil ? 'A1' : rows.first.cells.first.r
-      dim_end = rows.last.cells.last == nil ? 'AA200' : rows.last.cells.last.r
-      "#{dim_start}:#{dim_end}"
+     "#{dimension_reference(rows.first.cells.first, 'A1')}:#{dimension_reference(rows.last.cells.last, 'AA200')}"
     end
 
+      #
     # Indicates if gridlines should be shown in the sheet.
     # This is true by default.
     # @return [Boolean]
@@ -707,10 +706,8 @@ module Axlsx
       str << '</dataValidations>'
     end
 
-
     # assigns the owner workbook for this worksheet
     def workbook=(v) DataTypeValidator.validate "Worksheet.workbook", Workbook, v; @workbook = v; end
-
 
     # TODO this needs cleanup!
     def update_column_info(cells, widths=[], style=[])
@@ -742,6 +739,11 @@ module Axlsx
       mdw = 1.78 #This is the widest width of 0..9 in arial@10px)
       font_scale = (sz/10.0).to_f
       ((text.count(Worksheet.thin_chars) * mdw + 5) / mdw * 256) / 256.0 * font_scale
+    end
+
+    def dimension_reference(cell, default)
+      return default unless cell.respond_to?(:r)
+      cell.r
     end
   end
 end
