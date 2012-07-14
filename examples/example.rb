@@ -210,12 +210,9 @@ end
 #```ruby
 wb.add_worksheet(:name => "Bar Chart") do |sheet|
   sheet.add_row ["A Simple Bar Chart"]
-  sheet.add_row ["First", "Second", "Third"]
-  sheet.add_row [1, 2, 3]
-  sheet.add_chart(Axlsx::Bar3DChart, :start_at => "A4", :end_at => "F17") do |chart|
-    chart.add_series :data => sheet["A3:C3"], :labels => sheet["A2:C2"], :title => sheet["A1"]
-    chart.valAxis.label_rotation = -45
-    chart.catAxis.label_rotation = 45
+  %w(first second third).each { |label| sheet.add_row [label, rand(24)+1] }
+  sheet.add_chart(Axlsx::Bar3DChart, :start_at => "A6", :end_at => "F20") do |chart|
+    chart.add_series :data => sheet["B2:B4"], :labels => sheet["A2:A4"], :title => sheet["A1"]
   end
 end
 #```
@@ -224,11 +221,10 @@ end
 
 #```ruby
 wb.add_worksheet(:name => "Chart With No Gridlines") do |sheet|
-  sheet.add_row ["A Simple Bar Chart"]
-  sheet.add_row ["First", "Second", "Third"]
-  sheet.add_row [1, 2, 3]
-  sheet.add_chart(Axlsx::Bar3DChart, :start_at => "A4", :end_at => "F17") do |chart|
-    chart.add_series :data => sheet["A3:C3"], :labels => sheet["A2:C2"], :title => sheet["A1"]
+  sheet.add_row ["Bar Chart without gridlines"]
+  %w(first second third).each { |label| sheet.add_row [label, rand(24)+1] }
+  sheet.add_chart(Axlsx::Bar3DChart, :start_at => "A6", :end_at => "F20") do |chart|
+    chart.add_series :data => sheet["B2:B4"], :labels => sheet["A2:A4"]
     chart.valAxis.gridlines = false
     chart.catAxis.gridlines = false
   end
@@ -239,28 +235,10 @@ end
 
 #```ruby
 wb.add_worksheet(:name => "Pie Chart") do |sheet|
-  sheet.add_row ["First", "Second", "Third", "Fourth"]
-  sheet.add_row [1, 2, 3, "=PRODUCT(A2:C2)"]
-  sheet.add_chart(Axlsx::Pie3DChart, :start_at => [0,2], :end_at => [5, 15], :title => "example 3: Pie Chart") do |chart|
-    chart.add_series :data => sheet["A2:D2"], :labels => sheet["A1:D1"]
-  end
-end
-#```
-
-##Data over time
-
-#```ruby
-wb.add_worksheet(:name=>'Charting Dates') do |sheet|
-   # cell level style overides when adding cells
-  sheet.add_row ['Date', 'Value'], :sz => 16
-  sheet.add_row [Time.now - (7*60*60*24), 3]
-  sheet.add_row [Time.now - (6*60*60*24), 7]
-  sheet.add_row [Time.now - (5*60*60*24), 18]
-  sheet.add_row [Time.now - (4*60*60*24), 1]
-  sheet.add_chart(Axlsx::Bar3DChart) do |chart|
-    chart.start_at "B7"
-    chart.end_at "H27"
-    chart.add_series(:data => sheet["B2:B5"], :labels => sheet["A2:A5"], :title => sheet["B1"])
+  sheet.add_row ["Simple Pie Chart"]
+  %w(first second third).each { |label| sheet.add_row [label, rand(24)+1] }
+  sheet.add_chart(Axlsx::Pie3DChart, :start_at => [0,5], :end_at => [10, 20], :title => "example 3: Pie Chart") do |chart|
+    chart.add_series :data => sheet["B2:B4"], :labels => sheet["A2:A4"]
   end
 end
 #```
@@ -269,15 +247,18 @@ end
 
 #```ruby
 wb.add_worksheet(:name => "Line Chart") do |sheet|
-  sheet.add_row ["First", 1, 5, 7, 9]
-  sheet.add_row ["Second", 5, 2, 14, 9]
-  sheet.add_chart(Axlsx::Line3DChart, :title => "example 6: Line Chart", :rotX => 30, :rotY => 20) do |chart|
-    chart.start_at 0, 2
-    chart.end_at 10, 15
-    chart.add_series :data => sheet["B1:E1"], :title => sheet["A1"]
-    chart.add_series :data => sheet["B2:E2"], :title => sheet["A2"]
-    chart.catAxis.title = 'Y Axis'
-    chart.valAxis.title = 'X Axis'
+  sheet.add_row ["Simple Line Chart"]
+  sheet.add_row %w(first second)
+  4.times do
+    sheet.add_row [ rand(24)+1, rand(24)+1]
+  end
+  sheet.add_chart(Axlsx::Line3DChart, :title => "Simple Line Chart", :rotX => 30, :rotY => 20) do |chart|
+    chart.start_at 0, 5
+    chart.end_at 10, 20
+    chart.add_series :data => sheet["A3:A6"], :title => sheet["A2"]
+    chart.add_series :data => sheet["B3:B6"], :title => sheet["B2"]
+    chart.catAxis.title = 'X Axis'
+    chart.valAxis.title = 'Y Axis'
   end
 end
 #```
