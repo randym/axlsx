@@ -365,7 +365,7 @@ money = wb.styles.add_style(:format_code => '0,000', :border => Axlsx::STYLE_THI
 profitable = wb.styles.add_style( :fg_color=>"FF428751",
                                     :type => :dxf)
 
-wb.add_worksheet(:name => "Conditional Formatting: Cell Is") do |ws|
+wb.add_worksheet(:name => "Conditional Cell Is") do |ws|
 
   # Generate 20 rows of data
   ws.add_row ["Previous Year Quarterly Profits (JPY)"]
@@ -380,7 +380,7 @@ wb.add_worksheet(:name => "Conditional Formatting: Cell Is") do |ws|
   ws.add_conditional_formatting("B3:B100", { :type => :cellIs, :operator => :greaterThan, :formula => "100000", :dxfId => profitable, :priority => 1 })
 end
 
-wb.add_worksheet(:name => "Conditional Formatting: Color Scale") do |ws|
+wb.add_worksheet(:name => "Conditional Color Scale") do |ws|
   ws.add_row ["Previous Year Quarterly Profits (JPY)"]
   ws.add_row ["Quarter", "Profit", "% of Total"]
   offset = 3
@@ -394,7 +394,7 @@ wb.add_worksheet(:name => "Conditional Formatting: Color Scale") do |ws|
 end
 
 
-wb.add_worksheet(:name => "Conditional Formatting: Data Bar") do |ws|
+wb.add_worksheet(:name => "Conditional Data Bar") do |ws|
   ws.add_row ["Previous Year Quarterly Profits (JPY)"]
   ws.add_row ["Quarter", "Profit", "% of Total"]
   offset = 3
@@ -407,7 +407,7 @@ wb.add_worksheet(:name => "Conditional Formatting: Data Bar") do |ws|
   ws.add_conditional_formatting("B3:B100", { :type => :dataBar, :dxfId => profitable, :priority => 1, :data_bar => data_bar })
 end
 
-wb.add_worksheet(:name => "Conditional Formatting: Icon Set") do |ws|
+wb.add_worksheet(:name => "Conditional Format Icon Set") do |ws|
   ws.add_row ["Previous Year Quarterly Profits (JPY)"]
   ws.add_row ["Quarter", "Profit", "% of Total"]
   offset = 3
