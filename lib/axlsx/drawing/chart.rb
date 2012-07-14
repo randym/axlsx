@@ -154,16 +154,32 @@ module Axlsx
       str << '</c:chartSpace>'
     end
 
-    # This is a short cut method to set the start anchor position
+    # This is a short cut method to set the anchor start marker position
     # If you need finer granularity in positioning use
-    # graphic_frame.anchor.from.colOff / rowOff
-    # @param [Integer] x The column
+    #
+    # This helper method acceps a fairly wide range of inputs exampled
+    # below
+    #
+    # @example
+    #
+    #      start_at 0, 5 # The anchor start marker is set to 6th row of
+    #      the first column
+    #
+    #      start_at [0, 5] # The anchor start marker is set to start on the 6th row
+    #      of the first column
+    #
+    #      start_at "C1" # The anchor start marker is set to start on the first row
+    #      of the third column
+    #
+    #      start_at sheet.rows.first.cells.last # The anchor start
+    #      marker is set to the location of a specific cell.
+    #
+    # @param [Array|String|Cell] x the column, coordinates, string
+    # reference or cell to use in setting the start marker position.
     # @param [Integer] y The row
     # @return [Marker]
     def start_at(x=0, y=0)
-      x, y = *parse_coord_args(x, y)
-      @graphic_frame.anchor.from.col = x
-      @graphic_frame.anchor.from.row = y
+      @graphic_frame.anchor.start_at(x, y)
     end
 
     # This is a short cut method to set the end anchor position
@@ -172,25 +188,9 @@ module Axlsx
     # @param [Integer] x The column - default 10
     # @param [Integer] y The row - default 10
     # @return [Marker]
+    # @see start_at
     def end_at(x=10, y=10)
-      x, y = *parse_coord_args(x, y)
-      @graphic_frame.anchor.to.col = x
-      @graphic_frame.anchor.to.row = y
-    end
-
-    private
-
-    def parse_coord_args(x, y=0)
-      if x.is_a?(String)
-        x, y = *Axlsx::name_to_indices(x)
-      end
-      if x.is_a?(Cell)
-        x, y = *x.pos
-      end
-      if x.is_a?(Array)
-        x, y = *x
-      end
-      [x, y]
+      @graphic_frame.anchor.end_at(x, y)
     end
 
     def view_3D=(v) DataTypeValidator.validate "#{self.class}.view_3D", View3D, v; @view_3D = v; end
