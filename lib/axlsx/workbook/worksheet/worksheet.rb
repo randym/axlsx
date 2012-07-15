@@ -529,34 +529,39 @@ module Axlsx
       str << worksheet_node
       str << sheet_pr_node
       str << dimension_node
-      @sheet_view.to_xml_string(str) if @sheet_view
-      str << cols_node
-      str << sheet_data_node
-
+      self_serializing_node(@sheet_view, str)
+      collection_node('cols', @column_info, str)
+      collection_node('sheetData', @rows, str, :with_index => true, :required => true)
       str << auto_filter_node
-      @sheet_protection.to_xml_string(str) if @sheet_protection
-      str << protected_ranges_node
+      self_serializing_node(@sheet_protection, str)
+      collection_node('protectedRanges', @protected_ranges, str)
       str << merged_cells_node
-      @print_options.to_xml_string(str) if @print_options
-      page_margins.to_xml_string(str) if @page_margins
-      page_setup.to_xml_string(str) if @page_setup
-      str << drawing_node
-      str << legacy_drawing_node
+      self_serializing_node(@print_options, str)
+      self_serializing_node(@page_margins, str)
+      self_serializing_node(@page_setup, str)
+      str << drawing_nodes
       str << table_parts_node
       str << conditional_formattings_node
-      str << data_validations_node 
+      collection_node('dataValidations', @data_validations, str, :count => true) 
       str << '</worksheet>'
-      # User reported that when parsing some old data that had control characters excel chokes.
-      # All of the following are defined as illegal xml characters in the xml spec, but for now I am only dealing with control 
-      # characters. Thanks to asakusarb and @hsbt's flash of code on the screen!
-      # [#x1-#x8], [#xB-#xC], [#xE-#x1F], [#x7F-#x84], [#x86-#x9F], [#xFDD0-#xFDDF],
-      # [#x1FFFE-#x1FFFF], [#x2FFFE-#x2FFFF], [#x3FFFE-#x3FFFF],
-      # [#x4FFFE-#x4FFFF], [#x5FFFE-#x5FFFF], [#x6FFFE-#x6FFFF],
-      # [#x7FFFE-#x7FFFF], [#x8FFFE-#x8FFFF], [#x9FFFE-#x9FFFF],
-      # [#xAFFFE-#xAFFFF], [#xBFFFE-#xBFFFF], [#xCFFFE-#xCFFFF],
-      # [#xDFFFE-#xDFFFF], [#xEFFFE-#xEFFFF], [#xFFFFE-#xFFFFF],
-      # [#x10FFFE-#x10FFFF].
       str.gsub(/[[:cntrl:]]/,'')
+    end
+
+    def self_serializing_node(item, str)
+      item.to_xml_string(str) if item
+    end
+
+    def collection_node(node_name, collection, str="", options={})
+      return '' if collection.empty? && !options[:required]
+      str << "<#{node_name}"
+      str << " count='#{collection.size}'" if options[:count]
+      str << '>'
+      if options[:with_index]
+        collection.each_with_index { |item, index| item.to_xml_string(index, str) }
+      else
+        collection.each { |item| item.to_xml_string(str) }
+      end
+      str << "</#{node_name}>"
     end
 
     # The worksheet relationships. This is managed automatically by the worksheet
@@ -567,9 +572,11 @@ module Axlsx
         r << Relationship.new(TABLE_R, "../#{table.pn}")
       end
 
-      r << Relationship.new(VML_DRAWING_R, "../#{@comments.vml_drawing.pn}") if @comments.size > 0
-      r << Relationship.new(COMMENT_R, "../#{@comments.pn}") if @comments.size > 0
-      r << Relationship.new(COMMENT_R_NULL, "NULL") if @comments.size > 0
+      if @comments.size > 0
+        r << Relationship.new(VML_DRAWING_R, "../#{@comments.vml_drawing.pn}")
+        r << Relationship.new(COMMENT_R, "../#{@comments.pn}")
+        r << Relationship.new(COMMENT_R_NULL, "NULL")
+      end
 
       r << Relationship.new(DRAWING_R, "../#{@drawing.pn}") if @drawing
       r
@@ -619,14 +626,6 @@ module Axlsx
       "<dimension ref=\"%s\"></dimension>" % dimension
     end
 
-    # Helper method for parsing out the sheetData node
-    # @return [String]
-    def sheet_data_node
-      str = '<sheetData>'
-      @rows.each_with_index { |row, index| row.to_xml_string(index, str) }
-      str << '</sheetData>'
-    end
-
     # Helper method for parsing out the autoFilter node
     # @return [String]
     def auto_filter_node
@@ -634,45 +633,28 @@ module Axlsx
       "<autoFilter ref='%s'></autoFilter>" % @auto_filter
     end
 
-    # Helper method for parsing out the cols node
-    # @return [String]
-    def cols_node
-      return '' if @column_info.empty?
-      str = "<cols>"
-      @column_info.each { |col| col.to_xml_string(str) }
-      str << '</cols>'
-    end 
-
-    # Helper method for parsing out the protectedRanges node
-    # @return [String]
-    def protected_ranges_node
-      return '' if @protected_ranges.empty?
-      str = '<protectedRanges>'
-      @protected_ranges.each { |pr| pr.to_xml_string(str) }
-      str << '</protectedRanges>'
-    end
-
     # Helper method for parsing out the mergedCells node
     # @return [String]
     def merged_cells_node
-      return '' if @merged_cells.size == 0
+      return '' if @merged_cells.empty?
       str = "<mergeCells count='#{@merged_cells.size}'>"
       @merged_cells.each { |merged_cell| str << "<mergeCell ref='#{merged_cell}'></mergeCell>" }
       str << '</mergeCells>'
     end
 
-    # Helper method for parsing out the drawing node
-    # @return [String]
-    def drawing_node
-      return '' unless @drawing
-      "<drawing r:id='rId" << (relationships.index{ |r| r.Type == DRAWING_R } + 1).to_s << "'/>" 
+    def drawing_nodes
+      str = ""
+      if @drawing
+        str << relation_node('drawing', DRAWING_R)
+      end
+      unless @comments.empty?
+        str << relation_node('legacyDrawing', VML_DRAWING_R)
+      end
+      str     
     end
 
-    # Helper method for parsing out the legacyDrawing node required for comments
-    # @return [String]
-    def legacy_drawing_node
-      return '' if @comments.empty?
-      "<legacyDrawing r:id='rId" << (relationships.index{ |r| r.Type == VML_DRAWING_R } + 1).to_s << "'/>" 
+    def relation_node(node_name, relation_type)
+      "<#{node_name} r:id='rId" << (relationships.index{ |r| r.Type == relation_type } + 1).to_s << "'/>" 
     end
 
     # Helper method for parsing out the tableParts node
@@ -698,7 +680,7 @@ module Axlsx
     def data_validations_node
       return '' if @data_validations.size == 0
       str = "<dataValidations count='#{@data_validations.size}'>"
-      @data_validations.each { |data_validation| str << data_validation.to_xml_string }
+      @data_validations.each { |data_validation| data_validation.to_xml_string(str) }
       str << '</dataValidations>'
     end
 
