@@ -576,25 +576,27 @@ module Axlsx
     # @return [Cell, Array]
     def [] (cell_def)
       return rows[cell_def] if cell_def.is_a?(Integer)
-
-      parts = cell_def.split(':')
-      first = name_to_cell parts[0]
+      parts = cell_def.split(':').map{ |part| name_to_cell part }
       if parts.size == 1
-        first
+        parts.first
       else
-        cells = []
-        last = name_to_cell(parts[1])
-        rows[(first.row.index..last.row.index)].each do |r|
-          r.cells[(first.index..last.index)].each do |c|
-            cells << c
-          end
-        end
-        cells
+        range(*parts)
       end
     end
 
     private
 
+    def range(*cell_def)
+       first, last = cell_def
+       cells = []
+       rows[(first.row.index..last.row.index)].each do |r|
+         r.cells[(first.index..last.index)].each do |c|
+           cells << c
+         end
+       end
+       cells
+    end
+ 
     # A collection of protected ranges in the worksheet
     # @note The recommended way to manage protected ranges is with Worksheet#protect_range
     # @see Worksheet#protect_range
