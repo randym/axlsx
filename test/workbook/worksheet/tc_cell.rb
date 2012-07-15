@@ -197,19 +197,17 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_merge_with_string
-    assert_equal(@c.row.worksheet.merged_cells.size, 0)
     @c.row.add_cell 2
     @c.row.add_cell 3
     @c.merge "A2"
-    assert_equal(@c.row.worksheet.merged_cells.last, "A1:A2")
+    assert_equal(@c.row.worksheet.send(:merged_cells).last, "A1:A2")
   end
 
   def test_merge_with_cell
-    assert_equal(@c.row.worksheet.merged_cells.size, 0)
     @c.row.add_cell 2
     @c.row.add_cell 3
     @c.merge @row.cells.last
-    assert_equal(@c.row.worksheet.merged_cells.last, "A1:C1")
+    assert_equal(@c.row.worksheet.send(:merged_cells).last, "A1:C1")
   end
 
   def test_ssti

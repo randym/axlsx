@@ -11,7 +11,6 @@ def test_initialize_options
 end
 
 def test_range
-  assert_equal(0, @ws.protected_ranges.size)
   r = @ws.protect_range('A1:B1')
   assert_equal('A1:B1', r.sqref)
 end

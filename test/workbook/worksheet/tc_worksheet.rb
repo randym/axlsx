@@ -383,29 +383,27 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   def test_protect_range
-    assert(@ws.protected_ranges.is_a?(Axlsx::SimpleTypedList))
-    assert_equal(0, @ws.protected_ranges.size)
+    assert(@ws.send(:protected_ranges).is_a?(Axlsx::SimpleTypedList))
+    assert_equal(0, @ws.send(:protected_ranges).size)
     @ws.protect_range('A1:A3')
-    assert_equal('A1:A3', @ws.protected_ranges.last.sqref)
+    assert_equal('A1:A3', @ws.send(:protected_ranges).last.sqref)
   end
 
   def test_protect_range_with_cells
     @ws.add_row [1, 2, 3]
     assert_nothing_raised {@ws.protect_range(@ws.rows.first.cells) }
-    assert_equal('A1:C1', @ws.protected_ranges.last.sqref)
+    assert_equal('A1:C1', @ws.send(:protected_ranges).last.sqref)
     
   end
   def test_merge_cells
-    assert(@ws.merged_cells.is_a?(Array))
-    assert_equal(@ws.merged_cells.size, 0)
     @ws.add_row [1,2,3]
     @ws.add_row [4,5,6]
     @ws.add_row [7,8,9]
     @ws.merge_cells "A1:A2"
     @ws.merge_cells "B2:C3"
     @ws.merge_cells @ws.rows.last.cells[(0..1)]
-    assert_equal(@ws.merged_cells.size, 3)
-    assert_equal(@ws.merged_cells.last, "A3:B3")
+    assert_equal(@ws.send(:merged_cells).size, 3)
+    assert_equal(@ws.send(:merged_cells).last, "A3:B3")
   end
   
   def test_merge_cells_sorts_correctly_by_row_when_given_array
@@ -413,7 +411,7 @@ class TestWorksheet < Test::Unit::TestCase
       @ws.add_row [i]
     end
     @ws.merge_cells [@ws.rows[8].cells.first, @ws.rows[9].cells.first]
-    assert_equal "A9:A10", @ws.merged_cells.first
+    assert_equal "A9:A10", @ws.send(:merged_cells).first
   end
   
   def test_auto_filter
