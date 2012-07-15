@@ -38,8 +38,8 @@ class TestRow < Test::Unit::TestCase
   end
 
   def test_add_cell_autowidth_info
-    width = @ws.send :calculate_width, 'this is the cell of cells', @ws.workbook.styles.fonts.first.sz
-    @row.add_cell("this is the cell of cells")
+    cell = @row.add_cell("this is the cell of cells")
+    width = cell.send(:autowidth)
     assert_equal(@ws.column_info.last.width, width)
   end
 

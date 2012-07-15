@@ -321,7 +321,21 @@ module Axlsx
       @type == :string && @value.start_with?('=')
     end
 
+    # This is still not perfect...
+    #  - scaling is not linear as font sizes increst
+    #  - different fonts have different mdw and char widths
+    def autowidth
+      return if is_formula? || value == nil
+      mdw = 1.78 #This is the widest width of 0..9 in arial@10px)
+      font_scale = (font_size/10.0).to_f
+      ((value.to_s.count(Worksheet.thin_chars) * mdw + 5) / mdw * 256) / 256.0 * font_scale
+    end
+    
     private
+
+    def font_size
+        sz || @styles.fonts[@styles.cellXfs[style].fontId].sz
+    end
 
     # Utility method for setting inline style attributes
     def set_run_style( validator, attr, value)

@@ -365,7 +365,7 @@ class TestWorksheet < Test::Unit::TestCase
   def test_set_fixed_width_column
     @ws.add_row ["mule", "donkey", "horse"], :widths => [20, :ignore, nil]
     assert(@ws.column_info.size == 3, "a data item for each column")
-    assert_equal(@ws.column_info[0].width, 20, "adding a row with fixed width updates :fixed attribute")
+    assert_equal(20, @ws.column_info[0].width, "adding a row with fixed width updates :fixed attribute")
     assert_equal(@ws.column_info[1].width, nil, ":ignore does not set any data")
   end
 

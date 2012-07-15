@@ -274,10 +274,10 @@ module Axlsx
     # but at least a few other document readers expect this for conversion
     # @return [String] the A1:B2 style reference for the first and last row column intersection in the workbook
     def dimension
-     "#{dimension_reference(rows.first.cells.first, 'A1')}:#{dimension_reference(rows.last.cells.last, 'AA200')}"
+      "#{dimension_reference(rows.first.cells.first, 'A1')}:#{dimension_reference(rows.last.cells.last, 'AA200')}"
     end
 
-      #
+    #
     # Indicates if gridlines should be shown in the sheet.
     # This is true by default.
     # @return [Boolean]
@@ -415,8 +415,7 @@ module Axlsx
     # @option options [Float] height the row's height (in points)
     def add_row(values=[], options={})
       Row.new(self, values, options)
-      update_column_info @rows.last.cells, options.delete(:widths) ||[], options.delete(:style) || []
-      # update_auto_fit_data @rows.last.cells, options.delete(:widths) || []
+      update_column_info @rows.last.cells, options.delete(:widths) || []
       yield @rows.last if block_given?
       @rows.last
     end
@@ -470,7 +469,7 @@ module Axlsx
 
     # This is a helper method that Lets you specify a fixed width for multiple columns in a worksheet in one go.
     # Axlsx is sparse, so if you have not set data for a column, you cannot set the width.
-    # Setting a fixed column width to nil will revert the behaviour back to calculating the width for you.
+    # Setting a fixed column width to nil will revert the behaviour back to calculating the width for you on the next call to add_row.
     # @example This would set the first and third column widhts but leave the second column in autofit state.
     #      ws.column_widths 7.2, nil, 3
     # @note For updating only a single column it is probably easier to just set the width of the ws.column_info[col_index].width directly
@@ -709,36 +708,22 @@ module Axlsx
     # assigns the owner workbook for this worksheet
     def workbook=(v) DataTypeValidator.validate "Worksheet.workbook", Workbook, v; @workbook = v; end
 
-    # TODO this needs cleanup!
-    def update_column_info(cells, widths=[], style=[])
-      styles = self.workbook.styles
-      cellXfs, fonts = styles.cellXfs, styles.fonts
-      sz = 11
+    def styles
+      @styles ||= self.workbook.styles
+    end
 
+    def update_column_info(cells, widths=[])
       cells.each_with_index do |cell, index|
-        @column_info[index] ||= Col.new index+1, index+1
-        col = @column_info[index]
-        width = widths[index]
-        col.width = width if [Integer, Float, Fixnum].include?(width.class)
-        c_style = style[index] if [Integer, Fixnum].include?(style[index].class)
-        next if width == :ignore || (cell.value.is_a?(String) && cell.value.start_with?('=') || cell.value == nil)
-        if self.workbook.use_autowidth
-          cell_xf = cellXfs[(c_style || 0)]
-          font = fonts[(cell_xf.fontId || 0)]
-          sz = cell.sz || font.sz || sz
-          col.width = [(col.width || 0), calculate_width(cell.value.to_s, sz)].max
-        end
+        col = find_or_create_column_info(index)
+        next if widths[index] == :ignore
+        col.update_width(cell, widths[index], workbook.use_autowidth)
       end
     end
 
-
-    # This is still not perfect...
-    #  - scaling is not linear as font sizes increst
-    #  - different fonts have different mdw and char widths
-    def calculate_width(text, sz)
-      mdw = 1.78 #This is the widest width of 0..9 in arial@10px)
-      font_scale = (sz/10.0).to_f
-      ((text.count(Worksheet.thin_chars) * mdw + 5) / mdw * 256) / 256.0 * font_scale
+    def find_or_create_column_info(index, fixed_width=nil)
+      col = @column_info[index] || Col.new(index + 1, index + 1)
+      @column_info[index] = col if index == @column_info.size
+      col
     end
 
     def dimension_reference(cell, default)
