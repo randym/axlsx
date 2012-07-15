@@ -39,12 +39,18 @@ end
 
 # xlsx generation with charts, images, automated column width, customizable styles and full schema validation. Axlsx excels at helping you generate beautiful Office Open XML Spreadsheet documents without having to understand the entire ECMA specification. Check out the README for some examples of how easy it is. Best of all, you can validate your xlsx file before serialization so you know for sure that anything generated is going to load on your client's machine.
 module Axlsx
+
   # determines the cell range for the items provided
-  def self.cell_range(items)
-    return "" unless items.first.is_a? Cell
-    ref = "'#{items.first.row.worksheet.name}'!" +
-      "#{items.first.r_abs}"
-    ref += ":#{items.last.r_abs}" if items.size > 1
+  def self.cell_range(cells, absolute=true)
+    return "" unless cells.first.is_a? Cell
+    cells.sort { |x, y| [x.index, x.row.index] <=> [y.index, y.row.index] }
+    reference_method = absolute ? :r_abs : :r
+    ref = if absolute
+            "'#{cells.first.row.worksheet.name}'!#{cells.first.send(reference_method)}"
+          else
+            "#{cells.first.send(reference_method)}"
+          end
+    ref << ":#{cells.last.send(reference_method)}" if cells.size > 1
     ref
   end
 

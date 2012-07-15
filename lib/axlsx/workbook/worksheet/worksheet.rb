@@ -250,11 +250,9 @@ module Axlsx
       @merged_cells << if cells.is_a?(String)
                          cells
       elsif cells.is_a?(Array)
-        cells = cells.sort { |x, y| [x.index, x.row.index] <=> [y.index, y.row.index] }
-        "#{cells.first.r}:#{cells.last.r}"
+        Axlsx::cell_range(cells, false)
       end
     end
-
     # Adds a new protected cell range to the worksheet. Note that protected ranges are only in effect when sheet protection is enabled.
     # @param [String|Array] cells The string reference for the cells to protect or an array of cells.
     # @return [ProtectedRange]
@@ -263,8 +261,7 @@ module Axlsx
       sqref = if cells.is_a?(String)
                 cells
               elsif cells.is_a?(SimpleTypedList)
-                cells = cells.sort { |x, y| [x.index, x.row.index] <=> [y.index, y.row.index] }
-                "#{cells.first.r}:#{cells.last.r}"
+                Axlsx::cell_range(cells, false)
               end
       @protected_ranges << ProtectedRange.new(:sqref => sqref, :name => 'Range#{@protected_ranges.size}')
       @protected_ranges.last
