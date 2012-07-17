@@ -318,7 +318,7 @@ module Axlsx
     end
 
     def is_formula?
-      @type == :string && @value.start_with?('=')
+      @type == :string && @value.to_s.start_with?('=')
     end
 
     # This is still not perfect...

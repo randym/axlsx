@@ -22,12 +22,13 @@ module Axlsx
       self.workbook = wb
       @workbook.worksheets << self
       @sheet_protection = nil
+
       initialize_page_options(options)
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
     end
-    
+
     def initialize_page_options(options)
       @page_margins = PageMargins.new options[:page_margins] if options[:page_margins]
       @page_setup = PageSetup.new options[:page_setup]  if options[:page_setup]
@@ -39,6 +40,7 @@ module Axlsx
     def name
       @name ||=  "Sheet" + (index+1).to_s
     end
+
     # The sheet protection object for this workbook
     # @return [SheetProtection]
     # @see SheetProtection
@@ -67,12 +69,6 @@ module Axlsx
       @tables ||=  Tables.new self
     end
 
-    # The comments associated with this worksheet
-    # @return [SimpleTypedList]
-    def worksheet_comments
-      @worksheet_comments ||= WorksheetComments.new self
-    end
-
     def comments
       worksheet_comments.comments if worksheet_comments.has_comments?
     end
@@ -85,30 +81,17 @@ module Axlsx
       @rows ||=  SimpleTypedList.new Row
     end
 
+    # returns the sheet data as columnw
+    def cols
+      @rows.transpose
+    end
+
     # An range that excel will apply an autfilter to "A1:B3"
     # This will turn filtering on for the cells in the range.
     # The first row is considered the header, while subsequent rows are considerd to be data.
     # @return String 
     def auto_filter
       @auto_filter ||= AutoFilter.new self
-    end
-
-    # Indicates if the worksheet should show gridlines or not
-    # @return Boolean
-    # @deprecated Use {SheetView#show_grid_lines} instead.
-    def show_gridlines
-      warn('axlsx::DEPRECIATED: Worksheet#show_gridlines has been depreciated. This value can get over SheetView#show_grid_lines.')
-      sheet_view.show_grid_lines
-    end
-
-    # Indicates if the worksheet is selected in the workbook
-    # It is possible to have more than one worksheet selected, however it might cause issues
-    # in some older versions of excel when using copy and paste.
-    # @return Boolean
-    # @deprecated Use {SheetView#tab_selected} instead.
-    def selected
-      warn('axlsx::DEPRECIATED: Worksheet#selected has been depreciated. This value can get over SheetView#tab_selected.')
-      sheet_view.tab_selected
     end
 
     # Indicates if the worksheet will be fit by witdh or height to a specific number of pages.
@@ -201,34 +184,6 @@ module Axlsx
       rows.flatten
     end
 
-    # Add conditional formatting to this worksheet.
-    #
-    # @param [String] cells The range to apply the formatting to
-    # @param [Array|Hash] rules An array of hashes (or just one) to create Conditional formatting rules from.
-    # @example This would format column A whenever it is FALSE.
-    #        # for a longer example, see examples/example_conditional_formatting.rb (link below)
-    #        worksheet.add_conditional_formatting( "A1:A1048576", { :type => :cellIs, :operator => :equal, :formula => "FALSE", :dxfId => 1, :priority => 1 }
-    #
-    # @see ConditionalFormattingRule#initialize
-    # @see file:examples/example_conditional_formatting.rb
-    def add_conditional_formatting(cells, rules)
-      cf = ConditionalFormatting.new( :sqref => cells )
-      cf.add_rules rules
-      conditional_formattings << cf
-      conditional_formattings      
-    end
-
-    # Add data validation to this worksheet.
-    #
-    # @param [String] cells The cells the validation will apply to.
-    # @param [hash] data_validation options defining the validation to apply.
-    # @see  examples/data_validation.rb for an example
-    def add_data_validation(cells, data_validation)
-      dv = DataValidation.new(data_validation)
-      dv.sqref = cells
-      data_validations << dv
-    end
-
     # Creates merge information for this worksheet.
     # Cells can be merged by calling the merge_cells method on a worksheet.
     # @example This would merge the three cells C1..E1    #
@@ -241,6 +196,7 @@ module Axlsx
     def merge_cells(cells)
       merged_cells.add cells
     end
+
     # Adds a new protected cell range to the worksheet. Note that protected ranges are only in effect when sheet protection is enabled.
     # @param [String|Array] cells The string reference for the cells to protect or an array of cells.
     # @return [ProtectedRange]
@@ -282,6 +238,23 @@ module Axlsx
       sheet_view.tab_selected = v
     end
 
+    # Indicates if the worksheet should show gridlines or not
+    # @return Boolean
+    # @deprecated Use {SheetView#show_grid_lines} instead.
+    def show_gridlines
+      warn('axlsx::DEPRECIATED: Worksheet#show_gridlines has been depreciated. This value can get over SheetView#show_grid_lines.')
+      sheet_view.show_grid_lines
+    end
+
+    # Indicates if the worksheet is selected in the workbook
+    # It is possible to have more than one worksheet selected, however it might cause issues
+    # in some older versions of excel when using copy and paste.
+    # @return Boolean
+    # @deprecated Use {SheetView#tab_selected} instead.
+    def selected
+      warn('axlsx::DEPRECIATED: Worksheet#selected has been depreciated. This value can get over SheetView#tab_selected.')
+      sheet_view.tab_selected
+    end
 
     # (see #fit_to_page)
     # @return [Boolean]
@@ -290,27 +263,11 @@ module Axlsx
       fit_to_page?
     end
 
-
-    # returns the column and row index for a named based cell
-    # @param [String] name The cell or cell range to return. "A1" will return the first cell of the first row.
-    # @return [Cell]
-    def name_to_cell(name)
-      col_index, row_index = *Axlsx::name_to_indices(name)
-      r = rows[row_index]
-      r.cells[col_index] if r
-    end
-
     # The name of the worksheet
     # The name of a worksheet must be unique in the workbook, and must not exceed 31 characters
     # @param [String] v
-    def name=(v)
-      DataTypeValidator.validate "Worksheet.name", String, v
-      raise ArgumentError, (ERR_SHEET_NAME_TOO_LONG % v) if v.size > 31
-      raise ArgumentError, (ERR_SHEET_NAME_COLON_FORBIDDEN % v) if v.include? ':'
-      v = Axlsx::coder.encode(v) 
-      sheet_names = @workbook.worksheets.map { |s| s.name }
-      raise ArgumentError, (ERR_DUPLICATE_SHEET_NAME % v) if sheet_names.include?(v)
-      @name=v
+    def name=(name)
+      @name=Axlsx::coder.encode(name)
     end
 
     # The auto filter range for the worksheet
@@ -401,65 +358,32 @@ module Axlsx
 
     alias :<< :add_row
 
-    # Set the style for cells in a specific row
-    # @param [Integer] index or range of indexes in the table
-    # @param [Integer] style the cellXfs index
-    # @param [Hash] options the options used when applying the style
-    # @option [Integer] :col_offset only cells after this column will be updated.
-    # @note You can also specify the style in the add_row call
-    # @see Worksheet#add_row
-    # @see README.md for an example
-    def row_style(index, style, options={})
-      offset = options.delete(:col_offset) || 0
-      rs = @rows[index]
-      if rs.is_a?(Array)
-        rs.each { |r| r.cells[(offset..-1)].each { |c| c.style = style } }
-      else
-        rs.cells[(offset..-1)].each { |c| c.style = style }
-      end
+    # Add conditional formatting to this worksheet.
+    #
+    # @param [String] cells The range to apply the formatting to
+    # @param [Array|Hash] rules An array of hashes (or just one) to create Conditional formatting rules from.
+    # @example This would format column A whenever it is FALSE.
+    #        # for a longer example, see examples/example_conditional_formatting.rb (link below)
+    #        worksheet.add_conditional_formatting( "A1:A1048576", { :type => :cellIs, :operator => :equal, :formula => "FALSE", :dxfId => 1, :priority => 1 }
+    #
+    # @see ConditionalFormattingRule#initialize
+    # @see file:examples/example_conditional_formatting.rb
+    def add_conditional_formatting(cells, rules)
+      cf = ConditionalFormatting.new( :sqref => cells )
+      cf.add_rules rules
+      conditional_formattings << cf
+      conditional_formattings      
     end
 
-    # returns the sheet data as columnw
-    def cols
-      @rows.transpose
-    end
-
-
-    # Set the style for cells in a specific column
-    # @param [Integer] index the index of the column
-    # @param [Integer] style the cellXfs index
-    # @param [Hash] options
-    # @option [Integer] :row_offset only cells after this column will be updated.
-    # @note You can also specify the style for specific columns in the call to add_row by using an array for the :styles option
-    # @see Worksheet#add_row
-    # @see README.md for an example
-    def col_style(index, style, options={})
-      offset = options.delete(:row_offset) || 0
-      @rows[(offset..-1)].each do |r|
-        cells = r.cells[index]
-        next unless cells
-        if cells.is_a?(Array)
-          cells.each { |c| c.style = style }
-        else
-          cells.style = style
-        end
-      end
-    end
-
-    # This is a helper method that Lets you specify a fixed width for multiple columns in a worksheet in one go.
-    # Axlsx is sparse, so if you have not set data for a column, you cannot set the width.
-    # Setting a fixed column width to nil will revert the behaviour back to calculating the width for you on the next call to add_row.
-    # @example This would set the first and third column widhts but leave the second column in autofit state.
-    #      ws.column_widths 7.2, nil, 3
-    # @note For updating only a single column it is probably easier to just set the width of the ws.column_info[col_index].width directly
-    # @param [Integer|Float|Fixnum|nil] widths
-    def column_widths(*widths)
-      widths.each_with_index do |value, index|
-        next if value == nil
-        Axlsx::validate_unsigned_numeric(value) unless value == nil
-        @column_info[index] ||= Col.new index+1, index+1
-        @column_info[index].width = value
-      end
+    # Add data validation to this worksheet.
+    #
+    # @param [String] cells The cells the validation will apply to.
+    # @param [hash] data_validation options defining the validation to apply.
+    # @see  examples/data_validation.rb for an example
+    def add_data_validation(cells, data_validation)
+      dv = DataValidation.new(data_validation)
+      dv.sqref = cells
+      data_validations << dv
     end
 
     # Adds a chart to this worksheets drawing. This is the recommended way to create charts for your worksheet. This method wraps the complexity of dealing with ooxml drawing, anchors, markers graphic frames chart objects and all the other dirty details.
@@ -488,7 +412,6 @@ module Axlsx
       tables.last
     end
 
-
     # Shortcut to worsksheet_comments#add_comment
     def add_comment(options={})
       worksheet_comments.add_comment(options)
@@ -500,6 +423,49 @@ module Axlsx
       image = worksheet_drawing.add_image(options)
       yield image if block_given?
       image
+    end
+
+    # This is a helper method that Lets you specify a fixed width for multiple columns in a worksheet in one go.
+    # Axlsx is sparse, so if you have not set data for a column, you cannot set the width.
+    # Setting a fixed column width to nil will revert the behaviour back to calculating the width for you on the next call to add_row.
+    # @example This would set the first and third column widhts but leave the second column in autofit state.
+    #      ws.column_widths 7.2, nil, 3
+    # @note For updating only a single column it is probably easier to just set the width of the ws.column_info[col_index].width directly
+    # @param [Integer|Float|Fixnum|nil] widths
+    def column_widths(*widths)
+      widths.each_with_index do |value, index|
+        next if value == nil
+        Axlsx::validate_unsigned_numeric(value) unless value == nil
+        find_or_create_column_info(index).width = value
+      end
+    end
+
+    # Set the style for cells in a specific column
+    # @param [Integer] index the index of the column
+    # @param [Integer] style the cellXfs index
+    # @param [Hash] options
+    # @option [Integer] :row_offset only cells after this column will be updated.
+    # @note You can also specify the style for specific columns in the call to add_row by using an array for the :styles option
+    # @see Worksheet#add_row
+    # @see README.md for an example
+    def col_style(index, style, options={})
+      offset = options.delete(:row_offset) || 0
+      cells = @rows[(offset..-1)].map { |row| row.cells[index] }.flatten.compact
+      cells.each { |cell| cell.style = style }
+    end
+
+    # Set the style for cells in a specific row
+    # @param [Integer] index or range of indexes in the table
+    # @param [Integer] style the cellXfs index
+    # @param [Hash] options the options used when applying the style
+    # @option [Integer] :col_offset only cells after this column will be updated.
+    # @note You can also specify the style in the add_row call
+    # @see Worksheet#add_row
+    # @see README.md for an example
+    def row_style(index, style, options={})
+      offset = options.delete(:col_offset) || 0
+      cells = cols[(offset..-1)].map { |column| column[index] }.flatten.compact
+      cells.each { |cell| cell.style = style }
     end
 
     # Serializes the worksheet object to an xml string
@@ -538,15 +504,34 @@ module Axlsx
       end
     end
 
+    # returns the column and row index for a named based cell
+    # @param [String] name The cell or cell range to return. "A1" will return the first cell of the first row.
+    # @return [Cell]
+    def name_to_cell(name)
+      col_index, row_index = *Axlsx::name_to_indices(name)
+      r = rows[row_index]
+      r.cells[col_index] if r
+    end
+
     private
+
+    def validate_sheet_name(name)
+      DataTypeValidator.validate "Worksheet.name", String, name
+      raise ArgumentError, (ERR_SHEET_NAME_TOO_LONG % name) if name.size > 31
+      raise ArgumentError, (ERR_SHEET_NAME_COLON_FORBIDDEN % name) if name.include? ':'
+      name = Axlsx::coder.encode(name) 
+      sheet_names = @workbook.worksheets.map { |s| s.name }
+      raise ArgumentError, (ERR_DUPLICATE_SHEET_NAME % name) if sheet_names.include?(name)
+    end
+
 
     def serializable_parts
       [sheet_pr, dimension, sheet_view, column_info,
        sheet_data, @sheet_protection, protected_ranges,
-       auto_filter, merged_cells, print_options,
-       page_margins, page_setup, worksheet_drawing,
-       worksheet_comments, tables, conditional_formattings,
-       data_validations]
+       auto_filter, merged_cells, conditional_formattings,
+       data_validations, print_options, page_margins,
+       page_setup, worksheet_drawing, worksheet_comments,
+       tables]
     end
 
     def range(*cell_def)
@@ -602,28 +587,12 @@ module Axlsx
       @worksheet_drawing ||= WorksheetDrawing.new self
     end
 
-    def drawing_nodes
-      str = ""
-      if @comments
-        str << relation_node('legacyDrawing', VML_DRAWING_R)
-      end
-      str     
+    # The comments associated with this worksheet
+    # @return [SimpleTypedList]
+    def worksheet_comments
+      @worksheet_comments ||= WorksheetComments.new self
     end
 
-    def relation_node(node_name, relation_type)
-      "<#{node_name} r:id='rId" << (relationships.index{ |r| r.Type == relation_type } + 1).to_s << "'/>" 
-    end
-
-    # Helper method for parsing out the dataValidations node
-    # @return [String]
-    def data_validations_node
-      return '' if data_validations.size == 0
-      str = "<dataValidations count='#{data_validations.size}'>"
-      data_validations.each { |data_validation| data_validation.to_xml_string(str) }
-      str << '</dataValidations>'
-    end
-
-    # assigns the owner workbook for this worksheet
     def workbook=(v) DataTypeValidator.validate "Worksheet.workbook", Workbook, v; @workbook = v; end
 
     def styles
@@ -638,7 +607,7 @@ module Axlsx
       end
     end
 
-    def find_or_create_column_info(index, fixed_width=nil)
+    def find_or_create_column_info(index)
       column_info[index] ||= Col.new(index + 1, index + 1)
     end
 
