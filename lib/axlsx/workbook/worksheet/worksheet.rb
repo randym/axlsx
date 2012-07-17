@@ -21,24 +21,20 @@ module Axlsx
     def initialize(wb, options={})
       self.workbook = wb
       @workbook.worksheets << self
-      initialize_optional_instance_variables
+      @sheet_protection = nil
       initialize_page_options(options)
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
     end
-
-    def initialize_optional_instance_variables
-     @page_setup = @drawing = @sheet_protection = @auto_filter = nil
-    end
-
+    
     def initialize_page_options(options)
       @page_margins = PageMargins.new options[:page_margins] if options[:page_margins]
       @page_setup = PageSetup.new options[:page_setup]  if options[:page_setup]
       @print_options = PrintOptions.new options[:print_options] if options[:print_options]
     end
 
-     # The name of the worksheet
+    # The name of the worksheet
     # @return [String]
     def name
       @name ||=  "Sheet" + (index+1).to_s
@@ -51,7 +47,6 @@ module Axlsx
       yield @sheet_protection if block_given?
       @sheet_protection
     end
-
 
     # The sheet view object for this worksheet
     # @return [SheetView]
@@ -69,14 +64,19 @@ module Axlsx
     # The tables in this worksheet
     # @return [Array] of Table
     def tables
-      @tables ||=  SimpleTypedList.new Table
+      @tables ||=  Tables.new self
     end
 
     # The comments associated with this worksheet
     # @return [SimpleTypedList]
-    def comments
-      @comments ||= Comments.new(self)
+    def worksheet_comments
+      @worksheet_comments ||= WorksheetComments.new self
     end
+
+    def comments
+      worksheet_comments.comments if worksheet_comments.has_comments?
+    end
+
     # The rows in this worksheet
     # @note The recommended way to manage rows is Worksheet#add_row
     # @return [SimpleTypedList]
@@ -85,11 +85,13 @@ module Axlsx
       @rows ||=  SimpleTypedList.new Row
     end
 
-   # An range that excel will apply an autfilter to "A1:B3"
+    # An range that excel will apply an autfilter to "A1:B3"
     # This will turn filtering on for the cells in the range.
     # The first row is considered the header, while subsequent rows are considerd to be data.
     # @return String 
-    attr_reader :auto_filter
+    def auto_filter
+      @auto_filter ||= AutoFilter.new self
+    end
 
     # Indicates if the worksheet should show gridlines or not
     # @return Boolean
@@ -115,7 +117,7 @@ module Axlsx
     # @return Boolean
     # @see #page_setup
     def fit_to_page?
-      return false unless @page_setup
+      return false unless self.instance_values.keys.include?('page_setup')
       page_setup.fit_to_page?
     end
 
@@ -123,7 +125,7 @@ module Axlsx
     # Column info for the sheet
     # @return [SimpleTypedList]
     def column_info
-      @column_info ||= SimpleTypedList.new Col
+      @column_info ||= Cols.new self
     end
 
     # Page margins for printing the worksheet.
@@ -213,6 +215,7 @@ module Axlsx
       cf = ConditionalFormatting.new( :sqref => cells )
       cf.add_rules rules
       conditional_formattings << cf
+      conditional_formattings      
     end
 
     # Add data validation to this worksheet.
@@ -236,34 +239,30 @@ module Axlsx
     #        worksheet["C1"].merge worksheet["E1"]
     # @param [Array, string] cells
     def merge_cells(cells)
-      merged_cells << if cells.is_a?(String)
-                         cells
-      elsif cells.is_a?(Array)
-        Axlsx::cell_range(cells, false)
-      end
+      merged_cells.add cells
     end
     # Adds a new protected cell range to the worksheet. Note that protected ranges are only in effect when sheet protection is enabled.
     # @param [String|Array] cells The string reference for the cells to protect or an array of cells.
     # @return [ProtectedRange]
     # @note When using an array of cells, a contiguous range is created from the minimum top left to the maximum top bottom of the cells provided.
     def protect_range(cells)
-      sqref = if cells.is_a?(String)
-                cells
-              elsif cells.is_a?(SimpleTypedList)
-                Axlsx::cell_range(cells, false)
-              end
-      protected_ranges << ProtectedRange.new(:sqref => sqref, :name => "Range#{protected_ranges.size}")
-      protected_ranges.last
+      protected_ranges.add_range(cells)
     end
 
-    # The demensions of a worksheet. This is not actually a required element by the spec,
+    # The dimensions of a worksheet. This is not actually a required element by the spec,
     # but at least a few other document readers expect this for conversion
-    # @return [String] the A1:B2 style reference for the first and last row column intersection in the workbook
+    # @return [Dimension]
     def dimension
-      "#{dimension_reference(rows.first.cells.first, 'A1')}:#{dimension_reference(rows.last.cells.last, 'AA200')}"
+      @dimension ||= Dimension.new self
     end
 
-    #
+    # The sheet properties for this workbook.
+    # Currently only pageSetUpPr -> fitToPage is implemented
+    # @return [SheetPr]
+    def sheet_pr
+      @sheet_pr ||= SheetPr.new self
+    end
+
     # Indicates if gridlines should be shown in the sheet.
     # This is true by default.
     # @return [Boolean]
@@ -314,18 +313,12 @@ module Axlsx
       @name=v
     end
 
-    # The absolute auto filter range
-    # @see auto_filter
-    def abs_auto_filter
-      Axlsx.cell_range(@auto_filter.split(':').collect { |name| name_to_cell(name)}) if @auto_filter
-    end
-
     # The auto filter range for the worksheet
     # @param [String] v
     # @see auto_filter
     def auto_filter=(v)
       DataTypeValidator.validate "Worksheet.auto_filter", String, v
-      @auto_filter = v
+      auto_filter.range = v
     end
 
     # The part name of this worksheet
@@ -357,7 +350,7 @@ module Axlsx
     # @return [Drawing]
     # @see Worksheet#add_chart
     def drawing
-      @drawing ||= Axlsx::Drawing.new(self)
+      worksheet_drawing.drawing
     end
 
     # Adds a row to the worksheet and updates auto fit data.
@@ -483,29 +476,28 @@ module Axlsx
     # @see Line3DChart
     # @see README for examples
     def add_chart(chart_type, options={})
-      chart = drawing.add_chart(chart_type, options)
+      chart = worksheet_drawing.add_chart(chart_type, options)
       yield chart if block_given?
       chart
     end
 
     # needs documentation
     def add_table(ref, options={})
-      table = Table.new(ref, self, options)
-      tables << table
-      yield table if block_given?
-      table
+      tables << Table.new(ref, self, options)
+      yield tables.last if block_given?
+      tables.last
     end
 
 
-    # Shortcut to comments#add_comment
+    # Shortcut to worsksheet_comments#add_comment
     def add_comment(options={})
-      comments.add_comment(options)
+      worksheet_comments.add_comment(options)
     end
 
     # Adds a media item to the worksheets drawing
     # @option [Hash] options options passed to drawing.add_image
     def add_image(options={})
-      image = drawing.add_image(options)
+      image = worksheet_drawing.add_image(options)
       yield image if block_given?
       image
     end
@@ -516,58 +508,34 @@ module Axlsx
     def to_xml_string
       str = '<?xml version="1.0" encoding="UTF-8"?>'
       str << worksheet_node
-      str << sheet_pr_node
-      str << dimension_node
-      self_serializing_node(sheet_view, str)
-      collection_node('cols', column_info, str)
-      collection_node('sheetData', rows, str, :with_index => true, :required => true)
-      str << auto_filter_node
-      self_serializing_node(@sheet_protection, str)
-      collection_node('protectedRanges', protected_ranges, str)
-      str << merged_cells_node
-      self_serializing_node(print_options, str)
-      self_serializing_node(page_margins, str)
-      self_serializing_node(page_setup, str)
-      str << drawing_nodes
-      str << table_parts_node
-      str << conditional_formattings_node
-      collection_node('dataValidations', data_validations, str, :count => true) 
+      [sheet_pr, dimension,
+       sheet_view, column_info,
+       sheet_data, 
+       @sheet_protection, 
+       protected_ranges,
+       auto_filter,
+       merged_cells,
+       print_options,
+       page_margins,
+       page_setup,
+       worksheet_drawing,
+       worksheet_comments,
+       tables,
+       conditional_formattings,
+       data_validations].each do |item|
+        item.to_xml_string(str) if item
+      end
       str << '</worksheet>'
       str.gsub(/[[:cntrl:]]/,'')
-    end
-
-    def self_serializing_node(item, str)
-      item.to_xml_string(str) if item
-    end
-
-    def collection_node(node_name, collection, str="", options={})
-      return '' if collection && collection.empty? && !options[:required]
-      str << "<#{node_name}"
-      str << " count='#{collection.size}'" if options[:count]
-      str << '>'
-      if options[:with_index]
-        collection.each_with_index { |item, index| item.to_xml_string(index, str) }
-      else
-        collection.each { |item| item.to_xml_string(str) }
-      end
-      str << "</#{node_name}>"
     end
 
     # The worksheet relationships. This is managed automatically by the worksheet
     # @return [Relationships]
     def relationships
       r = Relationships.new
-      tables.each do |table|
-        r << Relationship.new(TABLE_R, "../#{table.pn}")
-      end
-
-      if comments.size > 0
-        r << Relationship.new(VML_DRAWING_R, "../#{comments.vml_drawing.pn}")
-        r << Relationship.new(COMMENT_R, "../#{comments.pn}")
-        r << Relationship.new(COMMENT_R_NULL, "NULL")
-      end
-
-      r << Relationship.new(DRAWING_R, "../#{@drawing.pn}") if @drawing
+      r + [tables.relationships, 
+           worksheet_comments.relationships, 
+           worksheet_drawing.relationship].flatten.compact
       r
     end
 
@@ -587,82 +555,61 @@ module Axlsx
     private
 
     def range(*cell_def)
-       first, last = cell_def
-       cells = []
-       rows[(first.row.index..last.row.index)].each do |r|
-         r.cells[(first.index..last.index)].each do |c|
-           cells << c
-         end
-       end
-       cells
+      first, last = cell_def
+      cells = []
+      rows[(first.row.index..last.row.index)].each do |r|
+        r.cells[(first.index..last.index)].each do |c|
+          cells << c
+        end
+      end
+      cells
     end
- 
+
     # A collection of protected ranges in the worksheet
     # @note The recommended way to manage protected ranges is with Worksheet#protect_range
     # @see Worksheet#protect_range
     # @return [SimpleTypedList] The protected ranges for this worksheet
     def protected_ranges
-      @protected_ranges ||= SimpleTypedList.new ProtectedRange
+      @protected_ranges ||= ProtectedRanges.new self 
+      # SimpleTypedList.new ProtectedRange
     end
 
+    # conditional formattings
+    # @return [Array]
     def conditional_formattings
-      @conditional_formattings ||= []
+      @conditional_formattings ||= ConditionalFormattings.new self
     end
-  
+
+    # data validations array
+    # @return [Array]
     def data_validations
-      @data_validations ||= []
+      @data_validations ||= DataValidations.new self 
     end
 
-    # An array of merged cell ranges e.d "A1:B3"
-    # Content and formatting is read from the first cell.
-    # @return Array
+    # merged cells array
+    # @return [Array]
     def merged_cells
-      @merged_cells ||= []
+      @merged_cells ||= MergedCells.new self
     end
 
- 
+
     # Helper method for parsingout the root node for worksheet
     # @return [String]
     def worksheet_node
       "<worksheet xmlns=\"%s\" xmlns:r=\"%s\">" % [XML_NS, XML_NS_R]
     end
 
-    # Helper method fo parsing out the sheetPr node
-    # @return [String]
-    def sheet_pr_node
-      return '' unless fit_to_page?
-      "<sheetPr><pageSetUpPr fitToPage=\"%s\"></pageSetUpPr></sheetPr>" % fit_to_page?
+    def sheet_data
+      @sheet_data ||= SheetData.new self
     end
 
-    # Helper method for parsing out the demension node
-    # @return [String]
-    def dimension_node
-      return '' if rows.size == 0
-      "<dimension ref=\"%s\"></dimension>" % dimension
-    end
-
-    # Helper method for parsing out the autoFilter node
-    # @return [String]
-    def auto_filter_node
-      return '' unless @auto_filter
-      "<autoFilter ref='%s'></autoFilter>" % @auto_filter
-    end
-
-    # Helper method for parsing out the mergedCells node
-    # @return [String]
-    def merged_cells_node
-      return '' if merged_cells.empty?
-      str = "<mergeCells count='#{merged_cells.size}'>"
-      merged_cells.each { |merged_cell| str << "<mergeCell ref='#{merged_cell}'></mergeCell>" }
-      str << '</mergeCells>'
+    def worksheet_drawing
+      @worksheet_drawing ||= WorksheetDrawing.new self
     end
 
     def drawing_nodes
       str = ""
-      if @drawing
-        str << relation_node('drawing', DRAWING_R)
-      end
-      unless comments.empty?
+      if @comments
         str << relation_node('legacyDrawing', VML_DRAWING_R)
       end
       str     
@@ -670,24 +617,6 @@ module Axlsx
 
     def relation_node(node_name, relation_type)
       "<#{node_name} r:id='rId" << (relationships.index{ |r| r.Type == relation_type } + 1).to_s << "'/>" 
-    end
-
-    # Helper method for parsing out the tableParts node
-    # @return [String]
-    def table_parts_node
-      return '' if tables.empty?
-      str = "<tableParts count='#{tables.size}'>"
-      tables.each { |table| str << "<tablePart r:id='#{table.rId}'/>" }
-      str << '</tableParts>'
-    end
-
-    # Helper method for parsing out the conditional formattings
-    # @return [String]
-    def conditional_formattings_node
-      return '' if conditional_formattings.size == 0
-      str = ''
-      conditional_formattings.each { |conditional_formatting| str << conditional_formatting.to_xml_string }
-      str
     end
 
     # Helper method for parsing out the dataValidations node
@@ -715,14 +644,8 @@ module Axlsx
     end
 
     def find_or_create_column_info(index, fixed_width=nil)
-      col = column_info[index] || Col.new(index + 1, index + 1)
-      column_info[index] = col if index == column_info.size
-      col
+      column_info[index] ||= Col.new(index + 1, index + 1)
     end
 
-    def dimension_reference(cell, default)
-      return default unless cell.respond_to?(:r)
-      cell.r
-    end
   end
 end

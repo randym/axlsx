@@ -113,12 +113,12 @@ class TestWorksheet < Test::Unit::TestCase
   def test_dimension
     @ws.add_row [1, 2, 3]
     @ws.add_row [4, 5, 6]
-    assert_equal @ws.dimension, "A1:C2"
+    assert_equal @ws.dimension.sqref, "A1:C2"
   end
 
   def test_dimension_with_empty_row
     @ws.add_row
-    assert_equal "A1:AA200", @ws.dimension
+    assert_equal "A1:AA200", @ws.dimension.sqref
   end
 
   def test_referencing
@@ -148,7 +148,9 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   def test_drawing
-    assert @ws.drawing.is_a? Axlsx::Drawing
+    assert @ws.drawing == nil
+    @ws.add_chart(Axlsx::Pie3DChart)
+    assert @ws.drawing.is_a?(Axlsx::Drawing)
   end
 
   def test_col_style
@@ -306,10 +308,11 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(doc.xpath('//xmlns:worksheet/xmlns:tableParts/xmlns:tablePart[@r:id="rId1"]').size, 1)
   end
 
-  def test_abs_auto_filter
+  def test_auto_filter
     @ws.add_row [1, "two", 3]
     @ws.auto_filter = "A1:C1"
-    assert_equal(@ws.abs_auto_filter, "'Sheet1'!$A$1:$C$1")
+    assert_equal("A1:C1", @ws.auto_filter.range)
+    assert_equal(@ws.auto_filter.defined_name, "'Sheet1'!$A$1:$C$1")
   end
 
   def test_to_xml_string
@@ -415,9 +418,9 @@ class TestWorksheet < Test::Unit::TestCase
   end
   
   def test_auto_filter
-    assert(@ws.auto_filter.nil?)
+    assert(@ws.auto_filter.range.nil?)
     assert_raise(ArgumentError) { @ws.auto_filter = 123 }
     @ws.auto_filter = "A1:D9"
-    assert_equal(@ws.auto_filter, "A1:D9")
+    assert_equal(@ws.auto_filter.range, "A1:D9")
   end
 end

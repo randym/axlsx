@@ -50,6 +50,18 @@ module Axlsx
       @locked_at = nil
       self
     end
+    
+    # join operator
+    # @param [Array] v the array to join
+    # @raise [ArgumentError] if any of the values being joined are not
+    # one of the allowed types
+    # @return [SimpleTypedList]
+    def +(v)
+      v.each do |item| 
+        DataTypeValidator.validate "SimpleTypedList.+", @allowed_types, item
+        @list << item 
+      end 
+    end
 
     # Concat operator
     # @param [Any] v the data to be added
@@ -60,12 +72,7 @@ module Axlsx
       @list << v
       @list.size - 1
     end
-
-    # alternate of << method
-    # @see <<
-    def push(v)
-      self.<< v
-    end
+    alias :push :<<
 
     # delete the item from the list
     # @param [Any] v The item to be deleted.

@@ -53,6 +53,14 @@ module Axlsx
       @list.map { |comment| comment.author.to_s }.uniq.sort
     end
 
+    # The relationships required by this object
+    # @return [Array]
+    def relationships
+      [Relationship.new(VML_DRAWING_R, "../#{vml_drawing.pn}"),
+       Relationship.new(COMMENT_R, "../#{pn}"),
+       Relationship.new(COMMENT_R_NULL, "NULL")]
+    end
+
     # serialize the object
     # @param [String] str
     # @return [String]

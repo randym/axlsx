@@ -9,8 +9,6 @@ class TestDrawing < Test::Unit::TestCase
 
   def test_initialization
     assert(@ws.workbook.drawings.empty?)
-    assert_equal(@ws.drawing, @ws.workbook.drawings.last, "drawing is added to workbook")
-    assert(@ws.drawing.anchors.is_a?(Axlsx::SimpleTypedList) && @ws.drawing.anchors.empty?, "anchor list is created and empty")
   end
 
   def test_add_chart
@@ -39,7 +37,6 @@ class TestDrawing < Test::Unit::TestCase
     assert(image.is_a?(Axlsx::Pic))
   end
   def test_charts
-    assert(@ws.drawing.charts.empty?)
     chart = @ws.add_chart(Axlsx::Pie3DChart, :title=>"bob", :start_at=>[0,0], :end_at=>[1,1])
     assert_equal(@ws.drawing.charts.last, chart, "add chart is returned")
     chart = @ws.add_chart(Axlsx::Pie3DChart, :title=>"nancy", :start_at=>[1,5], :end_at=>[5,10])
@@ -47,23 +44,26 @@ class TestDrawing < Test::Unit::TestCase
   end
 
   def test_pn
+    @ws.add_chart(Axlsx::Pie3DChart)
     assert_equal(@ws.drawing.pn, "drawings/drawing1.xml")
   end
 
   def test_rels_pn
+    @ws.add_chart(Axlsx::Pie3DChart)
     assert_equal(@ws.drawing.rels_pn, "drawings/_rels/drawing1.xml.rels")
   end
 
   def test_rId
+    @ws.add_chart(Axlsx::Pie3DChart)
     assert_equal(@ws.drawing.rId, "rId1")
   end
 
   def test_index
+    @ws.add_chart(Axlsx::Pie3DChart)
     assert_equal(@ws.drawing.index, @ws.workbook.drawings.index(@ws.drawing))
   end
 
   def test_relationships
-    assert(@ws.drawing.relationships.empty?)
     chart = @ws.add_chart(Axlsx::Pie3DChart, :title=>"bob", :start_at=>[0,0], :end_at=>[1,1])
     assert_equal(@ws.drawing.relationships.size, 1, "adding a chart adds a relationship")
     chart = @ws.add_chart(Axlsx::Pie3DChart, :title=>"nancy", :start_at=>[1,5], :end_at=>[5,10])
@@ -72,6 +72,7 @@ class TestDrawing < Test::Unit::TestCase
 
   def test_to_xml
     schema = Nokogiri::XML::Schema(File.open(Axlsx::DRAWING_XSD))
+    @ws.add_chart(Axlsx::Pie3DChart)
     doc = Nokogiri::XML(@ws.drawing.to_xml_string)
     errors = []
     schema.validate(doc).each do |error|

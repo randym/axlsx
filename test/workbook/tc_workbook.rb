@@ -79,7 +79,7 @@ class TestWorkbook < Test::Unit::TestCase
       sheet.auto_filter = "A1:B1"
     end
     doc = Nokogiri::XML(@wb.to_xml_string)
-    assert_equal(doc.xpath('//xmlns:workbook/xmlns:definedNames/xmlns:definedName').inner_text, @wb.worksheets[0].abs_auto_filter)
+    assert_equal(doc.xpath('//xmlns:workbook/xmlns:definedNames/xmlns:definedName').inner_text, @wb.worksheets[0].auto_filter.defined_name)
   end
 
 

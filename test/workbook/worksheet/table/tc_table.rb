@@ -25,14 +25,6 @@ class TestTable < Test::Unit::TestCase
 
   end
 
-  def test_charts
-    assert(@ws.drawing.charts.empty?)
-    chart = @ws.add_chart(Axlsx::Pie3DChart, :title=>"bob", :start_at=>[0,0], :end_at=>[1,1])
-    assert_equal(@ws.drawing.charts.last, chart, "add chart is returned")
-    chart = @ws.add_chart(Axlsx::Pie3DChart, :title=>"nancy", :start_at=>[1,5], :end_at=>[5,10])
-    assert_equal(@ws.drawing.charts.last, chart, "add chart is returned")
-  end
-
   def test_pn
     @ws.add_table("A1:D5")
     assert_equal(@ws.tables.first.pn, "tables/table1.xml")

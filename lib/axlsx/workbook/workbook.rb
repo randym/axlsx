@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 module Axlsx
-
+require 'axlsx/workbook/worksheet/auto_filter.rb'
 require 'axlsx/workbook/worksheet/date_time_converter.rb'
 require 'axlsx/workbook/worksheet/protected_range.rb'
+require 'axlsx/workbook/worksheet/protected_ranges.rb'
 require 'axlsx/workbook/worksheet/cell.rb'
 require 'axlsx/workbook/worksheet/page_margins.rb'
 require 'axlsx/workbook/worksheet/page_setup.rb'
@@ -13,15 +14,25 @@ require 'axlsx/workbook/worksheet/data_bar.rb'
 require 'axlsx/workbook/worksheet/icon_set.rb'
 require 'axlsx/workbook/worksheet/conditional_formatting.rb'
 require 'axlsx/workbook/worksheet/conditional_formatting_rule.rb'
+require 'axlsx/workbook/worksheet/conditional_formattings.rb'
 require 'axlsx/workbook/worksheet/row.rb'
 require 'axlsx/workbook/worksheet/col.rb'
+require 'axlsx/workbook/worksheet/cols.rb'
 require 'axlsx/workbook/worksheet/comments.rb'
 require 'axlsx/workbook/worksheet/comment.rb'
+require 'axlsx/workbook/worksheet/merged_cells.rb'
 require 'axlsx/workbook/worksheet/sheet_protection.rb'
+require 'axlsx/workbook/worksheet/sheet_pr.rb'
+require 'axlsx/workbook/worksheet/dimension.rb'
+require 'axlsx/workbook/worksheet/sheet_data.rb'
+require 'axlsx/workbook/worksheet/worksheet_drawing.rb'
+require 'axlsx/workbook/worksheet/worksheet_comments.rb'
 require 'axlsx/workbook/worksheet/worksheet.rb'
 require 'axlsx/workbook/shared_strings_table.rb'
 require 'axlsx/workbook/worksheet/table.rb'
+require 'axlsx/workbook/worksheet/tables.rb'
 require 'axlsx/workbook/worksheet/data_validation.rb'
+require 'axlsx/workbook/worksheet/data_validations.rb'
 require 'axlsx/workbook/worksheet/sheet_view.rb'
 require 'axlsx/workbook/worksheet/pane.rb'
 require 'axlsx/workbook/worksheet/selection.rb'
@@ -236,9 +247,9 @@ require 'axlsx/workbook/worksheet/selection.rb'
       str << '</sheets>'
       str << '<definedNames>'
       @worksheets.each_with_index do |sheet, index|
-        if sheet.auto_filter
+        if sheet.auto_filter.defined_name
           str << '<definedName name="_xlnm._FilterDatabase" localSheetId="' << index.to_s << '" hidden="1">'
-          str << sheet.abs_auto_filter << '</definedName>'
+          str << sheet.auto_filter.defined_name << '</definedName>'
         end
       end
       str << '</definedNames>'

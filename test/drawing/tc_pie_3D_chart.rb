@@ -6,7 +6,7 @@ class TestPie3DChart < Test::Unit::TestCase
     p = Axlsx::Package.new
     ws = p.workbook.add_worksheet
     @row = ws.add_row ["one", 1, Time.now]
-    @chart = ws.drawing.add_chart Axlsx::Pie3DChart, :title => "fishery"
+    @chart = ws.add_chart Axlsx::Pie3DChart, :title => "fishery"
   end
 
   def teardown

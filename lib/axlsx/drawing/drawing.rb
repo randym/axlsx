@@ -69,6 +69,7 @@ module Axlsx
       @anchors = SimpleTypedList.new [TwoCellAnchor, OneCellAnchor]
     end
 
+
     # Adds an image to the chart If th end_at option is specified we create a two cell anchor. By default we use a one cell anchor.
     # @note The recommended way to manage images is to use Worksheet.add_image. Please refer to that method for documentation.
     # @see Worksheet#add_image
