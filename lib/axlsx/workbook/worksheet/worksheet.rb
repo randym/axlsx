@@ -267,6 +267,7 @@ module Axlsx
     # The name of a worksheet must be unique in the workbook, and must not exceed 31 characters
     # @param [String] v
     def name=(name)
+      validate_sheet_name name
       @name=Axlsx::coder.encode(name)
     end
 
