@@ -508,21 +508,7 @@ module Axlsx
     def to_xml_string
       str = '<?xml version="1.0" encoding="UTF-8"?>'
       str << worksheet_node
-      [sheet_pr, dimension,
-       sheet_view, column_info,
-       sheet_data, 
-       @sheet_protection, 
-       protected_ranges,
-       auto_filter,
-       merged_cells,
-       print_options,
-       page_margins,
-       page_setup,
-       worksheet_drawing,
-       worksheet_comments,
-       tables,
-       conditional_formattings,
-       data_validations].each do |item|
+      serializable_parts.each do |item|
         item.to_xml_string(str) if item
       end
       str << '</worksheet>'
@@ -553,6 +539,15 @@ module Axlsx
     end
 
     private
+
+    def serializable_parts
+      [sheet_pr, dimension, sheet_view, column_info,
+       sheet_data, @sheet_protection, protected_ranges,
+       auto_filter, merged_cells, print_options,
+       page_margins, page_setup, worksheet_drawing,
+       worksheet_comments, tables, conditional_formattings,
+       data_validations]
+    end
 
     def range(*cell_def)
       first, last = cell_def
