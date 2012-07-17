@@ -26,6 +26,7 @@ module Axlsx
       super(frame, options)
       @series_type = PieSeries
       @view_3D = View3D.new({:rot_x =>30, :perspective=>30}.merge(options))
+      @d_lbls = nil
     end
 
     # Serializes the object
@@ -36,6 +37,7 @@ module Axlsx
         str_inner << '<c:pie3DChart>'
         str_inner << '<c:varyColors val="1"/>'
         @series.each { |ser| ser.to_xml_string(str_inner) }
+        @d_lbls.to_xml_string(str) if @d_lbls
         str_inner << '</c:pie3DChart>'
       end
     end

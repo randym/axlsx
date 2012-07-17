@@ -46,7 +46,9 @@ module Axlsx
     attr_reader :series_type
 
     #TODO data labels!
-    #attr_reader :dLabls
+    def d_lbls
+      @d_lbls ||= DLbls.new
+    end
 
     # The title object for the chart.
     # @return [Title]
