@@ -43,15 +43,13 @@ module Axlsx
   # determines the cell range for the items provided
   def self.cell_range(cells, absolute=true)
     return "" unless cells.first.is_a? Cell
+    sort_cells(cells)
+    reference = "#{cells.first.reference(absolute)}:#{cells.last.reference(absolute)}"
+    absolute ? "#{cells.first.row.worksheet.name}!#{reference}" : reference
+  end
+
+  def self.sort_cells(cells)
     cells.sort { |x, y| [x.index, x.row.index] <=> [y.index, y.row.index] }
-    reference_method = absolute ? :r_abs : :r
-    ref = if absolute
-            "'#{cells.first.row.worksheet.name}'!#{cells.first.send(reference_method)}"
-          else
-            "#{cells.first.send(reference_method)}"
-          end
-    ref << ":#{cells.last.send(reference_method)}" if cells.size > 1
-    ref
   end
 
   #global reference html entity encoding
@@ -66,9 +64,7 @@ module Axlsx
     v = name[/[A-Z]+/].reverse.chars.reduce({:base=>1, :i=>0}) do  |val, c|
       val[:i] += ((c.bytes.first - 64) * val[:base]); val[:base] *= 26; val
     end
-
     [v[:i]-1, ((name[/[1-9][0-9]*/]).to_i)-1]
-
   end
 
   # converts the column index into alphabetical values.

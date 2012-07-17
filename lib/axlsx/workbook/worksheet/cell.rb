@@ -330,6 +330,10 @@ module Axlsx
       font_scale = (font_size/10.0).to_f
       ((value.to_s.count(Worksheet.thin_chars) * mdw + 5) / mdw * 256) / 256.0 * font_scale
     end
+   
+    def reference(absolute=true)
+      absolute ? r_abs : r
+    end 
     
     private
 
