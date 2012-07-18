@@ -115,6 +115,9 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
+- **July.??.12**: 1.1.9 release
+   - lots of code clean up for worksheet
+   - added in data labels for pie charts
 - **July.14.12**: 1.1.8 release
    - added html entity encoding for sheet names. This allows you to use
      characters like '<' and '&' in your sheet names.
