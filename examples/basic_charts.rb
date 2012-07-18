@@ -9,10 +9,10 @@ wb.add_worksheet(:name => "Pie Chart") do |sheet|
   sheet.add_row [1, 2, 3, 4]
   sheet.add_chart(Axlsx::Pie3DChart, :start_at => [0,2], :end_at => [5, 15], :title=> 'dark corner here') do |chart|
     chart.add_series :data => sheet["A2:D2"], :labels => sheet["A1:D1"]
-    chart.d_lbls.show_cat_name = true
+    chart.d_lbls.show_val = true
     chart.d_lbls.show_percent = true
     chart.d_lbls.d_lbl_pos = :outEnd
-    chard.d_lbls.show_leader_lines = true
+    chart.d_lbls.show_leader_lines = true
   end
 end
 

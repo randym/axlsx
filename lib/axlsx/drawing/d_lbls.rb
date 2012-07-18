@@ -1,5 +1,9 @@
 module Axlsx
-  #       <c:dLbls>
+  # There are more elements in the dLbls spec that allow for
+  # customizations and formatting. For now, I am just implementing the
+  # basics.
+  # 
+  #<c:dLbls>
   #<c:dLblPos val="outEnd"/>
   #<c:showLegendKey val="0"/>
   #<c:showVal val="0"/>
@@ -12,6 +16,9 @@ module Axlsx
 
   #The DLbls class manages serialization of data labels
   class DLbls
+
+    # These attributes are all boolean so I'm doing a bit of a hand
+    # waving magic show to set up the attriubte accessors
     BOOLEAN_ATTRIBUTES = [:show_legend_key, :show_val, :show_cat_name, :show_ser_name, :show_percent, :show_bubble_size, :show_leader_lines]
     
     # creates a new DLbls object
@@ -24,12 +31,17 @@ module Axlsx
 
     end
     
+    # Initialize all the values to false as Excel requires them to
+    # explicitly be disabled or all will show.
     def initialize_defaults
       BOOLEAN_ATTRIBUTES.each do |attr|
         self.send("#{attr}=", false)
       end
     end
 
+    # The position of the data labels in the chart
+    # @see d_lbl_pos= for a list of allowed values
+    # @return [Symbol]
     attr_reader :d_lbl_pos
 
     # @see DLbls#d_lbl_pos
@@ -43,13 +55,19 @@ module Axlsx
       @d_lbl_pos = label_position
     end
    
+    # Dynamically create accessors for boolean attriubtes
     BOOLEAN_ATTRIBUTES.each do |attr|    
       class_eval %{
+      # The #{attr} attribute reader
+      # @return [Boolean]
       attr_reader :#{attr} 
 
-      def #{attr}=(v)
-        Axlsx::validate_boolean(v)
-        @#{attr} = v
+      # The #{attr} writer
+      # @param [Boolean] value The value to assign to #{attr}
+      # @return [Boolean]
+      def #{attr}=(value)
+        Axlsx::validate_boolean(value)
+        @#{attr} = value
       end
       }
     end
