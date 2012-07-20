@@ -73,7 +73,13 @@ class TestChart < Test::Unit::TestCase
   def test_pn
     assert_equal(@chart.pn, "charts/chart1.xml")
   end
-
+  
+  def test_d_lbls
+    assert_equal(nil, @chart.instance_values[:d_lbls])
+    @chart.d_lbls.d_lbl_pos = :t
+    assert(@chart.d_lbls.is_a?(Axlsx::DLbls), 'DLbls instantiated on access')
+  end
+  
   def test_to_xml_string
     schema = Nokogiri::XML::Schema(File.open(Axlsx::DRAWING_XSD))
     doc = Nokogiri::XML(@chart.to_xml_string)
