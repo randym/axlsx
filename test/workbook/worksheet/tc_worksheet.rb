@@ -314,6 +314,10 @@ class TestWorksheet < Test::Unit::TestCase
     assert(schema.validate(doc).map{ |e| puts e.message; e }.empty?, "error free validation")
   end
 
+  def test_styles
+    assert(@ws.styles.is_a?(Axlsx::Styles), 'worksheet provides access to styles')
+  end
+  
   def test_to_xml_string_with_illegal_chars
     nasties =  "\v\u2028\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008\u001f"
     @ws.add_row [nasties]

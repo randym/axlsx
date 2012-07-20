@@ -7,12 +7,20 @@ class TestDLbls < Test::Unit::TestCase
   end
 
   def test_initialization
-    assert_equal(:best_fit, @d_lbls.d_lbl_pos)
+    assert_equal(:bestFit, @d_lbls.d_lbl_pos)
     Axlsx::DLbls::BOOLEAN_ATTRIBUTES.each do |attr|
       assert_equal(false, @d_lbls.send(attr))
     end
   end
 
+  def test_initialization_with_optoins
+    options_hash = Hash[*[Axlsx::DLbls::BOOLEAN_ATTRIBUTES.map { |name| [name, true] }] ]
+    d_lbls = Axlsx::DLbls.new(options_hash.merge( { :d_lbl_pos => :t }))
+    Axlsx::DLbls::BOOLEAN_ATTRIBUTES.each do |attr|
+      assert_equal(true, d_lbls.send(attr), "boolean attributes set by options")
+    end
+    assert_equal(:t, d_lbls.d_lbl_pos, "d_lbl_pos set by options")
+  end
   def test_d_lbl_pos
     assert_raise(ArgumentError, 'invlaid label positions are rejected') { @d_lbls.d_lbl_pos = :upside_down }
     assert_nothing_raised('accepts valid label position') { @d_lbls.d_lbl_pos = :ctr }

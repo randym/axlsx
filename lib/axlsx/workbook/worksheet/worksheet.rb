@@ -514,6 +514,20 @@ module Axlsx
       r.cells[col_index] if r
     end
 
+    # shortcut method to access styles direclty from the worksheet
+    # This lets us do stuff like:
+    # @example
+    #     p = Axlsx::Package.new
+    #     p.workbook.add_worksheet(:name => 'foo') do |sheet|
+    #       my_style = sheet.styles.add_style { :bg_color => "FF0000" }
+    #       sheet.add_row ['Oh No!'], :styles => my_style
+    #     end
+    #     p.serialize 'foo.xlsx'
+    def styles
+      @styles ||= self.workbook.styles
+    end
+
+
     private
 
     def validate_sheet_name(name)
@@ -596,11 +610,7 @@ module Axlsx
 
     def workbook=(v) DataTypeValidator.validate "Worksheet.workbook", Workbook, v; @workbook = v; end
 
-    def styles
-      @styles ||= self.workbook.styles
-    end
-
-    def update_column_info(cells, widths=[])
+     def update_column_info(cells, widths=[])
       cells.each_with_index do |cell, index|
         col = find_or_create_column_info(index)
         next if widths[index] == :ignore
