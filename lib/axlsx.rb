@@ -45,7 +45,7 @@ module Axlsx
     return "" unless cells.first.is_a? Cell
     sort_cells(cells)
     reference = "#{cells.first.reference(absolute)}:#{cells.last.reference(absolute)}"
-    absolute ? "#{cells.first.row.worksheet.name}!#{reference}" : reference
+    absolute ? "'#{cells.first.row.worksheet.name}'!#{reference}" : reference
   end
 
   def self.sort_cells(cells)

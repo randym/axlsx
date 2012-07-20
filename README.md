@@ -117,7 +117,9 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 ---------
 - **July.??.12**: 1.1.9 release
    - lots of code clean up for worksheet
-   - added in data labels for pie charts
+   - added in data labels for pie charts, line charts and bar charts.
+   - bugfix chard with data in a sheet that has a space in the name are
+     now auto updating formula based values
 - **July.14.12**: 1.1.8 release
    - added html entity encoding for sheet names. This allows you to use
      characters like '<' and '&' in your sheet names.
@@ -193,7 +195,6 @@ related to themes, which axlsx does not implement at this time.
 2. Google Docs
    - Images are known to not work with google docs
    - border colors do not work
-   - Charts, for the most part, do not work. Google docs has some specific requirements about how the worksheet is set up to create a chart. 
 
 3. Numbers
    - you must set 'use_shared_strings' to true
