@@ -22,6 +22,8 @@ end
   sheet.add_row [1, 2, 3, '=sum(A2:C2)']
   sheet.add_chart(Axlsx::Line3DChart, :start_at => [0,2], :end_at => [5, 15], :title => "Chart") do |chart|
     chart.add_series :data => sheet["A2:D2"], :labels => sheet["A1:D1"], :title => 'bob'
+    chart.d_lbls.show_val = true
+    chart.d_lbls.show_cat_name = true
   end
  end
 
@@ -34,6 +36,8 @@ end
     chart.add_series :data => sheet["A3:C3"], :labels => sheet["A2:C2"], :title => sheet["A1"]
     chart.valAxis.label_rotation = -45
     chart.catAxis.label_rotation = 45
+    chart.d_lbls.d_lbl_pos = :outEnd
+    chart.d_lbls.show_val = true
   end
  end
 

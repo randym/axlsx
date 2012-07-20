@@ -71,6 +71,7 @@ module Axlsx
       super(frame, options)
       @series_type = LineSeries
       @view_3D = View3D.new({:perspective=>30}.merge(options))
+      @d_lbls = nil
     end
 
     # @see grouping
@@ -89,19 +90,13 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
+      remove_invalid_d_lbls_attributes
       super(str) do |str_inner|
         str_inner << '<c:line3DChart>'
         str_inner << '<c:grouping val="' << grouping.to_s << '"/>'
         str_inner << '<c:varyColors val="1"/>'
         @series.each { |ser| ser.to_xml_string(str_inner) }
-        str_inner << '<c:dLbls>'
-        str_inner << '<c:showLegendKey val="0"/>'
-        str_inner << '<c:showVal val="0"/>'
-        str_inner << '<c:showCatName val="0"/>'
-        str_inner << '<c:showSerName val="0"/>'
-        str_inner << '<c:showPercent val="0"/>'
-        str_inner << '<c:showBubbleSize val="0"/>'
-        str_inner << '</c:dLbls>'
+        @d_lbls.to_xml_string(str) if @d_lbls
         str_inner << '<c:gapDepth val="' << @gapDepth.to_s << '"/>' unless @gapDepth.nil?
         str_inner << '<c:axId val="' << @catAxId.to_s << '"/>'
         str_inner << '<c:axId val="' << @valAxId.to_s << '"/>'
@@ -111,6 +106,14 @@ module Axlsx
         @valAxis.to_xml_string str_inner
         @serAxis.to_xml_string str_inner
       end
+    end
+    #
+    # nills out d_lbls attributes that are not allowed in this chart type
+    def remove_invalid_d_lbls_attributes
+      return unless @d_lbls
+      @d_lbls.instance_eval{ @d_lbl_pos = nil
+                             @show_leader_lines = nil
+      }
     end
 
   end

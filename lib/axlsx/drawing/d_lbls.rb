@@ -19,6 +19,10 @@ module Axlsx
 
     # These attributes are all boolean so I'm doing a bit of a hand
     # waving magic show to set up the attriubte accessors
+    # @note 
+    #   not all charts support all methods! 
+    #   Bar3DChart and Line3DChart and ScatterChart do not support d_lbl_pos or show_leader_lines
+    #    
     BOOLEAN_ATTRIBUTES = [:show_legend_key, :show_val, :show_cat_name, :show_ser_name, :show_percent, :show_bubble_size, :show_leader_lines]
     
     # creates a new DLbls object
