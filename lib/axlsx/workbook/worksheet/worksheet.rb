@@ -488,7 +488,7 @@ module Axlsx
       r = Relationships.new
       r + [tables.relationships, 
            worksheet_comments.relationships, 
-           worksheet_drawing.relationship].flatten.compact
+           worksheet_drawing.relationship].flatten.compact || []
       r
     end
 

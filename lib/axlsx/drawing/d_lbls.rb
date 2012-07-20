@@ -23,7 +23,7 @@ module Axlsx
     
     # creates a new DLbls object
     def initialize(options={})
-      d_lbl_pos = :best_fit
+      @d_lbl_pos = :best_fit
       initialize_defaults
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="

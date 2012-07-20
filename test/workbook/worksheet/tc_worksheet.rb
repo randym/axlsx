@@ -308,13 +308,6 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(doc.xpath('//xmlns:worksheet/xmlns:tableParts/xmlns:tablePart[@r:id="rId1"]').size, 1)
   end
 
-  def test_auto_filter
-    @ws.add_row [1, "two", 3]
-    @ws.auto_filter = "A1:C1"
-    assert_equal("A1:C1", @ws.auto_filter.range)
-    assert_equal(@ws.auto_filter.defined_name, "'Sheet1'!$A$1:$C$1")
-  end
-
   def test_to_xml_string
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@ws.to_xml_string)
