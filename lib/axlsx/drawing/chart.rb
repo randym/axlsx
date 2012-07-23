@@ -47,8 +47,9 @@ module Axlsx
 
     #TODO data labels!
     def d_lbls
-      @d_lbls ||= DLbls.new
+      @d_lbls ||= DLbls.new(self.class)
     end
+
 
     # The title object for the chart.
     # @return [Title]

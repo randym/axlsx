@@ -610,7 +610,7 @@ module Axlsx
 
     def workbook=(v) DataTypeValidator.validate "Worksheet.workbook", Workbook, v; @workbook = v; end
 
-     def update_column_info(cells, widths=[])
+    def update_column_info(cells, widths=[])
       cells.each_with_index do |cell, index|
         col = find_or_create_column_info(index)
         next if widths[index] == :ignore

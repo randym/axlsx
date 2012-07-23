@@ -120,7 +120,6 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      remove_invalid_d_lbls_attributes
       super(str) do |str_inner|
         str_inner << '<c:bar3DChart>'
         str_inner << '<c:barDir val="' << bar_dir.to_s << '"/>'
@@ -138,13 +137,6 @@ module Axlsx
         @cat_axis.to_xml_string str_inner
         @val_axis.to_xml_string str_inner
       end
-    end
-
-    def remove_invalid_d_lbls_attributes
-      return unless @d_lbls
-      @d_lbls.instance_eval{ @d_lbl_pos = nil
-                             @show_leader_lines = nil
-      }
     end
   end
 end
