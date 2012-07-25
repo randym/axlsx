@@ -28,7 +28,8 @@ Axlsx: Office Open XML Spreadsheet Generation
 **Release Date**: July 14th 2012
 
 If you are working in rails, or with active record see:
-http://github.com/randym/acts_as_xlsx
+* http://github.com/randym/acts_as_xlsx
+* http://github.com/straydogstudio/axlsx_rails
 
 There are guides for using axlsx and acts_as_xlsx here:
 [http://axlsx.blogspot.com](http://axlsx.blogspot.com)
