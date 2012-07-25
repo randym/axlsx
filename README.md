@@ -29,7 +29,18 @@ Axlsx: Office Open XML Spreadsheet Generation
 
 If you are working in rails, or with active record see:
 * http://github.com/randym/acts_as_xlsx
+acts_as_xlsx is a simple ActiveRecord mixin that lets you do stuff like
+'''ruby
+
+Posts.where(created_at > Time.now-30.days).to_xlsx
+
+'''
+To automatically generate a workbook
+
+** and **
+
 * http://github.com/straydogstudio/axlsx_rails
+Axlsx_Rails provides an Axlsx renderer so you can move all your spreadsheet code from your controller into view files. Partials are supported so you can organize any code into reusable chunks (e.g. cover sheets, common styling, etc.) You can use it with acts_as_xlsx, placing the to_xlsx call in a view and add ':package => xlsx_package' to the parameter list. Now you can keep your controllers thin!
 
 There are guides for using axlsx and acts_as_xlsx here:
 [http://axlsx.blogspot.com](http://axlsx.blogspot.com)
@@ -231,6 +242,8 @@ done without the help of the people below.
 [janhuehne](https://github.com/janhuehne) - for working out the decoder ring and adding in cell level validation, and providing a support for window panes.
 
 [rfc2616](https://github.com/rfc2616) - for FINALLY working out the interop issues with google docs.
+
+[straydogstudio](https://github.com/straydocstudio) - For making an AWESOME axlsx templating gem for rails.
 
 #Copyright and License
 ----------
