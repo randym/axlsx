@@ -29,13 +29,11 @@ Axlsx: Office Open XML Spreadsheet Generation
 
 If you are working in rails, or with active record see:
 * http://github.com/randym/acts_as_xlsx
-acts_as_xlsx is a simple ActiveRecord mixin that lets you do stuff like
-'''ruby
+acts_as_xlsx is a simple ActiveRecord mixin that lets you generate a workbook with:
 
-Posts.where(created_at > Time.now-30.days).to_xlsx
-
-'''
-To automatically generate a workbook
+    ```ruby
+    Posts.where(created_at > Time.now-30.days).to_xlsx
+    ```
 
 ** and **
 
