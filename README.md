@@ -90,8 +90,10 @@ cell level input data validation.
 
 **16. Support for password and non password based sheet protection.
 
-**17. First stage interoperability support for GoogleDocs, LibraOffice,
+**17. First stage interoperability support for GoogleDocs, LibreOffice,
 and Numbers
+
+**18. Support for defined names, which gives you repeated header rows for printing and a whole bunch of out there stuff. Have a look at lib/axlsx/workbook/defined_name.rb for all the gory glory
 
 Installing
 ----------

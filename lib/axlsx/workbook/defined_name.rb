@@ -109,7 +109,7 @@ module Axlsx
     STRING_ATTRIBUTES = [:short_cut_key, :status_bar, :help, :description, :custom_menu, :comment, :name]
 
     # boolean attributes that will be added when this class is evaluated
-    BOOLEAN_ATTRIBUTES = [:workbook_parameter, :publish_to_server, :xml, :vb_proceedure, :function, :hidden] 
+    BOOLEAN_ATTRIBUTES = [:workbook_parameter, :publish_to_server, :xlm, :vb_proceedure, :function, :hidden] 
 
     # Dynamically create string attribute accessors
     STRING_ATTRIBUTES.each do |attr|
