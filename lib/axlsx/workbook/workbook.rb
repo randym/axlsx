@@ -29,6 +29,8 @@ require 'axlsx/workbook/worksheet/worksheet_drawing.rb'
 require 'axlsx/workbook/worksheet/worksheet_comments.rb'
 require 'axlsx/workbook/worksheet/worksheet.rb'
 require 'axlsx/workbook/shared_strings_table.rb'
+require 'axlsx/workbook/defined_name.rb'
+require 'axlsx/workbook/defined_names.rb'
 require 'axlsx/workbook/worksheet/table.rb'
 require 'axlsx/workbook/worksheet/tables.rb'
 require 'axlsx/workbook/worksheet/data_validation.rb'
@@ -112,13 +114,22 @@ require 'axlsx/workbook/worksheet/selection.rb'
     # @return [SimpleTypedList]
     attr_reader :tables
 
-    # A colllection of comments associated with this workbook
-    # @note The recommended way to manage comments is Worksheet#add_comment
+
+    # A collection of defined names for this workbook
+    # @note The recommended way to manage defined names is Workbook#add_defined_name
+    # @see DefinedName 
+    # @return [DefinedNames]
+    def defined_names
+      @defined_names ||= DefinedNames.new
+    end
+
+    # A collection of comments associated with this workbook
+    # @note The recommended way to manage comments is WOrksheet#add_comment
     # @see Worksheet#add_comment
     # @see Comment
     # @return [Comments]
     def comments
-      self.worksheets.map { |ws| ws.comments }.compact
+      worksheets.map { |sheet| sheet.comments }.compact
     end
 
     # The styles associated with this workbook
@@ -201,6 +212,14 @@ require 'axlsx/workbook/worksheet/selection.rb'
       worksheet
     end
 
+    # Adds a defined name to this workbook
+    # @return [DefinedName]
+    # @param [String] formula @see DefinedName
+    # @param [Hash] options @see DefinedName
+    def add_defined_name(formula, options)
+      defined_names << DefinedName.new(formula, options)
+    end
+
     # The workbook relationships. This is managed automatically by the workbook
     # @return [Relationships]
     def relationships
@@ -242,17 +261,13 @@ require 'axlsx/workbook/worksheet/selection.rb'
       str << '<workbookPr date1904="' << @@date1904.to_s << '"/>'
       str << '<sheets>'
       @worksheets.each_with_index do |sheet, index|
-         str << '<sheet name="' << sheet.name << '" sheetId="' << (index+1).to_s << '" r:id="' << sheet.rId << '"/>'
-      end
-      str << '</sheets>'
-      str << '<definedNames>'
-      @worksheets.each_with_index do |sheet, index|
-        if sheet.auto_filter.defined_name
-          str << '<definedName name="_xlnm._FilterDatabase" localSheetId="' << index.to_s << '" hidden="1">'
-          str << sheet.auto_filter.defined_name << '</definedName>'
+        str << '<sheet name="' << sheet.name << '" sheetId="' << (index+1).to_s << '" r:id="' << sheet.rId << '"/>'
+        if defined_name = sheet.auto_filter.defined_name
+          add_defined_name defined_name, :name => '_xlnm._FilterDatabase', :local_sheet_id => index, :hidden => 1
         end
       end
-      str << '</definedNames>'
+      str << '</sheets>'
+      defined_names.to_xml_string(str)
       str << '</workbook>'
     end
 
