@@ -91,7 +91,10 @@ module Axlsx
     def to_xml_string(str = '')
       validate_attributes_for_chart_type
       str << '<c:dLbls>'
-      instance_values.each { |name, value| str << "<c:#{Axlsx::camel(name, false)} val='#{value}' />" }
+      instance_values.each do |key, value| 
+        next if key == :formula
+        str << "<c:#{Axlsx::camel(key, false)} val='#{value}' />" 
+      end
       str << '</c:dLbls>'
     end
 

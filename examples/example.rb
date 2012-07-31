@@ -314,6 +314,12 @@ wb.add_worksheet(:name => "No Gridlines") do |sheet|
 end
 ##```
 
+#```ruby
+wb.add_worksheet(:name => "repeated header") do |sheet|
+  sheet.add_row %w(These Column Header Will Render On Every Printed Sheet)
+  200.times { sheet.add_row %w(1 2 3 4 5 6 7 8) }
+  wb.add_defined_name("'repeated header'!$1:$1", :local_sheet_id => sheet.index, :name => '_xlnm.Print_Titles') 
+end
 
 # Sheet Protection and excluding cells from locking.
 unlocked = wb.styles.add_style :locked => false

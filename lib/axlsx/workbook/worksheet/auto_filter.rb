@@ -13,7 +13,7 @@ module Axlsx
     def defined_name
       return unless range
       Axlsx.cell_range(range.split(':').collect { |name| worksheet.name_to_cell(name)})
-    end
+                            end
 
     def to_xml_string(str='')
       str << "<autoFilter ref='#{range}'></autoFilter>"
