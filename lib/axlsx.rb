@@ -48,6 +48,10 @@ module Axlsx
     absolute ? "'#{cells.first.row.worksheet.name}'!#{reference}" : reference
   end
 
+  # sorts the array of cells provided to start from the minimum x,y to
+  # the maximum x.y#
+  # @param [Array] cells
+  # @return [Array]
   def self.sort_cells(cells)
     cells.sort { |x, y| [x.index, x.row.index] <=> [y.index, y.row.index] }
   end

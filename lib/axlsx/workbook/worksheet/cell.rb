@@ -331,6 +331,11 @@ module Axlsx
       ((value.to_s.count(Worksheet.thin_chars) * mdw + 5) / mdw * 256) / 256.0 * font_scale
     end
    
+    # returns the absolute or relative string style reference for
+    # this cell. 
+    # @param [Boolean] absolute -when false a relative reference will be
+    # returned. 
+    # @return [String]
     def reference(absolute=true)
       absolute ? r_abs : r
     end 

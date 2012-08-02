@@ -196,6 +196,7 @@ module Axlsx
       @graphic_frame.anchor.end_at(x, y)
     end
 
+    # sets the view_3D object for the chart
     def view_3D=(v) DataTypeValidator.validate "#{self.class}.view_3D", View3D, v; @view_3D = v; end
     alias :view3D= :view_3D=
 
