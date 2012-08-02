@@ -17,7 +17,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 
 **License**: MIT License
 
-**Latest Version**: 1.1.8
+**Latest Version**: 1.2.0
 
 **Ruby Version**: 1.8.7, 1.9.2, 1.9.3
 
@@ -25,7 +25,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 
 **Rubinius Version**: rubinius 2.0.0dev * lower versions may run, this gem always tests against head.
 
-**Release Date**: July 14th 2012
+**Release Date**: August 2nd 2012
 
 If you are working in rails, or with active record see:
 * http://github.com/randym/acts_as_xlsx
@@ -95,6 +95,8 @@ and Numbers
 
 **18. Support for defined names, which gives you repeated header rows for printing and a whole bunch of out there stuff. Have a look at lib/axlsx/workbook/defined_name.rb for all the gory glory
 
+**19. Data labels for charts as well as series color customization.
+
 Installing
 ----------
 
@@ -107,7 +109,23 @@ To install Axlsx, use the following command:
 
 The example listing is getting overly large to maintain here.
 If you are using Yard, you will be able to see the examples in line below.
-If not, please refer to the Please see the [examples](https://github.com/randym/axlsx/tree/master/examples/example.rb) here.
+
+Here's a teaser that kicks about 5% of what the gem can do.
+
+```ruby
+Axlsx::Package.new do |p|
+  p.workbook.add_worksheet(:name => "Pie Chart") do |sheet|
+    sheet.add_row ["Simple Pie Chart"]
+    %w(first second third).each { |label| sheet.add_row [label, rand(24)+1] }
+    sheet.add_chart(Axlsx::Pie3DChart, :start_at => [0,5], :end_at => [10, 20], :title => "example 3: Pie Chart") do |chart|
+      chart.add_series :data => sheet["B2:B4"], :labels => sheet["A2:A4"],  :colors => ['FF0000', '00FF00', '0000FF']
+    end
+  end
+  p.serialize('simple.xlsx')
+end
+```
+
+Please see the [examples](https://github.com/randym/axlsx/tree/master/examples/example.rb) for more.
 
 {include:file:examples/example.rb}
 
@@ -127,6 +145,10 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
+- **August.2.12**: 1.2.0
+   - added data labels for charts
+   - added table header printing for each sheet via defined_name. This
+     means that when you print your worksheet, the header rows show for every page
 - **July.??.12**: 1.1.9 release
    - lots of code clean up for worksheet
    - added in data labels for pie charts, line charts and bar charts.
