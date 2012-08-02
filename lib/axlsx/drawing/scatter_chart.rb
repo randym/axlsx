@@ -50,17 +50,7 @@ module Axlsx
         str_inner << '<c:scatterStyle val="' << scatterStyle.to_s << '"/>'
         str_inner << '<c:varyColors val="1"/>'
         @series.each { |ser| ser.to_xml_string(str_inner) }
-        if @d_lbls
-          @d_lbls.to_xml_string(str)
-        end
-        str_inner << '<c:dLbls>'
-        str_inner << '<c:showLegendKey val="0"/>'
-        str_inner << '<c:showVal val="0"/>'
-        str_inner << '<c:showCatName val="0"/>'
-        str_inner << '<c:showSerName val="0"/>'
-        str_inner << '<c:showPercent val="0"/>'
-        str_inner << '<c:showBubbleSize val="0"/>'
-        str_inner << '</c:dLbls>'
+        d_lbls.to_xml_string(str) if @d_lbls
         str_inner << '<c:axId val="' << @xValAxId.to_s << '"/>'
         str_inner << '<c:axId val="' << @yValAxId.to_s << '"/>'
         str_inner << '</c:scatterChart>'

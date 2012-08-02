@@ -52,6 +52,7 @@ module Axlsx
     # creates a new DefinedName.
     # @param [String] formula - the formula the defined name references
     # @param [Hash] options - A hash of key/value pairs that will be mapped to this instances attributes.
+    # 
     # @option [String] name - Specifies the name that appears in the user interface for the defined name.
     #                         This attribute is required. 
     #                         The following built-in names are defined in this SpreadsheetML specification:
@@ -70,9 +71,9 @@ module Axlsx
     #                           _xlnm.Extract: this defined name refers to the range containing the filtered output 
     #                                           values resulting from applying an advanced filter criteria to a source range.
     #                         Miscellaneous
-    #                           _xlnm .Consolidate_Area: the defined name refers to a consolidation area.
-    #                           _xlnm .Database: the range specified in the defined name is from a database data source.
-    #                           _xlnm .Sheet_Title: the defined name refers to a sheet title.
+    #                           _xlnm.Consolidate_Area: the defined name refers to a consolidation area.
+    #                           _xlnm.Database: the range specified in the defined name is from a database data source.
+    #                           _xlnm.Sheet_Title: the defined name refers to a sheet title.
     # @option [String] comment - A comment to optionally associate with the name
     # @option [String] custom_menu - The menu text for the defined name
     # @option [String] description - An optional description for the defined name
@@ -106,7 +107,7 @@ module Axlsx
       @local_sheet_id = value
     end
     # string attributes that will be added when this class is evaluated
-    STRING_ATTRIBUTES = [:short_cut_key, :status_bar, :help, :description, :custom_menu, :comment, :name]
+    STRING_ATTRIBUTES = [:short_cut_key, :status_bar, :help, :description, :custom_menu, :comment]
 
     # boolean attributes that will be added when this class is evaluated
     BOOLEAN_ATTRIBUTES = [:workbook_parameter, :publish_to_server, :xlm, :vb_proceedure, :function, :hidden] 
@@ -144,8 +145,19 @@ module Axlsx
       end
       }
     end
+   
+    attr_reader :name
+    # The name of this defined name. Please refer to the class documentation for more information
+    def name=(value)
+      Axlsx::RestrictionValidator.validate 'DefinedName.name', %w(_xlnm.Print_Area _xlnm.Print_Titles _xlnm.Criteria _xlnm._FilterDatabase _xlnm.Extract _xlnm.Consolidate_Area _xlnm.Database _xlnm.Sheet_Title), value
+      @name = value
+    end
+
+    # The formula this defined name references
+    attr_reader :formula
 
     def to_xml_string(str='')
+      raise ArgumentError, 'you must specify the name for this defined name. Please read the documentation for Axlsx::DefinedName for more details' unless name 
       str << '<definedName'
       instance_values.each do |name, value| 
         unless name == 'formula'

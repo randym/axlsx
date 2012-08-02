@@ -2,19 +2,9 @@ module Axlsx
   # There are more elements in the dLbls spec that allow for
   # customizations and formatting. For now, I am just implementing the
   # basics.
-  # 
-  #<c:dLbls>
-  #<c:dLblPos val="outEnd"/>
-  #<c:showLegendKey val="0"/>
-  #<c:showVal val="0"/>
-  #<c:showCatName val="1"/>
-  #<c:showSerName val="0"/>
-  #<c:showPercent val="1"/>
-  #<c:showBubbleSize val="0"/>
-  #<c:showLeaderLines val="1"/>
-  #</c:dLbls>
 
   #The DLbls class manages serialization of data labels
+  # showLeaderLines and leaderLines are not currently implemented
   class DLbls
 
     # These attributes are all boolean so I'm doing a bit of a hand
@@ -91,9 +81,9 @@ module Axlsx
     def to_xml_string(str = '')
       validate_attributes_for_chart_type
       str << '<c:dLbls>'
-      instance_values.each do |key, value| 
-        next if key == :formula
-        str << "<c:#{Axlsx::camel(key, false)} val='#{value}' />" 
+      %w(d_lbl_pos show_legend_key show_val show_cat_name show_ser_name show_percent show_bubble_size show_leader_lines).each do |key|
+        next unless instance_values.keys.include?(key) && instance_values[key] != nil
+        str <<  "<c:#{Axlsx::camel(key, false)} val='#{instance_values[key]}' />" 
       end
       str << '</c:dLbls>'
     end

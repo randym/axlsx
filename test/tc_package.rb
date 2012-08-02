@@ -7,6 +7,7 @@ class TestPackage < Test::Unit::TestCase
     ws = @package.workbook.add_worksheet
     ws.add_row ['Can', 'we', 'build it?']
     ws.add_row ['Yes!', 'We', 'can!']
+    ws.workbook.add_defined_name("#{ws.name}!A1:C2", :name => '_xlnm.Print_Titles', :hidden => true)
     ws.protect_range('A1:C1')
     ws.protect_range(ws.rows.last.cells)
     ws.add_comment :author => 'alice', :text => 'Hi Bob', :ref => 'A12'
@@ -28,11 +29,25 @@ class TestPackage < Test::Unit::TestCase
 
     ws.add_chart(Axlsx::Pie3DChart, :title => "これは？", :start_at => [0,3]) do |chart|
       chart.add_series :data=>[1,2,3], :labels=>["a", "b", "c"]
+      chart.d_lbls.show_val = true
+      chart.d_lbls.d_lbl_pos = :outEnd
+      chart.d_lbls.show_percent = true
     end
 
     ws.add_chart(Axlsx::Line3DChart, :title => "axis labels") do |chart|
       chart.valAxis.title = 'bob'
+      chart.d_lbls.show_val = true
     end 
+    
+    ws.add_chart(Axlsx::Bar3DChart, :title => 'bar chart') do |chart|
+      chart.add_series :data => [1,4,5], :labels => %w(A B C)
+      chart.d_lbls.show_percent = true
+    end
+
+    ws.add_chart(Axlsx::ScatterChart, :title => 'scat man') do |chart|
+      chart.add_series :xData => [1,2,3,4], :yData => [4,3,2,1] 
+      chart.d_lbls.show_val = true
+    end
 
     @fname = 'axlsx_test_serialization.xlsx'
     img = File.expand_path('../../examples/image1.jpeg', __FILE__)
@@ -122,7 +137,7 @@ class TestPackage < Test::Unit::TestCase
 
 
     #no mystery parts
-    assert_equal(p.size, 19)
+    assert_equal(p.size, 21)
 
   end
 

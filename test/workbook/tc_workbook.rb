@@ -24,7 +24,10 @@ class TestWorkbook < Test::Unit::TestCase
     assert_equal(Axlsx::Workbook.date1904, @wb.date1904)
   end
 
-
+  def test_add_defined_name
+    @wb.add_defined_name 'Sheet1!1:1', :name => '_xlnm.Print_Titles', :hidden => true
+    assert_equal(1, @wb.defined_names.size)
+  end
 
   def test_shared_strings
     assert_equal(@wb.use_shared_strings, nil)
@@ -71,7 +74,6 @@ class TestWorkbook < Test::Unit::TestCase
     @wb.to_xml_string
     assert(@wb.worksheets.size == 1)
   end
-
 
   def test_to_xml_string_defined_names
     @wb.add_worksheet do |sheet|
