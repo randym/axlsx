@@ -22,8 +22,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'rubyzip', '>= 0.9.5'
   s.add_runtime_dependency "htmlentities", "~> 4.3.1"
 # REQUIRED by Travis-ci please do not alter these lines
-  s.add_runtime_dependency 'rake', '0.8.7'  if RUBY_VERSION == "1.9.2"
-  s.add_runtime_dependency 'rake', '>= 0.8.7' unless RUBY_VERSION == "1.9.2"
+#  s.add_runtime_dependency 'rake', '0.8.7'  if RUBY_VERSION == "1.9.2"
+#  s.add_runtime_dependency 'rake', '>= 0.8.7' unless RUBY_VERSION == "1.9.2"
 
 # This has been removed until JRuby can support the native extensions for redcarpet or yard removes the dependency
 #  s.add_development_dependency 'yard'
