@@ -41,7 +41,7 @@ acts_as_xlsx is a simple ActiveRecord mixin that lets you generate a workbook wi
 Axlsx_Rails provides an Axlsx renderer so you can move all your spreadsheet code from your controller into view files. Partials are supported so you can organize any code into reusable chunks (e.g. cover sheets, common styling, etc.) You can use it with acts_as_xlsx, placing the to_xlsx call in a view and add ':package => xlsx_package' to the parameter list. Now you can keep your controllers thin!
 
 There are guides for using axlsx and acts_as_xlsx here:
-[http://axlsx.blogspot.com](http://axlsx.blogspot.com)
+[http://axlsx.blog.randym.net](http://axlsx.blog.randym.net)
 
 The examples directory contains a number of more specific examples as
 well.
