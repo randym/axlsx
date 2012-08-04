@@ -6,6 +6,8 @@ module Axlsx
   # worksheet
   class WorksheetDrawing
 
+    # Creates a new WorksheetDrawing
+    # @param [Worksheet] worksheet
     def initialize(worksheet)
       raise ArgumentError, 'you must provide a worksheet' unless worksheet.is_a?(Worksheet)
       @worksheet = worksheet      
@@ -13,18 +15,28 @@ module Axlsx
     end
 
     attr_reader :worksheet
-    attr_reader :drawing
 
+    attr_reader :drawing
+    
+    # adds a chart to the drawing object
+    # @param [Class] chart_type The type of chart to add
+    # @param [Hash] options Options to pass on to the drawing and chart
+    # @see Worksheet#add_chart
     def add_chart(chart_type, options)
       @drawing ||= Drawing.new worksheet
       drawing.add_chart(chart_type, options)
     end
-   
+    
+    # adds an image to the drawing object
+    # @param [Hash] options Options to pass on to the drawing and image 
+    # @see Worksheet#add_image
     def add_image(options)
       @drawing ||= Drawing.new worksheet
       drawing.add_image(options)
     end 
-   
+  
+    # helper method to tell us if the drawing has something in it or not
+    # @return [Boolean] 
     def has_drawing?
       @drawing.is_a? Drawing
     end
@@ -36,10 +48,14 @@ module Axlsx
       Relationship.new(DRAWING_R, "../#{drawing.pn}") 
     end
 
+    # returns the index of the worksheet releationship that defines this drawing.
+    # @return [Integer]
     def index
        worksheet.relationships.index{ |r| r.Type == DRAWING_R } +1 
     end
 
+    # Serialize the drawing for the worksheet
+    # @param [String] str
     def to_xml_string(str = '')
       return unless has_drawing? 
       str << "<drawing r:id='rId#{index}'/>"

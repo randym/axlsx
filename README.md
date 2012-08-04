@@ -25,7 +25,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 
 **Rubinius Version**: rubinius 2.0.0dev * lower versions may run, this gem always tests against head.
 
-**Release Date**: August 3rd 2012
+**Release Date**: August 4th 2012
 
 If you are working in rails, or with active record see:
 * http://github.com/randym/acts_as_xlsx
@@ -145,7 +145,8 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
-- **August.3.12**: 1.2.0
+- **August.4.12**: 1.2.0
+   - rebuilt worksheet serialization to clean up the code base a bit.
    - added data labels for charts
    - added table header printing for each sheet via defined_name. This
      means that when you print your worksheet, the header rows show for every page

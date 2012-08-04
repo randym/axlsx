@@ -12,6 +12,8 @@ module Axlsx
       @worksheet = worksheet
     end
 
+    # Adds a protected range
+    # @param [Array|String] cells A string range reference or array of cells that will be protected
     def add_range(cells)
      sqref = if cells.is_a?(String)
                cells

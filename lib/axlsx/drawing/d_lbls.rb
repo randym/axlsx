@@ -51,7 +51,7 @@ module Axlsx
     # Allowed positions are :bestFilt, :b, :ctr, :inBase, :inEnd, :l,
     # :outEnd, :r and :t
     # The default is :bestFit
-    # @param [Symbol] label_postion the postion you want to use.
+    # @param [Symbol] label_position the postion you want to use.
     def d_lbl_pos=(label_position)
       return unless @chart_type == Pie3DChart
       Axlsx::RestrictionValidator.validate 'DLbls#d_lbl_pos',  [:bestFit, :b, :ctr, :inBase, :inEnd, :l, :outEnd, :r, :t], label_position

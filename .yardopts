@@ -1,5 +1,8 @@
 --protected
 --no-private
 --title "AXLSX"
---files LICENSE
---files CHANGELOG.md
+--readme README.md
+--markup markdown
+--markup-provider kramdown
+--files CHANGELOG.md, LICENSE
+--list-undoc

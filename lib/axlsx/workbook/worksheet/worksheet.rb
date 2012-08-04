@@ -29,6 +29,8 @@ module Axlsx
       end
     end
 
+    # Initalizes page margin, setup and print options
+    # @param [Hash] options Options passed in from the initializer
     def initialize_page_options(options)
       @page_margins = PageMargins.new options[:page_margins] if options[:page_margins]
       @page_setup = PageSetup.new options[:page_setup]  if options[:page_setup]
@@ -68,7 +70,9 @@ module Axlsx
     def tables
       @tables ||=  Tables.new self
     end
-
+    
+    # The a shortcut to the worksheet_comments list of comments
+    # @return [Array|SimpleTypedList]
     def comments
       worksheet_comments.comments if worksheet_comments.has_comments?
     end
@@ -265,7 +269,7 @@ module Axlsx
 
     # The name of the worksheet
     # The name of a worksheet must be unique in the workbook, and must not exceed 31 characters
-    # @param [String] v
+    # @param [String] name 
     def name=(name)
       validate_sheet_name name
       @name=Axlsx::coder.encode(name)

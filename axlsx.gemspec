@@ -1,6 +1,6 @@
 # This will recursively require rake when using rake 0.9.2.2 and bundler
 #require 'rake'
-require File.expand_path(File.dirname(__FILE__) + '/lib/axlsx/version.rb')
+require File.expand_path('../lib/axlsx/version', __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = 'axlsx'
@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
 
 # This has been removed until JRuby can support the native extensions for redcarpet or yard removes the dependency
   s.add_development_dependency 'yard'
-#  s.add_development_dependency 'redcarpet', '~>1.17.2'
+  s.add_development_dependency 'kramdown'
   s.add_development_dependency 'cover_me' unless RUBY_VERSION == '1.8.7'
   s.required_ruby_version = '>= 1.8.7'
   s.require_path = 'lib'
