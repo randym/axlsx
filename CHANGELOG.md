@@ -1,5 +1,44 @@
 CHANGELOG
 ---------
+- **May.30.12**: 1.1.6 release
+   - data protection with passwords for sheets
+   - cell level input validators
+   - added support for two cell anchors for images
+   - test coverage now back up to 100%
+   - bugfix for merge cell sorting algorithm
+   - added fit_to method for page_setup to simplify managing witdh/height
+   - added ph (phonetics) and s (style) attributes for row.
+   - resolved all warnings generating from this gem.
+   - improved comment relationship management for multiple comments
+
+- **May.13.12**: 1.1.5 release
+   - MOAR print options! You can now specify paper size, orientation,
+     fit to width, page margings and gridlines for printing.
+   - Support for adding comments to your worksheets
+   - bugfix for applying style to empty cells
+   - bugfix for parsing formula with multiple '='
+
+- **May.3.12:**: 1.1.4 release
+   - MOAR examples
+   - added outline level for rows and columns
+   - rebuild of numeric and axis data sources for charts
+   - added delete to axis
+   - added tick and label mark skipping for cat axis in charts
+   - bugfix for table headers method
+   - sane(er) defaults for chart positioning
+   - bugfix in val_axis_data to properly serialize value axis data. Excel does not mind as it reads from the sheet, but nokogiri has a fit if the elements are empty.
+   - Added support for specifying the color of data series in charts.
+   - bugfix using add_cell on row mismanaged calls to update_column_info.
+
+- ** April.25.12:**: 1.1.3 release
+   - Primarily because I am stupid.....Updates to readme to properly report version, add in missing docs and restructure example directory.
+
+- ** April.25.12:**: 1.1.2 release
+   - Conditional Formatting completely implemented.
+   - refactoring / documentation for Style#add_style
+   - added in label rotation for chart axis labels
+   - bugfix to properly assign style and type info to cells when only partial information is provided in the types/style option
+
 - ** April.18.12**: 1.1.1 release
    - bugfix for autowidth calculations across multiple rows
    - bugfix for dimension calculations with nil cells.

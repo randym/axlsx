@@ -25,7 +25,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 
 **Rubinius Version**: rubinius 2.0.0dev * lower versions may run, this gem always tests against head.
 
-**Release Date**: August 4th 2012
+**Release Date**: August 5th 2012
 
 If you are working in rails, or with active record see:
 * http://github.com/randym/acts_as_xlsx
@@ -93,7 +93,7 @@ cell level input data validation.
 **17. First stage interoperability support for GoogleDocs, LibreOffice,
 and Numbers
 
-**18. Support for defined names, which gives you repeated header rows for printing and a whole bunch of out there stuff. Have a look at lib/axlsx/workbook/defined_name.rb for all the gory glory
+**18. Support for defined names, which gives you repeated header rows for printing.
 
 **19. Data labels for charts as well as series color customization.
 
@@ -110,7 +110,7 @@ To install Axlsx, use the following command:
 The example listing is getting overly large to maintain here.
 If you are using Yard, you will be able to see the examples in line below.
 
-Here's a teaser that kicks about 5% of what the gem can do.
+Here's a teaser that kicks about 2% of what the gem can do.
 
 ```ruby
 Axlsx::Package.new do |p|
@@ -145,7 +145,7 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
-- **August.4.12**: 1.2.0
+- **August.5.12**: 1.2.0
    - rebuilt worksheet serialization to clean up the code base a bit.
    - added data labels for charts
    - added table header printing for each sheet via defined_name. This
@@ -172,45 +172,6 @@ in value caches
    - Add title property to axis so you can lable the x/y/series axis for
      charts.
    - Add sheet views with panes
-
-- **May.30.12**: 1.1.6 release
-   - data protection with passwords for sheets
-   - cell level input validators
-   - added support for two cell anchors for images
-   - test coverage now back up to 100%
-   - bugfix for merge cell sorting algorithm
-   - added fit_to method for page_setup to simplify managing witdh/height
-   - added ph (phonetics) and s (style) attributes for row.
-   - resolved all warnings generating from this gem.
-   - improved comment relationship management for multiple comments
-
-- **May.13.12**: 1.1.5 release
-   - MOAR print options! You can now specify paper size, orientation,
-     fit to width, page margings and gridlines for printing.
-   - Support for adding comments to your worksheets
-   - bugfix for applying style to empty cells
-   - bugfix for parsing formula with multiple '='
-
-- **May.3.12:**: 1.1.4 release
-   - MOAR examples
-   - added outline level for rows and columns
-   - rebuild of numeric and axis data sources for charts
-   - added delete to axis
-   - added tick and label mark skipping for cat axis in charts
-   - bugfix for table headers method
-   - sane(er) defaults for chart positioning
-   - bugfix in val_axis_data to properly serialize value axis data. Excel does not mind as it reads from the sheet, but nokogiri has a fit if the elements are empty.
-   - Added support for specifying the color of data series in charts.
-   - bugfix using add_cell on row mismanaged calls to update_column_info.
-
-- ** April.25.12:**: 1.1.3 release
-   - Primarily because I am stupid.....Updates to readme to properly report version, add in missing docs and restructure example directory.
-
-- ** April.25.12:**: 1.1.2 release
-   - Conditional Formatting completely implemented.
-   - refactoring / documentation for Style#add_style
-   - added in label rotation for chart axis labels
-   - bugfix to properly assign style and type info to cells when only partial information is provided in the types/style option
 
 Please see the {file:CHANGELOG.md} document for past release information.
 
