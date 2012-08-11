@@ -134,15 +134,15 @@ module Axlsx
 
     # Sets the template property of your app.xml file
     def template=(v) Axlsx::validate_string v; @template = v; end
-    alias :Template :template
+    alias :Template= :template=
 
     # Sets the manager property of your app.xml file
     def manager=(v) Axlsx::validate_string v; @manager = v; end
-    alias :Manager :manager
+    alias :Manager= :manager=
 
     # Sets the company property of your app.xml file
     def company=(v) Axlsx::validate_string v; @company = v; end
-    alias :Company :company
+    alias :Company= :company=
     # Sets the pages property of your app.xml file
     def pages=(v) Axlsx::validate_int v; @pages = v; end
 

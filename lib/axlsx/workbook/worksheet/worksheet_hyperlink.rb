@@ -67,16 +67,23 @@ module Axlsx
     end
 
     def id
-     "rId#{(@worksheet.relationships_index_of(self)+1)}"
+      "rId#{(@worksheet.relationships_index_of(self)+1)}"
     end
 
     def to_xml_string(str='')
-      h = instance_values.select { |key, value| %w(display ref tooltip).include? key }
-      h['r:id'] = id if @target == :external
-      h['location'] = location unless @target == :external
       str << '<hyperlink '
-      h.map { |key, value| str << key.to_s << '="' << value.to_s << '" ' }
+      serialization_values.map { |key, value| str << key.to_s << '="' << value.to_s << '" ' }
       str << '/>'
+    end
+
+    def serialization_values
+      h = instance_values.reject { |key, value| !%w(display ref tooltip).include?(key) }
+      if @target == :external
+        h['r:id'] = id
+      else
+        h['location'] = location
+      end
+      h
     end
   end
 end
