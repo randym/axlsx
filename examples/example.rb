@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby -w -s
 # -*- coding: utf-8 -*-
-# $LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../lib"
+$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../lib"
 
 #```ruby
 require 'axlsx'
@@ -202,8 +202,32 @@ wb.add_worksheet(:name => "Automatic cell types") do |sheet|
   sheet.add_row ["Date", "Time", "String", "Boolean", "Float", "Integer"]
   sheet.add_row [Date.today, Time.now, "value", true, 0.1, 1], :style => [date_format, time_format]
 end
+
+
+# Hyperlinks in worksheet
+wb.add_worksheet(:name => 'hyperlinks') do |sheet|
+  # external references
+  sheet.add_row ['axlsx']
+  sheet.add_hyperlink :location => 'https://github.com/randym/axlsx', :ref => sheet.rows.first.cells.first
+
+  # internal references
+  sheet.add_row ['next sheet']
+end
+
+wb.add_worksheet(:name => 'Next Sheet') do |sheet|
+  sheet.add_row ['hello!']
+end
 #```
 
+##Number formatting and currency
+wb.add_worksheet(:name => "Formats and Currency") do |sheet|
+  currency = wb.styles.add_style :num_fmt => 5
+  red_negative = wb.styles.add_style :num_fmt => 8
+  comma = wb.styles.add_style :num_fmt => 3
+  super_funk = wb.styles.add_style :format_code => '[Green]"super funk: " #'
+  sheet.add_row %w(Currency RedNegative, Comma Custom)
+  sheet.add_row [1500, -122.34, 123456789, 594829], :style=> [currency, red_negative, comma, super_funk]
+end
 
 ##Generating A Bar Chart
 

@@ -76,7 +76,7 @@ module Axlsx
   # image rels namespace
   IMAGE_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
 
-  # image rels namespace
+  # hyperlink rels namespace
   HYPERLINK_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink"
 
   # comment rels namespace

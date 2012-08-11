@@ -43,7 +43,9 @@ module Axlsx
     def to_ary
       @list
     end
-
+   
+    alias :to_a :to_ary
+    
     # Unlock the list
     # @return [self]
     def unlock

@@ -70,7 +70,11 @@ module Axlsx
     def tables
       @tables ||=  Tables.new self
     end
-    
+
+    def hyperlinks
+      @hyperlinks ||= WorksheetHyperlinks.new self
+    end
+
     # The a shortcut to the worksheet_comments list of comments
     # @return [Array|SimpleTypedList]
     def comments
@@ -391,6 +395,14 @@ module Axlsx
       data_validations << dv
     end
 
+    # Adds a new hyperlink to the worksheet
+    # @param [Hash] options for the hyperlink
+    # @see WorksheetHyperlink for a list of options
+    # @return [WorksheetHyperlink]
+    def add_hyperlink(options={})
+      hyperlinks.add(options)
+    end
+
     # Adds a chart to this worksheets drawing. This is the recommended way to create charts for your worksheet. This method wraps the complexity of dealing with ooxml drawing, anchors, markers graphic frames chart objects and all the other dirty details.
     # @param [Class] chart_type
     # @option options [Array] start_at
@@ -490,10 +502,16 @@ module Axlsx
     # @return [Relationships]
     def relationships
       r = Relationships.new
-      r + [tables.relationships, 
-           worksheet_comments.relationships, 
+      r + [tables.relationships,
+           worksheet_comments.relationships,
+           hyperlinks.relationships,
            worksheet_drawing.relationship].flatten.compact || []
       r
+    end
+
+    def relationships_index_of(object)
+      objects = [tables.to_a, worksheet_comments.comments.to_a, hyperlinks.to_a, worksheet_drawing.drawing].flatten.compact || []
+      objects.index(object)
     end
 
     # Returns the cell or cells defined using excel style A1:B3 references.
@@ -548,7 +566,7 @@ module Axlsx
       [sheet_pr, dimension, sheet_view, column_info,
        sheet_data, @sheet_protection, protected_ranges,
        auto_filter, merged_cells, conditional_formattings,
-       data_validations, print_options, page_margins,
+       data_validations, hyperlinks, print_options, page_margins,
        page_setup, worksheet_drawing, worksheet_comments,
        tables]
     end
