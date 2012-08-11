@@ -27,18 +27,17 @@ class TestWorksheetHyperlink < Test::Unit::TestCase
   def test_ref
     assert_equal(@options[:ref], @a.ref)
   end
+  
   def test_r_id
-    assert_equal("rId1", @a.r_id)
+    assert_equal("rId1", @a.id)
   end
 
 
   def test_to_xml_string
     doc = Nokogiri::XML(@a.to_xml_string)
-    puts doc.to_xml
     assert_equal(doc.xpath("//hyperlink[@ref='#{@a.ref}']").size, 1)
     assert_equal(doc.xpath("//hyperlink[@tooltip='#{@a.tooltip}']").size, 1)
     assert_equal(doc.xpath("//hyperlink[@display='#{@a.display}']").size, 1)
-    assert_equal(doc.xpath("//hyperlink[@location='#{@a.location}']").size, 1)
   end
 end
 
