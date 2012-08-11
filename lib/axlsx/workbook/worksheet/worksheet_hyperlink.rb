@@ -67,7 +67,7 @@ module Axlsx
     end
 
     def id
-     "rId#{@worksheet.relationships_index_of(self)+1}"
+     "rId#{(@worksheet.relationships_index_of(self)+1)}"
     end
 
     def to_xml_string(str='')
