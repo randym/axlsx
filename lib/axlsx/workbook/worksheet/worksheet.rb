@@ -511,7 +511,7 @@ module Axlsx
 
     def relationships_index_of(object)
       objects = [tables.to_a, worksheet_comments.comments.to_a, hyperlinks.to_a, worksheet_drawing.drawing].flatten.compact || []
-      objects.index(object)
+      objects.index(object) || 0
     end
 
     # Returns the cell or cells defined using excel style A1:B3 references.
