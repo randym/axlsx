@@ -145,6 +145,9 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
+- **August.?.12**: 1.2.1
+   - Add support for hyperlinks in worksheets
+   - Fix bug that occurs when calculating the font_size for cells that use a user specified style which does not define sz
 - **August.5.12**: 1.2.0
    - rebuilt worksheet serialization to clean up the code base a bit.
    - added data labels for charts
@@ -229,6 +232,7 @@ done without the help of the people below.
 
 [straydogstudio](https://github.com/straydocstudio) - For making an AWESOME axlsx templating gem for rails.
 
+[MitchellAJ](https://github.com/MitchellAJ) - For catching a bug in font_size calculations, finding some old code in an example and above all for reporting all of that brilliantly
 #Copyright and License
 ----------
 

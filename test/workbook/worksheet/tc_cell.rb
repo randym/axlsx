@@ -268,6 +268,22 @@ class TestCell < Test::Unit::TestCase
 
   end
 
+  def test_font_size_with_custom_style_and_no_sz
+    @c.style = @c.row.worksheet.workbook.styles.add_style :bg_color => 'FF00FF'
+    sz = @c.send(:font_size)
+    assert_equal(sz, @c.row.worksheet.workbook.styles.fonts.first.sz)
+  end
+
+  def test_font_size_with_custom_sz
+    @c.style = @c.row.worksheet.workbook.styles.add_style :sz => 52
+    sz = @c.send(:font_size)
+    assert_equal(sz, 52)
+  end
+
+  def test_cell_with_sz
+    @c.sz = 25
+    assert_equal(25, @c.send(:font_size))
+  end
   def test_to_xml
     # TODO This could use some much more stringent testing related to the xml content generated!
     @ws.add_row [Time.now, Date.today, true, 1, 1.0, "text", "=sum(A1:A2)"]
