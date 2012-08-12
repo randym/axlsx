@@ -1,4 +1,4 @@
-$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../lib"
+$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../../lib"
 
 require 'axlsx'
 
@@ -54,7 +54,7 @@ Axlsx::Package.new do |p|
         chart.start_at 7, 16
         chart.end_at 12, 31
       end
-      sheet.merged_cells.concat ["B4:C4","E4:F4","B11:C11","E11:F11","B2:F2"]
+      %w(B4:C4 E4:F4 B11:C11 E11:F11 B2:F2).each { |range| sheet.merge_cells(range) }
       sheet.column_widths 2, nil, nil, 2, nil, nil, 2
     end
   end

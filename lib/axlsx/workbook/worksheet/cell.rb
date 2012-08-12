@@ -343,7 +343,7 @@ module Axlsx
     private
 
     def font_size
-        sz || @styles.fonts[@styles.cellXfs[style].fontId].sz
+        sz || @styles.fonts[@styles.cellXfs[style].fontId].sz || @styles.fonts[0].sz
     end
 
     # Utility method for setting inline style attributes
