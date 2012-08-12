@@ -33,7 +33,11 @@ class TestWorksheetHyperlink < Test::Unit::TestCase
   end
 
   def test_id
+    @a.target = :external
+
     assert_equal("rId1", @a.id)
+    @a.target = :internal
+    assert_equal(nil, @a.id)
   end
 
 

@@ -36,7 +36,7 @@ module Axlsx
     end
 
     # Sets the cell location of this hyperlink in the worksheet
-    # @param [String|Cell] The string reference or cell that defines where this hyperlink shows in the worksheet.
+    # @param [String|Cell] cell_reference The string reference or cell that defines where this hyperlink shows in the worksheet.
     def ref=(cell_reference)
       cell_reference = cell_reference.r if cell_reference.is_a?(Cell)
 
@@ -61,21 +61,33 @@ module Axlsx
       }
     end
 
+    # The relationship required by this hyperlink when the taget is :external
+    # @return [Relationship]
     def relationship
       return unless @target == :external
       Relationship.new HYPERLINK_R, location, :target_mode => :External
     end
 
+    # The id of the relationship for this object
+    # @return [String]
     def id
+      return unless @target == :external
       "rId#{(@worksheet.relationships_index_of(self)+1)}"
     end
 
+    # Seralize the object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str='')
       str << '<hyperlink '
       serialization_values.map { |key, value| str << key.to_s << '="' << value.to_s << '" ' }
       str << '/>'
     end
 
+    # The values to be used in serialization based on the target.
+    # location should only be specified for non-external targets.
+    # r:id should only be specified for external targets.
+    # @return [Hash]
     def serialization_values
       h = instance_values.reject { |key, value| !%w(display ref tooltip).include?(key) }
       if @target == :external

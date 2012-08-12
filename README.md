@@ -25,7 +25,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 
 **Rubinius Version**: rubinius 2.0.0dev * lower versions may run, this gem always tests against head.
 
-**Release Date**: August 5th 2012
+**Release Date**: August 12th 2012
 
 If you are working in rails, or with active record see:
 * http://github.com/randym/acts_as_xlsx
@@ -145,8 +145,9 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
-- **August.?.12**: 1.2.1
+- **August.12.12**: 1.2.1
    - Add support for hyperlinks in worksheets
+   - Fix example that was using old style cell merging with concact.
    - Fix bug that occurs when calculating the font_size for cells that use a user specified style which does not define sz
 - **August.5.12**: 1.2.0
    - rebuilt worksheet serialization to clean up the code base a bit.

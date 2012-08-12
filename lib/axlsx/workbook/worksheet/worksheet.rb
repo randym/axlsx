@@ -71,6 +71,8 @@ module Axlsx
       @tables ||=  Tables.new self
     end
 
+    # A typed collection of hyperlinks associated with this worksheet
+    # @return [WorksheetHyperlinks]
     def hyperlinks
       @hyperlinks ||= WorksheetHyperlinks.new self
     end
@@ -509,9 +511,12 @@ module Axlsx
       r
     end
 
+    # identifies the index of an object withing the collections used in generating relationships for the worksheet
+    # @param [Any] object the object to search for
+    # @return [Integer] The index of the object
     def relationships_index_of(object)
       objects = [tables.to_a, worksheet_comments.comments.to_a, hyperlinks.to_a, worksheet_drawing.drawing].flatten.compact || []
-      objects.index(object) || 0
+      objects.index(object)
     end
 
     # Returns the cell or cells defined using excel style A1:B3 references.
