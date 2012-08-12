@@ -209,8 +209,8 @@ wb.add_worksheet(:name => 'hyperlinks') do |sheet|
   # external references
   sheet.add_row ['axlsx']
   sheet.add_hyperlink :location => 'https://github.com/randym/axlsx', :ref => sheet.rows.first.cells.first
-
   # internal references
+  sheet.add_hyperlink :location => "'Next Sheet'!A1", :ref => 'A2', :taget => :internal
   sheet.add_row ['next sheet']
 end
 
