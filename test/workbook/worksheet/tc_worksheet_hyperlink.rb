@@ -37,12 +37,23 @@ class TestWorksheetHyperlink < Test::Unit::TestCase
   end
 
 
-  def test_to_xml_string
-    doc = Nokogiri::XML(@a.to_xml_string)
-  # TODO find a way to add in the namespace or test this in worksheet as r (relation) namespace is not defined
-  #  assert_equal(doc.xpath("//hyperlink[@ref='#{@a.ref}']").size, 1)
-  #  assert_equal(doc.xpath("//hyperlink[@tooltip='#{@a.tooltip}']").size, 1)
-  #  assert_equal(doc.xpath("//hyperlink[@display='#{@a.display}']").size, 1)
+  def test_to_xml_string_with_non_external
+    doc = Nokogiri::XML(@ws.to_xml_string)
+    assert_equal(doc.xpath("//xmlns:hyperlink[@ref='#{@a.ref}']").size, 1)
+    assert_equal(doc.xpath("//xmlns:hyperlink[@tooltip='#{@a.tooltip}']").size, 1)
+    assert_equal(doc.xpath("//xmlns:hyperlink[@location='#{@a.location}']").size, 1)
+    assert_equal(doc.xpath("//xmlns:hyperlink[@display='#{@a.display}']").size, 1)
+    assert_equal(doc.xpath("//xmlns:hyperlink[@r:id='#{@a.id}']").size, 0)
+  end
+
+  def test_to_xml_stirng_with_external
+    @a.target = :external
+    doc = Nokogiri::XML(@ws.to_xml_string)
+    assert_equal(doc.xpath("//xmlns:hyperlink[@ref='#{@a.ref}']").size, 1)
+    assert_equal(doc.xpath("//xmlns:hyperlink[@tooltip='#{@a.tooltip}']").size, 1)
+    assert_equal(doc.xpath("//xmlns:hyperlink[@display='#{@a.display}']").size, 1)
+    assert_equal(doc.xpath("//xmlns:hyperlink[@location='#{@a.location}']").size, 0)
+    assert_equal(doc.xpath("//xmlns:hyperlink[@r:id='#{@a.id}']").size, 1)
   end
 end
 
