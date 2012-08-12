@@ -5,7 +5,7 @@ class TestWorksheetHyperlink < Test::Unit::TestCase
     p = Axlsx::Package.new
     wb = p.workbook
     @ws = wb.add_worksheet
-    @options = { :location => 'https://github.com/randym/axlsx', :tooltip => 'axlsx', :ref => 'A1', :display => 'AXSLX', :r_id => 'rId1' }
+    @options = { :location => 'https://github.com/randym/axlsx', :tooltip => 'axlsx', :ref => 'A1', :display => 'AXSLX', :r_id => 'rId1', :target => :internal }
     @a = @ws.add_hyperlink @options
   end
 
@@ -19,6 +19,10 @@ class TestWorksheetHyperlink < Test::Unit::TestCase
 
   def test_tooltip
     assert_equal(@options[:tooltip], @a.tooltip)
+  end
+
+  def test_target
+    assert_equal(@options[:target], @a.instance_values['target'])
   end
 
   def test_display
