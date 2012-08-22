@@ -55,7 +55,7 @@ wb.add_worksheet(:name => "Cell Level Style Overrides") do |sheet|
   sheet["A1:D1"].each { |c| c.color = "FF0000" }
   sheet['A1:D2'].each { |c| c.style = Axlsx::STYLE_THIN_BORDER }
 end
-#```
+##```
 
 ##Using Custom Border Styles
 
@@ -70,7 +70,7 @@ wb.styles do |s|
     sheet.add_row [1, 2, 3], :style => blue_border
   end
 end
-#```
+##```
 
 
 ##Styling Rows and Columns
@@ -101,7 +101,7 @@ wb.styles do |s|
     sheet.rows[1].outlineLevel = 2
   end
 end
-#```
+##```
 
 
 ##Specifying Column Widths
@@ -112,7 +112,7 @@ wb.add_worksheet(:name => "custom column widths") do |sheet|
   sheet.add_row ['abcdefg', 'This is a very long text and should flow into the right cell', nil, 'xxx' ]
   sheet.column_widths nil, 3, 5, nil
 end
-#```
+##```
 
 ##Merging Cells.
 
@@ -127,7 +127,7 @@ wb.add_worksheet(:name => 'Merging Cells') do |sheet|
   sheet["A1:D1"].each { |c| c.color = "FF0000"}
   sheet["A1:D4"].each { |c| c.style = Axlsx::STYLE_THIN_BORDER }
 end
-#```
+##```
 
 ##Add an Image with a hyperlink
 
@@ -169,7 +169,7 @@ wb.add_worksheet(:name => "日本語でのシート名") do |sheet|
   sheet.add_row ["华语/華語"]
   sheet.add_row ["한국어/조선말"]
 end
-#```
+##```
 
 ##Using formula
 
@@ -178,7 +178,7 @@ wb.add_worksheet(:name => "Using Formulas") do |sheet|
   sheet.add_row ['col 1', 'col 2', 'col 3', 'col 4']
   sheet.add_row [1, 2, 3, "=SUM(A2:C2)"]
 end
-#```
+##```
 
 ##Auto Filter
 
@@ -210,22 +210,22 @@ wb.add_worksheet(:name => 'hyperlinks') do |sheet|
   sheet.add_row ['axlsx']
   sheet.add_hyperlink :location => 'https://github.com/randym/axlsx', :ref => sheet.rows.first.cells.first
   # internal references
-  sheet.add_hyperlink :location => "'Next Sheet'!A1", :ref => 'A2', :taget => :internal
+  sheet.add_hyperlink :location => "'Next Sheet'!A1", :ref => 'A2', :target => :sheet
   sheet.add_row ['next sheet']
 end
 
 wb.add_worksheet(:name => 'Next Sheet') do |sheet|
   sheet.add_row ['hello!']
 end
-#```
+###```
 
 ##Number formatting and currency
 wb.add_worksheet(:name => "Formats and Currency") do |sheet|
   currency = wb.styles.add_style :num_fmt => 5
   red_negative = wb.styles.add_style :num_fmt => 8
   comma = wb.styles.add_style :num_fmt => 3
-  super_funk = wb.styles.add_style :format_code => '[Green]"super funk: " #'
-  sheet.add_row %w(Currency RedNegative, Comma Custom)
+  super_funk = wb.styles.add_style :format_code => '[Green]#'
+  sheet.add_row %w(Currency RedNegative Comma Custom)
   sheet.add_row [1500, -122.34, 123456789, 594829], :style=> [currency, red_negative, comma, super_funk]
 end
 
@@ -239,7 +239,7 @@ wb.add_worksheet(:name => "Bar Chart") do |sheet|
     chart.add_series :data => sheet["B2:B4"], :labels => sheet["A2:A4"], :title => sheet["A1"]
   end
 end
-#```
+##```
 
 ##Hide Gridlines in chart
 
@@ -471,7 +471,9 @@ p.use_shared_strings = true
 p.serialize("shared_strings_example.xlsx")
 #```
 
-
+#p.validate do |er|
+  #puts er.inspect
+#end
 ##Disabling Autowidth
 
 #```ruby
