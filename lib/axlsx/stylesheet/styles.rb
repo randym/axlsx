@@ -135,6 +135,7 @@ module Axlsx
     # @option options [Integer] num_fmt The number format to apply
     # @option options [String] format_code The formatting to apply. 
     # @option options [Integer|Hash] border The border style to use.
+    #   borders support style, color and edges options @see parse_border_options
     # @option options [String] bg_color The background color to apply to the cell
     # @option options [Boolean] hidden Indicates if the cell should be hidden
     # @option options [Boolean] locked Indicates if the cell should be locked
@@ -298,7 +299,11 @@ module Axlsx
 
     # parses Style#add_style options for borders.
     # @note noop if :border is not specified in options
-    # @option options [Hash|Integer] A border style definition hash or the index of an existing border. Border style definition hashes must include :style and color: key-value entries and may include an :edges entry that references an array of symbols identifying which border edges you wish to apply the style or any other valid Border initializer options. If the :edges entity is not provided the style is applied to all edges of cells that reference this style.
+    # @option options [Hash|Integer] A border style definition hash or the index of an existing border. 
+    # Border style definition hashes must include :style and :color key-value entries and 
+    # may include an :edges entry that references an array of symbols identifying which border edges 
+    # you wish to apply the style or any other valid Border initializer options.
+    # If the :edges entity is not provided the style is applied to all edges of cells that reference this style.
     # @example
     #   #apply a thick red border to the top and bottom
     #   { :border => { :style => :thick, :color => "FFFF0000", :edges => [:top, :bottom] }

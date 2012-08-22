@@ -62,8 +62,8 @@ end
 #```ruby
 #Axlsx defines a thin border style, but you can easily create and use your own.
 wb.styles do |s|
-  red_border =  s.add_style :border => { :style => :thick, :color =>"FFFF0000" }
-  blue_border =  s.add_style :border => { :style => :thick, :color =>"FF0000FF" }
+  red_border =  s.add_style :border => { :style => :thick, :color =>"FFFF0000", :edges => [:left, :right] }
+  blue_border =  s.add_style :border => { :style => :thick, :color =>"FF0000FF"}
 
   wb.add_worksheet(:name => "Custom Borders") do |sheet|
     sheet.add_row ["wrap", "me", "Up in Red"], :style => red_border
@@ -194,6 +194,7 @@ end
 #```
 
 ##Automatic cell types
+
 
 #```ruby
 wb.add_worksheet(:name => "Automatic cell types") do |sheet|
