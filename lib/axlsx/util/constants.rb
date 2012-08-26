@@ -31,6 +31,9 @@ module Axlsx
   # xml schema namespace
   CORE_NS_XSI = "http://www.w3.org/2001/XMLSchema-instance"
 
+  # Digital signature namespace
+  DIGITAL_SIGNATURE_NS = "http://schemas.openxmlformats.org/package/2006/digital-signature"
+
   # spreadsheet drawing namespace
   XML_NS_XDR = "http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing"
 
@@ -60,6 +63,9 @@ module Axlsx
 
   # core rels namespace
   CORE_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/metadata/core-properties"
+
+  # digital signature rels namespace
+  DIGITAL_SIGNATURE_R = "http://schemas.openxmlformats.org/package/2006/relationships/digital- signature/signature"
 
   # styles rels namespace
   STYLES_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles"
@@ -118,6 +124,15 @@ module Axlsx
   # core content type
   CORE_CT = "application/vnd.openxmlformats-package.core-properties+xml"
 
+  # digital signature xml content type
+  DIGITAL_SIGNATURE_XML_CT = "application/vnd.openxmlformats-package.digital-signature-xmlsignature+xml"
+
+  # digital signature origin content type
+  DIGITAL_SIGNATURE_ORIGIN_CT = "application/vnd.openxmlformats-package.digital-signature-origin"
+  
+  # digital signature certificate content type
+  DIGITAL_SIGNATURE_CERTIFICATE_CT = "application/vnd.openxmlformats-package.digital-signature-certificate"
+
   # chart content type
   CHART_CT = "application/vnd.openxmlformats-officedocument.drawingml.chart+xml"
 
@@ -136,6 +151,7 @@ module Axlsx
   #drawing content type
   DRAWING_CT = "application/vnd.openxmlformats-officedocument.drawing+xml"
 
+  
   # xml content type extensions
   XML_EX = "xml"
 

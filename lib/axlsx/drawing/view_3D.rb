@@ -15,7 +15,7 @@ module Axlsx
     attr_reader :rot_x
     alias :rotX :rot_x
     
-    # height of chart as % of chart
+    # height of chart as % of chart width
     # must be between 5% and 500%
     # @return [String]
     attr_reader :h_percent
