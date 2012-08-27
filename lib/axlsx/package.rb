@@ -118,8 +118,18 @@ module Axlsx
       stream
     end
 
+    attr_reader :signature
+
+    # signs the document using the supplied digital certificate
+    # it signs the relations and parts specified by the options hash
+    # this will sign everything except doc props and content
+    # types.
+    def sign(certificate)
+      @signature = XmlDigSig.new(self, certificate, options)
+    end
+
     # Encrypt the package into a CFB using the password provided
-    # This is not ready yet
+    # This is not ready yet - it may not be ready ever....
     def encrypt(file_name, password)
       return false
       # moc = MsOffCrypto.new(file_name, password)
@@ -218,6 +228,15 @@ module Axlsx
         @parts << {:entry => "xl/#{sheet.rels_pn}", :doc => sheet.relationships.to_xml_string, :schema => RELS_XSD}
         @parts << {:entry => "xl/#{sheet.pn}", :doc => sheet.to_xml_string, :schema => SML_XSD}
       end
+      
+      #TODO add signature
+      
+      if self.instance_variable_defined? :@signature
+       @parts << {:entry => "_xmlsignatures/sig1.xml", :doc => signature.to_xml_string, :schema => DIGITAL_SIGNATURE_XSD}
+       @parts << {:entry => "_xmlsignatures/_rels/origin.sigs.rels", :doc => signature.relationship,  :schema => RELS_XSD}
+       @parts << {:entry => "_xmlsignatures/origin.sigs", :doc => ""}
+      end 
+      
       @parts
     end
 
