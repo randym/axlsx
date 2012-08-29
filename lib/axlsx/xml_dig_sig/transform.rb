@@ -4,7 +4,7 @@ module Axlsx
   # @see Canonical XML http://www.w3.org/TR/2001/REC-xml-c14n-20010314
   class C14nTransform
 
-    @@algorithm = "http://www.w3.org/TR/2001/REC-xml-c14n-20010315"
+    ALGORITHM = "http://www.w3.org/TR/2001/REC-xml-c14n-20010315"
 
     # Applies the tranform to the string provided
     # @param [String] document The xml document as a string to be tranformed
@@ -13,7 +13,7 @@ module Axlsx
     end
 
     def to_xml_string(str)
-      str << '<Transform Algorithm="' << @@algorithm << '"/>'
+      str << '<Transform Algorithm="' << ALGORITHM << '"/>'
     end
   end
 
@@ -61,28 +61,36 @@ module Axlsx
   #4. If there are no Relationship elements, the package implementer shall remove all characters between
   #   the Relationships start tag and the Relationships end tag.
   #   AXSLX should error if you are trying to sign a workbook that has no worksheets.
-
+  
+  # working example:
+  #  http://eid-applet.googlecode.com/svn-history/r463/trunk/eid-applet-service-signer/src/main/java/be/fedict/eid/applet/service/signer/ooxml/RelationshipTransformService.java
   class RelationshipTransform
-    @@algorithm = "http://schemas.openxmlformats.org/package/2006/RelationshipTransform"
+    ALGORITHM = "http://schemas.openxmlformats.org/package/2006/RelationshipTransform"
 
     def initialize
       @relationship_references = []
     end
 
     # unless i am misunderstanding that outstanding specification - we dont actually
-    # need to do anything here!
+    # need to do anything here except populate the TargetMode attribute when it is nill
     # just pass in obj.to_xml_string as the document
     # @param [String] document the document to transform
     # @return [String]
-    def apply(transform)
-      transform.doc = Nokogiri::XML(transform.doc)
+    def apply(reference)
+      doc = Nokogiri::XML(reference.part)
+      doc.xpath('xmlns:Relationships/xmlns:Relation').each do |relation|
+        if relation['TargetMode'].nil?
+          relation['TargetMode'] = 'Internal'
+        end
+      end
+      reference.part = doc.to_xml
     end
 
     # serailize the tranformation
     # @param [String] str the string our serialization will be appended to.
     # @return [String]
     def to_xml_string(str="")
-      str << "<Transform Algorithm=" << @@algorithm << '">'
+      str << "<Transform Algorithm=" << ALGORITHM << '">'
       @doc.xpath('//xmlns:Relationships/xmlns:Relationship').each do |relationship|
         str << '<mdssi:RelationshipReference SourceId="' << relationship.attr('Id') << '"/>'
       end

@@ -19,6 +19,8 @@ require 'axlsx/rels/relationships.rb'
 require 'axlsx/drawing/drawing.rb'
 require 'axlsx/workbook/workbook.rb'
 require 'axlsx/package.rb'
+require 'axlsx/xml_dig_sig/xml_dig_sig.rb'
+
 #required gems
 require 'nokogiri'
 require 'zip/zip'

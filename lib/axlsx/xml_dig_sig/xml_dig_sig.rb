@@ -1,3 +1,8 @@
+require 'axlsx/xml_dig_sig/transform.rb'
+require 'axlsx/xml_dig_sig/reference'
+require 'axlsx/xml_dig_sig/manifest'
+
+
 module Axlsx
   class XmlDigSig
 
@@ -7,6 +12,15 @@ module Axlsx
     def initialize(package, certificate, options)
       self.package = package
       self.certificate = certificate
+      # Generate Objects
+        # create idPackageObject
+          # get package parts and create a manifest
+          # create the signature properties node
+        # create the idOfficeObject
+        # create QualifyingProperties
+      # Generate KeyInfo from certificate
+      # Generate Signed Info from objects
+      # Generate SignatureValue from SingedInfo and KeyInfo
     end
 
     attr_reader :package, :certificate

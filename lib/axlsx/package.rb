@@ -228,15 +228,15 @@ module Axlsx
         @parts << {:entry => "xl/#{sheet.rels_pn}", :doc => sheet.relationships.to_xml_string, :schema => RELS_XSD}
         @parts << {:entry => "xl/#{sheet.pn}", :doc => sheet.to_xml_string, :schema => SML_XSD}
       end
-      
+
       #TODO add signature
-      
+
       if self.instance_variable_defined? :@signature
        @parts << {:entry => "_xmlsignatures/sig1.xml", :doc => signature.to_xml_string, :schema => DIGITAL_SIGNATURE_XSD}
        @parts << {:entry => "_xmlsignatures/_rels/origin.sigs.rels", :doc => signature.relationship,  :schema => RELS_XSD}
        @parts << {:entry => "_xmlsignatures/origin.sigs", :doc => ""}
       end 
-      
+
       @parts
     end
 
