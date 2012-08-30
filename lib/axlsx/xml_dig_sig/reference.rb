@@ -16,7 +16,9 @@ module Axlsx
     def initialize(part, uri, options={})
       @part = part
       @uri = uri
-
+      options.each do |name, value|
+        self.send("#{name}=", value) if self.respond_to? "#{name}="
+      end
     end
 
     # The document that will be transformed

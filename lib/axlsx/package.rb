@@ -186,34 +186,34 @@ module Axlsx
     # @private
     def parts
       @parts = [
-       {:entry => RELS_PN, :doc => relationships.to_xml_string, :schema => RELS_XSD},
-       {:entry => "xl/#{STYLES_PN}", :doc => workbook.styles.to_xml_string, :schema => SML_XSD},
-       {:entry => CORE_PN, :doc => @core.to_xml_string, :schema => CORE_XSD},
-       {:entry => APP_PN, :doc => @app.to_xml_string, :schema => APP_XSD},
-       {:entry => WORKBOOK_RELS_PN, :doc => workbook.relationships.to_xml_string, :schema => RELS_XSD},
-       {:entry => CONTENT_TYPES_PN, :doc => content_types.to_xml_string, :schema => CONTENT_TYPES_XSD},
-       {:entry => WORKBOOK_PN, :doc => workbook.to_xml_string, :schema => SML_XSD}
+       {:entry => RELS_PN, :doc => relationships.to_xml_string, :schema => RELS_XSD, :content_type => RELS_CT},
+       {:entry => "xl/#{STYLES_PN}", :doc => workbook.styles.to_xml_string, :schema => SML_XSD, :content_type => STYLES_CT},
+       {:entry => CORE_PN, :doc => @core.to_xml_string, :schema => CORE_XSD, :content_type => CORE_CT},
+       {:entry => APP_PN, :doc => @app.to_xml_string, :schema => APP_XSD, :content_type => APP_CT },
+       {:entry => WORKBOOK_RELS_PN, :doc => workbook.relationships.to_xml_string, :schema => RELS_XSD, :content_type => RELS_CT },
+       {:entry => CONTENT_TYPES_PN, :doc => content_types.to_xml_string, :schema => CONTENT_TYPES_XSD, :content_type => :unknown},
+       {:entry => WORKBOOK_PN, :doc => workbook.to_xml_string, :schema => SML_XSD, :content_type => WORKBOOK_CT }
       ]
 
       workbook.drawings.each do |drawing|
-        @parts << {:entry => "xl/#{drawing.rels_pn}", :doc => drawing.relationships.to_xml_string, :schema => RELS_XSD}
-        @parts << {:entry => "xl/#{drawing.pn}", :doc => drawing.to_xml_string, :schema => DRAWING_XSD}
+        @parts << {:entry => "xl/#{drawing.rels_pn}", :doc => drawing.relationships.to_xml_string, :schema => RELS_XSD, :content_type => RELS_CT }
+        @parts << {:entry => "xl/#{drawing.pn}", :doc => drawing.to_xml_string, :schema => DRAWING_XSD, :content_type => DRAWING_CT }
       end
 
 
       workbook.tables.each do |table|
-        @parts << {:entry => "xl/#{table.pn}", :doc => table.to_xml_string, :schema => SML_XSD}
+        @parts << {:entry => "xl/#{table.pn}", :doc => table.to_xml_string, :schema => SML_XSD, :content_type => TABLE_CT }
       end
 
       workbook.comments.each do|comment|
         if comment.size > 0
-          @parts << { :entry => "xl/#{comment.pn}", :doc => comment.to_xml_string, :schema => SML_XSD }
-          @parts << { :entry => "xl/#{comment.vml_drawing.pn}", :doc => comment.vml_drawing.to_xml_string, :schema => nil }
+          @parts << { :entry => "xl/#{comment.pn}", :doc => comment.to_xml_string, :schema => SML_XSD, :content_type => COMMENT_CT }
+          @parts << { :entry => "xl/#{comment.vml_drawing.pn}", :doc => comment.vml_drawing.to_xml_string, :schema => nil, :content_type => :unknown }
         end
       end
 
       workbook.charts.each do |chart|
-        @parts << {:entry => "xl/#{chart.pn}", :doc => chart.to_xml_string, :schema => DRAWING_XSD}
+        @parts << {:entry => "xl/#{chart.pn}", :doc => chart.to_xml_string, :schema => DRAWING_XSD, :content_type => CHART_CT}
       end
 
       workbook.images.each do |image|
@@ -221,20 +221,20 @@ module Axlsx
       end
 
       if use_shared_strings
-        @parts << {:entry => "xl/#{SHARED_STRINGS_PN}", :doc => workbook.shared_strings.to_xml_string, :schema => SML_XSD}
+        @parts << {:entry => "xl/#{SHARED_STRINGS_PN}", :doc => workbook.shared_strings.to_xml_string, :schema => SML_XSD, :content_type => SHARED_STRINGS_CT}
       end
 
       workbook.worksheets.each do |sheet|
-        @parts << {:entry => "xl/#{sheet.rels_pn}", :doc => sheet.relationships.to_xml_string, :schema => RELS_XSD}
-        @parts << {:entry => "xl/#{sheet.pn}", :doc => sheet.to_xml_string, :schema => SML_XSD}
+        @parts << {:entry => "xl/#{sheet.rels_pn}", :doc => sheet.relationships.to_xml_string, :schema => RELS_XSD, :content_type => RELS_CT}
+        @parts << {:entry => "xl/#{sheet.pn}", :doc => sheet.to_xml_string, :schema => SML_XSD, :content_type => WORKSHEET_CT}
       end
 
       #TODO add signature
 
       if self.instance_variable_defined? :@signature
-       @parts << {:entry => "_xmlsignatures/sig1.xml", :doc => signature.to_xml_string, :schema => DIGITAL_SIGNATURE_XSD}
-       @parts << {:entry => "_xmlsignatures/_rels/origin.sigs.rels", :doc => signature.relationship,  :schema => RELS_XSD}
-       @parts << {:entry => "_xmlsignatures/origin.sigs", :doc => ""}
+       @parts << {:entry => "_xmlsignatures/sig1.xml", :doc => signature.to_xml_string, :schema => DIGITAL_SIGNATURE_XSD, :content_type => DIGITAL_SIGNATURE_XML_CT}
+       @parts << {:entry => "_xmlsignatures/_rels/origin.sigs.rels", :doc => signature.relationship.to_xml_string,  :schema => RELS_XSD, :content_type => RELS_CT}
+       @parts << {:entry => "_xmlsignatures/origin.sigs", :doc => "", :schema => nil, :content_type => :unknown}
       end 
 
       @parts

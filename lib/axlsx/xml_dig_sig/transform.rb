@@ -78,10 +78,11 @@ module Axlsx
     # @return [String]
     def apply(reference)
       doc = Nokogiri::XML(reference.part)
-      doc.xpath('xmlns:Relationships/xmlns:Relation').each do |relation|
-        if relation['TargetMode'].nil?
-          relation['TargetMode'] = 'Internal'
+      doc.xpath('xmlns:Relationships/xmlns:Relationship').each do |relationship|
+        if relationship['TargetMode'].nil?
+          relationship['TargetMode'] = 'Internal'
         end
+        @relationsip_references << relationship.attr('Id')
       end
       reference.part = doc.to_xml
     end
@@ -91,8 +92,8 @@ module Axlsx
     # @return [String]
     def to_xml_string(str="")
       str << "<Transform Algorithm=" << ALGORITHM << '">'
-      @doc.xpath('//xmlns:Relationships/xmlns:Relationship').each do |relationship|
-        str << '<mdssi:RelationshipReference SourceId="' << relationship.attr('Id') << '"/>'
+      @relationship_references.each do |relationship|
+        str << '<mdssi:RelationshipReference SourceId="' << relationship << '"/>'
       end
       str << "</Transform>"
     end
