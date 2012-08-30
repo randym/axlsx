@@ -102,7 +102,7 @@ module Axlsx
 
     # the position of the tick labels
     # must be one of [:nextTo, :high, :low1]
-    def tick_lbl_pos=(v) RestrictionValidator.validate "#{self.class}.tick_lbl_pos", [:nextTo, :high, :low], v; @tick_lbl_pos = v; end
+    def tick_lbl_pos=(v) RestrictionValidator.validate "#{self.class}.tick_lbl_pos", [:nextTo, :high, :low, :none], v; @tick_lbl_pos = v; end
     alias :tickLblPos= :tick_lbl_pos=
 
     # The number format format code for this axis
