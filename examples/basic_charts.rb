@@ -24,6 +24,8 @@ end
     chart.add_series :data => sheet["A2:D2"], :labels => sheet["A1:D1"], :title => 'bob'
     chart.d_lbls.show_val = true
     chart.d_lbls.show_cat_name = true
+    chart.catAxis.tick_lbl_pos = :none
+
   end
  end
 
@@ -38,6 +40,8 @@ end
     chart.catAxis.label_rotation = 45
     chart.d_lbls.d_lbl_pos = :outEnd
     chart.d_lbls.show_val = true
+
+    chart.catAxis.tick_lbl_pos = :none
   end
  end
 

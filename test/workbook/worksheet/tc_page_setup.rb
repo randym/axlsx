@@ -44,6 +44,11 @@ class TestPageSetup < Test::Unit::TestCase
     assert_equal(50, @ps.scale)
   end
 
+  def test_paper_size
+    assert_raise(ArgumentError) { @ps.paper_size = 119 }
+    assert_nothing_raised {  @ps.paper_size = 10 }
+  end
+
   def test_set_some_values
     @ps.set(:fit_to_width => 2, :orientation => :portrait)
     assert_equal(2, @ps.fit_to_width)
@@ -58,7 +63,7 @@ class TestPageSetup < Test::Unit::TestCase
     assert(@ps.fit_to_width == nil && @ps.fit_to_height == nil)
     assert(@ps.fit_to_page? == false)
   end
-
+  
   def test_with_height_fit_to_page?
     assert(@ps.fit_to_width == nil && @ps.fit_to_height == nil)
     @ps.set(:fit_to_height => 1)
