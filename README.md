@@ -145,6 +145,9 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
+- **September.??.12**: 1.2.3
+  - added support for :none option on chart axis labels
+  - added support for paper_size option on worksheet.page_setup
 - **August.27.12**: 1.2.2
    - minor patch for auto-filters
    - minor documentation improvements.
