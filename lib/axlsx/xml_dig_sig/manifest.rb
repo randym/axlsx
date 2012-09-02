@@ -38,7 +38,6 @@ module Axlsx
       @references << reference
     end
 
-
     # Serialize the manifiest
     # @param [String] str The string to append this manifest's content to.
     # @return [String]

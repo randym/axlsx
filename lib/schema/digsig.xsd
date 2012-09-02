@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://schemas.microsoft.com/office/2006/digsig" elementFormDefault="qualified" xmlns="http://schemas.microsoft.com/office/2006/digsig" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:simpleType name="ST_PositiveInteger">
+    <xsd:restriction base="xsd:int">
+      <xsd:minExclusive value="0" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="ST_SignatureComments">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="255" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="ST_SignatureProviderUrl">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="2083" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="ST_SignatureText">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="100" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="ST_SignatureType">
+    <xsd:restriction base="xsd:int">
+      <xsd:enumeration value="1"></xsd:enumeration>
+      <xsd:enumeration value="2"></xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="ST_Version">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="64" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="ST_UniqueIdentifierWithBraces">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="\{[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}\}|" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:group name="EG_RequiredChildren">
+    <xsd:sequence>
+      <xsd:element name="SetupID" type="ST_UniqueIdentifierWithBraces"></xsd:element>
+      <xsd:element name="SignatureText" type="ST_SignatureText"></xsd:element>
+      <xsd:element name="SignatureImage" type="xsd:base64Binary"></xsd:element>
+      <xsd:element name="SignatureComments" type="ST_SignatureComments"></xsd:element>
+      <xsd:element name="WindowsVersion" type="ST_Version"></xsd:element>
+      <xsd:element name="OfficeVersion" type="ST_Version"></xsd:element>
+      <xsd:element name="ApplicationVersion" type="ST_Version"></xsd:element>
+      <xsd:element name="Monitors" type="ST_PositiveInteger"></xsd:element>
+      <xsd:element name="HorizontalResolution" type="ST_PositiveInteger"></xsd:element>
+      <xsd:element name="VerticalResolution" type="ST_PositiveInteger"></xsd:element>
+      <xsd:element name="ColorDepth" type="ST_PositiveInteger"></xsd:element>
+      <xsd:element name="SignatureProviderId" type="ST_UniqueIdentifierWithBraces"></xsd:element>
+      <xsd:element name="SignatureProviderUrl" type="ST_SignatureProviderUrl"></xsd:element>
+      <xsd:element name="SignatureProviderDetails" type="xsd:int"></xsd:element>
+      <xsd:element name="SignatureType" type="ST_SignatureType"></xsd:element>
+    </xsd:sequence>
+  </xsd:group>
+  <xsd:group name="EG_OptionalChildren">
+    <xsd:sequence>
+      <xsd:element name="DelegateSuggestedSigner" type="xsd:string"></xsd:element>
+      <xsd:element name="DelegateSuggestedSigner2" type="xsd:string"></xsd:element>
+      <xsd:element name="DelegateSuggestedSignerEmail" type="xsd:string"></xsd:element>
+      <xsd:element name="ManifestHashAlgorithm" type="xsd:anyURI"></xsd:element>
+    </xsd:sequence>
+  </xsd:group>
+  <xsd:group name="EG_OptionalChildrenV2">
+    <xsd:sequence>
+      <xsd:element name="Address1" type="xsd:string"></xsd:element>
+      <xsd:element name="Address2" type="xsd:string"></xsd:element>
+    </xsd:sequence>
+  </xsd:group>
+  <xsd:complexType name="CT_SignatureInfoV1">
+    <xsd:sequence>
+      <xsd:group ref="EG_RequiredChildren" />
+      <xsd:group ref="EG_OptionalChildren" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CT_SignatureInfoV2">
+    <xsd:sequence>      <xsd:group ref="EG_OptionalChildrenV2" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="SignatureInfoV1" type="CT_SignatureInfoV1"></xsd:element>
+  <xsd:element name="SignatureInfoV2" type="CT_SignatureInfoV2"></xsd:element>
+ </xsd:schema>
