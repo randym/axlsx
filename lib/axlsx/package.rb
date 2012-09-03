@@ -159,6 +159,16 @@ module Axlsx
       errors
     end
 
+    def signature_manifest
+      manifest = Manifest.new
+      parts.each do |part|
+        if manifest.is_signable_part(part)
+          manifiest.add_reference_for_package_part part
+        end
+      end
+      manifest
+    end
+
     private
 
     # Writes the package parts to a zip archive.

@@ -16,6 +16,7 @@ module Axlsx
     #                       signature objects like manifes, signature_properties, or qualifying_properties.
     #                       This object must expose a to_xml_string method for serialization.
     def intialize(options={})
+      @content = []
       if options[:id] && options[:id] == 'idPackageObject'
         @namespace = 'http://schemas.openxmlformats.org/package/2006/digital-signature'
       end
@@ -32,7 +33,7 @@ module Axlsx
 
     # The contest of the object. e.g. a manifest
     # @return [Any]
-    attr_accessor :content
+    attr_reader :content
 
     # The optional id for the object.
     # @return [String]
@@ -43,7 +44,7 @@ module Axlsx
       str << " Id=\"#{id}\"" if id
       str << " xmlns:mdssi=\"#{namespace}\"" if namespace 
       str << ">"
-      content.to_xml_string(str)
+      content.each { |item| item.to_xml_string(str) }
       str << '</Object>'
     end
   end

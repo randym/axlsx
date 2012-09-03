@@ -5,9 +5,17 @@ module Axlsx
   # You should not be using this class directly.
   class Manifest
 
+    # @TODO add Themes if we ever implement them.
+    SIGNABLE_CONTENT_TYPES = [RELS_CT, STYLES_CT, WORKBOOK_CT, DRAWING_CT, TABLE_CT, COMMENT_CT, CHART_CT, SHARED_STRINGS_CT, WORKSHEET_CT]
+
+
     # Creates a new Manifest instance
     def initialize
       @references = []
+    end
+
+    def is_signable_part(part)
+      SIGNABLE_CONETNET_TYPES.inclue? part.content_type
     end
 
     # The references for this manifest. 
