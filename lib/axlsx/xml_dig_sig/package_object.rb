@@ -7,6 +7,7 @@ module Axlsx
 
     def signature_properties
       unless @signature_properties
+        # Hello ugly code!
         signature_time = SignatureTime.new(:time => Time.zone.now)
         signature_time_property = SignatureProperty.new(:id => "idSignatureTime", :target => "#idPackageSignature")
         signature_time_property.content << signature_time

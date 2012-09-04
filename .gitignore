@@ -10,3 +10,5 @@ example.csv
 *.*~
 .DS_Store
 tmp
+*.pfx
+*.pem
