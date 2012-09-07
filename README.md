@@ -146,6 +146,8 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 #Change log
 ---------
 - **September.??.12**: 1.2.3
+  - fix exponential float/bigdecimal values rendering as strings intead
+    of 'numbers' in excel.
   - added support for :none option on chart axis labels
   - added support for paper_size option on worksheet.page_setup
 - **August.27.12**: 1.2.2

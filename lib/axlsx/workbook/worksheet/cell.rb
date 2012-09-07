@@ -380,7 +380,7 @@ module Axlsx
         :boolean
       elsif v.to_s.match(/\A[+-]?\d+?\Z/) #numeric
         :integer
-      elsif v.to_s.match(/\A[+-]?\d+\.\d+?\Z/) #float
+      elsif v.to_s.match(/\A[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?\Z/) #float
         :float
       else
         :string
