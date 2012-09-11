@@ -1,6 +1,10 @@
 Axlsx: Office Open XML Spreadsheet Generation
 ====================================
 [![Build Status](https://secure.travis-ci.org/randym/axlsx.png)](http://travis-ci.org/randym/axlsx/)
+
+If you are using axlsx for comercial purposes, or just want to show your
+appreciation for the gem, please don't hesitate to make a donation.
+
 [![Click here to lend your support to: axlsx and make a donation at www.pledgie.com !](http://www.pledgie.com/campaigns/17814.png?skin_name=chrome)](http://www.pledgie.com/campaigns/17814)
 
 **IRC**:[irc.freenode.net / #axlsx](irc://irc.freenode.net/axlsx)
@@ -17,7 +21,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 
 **License**: MIT License
 
-**Latest Version**: 1.2.2
+**Latest Version**: 1.2.3
 
 **Ruby Version**: 1.8.7, 1.9.2, 1.9.3
 
@@ -25,7 +29,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 
 **Rubinius Version**: rubinius 2.0.0dev * lower versions may run, this gem always tests against head.
 
-**Release Date**: August 27th 2012
+**Release Date**: September 8th 2012
 
 If you are working in rails, or with active record see:
 * http://github.com/randym/acts_as_xlsx
@@ -145,8 +149,8 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
-- **September.??.12**: 1.2.3
-  - fix exponential float/bigdecimal values rendering as strings intead
+- **September.8.12**: 1.2.3
+  - enhance exponential float/bigdecimal values rendering as strings intead
     of 'numbers' in excel.
   - added support for :none option on chart axis labels
   - added support for paper_size option on worksheet.page_setup

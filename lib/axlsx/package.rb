@@ -242,7 +242,6 @@ module Axlsx
     # @private
     def content_types
       c_types = base_content_types
-
       workbook.drawings.each do |drawing|
         c_types << Axlsx::Override.new(:PartName => "/xl/#{drawing.pn}",
                                        :ContentType => DRAWING_CT)

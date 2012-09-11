@@ -1,4 +1,5 @@
 module Axlsx
+
   #A collection of hyperlink objects for a worksheet
   class WorksheetHyperlinks < SimpleTypedList
 
@@ -18,6 +19,8 @@ module Axlsx
       @list.last
     end
 
+    # The relationships required by this collection's hyperlinks
+    # @return Array
     def relationships
       return [] if empty?
       map { |hyperlink| hyperlink.relationship }

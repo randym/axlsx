@@ -167,6 +167,10 @@ module Axlsx
     # @return [Integer]
     attr_reader :paper_size
 
+
+    # Sets the paper size for printing.
+    # @see PageSetup#paper_size
+    # @return integer
     def paper_size=(size)
       RestrictionValidator.validate 'paper_size', (1..118), size
       @paper_size = size
