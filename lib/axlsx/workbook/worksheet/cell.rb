@@ -330,7 +330,7 @@ module Axlsx
       font_scale = (font_size/10.0).to_f
       ((value.to_s.count(Worksheet.thin_chars) * mdw + 5) / mdw * 256) / 256.0 * font_scale
     end
-   
+
     # returns the absolute or relative string style reference for
     # this cell. 
     # @param [Boolean] absolute -when false a relative reference will be
@@ -338,12 +338,17 @@ module Axlsx
     # @return [String]
     def reference(absolute=true)
       absolute ? r_abs : r
-    end 
-    
+    end
+
     private
 
+    # we scale the font size if bold style is applied to either the style font or
+    # the cell itself. Yes, it is a bit of a hack, but it is much better than using
+    # imagemagick and loading metrics for every character.
     def font_size
-        sz || @styles.fonts[@styles.cellXfs[style].fontId].sz || @styles.fonts[0].sz
+        font = @styles.fonts[@styles.cellXfs[style].fontId] || @styles.fonts[0]
+        size_from_styles = (font.b || b) ? font.sz * 1.5 : font.sz
+        sz || size_from_styles
     end
 
     # Utility method for setting inline style attributes
