@@ -105,6 +105,19 @@ class TestStyles < Test::Unit::TestCase
     assert(@styles.parse_alignment_options(:alignment => {}).is_a?(Axlsx::CellAlignment))
   end
 
+  def test_parse_font_using_defaults
+    original = @styles.fonts.first
+    @styles.add_style :b => 1, :sz => 99
+    created = @styles.fonts.last
+    original_attributes = original.instance_values
+    assert_equal(1, created.b)
+    assert_equal(99, created.sz)
+    copied = original_attributes.reject{ |key, value| %w(b sz).include? key }
+    copied.each do |key, value|
+      assert_equal(created.instance_values[key], value)
+    end
+  end
+
   def test_parse_font_options
     options = {
       :fg_color => "FF050505",

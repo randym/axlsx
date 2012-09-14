@@ -279,7 +279,7 @@ module Axlsx
     # @return [Font|Integer]
     def parse_font_options(options={})
       return if (options.keys & [:fg_color, :sz, :b, :i, :u, :strike, :outline, :shadow, :charset, :family, :font_name]).empty?
-      font = Font.new(options)
+      font = Font.new(fonts.first.instance_values.merge(options))
       font.color = Color.new(:rgb => options[:fg_color]) if options[:fg_color]
       font.name = options[:font_name] if options[:font_name]
       options[:type] == :dxf ? font : fonts << font
