@@ -15,6 +15,12 @@ class TestTable < Test::Unit::TestCase
 
   end
 
+  def test_table_style_info
+    table = @ws.add_table('A1:D5', :name => 'foo', :style_info => { :show_row_stripes => true, :name => "TableStyleMedium25" })
+    assert_equal('TableStyleMedium25', table.table_style_info.name)
+    assert_equal(true, table.table_style_info.show_row_stripes)
+  end
+
   def test_add_table
     name = "test"
     table = @ws.add_table("A1:D5", :name => name)
@@ -22,7 +28,6 @@ class TestTable < Test::Unit::TestCase
     assert_equal(@ws.workbook.tables.last, table, "must be added to workbook table collection")
     assert_equal(@ws.tables.last, table, "must be added to worksheet table collection")
     assert_equal(table.name, name, "options for name are applied")
-
   end
 
   def test_pn

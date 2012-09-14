@@ -28,6 +28,7 @@ module Axlsx
       @sheet = sheet
       @style = nil
       @sheet.workbook.tables << self
+      @table_style_info = TableStyleInfo.new(options[:style_info]) if options[:style_info]
       @name = "Table#{index+1}"
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
@@ -62,6 +63,12 @@ module Axlsx
         @name = v
       end
     end
+    
+    # TableStyleInfo for the table. 
+    # initialization can be fed via the :style_info option
+    def table_style_info
+      @table_style_info ||= TableStyleInfo.new
+    end
 
     # Serializes the object
     # @param [String] str
@@ -77,7 +84,7 @@ module Axlsx
       end
       str << '</tableColumns>'
       #TODO implement tableStyleInfo
-      str << '<tableStyleInfo showFirstColumn="0" showLastColumn="0" showRowStripes="1" showColumnStripes="0" name="TableStyleMedium9" />'
+      table_style_info.to_xml_string(str) # '<tableStyleInfo showFirstColumn="0" showLastColumn="0" showRowStripes="1" showColumnStripes="0" name="TableStyleMedium9" />'
       str << '</table>'
     end
 
