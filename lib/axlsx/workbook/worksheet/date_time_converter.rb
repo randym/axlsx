@@ -10,7 +10,7 @@ module Axlsx
     # @return [Numeric]
     def self.date_to_serial(date)
       epoch = Axlsx::Workbook::date1904 ? Date.new(1904) : Date.new(1899, 12, 30)
-      (date-epoch).to_f
+      (date - epoch).to_f
     end
 
     # The time_to_serial methond converts a Time object its excel serialized form.
