@@ -309,7 +309,7 @@ end
 ##Tables
 
 #```ruby
-wb.add_worksheet(:name => "Table") do |sheet|
+wb.add_worksheet(:name => "Table", :style_info => { :name => "TableStyleMedium23" }) do |sheet|
   sheet.add_row ["Build Matrix"]
   sheet.add_row ["Build", "Duration", "Finished", "Rvm"]
   sheet.add_row ["19.1", "1 min 32 sec", "about 10 hours ago", "1.8.7"]
