@@ -1,3 +1,4 @@
+$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../../lib"
 require 'axlsx'
 
 package = Axlsx::Package.new

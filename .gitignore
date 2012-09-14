@@ -12,3 +12,4 @@ example.csv
 tmp
 *.pem
 *.pfx
+examples/sprk2012
