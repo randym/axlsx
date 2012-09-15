@@ -497,7 +497,14 @@ module Axlsx
         item.to_xml_string(str) if item
       end
       str << '</worksheet>'
-      str.gsub(/[[:cntrl:]]/,'')
+
+      if RUBY_VERSION == "1.8.7"
+        nasty_control_char_matcher = Regexp.new("[\x01\x02\x03\x04\x05\x06\x07\x08\x1F\v\xE2]")
+      else
+        nasty_control_char_matcher = Regexp.new("[\x01\x02\x03\x04\x05\x06\x07\x08\x1F\v\u2028]")
+      end
+
+      str.gsub(nasty_control_char_matcher,'')
     end
 
     # The worksheet relationships. This is managed automatically by the worksheet
