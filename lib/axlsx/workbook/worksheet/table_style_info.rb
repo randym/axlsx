@@ -20,7 +20,7 @@ module Axlsx
     #                  @see Annex G. (normative) Predefined SpreadsheetML Style Definitions in part 1 of the specification.
     def initialize(options = {})
       initialize_defaults
-      name= 'TableStyleMedium9'
+      @name = 'TableStyleMedium9'
       options.each do |k, v|
         send("#{k}=", v) if respond_to? "#{k}="
       end

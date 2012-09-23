@@ -246,7 +246,7 @@ class TestWorksheet < Test::Unit::TestCase
 
   def test_to_xml_string_auto_filter
     @ws.add_row [1, "two"]
-    @ws.auto_filter = "A1:B1"
+    @ws.auto_filter.range = "A1:B1"
     doc = Nokogiri::XML(@ws.to_xml_string)
     assert_equal(doc.xpath('//xmlns:worksheet/xmlns:autoFilter[@ref="A1:B1"]').size, 1)
   end
@@ -337,7 +337,7 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.page_margins.set :left => 9
     @ws.page_setup.set :fit_to_width => 1
     @ws.print_options.set :headings => true
-    @ws.auto_filter = "A1:C3"
+    @ws.auto_filter.range = "A1:C3"
     @ws.merge_cells "A4:A5"
     @ws.add_chart Axlsx::Pie3DChart
     @ws.add_table "E1:F3"
@@ -424,7 +424,7 @@ class TestWorksheet < Test::Unit::TestCase
   def test_auto_filter
     assert(@ws.auto_filter.range.nil?)
     assert_raise(ArgumentError) { @ws.auto_filter = 123 }
-    @ws.auto_filter = "A1:D9"
+    @ws.auto_filter.range = "A1:D9"
     assert_equal(@ws.auto_filter.range, "A1:D9")
   end
 end

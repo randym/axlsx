@@ -277,7 +277,6 @@ class TestCell < Test::Unit::TestCase
 
   def test_font_size_with_bolding
     @c.style = @c.row.worksheet.workbook.styles.add_style :b => true
-    sz = @c.send(:font_size)
     assert_equal(@c.row.worksheet.workbook.styles.fonts.first.sz * 1.5, @c.send(:font_size))
   end
 

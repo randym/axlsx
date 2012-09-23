@@ -149,6 +149,12 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
+- **September.??.12**: 1.2.4
+  - Improved support for autowidth when custom styles are applied
+  - Added support for table style info that lets you take advantage of
+    all the predefined table styles.
+  - Improved style management for fonts so they merge undefined values
+    from the initial master.
 - **September.8.12**: 1.2.3
   - enhance exponential float/bigdecimal values rendering as strings intead
     of 'numbers' in excel.
