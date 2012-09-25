@@ -14,6 +14,24 @@ module Axlsx
     end
   end
 
+  # Validate that the value provided is between a specific range
+  # Note that no data conversions will be done for you!
+  # Comparisons will be made using < and > or <= and <= when the inclusive parameter is true
+  class RangeValidator
+    # @param [String] name The name of what is being validated
+    # @param [Any] min The minimum allowed value
+    # @param [Any] max The maximum allowed value
+    # @param [Any] value The value to be validated
+    # @param [Boolean] inclusive Flag indicating if the comparison should be inclusive.
+    def self.validate(name, min, max, value, inclusive = true)
+      passes = if inclusive
+                 min <= value && value <= max
+               else
+                 min < value && value < max
+               end
+      raise ArgumentError, (ERR_RANGE % [v.inspect, min.to_s, max.to_s, inclusive]) unless passes
+    end
+  end
   # Validates the value against the regular expression provided.
   class RegexValidator
     # @param [String] name The name of what is being validated. This is included in the output when the value is invalid
@@ -112,7 +130,7 @@ module Axlsx
   def self.validate_scale_10_400(v)
     DataTypeValidator.validate "page_scale", [Fixnum, Integer], v, lambda { |arg| arg >= 10 && arg <= 400 }
   end
-  
+
   # Requires that the value is an integer ranging from 10 to 400 or 0.
   def self.validate_scale_0_10_400(v)
     DataTypeValidator.validate "page_scale", [Fixnum, Integer], v, lambda { |arg| arg == 0 || (arg >= 10 && arg <= 400) }
@@ -129,7 +147,7 @@ module Axlsx
   # @param [Any] v The value validated
   def self.validate_pattern_type(v)
     RestrictionValidator.validate :pattern_type, [:none, :solid, :mediumGray, :darkGray, :lightGray, :darkHorizontal, :darkVertical, :darkDown, :darkUp, :darkGrid,
-       :darkTrellis, :lightHorizontal, :lightVertical, :lightDown, :lightUp, :lightGrid, :lightTrellis, :gray125, :gray0625], v
+                                                  :darkTrellis, :lightHorizontal, :lightVertical, :lightDown, :lightUp, :lightGrid, :lightTrellis, :gray125, :gray0625], v
   end
 
   # Requires that the value is one of the ST_TimePeriod types
@@ -226,7 +244,7 @@ module Axlsx
   def self.validate_data_validation_error_style(v)
     RestrictionValidator.validate :validate_data_validation_error_style, [:information, :stop, :warning], v
   end
-  
+
   # Requires that the value is valid data validation operator.
   # valid operators must be one of lessThan, lessThanOrEqual, equal,
   # notEqual, greaterThanOrEqual, greaterThan, between, notBetween
@@ -234,28 +252,28 @@ module Axlsx
   def self.validate_data_validation_operator(v)
     RestrictionValidator.validate :data_validation_operator, [:lessThan, :lessThanOrEqual, :equal, :notEqual, :greaterThanOrEqual, :greaterThan, :between, :notBetween], v
   end
-  
+
   # Requires that the value is valid data validation type.
   # valid types must be one of custom, data, decimal, list, none, textLength, time, whole
   # @param [Any] v The value validated
   def self.validate_data_validation_type(v)
     RestrictionValidator.validate :data_validation_type, [:custom, :data, :decimal, :list, :none, :textLength, :time, :whole], v
   end
-  
+
   # Requires that the value is a valid sheet view type.
   # valid types must be one of normal, page_break_preview, page_layout
   # @param [Any] v The value validated
   def self.validate_sheet_view_type(v)
     RestrictionValidator.validate :sheet_view_type, [:normal, :page_break_preview, :page_layout], v
   end
-  
+
   # Requires that the value is a valid active pane type.
   # valid types must be one of bottom_left, bottom_right, top_left, top_right
   # @param [Any] v The value validated
   def self.validate_pane_type(v)
     RestrictionValidator.validate :active_pane_type, [:bottom_left, :bottom_right, :top_left, :top_right], v
   end
-  
+
   # Requires that the value is a valid split state type.
   # valid types must be one of frozen, frozen_split, split
   # @param [Any] v The value validated

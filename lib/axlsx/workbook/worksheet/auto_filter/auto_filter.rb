@@ -51,7 +51,9 @@ module Axlsx
     # @return [String]
     def to_xml_string(str='')
       return unless range
-      str << "<autoFilter ref='#{range}'></autoFilter>"
+      str << "<autoFilter ref='#{range}'>"
+      colums.each { |filter_column| filter_column.to_xml_string(str) }
+      str << "</autoFilter>"
     end
 
   end

@@ -263,11 +263,14 @@ module Axlsx
   # error message for RegexValidator
   ERR_REGEX = "Invalid Data. %s does not match %s."
 
+  # error message for RangeValidator
+  ERR_RANGE = "Invalid Data. %s must be between %s and %s, (inclusive:%s) you gave: %s"
+
   # error message for sheets that use a name which is longer than 31 bytes
   ERR_SHEET_NAME_TOO_LONG = "Your worksheet name '%s' is too long. Worksheet names must be 31 characters (bytes) or less"
-  
+
   # error message for sheets that use a name which includes a colon
-  
+
   ERR_SHEET_NAME_COLON_FORBIDDEN = "Your worksheet name '%s' contains a colon, which is not allowed by MS Excel and will cause repair warnings. Please change the name of your sheet."
 
   # error message for duplicate sheet names
