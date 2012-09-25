@@ -7,7 +7,7 @@ class TestFilterColumn < Test::Unit::TestCase
   end
 
 
-  def tc_do_it_later
+  def test_do_it_later
     assert true
   end
 end
