@@ -427,4 +427,11 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.auto_filter.range = "A1:D9"
     assert_equal(@ws.auto_filter.range, "A1:D9")
   end
+
+  def test_sheet_pr_for_auto_filter
+    @ws.auto_filter.range = 'A1:D9'
+    @ws.auto_filter.add_column 0, :filters, :filter_items => [1]
+    doc = Nokogiri::XML(@ws.to_xml_string)
+    assert(doc.xpath('//sheetPr[@filterMode="true"]')) 
+  end
 end

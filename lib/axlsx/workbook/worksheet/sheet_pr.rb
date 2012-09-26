@@ -110,7 +110,7 @@ module Axlsx
     
     def update_properties
       page_setup_pr.fit_to_page = worksheet.fit_to_page?
-      filter_mode = worksheet.auto_filter.columns.size > 0
+      self.filter_mode = worksheet.auto_filter.columns.size > 0
     end
   end
 
