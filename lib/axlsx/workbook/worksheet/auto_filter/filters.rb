@@ -62,12 +62,16 @@ module Axlsx
 
     # Serialize the object to xml
     def to_xml_string(str = '')
-      str << "<filters blank='#{@blank}' calendarType='#{@calendar_type}'>"
-      @filters.each {  |filter| filter.to_xml_string(str) }
-      @date_group_items.each { |date_group_item| date_group_item.to_xml_string(str) }
+      str << "<filters blank='#{blank}' calendarType='#{calendar_type}'>"
+      filter_items.each {  |filter| filter.to_xml_string(str) }
+      date_group_items.each { |date_group_item| date_group_item.to_xml_string(str) }
       str << '</filters>'
     end
 
+    # not entirely happy with this. 
+    # filter_items should be a simple typed list that overrides << etc
+    # to create Filter objects from the inserted values. However this
+    # is most likely so rarely used...(really? do you know that?)
     def filter_items=(values)
       values.each do |value|
         filter_items << Filter.new(value)

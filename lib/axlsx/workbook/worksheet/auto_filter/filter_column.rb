@@ -17,17 +17,22 @@ module Axlsx
     # @option [Boolean] show_button @see show_button
     def initialize(col_id, filter_type, options = {})
       RestrictionValidator.validate 'FilterColumn.filter', FILTERS, filter_type
+      #Axlsx::validate_unsigned_int(col_id)
       self.col_id = col_id
       options.each do |o|
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
-      @filter = Axlsx.const_get(Axlsx.camel(filter_type))
+      @filter = Axlsx.const_get(Axlsx.camel(filter_type)).new(options)
       yield @filter if block_given?
     end
 
     # Zero-based index indicating the AutoFilter column to which this filter information applies.
     # @return [Integer]
     attr_reader :col_id
+    
+    # The actual filter being dealt with here
+    # This could be any one of the allowed filter types
+    attr_reader :filter
 
     # Flag indicating whether the filter button is visible.
     # When the cell containing the filter button is merged with another cell,
@@ -56,13 +61,23 @@ module Axlsx
     # @param [Boolean] hidden Flag indicating whether the AutoFilter button for this column is hidden.
     # @return [Boolean]
     def hidden_button=(hidden)
-      DataValidater.validate_boolean hidden
+      Axlsx.validate_boolean hidden
       @hidden_button = hidden
+    end
+
+    # Flag indicating whether the AutoFilter button is show. This is
+    # undocumented in the spec, but exists in the schema file as an
+    # optional attribute.
+    # @param [Boolean] show Show or hide the button
+    # @return [Boolean]
+    def show_button=(show)
+      Axlsx.validate_boolean show
+      @show_botton = show
     end
 
     # Serialize the object to xml
     def to_xml_string(str='')
-      str << "<filterColumn colId='#{@col_id}' hiddenButton='#{@hidden_button}' showButton='#{@show_button}'>"
+      str << "<filterColumn colId='#{@col_id}' hiddenButton='#{hidden_button}' showButton='#{show_button}'>"
       @filter.to_xml_string(str)
       str << "</filterColumn>"
     end

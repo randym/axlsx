@@ -150,6 +150,7 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 #Change log
 ---------
 - **September.??.12**: 1.2.4
+  - added stored autowidth filter values and date grouping items
   - Improved support for autowidth when custom styles are applied
   - Added support for table style info that lets you take advantage of
     all the predefined table styles.
@@ -252,6 +253,9 @@ done without the help of the people below.
 [straydogstudio](https://github.com/straydocstudio) - For making an AWESOME axlsx templating gem for rails.
 
 [MitchellAJ](https://github.com/MitchellAJ) - For catching a bug in font_size calculations, finding some old code in an example and above all for reporting all of that brilliantly
+
+[ebenoist](https://github.com/ebenoist) - For taking control of control characters and keeping what is between the lines, between the lines.
+
 #Copyright and License
 ----------
 
