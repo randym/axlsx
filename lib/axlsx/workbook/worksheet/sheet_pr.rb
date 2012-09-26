@@ -1,20 +1,20 @@
 module Axlsx
-#<xsd:complexType name="CT_SheetPr">
-#<xsd:sequence>
-#￼￼￼￼<xsd:element name="tabColor" type="CT_Color" minOccurs="0" maxOccurs="1"/>
-#<xsd:element name="outlinePr" type="CT_OutlinePr" minOccurs="0" maxOccurs="1"/>
-#<xsd:element name="pageSetUpPr" type="CT_PageSetUpPr" minOccurs="0" maxOccurs="1"/>
-#</xsd:sequence>
-#￼￼￼￼￼￼￼￼￼￼￼￼￼<xsd:attribute name="syncHorizontal" type="xsd:boolean" use="optional" default="false"/>
-#<xsd:attribute name="syncVertical" type="xsd:boolean" use="optional" default="false"/>
-#<xsd:attribute name="syncRef" type="ST_Ref" use="optional"/>
-#<xsd:attribute name="transitionEvaluation" type="xsd:boolean" use="optional" default="false"/>
-#<xsd:attribute name="transitionEntry" type="xsd:boolean" use="optional" default="false"/>
-#<xsd:attribute name="published" type="xsd:boolean" use="optional" default="true"/>
-#<xsd:attribute name="codeName" type="xsd:string" use="optional"/>
-#<xsd:attribute name="filterMode" type="xsd:boolean" use="optional" default="false"/>
-#<xsd:attribute name="enableFormatConditionsCalculation" type="xsd:boolean" use="optional" default="true"/>
-#</xsd:complexType>
+  #<xsd:complexType name="CT_SheetPr">
+  #<xsd:sequence>
+  #￼￼￼￼<xsd:element name="tabColor" type="CT_Color" minOccurs="0" maxOccurs="1"/>
+  #<xsd:element name="outlinePr" type="CT_OutlinePr" minOccurs="0" maxOccurs="1"/>
+  #<xsd:element name="pageSetUpPr" type="CT_PageSetUpPr" minOccurs="0" maxOccurs="1"/>
+  #</xsd:sequence>
+  #￼￼￼￼￼￼￼￼￼￼￼￼￼<xsd:attribute name="syncHorizontal" type="xsd:boolean" use="optional" default="false"/>
+  #<xsd:attribute name="syncVertical" type="xsd:boolean" use="optional" default="false"/>
+  #<xsd:attribute name="syncRef" type="ST_Ref" use="optional"/>
+  #<xsd:attribute name="transitionEvaluation" type="xsd:boolean" use="optional" default="false"/>
+  #<xsd:attribute name="transitionEntry" type="xsd:boolean" use="optional" default="false"/>
+  #<xsd:attribute name="published" type="xsd:boolean" use="optional" default="true"/>
+  #<xsd:attribute name="codeName" type="xsd:string" use="optional"/>
+  #<xsd:attribute name="filterMode" type="xsd:boolean" use="optional" default="false"/>
+  #<xsd:attribute name="enableFormatConditionsCalculation" type="xsd:boolean" use="optional" default="true"/>
+  #</xsd:complexType>
   # The SheetPr class manages serialization fo a worksheet's sheetPr element.
   # Only fit_to_page is implemented
   class SheetPr
@@ -107,10 +107,13 @@ module Axlsx
       str
     end
 
-    
+
     def update_properties
       page_setup_pr.fit_to_page = worksheet.fit_to_page?
-      self.filter_mode = worksheet.auto_filter.columns.size > 0
+      if worksheet.auto_filter.columns.size > 0
+        self.filter_mode = 1
+        self.enable_format_conditions_calculation = 0
+      end
     end
   end
 
@@ -122,9 +125,9 @@ module Axlsx
     # @option [Boolean] fit_to_page Flag indicating whether the sheet displays Automatic Page Breaks.
     # @option [Boolean] auto_page_breaks Flag indicating whether the Fit to Page print option is enabled.
     def initialize(options = {})
-       options.each do |key, value|
-         self.send("#{key}=",value) if self.respond_to?("#{key}=")
-       end
+      options.each do |key, value|
+        self.send("#{key}=",value) if self.respond_to?("#{key}=")
+      end
     end
 
     # Flag indicating whether the sheet displays Automatic Page Breaks.

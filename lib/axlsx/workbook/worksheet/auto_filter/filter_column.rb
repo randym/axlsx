@@ -77,9 +77,20 @@ module Axlsx
 
     # Serialize the object to xml
     def to_xml_string(str='')
-      str << "<filterColumn colId='#{@col_id}' hiddenButton='#{hidden_button}' showButton='#{show_button}'>"
+      str << "<filterColumn #{serialized_attributes}>"
       @filter.to_xml_string(str)
       str << "</filterColumn>"
+    end
+
+    private
+
+    def serialized_attributes(str='')
+      instance_values.each do |key, value|
+        if %(show_button hidden_button col_id).include? key.to_s
+        str << "#{Axlsx.camel(key, false)}='#{value}' "
+        end
+      end
+      str
     end
   end
 end

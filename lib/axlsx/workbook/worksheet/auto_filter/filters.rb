@@ -25,17 +25,13 @@ module Axlsx
 
     # Flag indicating whether to filter by blank.
     # @return [Boolean]
-    def blank
-      @blank ||= false
-    end
+    attr_reader :blank
 
     # Calendar type for date grouped items. 
     # Used to interpret the values in dateGroupItem.
     # This is the calendar type used to evaluate all dates in the filter column,
     # even when those dates are not using the same calendar system / date formatting.
-    def calendar_type
-      @calendar_type ||= CALENDAR_TYPES.first
-    end
+    attr_reader :calendar_type
 
     # The filter values in this filters object
     def filter_items
@@ -62,7 +58,7 @@ module Axlsx
 
     # Serialize the object to xml
     def to_xml_string(str = '')
-      str << "<filters blank='#{blank}' calendarType='#{calendar_type}'>"
+      str << "<filters #{serialized_attributes}>"
       filter_items.each {  |filter| filter.to_xml_string(str) }
       date_group_items.each { |date_group_item| date_group_item.to_xml_string(str) }
       str << '</filters>'
@@ -87,6 +83,14 @@ module Axlsx
 
     private
 
+    def serialized_attributes(str='')
+      instance_values.each do |key, value|
+        if %(blank claendar_type).include? key.to_s
+        str << "#{Axlsx.camel(key, false)}='#{value}' "
+        end
+      end
+      str
+    end
     # This class expresses a filter criteria value.
     class Filter
 
