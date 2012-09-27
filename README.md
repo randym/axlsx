@@ -216,7 +216,19 @@ related to themes, which axlsx does not implement at this time.
    - border colors do not work
 
 3. Numbers
-   - you must set 'use_shared_strings' to true
+   - you must set 'use_shared_strings' to true. This is most
+     conveniently done just before rendering by calling Package.use_shared_strings = true prior to serialization.
+
+```ruby
+p = Axlsx::Package.new
+p.workbook.add_worksheet(:name => "Basic Worksheet") do |sheet|
+  sheet.add_row ["First Column", "Second", "Third"]
+  sheet.add_row [1, 2, 3]
+end
+p.use_shared_strings = true
+p.serialize('simple.xlsx')
+```
+
    - charts do not render
 
 
