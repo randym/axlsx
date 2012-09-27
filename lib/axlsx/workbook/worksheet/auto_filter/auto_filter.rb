@@ -47,6 +47,22 @@ module Axlsx
       columns.last
     end
 
+    # actually performs the filtering of rows who's cells do not 
+    # match the filter.  
+    def apply
+      first_cell, last_cell = range.split(':')
+      start_point = Axlsx::name_to_indices(first_cell)
+      end_point = Axlsx::name_to_indices(last_cell)
+      # The +1 is so we skip the header row with the filter drop downs
+      rows = worksheet.rows[(start_point.last+1)..end_point.last]
+      column_offset = start_point.first
+      columns.each do |column|
+        rows.each do |row|
+          next if row.hidden
+          column.apply(row, column_offset)
+        end
+      end
+    end
     # serialize the object
     # @return [String]
     def to_xml_string(str='')

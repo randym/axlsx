@@ -33,6 +33,19 @@ module Axlsx
     # even when those dates are not using the same calendar system / date formatting.
     attr_reader :calendar_type
 
+    # Tells us if the row of the cell provided should be filterd as it
+    # does not meet any of the specified filter_items or
+    # date_group_items restrictions.
+    # @param [Cell] cell The cell to test against items
+    # TODO implement this for date filters as well!
+    def apply(cell)
+      return false unless cell
+      filter_items.each do |filter|
+        return false if cell.value == filter.val
+      end
+      true
+    end
+      
     # The filter values in this filters object
     def filter_items
       @filter_items ||= []

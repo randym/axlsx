@@ -43,6 +43,9 @@ module Axlsx
       @name ||=  "Sheet" + (index+1).to_s
     end
 
+    def sheet_calc_pr
+      @sheet_calc_pr ||= SheetCalcPr.new
+    end
     # The sheet protection object for this workbook
     # @return [SheetProtection]
     # @see SheetProtection
@@ -491,6 +494,7 @@ module Axlsx
     # This intentionally does not use nokogiri for performance reasons
     # @return [String]
     def to_xml_string
+      auto_filter.apply
       str = '<?xml version="1.0" encoding="UTF-8"?>'
       str << worksheet_node
       serializable_parts.each do |item|
@@ -576,7 +580,7 @@ module Axlsx
 
     def serializable_parts
       [sheet_pr, dimension, sheet_view, column_info,
-       sheet_data, @sheet_protection, protected_ranges,
+       sheet_data, sheet_calc_pr, @sheet_protection, protected_ranges,
        auto_filter, merged_cells, conditional_formattings,
        data_validations, hyperlinks, print_options, page_margins,
        page_setup, worksheet_drawing, worksheet_comments,
