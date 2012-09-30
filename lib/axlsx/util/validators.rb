@@ -29,7 +29,7 @@ module Axlsx
                else
                  min < value && value < max
                end
-      raise ArgumentError, (ERR_RANGE % [v.inspect, min.to_s, max.to_s, inclusive]) unless passes
+      raise ArgumentError, (ERR_RANGE % [value.inspect, min.to_s, max.to_s, inclusive]) unless passes
     end
   end
   # Validates the value against the regular expression provided.
