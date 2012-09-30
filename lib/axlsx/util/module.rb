@@ -7,8 +7,6 @@ class Module
     validated_attr_accessor(symbols, 'validate_boolean')
   end
 
-  private  
-
   SETTER = "def %s=(value) Axlsx::%s(value); @%s = value; end"
   def validated_attr_accessor(symbols, validator)
     symbols.each do |symbol|
