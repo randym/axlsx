@@ -14,6 +14,7 @@ module Axlsx
                           :filter_mode,
                           :enable_format_conditions_calculation]
 
+    include BooleanAttributes
 
     # Creates a new SheetPr object
     # @param [Worksheet] worksheet The worksheet that owns this SheetPr object
@@ -24,23 +25,6 @@ module Axlsx
         attr = "#{key}="  
         self.send(attr, value) if self.respond_to?(attr)
       end
-    end
-
-    # Dynamically create accessors for boolean attriubtes
-    BOOLEAN_ATTRIBUTES.each do |attr|    
-      class_eval %{
-      # The #{attr} attribute reader
-      # @return [Boolean]
-      attr_reader :#{attr} 
-
-      # The #{attr} writer
-      # @param [Boolean] value The value to assign to #{attr}
-      # @return [Boolean]
-      def #{attr}=(value)
-        Axlsx::validate_boolean(value)
-        @#{attr} = value
-      end
-      }
     end
 
     # Anchor point for worksheet's window.

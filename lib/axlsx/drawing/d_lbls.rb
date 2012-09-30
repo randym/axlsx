@@ -7,14 +7,6 @@ module Axlsx
   # showLeaderLines and leaderLines are not currently implemented
   class DLbls
 
-    # These attributes are all boolean so I'm doing a bit of a hand
-    # waving magic show to set up the attriubte accessors
-    # @note 
-    #   not all charts support all methods! 
-    #   Bar3DChart and Line3DChart and ScatterChart do not support d_lbl_pos or show_leader_lines
-    #    
-    BOOLEAN_ATTRIBUTES = [:show_legend_key, :show_val, :show_cat_name, :show_ser_name, :show_percent, :show_bubble_size, :show_leader_lines]
-
     # creates a new DLbls object
     def initialize(chart_type, options={})
       raise ArgumentError, 'chart_type must inherit from Chart' unless chart_type.superclass == Chart
@@ -24,6 +16,15 @@ module Axlsx
         self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
       end
     end
+
+    # These attributes are all boolean so I'm doing a bit of a hand
+    # waving magic show to set up the attriubte accessors
+    # @note 
+    #   not all charts support all methods! 
+    #   Bar3DChart and Line3DChart and ScatterChart do not support d_lbl_pos or show_leader_lines
+    #    
+    BOOLEAN_ATTRIBUTES = [:show_legend_key, :show_val, :show_cat_name, :show_ser_name, :show_percent, :show_bubble_size, :show_leader_lines]
+    include BooleanAttributes
 
     # Initialize all the values to false as Excel requires them to
     # explicitly be disabled or all will show.

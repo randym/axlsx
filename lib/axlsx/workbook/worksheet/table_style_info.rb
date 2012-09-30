@@ -4,9 +4,6 @@ module Axlsx
   # a worksheet
   class TableStyleInfo
 
-    # boolean attributes for this object
-    BOOLEAN_ATTRIBUTES = %w(show_first_column show_last_column show_row_stripes show_column_stripes)
-
     # creates a new TableStyleInfo instance
     # @param [Hash] options
     # @option [Boolean] show_first_column indicates if the first column should
@@ -27,22 +24,9 @@ module Axlsx
       end
     end
 
-    # Dynamically create accessors for boolean attriubtes
-    BOOLEAN_ATTRIBUTES.each do |attr|
-      class_eval %{
-      # The #{attr} attribute reader
-      # @return [Boolean]
-      attr_reader :#{attr} 
-
-      # The #{attr} writer
-      # @param [Boolean] value The value to assign to #{attr}
-      # @return [Boolean]
-      def #{attr}=(value)
-        Axlsx::validate_boolean(value)
-        @#{attr} = value
-      end
-      }
-    end
+    # boolean attributes for this object
+    BOOLEAN_ATTRIBUTES = %w(show_first_column show_last_column show_row_stripes show_column_stripes)
+    include BooleanAttributes
 
     # Initialize all the values to false as Excel requires them to
     # explicitly be disabled or all will show.

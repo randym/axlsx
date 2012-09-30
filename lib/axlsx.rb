@@ -5,7 +5,7 @@ require 'axlsx/version.rb'
 require 'axlsx/util/simple_typed_list.rb'
 require 'axlsx/util/constants.rb'
 require 'axlsx/util/validators.rb'
-
+require 'axlsx/util/boolean_attributes.rb'
 # to be included with parsable intitites.
 #require 'axlsx/util/parser.rb'
 
