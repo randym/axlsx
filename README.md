@@ -21,7 +21,7 @@ appreciation for the gem, please don't hesitate to make a donation.
 
 **License**: MIT License
 
-**Latest Version**: 1.2.3
+**Latest Version**: 1.3.1
 
 **Ruby Version**: 1.8.7, 1.9.2, 1.9.3
 
@@ -29,7 +29,7 @@ appreciation for the gem, please don't hesitate to make a donation.
 
 **Rubinius Version**: rubinius 2.0.0dev * lower versions may run, this gem always tests against head.
 
-**Release Date**: September 8th 2012
+**Release Date**: September 30th 2012
 
 If you are working in rails, or with active record see:
 * http://github.com/randym/acts_as_xlsx
@@ -149,8 +149,9 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
-- **September.??.12**: 1.2.4
-  - added stored autowidth filter values and date grouping items
+- **September.30.12**: 1.3.1
+  - Improved control character handling
+  - Added stored auto filter values and date grouping items
   - Improved support for autowidth when custom styles are applied
   - Added support for table style info that lets you take advantage of
     all the predefined table styles.
