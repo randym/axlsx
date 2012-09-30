@@ -494,23 +494,24 @@ module Axlsx
     # This intentionally does not use nokogiri for performance reasons
     # @return [String]
     def to_xml_string
-      auto_filter.apply
+      auto_filter.apply if auto_filter.range
       str = '<?xml version="1.0" encoding="UTF-8"?>'
       str << worksheet_node
       serializable_parts.each do |item|
         item.to_xml_string(str) if item
       end
       str << '</worksheet>'
-
-      if RUBY_VERSION == "1.8.7"
-        nasty_control_char_matcher = Regexp.new("[\x01\x02\x03\x04\x05\x06\x07\x08\x1F\v\xE2]")
-      else
-        nasty_control_char_matcher = Regexp.new("[\x01\x02\x03\x04\x05\x06\x07\x08\x1F\v\u2028]")
-      end
-
-      str.gsub(nasty_control_char_matcher,'')
+      sanitize(str)
     end
 
+    # returns the provided string with all invalid control charaters
+    # removed.
+    # @param [String] str The sting to process
+    # @return [String]
+    def sanitize(str)
+      str.gsub(CONTROL_CHAR_REGEX, '')
+    end
+    
     # The worksheet relationships. This is managed automatically by the worksheet
     # @return [Relationships]
     def relationships
@@ -567,7 +568,7 @@ module Axlsx
 
 
     private
-
+   
     def validate_sheet_name(name)
       DataTypeValidator.validate "Worksheet.name", String, name
       raise ArgumentError, (ERR_SHEET_NAME_TOO_LONG % name) if name.size > 31

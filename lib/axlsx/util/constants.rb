@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Axlsx
 
   # XML Encoding
@@ -129,7 +128,7 @@ module Axlsx
 
   # digital signature origin content type
   DIGITAL_SIGNATURE_ORIGIN_CT = "application/vnd.openxmlformats-package.digital-signature-origin"
-  
+
   # digital signature certificate content type
   DIGITAL_SIGNATURE_CERTIFICATE_CT = "application/vnd.openxmlformats-package.digital-signature-certificate"
 
@@ -151,7 +150,7 @@ module Axlsx
   #drawing content type
   DRAWING_CT = "application/vnd.openxmlformats-officedocument.drawing+xml"
 
-  
+
   # xml content type extensions
   XML_EX = "xml"
 
@@ -287,4 +286,85 @@ module Axlsx
 
   # error message for non 'integerish' value
   ERR_INTEGERISH = "You value must be, or be castable via to_i, an Integer. You provided %s"
+
+  # Regex to match forbidden control characters
+  # The following will be automatically stripped from worksheets.
+  #
+  # x00 Null
+  # x01 Start Of Heading
+  # x02 Start Of Text
+  # x03End Of Text
+  # x04 End Of Transmission
+  # x05 Enquiry
+  # x06 Acknowledge
+  # x07 Bell
+  # x08 Backspace
+  # x0B Line Tabulation
+  # x0C Form Feed
+  # x0E Shift Out
+  # x0F Shift In
+  # x10 Data Link Escape
+  # x11 Device Control One
+  # x12 Device Control Two
+  # x13 Device Control Three
+  # x14 Device Control Four
+  # x15 Negative Acknowledge
+  # x16 Synchronous Idle
+  # x17 End Of Transmission Block
+  # x18 Cancel
+  # x19 End Of Medium
+  # x1A Substitute
+  # x1B Escape
+  # x1C Information Separator Four
+  # x1D Information Separator Three
+  # x1E Information Separator Two
+  # x1F Information Separator One
+  #
+  # The following are not dealt with. 
+  # If you have this in your data, expect excel to blow up!
+  #
+  # x7F	Delete
+  # x80	Control 0080
+  # x81	Control 0081
+  # x82	Break Permitted Here
+  # x83	No Break Here
+  # x84	Control 0084
+  # x85	Next Line (Nel)
+  # x86	Start Of Selected Area
+  # x87	End Of Selected Area
+  # x88	Character Tabulation Set
+  # x89	Character Tabulation With Justification
+  # x8A	Line Tabulation Set
+  # x8B	Partial Line Forward
+  # x8C	Partial Line Backward
+  # x8D	Reverse Line Feed
+  # x8E	Single Shift Two
+  # x8F	Single Shift Three
+  # x90	Device Control String
+  # x91	Private Use One
+  # x92	Private Use Two
+  # x93	Set Transmit State
+  # x94	Cancel Character
+  # x95	Message Waiting
+  # x96	Start Of Guarded Area
+  # x97	End Of Guarded Area
+  # x98	Start Of String
+  # x99	Control 0099
+  # x9A	Single Character Introducer
+  # x9B	Control Sequence Introducer
+  # x9C	String Terminator
+  # x9D	Operating System Command
+  # x9E	Privacy Message
+  # x9F	Application Program Command
+  #
+  # The following are allowed:
+  #
+  # x0A Line Feed (Lf)
+  # x0D Carriage Return (Cr)
+  # x09 Character Tabulation
+  # @see http://www.codetable.net/asciikeycodes
+  pattern = "[\x0-\x08\x0B\x0C\x0E-\x1F]"
+  pattern= pattern.respond_to?(:encode) ? pattern.encode('UTF-8') : pattern
+  CONTROL_CHAR_REGEX = Regexp.new(pattern, 'n')
+
 end
