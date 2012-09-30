@@ -4,9 +4,10 @@ class TestAutoFilter < Test::Unit::TestCase
 
   def setup
     ws = Axlsx::Package.new.workbook.add_worksheet
-    3.times { ws.add_row [1,2,3] }
+    3.times { |index| ws.add_row [1*index,2*index,3*index] }
     @auto_filter = ws.auto_filter
     @auto_filter.range = 'A1:C3'
+    @auto_filter.add_column 0, :filters, :filter_items => [1]
   end
 
   def test_defined_name
@@ -29,4 +30,9 @@ class TestAutoFilter < Test::Unit::TestCase
     end
   end
 
+  def test_applya
+    assert_equal nil, @auto_filter.worksheet.rows.last.hidden
+    @auto_filter.apply
+    assert_equal true, @auto_filter.worksheet.rows.last.hidden
+  end
 end
