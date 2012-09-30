@@ -223,7 +223,10 @@ module Axlsx
     def to_xml_string(str = '')
       str << '<?xml version="1.0" encoding="UTF-8"?>'
       str << '<Properties xmlns="' << APP_NS << '" xmlns:vt="' << APP_NS_VT << '">'
-      str << instance_values.map { |key, value| '<' << Axlsx.camel(key) << '>' << value.to_s << '</' << Axlsx.camel(key) << '>' }.join
+      instance_values.each do |key, value|
+        node_name = Axlsx.camel(key)
+        str << "<#{node_name}>#{value}</#{node_name}>"
+      end
       str << '</Properties>'
     end
 
