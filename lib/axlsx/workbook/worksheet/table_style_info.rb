@@ -4,6 +4,7 @@ module Axlsx
   # a worksheet
   class TableStyleInfo
 
+    # boolean attributes for this object
     BOOLEAN_ATTRIBUTES = %w(show_first_column show_last_column show_row_stripes show_column_stripes)
 
     # creates a new TableStyleInfo instance
@@ -54,6 +55,8 @@ module Axlsx
     # The name of the table style.
     attr_accessor :name
 
+    # seralizes this object to an xml string
+    # @param [String] str the string to contact this objects serialization to.
     def to_xml_string(str = '')
       str << '<tableStyleInfo '
       instance_values.each do |key, value|

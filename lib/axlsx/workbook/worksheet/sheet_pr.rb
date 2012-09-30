@@ -79,6 +79,8 @@ module Axlsx
       str << "</sheetPr>"
     end
 
+    # The PageSetUpPr for this sheet pr object
+    # @return [PageSetUpPr]
     def page_setup_pr
       @page_setup_pr ||= PageSetUpPr.new
     end

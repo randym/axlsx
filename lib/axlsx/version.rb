@@ -1,5 +1,5 @@
-# encoding: UTF-8
 module Axlsx
+
   # The current version
-  VERSION="1.3.1"
+  VERSION = "1.3.1"
 end

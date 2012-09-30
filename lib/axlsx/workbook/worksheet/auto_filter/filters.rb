@@ -64,6 +64,8 @@ module Axlsx
       @calendar_type = calendar
     end
 
+    # Set the value for blank
+    # @see blank
     def blank=(use_blank)
       Axlsx.validate_boolean use_blank
       @blank = use_blank
@@ -87,6 +89,10 @@ module Axlsx
       end
     end
 
+    # Date group items are date group filter items where you specify the
+    # date_group and a value for that option as part of the auto_filter
+    # @note This can be specified, but will not be applied to the date
+    # values in your workbook at this time.
     def date_group_items=(options)
       options.each do |date_group|
         raise ArgumentError, "date_group_items should be an array of hashes specifying the options for each date_group_item" unless date_group.is_a?(Hash)
@@ -104,6 +110,7 @@ module Axlsx
       end
       str
     end
+
     # This class expresses a filter criteria value.
     class Filter
 
@@ -134,8 +141,20 @@ module Axlsx
     # types, can be correctly compared for the purposes of filtering.
     class DateGroupItem
 
+      # Allowed date time groupings
       DATE_TIME_GROUPING = %w(year month day hour minute second)
 
+      # Creates a new DateGroupItem
+      # @param [Hash] options A hash of options to use when
+      # instanciating the object
+      # @option [String] date_time_grouping the part of the date this
+      # filter should apply for grouping
+      # @option [Integer|String] year @see year
+      # @option [Integer] month @see month
+      # @option [Integer] day @see day
+      # @option [Integer] hour @see hour
+      # @option [Integer] minute @see minute
+      # @option [Integer] second @see second
       def initialize(options={})
         raise ArgumentError,  "You must specify a year for date time grouping" unless options[:year]
         raise ArgumentError, "You must specify a date_time_grouping when creating a DateGroupItem for auto filter" unless options[:date_time_grouping]
@@ -216,6 +235,7 @@ module Axlsx
         @second = value
       end
 
+      # The date time grouping for this filter.
       def date_time_grouping=(grouping)
         RestrictionValidator.validate 'DateGroupItem.date_time_grouping', DATE_TIME_GROUPING, grouping.to_s
         @date_time_grouping = grouping.to_s

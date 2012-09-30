@@ -365,6 +365,8 @@ module Axlsx
   # @see http://www.codetable.net/asciikeycodes
   pattern = "[\x0-\x08\x0B\x0C\x0E-\x1F]"
   pattern= pattern.respond_to?(:encode) ? pattern.encode('UTF-8') : pattern
+  
+  # The regular expression used to remove control characters from worksheets
   CONTROL_CHAR_REGEX = Regexp.new(pattern, 'n')
 
 end

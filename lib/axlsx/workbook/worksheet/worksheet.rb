@@ -42,10 +42,13 @@ module Axlsx
     def name
       @name ||=  "Sheet" + (index+1).to_s
     end
-
+ 
+    # The sheet calculation properties
+    # @return [SheetCalcPr]
     def sheet_calc_pr
       @sheet_calc_pr ||= SheetCalcPr.new
     end
+
     # The sheet protection object for this workbook
     # @return [SheetProtection]
     # @see SheetProtection
