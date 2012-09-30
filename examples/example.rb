@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby -w -s
 # -*- coding: utf-8 -*-
-$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../lib"
+# $LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../lib"
 
 #```ruby
 require 'axlsx'
@@ -190,6 +190,7 @@ wb.add_worksheet(:name => "Auto Filter") do |sheet|
   sheet.add_row ["19.2", "1 min 28 sec", "about 10 hours ago", "1.9.2"]
   sheet.add_row ["19.3", "1 min 35 sec", "about 10 hours ago", "1.9.3"]
   sheet.auto_filter = "A2:D5"
+  sheet.auto_filter.add_column 3, :filters, :filter_items => ['1.9.2', '1.8.7']
 end
 #```
 
