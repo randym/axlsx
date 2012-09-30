@@ -158,4 +158,11 @@ class TestValidators < Test::Unit::TestCase
     assert_raise(ArgumentError) { Axlsx.validate_split_state_type 'frozen_split' }
     assert_raise(ArgumentError) { Axlsx.validate_split_state_type 0 }
   end
+
+  def test_range_validation
+     # exclusive
+     assert_raise(ArgumentError) { Axlsx::RangeValidator.validate('foo', 1, 10, 10, false) } 
+     # inclusive by default
+     assert_nothing_raised { Axlsx::RangeValidator.validate('foo', 1, 10, 10) }
+  end
 end
