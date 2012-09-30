@@ -109,13 +109,10 @@ module Axlsx
       @local_sheet_id = value
     end
 
-    # string attributes that will be added when this class is evaluated
-    STRING_ATTRIBUTES = [:short_cut_key, :status_bar, :help, :description, :custom_menu, :comment]
-    include StringAttributes
+    string_attr_accessor :short_cut_key, :status_bar, :help, :description, :custom_menu, :comment
 
     # boolean attributes that will be added when this class is evaluated
-    BOOLEAN_ATTRIBUTES = [:workbook_parameter, :publish_to_server, :xlm, :vb_proceedure, :function, :hidden] 
-    include BooleanAttributes
+    boolean_attr_accessor :workbook_parameter, :publish_to_server, :xlm, :vb_proceedure, :function, :hidden 
     
     attr_reader :name
     # The name of this defined name. Please refer to the class documentation for more information

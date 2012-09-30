@@ -10,14 +10,14 @@ class TestDefinedNames < Test::Unit::TestCase
   end
   
   def test_string_attributes
-    Axlsx::DefinedName::STRING_ATTRIBUTES.each do |attr|
+    %w(short_cut_key status_bar help description custom_menu comment).each do |attr|
       assert_raise(ArgumentError, 'only strings allowed in string attributes') { @dn.send("#{attr}=", 1) }
       assert_nothing_raised { @dn.send("#{attr}=", '_xlnm.Sheet_Title') }
     end
   end
 
   def test_boolean_attributes
-   Axlsx::DefinedName::BOOLEAN_ATTRIBUTES.each do |attr|
+   %w(workbook_parameter publish_to_server xlm vb_proceedure function hidden).each do |attr|
       assert_raise(ArgumentError, 'only booleanish allowed in string attributes') { @dn.send("#{attr}=", 'foo') }
       assert_nothing_raised { @dn.send("#{attr}=", 1) }
     end

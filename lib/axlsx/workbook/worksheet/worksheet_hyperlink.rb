@@ -21,11 +21,9 @@ module Axlsx
       end
       yield self if block_given?
     end
-
-    # String attributes for this object
-    STRING_ATTRIBUTES = %w(display location tooltip)
-    include StringAttributes
-
+   
+    string_attr_accessor :display, :location, :tooltip
+    
     #Cell location of hyperlink on worksheet.
     # @return [String]
     attr_reader :ref
