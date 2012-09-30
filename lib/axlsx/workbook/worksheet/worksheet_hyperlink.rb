@@ -24,6 +24,7 @@ module Axlsx
 
     # String attributes for this object
     STRING_ATTRIBUTES = %w(display location tooltip)
+    include StringAttributes
 
     #Cell location of hyperlink on worksheet.
     # @return [String]
@@ -44,24 +45,7 @@ module Axlsx
       @ref = cell_reference
     end
 
-    # Dynamically create string attribute accessors
-    STRING_ATTRIBUTES.each do |attr|
-      class_eval %{
-        # The #{attr} attribute reader
-        # @return [String]
-        attr_reader :#{attr}
-
-        # The #{attr} writer
-        # @param [String] value The value to assign to #{attr}
-        # @return [String]
-        def #{attr}=(value)
-          Axlsx::validate_string(value)
-          @#{attr}= value
-        end
-      }
-    end
-
-    # The relationship required by this hyperlink when the taget is :external
+       # The relationship required by this hyperlink when the taget is :external
     # @return [Relationship]
     def relationship
       return unless @target == :external

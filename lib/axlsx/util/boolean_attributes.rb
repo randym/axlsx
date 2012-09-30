@@ -18,4 +18,26 @@ module Axlsx
       end
     end 
   end
+
+  module StringAttributes
+    def StringAttributes.included(mod)
+      mod::STRING_ATTRIBUTES.each do |attr|
+        class_eval %{
+        # The #{attr} attribute reader
+        # @return [String]
+        attr_reader :#{attr}
+
+        # The #{attr} writer
+        # @param [String] value The value to assign to #{attr}
+        # @return [String]
+        def #{attr}=(value)
+          Axlsx::validate_string(value)
+          @#{attr}= value
+        end
+        }
+
+      end
+    end
+  end
+
 end

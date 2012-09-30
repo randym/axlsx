@@ -111,27 +111,12 @@ module Axlsx
 
     # string attributes that will be added when this class is evaluated
     STRING_ATTRIBUTES = [:short_cut_key, :status_bar, :help, :description, :custom_menu, :comment]
+    include StringAttributes
 
     # boolean attributes that will be added when this class is evaluated
     BOOLEAN_ATTRIBUTES = [:workbook_parameter, :publish_to_server, :xlm, :vb_proceedure, :function, :hidden] 
     include BooleanAttributes
-    # Dynamically create string attribute accessors
-    STRING_ATTRIBUTES.each do |attr|
-      class_eval %{
-        # The #{attr} attribute reader
-        # @return [String]
-        attr_reader :#{attr}
-
-        # The #{attr} writer
-        # @param [String] value The value to assign to #{attr}
-        # @return [String]
-        def #{attr}=(value)
-          Axlsx::validate_string(value)
-          @#{attr}= value
-        end
-      }
-    end
-
+    
     attr_reader :name
     # The name of this defined name. Please refer to the class documentation for more information
     def name=(value)
