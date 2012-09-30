@@ -6,15 +6,15 @@ module Axlsx
 
     # These attributes are all boolean so I'm doing a bit of a hand
     # waving magic show to set up the attriubte accessors
-    BOOLEAN_ATTRIBUTES = [:sync_horizontal, 
-                          :sync_vertical, 
-                          :transtion_evaluation, 
+    boolean_attr_accessor :sync_horizontal,
+                          :sync_vertical,
+                          :transtion_evaluation,
                           :transition_entry,
                           :published,
                           :filter_mode,
-                          :enable_format_conditions_calculation]
+                          :enable_format_conditions_calculation
 
-    include BooleanAttributes
+    string_attr_accessor :code_name, :sync_ref
 
     # Creates a new SheetPr object
     # @param [Worksheet] worksheet The worksheet that owns this SheetPr object
@@ -27,31 +27,9 @@ module Axlsx
       end
     end
 
-    # Anchor point for worksheet's window.
-    # @return [String]
-    attr_reader :code_name
-
-    # Specifies a stable name of the sheet, which should not change over time,
-    #  and does not change from user input. This name should be used by code 
-    #  to reference a particular sheet.
-    # @return [String]
-    attr_reader :sync_ref
-
     # The worksheet these properties apply to!
     # @return [Worksheet]
     attr_reader :worksheet
-
-    # @see code_name
-    # @param [String] name
-    def code_name=(name)
-      @code_name = name
-    end
-
-    # @see sync_ref
-    # @param [String] ref A cell reference (e.g. "A1")
-    def sync_ref=(ref)
-      @sync_ref = ref
-    end
 
     # Serialize the object
     # @param [String] str serialized output will be appended to this object if provided.

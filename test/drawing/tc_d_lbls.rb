@@ -4,19 +4,29 @@ class TestDLbls < Test::Unit::TestCase
 
   def setup
     @d_lbls = Axlsx::DLbls.new(Axlsx::Pie3DChart)
+    @boolean_attributes =[:show_legend_key, 
+                          :show_val, 
+                          :show_cat_name, 
+                          :show_ser_name, 
+                          :show_percent, 
+                          :show_bubble_size, 
+                          :show_leader_lines]
   end
 
   def test_initialization
     assert_equal(:bestFit, @d_lbls.d_lbl_pos)
-    Axlsx::DLbls::BOOLEAN_ATTRIBUTES.each do |attr|
+    @boolean_attributes.each do |attr|
       assert_equal(false, @d_lbls.send(attr))
     end
   end
 
   def test_initialization_with_optoins
-    options_hash = Hash[*[Axlsx::DLbls::BOOLEAN_ATTRIBUTES.map { |name| [name, true] }] ]
+    
+    options_hash = Hash[*[@boolean_attributes.map { |name| [name, true] }] ]
+
     d_lbls = Axlsx::DLbls.new(Axlsx::Pie3DChart, options_hash.merge( { :d_lbl_pos => :t }))
-    Axlsx::DLbls::BOOLEAN_ATTRIBUTES.each do |attr|
+   
+    @boolean_attributes.each do |attr|
       assert_equal(true, d_lbls.send(attr), "boolean attributes set by options")
     end
     assert_equal(:t, d_lbls.d_lbl_pos, "d_lbl_pos set by options")
@@ -27,7 +37,7 @@ class TestDLbls < Test::Unit::TestCase
   end
 
   def test_boolean_attributes
-    Axlsx::DLbls::BOOLEAN_ATTRIBUTES.each do |attr|
+    @boolean_attributes.each do |attr|
       assert_raise(ArgumentError, "rejects non boolean value for #{attr}") { @d_lbls.send("#{attr}=", :foo) }
       assert_nothing_raised("accepts boolean value for #{attr}") { @d_lbls.send("#{attr}=", true) }
       assert_nothing_raised("accepts boolean value for #{attr}") { @d_lbls.send("#{attr}=", false) }

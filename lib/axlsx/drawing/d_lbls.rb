@@ -23,13 +23,20 @@ module Axlsx
     #   not all charts support all methods! 
     #   Bar3DChart and Line3DChart and ScatterChart do not support d_lbl_pos or show_leader_lines
     #    
-    BOOLEAN_ATTRIBUTES = [:show_legend_key, :show_val, :show_cat_name, :show_ser_name, :show_percent, :show_bubble_size, :show_leader_lines]
-    include BooleanAttributes
+    boolean_attr_accessor :show_legend_key, 
+                          :show_val, 
+                          :show_cat_name, 
+                          :show_ser_name, 
+                          :show_percent, 
+                          :show_bubble_size, 
+                          :show_leader_lines
 
     # Initialize all the values to false as Excel requires them to
     # explicitly be disabled or all will show.
     def initialize_defaults
-      BOOLEAN_ATTRIBUTES.each do |attr|
+      [:show_legend_key, :show_val, :show_cat_name, 
+       :show_ser_name, :show_percent, :show_bubble_size, 
+       :show_leader_lines].each do |attr|
         self.send("#{attr}=", false)
       end
     end
@@ -59,24 +66,7 @@ module Axlsx
       @d_lbl_pos = label_position
     end
 
-    # Dynamically create accessors for boolean attriubtes
-    BOOLEAN_ATTRIBUTES.each do |attr|    
-      class_eval %{
-      # The #{attr} attribute reader
-      # @return [Boolean]
-      attr_reader :#{attr} 
-
-      # The #{attr} writer
-      # @param [Boolean] value The value to assign to #{attr}
-      # @return [Boolean]
-      def #{attr}=(value)
-        Axlsx::validate_boolean(value)
-        @#{attr} = value
-      end
-      }
-    end
-
-
+   
     # serializes the data labels
     # @return [String]
     def to_xml_string(str = '')

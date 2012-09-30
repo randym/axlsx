@@ -25,13 +25,12 @@ module Axlsx
     end
 
     # boolean attributes for this object
-    BOOLEAN_ATTRIBUTES = %w(show_first_column show_last_column show_row_stripes show_column_stripes)
-    include BooleanAttributes
+    boolean_attr_accessor :show_first_column, :show_last_column, :show_row_stripes, :show_column_stripes
 
     # Initialize all the values to false as Excel requires them to
     # explicitly be disabled or all will show.
     def initialize_defaults
-      BOOLEAN_ATTRIBUTES.each do |attr|
+      %w(show_first_column show_last_column show_row_stripes show_column_stripes).each do |attr|
         self.send("#{attr}=", 0)
       end
     end
