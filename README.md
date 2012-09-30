@@ -162,40 +162,6 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
     of 'numbers' in excel.
   - added support for :none option on chart axis labels
   - added support for paper_size option on worksheet.page_setup
-- **August.27.12**: 1.2.2
-   - minor patch for auto-filters
-   - minor documentation improvements.
-- **August.12.12**: 1.2.1
-   - Add support for hyperlinks in worksheets
-   - Fix example that was using old style cell merging with concact.
-   - Fix bug that occurs when calculating the font_size for cells that use a user specified style which does not define sz
-- **August.5.12**: 1.2.0
-   - rebuilt worksheet serialization to clean up the code base a bit.
-   - added data labels for charts
-   - added table header printing for each sheet via defined_name. This
-     means that when you print your worksheet, the header rows show for every page
-- **July.??.12**: 1.1.9 release
-   - lots of code clean up for worksheet
-   - added in data labels for pie charts, line charts and bar charts.
-   - bugfix chard with data in a sheet that has a space in the name are
-     now auto updating formula based values
-- **July.14.12**: 1.1.8 release
-   - added html entity encoding for sheet names. This allows you to use
-     characters like '<' and '&' in your sheet names.
-   - new - first round google docs interoperability
-   - added filter to strip out control characters from cell data.
-   - added in interop requirements so that charts are properly exported
-     to PDF from Libra Office
-   - various readability improvements and work standardizing attribute
-     names to snake_case. Aliases are provided for backward compatiblity 
-- **June.11.12**: 1.1.7 release
-   - fix chart rendering issue when label offset is specified as a
-     percentage in serialization and ensure that formula are not stored
-in value caches
-   - fix bug that causes repair warnings when using a text only title reference.
-   - Add title property to axis so you can lable the x/y/series axis for
-     charts.
-   - Add sheet views with panes
 
 Please see the {file:CHANGELOG.md} document for past release information.
 
