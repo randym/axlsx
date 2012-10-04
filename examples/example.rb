@@ -70,6 +70,27 @@ wb.styles do |s|
     sheet.add_row [1, 2, 3], :style => blue_border
   end
 end
+
+#```ruby 
+# Hacking border styles
+    wb.styles do |s|
+      top_bottom =  s.add_style :border => { :style => :thick, :color =>"FFFF0000", :edges => [:top, :bottom] }  
+      border = s.borders[s.cellXfs[top_bottom].borderId]
+      # edit existing border parts
+      border.prs.each do |part|
+        case part.name
+        when :top
+          part.color = Axlsx::Color.new(:rgb => "FFFF0000")
+        when :bottom
+          part.color = Axlsx::Color.new(:rgb => "FF00FF00")
+        end
+      end
+
+      border.prs << Axlsx::BorderPr.new(:name => :left, :color => Axlsx::Color.new(:rgb => '0000FF'), :style => :mediumDashed)
+      wb.add_worksheet(:name => 'hacked borders') do |sheet|
+        sheet.add_row [1,2,3], :style=>top_bottom
+      end
+    end
 ##```
 
 
