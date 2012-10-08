@@ -14,8 +14,26 @@ class TestAxlsx < Test::Unit::TestCase
     }
   end
 
-  def test_cell_range
-    #To do
+  def test_cell_range_empty_if_no_cell
+    assert_equal(Axlsx.cell_range([]), "")
+  end
+
+  def test_cell_range_relative
+    p = Axlsx::Package.new
+    ws = p.workbook.add_worksheet
+    row = ws.add_row
+    c1 = row.add_cell
+    c2 = row.add_cell
+    assert_equal(Axlsx.cell_range([c2, c1], false), "A1:B1")
+  end
+
+  def test_cell_range_absolute
+    p = Axlsx::Package.new
+    ws = p.workbook.add_worksheet :name => "Sheet <'>\" 1"
+    row = ws.add_row
+    c1 = row.add_cell
+    c2 = row.add_cell
+    assert_equal(Axlsx.cell_range([c2, c1], true), "'Sheet &lt;''&gt;&quot; 1'!$A$1:$B$1")
   end
 
   def test_name_to_indices
