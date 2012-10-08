@@ -48,9 +48,14 @@ module Axlsx
   # determines the cell range for the items provided
   def self.cell_range(cells, absolute=true)
     return "" unless cells.first.is_a? Cell
-    sort_cells(cells)
+    cells = sort_cells(cells)
     reference = "#{cells.first.reference(absolute)}:#{cells.last.reference(absolute)}"
-    absolute ? "'#{cells.first.row.worksheet.name}'!#{reference}" : reference
+    if absolute
+      escaped_name = cells.first.row.worksheet.name.gsub "&apos;", "''"
+      "'#{escaped_name}'!#{reference}"
+    else
+      reference
+    end
   end
 
   # sorts the array of cells provided to start from the minimum x,y to
@@ -66,7 +71,7 @@ module Axlsx
   def self.coder
     @@coder ||= ::HTMLEntities.new
   end
-  
+
   # returns the x, y position of a cell
   def self.name_to_indices(name)
     raise ArgumentError, 'invalid cell name' unless name.size > 1
