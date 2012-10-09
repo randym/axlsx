@@ -16,6 +16,13 @@ class TestWorkbook < Test::Unit::TestCase
     assert_equal(@wb.use_autowidth, false)
   end
 
+
+  def test_sheet_by_name_retrieval
+    @wb.add_worksheet(:name=>'foo')
+    @wb.add_worksheet(:name=>'bar')
+    assert_equal('foo', @wb.sheet_by_name('foo').name)
+    
+  end
   def test_date1904
     assert_equal(Axlsx::Workbook.date1904, @wb.date1904)
     @wb.date1904 = :false

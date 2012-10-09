@@ -149,6 +149,9 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
+- **October.??.12**: 1.3.2
+  - Patched to handle sheet names with apostrophes
+  - refactored string and boolean attribute accessors
 - **September.30.12**: 1.3.1
   - Improved control character handling
   - Added stored auto filter values and date grouping items

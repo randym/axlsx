@@ -152,6 +152,14 @@ require 'axlsx/workbook/worksheet/selection.rb'
     @@date1904 = false
 
 
+    # A quick helper to retrive a worksheet by name
+    # @param [String] name The name of the sheet you are looking for
+    # @return [Worksheet] The sheet found, or nil
+    def sheet_by_name(name)
+      index = @worksheets.index { |sheet| sheet.name == name }
+      @worksheets[index] if index
+    end
+
     # lets come back to this later when we are ready for parsing.
     #def self.parse entry
     #  io = entry.get_input_stream
@@ -160,7 +168,7 @@ require 'axlsx/workbook/worksheet/selection.rb'
     #  w.parse_string :date1904, "//xmlns:workbookPr/@date1904"
     #  w
     #end
-
+    
     # Creates a new Workbook
     # The recomended way to work with workbooks is via Package#workbook
     # @option options [Boolean] date1904. If this is not specified, date1904 is set to false. Office 2011 for Mac defaults to false.
