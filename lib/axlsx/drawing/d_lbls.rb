@@ -2,11 +2,12 @@ module Axlsx
   # There are more elements in the dLbls spec that allow for
   # customizations and formatting. For now, I am just implementing the
   # basics.
-
   #The DLbls class manages serialization of data labels
   # showLeaderLines and leaderLines are not currently implemented
   class DLbls
 
+    include Axlsx::Accessors
+    
     # creates a new DLbls object
     def initialize(chart_type, options={})
       raise ArgumentError, 'chart_type must inherit from Chart' unless chart_type.superclass == Chart

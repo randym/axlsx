@@ -49,6 +49,9 @@ module Axlsx
   # @example
   #     For clarification: LOG10 is always a cell reference, LOG10() is always formula, LOGO1000 can be a defined name that overrides a cell reference.
   class DefinedName
+
+
+    include Axlsx::Accessors
     # creates a new DefinedName.
     # @param [String] formula - the formula the defined name references
     # @param [Hash] options - A hash of key/value pairs that will be mapped to this instances attributes.

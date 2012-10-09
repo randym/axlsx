@@ -2,7 +2,8 @@ module Axlsx
 
   # The SheetPr class manages serialization fo a worksheet's sheetPr element.
   class SheetPr
-
+ 
+    include Axlsx::Accessors
 
     # These attributes are all boolean so I'm doing a bit of a hand
     # waving magic show to set up the attriubte accessors

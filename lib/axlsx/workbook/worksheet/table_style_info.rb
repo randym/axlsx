@@ -4,6 +4,7 @@ module Axlsx
   # a worksheet
   class TableStyleInfo
 
+    include Axlsx::Accessors
     # creates a new TableStyleInfo instance
     # @param [Hash] options
     # @option [Boolean] show_first_column indicates if the first column should

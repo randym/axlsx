@@ -3,6 +3,7 @@ module Axlsx
   # A worksheet hyperlink object. Note that this is not the same as a drawing hyperlink object.
   class WorksheetHyperlink
 
+    include Axlsx::Accessors
     # Creates a new hyperlink object.
     # @note the preferred way to add hyperlinks to your worksheet is the Worksheet#add_hyperlink method
     # @param [Worksheet] worksheet the Worksheet that owns this hyperlink
