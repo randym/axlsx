@@ -4,6 +4,17 @@ module Axlsx
   class SheetPr
  
     include Axlsx::Accessors
+    include Axlsx::SerializedAttributes
+
+    serializable_attributes :sync_horizontal,
+                            :sync_vertical,
+                            :transtion_evaluation,
+                            :transition_entry,
+                            :published,
+                            :filter_mode,
+                            :enable_format_conditions_calculation,
+                            :code_name,
+                            :sync_ref
 
     # These attributes are all boolean so I'm doing a bit of a hand
     # waving magic show to set up the attriubte accessors
@@ -50,14 +61,14 @@ module Axlsx
 
     private
 
-    def serialized_attributes(str = '')
-      instance_values.each do |key, value| 
-        unless %(worksheet page_setup_pr).include? key
-          str << "#{Axlsx.camel(key, false)}='#{value}' " 
-        end
-      end
-      str
-    end
+   # def serialized_attributes(str = '')
+      #instance_values.each do |key, value| 
+        #unless %(worksheet page_setup_pr).include? key
+          #str << "#{Axlsx.camel(key, false)}='#{value}' " 
+        #end
+      #end
+      #str
+    #end
 
     def update_properties
       page_setup_pr.fit_to_page = worksheet.fit_to_page?
