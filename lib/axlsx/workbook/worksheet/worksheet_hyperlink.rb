@@ -3,7 +3,9 @@ module Axlsx
   # A worksheet hyperlink object. Note that this is not the same as a drawing hyperlink object.
   class WorksheetHyperlink
 
+
     include Axlsx::Accessors
+    include Axlsx::SerializedAttributes
     # Creates a new hyperlink object.
     # @note the preferred way to add hyperlinks to your worksheet is the Worksheet#add_hyperlink method
     # @param [Worksheet] worksheet the Worksheet that owns this hyperlink
@@ -22,9 +24,11 @@ module Axlsx
       end
       yield self if block_given?
     end
-   
+
     string_attr_accessor :display, :location, :tooltip
-    
+
+    serializable_attributes :display, :tooltip, :ref
+
     #Cell location of hyperlink on worksheet.
     # @return [String]
     attr_reader :ref
@@ -39,7 +43,6 @@ module Axlsx
     # @param [String|Cell] cell_reference The string reference or cell that defines where this hyperlink shows in the worksheet.
     def ref=(cell_reference)
       cell_reference = cell_reference.r if cell_reference.is_a?(Cell)
-
       Axlsx::validate_string cell_reference
       @ref = cell_reference
     end
@@ -63,7 +66,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str='')
       str << '<hyperlink '
-      serialization_values.map { |key, value| str << key.to_s << '="' << value.to_s << '" ' }
+      serialized_attributes str, location_or_id
       str << '/>'
     end
 
@@ -71,14 +74,8 @@ module Axlsx
     # location should only be specified for non-external targets.
     # r:id should only be specified for external targets.
     # @return [Hash]
-    def serialization_values
-      h = instance_values.reject { |key, value| !%w(display ref tooltip).include?(key) }
-      if @target == :external
-        h['r:id'] = id
-      else
-        h['location'] = location
-      end
-      h
+    def location_or_id
+      @target == :external ?  { :"r:id" => id } : { :"location" => location }
     end
   end
 end
