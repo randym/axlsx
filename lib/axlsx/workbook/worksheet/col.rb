@@ -4,6 +4,27 @@ module Axlsx
   # The Col class defines column attributes for columns in sheets.
   class Col
 
+    include Axlsx::SerializedAttributes
+    # Create a new Col objects
+    # @param min First column affected by this 'column info' record.
+    # @param max Last column affected by this 'column info' record.
+    # @option options [Boolean] collapsed see Col#collapsed
+    # @option options [Boolean] hidden see Col#hidden
+    # @option options [Boolean] outlineLevel see Col#outlineLevel
+    # @option options [Boolean] phonetic see Col#phonetic
+    # @option options [Integer] style see Col#style
+    # @option options [Numeric] width see Col#width
+    def initialize(min, max, options={})
+      Axlsx.validate_unsigned_int(max)
+      Axlsx.validate_unsigned_int(min)
+      @min = min
+      @max = max
+      options.each do |o|
+        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
+      end
+    end
+
+    serializable_attributes :collapsed, :hidden, :outline_level, :phonetic, :style, :width, :min, :max
     # First column affected by this 'column info' record.
     # @return [Integer]
     attr_reader :min
@@ -29,7 +50,8 @@ module Axlsx
 
     # Outline level of affected column(s). Range is 0 to 7.
     # @return [Integer]
-    attr_reader :outlineLevel
+    attr_reader :outline_level
+    alias :outlineLevel :outline_level
 
     # Flag indicating if the phonetic information should be displayed by default for the affected column(s) of the worksheet.
     # @return [Boolean]
@@ -59,11 +81,12 @@ module Axlsx
     end
 
     # @see Col#outline
-    def outlineLevel=(v)
+    def outline_level=(v)
       Axlsx.validate_unsigned_numeric(v)
       raise ArgumentError, 'outlineLevel must be between 0 and 7' unless 0 <= v && v <= 7
-      @outlineLevel = v
+      @outline_level = v
     end
+    alias :outlineLevel= :outline_level=
 
     # @see Col#phonetic
     def phonetic=(v)
@@ -84,24 +107,6 @@ module Axlsx
       @width = v
     end
 
-    # Create a new Col objects
-    # @param min First column affected by this 'column info' record.
-    # @param max Last column affected by this 'column info' record.
-    # @option options [Boolean] collapsed see Col#collapsed
-    # @option options [Boolean] hidden see Col#hidden
-    # @option options [Boolean] outlineLevel see Col#outlineLevel
-    # @option options [Boolean] phonetic see Col#phonetic
-    # @option options [Integer] style see Col#style
-    # @option options [Numeric] width see Col#width
-    def initialize(min, max, options={})
-      Axlsx.validate_unsigned_int(max)
-      Axlsx.validate_unsigned_int(min)
-      @min = min
-      @max = max
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
-    end
     
     # updates the width for this col based on the cells autowidth and 
     # an optionally specified fixed width
@@ -122,8 +127,9 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      attrs = self.instance_values.reject{ |key, value| value == nil }
-      str << '<col ' << attrs.map { |key, value| '' << key << '="' << value.to_s << '"' }.join(' ') << '/>'
+      str << '<col '
+      serialized_attributes str
+      str << '/>'
     end
 
   end
