@@ -17,7 +17,7 @@ module Axlsx
 
     def serialized_attributes(str = '', additional_attributes = {})
       key_value_pairs = instance_values.select do |key, value|
-        self.class.xml_attributes.include?(key.to_sym)
+        self.class.xml_attributes.include?(key.to_sym) && value != nil
       end
       key_value_pairs.merge! additional_attributes
       key_value_pairs.each do |key, value|
