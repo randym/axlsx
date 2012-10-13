@@ -6,16 +6,21 @@ module Axlsx
     end
 
     module ClassMethods
+
       def serializable_attributes(*symbols)
-        @@serializable_attributes = symbols
+        @xml_attributes = symbols
+      end
+      def xml_attributes
+        @xml_attributes
       end
     end
 
-    def serialized_attributes(str = '')
-      serializable_values = instance_values.select do |key, value|
-        self.class.serializable_attributes.include?(key.to_sym)
+    def serialized_attributes(str = '', additional_attributes = {})
+      key_value_pairs = instance_values.select do |key, value|
+        self.class.xml_attributes.include?(key.to_sym)
       end
-      serializable_values.each do |key, value|
+      key_value_pairs.merge! additional_attributes
+      key_value_pairs.each do |key, value|
         str << "#{Axlsx.camel(key, false)}='#{value}' "
       end
       str
