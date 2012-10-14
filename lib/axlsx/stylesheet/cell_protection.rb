@@ -5,6 +5,11 @@ module Axlsx
   # @see Styles#add_style
   class CellProtection
 
+    include Axlsx::OptionsParser
+    include Axlsx::SerializedAttributes
+
+    serializable_attributes :hidden, :locked
+
     # specifies locking for cells that have the style containing this protection
     # @return [Boolean]
     attr_reader :hidden
@@ -17,9 +22,7 @@ module Axlsx
     # @option options [Boolean] hidden value for hidden protection
     # @option options [Boolean] locked value for locked protection
     def initialize(options={})
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
+      parse_options options
     end
 
     # @see hidden
@@ -32,7 +35,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       str << '<protection '
-      str << instance_values.map { |key, value| '' << key.to_s << '="' << value.to_s << '"' }.join(' ')
+      serialized_attributes str
       str << '/>'
     end
 
