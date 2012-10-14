@@ -6,8 +6,24 @@ module Axlsx
   # @see Worksheet#initialize
   class PageSetup
 
+    include Axlsx::OptionsParser
+    include Axlsx::SerializedAttributes
+
+    # Creates a new PageSetup object
+    # @option options [Integer] fit_to_height Number of vertical pages to fit on
+    # @option options [Integer] fit_to_width Number of horizontal pages to fit on
+    # @option options [Symbol] orientation Orientation of the page (:default, :landscape, :portrait)
+    # @option options [String] paper_height Height of paper (number followed by unit identifier: "297mm", "11in")
+    # @option options [String] paper_width Width of paper (number followed by unit identifier: "210mm", "8.5in")
+    # @option options [Integer] scale Print scaling (percent value, integer ranging from 10 to 400)
+    # @option options [Integer] paper_size - the size of paper to use
+    def initialize(options = {})
+       parse_options options
+    end
+
+    serializable_attributes :fit_to_height, :fit_to_width, :orientation, :paper_height, :paper_width, :scale, :paper_size
+
     # TODO: Attributes defined by Open XML spec that are not implemented yet:
-    # 
     # * blackAndWhite
     # * cellComments
     # * copies
@@ -16,7 +32,6 @@ module Axlsx
     # * firstPageNumber
     # * horizontalDpi
     # * pageOrder
-    # * paperSize
     # * useFirstPageNumber
     # * usePrinterDefaults
     # * verticalDpi
@@ -176,24 +191,10 @@ module Axlsx
       @paper_size = size
     end
 
-    # Creates a new PageSetup object
-    # @option options [Integer] fit_to_height Number of vertical pages to fit on
-    # @option options [Integer] fit_to_width Number of horizontal pages to fit on
-    # @option options [Symbol] orientation Orientation of the page (:default, :landscape, :portrait)
-    # @option options [String] paper_height Height of paper (number followed by unit identifier: "297mm", "11in")
-    # @option options [String] paper_width Width of paper (number followed by unit identifier: "210mm", "8.5in")
-    # @option options [Integer] scale Print scaling (percent value, integer ranging from 10 to 400)
-    # @option options [Integer] paper_size - the size of paper to use
-    def initialize(options = {})
-      set(options)
-    end
-
-    # Set some or all page settings at once.
+     # Set some or all page settings at once.
     # @param [Hash] options The page settings to set (possible keys are :fit_to_height, :fit_to_width, :orientation, :paper_height, :paper_width, and :scale).
     def set(options)
-      options.each do |k, v|
-        send("#{k}=", v) if respond_to? "#{k}="
-      end
+      parse_options options
     end
 
     # @see fit_to_height
@@ -234,7 +235,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       str << '<pageSetup '
-      str << instance_values.reject{ |k, v| k == 'worksheet' }.map{ |k,v| k.gsub(/_(.)/){ $1.upcase } << %{="#{v}"} }.join(' ')
+      serialized_attributes str
       str << '/>'
     end
   end

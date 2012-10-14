@@ -4,6 +4,7 @@ module Axlsx
   # The Col class defines column attributes for columns in sheets.
   class Col
 
+    include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
     # Create a new Col objects
     # @param min First column affected by this 'column info' record.
@@ -19,12 +20,11 @@ module Axlsx
       Axlsx.validate_unsigned_int(min)
       @min = min
       @max = max
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
+      parse_options options
     end
 
     serializable_attributes :collapsed, :hidden, :outline_level, :phonetic, :style, :width, :min, :max
+
     # First column affected by this 'column info' record.
     # @return [Integer]
     attr_reader :min
@@ -107,7 +107,6 @@ module Axlsx
       @width = v
     end
 
-    
     # updates the width for this col based on the cells autowidth and 
     # an optionally specified fixed width
     # @param [Cell] cell The cell to use in updating this col's width

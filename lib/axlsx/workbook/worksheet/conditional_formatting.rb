@@ -6,6 +6,16 @@ module Axlsx
   # @see ConditionalFormattingRule
   class ConditionalFormatting
 
+   include Axlsx::OptionsParser
+   
+    # Creates a new {ConditionalFormatting} object
+    # @option options [Array] rules The rules to apply
+    # @option options [String] sqref The range to apply the rules to
+    def initialize(options={})
+      @rules = []
+      parse_options options
+    end
+
     # Range over which the formatting is applied, in "A1:B2" format
     # @return [String]
     attr_reader :sqref
@@ -18,17 +28,7 @@ module Axlsx
     # @return [Array]
     attr_reader :rules
 
-    # Creates a new {ConditionalFormatting} object
-    # @option options [Array] rules The rules to apply
-    # @option options [String] sqref The range to apply the rules to
-    def initialize(options={})
-      @rules = []
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
-    end
-
-    # Add Conditional Formatting Rules to this object. Rules can either
+     # Add Conditional Formatting Rules to this object. Rules can either
     # be already created {ConditionalFormattingRule} elements or
     # hashes of options for automatic creation.  If rules is a hash
     # instead of an array, assume only one rule being added.

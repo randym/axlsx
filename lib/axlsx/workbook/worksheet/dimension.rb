@@ -17,7 +17,6 @@ module Axlsx
       @@default_last ||= 'AA200'
     end
 
-
     # Creates a new dimension object
     # @param[Worksheet] worksheet - the worksheet this dimension applies
     # to.

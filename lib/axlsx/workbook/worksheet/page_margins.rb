@@ -10,6 +10,26 @@ module Axlsx
   # @see Worksheet#initialize
   class PageMargins
 
+    include Axlsx::OptionsParser
+    include Axlsx::SerializedAttributes
+
+    # Creates a new PageMargins object
+    # @option options [Numeric] left The left margin in inches
+    # @option options [Numeric] right The right margin in inches
+    # @option options [Numeric] bottom The bottom margin in inches
+    # @option options [Numeric] top The top margin in inches
+    # @option options [Numeric] header The header margin in inches
+    # @option options [Numeric] footer The footer margin in inches
+    def initialize(options={})
+      # Default values taken from MS Excel for Mac 2011
+      @left = @right = DEFAULT_LEFT_RIGHT
+      @top = @bottom = DEFAULT_TOP_BOTTOM
+      @header = @footer = DEFAULT_HEADER_FOOTER
+      parse_options options
+    end
+
+    serializable_attributes :left, :right, :bottom, :top, :header, :footer
+
     # Default left and right margin (in inches)
     DEFAULT_LEFT_RIGHT = 0.75
 
@@ -43,24 +63,6 @@ module Axlsx
     # @return [Float]
     attr_reader :footer
 
-    # Creates a new PageMargins object
-    # @option options [Numeric] left The left margin in inches
-    # @option options [Numeric] right The right margin in inches
-    # @option options [Numeric] bottom The bottom margin in inches
-    # @option options [Numeric] top The top margin in inches
-    # @option options [Numeric] header The header margin in inches
-    # @option options [Numeric] footer The footer margin in inches
-    def initialize(options={})
-      # Default values taken from MS Excel for Mac 2011
-      @left = @right = DEFAULT_LEFT_RIGHT
-      @top = @bottom = DEFAULT_TOP_BOTTOM
-      @header = @footer = DEFAULT_HEADER_FOOTER
-
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
-    end
-
     # Set some or all margins at once.
     # @param [Hash] margins the margins to set (possible keys are :left, :right, :top, :bottom, :header and :footer).
     def set(margins)
@@ -90,7 +92,7 @@ module Axlsx
     # @see #custom_margins_specified?
     def to_xml_string(str = '')
       str << '<pageMargins '
-      str << instance_values.map { |key, value| '' << key << '="' << value.to_s << '"' }.join(' ')
+      serialized_attributes str
       str << '/>'
     end
   end

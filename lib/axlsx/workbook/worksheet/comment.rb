@@ -3,6 +3,20 @@ module Axlsx
   # A comment is the text data for a comment
   class Comment
 
+    include Axlsx::OptionsParser
+
+    # Creates a new comment object
+    # @param [Comments] comments
+    # @param [Hash] options
+    # @option [String] author the author of the comment
+    # @option [String] text The text for the comment
+    def initialize(comments, options={})
+      raise ArgumentError, "A comment needs a parent comments object" unless comments.is_a?(Comments)
+      @comments = comments
+      parse_options options
+      yield self if block_given?
+    end
+
     # The text to render
     # @return [String]
     attr_reader :text
@@ -26,22 +40,12 @@ module Axlsx
     # rPh (Phonetic Text Run)
     # phoneticPr (Phonetic Properties)
 
-    def initialize(comments, options={})
-      raise ArgumentError, "A comment needs a parent comments object" unless comments.is_a?(Comments)
-      @comments = comments
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
-      yield self if block_given?
-    end
-
     # The vml shape that will render this comment
     # @return [VmlShape]
     def vml_shape
       @vml_shape ||= initialize_vml_shape
     end
 
-    #
     # The index of this author in a unique sorted list of all authors in
     # the comment.
     # @return [Integer]
@@ -96,6 +100,5 @@ module Axlsx
          vml.bottom_row = vml.row + 4
       end
     end
-
   end
 end

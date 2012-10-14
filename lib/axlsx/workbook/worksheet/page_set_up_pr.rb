@@ -4,15 +4,18 @@ module Axlsx
   # This class name is not a typo, its spec.
   class PageSetUpPr
 
+    include Axlsx::OptionsParser
+    include Axlsx::SerializedAttributes
+
     # creates a new page setup properties object
     # @param [Hash] options
     # @option [Boolean] auto_page_breaks Flag indicating whether the sheet displays Automatic Page Breaks.
     # @option [Boolean] fit_to_page Flag indicating whether the Fit to Page print option is enabled.
     def initialize(options = {})
-      options.each do |key, value|
-        self.send("#{key}=",value) if self.respond_to?("#{key}=")
-      end
+      parse_options options
     end
+
+    serializable_attributes :auto_page_breaks, :fit_to_page
 
     attr_reader :auto_page_breaks
     attr_reader :fit_to_page
@@ -36,12 +39,6 @@ module Axlsx
     # serialize to xml
     def to_xml_string(str='')
       str << '<pageSetUpPr ' << serialized_attributes << '/>'
-    end
-
-    private
-
-    def serialized_attributes
-      instance_values.map { |key, value| "#{Axlsx.camel(key, false)}='#{value}'" }.join(' ')
     end
   end
 end

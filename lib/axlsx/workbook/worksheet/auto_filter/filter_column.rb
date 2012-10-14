@@ -5,8 +5,8 @@ module Axlsx
   # then there is no corresponding filterColumn collection expressed for that column.
   class FilterColumn
 
-    # Allowed filters
-    FILTERS =  [:filters] #, :top10, :custom_filters, :dynamic_filters, :color_filters, :icon_filters]
+    include Axlsx::OptionsParser
+    include Axlsx::SerializedAttributes
 
     # Creates a new FilterColumn object
     # @note This class yeilds its filter object as that is where the vast majority of processing will be done
@@ -19,17 +19,20 @@ module Axlsx
       RestrictionValidator.validate 'FilterColumn.filter', FILTERS, filter_type
       #Axlsx::validate_unsigned_int(col_id)
       self.col_id = col_id
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
+      parse_options options
       @filter = Axlsx.const_get(Axlsx.camel(filter_type)).new(options)
       yield @filter if block_given?
     end
 
+    serializable_attributes :col_id, :hidden_button, :show_button
+
+    # Allowed filters
+    FILTERS =  [:filters] #, :top10, :custom_filters, :dynamic_filters, :color_filters, :icon_filters]
+
     # Zero-based index indicating the AutoFilter column to which this filter information applies.
     # @return [Integer]
     attr_reader :col_id
-    
+
     # The actual filter being dealt with here
     # This could be any one of the allowed filter types
     attr_reader :filter
@@ -42,7 +45,7 @@ module Axlsx
       @show_button ||= true
     end
 
-     # Flag indicating whether the AutoFilter button for this column is hidden.
+    # Flag indicating whether the AutoFilter button for this column is hidden.
     # @return [Boolean]
     def hidden_button
       @hidden_button ||= false
@@ -62,7 +65,7 @@ module Axlsx
     # @param [Array] row A row from a worksheet that needs to be
     # filtered.
     def apply(row, offset)
-       row.hidden = @filter.apply(row.cells[offset+col_id.to_i])
+      row.hidden = @filter.apply(row.cells[offset+col_id.to_i])
     end
     # @param [Boolean] hidden Flag indicating whether the AutoFilter button for this column is hidden.
     # @return [Boolean]
@@ -86,17 +89,6 @@ module Axlsx
       str << "<filterColumn #{serialized_attributes}>"
       @filter.to_xml_string(str)
       str << "</filterColumn>"
-    end
-
-    private
-
-    def serialized_attributes(str='')
-      instance_values.each do |key, value|
-        if %(show_button hidden_button col_id).include? key.to_s
-        str << "#{Axlsx.camel(key, false)}='#{value}' "
-        end
-      end
-      str
     end
   end
 end

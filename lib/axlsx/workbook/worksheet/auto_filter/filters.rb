@@ -3,9 +3,8 @@ module Axlsx
   # When multiple values are chosen to filter by, or when a group of date values are chosen to filter by, 
   # this object groups those criteria together.
   class Filters
-
-    # Allowed calendar types
-    CALENDAR_TYPES = %w(gregorian gregorianUs gregorianMeFrench gregorianArabic hijri hebrew taiwan japan thai korea saka gregorianXlitEnglish gregorianXlitFrench none)
+    include Axlsx::OptionsParser
+    include Axlsx::SerializedAttributes
 
     # Creates a new Filters object
     # @param [Hash] options Options used to set this objects attributes and
@@ -18,10 +17,13 @@ module Axlsx
     # @example
     #   ws.auto_filter.add_column(0, :filters, :blank => true, :calendar_type => 'japan', :filter_items => [100, 'a'])
     def initialize(options={})
-      options.each do |key, value|
-        self.send("#{key}=", value) if self.respond_to? "#{key}="
-      end
+      parse_options options
     end
+
+    serializable_attributes :blank, :calendar_type
+
+    # Allowed calendar types
+    CALENDAR_TYPES = %w(gregorian gregorianUs gregorianMeFrench gregorianArabic hijri hebrew taiwan japan thai korea saka gregorianXlitEnglish gregorianXlitFrench none)
 
     # Flag indicating whether to filter by blank.
     # @return [Boolean]
@@ -45,7 +47,7 @@ module Axlsx
       end
       true
     end
-      
+
     # The filter values in this filters object
     def filter_items
       @filter_items ||= []
@@ -100,17 +102,6 @@ module Axlsx
       end
     end
 
-    private
-
-    def serialized_attributes(str='')
-      instance_values.each do |key, value|
-        if %(blank claendar_type).include? key.to_s
-        str << "#{Axlsx.camel(key, false)}='#{value}' "
-        end
-      end
-      str
-    end
-
     # This class expresses a filter criteria value.
     class Filter
 
@@ -140,9 +131,8 @@ module Axlsx
     # subsequent dates, even when formatted or represented by other calendar
     # types, can be correctly compared for the purposes of filtering.
     class DateGroupItem
-
-      # Allowed date time groupings
-      DATE_TIME_GROUPING = %w(year month day hour minute second)
+      include Axlsx::OptionsParser
+include Axlsx::SerializedAttributes
 
       # Creates a new DateGroupItem
       # @param [Hash] options A hash of options to use when
@@ -158,10 +148,13 @@ module Axlsx
       def initialize(options={})
         raise ArgumentError,  "You must specify a year for date time grouping" unless options[:year]
         raise ArgumentError, "You must specify a date_time_grouping when creating a DateGroupItem for auto filter" unless options[:date_time_grouping]
-        options.each do |key, value|
-          self.send("#{key}=", value) if self.respond_to?("#{key}=")
-        end
+        parse_options options
       end
+
+      serializable_attributes :date_time_grouping, :year, :month, :day, :hour, :minute, :second
+
+      # Allowed date time groupings
+      DATE_TIME_GROUPING = %w(year month day hour minute second)
 
       # Grouping level
       # This must be one of year, month, day, hour, minute or second.
@@ -224,8 +217,8 @@ module Axlsx
       # The minute value for the date group item
       # This must be between 0 and 59
       def minute=(value)
-         RangeValidator.validate "DateGroupItem.minute", 0, 59, value
-         @minute = value
+        RangeValidator.validate "DateGroupItem.minute", 0, 59, value
+        @minute = value
       end
 
       # The second value for the date group item
@@ -245,7 +238,7 @@ module Axlsx
       # @param [String] str The string object this serialization will be concatenated to.
       def to_xml_string(str = '')
         str << '<dateGroupItem '
-        instance_values.each { |key, value| str << "#{key}='#{value.to_s}' " }
+        serialized_attributes str
         str << '/>'
       end
     end

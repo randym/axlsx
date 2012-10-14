@@ -8,6 +8,38 @@ module Axlsx
   # @see Worksheet#add_row
   class Cell
 
+    include Axlsx::OptionsParser
+
+    # @param [Row] row The row this cell belongs to.
+    # @param [Any] value The value associated with this cell.
+    # @option options [Symbol] type The intended data type for this cell. If not specified the data type will be determined internally based on the vlue provided.
+    # @option options [Integer] style The index of the cellXfs item to be applied to this cell. If not specified, the default style (0) will be applied.
+    # @option options [String] font_name
+    # @option options [Integer] charset
+    # @option options [String] family
+    # @option options [Boolean] b
+    # @option options [Boolean] i
+    # @option options [Boolean] strike
+    # @option options [Boolean] outline
+    # @option options [Boolean] shadow
+    # @option options [Boolean] condense
+    # @option options [Boolean] extend
+    # @option options [Boolean] u
+    # @option options [Symbol] vertAlign must be one of :baseline, :subscript, :superscript
+    # @option options [Integer] sz
+    # @option options [String] color an 8 letter rgb specification
+    # @option options [Symbol] scheme must be one of :none, major, :minor
+    def initialize(row, value="", options={})
+      self.row=row
+      @value = @font_name = @charset = @family = @b = @i = @strike = @outline = @shadow = nil
+      @condense = @u = @vertAlign = @sz = @color = @scheme = @extend = @ssti = nil
+      @styles = row.worksheet.workbook.styles
+      @row.cells << self
+      parse_options options
+      @style ||= 0
+      @type ||= cell_type_from_value(value)
+      @value = cast_value(value)
+    end
 
     # An array of available inline styes.
     # TODO change this to a hash where each key defines attr name and validator (and any info the validator requires)
@@ -16,9 +48,9 @@ module Axlsx
     # set_attr method that kicks the suplied validator and updates the instance_variable
     # for the key
     INLINE_STYLES = ['value', 'type', 'font_name', 'charset',
-                         'family', 'b', 'i', 'strike','outline',
-                         'shadow', 'condense', 'extend', 'u',
-                         'vertAlign', 'sz', 'color', 'scheme']
+                     'family', 'b', 'i', 'strike','outline',
+                     'shadow', 'condense', 'extend', 'u',
+                     'vertAlign', 'sz', 'color', 'scheme']
 
     # The index of the cellXfs item to be applied to this cell.
     # @return [Integer]
@@ -174,39 +206,6 @@ module Axlsx
       set_run_style nil, :scheme, v
     end
 
-    # @param [Row] row The row this cell belongs to.
-    # @param [Any] value The value associated with this cell.
-    # @option options [Symbol] type The intended data type for this cell. If not specified the data type will be determined internally based on the vlue provided.
-    # @option options [Integer] style The index of the cellXfs item to be applied to this cell. If not specified, the default style (0) will be applied.
-    # @option options [String] font_name
-    # @option options [Integer] charset
-    # @option options [String] family
-    # @option options [Boolean] b
-    # @option options [Boolean] i
-    # @option options [Boolean] strike
-    # @option options [Boolean] outline
-    # @option options [Boolean] shadow
-    # @option options [Boolean] condense
-    # @option options [Boolean] extend
-    # @option options [Boolean] u
-    # @option options [Symbol] vertAlign must be one of :baseline, :subscript, :superscript
-    # @option options [Integer] sz
-    # @option options [String] color an 8 letter rgb specification
-    # @option options [Symbol] scheme must be one of :none, major, :minor
-    def initialize(row, value="", options={})
-      self.row=row
-      @value = @font_name = @charset = @family = @b = @i = @strike = @outline = @shadow = nil
-      @condense = @u = @vertAlign = @sz = @color = @scheme = @extend = @ssti = nil
-      @styles = row.worksheet.workbook.styles
-      @row.cells << self
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
-      @style ||= 0
-      @type ||= cell_type_from_value(value)
-      @value = cast_value(value)
-    end
-
     # The Shared Strings Table index for this cell
     # @return [Integer]
     attr_reader :ssti
@@ -346,9 +345,9 @@ module Axlsx
     # the cell itself. Yes, it is a bit of a hack, but it is much better than using
     # imagemagick and loading metrics for every character.
     def font_size
-        font = @styles.fonts[@styles.cellXfs[style].fontId] || @styles.fonts[0]
-        size_from_styles = (font.b || b) ? font.sz * 1.5 : font.sz
-        sz || size_from_styles
+      font = @styles.fonts[@styles.cellXfs[style].fontId] || @styles.fonts[0]
+      size_from_styles = (font.b || b) ? font.sz * 1.5 : font.sz
+      sz || size_from_styles
     end
 
     # Utility method for setting inline style attributes
