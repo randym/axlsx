@@ -4,15 +4,15 @@ module Axlsx
   # An default content part. These parts are automatically created by for you based on the content of your package.
   class Default
 
+    include Axlsx::OptionsParser
+
     #Creates a new Default object
     # @option options [String] extension
     # @option options [String] content_type
     # @raise [ArgumentError] An argument error is raised if both extension and content_type are not specified.
     def initialize(options={})
       raise ArgumentError, INVALID_ARGUMENTS unless validate_options(options)
-      options.each do |name, value|
-        self.send("#{name}=", value) if self.respond_to? "#{name}="
-      end
+      parse_options options
     end
 
     # Error string for option validation

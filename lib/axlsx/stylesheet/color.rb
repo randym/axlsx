@@ -2,6 +2,21 @@
 module Axlsx
   # The color class represents a color used for borders, fills an fonts
   class Color
+
+    include Axlsx::OptionsParser
+    include Axlsx::SerializedAttributes
+
+    # Creates a new Color object
+    # @option options [Boolean] auto
+    # @option options [String] rgb
+    # @option options [Float] tint
+    def initialize(options={})
+      @rgb = "FF000000"
+      parse_options options
+    end
+
+    serializable_attributes :auto, :rgb, :tint
+
     # Determines if the color is system color dependant
     # @return [Boolean]
     attr_reader :auto
@@ -31,17 +46,7 @@ module Axlsx
     # @return [Float]
     attr_reader :tint
 
-    # Creates a new Color object
-    # @option options [Boolean] auto
-    # @option options [String] rgb
-    # @option options [Float] tint
-    def initialize(options={})
-      @rgb = "FF000000"
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? o[0]
-      end
-    end
-    # @see auto
+     # @see auto
     def auto=(v) Axlsx::validate_boolean v; @auto = v end
     # @see color
     def rgb=(v)
@@ -66,9 +71,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       str << "<color "
-      self.instance_values.each do |key, value|
-        str << key.to_s << '="' << value.to_s << '" '
-      end
+      serialized_attributes str
       str << "/>"
     end
   end

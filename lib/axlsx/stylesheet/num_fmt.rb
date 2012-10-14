@@ -3,6 +3,26 @@ module Axlsx
   # A NumFmt object defines an identifier and formatting code for data in cells.
   # @note The recommended way to manage styles is Styles#add_style
   class NumFmt
+
+    include Axlsx::OptionsParser
+    include Axlsx::SerializedAttributes
+
+    # Creates a new NumFmt object
+    # @param [Hash] options Options for the number format object
+    # @option [Integer] numFmtId The predefined format id or new format id for this format
+    # @option [String] fomratCode The format code for this number format
+    def initialize(options={})
+      @numFmtId = 0
+      @formatCode = ""
+      parse_options options
+    end
+
+    serializable_attributes :formatCode, :numFmtId
+
+    # @return [String] The formatting to use for this number format.
+    # @see http://support.microsoft.com/kb/264372
+    attr_reader :formatCode
+
     # @return [Integer] An unsinged integer referencing a standard or custom number format.
     # @note
     #  These are the known formats I can dig up. The constant NUM_FMT_PERCENT is 9, and uses the default % formatting. Axlsx also defines a few formats for date and time that are commonly used in asia as NUM_FMT_YYYYMMDD and NUM_FRM_YYYYMMDDHHMMSS.
@@ -40,29 +60,18 @@ module Axlsx
     # @see Axlsx
     attr_reader :numFmtId
 
-    # @return [String] The formatting to use for this number format.
-    # @see http://support.microsoft.com/kb/264372
-    attr_reader :formatCode
-    def initialize(options={})
-      @numFmtId = 0
-      @formatCode = ""
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? o[0]
-      end
-    end
-
     # @see numFmtId
     def numFmtId=(v) Axlsx::validate_unsigned_int v; @numFmtId = v end
+
     # @see formatCode
     def formatCode=(v) Axlsx::validate_string v; @formatCode = v end
-
 
     # Serializes the object
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
       str << '<numFmt '
-      str << instance_values.map { |key, value| '' << key.to_s << '="' << value.to_s << '"' }.join(' ')
+      serialized_attributes str
       str << '/>'
     end
 

@@ -5,6 +5,18 @@ module Axlsx
   # @see Worksheet#add_chart
   class Marker
 
+    include Axlsx::OptionsParser
+
+    # Creates a new Marker object
+    # @option options [Integer] col
+    # @option options [Integer] colOff
+    # @option options [Integer] row
+    # @option options [Integer] rowOff
+    def initialize(options={})
+      @col, @colOff, @row, @rowOff = 0, 0, 0, 0
+      parse_options options
+    end
+
     # The column this marker anchors to
     # @return [Integer]
     attr_reader :col
@@ -21,19 +33,7 @@ module Axlsx
     # @return [Integer]
     attr_reader :rowOff
 
-    # Creates a new Marker object
-    # @option options [Integer] col
-    # @option options [Integer] colOff
-    # @option options [Integer] row
-    # @option options [Integer] rowOff
-    def initialize(options={})
-      @col, @colOff, @row, @rowOff = 0, 0, 0, 0
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? o[0]
-      end
-    end
-
-    # @see col
+     # @see col
     def col=(v) Axlsx::validate_unsigned_int v; @col = v end
     # @see colOff
     def colOff=(v) Axlsx::validate_int v; @colOff = v end

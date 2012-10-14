@@ -7,6 +7,8 @@ module Axlsx
   # @see README for an example
   class ScatterChart < Chart
 
+    include Axlsx::OptionsParser
+
     # The Style for the scatter chart
     # must be one of :none | :line | :lineMarker | :marker | :smooth | :smoothMarker
     # return [Symbol]
@@ -30,9 +32,7 @@ module Axlsx
       super(frame, options)
       @series_type = ScatterSeries
       @d_lbls = nil
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
+      parse_options options
     end
 
     # see #scatterStyle

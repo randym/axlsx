@@ -3,6 +3,20 @@ module Axlsx
   # 3D attributes for a chart.
   class View3D
 
+    include Axlsx::OptionsParser
+
+    # Creates a new View3D for charts
+    # @option options [Integer] rot_x
+    # @option options [String] h_percent
+    # @option options [Integer] rot_y
+    # @option options [String] depth_percent
+    # @option options [Boolean] r_ang_ax
+    # @option options [Integer] perspective
+    def initialize(options={})
+      @rot_x, @h_percent, @rot_y, @depth_percent, @r_ang_ax, @perspective  = nil, nil, nil, nil, nil, nil
+      parse_options options
+    end
+
     # Validation for hPercent
     H_PERCENT_REGEX = /0*(([5-9])|([1-9][0-9])|([1-4][0-9][0-9])|500)/
 
@@ -14,7 +28,7 @@ module Axlsx
     # @return [Integer]
     attr_reader :rot_x
     alias :rotX :rot_x
-    
+
     # height of chart as % of chart width
     # must be between 5% and 500%
     # @return [String]
@@ -42,21 +56,7 @@ module Axlsx
     # @return [Integer]
     attr_reader :perspective
 
-    # Creates a new View3D for charts
-    # @option options [Integer] rot_x
-    # @option options [String] h_percent
-    # @option options [Integer] rot_y
-    # @option options [String] depth_percent
-    # @option options [Boolean] r_ang_ax
-    # @option options [Integer] perspective
-    def initialize(options={})
-      @rot_x, @h_percent, @rot_y, @depth_percent, @r_ang_ax, @perspective  = nil, nil, nil, nil, nil, nil
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
-    end
-
-    # @see rot_x
+     # @see rot_x
     def rot_x=(v) DataTypeValidator.validate "#{self.class}.rot_x", [Integer, Fixnum], v, lambda {|arg| arg >= -90 && arg <= 90 }; @rot_x = v; end
     alias :rotX= :rot_x=
 
@@ -78,10 +78,9 @@ module Axlsx
     # @see r_ang_ax
     def r_ang_ax=(v) Axlsx::validate_boolean(v); @r_ang_ax = v; end
     alias :rAngAx= :r_ang_ax=
-     
+
     # @see perspective
     def perspective=(v) DataTypeValidator.validate "#{self.class}.perspective", [Integer, Fixnum], v, lambda {|arg| arg >= 0 && arg <= 240 }; @perspective = v; end
-
 
     # Serializes the object
     # @param [String] str
@@ -96,6 +95,5 @@ module Axlsx
       str << '<c:perspective val="' << @perspective.to_s << '"/>' unless @perspective.nil?
       str << '</c:view3D>'
     end
-
   end
 end

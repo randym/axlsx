@@ -6,6 +6,8 @@ module Axlsx
   # @see Chart#add_series
   class Series
 
+    include Axlsx::OptionsParser
+
     # The chart that owns this series
     # @return [Chart]
     attr_reader :chart
@@ -22,18 +24,14 @@ module Axlsx
       @order = nil
       self.chart = chart
       @chart.series << self
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
+      parse_options options
     end
-
 
     # The index of this series in the chart's series.
     # @return [Integer]
     def index
       @chart.series.index(self)
     end
-
 
     # The order of this series in the chart's series. By default the order is the index of the series.
     # @return [Integer]
@@ -68,5 +66,4 @@ module Axlsx
       str << '</c:ser>'
     end
   end
-
 end

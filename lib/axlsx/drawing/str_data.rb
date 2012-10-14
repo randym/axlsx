@@ -5,6 +5,8 @@ module Axlsx
   # This class is extended for NumData to include the formatCode attribute required for numLit and numCache
   class StrData
 
+    include Axlsx::OptionsParser
+
     # creates a new StrVal object
     # @option options [Array] :data
     # @option options [String] :tag_name
@@ -12,9 +14,7 @@ module Axlsx
       @tag_prefix = :str
       @type = StrVal
       @pt = SimpleTypedList.new(@type)
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
+      parse_options options
     end
 
     # Creates the val objects for this data set. I am not overly confident this is going to play nicely with time and data types.

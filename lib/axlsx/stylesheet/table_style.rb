@@ -4,6 +4,22 @@ module Axlsx
   # @note Table are not supported in this version and only the defaults required for a valid workbook are created.
   class TableStyle < SimpleTypedList
 
+    include Axlsx::OptionsParser
+    include Axlsx::SerializedAttributes
+
+    # creates a new TableStyle object
+    # @raise [ArgumentError] if name option is not provided.
+    # @param [String] name
+    # @option options [Boolean] pivot
+    # @option options [Boolean] table
+    def initialize(name, options={})
+      self.name = name
+      parse_options options
+      super TableStyleElement
+    end
+
+    serializable_attributes :name, :pivot, :table
+
     # The name of this table style
     # @return [string]
     attr_reader :name
@@ -16,19 +32,6 @@ module Axlsx
     # @return [Boolean]
     attr_reader :table
 
-    # creates a new TableStyle object
-    # @raise [ArgumentError] if name option is not provided.
-    # @param [String] name
-    # @option options [Boolean] pivot
-    # @option options [Boolean] table
-    def initialize(name, options={})
-      self.name = name
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? o[0]
-      end
-      super TableStyleElement
-    end
-
     # @see name
     def name=(v) Axlsx::validate_string v; @name=v end
     # @see pivot
@@ -40,10 +43,8 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      attrs = instance_values.reject { |k, v| ![:name, :pivot, :table].include?(k) }
-      attrs[:count] = self.size
       str << '<tableStyle '
-      str << attrs.map { |key, value| '' << key.to_s << '="' << value.to_s << '"' }.join(' ')
+      serialized_attributes str, {:count => self.size}
       str << '>'
       each { |table_style_el| table_style_el.to_xml_string(str) }
       str << '</tableStyle>'

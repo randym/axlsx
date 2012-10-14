@@ -3,6 +3,19 @@ module Axlsx
   # The Scaling class defines axis scaling
   class Scaling
 
+    include Axlsx::OptionsParser
+
+    # creates a new Scaling object
+    # @option options [Integer, Fixnum] logBase
+    # @option options [Symbol] orientation
+    # @option options [Float] max
+    # @option options [Float] min
+    def initialize(options={})
+      @orientation = :minMax
+      @logBase, @min, @max = nil, nil, nil
+      parse_options options
+    end
+
     # logarithmic base for a logarithmic axis.
     # must be between 2 and 1000
     # @return [Integer]
@@ -20,19 +33,6 @@ module Axlsx
     # the minimu scaling
     # @return [Float]
     attr_reader :min
-
-    # creates a new Scaling object
-    # @option options [Integer, Fixnum] logBase
-    # @option options [Symbol] orientation
-    # @option options [Float] max
-    # @option options [Float] min
-    def initialize(options={})
-      @orientation = :minMax
-      @logBase, @min, @max = nil, nil, nil
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
-    end
 
     # @see logBase
     def logBase=(v) DataTypeValidator.validate "Scaling.logBase", [Integer, Fixnum], v, lambda { |arg| arg >= 2 && arg <= 1000}; @logBase = v; end

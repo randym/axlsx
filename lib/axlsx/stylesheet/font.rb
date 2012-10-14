@@ -4,6 +4,27 @@ module Axlsx
   # @note The recommended way to manage fonts, and other styles is Styles#add_style
   # @see Styles#add_style
   class Font
+    include Axlsx::OptionsParser
+
+    # Creates a new Font
+    # @option options [String] name
+    # @option options [Integer] charset
+    # @option options [Integer] family
+    # @option options [Integer] family
+    # @option options [Boolean] b
+    # @option options [Boolean] i
+    # @option options [Boolean] u
+    # @option options [Boolean] strike
+    # @option options [Boolean] outline
+    # @option options [Boolean] shadow
+    # @option options [Boolean] condense
+    # @option options [Boolean] extend
+    # @option options [Color] color
+    # @option options [Integer] sz
+    def initialize(options={})
+      parse_options options
+    end
+
     # The name of the font
     # @return [String]
     attr_reader :name
@@ -86,28 +107,7 @@ module Axlsx
     # @return [Integer]
     attr_reader :sz
 
-    # Creates a new Font
-    # @option options [String] name
-    # @option options [Integer] charset
-    # @option options [Integer] family
-    # @option options [Integer] family
-    # @option options [Boolean] b
-    # @option options [Boolean] i
-    # @option options [Boolean] u
-    # @option options [Boolean] strike
-    # @option options [Boolean] outline
-    # @option options [Boolean] shadow
-    # @option options [Boolean] condense
-    # @option options [Boolean] extend
-    # @option options [Color] color
-    # @option options [Integer] sz
-    def initialize(options={})
-      options.each do |o|
-        next if o[1].nil?
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
-    end
-    # @see name
+     # @see name
     def name=(v) Axlsx::validate_string v; @name = v end
     # @see charset
     def charset=(v) Axlsx::validate_unsigned_int v; @charset = v end

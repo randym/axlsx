@@ -3,6 +3,20 @@ module Axlsx
   # an element of style that belongs to a table style.
   # @note tables and table styles are not supported in this version. This class exists in preparation for that support.
   class TableStyleElement
+
+    include Axlsx::OptionsParser
+    include Axlsx::SerializedAttributes
+
+    # creates a new TableStyleElement object
+    # @option options [Symbol] type
+    # @option options [Integer] size
+    # @option options [Integer] dxfId
+    def initialize(options={})
+      parse_options options
+    end
+
+    serializable_attributes :type, :size, :dxfId
+
     # The type of style element. The following type are allowed
     #   :wholeTable
     #   :headerRow
@@ -43,16 +57,6 @@ module Axlsx
     # @return [Integer]
     attr_reader :dxfId
 
-    # creates a new TableStyleElement object
-    # @option options [Symbol] type
-    # @option options [Integer] size
-    # @option options [Integer] dxfId
-    def initialize(options={})
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? o[0]
-      end
-    end
-
     # @see type
     def type=(v) Axlsx::validate_table_element_type v; @type = v end
 
@@ -67,7 +71,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       str << '<tableStyleElement '
-      str << instance_values.map { |key, value| '' << key.to_s << '="' << value.to_s << '"' }.join(' ')
+      serialized_attributes str
       str << '/>'
     end
 

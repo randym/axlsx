@@ -4,6 +4,8 @@ module Axlsx
   # the access class defines common properties and values for a chart axis.
   class Axis
 
+    include Axlsx::OptionsParser
+
     # Creates an Axis object
     # @param [Integer] ax_id the id of this axis
     # @param [Integer] cross_ax the id of the perpendicular axis
@@ -25,9 +27,7 @@ module Axlsx
       self.format_code = "General"
       self.crosses = :autoZero
       self.gridlines = true
-      options.each do |name, value|
-        self.send("#{name}=", value) if self.respond_to? "#{name}="
-      end
+      parse_options options
     end
 
     # the fill color to use in the axis shape properties. This should be a 6 character long hex string

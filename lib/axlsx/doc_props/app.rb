@@ -11,6 +11,8 @@ module Axlsx
   #    DigSig (DigSigBlob)
   class App
 
+    include Axlsx::OptionsParser
+
     # Creates an App object
     # @option options [String] template
     # @option options [String] manager
@@ -35,9 +37,7 @@ module Axlsx
     # @option options [String] app_version
     # @option options [Integer] doc_security
     def initialize(options={})
-      options.each do |name, value|
-        self.send("#{name}=", value) if self.respond_to? "#{name}="
-      end
+      parse_options options
     end
 
     # @return [String] The name of the document template.

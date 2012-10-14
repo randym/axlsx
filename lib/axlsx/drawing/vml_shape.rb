@@ -3,6 +3,28 @@ module Axlsx
   # A VmlShape is used to position and render a comment.
   class VmlShape
 
+    include Axlsx::OptionsParser
+
+    # Creates a new VmlShape
+    # @option options [Integer|String] left_column
+    # @option options [Integer|String] left_offset
+    # @option options [Integer|String] top_row
+    # @option options [Integer|String] top_offset
+    # @option options [Integer|String] right_column
+    # @option options [Integer|String] right_offset
+    # @option options [Integer|String] bottom_row
+    # @option options [Integer|String] bottom_offset
+    def initialize(options={})
+      @row = @column = @left_column = @top_row = @right_column = @bottom_row = 0
+      @left_offset = 15
+      @top_offset = 2
+      @right_offset = 50
+      @bottom_offset = 5
+      @id = (0...8).map{65.+(rand(25)).chr}.join
+      parse_options options
+      yield self if block_given?
+    end
+
     # The row anchor position for this shape determined by the comment's ref value
     # @return [Integer]
     attr_reader :row
@@ -43,29 +65,7 @@ module Axlsx
     # @return [Integer]
     attr_reader :bottom_offset
 
-    # Creates a new VmlShape
-    # @option options [Integer|String] left_column
-    # @option options [Integer|String] left_offset
-    # @option options [Integer|String] top_row
-    # @option options [Integer|String] top_offset
-    # @option options [Integer|String] right_column
-    # @option options [Integer|String] right_offset
-    # @option options [Integer|String] bottom_row
-    # @option options [Integer|String] bottom_offset
-    def initialize(options={})
-      @row = @column = @left_column = @top_row = @right_column = @bottom_row = 0
-      @left_offset = 15
-      @top_offset = 2
-      @right_offset = 50
-      @bottom_offset = 5
-      @id = (0...8).map{65.+(rand(25)).chr}.join
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
-      yield self if block_given?
-    end
-
-    # @see column
+     # @see column
     def column=(v); Axlsx::validate_integerish(v); @column = v.to_i end
  
     # @see row

@@ -4,13 +4,7 @@ module Axlsx
   # @note Support for custom table styles does not exist in this version. Many of the classes required are defined in preparation for future release. Please do not attempt to add custom table styles.
   class TableStyles < SimpleTypedList
 
-    # The default table style. The default value is 'TableStyleMedium9'
-    # @return [String]
-    attr_reader :defaultTableStyle
-
-    # The default pivot table style. The default value is  'PivotStyleLight6'
-    # @return [String]
-    attr_reader :defaultPivotStyle
+    include Axlsx::SerializedAttributes
 
     # Creates a new TableStyles object that is a container for TableStyle objects
     # @option options [String] defaultTableStyle
@@ -20,7 +14,18 @@ module Axlsx
       @defaultPivotStyle = options[:defaultPivotStyle] || "PivotStyleLight16"
       super TableStyle
     end
-    # @see defaultTableStyle
+
+    serializable_attributes :defaultTableStyle, :defaultPivotStyle
+
+    # The default table style. The default value is 'TableStyleMedium9'
+    # @return [String]
+    attr_reader :defaultTableStyle
+
+    # The default pivot table style. The default value is  'PivotStyleLight6'
+    # @return [String]
+    attr_reader :defaultPivotStyle
+
+   # @see defaultTableStyle
     def defaultTableStyle=(v) Axlsx::validate_string(v); @defaultTableStyle = v; end
     # @see defaultPivotStyle
     def defaultPivotStyle=(v) Axlsx::validate_string(v); @defaultPivotStyle = v; end
@@ -29,10 +34,8 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      attr = self.instance_values.reject {|k, v| ![:defaultTableStyle, :defaultPivotStyle].include?(k.to_sym) }
-      attr[:count] = self.size
       str << '<tableStyles '
-      str << attr.map { |key, value| '' << key.to_s << '="' << value.to_s << '"' }.join(' ')
+      serialized_attributes str, {:count => self.size }
       str << '>'
       each { |table_style| table_style.to_xml_string(str) }
       str << '</tableStyles>'

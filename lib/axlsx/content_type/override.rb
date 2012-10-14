@@ -4,15 +4,15 @@ module Axlsx
   # An override content part. These parts are automatically created by for you based on the content of your package.
   class Override
 
+    include Axlsx::OptionsParser
+
     #Creates a new Override object
     # @option options [String] PartName
     # @option options [String] ContentType
     # @raise [ArgumentError] An argument error is raised if both PartName and ContentType are not specified.
     def initialize(options={})
       raise ArgumentError, INVALID_ARGUMENTS unless validate_options(options)
-      options.each do |name, value|
-        self.send("#{name}=", value) if self.respond_to? "#{name}="
-      end
+      parse_options options
     end
 
     # Error message for invalid options
