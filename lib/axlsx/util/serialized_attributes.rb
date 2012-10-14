@@ -16,10 +16,13 @@ module Axlsx
     end
 
     def serialized_attributes(str = '', additional_attributes = {})
-      key_value_pairs = instance_values.select do |key, value|
-        self.class.xml_attributes.include?(key.to_sym) && value != nil
+      key_value_pairs = instance_values
+      key_value_pairs.each do |key, value|
+        key_value_pairs.delete(key) if value == nil
+        key_value_pairs.delete(key) unless self.class.xml_attributes.include?(key.to_sym)
       end
       key_value_pairs.merge! additional_attributes
+
       key_value_pairs.each do |key, value|
         str << "#{Axlsx.camel(key, false)}='#{value}' "
       end
