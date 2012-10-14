@@ -8,8 +8,32 @@ module Axlsx
   # @see ConditionalFormattingRule#initialize
   class ConditionalFormattingRule
 
-    # instance values that must be serialized as their own elements - e.g. not attributes.
-    CHILD_ELEMENTS = [:formula, :color_scale, :data_bar, :icon_set]
+    include Axlsx::OptionsParser
+    include Axlsx::SerializedAttributes
+
+    # Creates a new Conditional Formatting Rule object
+    # @option options [Symbol] type The type of this formatting rule
+    # @option options [Boolean] aboveAverage This is an aboveAverage rule
+    # @option options [Boolean] bottom This is a bottom N rule.
+    # @option options [Integer] dxfId The formatting id to apply to matches
+    # @option options [Boolean] equalAverage Is the aboveAverage or belowAverage rule inclusive
+    # @option options [Integer] priority The priority of the rule, 1 is highest
+    # @option options [Symbol] operator Which operator to apply
+    # @option options [String] text The value to apply a text operator against
+    # @option options [Boolean] percent If a top/bottom N rule, evaluate as N% rather than N
+    # @option options [Integer] rank If a top/bottom N rule, the value of N
+    # @option options [Integer] stdDev The number of standard deviations above or below the average to match
+    # @option options [Boolean] stopIfTrue Stop evaluating rules after this rule matches
+    # @option options [Symbol]  timePeriod The time period in a date occuring... rule
+    # @option options [String] formula The formula to match against in i.e. an equal rule
+    def initialize(options={})
+      @color_scale = @data_bar = @icon_set = @formula = nil
+      parse_options options
+    end
+
+    serializable_attributes :type, :aboveAverage, :bottom, :dxfId, :equalAverage,
+                            :priority, :operator, :text, :percent, :rank, :stdDev,
+                            :stopIfTrue, :timePeriod
 
     # Formula
     # @return [String]
@@ -129,28 +153,6 @@ module Axlsx
       @icon_set ||= IconSet.new
     end
 
-    # Creates a new Conditional Formatting Rule object
-    # @option options [Symbol] type The type of this formatting rule
-    # @option options [Boolean] aboveAverage This is an aboveAverage rule
-    # @option options [Boolean] bottom This is a bottom N rule.
-    # @option options [Integer] dxfId The formatting id to apply to matches
-    # @option options [Boolean] equalAverage Is the aboveAverage or belowAverage rule inclusive
-    # @option options [Integer] priority The priority of the rule, 1 is highest
-    # @option options [Symbol] operator Which operator to apply
-    # @option options [String] text The value to apply a text operator against
-    # @option options [Boolean] percent If a top/bottom N rule, evaluate as N% rather than N
-    # @option options [Integer] rank If a top/bottom N rule, the value of N
-    # @option options [Integer] stdDev The number of standard deviations above or below the average to match
-    # @option options [Boolean] stopIfTrue Stop evaluating rules after this rule matches
-    # @option options [Symbol]  timePeriod The time period in a date occuring... rule
-    # @option options [String] formula The formula to match against in i.e. an equal rule
-    def initialize(options={})
-      @color_scale = @data_bar = @icon_set = @formula = nil
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
-    end
-
     # @see type
     def type=(v); Axlsx::validate_conditional_formatting_type(v); @type = v end
     # @see aboveAverage
@@ -204,7 +206,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       str << '<cfRule '
-      str << instance_values.map { |key, value| '' << key << '="' << value.to_s << '"' unless CHILD_ELEMENTS.include?(key.to_sym) }.join(' ')
+      serialized_attributes str
       str << '>'
       str << '<formula>' << self.formula << '</formula>' if @formula
       @color_scale.to_xml_string(str) if @color_scale && @type == :colorScale
