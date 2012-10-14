@@ -5,13 +5,32 @@ module Axlsx
   # @see Worksheet#add_image
   class Pic
 
+    include Axlsx::OptionsParser
+
+    # Creates a new Pic(ture) object
+    # @param [Anchor] anchor the anchor that holds this image
+    # @option options [String] name
+    # @option options [String] descr
+    # @option options [String] image_src
+    # @option options [Array] start_at
+    # @option options [Intger] width
+    # @option options [Intger] height
+    def initialize(anchor, options={})
+      @anchor = anchor
+      @hyperlink = nil
+      @anchor.drawing.worksheet.workbook.images << self
+      parse_options options
+      start_at(*options[:start_at]) if options[:start_at]
+      yield self if block_given?
+      @picture_locking = PictureLocking.new(options)
+    end
+
     # allowed file extenstions
     ALLOWED_EXTENSIONS = ['gif', 'jpeg', 'png', 'jpg']
 
     # The name to use for this picture
     # @return [String]
     attr_reader :name
-
 
     # A description of the picture
     # @return [String]
@@ -28,26 +47,6 @@ module Axlsx
 
     # The picture locking attributes for this picture
     attr_reader :picture_locking
-
-    # Creates a new Pic(ture) object
-    # @param [Anchor] anchor the anchor that holds this image
-    # @option options [String] name
-    # @option options [String] descr
-    # @option options [String] image_src
-    # @option options [Array] start_at
-    # @option options [Intger] width
-    # @option options [Intger] height
-    def initialize(anchor, options={})
-      @anchor = anchor
-      @hyperlink = nil
-      @anchor.drawing.worksheet.workbook.images << self
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
-      start_at(*options[:start_at]) if options[:start_at]
-      yield self if block_given?
-      @picture_locking = PictureLocking.new(options)
-    end
 
     attr_reader :hyperlink
 
@@ -136,8 +135,8 @@ module Axlsx
       use_one_cell_anchor unless @anchor.is_a?(OneCellAnchor)
       @anchor.height = v
     end
-    
-       # This is a short cut method to set the start anchor position
+
+    # This is a short cut method to set the start anchor position
     # If you need finer granularity in positioning use
     # graphic_frame.anchor.from.colOff / rowOff
     # @param [Integer] x The column
@@ -148,7 +147,7 @@ module Axlsx
       @anchor.from.row = y
       @anchor.from
     end
-    
+
     # noop if not using a two cell anchor
     # @param [Integer] x The column
     # @param [Integer] y The row
@@ -178,7 +177,7 @@ module Axlsx
       str << '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></xdr:spPr></xdr:pic>'
 
     end
-     
+
     private
 
     # Changes the anchor to a one cell anchor.
@@ -186,7 +185,7 @@ module Axlsx
       return if @anchor.is_a?(OneCellAnchor)
       swap_anchor(OneCellAnchor.new(@anchor.drawing, :from => @anchor.from))
     end
-    
+
     #changes the anchor type to a two cell anchor
     def use_two_cell_anchor
       return if @anchor.is_a?(TwoCellAnchor)
@@ -202,6 +201,5 @@ module Axlsx
       @anchor.drawing.anchors[@anchor.drawing.anchors.index(@anchor)] = new_anchor
       @anchor = new_anchor
     end
-
   end
 end

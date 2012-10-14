@@ -3,18 +3,7 @@ module Axlsx
   # A numeric data source for use by charts.
   class NumDataSource
 
-    # The tag name to use when serializing this data source.
-    # Only items defined in allowed_tag_names are allowed
-    # @return [Symbol]
-    attr_reader :tag_name
-
-    attr_reader :data
-
-    # allowed element tag names
-    # @return [Array]
-    def self.allowed_tag_names
-      [:yVal, :val]
-    end
+    include Axlsx::OptionsParser
 
     # creates a new NumDataSource object
     # @option options [Array] data An array of Cells or Numeric objects
@@ -30,12 +19,24 @@ module Axlsx
       if options[:data] && options[:data].first.is_a?(Cell)
         @f = Axlsx::cell_range(options[:data])
       end
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
+      parse_options options
     end
 
-    # sets the tag name for this data source
+
+    # The tag name to use when serializing this data source.
+    # Only items defined in allowed_tag_names are allowed
+    # @return [Symbol]
+    attr_reader :tag_name
+
+    attr_reader :data
+
+    # allowed element tag names
+    # @return [Array]
+    def self.allowed_tag_names
+      [:yVal, :val]
+    end
+
+     # sets the tag name for this data source
     # @param [Symbol] v One of the allowed_tag_names
     def tag_name=(v)
       Axlsx::RestrictionValidator.validate "#{self.class.name}.tag_name", self.class.allowed_tag_names, v

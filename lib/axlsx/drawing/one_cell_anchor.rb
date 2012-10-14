@@ -6,6 +6,26 @@ module Axlsx
   # @see Worksheet#add_image
   class OneCellAnchor
 
+    include Axlsx::OptionsParser
+ 
+    # Creates a new OneCellAnchor object and an Pic associated with it.
+    # @param [Drawing] drawing
+    # @option options [Array] start_at the col, row to start at
+    # @option options [Integer] width
+    # @option options [Integer] height
+    # @option options [String] image_src the file location of the image you will render
+    # @option options [String] name the name attribute for the rendered image
+    # @option options [String] descr the description of the image rendered
+    def initialize(drawing, options={})
+      @drawing = drawing
+      @width = 0
+      @height = 0
+      drawing.anchors << self
+      @from = Marker.new
+      parse_options options
+      @object = Pic.new(self, options)
+    end
+
     # A marker that defines the from cell anchor. The default from column and row are 0 and 0 respectively
     # @return [Marker]
     attr_reader :from
@@ -28,27 +48,6 @@ module Axlsx
     # @return [Integer]
     attr_reader :height
 
-
-    # Creates a new OneCellAnchor object and an Pic associated with it.
-    # @param [Drawing] drawing
-    # @option options [Array] start_at the col, row to start at
-    # @option options [Integer] width
-    # @option options [Integer] height
-    # @option options [String] image_src the file location of the image you will render
-    # @option options [String] name the name attribute for the rendered image
-    # @option options [String] descr the description of the image rendered
-    def initialize(drawing, options={})
-      @drawing = drawing
-      @width = 0
-      @height = 0
-      drawing.anchors << self
-      @from = Marker.new
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
-      @object = Pic.new(self, options)
-    end
-
     # @see height
     def height=(v) Axlsx::validate_unsigned_int(v); @height = v; end
 
@@ -60,7 +59,6 @@ module Axlsx
     def index
       @drawing.anchors.index(self)
     end
-
 
     # Serializes the object
     # @param [String] str

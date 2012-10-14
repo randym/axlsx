@@ -6,8 +6,28 @@ module Axlsx
   class Hyperlink
 
     include Axlsx::SerializedAttributes
+    include Axlsx::OptionsParser
+
+    #Creates a hyperlink object
+    # parent must be a Pic for now, although I expect that other object support this tag and its cNvPr parent
+    # @param [Pic] parent
+    # @option options [String] tooltip message shown when hyperlinked object is hovered over with mouse.
+    # @option options [String] tgtFrame Target frame for opening hyperlink
+    # @option options [String] invalidUrl supposedly use to store the href when we know it is an invalid resource.
+    # @option options [String] href the target resource this hyperlink links to. This is actually stored on the relationship.
+    # @option options [String] action A string that can be used to perform specific actions. For excel please see this reference: http://msdn.microsoft.com/en-us/library/ff532419%28v=office.12%29.aspx
+    # @option options [Boolean] endSnd terminate any sound events when processing this link
+    # @option options [Boolean] history include this link in the list of visited links for the applications history.
+    # @option options [Boolean] highlightClick indicate that the link has already been visited.
+    def initialize(parent, options={})
+      DataTypeValidator.validate "Hyperlink.parent", [Pic], parent
+      @parent = parent
+      parse_options options
+      yield self if block_given?
+    end
 
     serializable_attributes :invalid_url, :action, :end_snd, :highlight_click, :history, :tgt_frame, :tooltip
+
     # The destination of the hyperlink stored in the drawing's relationships document.
     # @return [String]
     attr_accessor :href
@@ -62,27 +82,6 @@ module Axlsx
     # Text to show when you mouse over the hyperlink. If you do not set this, the href property will be shown.
     # @return [String]
     attr_accessor :tooltip
-
-    #Creates a hyperlink object
-    # parent must be a Pic for now, although I expect that other object support this tag and its cNvPr parent
-    # @param [Pic] parent
-    # @option options [String] tooltip message shown when hyperlinked object is hovered over with mouse.
-    # @option options [String] tgtFrame Target frame for opening hyperlink
-    # @option options [String] invalidUrl supposedly use to store the href when we know it is an invalid resource.
-    # @option options [String] href the target resource this hyperlink links to. This is actually stored on the relationship.
-    # @option options [String] action A string that can be used to perform specific actions. For excel please see this reference: http://msdn.microsoft.com/en-us/library/ff532419%28v=office.12%29.aspx
-    # @option options [Boolean] endSnd terminate any sound events when processing this link
-    # @option options [Boolean] history include this link in the list of visited links for the applications history.
-    # @option options [Boolean] highlightClick indicate that the link has already been visited.
-    def initialize(parent, options={})
-      DataTypeValidator.validate "Hyperlink.parent", [Pic], parent
-      @parent = parent
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
-      yield self if block_given?
-
-    end
 
     # Serializes the object
     # @param [String] str
