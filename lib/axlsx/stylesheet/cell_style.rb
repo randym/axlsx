@@ -4,6 +4,23 @@ module Axlsx
   # @note Using Styles#add_style is the recommended way to manage cell styling.
   # @see Styles#add_style
   class CellStyle
+
+    include Axlsx::OptionsParser
+    include Axlsx::SerializedAttributes
+
+    # Creats a new CellStyle object
+    # @option options [String] name
+    # @option options [Integer] xfId
+    # @option options [Integer] buildinId
+    # @option options [Integer] iLevel
+    # @option options [Boolean] hidden
+    # @option options [Boolean] customBuiltIn
+    def initialize(options={})
+      parse_options options
+    end
+
+    serializable_attributes :name, :xfId, :buildinId, :iLevel, :hidden, :customBuilin
+
     # The name of this cell style
     # @return [String]
     attr_reader :name
@@ -30,19 +47,7 @@ module Axlsx
     # @return [Boolean]
     attr_reader :customBuiltin
 
-    # Creats a new CellStyle object
-    # @option options [String] name
-    # @option options [Integer] xfId
-    # @option options [Integer] buildinId
-    # @option options [Integer] iLevel
-    # @option options [Boolean] hidden
-    # @option options [Boolean] customBuiltIn
-    def initialize(options={})
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? o[0]
-      end
-    end
-    # @see name
+     # @see name
     def name=(v)  Axlsx::validate_string v; @name = v end
     # @see xfId
     def xfId=(v) Axlsx::validate_unsigned_int v; @xfId = v end
@@ -60,7 +65,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       str << '<cellStyle '
-      str << instance_values.map { |key, value| '' << key.to_s << '="' << value.to_s << '"' }.join(' ')
+      serialized_attributes str
       str << '/>'
     end
 
