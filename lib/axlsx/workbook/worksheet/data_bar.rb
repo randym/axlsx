@@ -7,6 +7,25 @@ module Axlsx
   # @see ConditionalFormattingRule#initialize
   class DataBar
 
+    include Axlsx::OptionsParser
+    include Axlsx::SerializedAttributes
+
+    # Creates a new data bar conditional formatting object
+    # @option options [Integer] minLength
+    # @option options [Integer] maxLength
+    # @option options [Boolean] showValue
+    # @option options [String] color - the rbg value used to color the bars
+    def initialize(options = {})
+      @minLength = 10
+      @maxLength = 90
+      @showValue = true
+      initialize_value_objects
+      parse_options options
+      yield self if block_given?
+    end
+
+    serializable_attributes :minLength, :maxLength, :showValue
+
     # instance values that must be serialized as their own elements - e.g. not attributes.
     CHILD_ELEMENTS = [:value_objects, :color]
 
@@ -40,22 +59,6 @@ module Axlsx
       @color ||= Color.new :rgb => "FF0000FF"
     end
 
-    # Creates a new data bar conditional formatting object
-    # @option options [Integer] minLength
-    # @option options [Integer] maxLength
-    # @option options [Boolean] showValue
-    # @option options [String] color - the rbg value used to color the bars
-    def initialize(options = {})
-      @minLength = 10
-      @maxLength = 90
-      @showValue = true
-      initialize_value_objects
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
-      yield self if block_given?
-    end
-
     # @see minLength
     def minLength=(v); Axlsx.validate_unsigned_int(v); @minLength = v end
     # @see maxLength
@@ -77,7 +80,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str="")
       str << '<dataBar '
-      str << instance_values.map { |key, value| '' << key << '="' << value.to_s << '"' unless CHILD_ELEMENTS.include?(key.to_sym) }.join(' ')
+      serialized_attributes str
       str << '>'
       @value_objects.each { |cfvo| cfvo.to_xml_string(str) }
       self.color.to_xml_string(str)
