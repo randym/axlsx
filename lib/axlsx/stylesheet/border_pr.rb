@@ -2,7 +2,7 @@
 module Axlsx
   # A border part.
   class BorderPr
-
+    include Axlsx::OptionsParser
     # @return [Color] The color of this border part.
     attr_reader :color
 
@@ -45,9 +45,10 @@ module Axlsx
     # @option options [Symbol] style
     # @see Axlsx::Border
     def initialize(options={})
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
+      parse_options(options)
+      #options.each do |o|
+      #  self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
+      #end
     end
 
     # @see name

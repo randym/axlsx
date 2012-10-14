@@ -7,6 +7,7 @@ require 'axlsx/util/constants.rb'
 require 'axlsx/util/validators.rb'
 require 'axlsx/util/accessors.rb'
 require 'axlsx/util/serialized_attributes'
+require 'axlsx/util/options_parser'
 # to be included with parsable intitites.
 #require 'axlsx/util/parser.rb'
 
