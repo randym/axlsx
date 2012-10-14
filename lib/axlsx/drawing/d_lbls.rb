@@ -7,15 +7,13 @@ module Axlsx
   class DLbls
 
     include Axlsx::Accessors
-    
+    include Axlsx::OptionsParser 
     # creates a new DLbls object
     def initialize(chart_type, options={})
       raise ArgumentError, 'chart_type must inherit from Chart' unless chart_type.superclass == Chart
       @chart_type = chart_type
       initialize_defaults
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
+      parse_options options
     end
 
     # These attributes are all boolean so I'm doing a bit of a hand

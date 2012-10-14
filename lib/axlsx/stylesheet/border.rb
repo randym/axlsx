@@ -4,22 +4,7 @@ module Axlsx
   class Border
 
     include Axlsx::SerializedAttributes
-
-    serializable_attributes :diagonal_up, :diagonal_down, :outline
-
-    # @return [Boolean] The diagonal up property for the border that indicates if the border should include a diagonal line from the bottom left to the top right of the cell.
-    attr_reader :diagonal_up
-    alias :diagonalUp :diagonal_up
-
-    # @return [Boolean] The diagonal down property for the border that indicates if the border should include a diagonal line from the top left to the top right of the cell.
-    attr_reader :diagonal_down
-    alias :diagonalDown :diagonal_down
-
-    # @return [Boolean] The outline property for the border indicating that top, left, right and bottom borders should only be applied to the outside border of a range of cells.
-    attr_reader :outline
-
-    # @return [SimpleTypedList] A list of BorderPr objects for this border.
-    attr_reader :prs
+    include Axlsx::OptionsParser
 
     # Creates a new Border object
     # @option options [Boolean] diagonal_up
@@ -36,10 +21,24 @@ module Axlsx
     # @see Style#add_style
     def initialize(options={})
       @prs = SimpleTypedList.new BorderPr
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
+      parse_options options
     end
+
+    serializable_attributes :diagonal_up, :diagonal_down, :outline
+
+    # @return [Boolean] The diagonal up property for the border that indicates if the border should include a diagonal line from the bottom left to the top right of the cell.
+    attr_reader :diagonal_up
+    alias :diagonalUp :diagonal_up
+
+    # @return [Boolean] The diagonal down property for the border that indicates if the border should include a diagonal line from the top left to the top right of the cell.
+    attr_reader :diagonal_down
+    alias :diagonalDown :diagonal_down
+
+    # @return [Boolean] The outline property for the border indicating that top, left, right and bottom borders should only be applied to the outside border of a range of cells.
+    attr_reader :outline
+
+    # @return [SimpleTypedList] A list of BorderPr objects for this border.
+    attr_reader :prs
 
     # @see diagonalUp
     def diagonal_up=(v) Axlsx::validate_boolean v; @diagonal_up = v end

@@ -6,6 +6,7 @@ module Axlsx
   # @see README for examples
   class Chart
 
+    include Axlsx::OptionsParser
     # Creates a new chart object
     # @param [GraphicalFrame] frame The frame that holds this chart.
     # @option options [Cell, String] title
@@ -21,9 +22,7 @@ module Axlsx
       @show_legend = true
       @series_type = Series
       @title = Title.new
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
+      parse_options options
       start_at(*options[:start_at]) if options[:start_at]
       end_at(*options[:end_at]) if options[:end_at]
       yield self if block_given?
