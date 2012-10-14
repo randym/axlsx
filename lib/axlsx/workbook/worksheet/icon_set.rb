@@ -7,8 +7,24 @@ module Axlsx
   # @see ConditionalFormattingRule#initialize
   class IconSet
 
-    # instance values that must be serialized as their own elements - e.g. not attributes.
-    CHILD_ELEMENTS = [:value_objects]
+    include Axlsx::OptionsParser
+    include Axlsx::SerializedAttributes
+
+    # Creates a new icon set object
+    # @option options [String] iconSet
+    # @option options [Boolean] reverse
+    # @option options [Boolean] percent
+    # @option options [Boolean] showValue
+    def initialize(options = {})
+      @percent = @showValue = true
+      @reverse = false
+      @iconSet = "3TrafficLights1"
+      initialize_value_objects
+      parse_options options
+      yield self if block_given?
+    end
+
+    serializable_attributes :iconSet, :percent, :reverse, :showValue
 
     # The icon set to display.
     # Allowed values are: 3Arrows, 3ArrowsGray, 3Flags, 3TrafficLights1, 3TrafficLights2, 3Signs, 3Symbols, 3Symbols2, 4Arrows, 4ArrowsGray, 4RedToBlack, 4Rating, 4TrafficLights, 5Arrows, 5ArrowsGray, 5Rating, 5Quarters
@@ -31,23 +47,7 @@ module Axlsx
     # @return [Boolean]
     attr_reader :showValue
 
-    # Creates a new icon set object
-    # @option options [String] iconSet
-    # @option options [Boolean] reverse
-    # @option options [Boolean] percent
-    # @option options [Boolean] showValue
-    def initialize(options = {})
-      @percent = @showValue = true
-      @reverse = false
-      @iconSet = "3TrafficLights1"
-      initialize_value_objects
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
-      yield self if block_given?
-    end
-
-    # @see iconSet
+      # @see iconSet
     def iconSet=(v); Axlsx::validate_icon_set(v); @iconSet = v end
 
     # @see showValue
@@ -64,7 +64,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str="")
       str << '<iconSet '
-      str << instance_values.map { |key, value| '' << key << '="' << value.to_s << '"' unless CHILD_ELEMENTS.include?(key.to_sym) }.join(' ')
+      serialized_attributes str
       str << '>'
       @value_objects.each { |cfvo| cfvo.to_xml_string(str) }
       str << '</iconSet>'
