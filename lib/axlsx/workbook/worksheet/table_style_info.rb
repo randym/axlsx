@@ -3,7 +3,8 @@ module Axlsx
   # The table style info class manages style attributes for defined tables in
   # a worksheet
   class TableStyleInfo
-
+    include Axlsx::OptionsParser
+    include Axlsx::SerializedAttributes
     include Axlsx::Accessors
     # creates a new TableStyleInfo instance
     # @param [Hash] options
@@ -20,13 +21,13 @@ module Axlsx
     def initialize(options = {})
       initialize_defaults
       @name = 'TableStyleMedium9'
-      options.each do |k, v|
-        send("#{k}=", v) if respond_to? "#{k}="
-      end
+      parse_options options
     end
 
     # boolean attributes for this object
     boolean_attr_accessor :show_first_column, :show_last_column, :show_row_stripes, :show_column_stripes
+    serializable_attributes :show_first_column, :show_last_column, :show_row_stripes, :show_column_stripes,
+      :name
 
     # Initialize all the values to false as Excel requires them to
     # explicitly be disabled or all will show.
@@ -43,9 +44,7 @@ module Axlsx
     # @param [String] str the string to contact this objects serialization to.
     def to_xml_string(str = '')
       str << '<tableStyleInfo '
-      instance_values.each do |key, value|
-        str << Axlsx::camel(key, false) << "='#{value}' "
-      end
+      serialized_attributes str
       str << '/>'
     end
   end

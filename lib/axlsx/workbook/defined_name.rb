@@ -49,8 +49,8 @@ module Axlsx
   # @example
   #     For clarification: LOG10 is always a cell reference, LOG10() is always formula, LOGO1000 can be a defined name that overrides a cell reference.
   class DefinedName
-
-
+    include Axlsx::SerializedAttributes
+    include Axlsx::OptionsParser
     include Axlsx::Accessors
     # creates a new DefinedName.
     # @param [String] formula - the formula the defined name references
@@ -99,10 +99,9 @@ module Axlsx
     #                                        version of the workbook that is published to or rendered on a Web or application server.
     def initialize(formula, options={})
       @formula = formula
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
+      parse_options options
     end
+
     attr_reader :local_sheet_id
 
     # The local sheet index (0-based)
@@ -115,8 +114,12 @@ module Axlsx
     string_attr_accessor :short_cut_key, :status_bar, :help, :description, :custom_menu, :comment
 
     # boolean attributes that will be added when this class is evaluated
-    boolean_attr_accessor :workbook_parameter, :publish_to_server, :xlm, :vb_proceedure, :function, :hidden 
-    
+    boolean_attr_accessor :workbook_parameter, :publish_to_server, :xlm, :vb_proceedure, :function, :hidden
+
+    serializable_attributes :short_cut_key, :status_bar, :help, :description, :custom_menu, :comment,
+      :workbook_parameter, :publish_to_server, :xlm, :vb_proceedure, :function, :hidden, :name, :local_sheet_id
+
+
     attr_reader :name
     # The name of this defined name. Please refer to the class documentation for more information
     def name=(value)
@@ -129,12 +132,8 @@ module Axlsx
 
     def to_xml_string(str='')
       raise ArgumentError, 'you must specify the name for this defined name. Please read the documentation for Axlsx::DefinedName for more details' unless name 
-      str << '<definedName'
-      instance_values.each do |name, value| 
-        unless name == 'formula'
-          str << ' ' << Axlsx::camel(name, false) << "='#{value}'"
-        end
-      end
+      str << '<definedName '
+      serialized_attributes str
       str << '>' << @formula
       str << '</definedName>'
     end

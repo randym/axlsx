@@ -5,18 +5,7 @@ module Axlsx
   # @see README for examples
   class Table
 
-
-    # The reference to the table data
-    # @return [String]
-    attr_reader :ref
-
-    # The name of the table.
-    # @return [String]
-    attr_reader :name
-
-    # The style for the table.
-    # @return [TableStyle]
-    attr_reader :style
+    include Axlsx::OptionsParser
 
     # Creates a new Table object
     # @param [String] ref The reference to the table data like 'A1:G24'.
@@ -30,11 +19,21 @@ module Axlsx
       @sheet.workbook.tables << self
       @table_style_info = TableStyleInfo.new(options[:style_info]) if options[:style_info]
       @name = "Table#{index+1}"
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
+      parse_options options
       yield self if block_given?
     end
+
+    # The reference to the table data
+    # @return [String]
+    attr_reader :ref
+
+    # The name of the table.
+    # @return [String]
+    attr_reader :name
+
+    # The style for the table.
+    # @return [TableStyle]
+    attr_reader :style
 
     # The index of this chart in the workbooks charts collection
     # @return [Integer]
@@ -63,7 +62,7 @@ module Axlsx
         @name = v
       end
     end
-    
+
     # TableStyleInfo for the table. 
     # initialization can be fed via the :style_info option
     def table_style_info
@@ -83,8 +82,7 @@ module Axlsx
         str << '<tableColumn id ="' << (index+1).to_s << '" name="' << cell.value << '"/>'
       end
       str << '</tableColumns>'
-      #TODO implement tableStyleInfo
-      table_style_info.to_xml_string(str) # '<tableStyleInfo showFirstColumn="0" showLastColumn="0" showRowStripes="1" showColumnStripes="0" name="TableStyleMedium9" />'
+      table_style_info.to_xml_string(str)
       str << '</table>'
     end
 

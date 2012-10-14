@@ -5,15 +5,28 @@ module Axlsx
   # @note The recommended way to manage the selection pane options is via SheetView#add_selection
   # @see SheetView#add_selection
   class Selection
-    
+
+    include Axlsx::OptionsParser
+    include Axlsx::SerializedAttributes
+
+    # Creates a new {Selection} object
+    # @option options [Cell, String] active_cell Active Cell Location
+    # @option options [Integer] active_cell_id Active Cell Index
+    # @option options [Symbol] pane Pane
+    # @option options [String] sqref Sequence of References
+    def initialize(options={})
+      @active_cell = @active_cell_id = @pane = @sqref = nil
+      parse_options options
+    end
+
+    serializable_attributes :active_cell, :active_cell_id, :pane, :sqref
     # Active Cell Location
     # Location of the active cell.
     # @see type
     # @return [String]
     # default nil
     attr_reader :active_cell
-    
-    
+
     # Active Cell Index
     # 0-based index of the range reference (in the array of references listed in sqref)
     # containing the active cell. Only used when the selection in sqref is not contiguous.
@@ -24,8 +37,7 @@ module Axlsx
     # @return [Integer]
     # default nil
     attr_reader :active_cell_id
-    
-    
+
     # Pane
     # The pane to which this selection belongs.
     # Options are 
@@ -52,59 +64,39 @@ module Axlsx
     # @return [Symbol]
     # default nil
     attr_reader :pane
-    
-    
+
     # Sequence of References
     # Range of the selection. Can be non-contiguous set of ranges.
     # @see type
     # @return [String]
     # default nil
     attr_reader :sqref
-    
-    
-    # Creates a new {Selection} object
-    # @option options [Cell, String] active_cell Active Cell Location
-    # @option options [Integer] active_cell_id Active Cell Index
-    # @option options [Symbol] pane Pane
-    # @option options [String] sqref Sequence of References
-    def initialize(options={})
-      #defaults
-      @active_cell = @active_cell_id = @pane = @sqref = nil
-      
-      # write options to instance variables
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
-    end
-    
-    
+
     # @see active_cell
     def active_cell=(v)
       cell = (v.class == Axlsx::Cell ? v.r_abs : v)
-      Axlsx::validate_string(cell)  
-      @active_cell = cell 
+      Axlsx::validate_string(cell)
+      @active_cell = cell
     end
-    
-    
+
     # @see active_cell_id
     def active_cell_id=(v); Axlsx::validate_unsigned_int(v); @active_cell_id = v end
-    
-    
+
     # @see pane
-    def pane=(v); Axlsx::validate_pane_type(v); @pane = v end
-    
-    
+    def pane=(v)
+      Axlsx::validate_pane_type(v)
+      @pane = Axlsx::camel(v, false)
+    end
+
     # @see sqref
     def sqref=(v); Axlsx::validate_string(v); @sqref = v end
-    
-    
+
     # Serializes the data validation
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
       str << '<selection '
-      str << instance_values.map { |key, value| '' << key.gsub(/_(.)/){ $1.upcase } << 
-        %{="#{[:pane].include?(key.to_sym) ? value.to_s.gsub(/_(.)/){ $1.upcase } : value}"} unless value.nil? }.join(' ')
+      serialized_attributes str
       str << '/>'
     end
   end

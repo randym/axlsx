@@ -5,7 +5,24 @@ module Axlsx
   # @note The recommended way to manage the pane options is via SheetView#pane
   # @see SheetView#pane
   class Pane
-    
+
+    include Axlsx::OptionsParser
+    include Axlsx::SerializedAttributes
+    # Creates a new {Pane} object
+    # @option options [Symbol] active_pane Active Pane
+    # @option options [Symbol] state Split State
+    # @option options [Cell, String] top_left_cell Top Left Visible Cell
+    # @option options [Integer] x_split Horizontal Split Position
+    # @option options [Integer] y_split Vertical Split Position
+    def initialize(options={})
+      #defaults
+      @active_pane = @state = @top_left_cell = nil
+      @x_split = @y_split = 0
+      parse_options options
+    end
+
+    serializable_attributes :active_pane, :state, :top_left_cell, :x_split, :y_split
+
     # Active Pane
     # The pane that is active.
     # Options are 
@@ -32,8 +49,8 @@ module Axlsx
     # @return [Symbol]
     # default nil
     attr_reader :active_pane
-    
-    
+
+
     # Split State
     # Indicates whether the pane has horizontal / vertical 
     # splits, and whether those splits are frozen.
@@ -51,8 +68,7 @@ module Axlsx
     # @return [Symbol]
     # default nil
     attr_reader :state
-    
-    
+
     # Top Left Visible Cell
     # Location of the top left visible cell in the bottom 
     # right pane (when in Left-To-Right mode).
@@ -60,8 +76,7 @@ module Axlsx
     # @return [String]
     # default nil
     attr_reader :top_left_cell
-    
-    
+
     # Horizontal Split Position
     # Horizontal position of the split, in 1/20th of a point; 0 (zero)
     # if none. If the pane is frozen, this value indicates the number 
@@ -70,8 +85,7 @@ module Axlsx
     # @return [Integer]
     # default 0
     attr_reader :x_split
-    
-    
+
     # Vertical Split Position
     # Vertical position of the split, in 1/20th of a point; 0 (zero) 
     # if none. If the pane is frozen, this value indicates the number
@@ -80,65 +94,49 @@ module Axlsx
     # @return [Integer]
     # default 0
     attr_reader :y_split
-    
-    
-    # Creates a new {Pane} object
-    # @option options [Symbol] active_pane Active Pane
-    # @option options [Symbol] state Split State
-    # @option options [Cell, String] top_left_cell Top Left Visible Cell
-    # @option options [Integer] x_split Horizontal Split Position
-    # @option options [Integer] y_split Vertical Split Position
-    def initialize(options={})
-      #defaults
-      @active_pane = @state = @top_left_cell = nil
-      @x_split = @y_split = 0
-      
-      # write options to instance variables
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
-    end
-    
-    
+
     # @see active_pane
-    def active_pane=(v); Axlsx::validate_pane_type(v); @active_pane = v end
-    
-    
+    def active_pane=(v)
+      Axlsx::validate_pane_type(v)
+      @active_pane = Axlsx::camel(v.to_s, false)
+    end
+
     # @see state
-    def state=(v); Axlsx::validate_split_state_type(v); @state = v end
-    
-    
+    def state=(v)
+      Axlsx::validate_split_state_type(v)
+      @state = Axlsx::camel(v.to_s, false)
+    end
+
     # @see top_left_cell
     def top_left_cell=(v)
       cell = (v.class == Axlsx::Cell ? v.r_abs : v)
-      Axlsx::validate_string(cell)  
-      @top_left_cell = cell 
+      Axlsx::validate_string(cell)
+      @top_left_cell = cell
     end
-    
-    
+
     # @see x_split
     def x_split=(v); Axlsx::validate_unsigned_int(v); @x_split = v end
-    
-    
+
     # @see y_split
     def y_split=(v); Axlsx::validate_unsigned_int(v); @y_split = v end
-    
-    
+
     # Serializes the data validation
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      if @state == :frozen && @top_left_cell.nil?
+      finalize
+      str << '<pane '
+      serialized_attributes str
+      str << '/>'
+    end
+    private
+
+    def finalize
+     if @state == 'frozen' && @top_left_cell.nil?
         row = @y_split || 0
         column = @x_split || 0
-        
         @top_left_cell = "#{('A'..'ZZ').to_a[column]}#{row+1}"
       end
-      
-      str << '<pane '
-      str << instance_values.map { |key, value| '' << key.gsub(/_(.)/){ $1.upcase } << 
-        %{="#{[:active_pane, :state].include?(key.to_sym) ? value.to_s.gsub(/_(.)/){ $1.upcase } : value}"} unless value.nil? }.join(' ')
-      str << '/>'
     end
   end
 end

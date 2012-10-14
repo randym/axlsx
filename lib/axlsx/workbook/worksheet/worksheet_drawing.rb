@@ -10,7 +10,7 @@ module Axlsx
     # @param [Worksheet] worksheet
     def initialize(worksheet)
       raise ArgumentError, 'you must provide a worksheet' unless worksheet.is_a?(Worksheet)
-      @worksheet = worksheet      
+      @worksheet = worksheet
       @drawing = nil
     end
 

@@ -3,6 +3,7 @@ module Axlsx
 
   # The Worksheet class represents a worksheet in the workbook.
   class Worksheet
+    include Axlsx::OptionsParser
 
     # definition of characters which are less than the maximum width of 0-9 in the default font for use in String#count.
     # This is used for autowidth calculations
@@ -24,9 +25,7 @@ module Axlsx
       @sheet_protection = nil
 
       initialize_page_options(options)
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
+      parse_options options
     end
 
     # Initalizes page margin, setup and print options

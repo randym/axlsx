@@ -3,7 +3,7 @@ module Axlsx
   # A worksheet hyperlink object. Note that this is not the same as a drawing hyperlink object.
   class WorksheetHyperlink
 
-
+    include Axlsx::OptionsParser
     include Axlsx::Accessors
     include Axlsx::SerializedAttributes
     # Creates a new hyperlink object.
@@ -19,9 +19,7 @@ module Axlsx
       DataTypeValidator.validate "Hyperlink.worksheet", [Worksheet], worksheet
       @worksheet = worksheet
       @target = :external
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
+      parse_options options
       yield self if block_given?
     end
 

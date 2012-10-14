@@ -2,7 +2,7 @@ module Axlsx
 
   # The SheetPr class manages serialization fo a worksheet's sheetPr element.
   class SheetPr
- 
+    include Axlsx::OptionsParser
     include Axlsx::Accessors
     include Axlsx::SerializedAttributes
 
@@ -33,10 +33,7 @@ module Axlsx
     def initialize(worksheet, options={})
       raise ArgumentError, "you must provide a worksheet" unless worksheet.is_a?(Worksheet)
       @worksheet = worksheet
-      options.each do |key, value|
-        attr = "#{key}="  
-        self.send(attr, value) if self.respond_to?(attr)
-      end
+      parse_options options
     end
 
     # The worksheet these properties apply to!
@@ -60,15 +57,6 @@ module Axlsx
     end
 
     private
-
-   # def serialized_attributes(str = '')
-      #instance_values.each do |key, value| 
-        #unless %(worksheet page_setup_pr).include? key
-          #str << "#{Axlsx.camel(key, false)}='#{value}' " 
-        #end
-      #end
-      #str
-    #end
 
     def update_properties
       page_setup_pr.fit_to_page = worksheet.fit_to_page?

@@ -3,7 +3,7 @@ module Axlsx
   # Package is responsible for managing all the bits and peices that Open Office XML requires to make a valid
   # xlsx document including valdation and serialization.
   class Package
-
+    include Axlsx::OptionsParser
 
     # provides access to the app doc properties for this package
     # see App
@@ -23,9 +23,7 @@ module Axlsx
       @workbook = nil
       @core, @app  =  Core.new, App.new
       @core.creator = options[:author] || @core.creator
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
+      parse_options options
       yield self if block_given?
     end
 
