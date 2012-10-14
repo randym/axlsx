@@ -4,6 +4,24 @@ module Axlsx
   # @see Open Office XML Part 1 §18.8.24
   class GradientFill
 
+    include Axlsx::OptionsParser
+    include Axlsx::SerializedAttributes
+
+    # Creates a new GradientFill object
+    # @option options [Symbol] type
+    # @option options [Float] degree
+    # @option options [Float] left
+    # @option options [Float] right
+    # @option options [Float] top
+    # @option options [Float] bottom
+    def initialize(options={})
+      options[:type] ||= :linear
+      parse_options options
+      @stop = SimpleTypedList.new GradientStop
+    end
+
+    serializable_attributes :type, :degree, :left, :right, :top, :bottom
+
     # The type of gradient.
     # @note
     #  valid options are
@@ -36,22 +54,7 @@ module Axlsx
     # @return [SimpleTypedList]
     attr_reader :stop
 
-    # Creates a new GradientFill object
-    # @option options [Symbol] type
-    # @option options [Float] degree
-    # @option options [Float] left
-    # @option options [Float] right
-    # @option options [Float] top
-    # @option options [Float] bottom
-    def initialize(options={})
-      options[:type] ||= :linear
-      options.each do |o|
-        self.send("#{o[0]}=", o[1]) if self.respond_to? o[0]
-      end
-      @stop = SimpleTypedList.new GradientStop
-    end
-
-    # @see type
+      # @see type
     def type=(v) Axlsx::validate_gradient_type v; @type = v end
     # @see degree
     def degree=(v) Axlsx::validate_float v; @degree = v end
@@ -69,8 +72,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       str << '<gradientFill '
-      h = self.instance_values.reject { |k,v| k.to_sym == :stop }
-      str << h.map { |key, value| '' << key.to_s << '="' << value.to_s << '"' }.join(' ')
+      serialized_attributes str
       str << '>'
       @stop.each { |s| s.to_xml_string(str) }
       str << '</gradientFill>'

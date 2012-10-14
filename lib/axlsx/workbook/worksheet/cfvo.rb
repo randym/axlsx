@@ -9,7 +9,7 @@ module Axlsx
   class Cfvo
 
     include Axlsx::OptionsParser
-    include Axlsx::SerailizedAttriubtes
+    include Axlsx::SerializedAttributes
 
     # Creates a new Cfvo object
     # @option options [Symbol] type The type of conditional formatting value object
