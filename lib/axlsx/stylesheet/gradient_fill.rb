@@ -54,18 +54,39 @@ module Axlsx
     # @return [SimpleTypedList]
     attr_reader :stop
 
-      # @see type
+    # @see type
     def type=(v) Axlsx::validate_gradient_type v; @type = v end
+
     # @see degree
     def degree=(v) Axlsx::validate_float v; @degree = v end
+
     # @see left
-    def left=(v) DataTypeValidator.validate "GradientFill.left", Float, v, lambda { |arg| arg >= 0.0 && arg <= 1.0}; @left = v end
+    def left=(v)
+      validate_format_percentage "GradientFill.left", v
+      @left = v
+    end
+
     # @see right
-    def right=(v) DataTypeValidator.validate "GradientFill.right", Float, v, lambda { |arg| arg >= 0.0 && arg <= 1.0}; @right = v end
+    def right=(v)
+     validate_format_percentage "GradientFill.right", v
+     @right = v
+    end
+
     # @see top
-    def top=(v) DataTypeValidator.validate "GradientFill.top", Float, v, lambda { |arg| arg >= 0.0 && arg <= 1.0}; @top = v end
+    def top=(v)
+      validate_format_percentage "GradientFill.top", v
+      @top = v
+    end
+
     # @see bottom
-    def bottom=(v) DataTypeValidator.validate "GradientFill.bottom", Float, v, lambda { |arg| arg >= 0.0 && arg <= 1.0}; @bottom= v end
+    def bottom=(v)
+      validate_format_percentage "GradientFill.bottom", v
+      @bottom = v
+    end
+
+    def validate_format_percentage(name, value)
+      DataTypeValidator.validate name, Float, value, lambda { |arg| arg >= 0.0 && arg <= 1.0}
+    end
 
     # Serializes the object
     # @param [String] str
