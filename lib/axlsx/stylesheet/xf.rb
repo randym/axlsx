@@ -5,6 +5,32 @@ module Axlsx
   class Xf
     #does not support extList (ExtensionList)
 
+    include Axlsx::SerializedAttributes
+    include Axlsx::OptionsParser
+    # Creates a new Xf object
+    # @option options [Integer] numFmtId
+    # @option options [Integer] fontId
+    # @option options [Integer] fillId
+    # @option options [Integer] borderId
+    # @option options [Integer] xfId
+    # @option options [Boolean] quotePrefix
+    # @option options [Boolean] pivotButton
+    # @option options [Boolean] applyNumberFormat
+    # @option options [Boolean] applyFont
+    # @option options [Boolean] applyFill
+    # @option options [Boolean] applyBorder
+    # @option options [Boolean] applyAlignment
+    # @option options [Boolean] applyProtection
+    # @option options [CellAlignment] alignment
+    # @option options [CellProtection] protection
+    def initialize(options={})
+      parse_options options
+    end
+
+    serializable_attributes :numFmtId, :fontId, :fillId, :borderId, :xfId, :quotePrefix,
+                            :pivotButton, :applyNumberFormat, :applyFont, :applyFill, :applyBorder, :applyAlignment,
+                            :applyProtection
+
     # The cell alignment for this style
     # @return [CellAlignment]
     # @see CellAlignment
@@ -67,30 +93,7 @@ module Axlsx
     # @return [Boolean]
     attr_reader :applyProtection
 
-    # Creates a new Xf object
-    # @option options [Integer] numFmtId
-    # @option options [Integer] fontId
-    # @option options [Integer] fillId
-    # @option options [Integer] borderId
-    # @option options [Integer] xfId
-    # @option options [Boolean] quotePrefix
-    # @option options [Boolean] pivotButton
-    # @option options [Boolean] applyNumberFormat
-    # @option options [Boolean] applyFont
-    # @option options [Boolean] applyFill
-    # @option options [Boolean] applyBorder
-    # @option options [Boolean] applyAlignment
-    # @option options [Boolean] applyProtection
-    # @option options [CellAlignment] alignment
-    # @option options [CellProtection] protection
-    def initialize(options={})
-      options.each do |o|
-        next if o[1].nil?
-        self.send("#{o[0]}=", o[1]) if self.respond_to? "#{o[0]}="
-      end
-    end
-
-    # @see Xf#alignment
+      # @see Xf#alignment
     def alignment=(v) DataTypeValidator.validate "Xf.alignment", CellAlignment, v; @alignment = v end
 
     # @see protection
@@ -132,8 +135,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       str << '<xf '
-      h = instance_values.reject { |k, v| [:alignment, :protection, :extList, :name].include? k.to_sym}
-      str << h.map { |key, value| '' << key.to_s << '="' << value.to_s << '"' }.join(' ')
+      serialized_attributes str
       str << '>'
       alignment.to_xml_string(str) if self.alignment
       protection.to_xml_string(str) if self.protection
