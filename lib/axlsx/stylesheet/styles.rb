@@ -316,7 +316,7 @@ module Axlsx
       return unless options[:border]
       b_opts = options[:border]
       if b_opts.is_a?(Hash)
-        raise ArgumentError, (ERR_INVALID_BORDER_OPTIONS % b_opts) unless b_opts.values_at(:style, :color).size == 2
+        raise ArgumentError, (ERR_INVALID_BORDER_OPTIONS % b_opts) unless b_opts.keys.include?(:style) && b_opts.keys.include?(:color)
         border = Border.new b_opts
         (b_opts[:edges] || [:left, :right, :top, :bottom]).each do |edge|
           b_options = { :name => edge, :style => b_opts[:style], :color => Color.new(:rgb => b_opts[:color]) }
