@@ -41,7 +41,6 @@ module Axlsx
     # our output to that object. Use this - it helps limit the number of
     # objects created during serialization
     def to_xml_string(str="")
-      attrs = self.instance_values.reject{ |key, value| value == nil }
       str << '<protectedRange '
       serialized_attributes str
       str << '/>'
