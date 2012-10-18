@@ -69,8 +69,8 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
-      str << "<color "
+    def to_xml_string(str = '', tagName = 'color')
+      str << "<" << tagName << " "
       serialized_attributes str
       str << "/>"
     end
