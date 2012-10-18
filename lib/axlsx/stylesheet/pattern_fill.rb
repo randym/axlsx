@@ -6,7 +6,6 @@ module Axlsx
   class PatternFill
 
     include Axlsx::OptionsParser
-
     # Creates a new PatternFill Object
     # @option options [Symbol] patternType
     # @option options [Color] fgColor
@@ -62,19 +61,11 @@ module Axlsx
     def to_xml_string(str = '')
       str << '<patternFill patternType="' << patternType.to_s << '">'
       if fgColor.is_a?(Color)
-        str << "<fgColor "
-        fgColor.instance_values.each do |key, value|
-          str << key.to_s << '="' << value.to_s << '" '
-        end
-        str << "/>"
+        fgColor.to_xml_string str, "fgColor"
       end
 
       if bgColor.is_a?(Color)
-        str << "<bgColor "
-        bgColor.instance_values.each do |key, value|
-          str << key.to_s << '="' << value.to_s << '" '
-        end
-        str << "/>"
+        bgColor.to_xml_string str, "bgColor"
       end
       str << '</patternFill>'
     end
