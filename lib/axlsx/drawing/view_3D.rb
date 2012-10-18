@@ -40,7 +40,7 @@ module Axlsx
     # @return [Integer]
     attr_reader :rot_y
     alias :rotY :rot_y
-    
+
     # depth or chart as % of chart width
     # must be between 20% and 2000%
     # @return [String]
@@ -56,44 +56,60 @@ module Axlsx
     # @return [Integer]
     attr_reader :perspective
 
-     # @see rot_x
-    def rot_x=(v) DataTypeValidator.validate "#{self.class}.rot_x", [Integer, Fixnum], v, lambda {|arg| arg >= -90 && arg <= 90 }; @rot_x = v; end
+    # @see rot_x
+    def rot_x=(v)
+      RangeValidator.validate "View3D.rot_x", -90, 90, v
+      @rot_x = v
+    end
     alias :rotX= :rot_x=
 
-    # @see h_percent
-    def h_percent=(v)
-      RegexValidator.validate "#{self.class}.h_percent", H_PERCENT_REGEX, v
-      @h_percent = v
-    end
+      # @see h_percent
+      def h_percent=(v)
+        RegexValidator.validate "#{self.class}.h_percent", H_PERCENT_REGEX, v
+        @h_percent = v
+      end
     alias :hPercent= :h_percent=
 
-    # @see rot_y
-    def rot_y=(v) DataTypeValidator.validate "#{self.class}.rot_y", [Integer, Fixnum], v, lambda {|arg| arg >= 0 && arg <= 360 }; @rot_y = v; end
+      # @see rot_y
+      def rot_y=(v) 
+        RangeValidator.validate "View3D.rot_y", 0, 360, v
+        @rot_y = v
+      end
     alias :rotY= :rot_y=
 
-    # @see depth_percent
-    def depth_percent=(v) RegexValidator.validate "#{self.class}.depth_percent", DEPTH_PERCENT_REGEX, v; @depth_percent = v; end
+      # @see depth_percent
+      def depth_percent=(v) RegexValidator.validate "#{self.class}.depth_percent", DEPTH_PERCENT_REGEX, v; @depth_percent = v; end
     alias :depthPercent= :depth_percent=
 
-    # @see r_ang_ax
-    def r_ang_ax=(v) Axlsx::validate_boolean(v); @r_ang_ax = v; end
+      # @see r_ang_ax
+      def r_ang_ax=(v) Axlsx::validate_boolean(v); @r_ang_ax = v; end
     alias :rAngAx= :r_ang_ax=
 
-    # @see perspective
-    def perspective=(v) DataTypeValidator.validate "#{self.class}.perspective", [Integer, Fixnum], v, lambda {|arg| arg >= 0 && arg <= 240 }; @perspective = v; end
+      # @see perspective
+      def perspective=(v) 
+        RangeValidator.validate "View3D.perspective", 0, 240, v
+        @perspective = v
+      end
+
+    # DataTypeValidator.validate "#{self.class}.perspective", [Integer, Fixnum], v, lambda {|arg| arg >= 0 && arg <= 240 }; @perspective = v; end
 
     # Serializes the object
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
       str << '<c:view3D>'
-      str << '<c:rotX val="' << @rot_x.to_s << '"/>' unless @rot_x.nil?
-      str << '<c:hPercent val="' << @h_percent.to_s << '"/>' unless @h_percent.nil?
-      str << '<c:rotY val="' << @rot_y.to_s << '"/>' unless @rot_y.nil?
-      str << '<c:depthPercent val="' << @depth_percent.to_s << '"/>' unless @depth_percent.nil?
-      str << '<c:rAngAx val="' << @r_ang_ax.to_s << '"/>' unless @r_ang_ax.nil?
-      str << '<c:perspective val="' << @perspective.to_s << '"/>' unless @perspective.nil?
+      %w(rot_x h_percent rot_y depth_percent r_ang_ax perspective).each do |key|
+        str << element_for_attribute(key)
+      end
       str << '</c:view3D>'
+    end
+
+    private
+
+    def element_for_attribute(name)
+      val = instance_values[name]
+      return "" if val == nil
+      "<c:%s val='%s'/>" % [Axlsx::camel(name, false), val]
     end
   end
 end
