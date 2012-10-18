@@ -73,7 +73,7 @@ module Axlsx
     # r:id should only be specified for external targets.
     # @return [Hash]
     def location_or_id
-      @target == :external ?  { :"r:id" => id } : { :"location" => location }
+      @target == :external ?  { :"r:id" => id } : { :location => location }
     end
   end
 end
