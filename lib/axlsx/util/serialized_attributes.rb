@@ -24,7 +24,7 @@ module Axlsx
       key_value_pairs.merge! additional_attributes
 
       key_value_pairs.each do |key, value|
-        str << "#{Axlsx.camel(key, false)}='#{value}' "
+        str << "#{Axlsx.camel(key, false)}=\"#{value}\" "
       end
       str
     end
