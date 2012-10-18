@@ -55,9 +55,9 @@ module Axlsx
     # creates a new DefinedName.
     # @param [String] formula - the formula the defined name references
     # @param [Hash] options - A hash of key/value pairs that will be mapped to this instances attributes.
-    # 
+    #
     # @option [String] name - Specifies the name that appears in the user interface for the defined name.
-    #                         This attribute is required. 
+    #                         This attribute is required.
     #                         The following built-in names are defined in this SpreadsheetML specification:
     #                         Print
     #                           _xlnm.Print_Area: this defined name specifies the workbook's print area.
@@ -111,24 +111,12 @@ module Axlsx
       @local_sheet_id = value
     end
 
-    string_attr_accessor :short_cut_key, :status_bar, :help, :description, :custom_menu, :comment
+    string_attr_accessor :short_cut_key, :status_bar, :help, :description, :custom_menu, :comment, :name, :formula
 
-    # boolean attributes that will be added when this class is evaluated
     boolean_attr_accessor :workbook_parameter, :publish_to_server, :xlm, :vb_proceedure, :function, :hidden
 
     serializable_attributes :short_cut_key, :status_bar, :help, :description, :custom_menu, :comment,
       :workbook_parameter, :publish_to_server, :xlm, :vb_proceedure, :function, :hidden, :name, :local_sheet_id
-
-
-    attr_reader :name
-    # The name of this defined name. Please refer to the class documentation for more information
-    def name=(value)
-      Axlsx::RestrictionValidator.validate 'DefinedName.name', %w(_xlnm.Print_Area _xlnm.Print_Titles _xlnm.Criteria _xlnm._FilterDatabase _xlnm.Extract _xlnm.Consolidate_Area _xlnm.Database _xlnm.Sheet_Title), value
-      @name = value
-    end
-
-    # The formula this defined name references
-    attr_reader :formula
 
     def to_xml_string(str='')
       raise ArgumentError, 'you must specify the name for this defined name. Please read the documentation for Axlsx::DefinedName for more details' unless name 
