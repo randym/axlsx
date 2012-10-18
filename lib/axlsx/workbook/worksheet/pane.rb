@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Axlsx
   # Pane options for a worksheet.
   #
@@ -132,7 +131,7 @@ module Axlsx
     private
 
     def finalize
-     if @state == 'frozen' && @top_left_cell.nil?
+      if @state == 'frozen' && @top_left_cell.nil?
         row = @y_split || 0
         column = @x_split || 0
         @top_left_cell = "#{('A'..'ZZ').to_a[column]}#{row+1}"
