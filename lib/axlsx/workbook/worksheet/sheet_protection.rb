@@ -45,12 +45,6 @@ module Axlsx
     # @return [String]
     attr_reader :salt_value
 
-    # If 1 or true then sorting should not be allowed when the sheet is protected.
-    # If 0 or false then sorting should be allowed when the sheet is protected.
-    # @return [Boolean]
-    # default true
-    attr_reader :sort
-
     # Password hash
     # @return [String]
     # default nil
