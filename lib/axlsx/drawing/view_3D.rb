@@ -99,17 +99,17 @@ module Axlsx
     def to_xml_string(str = '')
       str << '<c:view3D>'
       %w(rot_x h_percent rot_y depth_percent r_ang_ax perspective).each do |key|
-        str << element_for_attribute(key)
+        str << element_for_attribute(key, 'c')
       end
       str << '</c:view3D>'
     end
 
     private
-
-    def element_for_attribute(name)
+    # Note: move this to Axlsx module if we find the smae pattern elsewhere.
+    def element_for_attribute(name, namespace='')
       val = instance_values[name]
       return "" if val == nil
-      "<c:%s val='%s'/>" % [Axlsx::camel(name, false), val]
+      "<%s:%s val='%s'/>" % [namespace, Axlsx::camel(name, false), val]
     end
   end
 end
