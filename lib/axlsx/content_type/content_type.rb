@@ -1,6 +1,6 @@
 # encoding: UTF-8
 module Axlsx
-
+  require 'axlsx/content_type/abstract_content_type.rb'
   require 'axlsx/content_type/default.rb'
   require 'axlsx/content_type/override.rb'
 
