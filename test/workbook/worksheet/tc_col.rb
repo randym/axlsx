@@ -58,6 +58,16 @@ class TestCol < Test::Unit::TestCase
     assert_nothing_raised(ArgumentError, 'phonetic must be boolean(ish)') { @col.phonetic = true }
   end
 
+  def test_to_xml_string
+    @col.width = 100
+    doc = Nokogiri::XML(@col.to_xml_string)
+    assert_equal(1, doc.xpath("//col [@bestFit='#{@col.best_fit}']").size)
+    assert_equal(1, doc.xpath("//col [@max=#{@col.max}]").size)
+    assert_equal(1, doc.xpath("//col [@min=#{@col.min}]").size)
+    assert_equal(1, doc.xpath("//col [@width=#{@col.width}]").size)
+    assert_equal(1, doc.xpath("//col [@customWidth='#{@col.custom_width}']").size)
+  end
+
   def test_style
     assert_equal(@col.style, nil)
     @col.style = 1
