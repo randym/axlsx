@@ -12,8 +12,5 @@ class TestDefault < Test::Unit::TestCase
     doc = Nokogiri::XML(type.to_xml_string)
     assert_equal(doc.xpath("Default[@ContentType='#{Axlsx::XML_CT}']").size, 1)
     assert_equal(doc.xpath("Default[@Extension='xml']").size, 1)
-
   end
-
-
 end
