@@ -49,6 +49,14 @@ class TestWorkbook < Test::Unit::TestCase
     assert_equal(@wb.worksheets.first, ws, "the worksheet returned is the worksheet added")
     assert_equal(ws.name, "bob", "name option gets passed to worksheet")
   end
+  
+  def test_insert_worksheet
+    @wb.add_worksheet(:name => 'A')
+    @wb.add_worksheet(:name => 'B')
+    ws3 = @wb.insert_worksheet(0, :name => 'C')
+    assert_equal(ws3.name, @wb.worksheets.first.name)
+  end
+
   def test_relationships
     #current relationship size is 1 due to style relation
     assert(@wb.relationships.size == 1)

@@ -214,6 +214,23 @@ require 'axlsx/workbook/worksheet/selection.rb'
     # see @use_autowidth
     def use_autowidth=(v=true) Axlsx::validate_boolean v; @use_autowidth = v; end
 
+    # inserts a worksheet into this workbook at the position specified.
+    # It the index specified is out of range, the worksheet will be added to the end of the 
+    # worksheets collection
+    # @return [Worksheet]
+    # @param index The zero based position to insert the newly created worksheet
+    # @param [Hash] options Options to pass into the worksheed during initialization.
+    # @option options [String] name The name of the worksheet
+    # @option options [Hash] page_margins The page margins for the worksheet
+    def insert_worksheet(index=0, options={})
+      worksheet = Worksheet.new(self, options)
+      @worksheets.delete_at(@worksheets.size - 1)
+      @worksheets.insert(index, worksheet)
+      yield worksheet if block_given?
+      worksheet
+    end
+
+    #
     # Adds a worksheet to this workbook
     # @return [Worksheet]
     # @option options [String] name The name of the worksheet.

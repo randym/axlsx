@@ -43,16 +43,16 @@ module Axlsx
     def to_ary
       @list
     end
-   
+
     alias :to_a :to_ary
-    
+
     # Unlock the list
     # @return [self]
     def unlock
       @locked_at = nil
       self
     end
-    
+
     # join operator
     # @param [Array] v the array to join
     # @raise [ArgumentError] if any of the values being joined are not
@@ -62,7 +62,7 @@ module Axlsx
       v.each do |item| 
         DataTypeValidator.validate "SimpleTypedList.+", @allowed_types, item
         @list << item 
-      end 
+      end
     end
 
     # Concat operator
@@ -104,6 +104,18 @@ module Axlsx
       DataTypeValidator.validate "SimpleTypedList.<<", @allowed_types, v
       raise ArgumentError, "Item is protected and cannot be changed" if protected? index
       @list[index] = v
+      v
+    end
+
+    # inserts an item at the index specfied
+    # @param [Integer] index
+    # @param [Any] v
+    # @raise [ArgumentError] if the index is protected by locking
+    # @raise [ArgumentError] if the index is not one of the allowed types
+    def insert(index, v)
+      DataTypeValidator.validate "SimpleTypedList.<<", @allowed_types, v
+      raise ArgumentError, "Item is protected and cannot be changed" if protected? index
+      @list.insert(index, v)
       v
     end
 

@@ -23,7 +23,7 @@ module Axlsx
       parse_options options
     end
 
-    serializable_attributes :collapsed, :hidden, :outline_level, :phonetic, :style, :width, :min, :max
+    serializable_attributes :collapsed, :hidden, :outline_level, :phonetic, :style, :width, :min, :max, :best_fit, :custom_width
 
     # First column affected by this 'column info' record.
     # @return [Integer]
@@ -38,7 +38,8 @@ module Axlsx
     # 'Best fit' means that when numbers are typed into a cell contained in a 'best fit' column, the column width should
     #  automatically resize to display the number. [Note: In best fit cases, column width must not be made smaller, only larger. end note]
     # @return [Boolean]
-    attr_reader :bestFit
+    attr_reader :best_fit
+    alias :bestFit :best_fit
 
     # Flag indicating if the outlining of the affected column(s) is in the collapsed state.
     # @return [Boolean]
@@ -66,7 +67,8 @@ module Axlsx
     attr_reader :width
 
     # @return [Boolean]
-    attr_reader :customWidth
+    attr_reader :custom_width
+    alias :customWidth :custom_width
 
     # @see Col#collapsed
     def collapsed=(v)
@@ -103,7 +105,7 @@ module Axlsx
    # @see Col#width
     def width=(v)
       Axlsx.validate_unsigned_numeric(v) unless v == nil
-      @customWidth = @bestFit = v != nil
+      @custom_width = @best_fit = v != nil
       @width = v
     end
 
