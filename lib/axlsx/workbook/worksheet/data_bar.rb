@@ -16,15 +16,14 @@ module Axlsx
     # @option options [Boolean] showValue
     # @option options [String] color - the rbg value used to color the bars
     def initialize(options = {})
-      @minLength = 10
-      @maxLength = 90
-      @showValue = true
-      initialize_value_objects
+      @min_length = 10
+      @max_length = 90
+      @show_value = true
       parse_options options
       yield self if block_given?
     end
 
-    serializable_attributes :minLength, :maxLength, :showValue
+    serializable_attributes :min_length, :max_length, :show_value
 
     # instance values that must be serialized as their own elements - e.g. not attributes.
     CHILD_ELEMENTS = [:value_objects, :color]
@@ -33,24 +32,29 @@ module Axlsx
     # The minimum length of the data bar, as a percentage of the cell width.
     # The default value is 10
     # @return [Integer]
-    attr_reader :minLength
+    attr_reader :min_length
+    alias :minLength :min_length
 
     # maxLength attribute
     # The maximum length of the data bar, as a percentage of the cell width.
     # The default value is 90
     # @return [Integer]
-    attr_reader :maxLength
+    attr_reader :max_length
+    alias :maxLength :max_length
 
     # maxLength attribute
     # Indicates whether to show the values of the cells on which this data bar is applied.
     # The default value is true
     # @return [Boolean]
-    attr_reader :showValue
+    attr_reader :show_value
+    alias :showValue :show_value
 
     # A simple typed list of cfvos
     # @return [SimpleTypedList]
     # @see Cfvo
-    attr_reader :value_objects
+    def value_objects
+      @value_objects ||= Cfvos.new
+    end
 
     # color
     # the color object used in the data bar formatting
@@ -60,12 +64,25 @@ module Axlsx
     end
 
     # @see minLength
-    def minLength=(v); Axlsx.validate_unsigned_int(v); @minLength = v end
+    def min_length=(v)
+      Axlsx.validate_unsigned_int(v)
+      @min_length = v
+    end
+    alias :minLength= :min_length=
+
     # @see maxLength
-    def maxLength=(v); Axlsx.validate_unsigned_int(v); @maxLength = v end
+    def max_length=(v)
+      Axlsx.validate_unsigned_int(v)
+      @max_length = v
+    end
+    alias :maxLength= :max_length=
 
     # @see showValue
-    def showValue=(v); Axlsx.validate_boolean(v); @showValue = v end
+    def show_value=(v)
+      Axlsx.validate_boolean(v)
+      @show_value = v
+    end
+    alias :showValue= :show_value=
 
     # Sets the color for the data bars.
     # @param [Color|String] v The color object, or rgb string value to apply
@@ -82,19 +99,9 @@ module Axlsx
       str << '<dataBar '
       serialized_attributes str
       str << '>'
-      @value_objects.each { |cfvo| cfvo.to_xml_string(str) }
+      value_objects.to_xml_string(str)
       self.color.to_xml_string(str)
       str << '</dataBar>'
-    end
-
-    private
-
-    # Initalize the simple typed list of value objects
-    # I am keeping this private for now as I am not sure what impact changes to the required two cfvo objects will do.
-    def initialize_value_objects
-      @value_objects = SimpleTypedList.new Cfvo
-      @value_objects.concat [Cfvo.new(:type => :min, :val => 0), Cfvo.new(:type => :max, :val => 0)]
-      @value_objects.lock
     end
   end
 end

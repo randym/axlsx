@@ -10,7 +10,9 @@ module Axlsx
     # A simple typed list of cfvos
     # @return [SimpleTypedList]
     # @see Cfvo
-    attr_reader :value_objects
+    def value_objects
+      @value_objects ||= Cfvos.new
+    end
 
     # A simple types list of colors
     # @return [SimpleTypedList]
@@ -23,7 +25,6 @@ module Axlsx
     # @see Cfvo
     # @see Color
     def initialize
-      initialize_value_objects
       initialize_colors
       yield self if block_given?
     end
@@ -32,9 +33,9 @@ module Axlsx
     # a reference to the newly created cfvo and color objects so you can alter the default properties.
     # @return [Hash] a hash with :cfvo and :color keys referencing the newly added objects.
     def add(options={})
-      @value_objects << Cfvo.new(:type => options[:type] || :min, :val => options[:val] || 0)
+      value_objects << Cfvo.new(:type => options[:type] || :min, :val => options[:val] || 0)
       @colors << Color.new(:rgb => options[:color] || "FF000000")
-      {:cfvo => @value_objects.last, :color => @colors.last}
+      {:cfvo => value_objects.last, :color => @colors.last}
     end
 
 
@@ -42,7 +43,7 @@ module Axlsx
     # @param [Integer] index The index of the cfvo and color object to delete
     # @note you cannot remove the first two cfvo and color pairs
     def delete_at(index=2)
-      @value_objects.delete_at index
+      value_objects.delete_at index
       @colors.delete_at index
     end
 
@@ -51,19 +52,12 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       str << '<colorScale>'
-      @value_objects.each { |cfvo| cfvo.to_xml_string(str) }
+      value_objects.to_xml_string(str)
       @colors.each { |color| color.to_xml_string(str) }
       str << '</colorScale>'
     end
 
     private
-
-    # creates the initial cfvo objects
-    def initialize_value_objects
-      @value_objects = SimpleTypedList.new Cfvo
-      @value_objects.concat [Cfvo.new(:type => :min, :val => 0), Cfvo.new(:type => :max, :val => 0)]
-      @value_objects.lock
-    end
 
     # creates the initial color objects
     def initialize_colors
