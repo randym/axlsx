@@ -93,10 +93,11 @@ module Axlsx
     end
 
     private
+
     # The relational ID for this hyperlink
     # @return [Integer]
     def id
-      @parent.anchor.drawing.charts.size + @parent.anchor.drawing.images.size + @parent.anchor.drawing.hyperlinks.index(self) + 1
+      @parent.anchor.drawing.index_of(self)+1
     end
 
   end

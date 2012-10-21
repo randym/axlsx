@@ -137,6 +137,12 @@ module Axlsx
       "#{DRAWING_RELS_PN % (index+1)}"
     end
 
+    # The index of a chart, image or hyperlink object this drawing contains
+    def index_of(object)
+      objects = charts + images + hyperlinks
+      objects.index(object)
+    end
+
     # The drawing's relationships.
     # @return [Relationships]
     def relationships
