@@ -173,7 +173,7 @@ module Axlsx
     # @return [Array] An array of hashes that define the entry, document and schema for each part of the package.
     # @private
     def parts
-      @parts = [
+      parts = [
        {:entry => RELS_PN, :doc => relationships.to_xml_string, :schema => RELS_XSD},
        {:entry => "xl/#{STYLES_PN}", :doc => workbook.styles.to_xml_string, :schema => SML_XSD},
        {:entry => CORE_PN, :doc => @core.to_xml_string, :schema => CORE_XSD},
@@ -184,39 +184,39 @@ module Axlsx
       ]
 
       workbook.drawings.each do |drawing|
-        @parts << {:entry => "xl/#{drawing.rels_pn}", :doc => drawing.relationships.to_xml_string, :schema => RELS_XSD}
-        @parts << {:entry => "xl/#{drawing.pn}", :doc => drawing.to_xml_string, :schema => DRAWING_XSD}
+        parts << {:entry => "xl/#{drawing.rels_pn}", :doc => drawing.relationships.to_xml_string, :schema => RELS_XSD}
+        parts << {:entry => "xl/#{drawing.pn}", :doc => drawing.to_xml_string, :schema => DRAWING_XSD}
       end
 
 
       workbook.tables.each do |table|
-        @parts << {:entry => "xl/#{table.pn}", :doc => table.to_xml_string, :schema => SML_XSD}
+        parts << {:entry => "xl/#{table.pn}", :doc => table.to_xml_string, :schema => SML_XSD}
       end
 
       workbook.comments.each do|comment|
         if comment.size > 0
-          @parts << { :entry => "xl/#{comment.pn}", :doc => comment.to_xml_string, :schema => SML_XSD }
-          @parts << { :entry => "xl/#{comment.vml_drawing.pn}", :doc => comment.vml_drawing.to_xml_string, :schema => nil }
+          parts << { :entry => "xl/#{comment.pn}", :doc => comment.to_xml_string, :schema => SML_XSD }
+          parts << { :entry => "xl/#{comment.vml_drawing.pn}", :doc => comment.vml_drawing.to_xml_string, :schema => nil }
         end
       end
 
       workbook.charts.each do |chart|
-        @parts << {:entry => "xl/#{chart.pn}", :doc => chart.to_xml_string, :schema => DRAWING_XSD}
+        parts << {:entry => "xl/#{chart.pn}", :doc => chart.to_xml_string, :schema => DRAWING_XSD}
       end
 
       workbook.images.each do |image|
-        @parts << {:entry => "xl/#{image.pn}", :path => image.image_src}
+        parts << {:entry => "xl/#{image.pn}", :path => image.image_src}
       end
 
       if use_shared_strings
-        @parts << {:entry => "xl/#{SHARED_STRINGS_PN}", :doc => workbook.shared_strings.to_xml_string, :schema => SML_XSD}
+        parts << {:entry => "xl/#{SHARED_STRINGS_PN}", :doc => workbook.shared_strings.to_xml_string, :schema => SML_XSD}
       end
 
       workbook.worksheets.each do |sheet|
-        @parts << {:entry => "xl/#{sheet.rels_pn}", :doc => sheet.relationships.to_xml_string, :schema => RELS_XSD}
-        @parts << {:entry => "xl/#{sheet.pn}", :doc => sheet.to_xml_string, :schema => SML_XSD}
+        parts << {:entry => "xl/#{sheet.rels_pn}", :doc => sheet.relationships.to_xml_string, :schema => RELS_XSD}
+        parts << {:entry => "xl/#{sheet.pn}", :doc => sheet.to_xml_string, :schema => SML_XSD}
       end
-      @parts
+      parts
     end
 
     # Performs xsd validation for a signle document
