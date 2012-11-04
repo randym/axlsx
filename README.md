@@ -15,13 +15,13 @@ appreciation for the gem, please don't hesitate to make a donation.
 
 **Google Group**: [https://groups.google.com/forum/?fromgroups#!forum/axlsx](https://groups.google.com/forum/?fromgroups#!forum/axlsx)
 
-**Author**:  Randy Morgan
+**Author**: Randy Morgan
 
-**Copyright**:    2011 - 2012
+**Copyright**: 2011 - 2012
 
 **License**: MIT License
 
-**Latest Version**: 1.3.1
+**Latest Version**: 1.3.2
 
 **Ruby Version**: 1.8.7, 1.9.2, 1.9.3
 
@@ -29,7 +29,7 @@ appreciation for the gem, please don't hesitate to make a donation.
 
 **Rubinius Version**: rubinius 2.0.0dev * lower versions may run, this gem always tests against head.
 
-**Release Date**: September 30th 2012
+**Release Date**: November 5th 2012
 
 If you are working in rails, or with active record see:
 * http://github.com/randym/acts_as_xlsx
@@ -149,9 +149,14 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
-- **October.??.12**: 1.3.2
-  - Patched to handle sheet names with apostrophes
-  - refactored string and boolean attribute accessors
+- **November.5.12**:1.3.2
+  - MASSIVE REFACTORING
+  - Patch for apostrophes in worksheet names
+  - added sheet_by_name for workbook so you can now find your worksheets
+    by name
+  - added insert_worksheet so you can now add a worksheet to an
+    arbitrary position in the worksheets list.
+  - reduced memory consumption for package parts post serialization
 - **September.30.12**: 1.3.1
   - Improved control character handling
   - Added stored auto filter values and date grouping items
@@ -173,7 +178,7 @@ As axslx implements the Office Open XML (ECMA-376 spec) much of the
 functionality is interoperable with other spreadsheet software. Below is
 a listing of some known issues.
 
-1. Libra Office
+1. Libre Office
    -  You must specify colors for your series. see examples/chart_colors.rb
 for an example.
    - You must use data in your sheet for charts. You cannot use hard coded
