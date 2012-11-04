@@ -9,6 +9,7 @@ examples << :basic
 examples << :custom_styles
 examples << :cell_style_override
 examples << :custom_borders
+examples << :surrounding_border
 examples << :deep_custom_borders
 examples << :row_column_style
 examples << :fixed_column_width
@@ -108,6 +109,33 @@ if examples.include? :custom_borders
       sheet.add_row ["wrap", "me", "Up in Red"], :style => red_border
       sheet.add_row [1, 2, 3], :style => blue_border
     end
+  end
+end
+
+#```ruby
+# More Custom Borders
+if examples.include? :surrounding_border
+
+  # Stuff like this is why I LOVE RUBY
+  # If you dont know about hash default values
+  # LEARN IT! LIVE IT! LOVE IT!
+  defaults =  { :style => :thick, :color => "000000" }
+  borders = Hash.new do |hash, key|
+    hash[key] = wb.styles.add_style :border => defaults.merge( { :edges => key.to_s.split('_').map(&:to_sym) } ) 
+  end
+  top_row =  [0, borders[:top_left], borders[:top], borders[:top], borders[:top_right]]
+  middle_row = [0, borders[:left], nil, nil, borders[:right]]
+  bottom_row = [0, borders[:bottom_left], borders[:bottom], borders[:bottom], borders[:bottom_right]]
+
+  wb.add_worksheet(:name => "Surrounding Border") do |ws|
+    ws.add_row []
+    ws.add_row ['', 1,2,3,4], :style => top_row
+    ws.add_row ['', 5,6,7,8], :style => middle_row
+    ws.add_row ['', 9, 10, 11, 12]
+
+    #This works too!
+    ws.rows.last.style = bottom_row
+
   end
 end
 
