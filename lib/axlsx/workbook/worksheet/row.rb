@@ -5,59 +5,14 @@ module Axlsx
   # @see Worksheet#add_row
   class Row
 
+    include SerializedAttributes
+    include Accessors
     # No support is provided for the following attributes
     # spans
     # thickTop
     # thickBottom
 
-
-    # A list of serilizable attributes.
-    # @note height(ht) and customHeight are manages separately for now. Have a look at Row#height
-    SERIALIZABLE_ATTRIBUTES = [:hidden, :outlineLevel, :collapsed, :s, :customFormat, :ph]
-    
-    # The worksheet this row belongs to
-    # @return [Worksheet]
-    attr_reader :worksheet
-
-    # The cells this row holds
-    # @return [SimpleTypedList]
-    attr_reader :cells
-
-    # Row height measured in point size. There is no margin padding on row height.
-    # @return [Float]
-    attr_reader :height
-
-    # Flag indicating if the outlining of row.
-    # @return [Boolean]
-    attr_reader :collapsed
-
-    # Flag indicating if the the row is hidden.
-    # @return [Boolean]
-    attr_reader :hidden
-
-    # Outlining level of the row, when outlining is on
-    # @return [Integer]
-    attr_reader :outlineLevel
-
-    # The style applied ot the row. This affects the entire row.
-    # @return [Integer]
-    attr_reader :s
-
-    # indicates that a style has been applied directly to the row via Row#s
-    # @return [Boolean]
-    attr_reader :customFormat
-
-    # indicates if the row should show phonetic
-    # @return [Boolean]
-    attr_reader :ph
-
-    # NOTE removing this from the api as it is actually incorrect. 
-    # having a method to style a row's cells is fine, but it is not an attribute on the row. 
-    # The proper attribute is ':s'
-    # attr_reader style
-    #
-    
-    # Creates a new row. New Cell objects are created based on the values, types and style options.
+   # Creates a new row. New Cell objects are created based on the values, types and style options.
     # A new cell is created for each item in the values array. style and types options are applied as follows:
     #   If the types option is defined and is a symbol it is applied to all the cells created.
     #   If the types option is an array, cell types are applied by index for each cell
@@ -73,7 +28,7 @@ module Axlsx
     # @see Row#array_to_cells
     # @see Cell
     def initialize(worksheet, values=[], options={})
-      @height = nil
+      @ht = nil
       self.worksheet = worksheet
       @cells = SimpleTypedList.new Cell
       @worksheet.rows << self
@@ -81,29 +36,48 @@ module Axlsx
       array_to_cells(values, options)
     end
 
-    # @see Row#collapsed
-    def collapsed=(v)
-      Axlsx.validate_boolean(v)
-      @collapsed = v
+    # A list of serializable attributes.
+    serializable_attributes :hidden, :outline_level, :collapsed, :custom_format, :s, :ph, :custom_height, :ht
+
+    # Boolean row attribute accessors
+    boolean_attr_accessor :hidden, :collapsed, :custom_format, :ph, :custom_height
+
+    # The worksheet this row belongs to
+    # @return [Worksheet]
+    attr_reader :worksheet
+
+    # The cells this row holds
+    # @return [SimpleTypedList]
+    attr_reader :cells
+
+    # Row height measured in point size. There is no margin padding on row height.
+    # @return [Float]
+    def height
+      @ht
     end
 
-    # @see Row#hidden
-    def hidden=(v)
-      Axlsx.validate_boolean(v)
-      @hidden = v
-    end
-   
-    # @see Row#ph
-    def ph=(v) Axlsx.validate_boolean(v); @ph = v end
+    # Outlining level of the row, when outlining is on
+    # @return [Integer]
+    attr_reader :outline_level
+    alias :outlineLevel :outline_level
+
+    # The style applied ot the row. This affects the entire row.
+    # @return [Integer]
+    attr_reader :s
 
     # @see Row#s
-    def s=(v) Axlsx.validate_unsigned_numeric(v); @s = v; @customFormat = true end
+    def s=(v)
+      Axlsx.validate_unsigned_numeric(v)
+      @custom_format = true 
+      @s = v
+    end
 
     # @see Row#outline
-    def outlineLevel=(v)
+    def outline_level=(v)
       Axlsx.validate_unsigned_numeric(v)
-      @outlineLevel = v
+      @outline_level = v
     end
+    alias :outlineLevel= :outline_level=
 
     # The index of this row in the worksheet
     # @return [Integer]
@@ -116,18 +90,11 @@ module Axlsx
     # @param [String] str The string this rows xml will be appended to.
     # @return [String]
     def to_xml_string(r_index, str = '')
-      str << '<row r="' << (r_index + 1 ).to_s << '" '
-      instance_values.select { |key, value| SERIALIZABLE_ATTRIBUTES.include? key.to_sym }.each do |key, value|
-        str << key << '="' << value.to_s << '" '
-      end
-      if custom_height?
-        str << 'customHeight="1" ht="' << height.to_s << '">'
-      else
-        str << '>'
-      end
+      str << '<row '
+      serialized_attributes(str, { :r => r_index + 1 })
+      str << '>'
       @cells.each_with_index { |cell, c_index| cell.to_xml_string(r_index, c_index, str) }
       str << '</row>'
-      str
     end
 
     # Adds a singel sell to the row based on the data provided and updates the worksheet's autofit data.
@@ -154,13 +121,13 @@ module Axlsx
     end
 
     # @see height
-    def height=(v); Axlsx::validate_unsigned_numeric(v) unless v.nil?; @height = v end
-
-    # true if the row height has been manually set
-    # @return [Boolean]
-    # @see #height
-    def custom_height?
-      @height != nil
+    def height=(v)
+      Axlsx::validate_unsigned_numeric(v)
+      unless v.nil?
+        @ht = v
+        @custom_height = true
+      end
+      @ht
     end
 
     private

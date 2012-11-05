@@ -12,13 +12,13 @@ class TestRow < Test::Unit::TestCase
     assert(@row.cells.empty?, "no cells by default")
     assert_equal(@row.worksheet, @ws, "has a reference to the worksheet")
     assert_nil(@row.height, "height defaults to nil")
-    assert(!@row.custom_height?, "no custom height by default")
+    assert(!@row.custom_height, "no custom height by default")
   end
 
   def test_initialize_with_fixed_height
     row = @ws.add_row([1,2,3,4,5], :height=>40)
     assert_equal(40, row.height)
-    assert(row.custom_height?)
+    assert(row.custom_height)
   end
 
   def test_style
@@ -57,7 +57,7 @@ class TestRow < Test::Unit::TestCase
 
   def test_custom_height
     @row.height = 20
-    assert(@row.custom_height?)
+    assert(@row.custom_height)
   end
 
   def test_height
@@ -111,7 +111,7 @@ class TestRow < Test::Unit::TestCase
     @row.add_cell 1
     @row.height = 20
     r_s_xml = Nokogiri::XML(@row.to_xml_string(0, ''))
-    assert_equal(r_s_xml.xpath(".//row[@r=1][@ht=20][@customHeight=1]").size, 1)
+    assert_equal(r_s_xml.xpath(".//row[@r=1][@ht=20][@customHeight='true']").size, 1)
   end
 
 end
