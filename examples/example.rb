@@ -88,7 +88,14 @@ if examples.include? :cell_style_override
     sheet.add_row ['col 1', 'col 2', 'col 3', 'col 4'], :sz => 16
 
     sheet.add_row [1, 2, 3, "=SUM(A2:C2)"]
-
+    sheet.add_row %w(u shadow sz b i strike outline)
+    sheet.rows.last.cells[0].u = :double
+    sheet.rows.last.cells[1].shadow = true
+    sheet.rows.last.cells[2].sz = 20
+    sheet.rows.last.cells[3].b = true
+    sheet.rows.last.cells[4].i = true
+    sheet.rows.last.cells[5].strike = true
+    sheet.rows.last.cells[6].outline = 1
     # You can also apply cell style overrides to a range of cells
     sheet["A1:D1"].each { |c| c.color = "FF0000" }
     sheet['A1:D2'].each { |c| c.style = Axlsx::STYLE_THIN_BORDER }

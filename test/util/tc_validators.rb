@@ -159,6 +159,20 @@ class TestValidators < Test::Unit::TestCase
     assert_raise(ArgumentError) { Axlsx.validate_split_state_type 0 }
   end
 
+  def test_validate_family
+    assert_raise(ArgumentError) { Axlsx.validate_family 0 }
+    (1..5).each do |item|
+      assert_nothing_raised { Axlsx.validate_family item }
+    end
+  end
+
+  def test_validate_u
+    assert_raise(ArgumentError) { Axlsx.validate_cell_u :hoge }
+    [:none, :single, :double, :singleAccounting, :doubleAccounting].each do |sym|
+      assert_nothing_raised { Axlsx.validate_cell_u sym }
+    end
+  end
+
   def test_range_validation
      # exclusive
      assert_raise(ArgumentError) { Axlsx::RangeValidator.validate('foo', 1, 10, 10, false) } 

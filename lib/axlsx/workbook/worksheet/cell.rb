@@ -112,16 +112,43 @@ module Axlsx
     def font_name=(v) set_run_style :validate_string, :font_name, v; end
 
     # The inline charset property for the cell
+    # As far as I can tell, this is pretty much ignored. However, based on the spec it should be one of the following:
+    # 0 ￼ ANSI_CHARSET
+    # 1 DEFAULT_CHARSET
+    # 2 SYMBOL_CHARSET
+    # 77 MAC_CHARSET
+    # 128 SHIFTJIS_CHARSET
+    # 129 ￼ HANGUL_CHARSET
+    # 130 ￼ JOHAB_CHARSET
+    # 134 ￼ GB2312_CHARSET
+    # 136 ￼ CHINESEBIG5_CHARSET
+    # 161 ￼ GREEK_CHARSET
+    # 162 ￼ TURKISH_CHARSET
+    # 163 ￼ VIETNAMESE_CHARSET
+    # 177 ￼ HEBREW_CHARSET
+    # 178 ￼ ARABIC_CHARSET
+    # 186 ￼ BALTIC_CHARSET
+    # 204 ￼ RUSSIAN_CHARSET
+    # 222 ￼ THAI_CHARSET
+    # 238 ￼ EASTEUROPE_CHARSET
+    # 255 ￼ OEM_CHARSET
     # @return [String]
     attr_reader :charset
     # @see charset
     def charset=(v) set_run_style :validate_unsigned_int, :charset, v; end
 
     # The inline family property for the cell
-    # @return [String]
+    # @return [Integer]
+    # 1 Roman
+    # 2 Swiss
+    # 3 Modern
+    # 4 Script
+    # 5 Decorative
     attr_reader :family
     # @see family
-    def family=(v) set_run_style :validate_string, :family, v; end
+    def family=(v)
+      set_run_style :validate_family, :family, v.to_i
+    end
 
     # The inline bold property for the cell
     # @return [Boolean]
@@ -165,11 +192,17 @@ module Axlsx
     # @see extend
     def extend=(v) set_run_style :validate_boolean, :extend, v; end
 
-    # The inline underline property for the cell
+    # The inline underline property for the cell.
+    # It must be one of :none, :single, :double, :singleAccounting, :doubleAccounting, true
     # @return [Boolean]
+    # @return [String]
+    # @note true is for backwards compatability and is reassigned to :single
     attr_reader :u
     # @see u
-    def u=(v) set_run_style :validate_boolean, :u, v; end
+    def u=(v)
+      v = :single if (v == true || v == 1 || v == :true || v == 'true')
+      set_run_style :validate_cell_u, :u, v
+    end
 
     # The inline color property for the cell
     # @return [Color]

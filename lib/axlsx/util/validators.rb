@@ -140,7 +140,14 @@ module Axlsx
   def self.validate_page_orientation(v)
     RestrictionValidator.validate "page_orientation", [:default, :landscape, :portrait], v
   end
+  # Requires that the value is one of :none, :single, :double, :singleAccounting, :doubleAccounting
+  def self.validate_cell_u(v)
+    RestrictionValidator.validate "cell run style u", [:none, :single, :double, :singleAccounting, :doubleAccounting], v
+  end
 
+  def self.validate_family(v)
+    RestrictionValidator.validate "cell run style family", 1..5, v
+  end
   # Requires that the value is valid pattern type.
   # valid pattern types must be one of :none, :solid, :mediumGray, :darkGray, :lightGray, :darkHorizontal, :darkVertical, :darkDown,
   # :darkUp, :darkGrid, :darkTrellis, :lightHorizontal, :lightVertical, :lightDown, :lightUp, :lightGrid, :lightTrellis, :gray125, or :gray0625.

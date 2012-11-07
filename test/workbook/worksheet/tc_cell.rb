@@ -162,9 +162,12 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_u
+    @c.type = :string
     assert_raise(ArgumentError) { @c.u = -1.1 }
-    assert_nothing_raised { @c.u = false }
-    assert_equal(@c.u, false)
+    assert_nothing_raised { @c.u = :single }
+    assert_equal(@c.u, :single)
+    doc = Nokogiri::XML(@c.to_xml_string(1,1))
+    assert(doc.xpath('//u[@val="single"]'))
   end
 
   def test_i
@@ -187,8 +190,8 @@ class TestCell < Test::Unit::TestCase
 
   def test_family
     assert_raise(ArgumentError) { @c.family = -1.1 }
-    assert_nothing_raised { @c.family = "Who knows!" }
-    assert_equal(@c.family, "Who knows!")
+    assert_nothing_raised { @c.family = 5 }
+    assert_equal(@c.family, 5)
   end
 
   def test_b
@@ -251,6 +254,8 @@ class TestCell < Test::Unit::TestCase
   end
   
   def test_to_xml_string_with_run
+    # Actually quite a number of similar run styles
+    # but the processing should be the same
     @c.b = true
     @c.type = :string
     @c.value = "a"
@@ -259,6 +264,7 @@ class TestCell < Test::Unit::TestCase
     c_xml = Nokogiri::XML(@c.to_xml_string(1,1))
     assert(c_xml.xpath("//b"))
   end
+
   def test_to_xml_string_formula
     p = Axlsx::Package.new
     ws = p.workbook.add_worksheet do |sheet|
@@ -285,6 +291,7 @@ class TestCell < Test::Unit::TestCase
     sz = @c.send(:font_size)
     assert_equal(sz, 52)
   end
+  
 
   def test_cell_with_sz
     @c.sz = 25
@@ -293,6 +300,7 @@ class TestCell < Test::Unit::TestCase
   def test_to_xml
     # TODO This could use some much more stringent testing related to the xml content generated!
     @ws.add_row [Time.now, Date.today, true, 1, 1.0, "text", "=sum(A1:A2)"]
+    @ws.rows.last.cells[5].u = true
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@ws.to_xml_string)
     errors = []
