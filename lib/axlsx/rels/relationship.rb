@@ -55,7 +55,7 @@ module Axlsx
       h = self.instance_values
       h[:Id] = 'rId' << rId.to_s
       str << '<Relationship '
-      str << h.map { |key, value| '' << key.to_s << '="' << value.to_s << '"'}.join(' ')
+      str << h.map { |key, value| '' << key.to_s << '="' << Axlsx::coder.encode(value.to_s) << '"'}.join(' ')
       str << '/>'
     end
 

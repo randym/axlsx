@@ -5,7 +5,7 @@ class TestWorksheetHyperlink < Test::Unit::TestCase
     p = Axlsx::Package.new
     wb = p.workbook
     @ws = wb.add_worksheet
-    @options = { :location => 'https://github.com/randym/axlsx', :tooltip => 'axlsx', :ref => 'A1', :display => 'AXSLX', :target => :internal }
+    @options = { :location => 'https://github.com/randym/axlsx?foo=1&bar=2', :tooltip => 'axlsx', :ref => 'A1', :display => 'AXSLX', :target => :internal }
     @a = @ws.add_hyperlink @options
   end
 
