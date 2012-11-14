@@ -5,40 +5,42 @@ $LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../lib"
 #```ruby
 require 'axlsx'
 examples = []
-examples << :basic
-examples << :custom_styles
-examples << :cell_style_override
-examples << :custom_borders
-examples << :surrounding_border
-examples << :deep_custom_borders
-examples << :row_column_style
-examples << :fixed_column_width
-examples << :merge_cells
-examples << :images
-examples << :format_dates
-examples << :mbcs
-examples << :formula
-examples << :auto_filter
-examples << :data_types
-examples << :hyperlinks
-examples << :number_currency_format
-examples << :bar_chart
-examples << :chart_gridlines
-examples << :pie_chart
-examples << :line_chart
-examples << :scatter_chart
-examples << :tables
-examples << :fit_to_page
-examples << :hide_gridlines
-examples << :repeated_header
-examples << :defined_name
-examples << :printing
-examples << :comments
-examples << :panes
-examples << :conditional_formatting
-examples << :streaming
-examples << :shared_strings
-examples << :no_autowidth
+#examples << :basic
+#examples << :custom_styles
+#examples << :wrap_text
+#examples << :cell_style_override
+#examples << :custom_borders
+#examples << :surrounding_border
+#examples << :deep_custom_borders
+#examples << :row_column_style
+#examples << :fixed_column_width
+#examples << :merge_cells
+#examples << :images
+#examples << :format_dates
+#examples << :mbcs
+#examples << :formula
+#examples << :auto_filter
+#examples << :data_types
+#examples << :hyperlinks
+#examples << :number_currency_format
+examples << :venezuela_currency
+#examples << :bar_chart
+#examples << :chart_gridlines
+#examples << :pie_chart
+#examples << :line_chart
+#examples << :scatter_chart
+#examples << :tables
+#examples << :fit_to_page
+#examples << :hide_gridlines
+#examples << :repeated_header
+#examples << :defined_name
+#examples << :printing
+#examples << :comments
+#examples << :panes
+#examples << :conditional_formatting
+#examples << :streaming
+#examples << :shared_strings
+#examples << :no_autowidth
 
 p = Axlsx::Package.new
 wb = p.workbook
@@ -75,7 +77,26 @@ if examples.include? :custom_styles
     end
   end
 end
-#```
+
+
+#```ruby
+# A simple example of wrapping text. Seems this may not be working in Libre Office so here is an example for me to play with.
+if examples.include? :wrap_text
+  wb.styles do |s|
+    wrap_text = s.add_style :fg_color=> "FFFFFF",
+                            :b => true,
+                            :bg_color => "004586",
+                            :sz => 12,
+                            :border => { :style => :thin, :color => "00" },
+                            :alignment => { :horizontal => :center,
+                                            :vertical => :center ,
+                                            :wrap_text => true}
+    wb.add_worksheet(:name => 'wrap text') do |sheet|
+      sheet.add_row ['Torp, White and Cronin'], :style=>wrap_text
+      sheet.column_info.first.width = 5
+    end
+  end
+end
 
 ##Styling Cell Overrides
 
@@ -349,6 +370,15 @@ if examples.include? :number_currency_format
     sheet.add_row [1500, -122.34, 123456789, 594829], :style=> [currency, red_negative, comma, super_funk]
   end
 end
+
+## Venezuala currency
+if examples.include? :venezuela_currency
+  wb.add_worksheet(:name => 'Venezuala_currency') do |sheet|
+    number = wb.styles.add_style :format_code => '#.##0\,00'
+    sheet.add_row [2.5] , :style => [number]
+  end
+end
+
 ##Generating A Bar Chart
 
 #```ruby

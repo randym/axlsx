@@ -19,6 +19,10 @@ module Axlsx
       @min_length = 10
       @max_length = 90
       @show_value = true
+      # TODO initialize using the same pattern as color_scale so consumers can override these values
+      # as they like.
+      value_objects << Cfvo.new(:type => :min, :val => 0)
+      value_objects << Cfvo.new(:type => :max, :val => 0)
       parse_options options
       yield self if block_given?
     end

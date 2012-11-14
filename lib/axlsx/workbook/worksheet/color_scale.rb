@@ -7,6 +7,12 @@ module Axlsx
   # @see ConditionalFormattingRule#initialize
   class ColorScale
 
+    class << self
+      def default_cfvos
+        [{:type => :min, :val => 0, :color => 'FFFF0000'},
+         {:type => :max, :val => 0, :color => 'FF0000FF'}]
+      end
+    end
     # A simple typed list of cfvos
     # @return [SimpleTypedList]
     # @see Cfvo
@@ -17,25 +23,31 @@ module Axlsx
     # A simple types list of colors
     # @return [SimpleTypedList]
     # @see Color
-    attr_reader :colors
+    def colors
+      @colors ||= SimpleTypedList.new Color
+    end
 
     # creates a new ColorScale object.
-    # This method will yield it self so you can alter the properites of the defauls conditional formating value object (cfvo and colors
-    # Two value objects and two colors are created on initialization and cannot be deleted.
     # @see Cfvo
     # @see Color
-    def initialize
-      initialize_colors
+    # @example
+    #     color_scale = Axlsx::ColorScale.new({:type => :num, :val => 0.55, :color => 'fff7696c'})
+    def initialize(*cfvos)
+      initialize_default_cfvos(cfvos)
       yield self if block_given?
     end
 
     # adds a new cfvo / color pair to the color scale and returns a hash containing
     # a reference to the newly created cfvo and color objects so you can alter the default properties.
     # @return [Hash] a hash with :cfvo and :color keys referencing the newly added objects.
+    # @param [Hash] options options for the new cfvo and color objects
+    # @option [Symbol] type The type of cfvo you to add
+    # @option [Any] val The value of the cfvo to add
+    # @option [String] The rgb color for the cfvo
     def add(options={})
       value_objects << Cfvo.new(:type => options[:type] || :min, :val => options[:val] || 0)
-      @colors << Color.new(:rgb => options[:color] || "FF000000")
-      {:cfvo => value_objects.last, :color => @colors.last}
+      colors << Color.new(:rgb => options[:color] || "FF000000")
+      {:cfvo => value_objects.last, :color => colors.last}
     end
 
 
@@ -44,7 +56,7 @@ module Axlsx
     # @note you cannot remove the first two cfvo and color pairs
     def delete_at(index=2)
       value_objects.delete_at index
-      @colors.delete_at index
+      colors.delete_at index
     end
 
     # Serialize this color_scale object data to an xml string
@@ -53,18 +65,23 @@ module Axlsx
     def to_xml_string(str = '')
       str << '<colorScale>'
       value_objects.to_xml_string(str)
-      @colors.each { |color| color.to_xml_string(str) }
+      colors.each { |color| color.to_xml_string(str) }
       str << '</colorScale>'
     end
 
     private
-
-    # creates the initial color objects
-    def initialize_colors
-      @colors = SimpleTypedList.new Color
-      @colors.concat [Color.new(:rgb => "FFFF0000"), Color.new(:rgb => "FF0000FF")]
-      @colors.lock
+    # There has got to be cleaner way of merging these arrays.
+    def initialize_default_cfvos(user_cfvos)
+      defaults = self.class.default_cfvos
+      user_cfvos.each_with_index do |cfvo, index|
+        if index < defaults.size
+          cfvo = defaults[index].merge(cfvo)
+        end
+        add cfvo
+      end
+      while colors.size < defaults.size
+        add defaults[colors.size - 1]
+      end
     end
-
   end
 end

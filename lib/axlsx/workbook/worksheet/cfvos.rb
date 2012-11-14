@@ -6,9 +6,6 @@ module Axlsx
 
     def initialize
       super(Cfvo)
-      @list << Cfvo.new(:type => :min, :val => 0)
-      @list << Cfvo.new(:type => :max, :val => 0)
-      lock
     end
 
     def to_xml_string(str='')
