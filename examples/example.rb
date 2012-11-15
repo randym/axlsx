@@ -23,7 +23,7 @@ examples = []
 #examples << :data_types
 #examples << :hyperlinks
 #examples << :number_currency_format
-examples << :venezuela_currency
+#examples << :venezuela_currency
 #examples << :bar_chart
 #examples << :chart_gridlines
 #examples << :pie_chart
@@ -37,7 +37,7 @@ examples << :venezuela_currency
 #examples << :printing
 #examples << :comments
 #examples << :panes
-#examples << :conditional_formatting
+examples << :conditional_formatting
 #examples << :streaming
 #examples << :shared_strings
 #examples << :no_autowidth
@@ -604,8 +604,10 @@ if examples.include? :conditional_formatting
     offset.upto(rows + offset) do |i|
       ws.add_row ["Q#{i}", 10000*((rows/2-i) * (rows/2-i)), "=100*B#{i}/SUM(B3:B#{rows+offset})"], :style=>[nil, money, percent]
     end
-    # Apply conditional formatting to range B3:B100 in the worksheet
-    color_scale = Axlsx::ColorScale.new
+    # color scale has two_tone and three_tone class methods to setup the excel defaults (2011)
+    # alternatively, you can pass in {:type => [:min, :max, :percent], :val => [whatever], :color =>[Some RGB String] to create a customized color scale object
+
+    color_scale = Axlsx::ColorScale.three_tone
     ws.add_conditional_formatting("B3:B100", { :type => :colorScale, :operator => :greaterThan, :formula => "100000", :dxfId => profitable, :priority => 1, :color_scale => color_scale })
   end
 

@@ -9,8 +9,18 @@ module Axlsx
 
     class << self
       def default_cfvos
-        [{:type => :min, :val => 0, :color => 'FFFF0000'},
-         {:type => :max, :val => 0, :color => 'FF0000FF'}]
+        [{:type => :min, :val => 0, :color => 'FFFF7128'},
+         {:type => :max, :val => 0, :color => 'FFFFEF9C'}]
+      end
+
+      def two_tone
+        self.new(*self.default_cfvos)
+      end
+
+      def three_tone
+        self.new({:type => :min, :val => 0, :color => 'FFF8696B'},
+                 {:type => :percent, :val => '50', :color => 'FFFFEB84'},
+                 {:type => :max, :val => 0, :color => 'FF63BE7B'})
       end
     end
     # A simple typed list of cfvos

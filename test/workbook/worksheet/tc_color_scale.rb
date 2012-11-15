@@ -5,15 +5,25 @@ class TestColorScale < Test::Unit::TestCase
     @color_scale = Axlsx::ColorScale.new
   end
 
+  def test_three_tone
+    color_scale = Axlsx::ColorScale.three_tone
+    assert_equal 3, color_scale.value_objects.size
+    assert_equal 3, color_scale.colors.size
+  end
 
+  def two_tone
+    color_scale = Axlsx::ColorScale.two_tone
+    assert_equal 2, color_scale.value_objects.size
+    assert_equal 2, color_scale.colors.size
+  end
   def test_default_cfvo
     first = Axlsx::ColorScale.default_cfvos.first
     second = Axlsx::ColorScale.default_cfvos.last
-    assert_equal 'FFFF0000', first[:color]
+    assert_equal 'FFFF7128', first[:color]
     assert_equal :min,first[:type]
     assert_equal 0, first[:val]
 
-    assert_equal 'FF0000FF', second[:color]
+    assert_equal 'FFFFEF9C', second[:color]
     assert_equal :max, second[:type]
     assert_equal 0, second[:val]
   end
