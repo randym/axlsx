@@ -10,20 +10,27 @@ module Axlsx
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
 
+    class << self
+      # This differs from ColorScale. There must be exactly two cfvos one color
+      def default_cfvos
+        [{:type => :min, :val => "0"},
+         {:type => :max, :val => "0"}]
+      end
+    end
+
     # Creates a new data bar conditional formatting object
+    # @param [Hash] options
     # @option options [Integer] minLength
     # @option options [Integer] maxLength
     # @option options [Boolean] showValue
     # @option options [String] color - the rbg value used to color the bars
-    def initialize(options = {})
+    # @param [Array] cfvos hashes defining the gradient interpolation points for this formatting.
+    def initialize(options = {}, *cfvos)
       @min_length = 10
       @max_length = 90
       @show_value = true
-      # TODO initialize using the same pattern as color_scale so consumers can override these values
-      # as they like.
-      value_objects << Cfvo.new(:type => :min, :val => 0)
-      value_objects << Cfvo.new(:type => :max, :val => 0)
       parse_options options
+      initialize_cfvos(cfvos)
       yield self if block_given?
     end
 
@@ -74,27 +81,27 @@ module Axlsx
     end
     alias :minLength= :min_length=
 
-    # @see maxLength
-    def max_length=(v)
-      Axlsx.validate_unsigned_int(v)
-      @max_length = v
-    end
+      # @see maxLength
+      def max_length=(v)
+        Axlsx.validate_unsigned_int(v)
+        @max_length = v
+      end
     alias :maxLength= :max_length=
 
-    # @see showValue
-    def show_value=(v)
-      Axlsx.validate_boolean(v)
-      @show_value = v
-    end
+      # @see showValue
+      def show_value=(v)
+        Axlsx.validate_boolean(v)
+        @show_value = v
+      end
     alias :showValue= :show_value=
 
-    # Sets the color for the data bars.
-    # @param [Color|String] v The color object, or rgb string value to apply
-    def color=(v)
-      @color = v if v.is_a? Color
-      self.color.rgb = v if v.is_a? String
-      @color
-    end
+      # Sets the color for the data bars.
+      # @param [Color|String] v The color object, or rgb string value to apply
+      def color=(v)
+        @color = v if v.is_a? Color
+        self.color.rgb = v if v.is_a? String
+        @color
+      end
 
     # Serialize this object to an xml string
     # @param [String] str
@@ -107,5 +114,18 @@ module Axlsx
       self.color.to_xml_string(str)
       str << '</dataBar>'
     end
+
+    private
+
+    def initialize_cfvos(cfvos)
+      self.class.default_cfvos.map.with_index do |default, index|
+        if index < cfvos.size
+          value_objects << Cfvo.new(default.merge(cfvos[index]))
+        else
+          value_objects << Cfvo.new(default)
+        end
+      end
+    end
+
   end
 end
