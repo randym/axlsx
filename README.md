@@ -21,7 +21,7 @@ appreciation for the gem, please don't hesitate to make a donation.
 
 **License**: MIT License
 
-**Latest Version**: 1.3.3
+**Latest Version**: 1.3.4
 
 **Ruby Version**: 1.8.7, 1.9.2, 1.9.3
 
@@ -29,7 +29,7 @@ appreciation for the gem, please don't hesitate to make a donation.
 
 **Rubinius Version**: rubinius 2.0.0dev * lower versions may run, this gem always tests against head.
 
-**Release Date**: November 8th 2012
+**Release Date**: November ??th 2012
 
 If you are working in rails, or with active record see:
 * http://github.com/randym/acts_as_xlsx
@@ -149,6 +149,9 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
+- **November.??.12**:1.3.4
+  - Patch to properly escape hyperlink urls
+  - Improvements in color_scale generation for conditional formatting
 - **November.8.12**:1.3.3
   - Patched cell run styles for u and validation for family
 - **November.5.12**:1.3.2
