@@ -11,7 +11,7 @@ class TestColorScale < Test::Unit::TestCase
     assert_equal 3, color_scale.colors.size
   end
 
-  def two_tone
+  def test_two_tone
     color_scale = Axlsx::ColorScale.two_tone
     assert_equal 2, color_scale.value_objects.size
     assert_equal 2, color_scale.colors.size

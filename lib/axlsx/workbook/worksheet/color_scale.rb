@@ -14,7 +14,7 @@ module Axlsx
       end
 
       def two_tone
-        self.new(*self.default_cfvos)
+        self.new
       end
 
       def three_tone
