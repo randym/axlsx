@@ -18,6 +18,7 @@ module Axlsx
     # @option options [String] name The name of this worksheet.
     # @option options [Hash] page_margins A hash containing page margins for this worksheet. @see PageMargins
     # @option options [Hash] print_options A hash containing print options for this worksheet. @see PrintOptions
+    # @option options [Hash] header_footer A hash containing header/footer options for this worksheet. @see HeaderFooter
     # @option options [Boolean] show_gridlines indicates if gridlines should be shown for this sheet.
     def initialize(wb, options={})
       self.workbook = wb
@@ -34,6 +35,7 @@ module Axlsx
       @page_margins = PageMargins.new options[:page_margins] if options[:page_margins]
       @page_setup = PageSetup.new options[:page_setup]  if options[:page_setup]
       @print_options = PrintOptions.new options[:print_options] if options[:print_options]
+      @header_footer = HeaderFooter.new options[:header_footer] if options[:header_footer]
     end
 
     # The name of the worksheet
@@ -41,7 +43,7 @@ module Axlsx
     def name
       @name ||=  "Sheet" + (index+1).to_s
     end
- 
+
     # The sheet calculation properties
     # @return [SheetCalcPr]
     def sheet_calc_pr
@@ -104,7 +106,7 @@ module Axlsx
     # An range that excel will apply an autfilter to "A1:B3"
     # This will turn filtering on for the cells in the range.
     # The first row is considered the header, while subsequent rows are considerd to be data.
-    # @return String 
+    # @return String
     def auto_filter
       @auto_filter ||= AutoFilter.new self
     end
@@ -191,6 +193,21 @@ module Axlsx
       @print_options ||= PrintOptions.new
       yield @print_options if block_given?
       @print_options
+    end
+
+    # Options for headers and footers.
+    # @example
+    #   wb = Axlsx::Package.new.workbook
+    #   # would generate something like: "file.xlsx : sheet_name 2 of 7 date with timestamp"
+    #   header = {:different_odd_ => false, :odd_header => "&L&F : &A&C&Pof%N%R%D %T"}
+    #   ws = wb.add_worksheet :header_footer => header
+    #
+    # @see HeaderFooter#initialize
+    # @return [HeaderFooter]
+    def header_footer
+      @header_footer ||= HeaderFooter.new
+      yield @header_footer if block_given?
+      @header_footer
     end
 
     # convinience method to access all cells in this worksheet
@@ -280,7 +297,7 @@ module Axlsx
 
     # The name of the worksheet
     # The name of a worksheet must be unique in the workbook, and must not exceed 31 characters
-    # @param [String] name 
+    # @param [String] name
     def name=(name)
       validate_sheet_name name
       @name=Axlsx::coder.encode(name)
@@ -388,7 +405,7 @@ module Axlsx
       cf = ConditionalFormatting.new( :sqref => cells )
       cf.add_rules rules
       conditional_formattings << cf
-      conditional_formattings      
+      conditional_formattings
     end
 
     # Add data validation to this worksheet.
@@ -513,7 +530,7 @@ module Axlsx
     def sanitize(str)
       str.gsub(CONTROL_CHAR_REGEX, '')
     end
-    
+
     # The worksheet relationships. This is managed automatically by the worksheet
     # @return [Relationships]
     def relationships
@@ -570,12 +587,12 @@ module Axlsx
 
 
     private
-   
+
     def validate_sheet_name(name)
       DataTypeValidator.validate "Worksheet.name", String, name
       raise ArgumentError, (ERR_SHEET_NAME_TOO_LONG % name) if name.size > 31
       raise ArgumentError, (ERR_SHEET_NAME_COLON_FORBIDDEN % name) if name.include? ':'
-      name = Axlsx::coder.encode(name) 
+      name = Axlsx::coder.encode(name)
       sheet_names = @workbook.worksheets.map { |s| s.name }
       raise ArgumentError, (ERR_DUPLICATE_SHEET_NAME % name) if sheet_names.include?(name)
     end
@@ -586,7 +603,7 @@ module Axlsx
        sheet_data, sheet_calc_pr, @sheet_protection, protected_ranges,
        auto_filter, merged_cells, conditional_formattings,
        data_validations, hyperlinks, print_options, page_margins,
-       page_setup, worksheet_drawing, worksheet_comments,
+       page_setup, header_footer, worksheet_drawing, worksheet_comments,
        tables]
     end
 
@@ -606,7 +623,7 @@ module Axlsx
     # @see Worksheet#protect_range
     # @return [SimpleTypedList] The protected ranges for this worksheet
     def protected_ranges
-      @protected_ranges ||= ProtectedRanges.new self 
+      @protected_ranges ||= ProtectedRanges.new self
       # SimpleTypedList.new ProtectedRange
     end
 
@@ -619,7 +636,7 @@ module Axlsx
     # data validations array
     # @return [Array]
     def data_validations
-      @data_validations ||= DataValidations.new self 
+      @data_validations ||= DataValidations.new self
     end
 
     # merged cells array
