@@ -14,7 +14,7 @@ module Axlsx
     # @option options [Array|String|Cell] start_at The X, Y coordinates defining the top left corner of the chart.
     # @option options [Array|String|Cell] end_at The X, Y coordinates defining the bottom right corner of the chart.
     def initialize(frame, options={})
-      @style = 18  
+      @style = 18
       @view_3D = nil
       @graphic_frame=frame
       @graphic_frame.anchor.drawing.worksheet.workbook.charts << self

@@ -9,7 +9,8 @@ module Axlsx
     # This is used for autowidth calculations
     # @return [String]
     def self.thin_chars
-      @thin_chars ||= "^.acefijklrstxyzFIJL()-"
+      # removed 'e' and 'y' from this list - as a GUESS
+      @thin_chars ||= "^.acfijklrstxzFIJL()-"
     end
 
     # Creates a new worksheet.

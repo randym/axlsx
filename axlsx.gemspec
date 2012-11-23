@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
 # This has been removed until JRuby can support the native extensions for redcarpet or yard removes the dependency
   s.add_development_dependency 'yard'
   s.add_development_dependency 'kramdown'
-  s.add_development_dependency 'cover_me' unless RUBY_VERSION == '1.8.7'
+  s.add_development_dependency 'simplecov'
   s.required_ruby_version = '>= 1.8.7'
   s.require_path = 'lib'
 end
