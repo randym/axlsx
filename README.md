@@ -150,6 +150,7 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 #Change log
 ---------
 - **November.??.12**:1.3.4
+  - Support for headers and footers for worksheets
   - Patch to properly escape hyperlink urls
   - Improvements in color_scale generation for conditional formatting
 - **November.8.12**:1.3.3
@@ -248,6 +249,8 @@ done without the help of the people below.
 
 [ebenoist](https://github.com/ebenoist) - For taking control of control characters and keeping what is between the lines, between the lines.
 
+[adammathys](https://github.com/adammathys) - Fgr getting our head in the
+air and our feet on the ground.
 #Copyright and License
 ----------
 
