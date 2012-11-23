@@ -35,6 +35,7 @@ examples = []
 #examples << :repeated_header
 #examples << :defined_name
 #examples << :printing
+#examples << :header_footer
 #examples << :comments
 #examples << :panes
 examples << :conditional_formatting
@@ -149,7 +150,7 @@ if examples.include? :surrounding_border
   # LEARN IT! LIVE IT! LOVE IT!
   defaults =  { :style => :thick, :color => "000000" }
   borders = Hash.new do |hash, key|
-    hash[key] = wb.styles.add_style :border => defaults.merge( { :edges => key.to_s.split('_').map(&:to_sym) } ) 
+    hash[key] = wb.styles.add_style :border => defaults.merge( { :edges => key.to_s.split('_').map(&:to_sym) } )
   end
   top_row =  [0, borders[:top_left], borders[:top], borders[:top], borders[:top_right]]
   middle_row = [0, borders[:left], nil, nil, borders[:right]]
@@ -167,11 +168,11 @@ if examples.include? :surrounding_border
   end
 end
 
-#```ruby 
+#```ruby
 # Hacking border styles
 if examples.include? :deep_custom_borders
   wb.styles do |s|
-    top_bottom =  s.add_style :border => { :style => :thick, :color =>"FFFF0000", :edges => [:top, :bottom] }  
+    top_bottom =  s.add_style :border => { :style => :thick, :color =>"FFFF0000", :edges => [:top, :bottom] }
     border = s.borders[s.cellXfs[top_bottom].borderId]
     # edit existing border parts
     border.prs.each do |part|
@@ -511,7 +512,7 @@ if examples.include? :repeated_header
   wb.add_worksheet(:name => "repeated header") do |sheet|
     sheet.add_row %w(These Column Header Will Render On Every Printed Sheet)
     200.times { sheet.add_row %w(1 2 3 4 5 6 7 8) }
-    wb.add_defined_name("'repeated header'!$1:$1", :local_sheet_id => sheet.index, :name => '_xlnm.Print_Titles') 
+    wb.add_defined_name("'repeated header'!$1:$1", :local_sheet_id => sheet.index, :name => '_xlnm.Print_Titles')
   end
 end
 
@@ -546,7 +547,17 @@ if examples.include? :printing
 end
 #```
 
-## Add Comments to your spreadsheet 
+## Add headers and footers to a worksheet
+#``` ruby
+if examples.include? :header_footer
+  header_footer = {:different_first => false, :odd_header => '&L&F : &A&R&D &T', :odd_footer => '&C&Pof&N'}
+  wb.add_worksheet(:name => "header footer", :header_footer => header_footer) do |sheet|
+    sheet.add_row ["this sheet has a header and a footer"]
+  end
+end
+#```
+
+## Add Comments to your spreadsheet
 #``` ruby
 if examples.include? :comments
   wb.add_worksheet(:name => 'comments') do |sheet|

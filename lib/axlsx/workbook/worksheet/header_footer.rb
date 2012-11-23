@@ -1,6 +1,11 @@
 module Axlsx
   # Header/Footer options for printing a worksheet. All settings are optional.
   #
+  # Headers and footers are generated using a string which is a combination
+  # of plain text and control characters. A fairly comprehensive list of control
+  # characters can be found here:
+  # https://github.com/randym/axlsx/blob/master/notes_on_header_footer.md
+  #     
   # @note The recommended way of managing header/footers is via Worksheet#header_footer
   # @see Worksheet#initialize
   class HeaderFooter
@@ -41,14 +46,14 @@ module Axlsx
       serialized_attributes str
       str << ">"
 
-      str << "<oddHeader>#{odd_header}</oddHeader>" unless odd_header.nil?
-      str << "<oddFooter>#{odd_footer}</oddFooter>" unless odd_footer.nil?
+      str << "<oddHeader>#{::CGI.escapeHTML(odd_header)}</oddHeader>" unless odd_header.nil?
+      str << "<oddFooter>#{::CGI.escapeHTML(odd_footer)}</oddFooter>" unless odd_footer.nil?
 
-      str << "<evenHeader>#{even_header}</evenHeader>" unless even_header.nil?
-      str << "<evenFooter>#{even_footer}</evenFooter>" unless even_footer.nil?
+      str << "<evenHeader>#{::CGI.escapeHTML(even_header)}</evenHeader>" unless even_header.nil?
+      str << "<evenFooter>#{::CGI.escapeHTML(even_footer)}</evenFooter>" unless even_footer.nil?
 
-      str << "<firstHeader>#{first_header}</firstHeader>" unless first_header.nil?
-      str << "<firstFooter>#{first_footer}</firstFooter>" unless first_footer.nil?
+      str << "<firstHeader>#{::CGI.escapeHTML(first_header)}</firstHeader>" unless first_header.nil?
+      str << "<firstFooter>#{::CGI.escapeHTML(first_footer)}</firstFooter>" unless first_footer.nil?
 
       str << "</headerFooter>"
     end
