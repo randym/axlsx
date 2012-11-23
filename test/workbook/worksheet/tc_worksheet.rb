@@ -55,6 +55,17 @@ class TestWorksheet < Test::Unit::TestCase
     end
   end
 
+  def test_header_footer
+    assert(@ws.header_footer.is_a? Axlsx::HeaderFooter)
+  end
+
+  def test_header_footer_yield
+    @ws.header_footer do |hf|
+      assert(hf.is_a? Axlsx::HeaderFooter)
+      assert(@ws.header_footer == hf)
+    end
+  end
+
   def test_no_autowidth
     @ws.workbook.use_autowidth = false
     @ws.add_row [1,2,3,4]
@@ -65,7 +76,8 @@ class TestWorksheet < Test::Unit::TestCase
     page_margins = {:left => 2, :right => 2, :bottom => 2, :top => 2, :header => 2, :footer => 2}
     page_setup = {:fit_to_height => 1, :fit_to_width => 1, :orientation => :landscape, :paper_width => "210mm", :paper_height => "297mm", :scale => 80}
     print_options = {:grid_lines => true, :headings => true, :horizontal_centered => true, :vertical_centered => true}
-    optioned = @ws.workbook.add_worksheet(:name => 'bob', :page_margins => page_margins, :page_setup => page_setup, :print_options => print_options, :selected => true, :show_gridlines => false)
+    header_footer = {:different_first => false, :different_odd_even => false, :odd_header => 'Header'}
+    optioned = @ws.workbook.add_worksheet(:name => 'bob', :page_margins => page_margins, :page_setup => page_setup, :print_options => print_options, :header_footer => header_footer, :selected => true, :show_gridlines => false)
     page_margins.keys.each do |key|
       assert_equal(page_margins[key], optioned.page_margins.send(key))
     end
@@ -74,6 +86,9 @@ class TestWorksheet < Test::Unit::TestCase
     end
     print_options.keys.each do |key|
       assert_equal(print_options[key], optioned.print_options.send(key))
+    end
+    header_footer.keys.each do |key|
+      assert_equal(header_footer[key], optioned.header_footer.send(key))
     end
     assert_equal(optioned.name, 'bob')
     assert_equal(optioned.selected, true)
@@ -293,6 +308,16 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(doc.xpath('//xmlns:worksheet/xmlns:printOptions[@gridLines="true"][@horizontalCentered="true"]').size, 1)
   end
 
+  def test_to_xml_string_header_footer
+    @ws.header_footer do |hf|
+      hf.different_first = false
+      hf.different_odd_even = false
+      hf.odd_header = 'Test Header'
+    end
+    doc = Nokogiri::XML(@ws.to_xml_string)
+    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:headerFooter[@differentFirst="false"][@differentOddEven="false"]').size, 1)
+  end
+
   def test_to_xml_string_drawing
     @ws.add_chart Axlsx::Pie3DChart
     doc = Nokogiri::XML(@ws.to_xml_string)
@@ -317,7 +342,7 @@ class TestWorksheet < Test::Unit::TestCase
   def test_styles
     assert(@ws.styles.is_a?(Axlsx::Styles), 'worksheet provides access to styles')
   end
-  
+
   def test_to_xml_string_with_illegal_chars
     nasties =  "\v\u2028\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008\u001f"
     @ws.add_row [nasties]
@@ -400,7 +425,7 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.add_row [1, 2, 3]
     assert_nothing_raised {@ws.protect_range(@ws.rows.first.cells) }
     assert_equal('A1:C1', @ws.send(:protected_ranges).last.sqref)
-    
+
   end
   def test_merge_cells
     @ws.add_row [1,2,3]
@@ -412,7 +437,7 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(@ws.send(:merged_cells).size, 3)
     assert_equal(@ws.send(:merged_cells).last, "A3:B3")
   end
-  
+
   def test_merge_cells_sorts_correctly_by_row_when_given_array
     10.times do |i|
       @ws.add_row [i]
@@ -420,7 +445,7 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.merge_cells [@ws.rows[8].cells.first, @ws.rows[9].cells.first]
     assert_equal "A9:A10", @ws.send(:merged_cells).first
   end
-  
+
   def test_auto_filter
     assert(@ws.auto_filter.range.nil?)
     assert_raise(ArgumentError) { @ws.auto_filter = 123 }
@@ -432,6 +457,6 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.auto_filter.range = 'A1:D9'
     @ws.auto_filter.add_column 0, :filters, :filter_items => [1]
     doc = Nokogiri::XML(@ws.to_xml_string)
-    assert(doc.xpath('//sheetPr[@filterMode="true"]')) 
+    assert(doc.xpath('//sheetPr[@filterMode="true"]'))
   end
 end
