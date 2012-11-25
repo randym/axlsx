@@ -5,43 +5,43 @@ $LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../lib"
 #```ruby
 require 'axlsx'
 examples = []
-#examples << :basic
-#examples << :custom_styles
-#examples << :wrap_text
-#examples << :cell_style_override
-#examples << :custom_borders
-#examples << :surrounding_border
-#examples << :deep_custom_borders
-#examples << :row_column_style
-#examples << :fixed_column_width
-#examples << :merge_cells
-#examples << :images
-#examples << :format_dates
-#examples << :mbcs
-#examples << :formula
-#examples << :auto_filter
-#examples << :data_types
-#examples << :hyperlinks
-#examples << :number_currency_format
-#examples << :venezuela_currency
-#examples << :bar_chart
-#examples << :chart_gridlines
-#examples << :pie_chart
-#examples << :line_chart
-#examples << :scatter_chart
-#examples << :tables
-#examples << :fit_to_page
-#examples << :hide_gridlines
-#examples << :repeated_header
-#examples << :defined_name
-#examples << :printing
-#examples << :header_footer
-#examples << :comments
-#examples << :panes
+examples << :basic
+examples << :custom_styles
+examples << :wrap_text
+examples << :cell_style_override
+examples << :custom_borders
+examples << :surrounding_border
+examples << :deep_custom_borders
+examples << :row_column_style
+examples << :fixed_column_width
+examples << :merge_cells
+examples << :images
+examples << :format_dates
+examples << :mbcs
+examples << :formula
+examples << :auto_filter
+examples << :data_types
+examples << :hyperlinks
+examples << :number_currency_format
+examples << :venezuela_currency
+examples << :bar_chart
+examples << :chart_gridlines
+examples << :pie_chart
+examples << :line_chart
+examples << :scatter_chart
+examples << :tables
+examples << :fit_to_page
+examples << :hide_gridlines
+examples << :repeated_header
+examples << :defined_name
+examples << :printing
+examples << :header_footer
+examples << :comments
+examples << :panes
 examples << :conditional_formatting
-#examples << :streaming
-#examples << :shared_strings
-#examples << :no_autowidth
+examples << :streaming
+examples << :shared_strings
+examples << :no_autowidth
 
 p = Axlsx::Package.new
 wb = p.workbook
@@ -569,7 +569,7 @@ end
 ## Frozen/Split panes
 ## ``` ruby
 if examples.include? :panes
-  wb.add_worksheet(:name => 'fixed headers') do |sheet|
+  wb.add_worksheet(:name => 'panes') do |sheet|
     sheet.add_row(['',  (0..99).map { |i| "column header #{i}" }].flatten )
     100.times.with_index { |index| sheet << ["row header", (0..index).to_a].flatten }
     sheet.sheet_view.pane do |pane|
@@ -676,9 +676,9 @@ if examples.include? :shared_strings
 end
 #```
 
-#p.validate do |er|
-#puts er.inspect
-#end
+p.validate do |er|
+puts er.inspect
+end
 ##Disabling Autowidth
 
 #```ruby

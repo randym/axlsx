@@ -65,7 +65,7 @@ module Axlsx
       attrs.each do |attribute_name|
         value = values[attribute_name.to_s]
         next if value.nil?
-        yield value if block_given?
+        value = yield value if block_given?
         element_name = Axlsx.camel(attribute_name, false)
         str << "<#{element_name}>#{value}</#{element_name}>"
       end
