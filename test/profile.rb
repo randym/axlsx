@@ -19,8 +19,8 @@ times = 3000
 
 PerfTools::CpuProfiler.start("/tmp/axlsx_noautowidth") do
   p = Axlsx::Package.new
-  p.use_autowidth = false
-  p.use_shared_strings = true
+  #p.use_autowidth = false
+  #p.use_shared_strings = true
   wb = p.workbook
   
   #A Simple Workbook
