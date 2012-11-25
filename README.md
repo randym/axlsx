@@ -101,6 +101,9 @@ and Numbers
 
 **19. Data labels for charts as well as series color customization.
 
+**20. Support for sheet headers and footers
+
+
 Installing
 ----------
 
@@ -149,10 +152,11 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
-- **November.??.12**:1.3.4
+- **November.25.12**:1.3.4
   - Support for headers and footers for worksheets
-  - Patch to properly escape hyperlink urls
+  - bug fix: Properly escape hyperlink urls
   - Improvements in color_scale generation for conditional formatting
+  - Improvements in autowidth calculation.
 - **November.8.12**:1.3.3
   - Patched cell run styles for u and validation for family
 - **November.5.12**:1.3.2
@@ -163,19 +167,6 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
   - added insert_worksheet so you can now add a worksheet to an
     arbitrary position in the worksheets list.
   - reduced memory consumption for package parts post serialization
-- **September.30.12**: 1.3.1
-  - Improved control character handling
-  - Added stored auto filter values and date grouping items
-  - Improved support for autowidth when custom styles are applied
-  - Added support for table style info that lets you take advantage of
-    all the predefined table styles.
-  - Improved style management for fonts so they merge undefined values
-    from the initial master.
-- **September.8.12**: 1.2.3
-  - enhance exponential float/bigdecimal values rendering as strings intead
-    of 'numbers' in excel.
-  - added support for :none option on chart axis labels
-  - added support for paper_size option on worksheet.page_setup
 
 Please see the {file:CHANGELOG.md} document for past release information.
 
@@ -251,6 +242,7 @@ done without the help of the people below.
 
 [adammathys](https://github.com/adammathys) - Fgr getting our head in the
 air and our feet on the ground.
+
 #Copyright and License
 ----------
 

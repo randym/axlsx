@@ -145,6 +145,7 @@ module Axlsx
     RestrictionValidator.validate "cell run style u", [:none, :single, :double, :singleAccounting, :doubleAccounting], v
   end
 
+  # validates cell style family which must be between 1 and 5 
   def self.validate_family(v)
     RestrictionValidator.validate "cell run style family", 1..5, v
   end

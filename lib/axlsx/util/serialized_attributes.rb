@@ -22,10 +22,12 @@ module Axlsx
         @xml_attributes
       end
 
+      # This helper registers the attributes that will be formatted as elements.
       def serializable_element_attributes(*symbols)
         @xml_element_attributes = symbols
       end
 
+      # attr reader for element attributes
       def xml_element_attributes
         @xml_element_attributes
       end

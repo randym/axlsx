@@ -8,15 +8,28 @@ module Axlsx
   class ColorScale
 
     class << self
+
+      # These are the default conditional formatting value objects
+      # that define a two tone color gradient.
       def default_cfvos
         [{:type => :min, :val => 0, :color => 'FFFF7128'},
          {:type => :max, :val => 0, :color => 'FFFFEF9C'}]
       end
 
+      # A builder for two tone color gradient
+      # @example
+      #   # this creates a two tone color scale
+      #   color_scale = Axlsx::ColorScale.two_tone
+      # @see examples/example.rb conditional formatting examples.
       def two_tone
         self.new
       end
 
+      # A builder for three tone color gradient
+      # @example
+      #   #this creates a three tone color scale
+      #   color_scale = Axlsx::ColorScale.three_tone 
+      # @see examples/example.rb conditional formatting examples.
       def three_tone
         self.new({:type => :min, :val => 0, :color => 'FFF8696B'},
                  {:type => :percent, :val => '50', :color => 'FFFFEB84'},
