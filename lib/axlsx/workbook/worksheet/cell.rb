@@ -444,6 +444,9 @@ module Axlsx
         v ? 1 : 0
       else
         @type = :string
+        v.to_s
+        # TODO find a better way to do this as it accounts for 30% of
+        # processing time in benchmarking...
         ::CGI.escapeHTML(v.to_s)
       end
     end

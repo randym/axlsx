@@ -4,11 +4,10 @@ $:.unshift "#{File.dirname(__FILE__)}/../lib"
 require 'axlsx'
 require 'csv'
 require 'benchmark'
-
 row = []
 input = (32..126).to_a.pack('U*').chars.to_a
 20.times { row << input.shuffle.join}
-times = 2000
+times = 3000
 Benchmark.bmbm(30) do |x|
 
   x.report('axlsx_noautowidth') {
