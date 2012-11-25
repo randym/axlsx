@@ -38,6 +38,7 @@ examples << :printing
 examples << :header_footer
 examples << :comments
 examples << :panes
+examples << :sheet_view
 examples << :conditional_formatting
 examples << :streaming
 examples << :shared_strings
@@ -582,6 +583,33 @@ if examples.include? :panes
   end
 end
 
+if examples.include? :sheet_view
+  ws = wb.add_worksheet(:name => 'SheetView - Split')
+  ws.sheet_view do |vs|
+    vs.pane do |pane|
+      pane.active_pane = :top_right
+      pane.state = :split
+      pane.x_split = 11080
+      pane.y_split = 5000
+      pane.top_left_cell = 'C44'
+    end
+
+    vs.add_selection(:top_left, { :active_cell => 'A2', :sqref => 'A2' })
+    vs.add_selection(:top_right, { :active_cell => 'I10', :sqref => 'I10' })
+    vs.add_selection(:bottom_left, { :active_cell => 'E55', :sqref => 'E55' })
+    vs.add_selection(:bottom_right, { :active_cell => 'I57', :sqref => 'I57' })
+  end
+
+  ws = wb.add_worksheet :name => "Sheetview - Frozen"
+  ws.sheet_view do |vs|
+    vs.pane do |pane|
+      pane.state = :frozen
+      pane.x_split = 3
+      pane.y_split = 4
+    end
+  end
+end
+
 # conditional formatting
 #
 if examples.include? :conditional_formatting
@@ -592,61 +620,61 @@ if examples.include? :conditional_formatting
   profitable = wb.styles.add_style( :fg_color=>"FF428751",
                                    :type => :dxf)
 
-  wb.add_worksheet(:name => "Conditional Cell Is") do |ws|
+  wb.add_worksheet(:name => "Conditional Cell Is") do |sheet|
 
-    # Generate 20 rows of data
-    ws.add_row ["Previous Year Quarterly Profits (JPY)"]
-    ws.add_row ["Quarter", "Profit", "% of Total"]
+    # Generate 20 rosheet of data
+    sheet.add_row ["Previous Year Quarterly Profits (JPY)"]
+    sheet.add_row ["Quarter", "Profit", "% of Total"]
     offset = 3
-    rows = 20
-    offset.upto(rows + offset) do |i|
-      ws.add_row ["Q#{i}", 10000*((rows/2-i) * (rows/2-i)), "=100*B#{i}/SUM(B3:B#{rows+offset})"], :style=>[nil, money, percent]
+    rosheet = 20
+    offset.upto(rosheet + offset) do |i|
+      sheet.add_row ["Q#{i}", 10000*((rosheet/2-i) * (rosheet/2-i)), "=100*B#{i}/SUM(B3:B#{rosheet+offset})"], :style=>[nil, money, percent]
     end
 
     # Apply conditional formatting to range B3:B100 in the worksheet
-    ws.add_conditional_formatting("B3:B100", { :type => :cellIs, :operator => :greaterThan, :formula => "100000", :dxfId => profitable, :priority => 1 })
+    sheet.add_conditional_formatting("B3:B100", { :type => :cellIs, :operator => :greaterThan, :formula => "100000", :dxfId => profitable, :priority => 1 })
   end
 
-  wb.add_worksheet(:name => "Conditional Color Scale") do |ws|
-    ws.add_row ["Previous Year Quarterly Profits (JPY)"]
-    ws.add_row ["Quarter", "Profit", "% of Total"]
+  wb.add_worksheet(:name => "Conditional Color Scale") do |sheet|
+    sheet.add_row ["Previous Year Quarterly Profits (JPY)"]
+    sheet.add_row ["Quarter", "Profit", "% of Total"]
     offset = 3
-    rows = 20
-    offset.upto(rows + offset) do |i|
-      ws.add_row ["Q#{i}", 10000*((rows/2-i) * (rows/2-i)), "=100*B#{i}/SUM(B3:B#{rows+offset})"], :style=>[nil, money, percent]
+    rosheet = 20
+    offset.upto(rosheet + offset) do |i|
+      sheet.add_row ["Q#{i}", 10000*((rosheet/2-i) * (rosheet/2-i)), "=100*B#{i}/SUM(B3:B#{rosheet+offset})"], :style=>[nil, money, percent]
     end
     # color scale has two_tone and three_tone class methods to setup the excel defaults (2011)
     # alternatively, you can pass in {:type => [:min, :max, :percent], :val => [whatever], :color =>[Some RGB String] to create a customized color scale object
 
     color_scale = Axlsx::ColorScale.three_tone
-    ws.add_conditional_formatting("B3:B100", { :type => :colorScale, :operator => :greaterThan, :formula => "100000", :dxfId => profitable, :priority => 1, :color_scale => color_scale })
+    sheet.add_conditional_formatting("B3:B100", { :type => :colorScale, :operator => :greaterThan, :formula => "100000", :dxfId => profitable, :priority => 1, :color_scale => color_scale })
   end
 
 
-  wb.add_worksheet(:name => "Conditional Data Bar") do |ws|
-    ws.add_row ["Previous Year Quarterly Profits (JPY)"]
-    ws.add_row ["Quarter", "Profit", "% of Total"]
+  wb.add_worksheet(:name => "Conditional Data Bar") do |sheet|
+    sheet.add_row ["Previous Year Quarterly Profits (JPY)"]
+    sheet.add_row ["Quarter", "Profit", "% of Total"]
     offset = 3
     rows = 20
     offset.upto(rows + offset) do |i|
-      ws.add_row ["Q#{i}", 10000*((rows/2-i) * (rows/2-i)), "=100*B#{i}/SUM(B3:B#{rows+offset})"], :style=>[nil, money, percent]
+      sheet.add_row ["Q#{i}", 10000*((rows/2-i) * (rows/2-i)), "=100*B#{i}/SUM(B3:B#{rows+offset})"], :style=>[nil, money, percent]
     end
     # Apply conditional formatting to range B3:B100 in the worksheet
     data_bar = Axlsx::DataBar.new
-    ws.add_conditional_formatting("B3:B100", { :type => :dataBar, :dxfId => profitable, :priority => 1, :data_bar => data_bar })
+    sheet.add_conditional_formatting("B3:B100", { :type => :dataBar, :dxfId => profitable, :priority => 1, :data_bar => data_bar })
   end
 
-  wb.add_worksheet(:name => "Conditional Format Icon Set") do |ws|
-    ws.add_row ["Previous Year Quarterly Profits (JPY)"]
-    ws.add_row ["Quarter", "Profit", "% of Total"]
+  wb.add_worksheet(:name => "Conditional Format Icon Set") do |sheet|
+    sheet.add_row ["Previous Year Quarterly Profits (JPY)"]
+    sheet.add_row ["Quarter", "Profit", "% of Total"]
     offset = 3
     rows = 20
     offset.upto(rows + offset) do |i|
-      ws.add_row ["Q#{i}", 10000*((rows/2-i) * (rows/2-i)), "=100*B#{i}/SUM(B3:B#{rows+offset})"], :style=>[nil, money, percent]
+      sheet.add_row ["Q#{i}", 10000*((rows/2-i) * (rows/2-i)), "=100*B#{i}/SUM(B3:B#{rows+offset})"], :style=>[nil, money, percent]
     end
     # Apply conditional formatting to range B3:B100 in the worksheet
     icon_set = Axlsx::IconSet.new
-    ws.add_conditional_formatting("B3:B100", { :type => :iconSet, :dxfId => profitable, :priority => 1, :icon_set => icon_set })
+    sheet.add_conditional_formatting("B3:B100", { :type => :iconSet, :dxfId => profitable, :priority => 1, :icon_set => icon_set })
   end
 end
 
