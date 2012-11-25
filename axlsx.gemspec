@@ -1,5 +1,3 @@
-# This will recursively require rake when using rake 0.9.2.2 and bundler
-#require 'rake'
 require File.expand_path('../lib/axlsx/version', __FILE__)
 
 Gem::Specification.new do |s|
@@ -15,7 +13,7 @@ Gem::Specification.new do |s|
   s.description = <<-eof
     xlsx generation with charts, images, automated column width, customizable styles and full schema validation. Axlsx excels at helping you generate beautiful Office Open XML Spreadsheet documents without having to understand the entire ECMA specification. Check out the README for some examples of how easy it is. Best of all, you can validate your xlsx file before serialization so you know for sure that anything generated is going to load on your client's machine.
   eof
-  s.files = Dir.glob("{lib/**/*,examples/**/*}") + %w{ LICENSE README.md Rakefile CHANGELOG.md .yardopts }
+  s.files = Dir.glob("{lib/**/*,examples/**/*.rb,examples/**/*.jpeg}") + %w{ LICENSE README.md Rakefile CHANGELOG.md .yardopts }
   s.test_files  = Dir.glob("{test/**/*}")
 
   s.add_runtime_dependency 'nokogiri', '>= 1.4.1'

@@ -348,7 +348,7 @@ if examples.include? :hyperlinks
   wb.add_worksheet(:name => 'hyperlinks') do |sheet|
     # external references
     sheet.add_row ['axlsx']
-    #sheet.add_hyperlink :location => 'https://github.com/randym/axlsx', :ref => sheet.rows.first.cells.first
+    sheet.add_hyperlink :location => 'https://github.com/randym/axlsx', :ref => sheet.rows.first.cells.first
     # internal references
     sheet.add_hyperlink :location => "'Next Sheet'!A1", :ref => 'A2', :target => :sheet
     sheet.add_row ['next sheet']
@@ -676,9 +676,9 @@ if examples.include? :shared_strings
 end
 #```
 
-p.validate do |er|
-puts er.inspect
-end
+#p.validate do |er|
+#puts er.inspect
+#end
 ##Disabling Autowidth
 
 #```ruby
