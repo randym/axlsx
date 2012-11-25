@@ -398,8 +398,8 @@ module Axlsx
     end
 
     # assigns the owning row for this cell.
-    def row=(v) DataTypeValidator.validate "Cell.row", Row, v; @row=v end
-
+    def row=(v) @row=v end
+    
     # Determines the cell type based on the cell value.
     # @note This is only used when a cell is created but no :type option is specified, the following rules apply:
     #   1. If the value is an instance of Date, the type is set to :date
