@@ -21,6 +21,14 @@ module Axlsx
       def xml_attributes
         @xml_attributes
       end
+
+      def serializable_element_attributes(*symbols)
+        @xml_element_attributes = symbols
+      end
+
+      def xml_element_attributes
+        @xml_element_attributes
+      end
     end
 
     # serializes the instance values of the defining object based on the 
@@ -36,9 +44,30 @@ module Axlsx
         key_value_pairs.delete(key) unless self.class.xml_attributes.include?(key.to_sym)
       end
       key_value_pairs.merge! additional_attributes
-
       key_value_pairs.each do |key, value|
         str << "#{Axlsx.camel(key, false)}=\"#{value}\" "
+      end
+      str
+    end
+
+
+    # serialized instance values at text nodes on a camelized element of the
+    # attribute name. You may pass in a block for evaluation against non nil
+    # values. We use an array for element attributes becuase misordering will
+    # break the xml and 1.8.7 does not support ordered hashes.
+    # @param [String] str The string instance to which serialized data is appended
+    # @param [Array] additional_attributes An array of additional attribute names.
+    # @param [Proc] block A which will be called with the value for each element.
+    # @return [String] The serialized output.
+    def serialized_element_attributes(str='', additional_attributes=[], &block)
+      attrs = self.class.xml_element_attributes + additional_attributes
+      values = instance_values
+      attrs.each do |attribute_name|
+        value = values[attribute_name.to_s]
+        next if value.nil?
+        yield value if block_given?
+        element_name = Axlsx.camel(attribute_name, false)
+        str << "<#{element_name}>#{value}</#{element_name}>"
       end
       str
     end

@@ -28,7 +28,7 @@ module Axlsx
     end
 
     serializable_attributes :different_odd_even, :different_first
-
+    serializable_element_attributes :odd_header, :odd_footer, :even_header, :even_footer, :first_header, :first_footer
     string_attr_accessor :odd_header, :odd_footer, :even_header, :even_footer, :first_header, :first_footer
     boolean_attr_accessor :different_odd_even, :different_first
 
@@ -45,16 +45,9 @@ module Axlsx
       str << "<headerFooter "
       serialized_attributes str
       str << ">"
-
-      str << "<oddHeader>#{::CGI.escapeHTML(odd_header)}</oddHeader>" unless odd_header.nil?
-      str << "<oddFooter>#{::CGI.escapeHTML(odd_footer)}</oddFooter>" unless odd_footer.nil?
-
-      str << "<evenHeader>#{::CGI.escapeHTML(even_header)}</evenHeader>" unless even_header.nil?
-      str << "<evenFooter>#{::CGI.escapeHTML(even_footer)}</evenFooter>" unless even_footer.nil?
-
-      str << "<firstHeader>#{::CGI.escapeHTML(first_header)}</firstHeader>" unless first_header.nil?
-      str << "<firstFooter>#{::CGI.escapeHTML(first_footer)}</firstFooter>" unless first_footer.nil?
-
+      serialized_element_attributes(str) do |value|
+        value = ::CGI.escapeHTML(value)
+      end
       str << "</headerFooter>"
     end
   end
