@@ -308,6 +308,8 @@ module Axlsx
     # may include an :edges entry that references an array of symbols identifying which border edges 
     # you wish to apply the style or any other valid Border initializer options.
     # If the :edges entity is not provided the style is applied to all edges of cells that reference this style.
+	# Also available :border_top, :border_right, :border_bottom and :border_left options with :style and/or :color 
+	# key-value entries, which override :border values.
     # @example
     #   #apply a thick red border to the top and bottom
     #   { :border => { :style => :thick, :color => "FFFF0000", :edges => [:top, :bottom] }
@@ -319,7 +321,10 @@ module Axlsx
         raise ArgumentError, (ERR_INVALID_BORDER_OPTIONS % b_opts) unless b_opts.keys.include?(:style) && b_opts.keys.include?(:color)
         border = Border.new b_opts
         (b_opts[:edges] || [:left, :right, :top, :bottom]).each do |edge|
-          b_options = { :name => edge, :style => b_opts[:style], :color => Color.new(:rgb => b_opts[:color]) }
+		  sb_opts = options["border_#{edge}".to_sym]
+		  style = (!sb_opts.nil? && sb_opts.keys.include?(:style)) ? sb_opts[:style] : b_opts[:style]
+		  color = (!sb_opts.nil? && sb_opts.keys.include?(:color)) ? sb_opts[:color] : b_opts[:color]
+		  b_options = { :name => edge, :style => style, :color => Color.new(:rgb => color) }
           border.prs << BorderPr.new(b_options)
         end
         options[:type] == :dxf ? border : borders << border
