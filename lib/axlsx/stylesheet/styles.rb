@@ -321,10 +321,9 @@ module Axlsx
         raise ArgumentError, (ERR_INVALID_BORDER_OPTIONS % b_opts) unless b_opts.keys.include?(:style) && b_opts.keys.include?(:color)
         border = Border.new b_opts
         (b_opts[:edges] || [:left, :right, :top, :bottom]).each do |edge|
-		  sb_opts = options["border_#{edge}".to_sym]
-		  style = (!sb_opts.nil? && sb_opts.keys.include?(:style)) ? sb_opts[:style] : b_opts[:style]
-		  color = (!sb_opts.nil? && sb_opts.keys.include?(:color)) ? sb_opts[:color] : b_opts[:color]
-		  b_options = { :name => edge, :style => style, :color => Color.new(:rgb => color) }
+          edge_options = options["border_#{edge}".to_sym] || {}
+          border_edge = b_opts.merge(edge_options)
+          b_options = { :name => edge, :style => border_edge[:style], :color => Color.new(:rgb => border_edge[:color]) }
           border.prs << BorderPr.new(b_options)
         end
         options[:type] == :dxf ? border : borders << border

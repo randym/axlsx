@@ -49,7 +49,7 @@ wb.styles do |style|
   custom_format = wb.styles.add_style :sz => 20, :format_code => 'yyyy-mm-dd'
 
   # A style that overrides top and left border style
-  one_border = wb.styles.add_style :border => { :style => :thin, :color =>"FAAC58", :edges => [:right, :top, :left] }, :border_top => { :style => :thick, :color => "01DF74" }, :border_left => { :color => "0101DF" }
+  override_border = wb.styles.add_style :border => { :style => :thin, :color =>"FAAC58", :edges => [:right, :top, :left] }, :border_top => { :style => :thick, :color => "01DF74" }, :border_left => { :color => "0101DF" }
 
 
   wb.add_worksheet do |sheet|
@@ -58,7 +58,7 @@ wb.styles do |style|
     sheet.add_row [123, "123", Time.now], style: [nil, large_font, predefined_format]
     sheet.add_row [123, "123", Date.new(2012, 9, 14)], style: [large_font, nil, custom_format]
     sheet.add_row [123, "123", Date.new(2000, 9, 12)] # This uses the axlsx default format_code (14)
-    sheet.add_row [123, "123", Time.now], style: [large_font, one_border, predefined_format]
+    sheet.add_row [123, "123", Time.now], style: [large_font, override_border, predefined_format]
   end
 
 end
