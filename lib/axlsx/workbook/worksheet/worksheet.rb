@@ -41,7 +41,7 @@ module Axlsx
     def name
       @name ||=  "Sheet" + (index+1).to_s
     end
- 
+
     # The sheet calculation properties
     # @return [SheetCalcPr]
     def sheet_calc_pr
@@ -76,6 +76,12 @@ module Axlsx
       @tables ||=  Tables.new self
     end
 
+    # The pivot tables in this worksheet
+    # @return [Array] of Table
+    def pivot_tables
+      @pivot_tables ||=  PivotTables.new self
+    end
+
     # A typed collection of hyperlinks associated with this worksheet
     # @return [WorksheetHyperlinks]
     def hyperlinks
@@ -104,7 +110,7 @@ module Axlsx
     # An range that excel will apply an autfilter to "A1:B3"
     # This will turn filtering on for the cells in the range.
     # The first row is considered the header, while subsequent rows are considerd to be data.
-    # @return String 
+    # @return String
     def auto_filter
       @auto_filter ||= AutoFilter.new self
     end
@@ -280,7 +286,7 @@ module Axlsx
 
     # The name of the worksheet
     # The name of a worksheet must be unique in the workbook, and must not exceed 31 characters
-    # @param [String] name 
+    # @param [String] name
     def name=(name)
       validate_sheet_name name
       @name=Axlsx::coder.encode(name)
@@ -388,7 +394,7 @@ module Axlsx
       cf = ConditionalFormatting.new( :sqref => cells )
       cf.add_rules rules
       conditional_formattings << cf
-      conditional_formattings      
+      conditional_formattings
     end
 
     # Add data validation to this worksheet.
@@ -434,6 +440,12 @@ module Axlsx
       tables << Table.new(ref, self, options)
       yield tables.last if block_given?
       tables.last
+    end
+
+    def add_pivot_table(ref, range, options={})
+      pivot_tables << PivotTable.new(ref, range, self, options)
+      yield pivot_tables.last if block_given?
+      pivot_tables.last
     end
 
     # Shortcut to worsksheet_comments#add_comment
@@ -513,7 +525,7 @@ module Axlsx
     def sanitize(str)
       str.gsub(CONTROL_CHAR_REGEX, '')
     end
-    
+
     # The worksheet relationships. This is managed automatically by the worksheet
     # @return [Relationships]
     def relationships
@@ -521,7 +533,8 @@ module Axlsx
       r + [tables.relationships,
            worksheet_comments.relationships,
            hyperlinks.relationships,
-           worksheet_drawing.relationship].flatten.compact || []
+           worksheet_drawing.relationship,
+           pivot_tables.relationships].flatten.compact || []
       r
     end
 
@@ -570,12 +583,12 @@ module Axlsx
 
 
     private
-   
+
     def validate_sheet_name(name)
       DataTypeValidator.validate "Worksheet.name", String, name
       raise ArgumentError, (ERR_SHEET_NAME_TOO_LONG % name) if name.size > 31
       raise ArgumentError, (ERR_SHEET_NAME_COLON_FORBIDDEN % name) if name.include? ':'
-      name = Axlsx::coder.encode(name) 
+      name = Axlsx::coder.encode(name)
       sheet_names = @workbook.worksheets.map { |s| s.name }
       raise ArgumentError, (ERR_DUPLICATE_SHEET_NAME % name) if sheet_names.include?(name)
     end
@@ -606,7 +619,7 @@ module Axlsx
     # @see Worksheet#protect_range
     # @return [SimpleTypedList] The protected ranges for this worksheet
     def protected_ranges
-      @protected_ranges ||= ProtectedRanges.new self 
+      @protected_ranges ||= ProtectedRanges.new self
       # SimpleTypedList.new ProtectedRange
     end
 
@@ -619,7 +632,7 @@ module Axlsx
     # data validations array
     # @return [Array]
     def data_validations
-      @data_validations ||= DataValidations.new self 
+      @data_validations ||= DataValidations.new self
     end
 
     # merged cells array

@@ -153,6 +153,12 @@ class TestWorksheet < Test::Unit::TestCase
     assert @ws.drawing.is_a?(Axlsx::Drawing)
   end
 
+  def test_add_pivot_table
+    assert(@ws.workbook.pivot_tables.empty?, "the sheet's workbook should not have any pivot tables by default")
+    @ws.add_pivot_table 'G5:G6', 'A1:D:10'
+    assert_equal(@ws.workbook.pivot_tables.size, 1, "add_pivot_tables adds a pivot_table to the workbook")
+  end
+
   def test_col_style
     @ws.add_row [1,2,3,4]
     @ws.add_row [1,2,3,4]
@@ -317,7 +323,7 @@ class TestWorksheet < Test::Unit::TestCase
   def test_styles
     assert(@ws.styles.is_a?(Axlsx::Styles), 'worksheet provides access to styles')
   end
-  
+
   def test_to_xml_string_with_illegal_chars
     nasties =  "\v\u2028\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008\u001f"
     @ws.add_row [nasties]
@@ -341,6 +347,7 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.merge_cells "A4:A5"
     @ws.add_chart Axlsx::Pie3DChart
     @ws.add_table "E1:F3"
+    @ws.add_pivot_table  'G5:G6', 'A1:D10'
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@ws.to_xml_string)
     assert(schema.validate(doc).map { |e| puts e.message; e }.empty?, schema.validate(doc).map { |e| e.message }.join('\n'))
@@ -357,6 +364,8 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(@ws.relationships.size, 4, "adding a comment adds 3 relationships")
     c = @ws.add_comment :text => 'not that is a comment!', :author => 'travis', :ref => "A1"
     assert_equal(@ws.relationships.size, 4, "adding multiple comments in the same worksheet should not add any additional comment relationships")
+    c = @ws.add_pivot_table 'G5:G6', 'A1:D10'
+    assert_equal(@ws.relationships.size, 5, "adding a pivot table adds 1 relationship")
   end
 
 
@@ -400,7 +409,7 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.add_row [1, 2, 3]
     assert_nothing_raised {@ws.protect_range(@ws.rows.first.cells) }
     assert_equal('A1:C1', @ws.send(:protected_ranges).last.sqref)
-    
+
   end
   def test_merge_cells
     @ws.add_row [1,2,3]
@@ -412,7 +421,7 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(@ws.send(:merged_cells).size, 3)
     assert_equal(@ws.send(:merged_cells).last, "A3:B3")
   end
-  
+
   def test_merge_cells_sorts_correctly_by_row_when_given_array
     10.times do |i|
       @ws.add_row [i]
@@ -420,7 +429,7 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.merge_cells [@ws.rows[8].cells.first, @ws.rows[9].cells.first]
     assert_equal "A9:A10", @ws.send(:merged_cells).first
   end
-  
+
   def test_auto_filter
     assert(@ws.auto_filter.range.nil?)
     assert_raise(ArgumentError) { @ws.auto_filter = 123 }
@@ -432,6 +441,6 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.auto_filter.range = 'A1:D9'
     @ws.auto_filter.add_column 0, :filters, :filter_items => [1]
     doc = Nokogiri::XML(@ws.to_xml_string)
-    assert(doc.xpath('//sheetPr[@filterMode="true"]')) 
+    assert(doc.xpath('//sheetPr[@filterMode="true"]'))
   end
 end
