@@ -17,8 +17,7 @@ rvm:
   - jruby-head
 matrix:
   allow_failures:
-    rvm:
-      -  ruby-head
-      -  jruby-head
+    - rvm: ruby-head
+    - rvm: jruby-head
 before_install:
   - gem install nokogiri -- --with-cflags='--std=gnu99'
