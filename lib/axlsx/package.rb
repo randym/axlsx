@@ -192,6 +192,12 @@ module Axlsx
       workbook.tables.each do |table|
         parts << {:entry => "xl/#{table.pn}", :doc => table.to_xml_string, :schema => SML_XSD}
       end
+      workbook.pivot_tables.each do |pivot_table|
+        cache_definition = pivot_table.cache_definition
+        parts << {:entry => "xl/#{pivot_table.rels_pn}", :doc => pivot_table.relationships.to_xml_string, :schema => RELS_XSD}
+        parts << {:entry => "xl/#{pivot_table.pn}", :doc => pivot_table.to_xml_string} #, :schema => SML_XSD}
+        parts << {:entry => "xl/#{cache_definition.pn}", :doc => cache_definition.to_xml_string} #, :schema => SML_XSD}
+      end
 
       workbook.comments.each do|comment|
         if comment.size > 0
@@ -253,6 +259,13 @@ module Axlsx
       workbook.tables.each do |table|
         c_types << Axlsx::Override.new(:PartName => "/xl/#{table.pn}",
                                        :ContentType => TABLE_CT)
+      end
+
+      workbook.pivot_tables.each do |pivot_table|
+        c_types << Axlsx::Override.new(:PartName => "/xl/#{pivot_table.pn}",
+                                       :ContentType => PIVOT_TABLE_CT)
+        c_types << Axlsx::Override.new(:PartName => "/xl/#{pivot_table.cache_definition.pn}",
+                                       :ContentType => PIVOT_TABLE_CACHE_DEFINITION_CT)
       end
 
       workbook.comments.each do |comment|

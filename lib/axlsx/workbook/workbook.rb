@@ -40,6 +40,9 @@ require 'axlsx/workbook/defined_names.rb'
 require 'axlsx/workbook/worksheet/table_style_info.rb'
 require 'axlsx/workbook/worksheet/table.rb'
 require 'axlsx/workbook/worksheet/tables.rb'
+require 'axlsx/workbook/worksheet/pivot_table_cache_definition.rb'
+require 'axlsx/workbook/worksheet/pivot_table.rb'
+require 'axlsx/workbook/worksheet/pivot_tables.rb'
 require 'axlsx/workbook/worksheet/data_validation.rb'
 require 'axlsx/workbook/worksheet/data_validations.rb'
 require 'axlsx/workbook/worksheet/sheet_view.rb'
@@ -121,10 +124,17 @@ require 'axlsx/workbook/worksheet/selection.rb'
     # @return [SimpleTypedList]
     attr_reader :tables
 
+    # A colllection of pivot tables associated with this workbook
+    # @note The recommended way to manage drawings is Worksheet#add_table
+    # @see Worksheet#add_table
+    # @see Table
+    # @return [SimpleTypedList]
+    attr_reader :pivot_tables
+
 
     # A collection of defined names for this workbook
     # @note The recommended way to manage defined names is Workbook#add_defined_name
-    # @see DefinedName 
+    # @see DefinedName
     # @return [DefinedNames]
     def defined_names
       @defined_names ||= DefinedNames.new
@@ -170,7 +180,7 @@ require 'axlsx/workbook/worksheet/selection.rb'
     #  w.parse_string :date1904, "//xmlns:workbookPr/@date1904"
     #  w
     #end
-    
+
     # Creates a new Workbook
     # The recomended way to work with workbooks is via Package#workbook
     # @option options [Boolean] date1904. If this is not specified, date1904 is set to false. Office 2011 for Mac defaults to false.
@@ -182,6 +192,7 @@ require 'axlsx/workbook/worksheet/selection.rb'
       @images = SimpleTypedList.new Pic
       # Are these even used????? Check package serialization parts
       @tables = SimpleTypedList.new Table
+      @pivot_tables = SimpleTypedList.new PivotTable
       @comments = SimpleTypedList.new Comments
 
 
@@ -217,7 +228,7 @@ require 'axlsx/workbook/worksheet/selection.rb'
     def use_autowidth=(v=true) Axlsx::validate_boolean v; @use_autowidth = v; end
 
     # inserts a worksheet into this workbook at the position specified.
-    # It the index specified is out of range, the worksheet will be added to the end of the 
+    # It the index specified is out of range, the worksheet will be added to the end of the
     # worksheets collection
     # @return [Worksheet]
     # @param index The zero based position to insert the newly created worksheet
@@ -259,6 +270,9 @@ require 'axlsx/workbook/worksheet/selection.rb'
       @worksheets.each do |sheet|
         r << Relationship.new(WORKSHEET_R, WORKSHEET_PN % (r.size+1))
       end
+      pivot_tables.each_with_index do |pivot_table, index|
+        r << Relationship.new(PIVOT_TABLE_CACHE_DEFINITION_R, PIVOT_TABLE_CACHE_DEFINITION_PN % (index+1))
+      end
       r << Relationship.new(STYLES_R,  STYLES_PN)
       if use_shared_strings
           r << Relationship.new(SHARED_STRINGS_R,  SHARED_STRINGS_PN)
@@ -299,6 +313,14 @@ require 'axlsx/workbook/worksheet/selection.rb'
         end
       end
       str << '</sheets>'
+      unless pivot_tables.empty?
+        str << '<pivotCaches>'
+        pivot_tables.each_with_index do |pivot_table, index|
+          rId = "rId#{@worksheets.size + index + 1  }"
+          str << '<pivotCache cacheId="' << pivot_table.cache_definition.cache_id.to_s << '" r:id="' << rId << '"/>'
+        end
+        str << '</pivotCaches>'
+      end
       defined_names.to_xml_string(str)
       str << '</workbook>'
     end

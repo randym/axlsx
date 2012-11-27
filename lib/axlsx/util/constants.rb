@@ -51,6 +51,10 @@ module Axlsx
   # table rels namespace
   TABLE_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/table"
 
+  # pivot table rels namespace
+  PIVOT_TABLE_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/pivotTable"
+  PIVOT_TABLE_CACHE_DEFINITION_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/pivotCacheDefinition"
+
   # workbook rels namespace
   WORKBOOK_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument"
 
@@ -98,6 +102,12 @@ module Axlsx
 
   # table content type
   TABLE_CT = "application/vnd.openxmlformats-officedocument.spreadsheetml.table+xml"
+
+  # pivot table content type
+  PIVOT_TABLE_CT = "application/vnd.openxmlformats-officedocument.spreadsheetml.pivotTable+xml"
+
+  # pivot table cache definition content type
+  PIVOT_TABLE_CACHE_DEFINITION_CT = "application/vnd.openxmlformats-officedocument.spreadsheetml.pivotCacheDefinition+xml"
 
   # workbook content type
   WORKBOOK_CT = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"
@@ -207,6 +217,13 @@ module Axlsx
 
   # drawing part
   TABLE_PN = "tables/table%d.xml"
+
+  # pivot table parts
+  PIVOT_TABLE_PN = "pivotTables/pivotTable%d.xml"
+  PIVOT_TABLE_CACHE_DEFINITION_PN = "pivotCache/pivotCacheDefinition%d.xml"
+
+  # pivot table rels parts
+  PIVOT_TABLE_RELS_PN = "pivotTables/_rels/pivotTable%d.xml.rels"
 
   # chart part
   CHART_PN = "charts/chart%d.xml"
@@ -320,7 +337,7 @@ module Axlsx
   # x1E Information Separator Two
   # x1F Information Separator One
   #
-  # The following are not dealt with. 
+  # The following are not dealt with.
   # If you have this in your data, expect excel to blow up!
   #
   # x7F	Delete
@@ -365,7 +382,7 @@ module Axlsx
   # @see http://www.codetable.net/asciikeycodes
   pattern = "[\x0-\x08\x0B\x0C\x0E-\x1F]"
   pattern= pattern.respond_to?(:encode) ? pattern.encode('UTF-8') : pattern
-  
+
   # The regular expression used to remove control characters from worksheets
   CONTROL_CHAR_REGEX = Regexp.new(pattern, 'n')
 

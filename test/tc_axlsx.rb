@@ -54,4 +54,10 @@ class TestAxlsx < Test::Unit::TestCase
     # todo
   end
 
+  def test_range_to_a
+    assert_equal([['A1', 'B1', 'C1']],                         Axlsx::range_to_a('A1:C1'))
+    assert_equal([['A1', 'B1', 'C1'], ['A2', 'B2', 'C2']],     Axlsx::range_to_a('A1:C2'))
+    assert_equal([['Z5', 'AA5', 'AB5'], ['Z6', 'AA6', 'AB6']], Axlsx::range_to_a('Z5:AB6'))
+  end
+
 end

@@ -12,6 +12,7 @@ module Axlsx
     # @note Supported types are defined as constants in Axlsx:
     # @see XML_NS_R
     # @see TABLE_R
+    # @see PIVOT_TABLE_R
     # @see WORKBOOK_R
     # @see WORKSHEET_R
     # @see APP_R
