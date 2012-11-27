@@ -104,6 +104,18 @@ module Axlsx
     Axlsx::col_ref(c_index).to_s << (r_index+1).to_s
   end
 
+  def self.range_to_a(range)
+    range.match(/^(\w+?\d+)\:(\w+?\d+)$/)
+    start_col, start_row = name_to_indices($1)
+    end_col,   end_row   = name_to_indices($2)
+    (start_row..end_row).to_a.map do |row_num|
+      (start_col..end_col).to_a.map do |col_num|
+        "#{col_ref(col_num)}#{row_num+1}"
+      end
+    end
+  end
+
+
   # performs the increadible feat of changing snake_case to CamelCase
   # @param [String] s The snake case string to camelize
   # @return [String]

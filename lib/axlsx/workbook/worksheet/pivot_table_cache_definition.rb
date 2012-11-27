@@ -30,7 +30,7 @@ module Axlsx
     end
 
     def cache_id
-      index
+      index + 1
     end
 
     # The relation reference id for this table
@@ -49,8 +49,8 @@ module Axlsx
       str <<     '<worksheetSource ref="' << pivot_table.range << '" sheet="Data Sheet"/>'
       str <<   '</cacheSource>'
       str <<   '<cacheFields count="' << pivot_table.header_cells_count.to_s << '">'
-      pivot_table.header_cells_count.times do |i|
-        str <<   '<cacheField name="placeholder_' << i.to_s << '" numFmtId="0">'
+      pivot_table.header_cells.each do |cell|
+        str <<   '<cacheField name="' << cell.value << '" numFmtId="0">'
         str <<     '<sharedItems count="0">'
         str <<     '</sharedItems>'
         str <<   '</cacheField>'

@@ -29,7 +29,7 @@ class TestPivotTableCacheDefinition < Test::Unit::TestCase
   end
 
   def test_cache_id
-    assert_equal(0, @cache_definition.cache_id)
+    assert_equal(1, @cache_definition.cache_id)
   end
 
   def test_to_xml_string
