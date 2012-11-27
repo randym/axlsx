@@ -79,6 +79,12 @@ module Axlsx
       @tables ||=  Tables.new self
     end
 
+    # The pivot tables in this worksheet
+    # @return [Array] of Table
+    def pivot_tables
+      @pivot_tables ||=  PivotTables.new self
+    end
+
     # A typed collection of hyperlinks associated with this worksheet
     # @return [WorksheetHyperlinks]
     def hyperlinks
@@ -454,6 +460,12 @@ module Axlsx
       tables.last
     end
 
+    def add_pivot_table(ref, range, options={})
+      pivot_tables << PivotTable.new(ref, range, self, options)
+      yield pivot_tables.last if block_given?
+      pivot_tables.last
+    end
+
     # Shortcut to worsksheet_comments#add_comment
     def add_comment(options={})
       worksheet_comments.add_comment(options)
@@ -539,7 +551,8 @@ module Axlsx
       r + [tables.relationships,
            worksheet_comments.relationships,
            hyperlinks.relationships,
-           worksheet_drawing.relationship].flatten.compact || []
+           worksheet_drawing.relationship,
+           pivot_tables.relationships].flatten.compact || []
       r
     end
 

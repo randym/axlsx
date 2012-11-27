@@ -168,6 +168,12 @@ class TestWorksheet < Test::Unit::TestCase
     assert @ws.drawing.is_a?(Axlsx::Drawing)
   end
 
+  def test_add_pivot_table
+    assert(@ws.workbook.pivot_tables.empty?, "the sheet's workbook should not have any pivot tables by default")
+    @ws.add_pivot_table 'G5:G6', 'A1:D:10'
+    assert_equal(@ws.workbook.pivot_tables.size, 1, "add_pivot_tables adds a pivot_table to the workbook")
+  end
+
   def test_col_style
     @ws.add_row [1,2,3,4]
     @ws.add_row [1,2,3,4]
@@ -366,6 +372,7 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.merge_cells "A4:A5"
     @ws.add_chart Axlsx::Pie3DChart
     @ws.add_table "E1:F3"
+    @ws.add_pivot_table  'G5:G6', 'A1:D10'
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@ws.to_xml_string)
     assert(schema.validate(doc).map { |e| puts e.message; e }.empty?, schema.validate(doc).map { |e| e.message }.join('\n'))
@@ -382,6 +389,8 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(@ws.relationships.size, 4, "adding a comment adds 3 relationships")
     c = @ws.add_comment :text => 'not that is a comment!', :author => 'travis', :ref => "A1"
     assert_equal(@ws.relationships.size, 4, "adding multiple comments in the same worksheet should not add any additional comment relationships")
+    c = @ws.add_pivot_table 'G5:G6', 'A1:D10'
+    assert_equal(@ws.relationships.size, 5, "adding a pivot table adds 1 relationship")
   end
 
 
