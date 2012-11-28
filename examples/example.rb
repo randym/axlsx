@@ -21,6 +21,7 @@ examples << :mbcs
 examples << :formula
 examples << :auto_filter
 examples << :data_types
+examples << :override_data_types
 examples << :hyperlinks
 examples << :number_currency_format
 examples << :venezuela_currency
@@ -344,6 +345,12 @@ if examples.include? :data_types
   end
 end
 
+#```ruby
+if examples.include? :override_data_types
+  wb.add_worksheet(:name => "Override Data Type") do |sheet|
+    sheet.add_row ['dont eat my zeros!', '0088'] , :types => [nil, :string]
+  end
+end
 # Hyperlinks in worksheet
 if examples.include? :hyperlinks
   wb.add_worksheet(:name => 'hyperlinks') do |sheet|
