@@ -9,7 +9,7 @@ class TestPackage < Test::Unit::TestCase
     ws.add_row ['Yes!', 'We', 'can!']
     ws.add_hyperlink :ref => ws.rows.first.cells.last, :location => 'https://github.com/randym'
     # TODO this needs to be confirmed and checked. Validation errors should not be happening here!!!!!!
-    #ws.workbook.add_defined_name("#{ws.name}!A1:C2", :name => '_xlnm.Print_Titles', :hidden => true)
+    ws.workbook.add_defined_name("#{ws.name}!A1:C2", :name => '_xlnm.Print_Titles', :hidden => true)
     ws.protect_range('A1:C1')
     ws.protect_range(ws.rows.last.cells)
     ws.add_comment :author => 'alice', :text => 'Hi Bob', :ref => 'A12'

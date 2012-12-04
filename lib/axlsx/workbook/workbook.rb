@@ -313,6 +313,7 @@ require 'axlsx/workbook/worksheet/selection.rb'
         end
       end
       str << '</sheets>'
+      defined_names.to_xml_string(str)
       unless pivot_tables.empty?
         str << '<pivotCaches>'
         pivot_tables.each_with_index do |pivot_table, index|
@@ -321,7 +322,6 @@ require 'axlsx/workbook/worksheet/selection.rb'
         end
         str << '</pivotCaches>'
       end
-      defined_names.to_xml_string(str)
       str << '</workbook>'
     end
 
