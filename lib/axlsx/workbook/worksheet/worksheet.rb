@@ -69,6 +69,15 @@ module Axlsx
       @sheet_view
     end
 
+    # The sheet format pr for this worksheet
+    # @return [SheetFormatPr]
+    # @see [SheetFormatPr]
+    def sheet_format_pr
+      @sheet_format_pr ||= SheetFormatPr.new
+      yeild @sheet_format_pr if block_given?
+      @sheet_format_pr
+    end
+
     # The workbook that owns this worksheet
     # @return [Workbook]
     attr_reader :workbook
@@ -613,7 +622,7 @@ module Axlsx
 
 
     def serializable_parts
-      [sheet_pr, dimension, sheet_view, column_info,
+      [sheet_pr, dimension, sheet_view, sheet_format_pr, column_info,
        sheet_data, sheet_calc_pr, @sheet_protection, protected_ranges,
        auto_filter, merged_cells, conditional_formattings,
        data_validations, hyperlinks, print_options, page_margins,

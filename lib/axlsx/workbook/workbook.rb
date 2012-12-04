@@ -46,6 +46,7 @@ require 'axlsx/workbook/worksheet/pivot_tables.rb'
 require 'axlsx/workbook/worksheet/data_validation.rb'
 require 'axlsx/workbook/worksheet/data_validations.rb'
 require 'axlsx/workbook/worksheet/sheet_view.rb'
+require 'axlsx/workbook/worksheet/sheet_format_pr.rb'
 require 'axlsx/workbook/worksheet/pane.rb'
 require 'axlsx/workbook/worksheet/selection.rb'
   # The Workbook class is an xlsx workbook that manages worksheets, charts, drawings and styles.
