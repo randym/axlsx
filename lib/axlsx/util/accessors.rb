@@ -22,6 +22,21 @@ module Axlsx
         validated_attr_accessor(symbols, 'validate_string')
       end
 
+
+      # Creates one or more usigned integer attr_accessors
+      # @param [Array] symbols An array of symbols representing the
+      # names of the attributes you will add to your class
+      def unsigned_int_attr_accessor(*symbols)
+        validated_attr_accessor(symbols, 'validate_unsigned_int')
+      end
+
+      # Creates one or more float (double?) attr_accessors
+      # @param [Array] symbols An array of symbols representing the
+      # names of the attributes you will add to your class
+      def float_attr_accessor(*symbols)
+        validated_attr_accessor(symbols, 'validate_float')
+      end
+
       # Creates on or more boolean validated attr_accessors
       # @param [Array] symbols An array of symbols representing the
       # names of the attributes you will add to your class.
