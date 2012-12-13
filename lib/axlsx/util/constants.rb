@@ -285,9 +285,8 @@ module Axlsx
   # error message for sheets that use a name which is longer than 31 bytes
   ERR_SHEET_NAME_TOO_LONG = "Your worksheet name '%s' is too long. Worksheet names must be 31 characters (bytes) or less"
 
-  # error message for sheets that use a name which includes a colon
-
-  ERR_SHEET_NAME_COLON_FORBIDDEN = "Your worksheet name '%s' contains a colon, which is not allowed by MS Excel and will cause repair warnings. Please change the name of your sheet."
+  # error message for sheets that use a name which include invalid characters
+  ERR_SHEET_NAME_CHARACTER_FORBIDDEN = "Your worksheet name '%s' contains a character which is not allowed by MS Excel and will cause repair warnings. Please change the name of your sheet."
 
   # error message for duplicate sheet names
   ERR_DUPLICATE_SHEET_NAME = "There is already a worksheet in this workbook named '%s'. Please use a unique name"

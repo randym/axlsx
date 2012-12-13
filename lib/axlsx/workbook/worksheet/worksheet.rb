@@ -614,7 +614,7 @@ module Axlsx
     def validate_sheet_name(name)
       DataTypeValidator.validate "Worksheet.name", String, name
       raise ArgumentError, (ERR_SHEET_NAME_TOO_LONG % name) if name.size > 31
-      raise ArgumentError, (ERR_SHEET_NAME_COLON_FORBIDDEN % name) if name.include? ':'
+      raise ArgumentError, (ERR_SHEET_NAME_CHARACTER_FORBIDDEN % name) if '[]*/\?:'.chars.any? { |char| name.include? char }
       name = Axlsx::coder.encode(name)
       sheet_names = @workbook.worksheets.map { |s| s.name }
       raise ArgumentError, (ERR_DUPLICATE_SHEET_NAME % name) if sheet_names.include?(name)
