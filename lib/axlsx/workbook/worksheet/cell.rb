@@ -28,11 +28,12 @@ module Axlsx
     # @option options [Symbol] vertAlign must be one of :baseline, :subscript, :superscript
     # @option options [Integer] sz
     # @option options [String] color an 8 letter rgb specification
+    # @option options [Number] formula_value The value to cache for a formula cell.
     # @option options [Symbol] scheme must be one of :none, major, :minor
     def initialize(row, value="", options={})
       self.row=row
       @value = @font_name = @charset = @family = @b = @i = @strike = @outline = @shadow = nil
-      @condense = @u = @vertAlign = @sz = @color = @scheme = @extend = @ssti = nil
+      @formula_value = @condense = @u = @vertAlign = @sz = @color = @scheme = @extend = @ssti = nil
       @styles = row.worksheet.workbook.styles
       @row.cells << self
       parse_options options
@@ -40,6 +41,10 @@ module Axlsx
       @type ||= cell_type_from_value(value)
       @value = cast_value(value)
     end
+
+    # this is the cached value for formula cells. If you want the values to render in iOS/Mac OSX preview
+    # you need to set this.
+    attr_accessor :formula_value
 
     # An array of available inline styes.
     # TODO change this to a hash where each key defines attr name and validator (and any info the validator requires)
@@ -326,8 +331,9 @@ module Axlsx
 
       when :string
         #parse formula
-        if @value.start_with?('=')
+        if is_formula?
           str  << 't="str"><f>' << @value.to_s.sub('=', '') << '</f>'
+          str << '<v>' << @formula_value.to_s << '</v>' if @formula_value
         else
           #parse shared
           if @ssti

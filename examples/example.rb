@@ -44,7 +44,7 @@ examples << :conditional_formatting
 examples << :streaming
 examples << :shared_strings
 examples << :no_autowidth
-
+examples << :cached_formula
 p = Axlsx::Package.new
 wb = p.workbook
 #```
@@ -724,11 +724,20 @@ if examples.include? :no_autowidth
   wb.add_worksheet(:name => "Manual Widths") do | sheet |
     sheet.add_row ['oh look! no autowidth']
   end
-  p.validate.each { |e| puts e.message }
   p.serialize("no-use_autowidth.xlsx")
 end
 #```
 
 
 
+if examples.include? :cached_formula
+  p = Axlsx::Package.new
+  p.use_shared_strings = true
+  wb = p.workbook
+  wb.add_worksheet(:name => "cached formula") do | sheet |
+    puts sheet.sheet_format_pr
+    sheet.add_row [1, 2, '=A1+B1'], :formula_values => [nil, nil, 3]
+  end
+  p.serialize 'cached_formula.xlsx'
+end
 

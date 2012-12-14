@@ -620,7 +620,6 @@ module Axlsx
       raise ArgumentError, (ERR_DUPLICATE_SHEET_NAME % name) if sheet_names.include?(name)
     end
 
-
     def serializable_parts
       [sheet_pr, dimension, sheet_view, sheet_format_pr, column_info,
        sheet_data, sheet_calc_pr, @sheet_protection, protected_ranges,

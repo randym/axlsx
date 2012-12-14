@@ -147,15 +147,24 @@ module Axlsx
     def array_to_cells(values, options={})
       values = values
       DataTypeValidator.validate 'Row.array_to_cells', Array, values
-      types, style = options.delete(:types), options.delete(:style)
+      types, style, formula_values = options.delete(:types), options.delete(:style), options.delete(:formula_values)
       values.each_with_index do |value, index|
+
+        #WTF IS THIS PAP?
         cell_style = style.is_a?(Array) ? style[index] : style
         options[:style] = cell_style if cell_style
+
         cell_type = types.is_a?(Array)? types[index] : types
         options[:type] = cell_type if cell_type
+
+        formula_value = formula_values[index] if formula_values.is_a?(Array)
+        options[:formula_value] = formula_value if formula_value
+
         Cell.new(self, value, options)
+
         options.delete(:style)
         options.delete(:type)
+        options.delete(:formula_value)
       end
     end
   end
