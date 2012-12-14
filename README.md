@@ -21,7 +21,7 @@ appreciation for the gem, please don't hesitate to make a donation.
 
 **License**: MIT License
 
-**Latest Version**: 1.3.4
+**Latest Version**: 1.3.5
 
 **Ruby Version**: 1.8.7, 1.9.2, 1.9.3
 
@@ -152,6 +152,12 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
+- **December.??.12**:1.3.5
+  - Added support for pivot tables
+  - Added support for descrete border edge styles
+  - Improved validation of sheet names
+  - Added support for formula value caching so that iOS and OSX preview can show the proper values
+
 - **November.25.12**:1.3.4
   - Support for headers and footers for worksheets
   - bug fix: Properly escape hyperlink urls
@@ -240,11 +246,18 @@ done without the help of the people below.
 
 [ebenoist](https://github.com/ebenoist) - For taking control of control characters and keeping what is between the lines, between the lines.
 
-[adammathys](https://github.com/adammathys) - Fgr getting our head in the
+[adammathys](https://github.com/adammathys) - For getting our head in the
 air and our feet on the ground.
+
+[raiis](https://github.com/raiis) - For letting us specify diffent border styles on any edge.
+
+[alexrothenberg](https://github.com/alexrothenberg) - For an outstanding implementation of PivotTables, one of the last BIG chunks missing from the spec.
+
+[ball-hayden](https://github.com/ball-hayden) - For making sure we only get the right characters in our sheet names.
 
 #Copyright and License
 ----------
 
-Axlsx &copy; 2011-2012 by [Randy Morgan](mailto:digial.ipseity@gmail.com). Axlsx is
-licensed under the MIT license. Please see the LICENSE document for more information.
+Axlsx &copy; 2011-2012 by [Randy Morgan](mailto:digial.ipseity@gmail.com). 
+
+Axlsx is licensed under the MIT license. Please see the LICENSE document for more information.
