@@ -135,6 +135,9 @@ module Axlsx
     # identifies the index of an object withing the collections used in generating relationships for the worksheet
     # @param [Any] object the object to search for
     # @return [Integer] The index of the object
+    #
+    # RM: I cannot find any place in the code base where this is actually used
+    # TODO: confirm with author before removal
     def relationships_index_of(object)
       objects = [cache_definition]
       objects.index(object)

@@ -608,9 +608,25 @@ module Axlsx
       @styles ||= self.workbook.styles
     end
 
+    def outline_rows(start_index, end_index, level = 1, collapsed = true)
+      outline rows, (start_index..end_index), level, collapsed
+    end
+
+    def outline_columns(start_index, end_index, level = 1, collapsed = true)
+      outline column_info, (start_index..end_index), level, collapsed
+    end
 
     private
+    def outline(collection, range, level = 1, collapsed = true)
+       range.each do |index|
+        unless (item = collection[index]).nil?
+          item.outline_level = level
+          item.hidden = collapsed
+        end
+        sheet_view.show_outline_symbols = true
+      end
 
+    end
     def validate_sheet_name(name)
       DataTypeValidator.validate "Worksheet.name", String, name
       raise ArgumentError, (ERR_SHEET_NAME_TOO_LONG % name) if name.size > 31

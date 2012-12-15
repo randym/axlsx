@@ -7,8 +7,9 @@ class TestPackage < Test::Unit::TestCase
     ws = @package.workbook.add_worksheet
     ws.add_row ['Can', 'we', 'build it?']
     ws.add_row ['Yes!', 'We', 'can!']
+    ws.outline_rows 0, 1
+    ws.outline_columns 0, 1
     ws.add_hyperlink :ref => ws.rows.first.cells.last, :location => 'https://github.com/randym'
-    # TODO this needs to be confirmed and checked. Validation errors should not be happening here!!!!!!
     ws.workbook.add_defined_name("#{ws.name}!A1:C2", :name => '_xlnm.Print_Titles', :hidden => true)
     ws.protect_range('A1:C1')
     ws.protect_range(ws.rows.last.cells)
@@ -145,7 +146,7 @@ class TestPackage < Test::Unit::TestCase
 
 
     #no mystery parts
-    assert_equal(p.size, 24)
+    assert_equal(24, p.size)
 
   end
 

@@ -45,6 +45,7 @@ class TestPivotTable < Test::Unit::TestCase
     assert_equal(3,   pivot_table.header_index_of('Type'   ))
     assert_equal(4,   pivot_table.header_index_of('Sales'  ))
     assert_equal(nil, pivot_table.header_index_of('Missing'))
+    assert_equal(%w(A1 B1 C1 D1 E1), pivot_table.header_cell_refs)
   end
 
   def test_pn
