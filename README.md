@@ -153,6 +153,7 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 #Change log
 ---------
 - **December.??.12**:1.3.5
+  - Added outline_level_rows and outline_level_columns to worksheet to simplify setting up outlining in the worksheet.
   - Added support for pivot tables
   - Added support for descrete border edge styles
   - Improved validation of sheet names
