@@ -608,11 +608,23 @@ module Axlsx
       @styles ||= self.workbook.styles
     end
 
-    def outline_rows(start_index, end_index, level = 1, collapsed = true)
+    # shortcut level to specify the outline level for a series of rows
+    # Oulining is what lets you add collapse and expand to a data set.
+    # @param [Integer] start_index The zero based index of the first row of outlining.
+    # @param [Integer] end_index The zero based index of  the last row to be outlined
+    # @param [integer] level The level of outline to apply
+    # @param [Integer] collapsed The initial collapsed state of the outline group
+    def outline_level_rows(start_index, end_index, level = 1, collapsed = true)
       outline rows, (start_index..end_index), level, collapsed
     end
 
-    def outline_columns(start_index, end_index, level = 1, collapsed = true)
+    # shortcut level to specify the outline level for a series of columns
+    # Oulining is what lets you add collapse and expand to a data set.
+    # @param [Integer] start_index The zero based index of the first column of outlining.
+    # @param [Integer] end_index The zero based index of  the last column to be outlined
+    # @param [integer] level The level of outline to apply
+    # @param [Integer] collapsed The initial collapsed state of the outline group
+    def outline_level_columns(start_index, end_index, level = 1, collapsed = true)
       outline column_info, (start_index..end_index), level, collapsed
     end
 

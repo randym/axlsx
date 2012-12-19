@@ -476,17 +476,17 @@ class TestWorksheet < Test::Unit::TestCase
     assert(doc.xpath('//sheetPr[@filterMode="true"]'))
   end
 
-  def test_outline_rows
+  def test_outline_level_rows
     3.times { @ws.add_row [1,2,3] }
-    @ws.outline_rows 0, 2
+    @ws.outline_level_rows 0, 2
     assert_equal(1, @ws.rows[0].outline_level)
     assert_equal(true, @ws.rows[2].hidden)
     assert_equal(true, @ws.sheet_view.show_outline_symbols)
   end
 
-  def test_outline_columns
+  def test_outline_level_columns
     3.times { @ws.add_row [1,2,3] }
-    @ws.outline_columns 0, 2
+    @ws.outline_level_columns 0, 2
     assert_equal(1, @ws.column_info[0].outline_level)
     assert_equal(true, @ws.column_info[2].hidden)
     assert_equal(true, @ws.sheet_view.show_outline_symbols)

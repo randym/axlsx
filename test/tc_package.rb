@@ -7,8 +7,8 @@ class TestPackage < Test::Unit::TestCase
     ws = @package.workbook.add_worksheet
     ws.add_row ['Can', 'we', 'build it?']
     ws.add_row ['Yes!', 'We', 'can!']
-    ws.outline_rows 0, 1
-    ws.outline_columns 0, 1
+    ws.outline_level_rows 0, 1
+    ws.outline_level_columns 0, 1
     ws.add_hyperlink :ref => ws.rows.first.cells.last, :location => 'https://github.com/randym'
     ws.workbook.add_defined_name("#{ws.name}!A1:C2", :name => '_xlnm.Print_Titles', :hidden => true)
     ws.protect_range('A1:C1')
