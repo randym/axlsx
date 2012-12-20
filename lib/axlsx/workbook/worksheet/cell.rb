@@ -326,7 +326,8 @@ module Axlsx
     def to_xml_string(r_index, c_index, str = '')
       str << '<c r="' << Axlsx::cell_r(c_index, r_index) << '" s="' << @style.to_s << '" '
       return str << '/>' if @value.nil?
-      self.send (@type.to_s << '_type_serialization').to_sym, str
+      method = (@type.to_s << '_type_serialization').to_sym
+      self.send( method, str)
       str << '</c>'
     end
    
@@ -407,7 +408,7 @@ module Axlsx
 
     # Cast the value into this cells data type.
     # @note
-    #   About Time - Time in OOXML is *different* from what you might expect. The history as to why is interesting,  but you can safely assume that if you are generating docs on a mac, you will want to specify Workbook.1904 as true when using time typed values.
+    #   About Time - Time in OOXML is *different* from what you might expect. The history as to why is interesting, but you can safely assume that if you are generating docs on a mac, you will want to specify Workbook.1904 as true when using time typed values.
     # @see Axlsx#date1904
     def cast_value(v)
       return nil if v.nil?
