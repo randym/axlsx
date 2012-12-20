@@ -87,7 +87,7 @@ module Axlsx
 
 
     # The value of this cell.
-    # @return [String, Integer, Float, Time] casted value based on cell's type attribute.
+    # @return [String, Integer, Float, Time, Boolean] casted value based on cell's type attribute.
     attr_reader :value
     # @see value
     def value=(v)
@@ -219,7 +219,7 @@ module Axlsx
     end
 
     # The inline sz property for the cell
-    # @return [Boolean]
+    # @return [Inteter]
     attr_reader :sz
     # @see sz
     def sz=(v) set_run_style :validate_unsigned_int, :sz, v; end
@@ -326,35 +326,10 @@ module Axlsx
     def to_xml_string(r_index, c_index, str = '')
       str << '<c r="' << Axlsx::cell_r(c_index, r_index) << '" s="' << @style.to_s << '" '
       return str << '/>' if @value.nil?
-
-      case @type
-
-      when :string
-        #parse formula
-        if is_formula?
-          str  << 't="str"><f>' << @value.to_s.sub('=', '') << '</f>'
-          str << '<v>' << @formula_value.to_s << '</v>' if @formula_value
-        else
-          #parse shared
-          if @ssti
-            str << 't="s"><v>' << @ssti.to_s << '</v>'
-          else
-            str << 't="inlineStr"><is>' << run_xml_string << '</is>'
-          end
-        end
-      when :date
-        # TODO: See if this is subject to the same restriction as Time below
-        str << '><v>' << DateTimeConverter::date_to_serial(@value).to_s << '</v>'
-      when :time
-        str << '><v>' << DateTimeConverter::time_to_serial(@value).to_s << '</v>'
-      when :boolean
-        str << 't="b"><v>' << @value.to_s << '</v>'
-      else
-        str << '><v>' << @value.to_s << '</v>'
-      end
+      self.send (@type.to_s << '_type_serialization').to_sym, str
       str << '</c>'
     end
-
+   
     def is_formula?
       @type == :string && @value.to_s.start_with?('=')
     end
@@ -450,11 +425,50 @@ module Axlsx
         v ? 1 : 0
       else
         @type = :string
-        v.to_s
         # TODO find a better way to do this as it accounts for 30% of
         # processing time in benchmarking...
         ::CGI.escapeHTML(v.to_s)
       end
     end
+
+    def date_type_serialization(str='')
+      value_serialization 'd', DateTimeConverter::date_to_serial(@value).to_s, str
+    end
+    
+    def time_type_serialization(str='')
+      value_serialization 'd', DateTimeConverter::time_to_serial(@value).to_s, str
+    end
+    
+    def boolean_type_serialization(str='')
+      value_serialization 'b', @value.to_s, str
+    end
+    
+    def float_type_serialization(str='')
+      numeric_type_serialization str
+    end
+    
+    def integer_type_serialization(str = '')
+      numeric_type_serialization str
+    end
+    
+    def numeric_type_serialization(str = '')
+      value_serialization('n', @value.to_s, str)
+    end
+   
+    def value_serialization(serialization_type, serialization_value, str = '')
+      str << 't="' << serialization_type << '"><v>' << serialization_value << '</v>'
+    end 
+    
+    def string_type_serialization(str='')
+      if is_formula?
+        str << 't="str">' << '<f>' << value.to_s.sub('=', '') << '</f>'
+        str << '<v>' << formula_value.to_s << '</v>' unless formula_value.nil?
+      elsif !@ssti.nil?
+        value_serialization 's', @ssti.to_s, str
+      else
+        str << 't="inlineStr">' << '<is>' << run_xml_string << '</is>'
+      end
+    end
+
   end
 end
