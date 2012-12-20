@@ -104,7 +104,12 @@ module Axlsx
 
    # @see Col#width
     def width=(v)
-      Axlsx.validate_unsigned_numeric(v) unless v == nil
+      # Removing this validation make a 10% difference in performance
+      # as it is called EVERY TIME A CELL IS ADDED - the proper solution
+      # is to only set this if a calculated value is greated than the
+      # current @width value.
+      # TODO!!!
+      #Axlsx.validate_unsigned_numeric(v) unless v == nil
       @custom_width = @best_fit = v != nil
       @width = v
     end
