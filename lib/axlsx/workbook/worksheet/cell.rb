@@ -327,7 +327,7 @@ module Axlsx
       str << '<c r="' << Axlsx::cell_r(c_index, r_index) << '" s="' << @style.to_s << '" '
       return str << '/>' if @value.nil?
       method = (@type.to_s << '_type_serialization').to_sym
-      self.send( method, str)
+      self.send(method, str)
       str << '</c>'
     end
    
