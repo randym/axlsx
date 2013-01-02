@@ -492,4 +492,10 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(true, @ws.sheet_view.show_outline_symbols)
   end
 
+  def test_worksheet_does_not_get_added_to_workbook_on_initialize_failure
+    assert_equal(1, @wb.worksheets.size)
+    assert_raise(ArgumentError) { @wb.add_worksheet(:name => 'Sheet1') }
+    assert_equal(1, @wb.worksheets.size)
+  end
+
 end

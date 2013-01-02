@@ -23,11 +23,11 @@ module Axlsx
     # @option options [Boolean] show_gridlines indicates if gridlines should be shown for this sheet.
     def initialize(wb, options={})
       self.workbook = wb
-      @workbook.worksheets << self
       @sheet_protection = nil
 
       initialize_page_options(options)
       parse_options options
+      @workbook.worksheets << self
     end
 
     # Initalizes page margin, setup and print options
