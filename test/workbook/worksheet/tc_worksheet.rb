@@ -405,6 +405,11 @@ class TestWorksheet < Test::Unit::TestCase
     assert_raise(ArgumentError, "worksheet name must be unique") { n = @ws.name; @ws.workbook.add_worksheet(:name=> n) }
   end
 
+  def test_name_unique_only_checks_other_worksheet_names
+    assert_nothing_raised { @ws.name = @ws.name }
+    assert_nothing_raised { Axlsx::Package.new.workbook.add_worksheet :name => 'Sheet1' }
+  end
+
   def test_name_size
     assert_raise(ArgumentError, "name too long!") { @ws.name = Array.new(32, "A").join() }
     assert_nothing_raised { @ws.name = Array.new(31, "A").join() }
@@ -490,6 +495,12 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(1, @ws.column_info[0].outline_level)
     assert_equal(true, @ws.column_info[2].hidden)
     assert_equal(true, @ws.sheet_view.show_outline_symbols)
+  end
+
+  def test_worksheet_does_not_get_added_to_workbook_on_initialize_failure
+    assert_equal(1, @wb.worksheets.size)
+    assert_raise(ArgumentError) { @wb.add_worksheet(:name => 'Sheet1') }
+    assert_equal(1, @wb.worksheets.size)
   end
 
 end
