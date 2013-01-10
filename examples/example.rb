@@ -237,17 +237,20 @@ if examples.include? :fixed_column_width
     sheet.add_row ["I use autowidth and am very wide", "I use a custom width and am narrow"]
     sheet.add_row ['abcdefg', 'This is a very long text and should flow into the right cell', nil, 'xxx' ]
     sheet.column_widths nil, 3, 5, nil
+    sheet.column_info.each do |col|
+      puts col.width
+    end
   end
 end
 
 #```ruby
 if examples.include? :outline_level
   wb.add_worksheet(name: 'outline_level') do |sheet|
-    sheet.add_row [1, 2, 3, 4, Time.now, 149455.15]
-    sheet.add_row [1, 2, 5, 6, Time.now,14100.19]
-    sheet.add_row [9500002267, 1212, 1212, Time.now,14100.19]
-    sheet.outline_rows 0, 2
-    sheet.outline_cols 0, 2
+    sheet.add_row [1, 2, 3, Time.now, 5, 149455.15]
+    sheet.add_row [1, 2, 5, 6, 5,14100.19]
+    sheet.add_row [9500002267, 1212, 1212, 5,14100.19]
+    sheet.outline_level_rows 0, 2
+    sheet.outline_level_columns 0, 2
   end
 end
 ##```
