@@ -125,7 +125,9 @@ module Axlsx
        if fixed_width.is_a? Numeric
          self.width = fixed_width
        elsif use_autowidth
-        self.width = [width || 0, cell.autowidth || 0].max
+         cell_width = cell.autowidth
+         self.width = cell_width unless (width || 0) > (cell_width || 0)
+         #self.width = [width || 0, cell.autowidth || 0].max
        end 
     end 
 

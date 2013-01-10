@@ -58,7 +58,7 @@ module Axlsx
           cell.send :ssti=, index
         else
           cell.send :ssti=, @index
-          @shared_xml_string << '<si>' << cell.run_xml_string << '</si>'
+          @shared_xml_string << '<si>' << CellSerializer.run_xml_string(cell) << '</si>'
           @unique_cells[cell_hash] = @index
           @index += 1
         end

@@ -32,8 +32,9 @@ module Axlsx
     # @option options [Symbol] scheme must be one of :none, major, :minor
     def initialize(row, value="", options={})
       self.row=row
-      @value = @font_name = @charset = @family = @b = @i = @strike = @outline = @shadow = nil
-      @formula_value = @condense = @u = @vertAlign = @sz = @color = @scheme = @extend = @ssti = nil
+      @value = nil
+      #@value = @font_name = @charset = @family = @b = @i = @strike = @outline = @shadow = nil
+      #@formula_value = @condense = @u = @vertAlign = @sz = @color = @scheme = @extend = @ssti = nil
       @styles = row.worksheet.workbook.styles
       @row.cells << self
       parse_options options
@@ -293,42 +294,13 @@ module Axlsx
       self.row.worksheet.merge_cells "#{self.r}:#{range_end}" unless range_end.nil?
     end
 
-    # builds an xml text run based on this cells attributes.
-    # @param [String] str The string instance this run will be concated to.
-    # @return [String]
-    def run_xml_string(str = '')
-      if is_text_run?
-        data = instance_values.reject{|key, value| value == nil || key == 'value' || key == 'type' }
-        keys = data.keys & INLINE_STYLES
-        str << "<r><rPr>"
-        keys.each do |key|
-          case key
-          when 'font_name'
-            str << "<rFont val='"<< @font_name << "'/>"
-          when 'color'
-            str << data[key].to_xml_string
-          else
-            str << "<" << key.to_s << " val='" << data[key].to_s << "'/>"
-          end
-        end
-        str << "</rPr>" << "<t>" << value.to_s << "</t></r>"
-      else
-        str << "<t>" << value.to_s << "</t>"
-      end
-      str
-    end
-
     # Serializes the cell
     # @param [Integer] r_index The row index for the cell
     # @param [Integer] c_index The cell index in the row.
     # @param [String] str The string index the cell content will be appended to. Defaults to empty string.
     # @return [String] xml text for the cell
     def to_xml_string(r_index, c_index, str = '')
-      str << '<c r="' << Axlsx::cell_r(c_index, r_index) << '" s="' << @style.to_s << '" '
-      return str << '/>' if @value.nil?
-      method = (@type.to_s << '_type_serialization').to_sym
-      self.send(method, str)
-      str << '</c>'
+      CellSerializer.to_xml_string r_index, c_index, self, str
     end
    
     def is_formula?
@@ -397,9 +369,9 @@ module Axlsx
         :time
       elsif v.is_a?(TrueClass) || v.is_a?(FalseClass)
         :boolean
-      elsif v.to_s.match(/\A[+-]?\d+?\Z/) #numeric
+      elsif v.to_s =~ /\A[+-]?\d+?\Z/ #numeric
         :integer
-      elsif v.to_s.match(/\A[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?\Z/) #float
+      elsif v.to_s =~ /\A[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?\Z/ #float
         :float
       else
         :string
@@ -428,46 +400,7 @@ module Axlsx
         @type = :string
         # TODO find a better way to do this as it accounts for 30% of
         # processing time in benchmarking...
-        ::CGI.escapeHTML(v.to_s)
-      end
-    end
-
-    def date_type_serialization(str='')
-      value_serialization 'd', DateTimeConverter::date_to_serial(@value).to_s, str
-    end
-    
-    def time_type_serialization(str='')
-      value_serialization 'd', DateTimeConverter::time_to_serial(@value).to_s, str
-    end
-    
-    def boolean_type_serialization(str='')
-      value_serialization 'b', @value.to_s, str
-    end
-    
-    def float_type_serialization(str='')
-      numeric_type_serialization str
-    end
-    
-    def integer_type_serialization(str = '')
-      numeric_type_serialization str
-    end
-    
-    def numeric_type_serialization(str = '')
-      value_serialization('n', @value.to_s, str)
-    end
-   
-    def value_serialization(serialization_type, serialization_value, str = '')
-      str << 't="' << serialization_type << '"><v>' << serialization_value << '</v>'
-    end 
-    
-    def string_type_serialization(str='')
-      if is_formula?
-        str << 't="str">' << '<f>' << value.to_s.sub('=', '') << '</f>'
-        str << '<v>' << formula_value.to_s << '</v>' unless formula_value.nil?
-      elsif !@ssti.nil?
-        value_serialization 's', @ssti.to_s, str
-      else
-        str << 't="inlineStr">' << '<is>' << run_xml_string << '</is>'
+        Axlsx::trust_input ? v.to_s : ::CGI.escapeHTML(v.to_s)
       end
     end
 

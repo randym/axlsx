@@ -124,5 +124,10 @@ module Axlsx
     s = s.capitalize if all_caps
     s.gsub(/_(.)/){ $1.upcase }
   end
-
+  def self.trust_input
+    @trust_input ||= false
+  end
+  def self.trust_input=(v)
+    @trust_input=v
+  end
 end
