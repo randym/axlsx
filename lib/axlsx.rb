@@ -124,10 +124,19 @@ module Axlsx
     s = s.capitalize if all_caps
     s.gsub(/_(.)/){ $1.upcase }
   end
+
+
+  # Instructs the serializer to not try to escape cell value input. 
+  # This will give you a huge speed bonus, but if you content has <, > or other xml character data
+  # the workbook will be invalid and excel will complain.
   def self.trust_input
     @trust_input ||= false
   end
-  def self.trust_input=(v)
-    @trust_input=v
+
+  # @param[Boolean] trust_me A boolean value indicating if the cell value content is to be trusted
+  # @return [Boolean]
+  # @see Axlsx::trust_input
+  def self.trust_input=(trust_me)
+    @trust_input = trust_me
   end
 end
