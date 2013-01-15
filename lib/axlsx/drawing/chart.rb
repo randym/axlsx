@@ -63,6 +63,12 @@ module Axlsx
     # @return [Boolean]
     attr_reader :show_legend
 
+    # returns a relationship object for the chart
+    # @return [Axlsx::Relationship]
+    def relationship
+      Relationship.new(CHART_R, "../#{pn}")
+    end
+
     # The index of this chart in the workbooks charts collection
     # @return [Integer]
     def index

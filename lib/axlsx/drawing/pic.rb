@@ -107,6 +107,12 @@ module Axlsx
       @anchor.drawing.charts.size + @anchor.drawing.images.index(self) + 1
     end
 
+    # Returns a relationship object for this object
+    # @return Axlsx::Relationship
+    def relationship
+      Relationship.new(IMAGE_R, "../#{pn}")
+    end
+
     # providing access to the anchor's width attribute
     # @param [Integer] v
     # @see OneCellAnchor.width

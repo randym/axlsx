@@ -132,6 +132,7 @@ module Axlsx
     end
 
     # The relational part name for this drawing
+    # #NOTE This should be rewritten to return an Axlsx::Relationship object.
     # @return [String]
     def rels_pn
       "#{DRAWING_RELS_PN % (index+1)}"
@@ -139,23 +140,17 @@ module Axlsx
 
     # The index of a chart, image or hyperlink object this drawing contains
     def index_of(object)
-      objects = charts + images + hyperlinks
-      objects.index(object)
+      child_objects.index(object)
     end
 
+    def child_objects
+      charts + images + hyperlinks
+    end
     # The drawing's relationships.
     # @return [Relationships]
     def relationships
       r = Relationships.new
-      charts.each do |chart|
-        r << Relationship.new(CHART_R, "../#{chart.pn}")
-      end
-      images.each do |image|
-        r << Relationship.new(IMAGE_R, "../#{image.pn}")
-      end
-      hyperlinks.each do |hyperlink|
-        r << Relationship.new(HYPERLINK_R, hyperlink.href, :target_mode => :External)
-      end
+      child_objects.each { |child| r << child.relationship }
       r
     end
 

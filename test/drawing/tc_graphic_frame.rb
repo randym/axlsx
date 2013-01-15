@@ -22,4 +22,9 @@ class TestGraphicFrame < Test::Unit::TestCase
     assert_equal(chart.graphic_frame.rId, "rId2")
   end
 
+  def test_rId_with_image_and_chart
+    image = @ws.add_image :image_src => (File.dirname(__FILE__) + "/../../examples/image1.jpeg"), :start_at => [0,25], :width => 200, :height => 200
+    assert_equal(2, image.id)
+    assert_equal(1, @chart.index+1)
+  end
 end

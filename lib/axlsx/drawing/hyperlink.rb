@@ -83,6 +83,11 @@ module Axlsx
     # @return [String]
     attr_accessor :tooltip
 
+    # Returns a relationship object for this hyperlink
+    # @return [Axlsx::Relationship]
+    def relationship
+      Relationship.new(HYPERLINK_R, href, :target_mode => :External)
+    end
     # Serializes the object
     # @param [String] str
     # @return [String]
