@@ -81,7 +81,7 @@ module Axlsx
     attr_reader :type
     # @see type
     def type=(v)
-      RestrictionValidator.validate "Cell.type", [:date, :time, :float, :integer, :string, :boolean], v
+      RestrictionValidator.validate "Cell.type", [:date, :time, :float, :integer, :string, :boolean, :iso_8601], v
       @type=v
       self.value = @value unless @value.nil?
     end
@@ -373,6 +373,11 @@ module Axlsx
         :integer
       elsif v.to_s =~ /\A[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?\Z/ #float
         :float
+        # \A(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|0[1-9]|[1-2][0-9])
+        # T(2[0-3]|[0-1][0-9]):([0-5][0-9]):([0-5][0-9])(\.[0-9]+)?
+        # (Z|[+-](?:2[0-3]|[0-1][0-9]):[0-5][0-9])?\Z 
+      elsif v.to_s =~/\A(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|0[1-9]|[1-2][0-9])T(2[0-3]|[0-1][0-9]):([0-5][0-9]):([0-5][0-9])(\.[0-9]+)?(Z|[+-](?:2[0-3]|[0-1][0-9]):[0-5][0-9])?\Z/
+        :iso_8601
       else
         :string
       end
@@ -396,6 +401,9 @@ module Axlsx
         v.to_i
       elsif @type == :boolean
         v ? 1 : 0
+      elsif @type == :iso_8601
+        #consumer is responsible for ensuring the iso_8601 format when specifying this type
+        v
       else
         @type = :string
         # TODO find a better way to do this as it accounts for 30% of

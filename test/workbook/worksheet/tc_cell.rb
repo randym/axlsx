@@ -89,6 +89,7 @@ class TestCell < Test::Unit::TestCase
     assert_equal(@c.send(:cell_type_from_value, true), :boolean)
     assert_equal(@c.send(:cell_type_from_value, false), :boolean)
     assert_equal(@c.send(:cell_type_from_value, 1.0/10**6), :float)
+    assert_equal(:iso_8601, @c.send(:cell_type_from_value, '2008-08-30T01:45:36.123+09:00'))
   end
 
   def test_cast_value
@@ -105,6 +106,8 @@ class TestCell < Test::Unit::TestCase
     @c.type = :boolean
     assert_equal(@c.send(:cast_value, true), 1)
     assert_equal(@c.send(:cast_value, false), 0)
+    @c.type = :iso_8601
+    assert_equal("2012-10-10T12:24", @c.send(:cast_value, "2012-10-10T12:24"))
   end
 
   def test_color
@@ -299,8 +302,9 @@ class TestCell < Test::Unit::TestCase
   end
   def test_to_xml
     # TODO This could use some much more stringent testing related to the xml content generated!
-    @ws.add_row [Time.now, Date.today, true, 1, 1.0, "text", "=sum(A1:A2)"]
+    @ws.add_row [Time.now, Date.today, true, 1, 1.0, "text", "=sum(A1:A2)", "2013-01-13T13:31:25.123"]
     @ws.rows.last.cells[5].u = true
+    
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@ws.to_xml_string)
     errors = []
