@@ -165,7 +165,10 @@ module Axlsx
       end
       str << '</c:majorGridlines>'
       @title.to_xml_string(str) unless @title == nil
-      str << ('<c:numFmt formatCode="' << @format_code << '" sourceLinked="1"/>')
+      # Need to set sourceLinked to 0 if we're setting a format code on this row
+      # otherwise it will never take, as it will always prefer the 'General' formatting
+      # of the cells themselves
+      str << ('<c:numFmt formatCode="' << @format_code << '" sourceLinked="' << (@format_code.eql?('General') ? '1' : '0') << '"/>')
       str << '<c:majorTickMark val="none"/>'
       str << '<c:minorTickMark val="none"/>'
       str << ('<c:tickLblPos val="' << @tick_lbl_pos.to_s << '"/>')
