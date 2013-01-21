@@ -153,9 +153,9 @@ module Axlsx
     #   # black text on a white background at 14pt with thin borders!
     #   title = ws.style.add_style(:bg_color => "FFFF0000", :fg_color=>"#FF000000", :sz=>14,  :border=> {:style => :thin, :color => "FFFF0000"}
     #
-    #   ws.add_row :values => ["Least Popular Pets"]
-    #   ws.add_row :values => ["", "Dry Skinned Reptiles", "Bald Cats", "Violent Parrots"], :style=>title
-    #   ws.add_row :values => ["Votes", 6, 4, 1], :style=>Axlsx::STYLE_THIN_BORDER
+    #   ws.add_row ["Least Popular Pets"]
+    #   ws.add_row ["", "Dry Skinned Reptiles", "Bald Cats", "Violent Parrots"], :style=>title
+    #   ws.add_row ["Votes", 6, 4, 1], :style=>Axlsx::STYLE_THIN_BORDER
     #   f = File.open('example_you_got_style.xlsx', 'w')
     #   p.serialize(f)
     #
@@ -183,13 +183,13 @@ module Axlsx
     #                                 :border=>Axlsx::STYLE_THIN_BORDER)
     #
     #   # build your rows
-    #   ws.add_row :values => ["Genreated At:", Time.now], :styles=>[nil, date_time]
-    #   ws.add_row :values => ["Previous Year Quarterly Profits (JPY)"], :style=>title
-    #   ws.add_row :values => ["Quarter", "Profit", "% of Total"], :style=>title
-    #   ws.add_row :values => ["Q1", 4000, 40], :style=>[title, currency, percent]
-    #   ws.add_row :values => ["Q2", 3000, 30], :style=>[title, currency, percent]
-    #   ws.add_row :values => ["Q3", 1000, 10], :style=>[title, currency, percent]
-    #   ws.add_row :values => ["Q4", 2000, 20], :style=>[title, currency, percent]
+    #   ws.add_row ["Genreated At:", Time.now], :styles=>[nil, date_time]
+    #   ws.add_row ["Previous Year Quarterly Profits (JPY)"], :style=>title
+    #   ws.add_row ["Quarter", "Profit", "% of Total"], :style=>title
+    #   ws.add_row ["Q1", 4000, 40], :style=>[title, currency, percent]
+    #   ws.add_row ["Q2", 3000, 30], :style=>[title, currency, percent]
+    #   ws.add_row ["Q3", 1000, 10], :style=>[title, currency, percent]
+    #   ws.add_row ["Q4", 2000, 20], :style=>[title, currency, percent]
     #   f = File.open('example_you_got_style.xlsx', 'w')
     #   p.serialize(f)
     #
@@ -207,13 +207,13 @@ module Axlsx
     #                              :fg_color=>"#FF000000",
     #                              :type => :dxf)
     #
-    #   ws.add_row :values => ["Genreated At:", Time.now], :styles=>[nil, date_time]
-    #   ws.add_row :values => ["Previous Year Quarterly Profits (JPY)"], :style=>title
-    #   ws.add_row :values => ["Quarter", "Profit", "% of Total"], :style=>title
-    #   ws.add_row :values => ["Q1", 4000, 40], :style=>[title, currency, percent]
-    #   ws.add_row :values => ["Q2", 3000, 30], :style=>[title, currency, percent]
-    #   ws.add_row :values => ["Q3", 1000, 10], :style=>[title, currency, percent]
-    #   ws.add_row :values => ["Q4", 2000, 20], :style=>[title, currency, percent]
+    #   ws.add_row ["Genreated At:", Time.now], :styles=>[nil, date_time]
+    #   ws.add_row ["Previous Year Quarterly Profits (JPY)"], :style=>title
+    #   ws.add_row ["Quarter", "Profit", "% of Total"], :style=>title
+    #   ws.add_row ["Q1", 4000, 40], :style=>[title, currency, percent]
+    #   ws.add_row ["Q2", 3000, 30], :style=>[title, currency, percent]
+    #   ws.add_row ["Q3", 1000, 10], :style=>[title, currency, percent]
+    #   ws.add_row ["Q4", 2000, 20], :style=>[title, currency, percent]
     #
     #   ws.add_conditional_formatting("A1:A7", { :type => :cellIs, :operator => :greaterThan, :formula => "2000", :dxfId => profitable, :priority => 1 })
     #   f = File.open('example_differential_styling', 'w')

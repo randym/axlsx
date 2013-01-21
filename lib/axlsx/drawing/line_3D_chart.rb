@@ -9,7 +9,7 @@ module Axlsx
   #
   #   p = Axlsx::Package.new
   #   ws = p.workbook.add_worksheet
-  #   ws.add_row :values => ["This is a chart with no data in the sheet"]
+  #   ws.add_row ["This is a chart with no data in the sheet"]
   #
   #   chart = ws.add_chart(Axlsx::Line3DChart, :start_at=> [0,1], :end_at=>[0,6], :title=>"Most Popular Pets")
   #   chart.add_series :data => [1, 9, 10], :labels => ["Slimy Reptiles", "Fuzzy Bunnies", "Rottweiler"]
