@@ -23,6 +23,7 @@ module Axlsx
     # @see Chart
     # @see View3D
     def initialize(frame, options={})
+      @vary_colors = true
       super(frame, options)
       @series_type = PieSeries
       @view_3D = View3D.new({:rot_x =>30, :perspective=>30}.merge(options))
@@ -36,7 +37,7 @@ module Axlsx
       super(str) do |str_inner|
 
         str_inner << '<c:pie3DChart>'
-        str_inner << '<c:varyColors val="1"/>'
+        str_inner << '<c:varyColors val="' << vary_colors.to_s << '"/>'
         @series.each { |ser| ser.to_xml_string(str_inner) }
         d_lbls.to_xml_string(str) if @d_lbls
         str_inner << '</c:pie3DChart>'

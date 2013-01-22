@@ -37,6 +37,13 @@ class TestChart < Test::Unit::TestCase
     assert_nothing_raised { @chart.style = 2 }
     assert_equal(@chart.style, 2)
   end
+  
+  def test_vary_colors
+    assert_equal(true, @chart.vary_colors)
+    assert_raise(ArgumentError) { @chart.vary_colors = 7 }
+    assert_nothing_raised { @chart.vary_colors = false }
+    assert_equal(false, @chart.vary_colors)
+  end
 
   def test_start_at
     @chart.start_at 15, 25

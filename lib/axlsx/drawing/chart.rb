@@ -49,6 +49,13 @@ module Axlsx
       @d_lbls ||= DLbls.new(self.class)
     end
 
+    # Indicates that colors should be varied by datum
+    # @return [Boolean]
+    attr_reader :vary_colors
+ 
+    # Configures the vary_colors options for this chart
+    # @param [Boolean] v The value to set
+    def vary_colors=(v) Axlsx::validate_boolean(v); @vary_colors = v; end
 
     # The title object for the chart.
     # @return [Title]
@@ -133,7 +140,6 @@ module Axlsx
       str << '<c:style val="' << style.to_s << '"/>'
       str << '<c:chart>'
       @title.to_xml_string str
-      # do these need the c: namespace as well???
       str << '<c:autoTitleDeleted val="' << (@title == nil).to_s << '"/>'
       @view_3D.to_xml_string(str) if @view_3D
       str << '<c:floor><c:thickness val="0"/></c:floor>'

@@ -21,7 +21,9 @@ module Axlsx
     # The direction of the bars in the chart
     # must be one of [:bar, :col]
     # @return [Symbol]
-    attr_reader :bar_dir
+    def bar_dir
+      @bar_dir ||= :bar
+    end
     alias :barDir :bar_dir
 
     # space between bar or column clusters, as a percentage of the bar or column width.
@@ -31,18 +33,24 @@ module Axlsx
 
     # space between bar or column clusters, as a percentage of the bar or column width.
     # @return [String]
-    attr_reader :gap_width 
+    def gap_width
+      @gap_width ||= 150
+    end
     alias :gapWidth :gap_width
-
+    
     #grouping for a column, line, or area chart.
     # must be one of  [:percentStacked, :clustered, :standard, :stacked]
     # @return [Symbol]
-    attr_reader :grouping
+    def grouping
+      @grouping ||= :clustered
+    end
 
     # The shabe of the bars or columns
     # must be one of  [:cone, :coneToMax, :box, :cylinder, :pyramid, :pyramidToMax]
     # @return [Symbol]
-    attr_reader :shape
+    def shape
+      @shape ||= :box
+    end
 
     # validation regex for gap amount percent
     GAP_AMOUNT_PERCENT = /0*(([0-9])|([1-9][0-9])|([1-4][0-9][0-9])|500)%/
@@ -65,10 +73,7 @@ module Axlsx
     # @see Chart
     # @see View3D
     def initialize(frame, options={})
-      @bar_dir = :bar
-      @grouping = :clustered
-      @shape = :box
-      @gap_width = 150
+      @vary_colors = true
       @gap_width, @gap_depth, @shape = nil, nil, nil
       @cat_ax_id = rand(8 ** 8)
       @val_ax_id = rand(8 ** 8)
@@ -124,7 +129,7 @@ module Axlsx
         str_inner << '<c:bar3DChart>'
         str_inner << '<c:barDir val="' << bar_dir.to_s << '"/>'
         str_inner << '<c:grouping val="' << grouping.to_s << '"/>'
-        str_inner << '<c:varyColors val="1"/>'
+        str_inner << '<c:varyColors val="' << vary_colors.to_s << '"/>'
         @series.each { |ser| ser.to_xml_string(str_inner) }
         @d_lbls.to_xml_string(str) if @d_lbls
         str_inner << '<c:gapWidth val="' << @gap_width.to_s << '"/>' unless @gap_width.nil?

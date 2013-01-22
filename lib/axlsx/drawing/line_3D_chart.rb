@@ -60,6 +60,7 @@ module Axlsx
     # @see Chart
     # @see View3D
     def initialize(frame, options={})
+      @vary_colors = false
       @gapDepth = nil
       @grouping = :standard
       @catAxId = rand(8 ** 8)
@@ -93,7 +94,7 @@ module Axlsx
       super(str) do |str_inner|
         str_inner << '<c:line3DChart>'
         str_inner << '<c:grouping val="' << grouping.to_s << '"/>'
-        str_inner << '<c:varyColors val="1"/>'
+        str_inner << '<c:varyColors val="' << vary_colors.to_s << '"/>'
         @series.each { |ser| ser.to_xml_string(str_inner) }
         @d_lbls.to_xml_string(str) if @d_lbls
         str_inner << '<c:gapDepth val="' << @gapDepth.to_s << '"/>' unless @gapDepth.nil?

@@ -24,6 +24,7 @@ module Axlsx
 
     # Creates a new scatter chart
     def initialize(frame, options={})
+      @vary_colors = 0
       @scatterStyle = :lineMarker
       @xValAxId = rand(8 ** 8)
       @yValAxId = rand(8 ** 8)
@@ -48,7 +49,7 @@ module Axlsx
       super(str) do |str_inner|
         str_inner << '<c:scatterChart>'
         str_inner << '<c:scatterStyle val="' << scatterStyle.to_s << '"/>'
-        str_inner << '<c:varyColors val="1"/>'
+        str_inner << '<c:varyColors val="' << vary_colors.to_s << '"/>'
         @series.each { |ser| ser.to_xml_string(str_inner) }
         d_lbls.to_xml_string(str) if @d_lbls
         str_inner << '<c:axId val="' << @xValAxId.to_s << '"/>'
