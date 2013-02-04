@@ -143,9 +143,15 @@ module Axlsx
       child_objects.index(object)
     end
 
+
+    # An ordered list of objects this drawing holds
+    # It is important that the objects are returned in the same order each time for 
+    # releationship indexing in the package
+    # @return [Array]
     def child_objects
       charts + images + hyperlinks
     end
+
     # The drawing's relationships.
     # @return [Relationships]
     def relationships
