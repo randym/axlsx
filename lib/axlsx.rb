@@ -104,6 +104,9 @@ module Axlsx
     Axlsx::col_ref(c_index).to_s << (r_index+1).to_s
   end
 
+  # Creates an array of individual cell references based on an excel reference range.
+  # @param [String] range A cell range, for example A1:D5
+  # @return [Array]
   def self.range_to_a(range)
     range.match(/^(\w+?\d+)\:(\w+?\d+)$/)
     start_col, start_row = name_to_indices($1)
@@ -114,7 +117,6 @@ module Axlsx
       end
     end
   end
-
 
   # performs the increadible feat of changing snake_case to CamelCase
   # @param [String] s The snake case string to camelize
