@@ -53,6 +53,8 @@ module Axlsx
 
   # pivot table rels namespace
   PIVOT_TABLE_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/pivotTable"
+
+  # pivot table cache definition namespace
   PIVOT_TABLE_CACHE_DEFINITION_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/pivotCacheDefinition"
 
   # workbook rels namespace
@@ -220,6 +222,8 @@ module Axlsx
 
   # pivot table parts
   PIVOT_TABLE_PN = "pivotTables/pivotTable%d.xml"
+
+  # pivot table cache definition part name
   PIVOT_TABLE_CACHE_DEFINITION_PN = "pivotCache/pivotCacheDefinition%d.xml"
 
   # pivot table rels parts

@@ -28,10 +28,6 @@ module Axlsx
     # NOTE: Discontinued. This should not be part of GraphicFrame.
     # The drawing object maintains relationships and needs to be queried to determine the relationship id of any given graphic data child object.
     #
-    # @example
-    # <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/chart">
-    #   <c:chart xmlns:c="http://schemas.openxmlformats.org/drawingml/2006/chart" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" r:id="rId2"/>
-    # </a:graphicData>
     def rId
       warn('axlsx::DEPRECIATED: GraphicFrame#rId has been depreciated. relationship id is determed by the drawing object')
       "rId#{@anchor.index+1}"

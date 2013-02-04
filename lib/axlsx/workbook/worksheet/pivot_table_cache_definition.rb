@@ -29,6 +29,8 @@ module Axlsx
       "#{PIVOT_TABLE_CACHE_DEFINITION_PN % (index+1)}"
     end
 
+    # The identifier for this cache
+    # @return [Integer]
     def cache_id
       index + 1
     end

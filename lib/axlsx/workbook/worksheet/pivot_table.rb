@@ -43,6 +43,7 @@ module Axlsx
     # @return [String]
     attr_reader :range
 
+    # (see #range)
     def range=(v)
       DataTypeValidator.validate "#{self.class}.range", [String], v
       if v.is_a?(String)
@@ -54,6 +55,8 @@ module Axlsx
     # @return [Array]
     attr_reader :rows
 
+
+    # (see #rows)
     def rows=(v)
       DataTypeValidator.validate "#{self.class}.rows", [Array], v
       v.each do |ref|
@@ -66,6 +69,7 @@ module Axlsx
     # @return [Array]
     attr_reader :columns
 
+    # (see #columns)
     def columns=(v)
       DataTypeValidator.validate "#{self.class}.columns", [Array], v
       v.each do |ref|
@@ -78,6 +82,7 @@ module Axlsx
     # @return [Array]
     attr_reader :data
 
+    # (see #data)
     def data=(v)
       DataTypeValidator.validate "#{self.class}.data", [Array], v
       v.each do |ref|
@@ -90,6 +95,7 @@ module Axlsx
     # @return [String]
     attr_reader :pages
 
+    # (see #pages)
     def pages=(v)
       DataTypeValidator.validate "#{self.class}.pages", [Array], v
       v.each do |ref|
@@ -116,10 +122,8 @@ module Axlsx
       "#{PIVOT_TABLE_RELS_PN % (index+1)}"
     end
 
-    def header_cells_count
-      header_cells.count
-    end
-
+    # The cache_definition for this pivot table
+    # @return [PivotTableCacheDefinition]
     def cache_definition
       @cache_definition ||= PivotTableCacheDefinition.new(self)
     end
@@ -193,18 +197,32 @@ module Axlsx
       str << '</pivotTableDefinition>'
     end
 
+    # References for header cells
+    # @return [Array]
     def header_cell_refs
       Axlsx::range_to_a(header_range).first
     end
 
+    # The header cells for the pivot table
+    # @return [Array]
     def header_cells
       @sheet[header_range]
     end
 
+    # The values in the header cells collection
+    # @return [Array]
     def header_cell_values
       header_cells.map(&:value)
     end
 
+    # The number of cells in the header_cells collection
+    # @return [Integer]
+    def header_cells_count
+      header_cells.count
+    end
+
+    # The index of a given value in the header cells
+    # @return [Integer]
     def header_index_of(value)
       header_cell_values.index(value)
     end

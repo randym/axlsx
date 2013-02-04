@@ -29,7 +29,7 @@ appreciation for the gem, please don't hesitate to make a donation.
 
 **Rubinius Version**: rubinius 2.0.0dev * lower versions may run, this gem always tests against head.
 
-**Release Date**: November ??th 2012
+**Release Date**: February 4th 2013
 
 If you are working in rails, or with active record see:
 * http://github.com/randym/acts_as_xlsx
@@ -152,7 +152,7 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
-- **January.??.12**:1.3.5
+- **February.4.13**:1.3.5
   - converted vary_colors for chart data to instance variable with appropriate defulats for the various charts.
   - Added trust_input method on Axlsx to instruct the serializer to skip HTML escaping. This will give you a tremendous performance boost,
     Please be sure that you will never have <, >, etc in your content or the XML will be invalid.

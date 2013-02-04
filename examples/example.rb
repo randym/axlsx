@@ -237,9 +237,6 @@ if examples.include? :fixed_column_width
     sheet.add_row ["I use autowidth and am very wide", "I use a custom width and am narrow"]
     sheet.add_row ['abcdefg', 'This is a very long text and should flow into the right cell', nil, 'xxx' ]
     sheet.column_widths nil, 3, 5, nil
-    sheet.column_info.each do |col|
-      puts col.width
-    end
   end
 end
 
@@ -512,7 +509,7 @@ end
 if examples.include? :fit_to_page
   wb.add_worksheet(:name => "fit to page") do |sheet|
     sheet.add_row ['this all goes on one page']
-    sheet.fit_to_page = true
+    sheet.page_setup.fit_to :width => 1, :height => 1
   end
 end
 ##```
@@ -524,7 +521,7 @@ end
 if examples.include? :hide_gridlines
   wb.add_worksheet(:name => "No Gridlines") do |sheet|
     sheet.add_row ["This", "Sheet", "Hides", "Gridlines"]
-    sheet.show_gridlines = false
+    sheet.sheet_view.show_grid_lines = false
   end
 end
 ##```
@@ -726,11 +723,6 @@ if examples.include? :shared_strings
 end
 #```
 
-#p.validate do |er|
-#puts er.inspect
-#end
-##Disabling Autowidth
-
 #```ruby
 if examples.include? :no_autowidth
   p = Axlsx::Package.new
@@ -750,7 +742,6 @@ if examples.include? :cached_formula
   p.use_shared_strings = true
   wb = p.workbook
   wb.add_worksheet(:name => "cached formula") do | sheet |
-    puts sheet.sheet_format_pr
     sheet.add_row [1, 2, '=A1+B1'], :formula_values => [nil, nil, 3]
   end
   p.serialize 'cached_formula.xlsx'
