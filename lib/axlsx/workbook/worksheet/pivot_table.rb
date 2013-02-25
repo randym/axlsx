@@ -19,6 +19,7 @@ module Axlsx
       @sheet = sheet
       @sheet.workbook.pivot_tables << self
       @name = "PivotTable#{index+1}"
+      @data_sheet = nil
       @rows = []
       @columns = []
       @data = []
@@ -38,6 +39,15 @@ module Axlsx
     # The name of the sheet.
     # @return [String]
     attr_reader :sheet
+
+    # The sheet used as data source for the pivot table
+    # @return [Worksheet]
+    attr_writer :data_sheet
+
+    # (see #data_sheet)
+    def data_sheet
+      @data_sheet || @sheet
+    end
 
     # The range where the data for this pivot table lives.
     # @return [String]
@@ -206,7 +216,7 @@ module Axlsx
     # The header cells for the pivot table
     # @return [Array]
     def header_cells
-      @sheet[header_range]
+      data_sheet[header_range]
     end
 
     # The values in the header cells collection
