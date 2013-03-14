@@ -73,7 +73,7 @@ module Axlsx
         str_inner << '<c:varyColors val="' << vary_colors.to_s << '"/>'
         @series.each { |ser| ser.to_xml_string(str_inner) }
         @d_lbls.to_xml_string(str) if @d_lbls
-        yield str_inner
+        yield str_inner if block_given?
         str_inner << '<c:axId val="' << @catAxId.to_s << '"/>'
         str_inner << '<c:axId val="' << @valAxId.to_s << '"/>'
         str_inner << '<c:axId val="' << @serAxId.to_s << '"/>'
