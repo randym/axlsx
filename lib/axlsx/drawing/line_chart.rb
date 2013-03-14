@@ -68,7 +68,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       super(str) do |str_inner|
-        str_inner << "<c:#{self.class.name.camelcase(:lower)}>"
+        str_inner << "<c:#{self.class.name.demodulize.camelcase(:lower)}>"
         str_inner << '<c:grouping val="' << grouping.to_s << '"/>'
         str_inner << '<c:varyColors val="' << vary_colors.to_s << '"/>'
         @series.each { |ser| ser.to_xml_string(str_inner) }
@@ -77,7 +77,7 @@ module Axlsx
         str_inner << '<c:axId val="' << @catAxId.to_s << '"/>'
         str_inner << '<c:axId val="' << @valAxId.to_s << '"/>'
         str_inner << '<c:axId val="' << @serAxId.to_s << '"/>'
-        str_inner << "</c:#{self.class.name.camelcase(:lower)}>"
+        str_inner << "</c:#{self.class.name.demodulize.camelcase(:lower)}>"
         @catAxis.to_xml_string str_inner
         @valAxis.to_xml_string str_inner
         @serAxis.to_xml_string str_inner
