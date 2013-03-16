@@ -19,28 +19,11 @@ module Axlsx
   # @see Chart#add_series
   # @see Series
   # @see Package#serialize
-  class Line3DChart < Chart
-
-    # the category axis
-    # @return [CatAxis]
-    attr_reader :catAxis
-
-    # the category axis
-    # @return [ValAxis]
-    attr_reader :valAxis
-
-    # the category axis
-    # @return [Axis]
-    attr_reader :serAxis
+  class Line3DChart < LineChart
 
     # space between bar or column clusters, as a percentage of the bar or column width.
     # @return [String]
     attr_reader :gapDepth
-
-    #grouping for a column, line, or area chart.
-    # must be one of  [:percentStacked, :clustered, :standard, :stacked]
-    # @return [Symbol]
-    attr_reader :grouping
 
     # validation regex for gap amount percent
     GAP_AMOUNT_PERCENT = /0*(([0-9])|([1-9][0-9])|([1-4][0-9][0-9])|500)%/
@@ -60,25 +43,9 @@ module Axlsx
     # @see Chart
     # @see View3D
     def initialize(frame, options={})
-      @vary_colors = false
       @gapDepth = nil
-      @grouping = :standard
-      @catAxId = rand(8 ** 8)
-      @valAxId = rand(8 ** 8)
-      @serAxId = rand(8 ** 8)
-      @catAxis = CatAxis.new(@catAxId, @valAxId)
-      @valAxis = ValAxis.new(@valAxId, @catAxId)
-      @serAxis = SerAxis.new(@serAxId, @valAxId)
       super(frame, options)
-      @series_type = LineSeries
       @view_3D = View3D.new({:perspective=>30}.merge(options))
-      @d_lbls = nil
-    end
-
-    # @see grouping
-    def grouping=(v)
-      RestrictionValidator.validate "Bar3DChart.grouping", [:percentStacked, :standard, :stacked], v
-      @grouping = v
     end
 
     # @see gapDepth
@@ -92,19 +59,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       super(str) do |str_inner|
-        str_inner << '<c:line3DChart>'
-        str_inner << '<c:grouping val="' << grouping.to_s << '"/>'
-        str_inner << '<c:varyColors val="' << vary_colors.to_s << '"/>'
-        @series.each { |ser| ser.to_xml_string(str_inner) }
-        @d_lbls.to_xml_string(str) if @d_lbls
         str_inner << '<c:gapDepth val="' << @gapDepth.to_s << '"/>' unless @gapDepth.nil?
-        str_inner << '<c:axId val="' << @catAxId.to_s << '"/>'
-        str_inner << '<c:axId val="' << @valAxId.to_s << '"/>'
-        str_inner << '<c:axId val="' << @serAxId.to_s << '"/>'
-        str_inner << '</c:line3DChart>'
-        @catAxis.to_xml_string str_inner
-        @valAxis.to_xml_string str_inner
-        @serAxis.to_xml_string str_inner
       end
     end
   end
