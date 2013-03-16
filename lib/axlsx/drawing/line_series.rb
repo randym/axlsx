@@ -19,6 +19,10 @@ module Axlsx
     # @return [String]
     attr_reader :color
 
+    # show markers on values
+    # @return [Boolean]
+    attr_reader :show_marker
+
     # Creates a new series
     # @option options [Array, SimpleTypedList] data
     # @option options [Array, SimpleTypedList] labels
@@ -35,11 +39,18 @@ module Axlsx
       @color = v
     end
 
+    # @see show_marker
+    def show_marker=(v)
+      Axlsx::validate_boolean(v)
+      @show_marker = v
+    end
+
     # Serializes the object
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
       super(str) do
+        str << '<c:marker><c:symbol val="none"/></c:marker>' unless @show_marker
         if color
           str << '<c:spPr><a:solidFill>'
           str << '<a:srgbClr val="' << color << '"/>'
