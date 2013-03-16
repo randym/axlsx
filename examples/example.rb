@@ -583,6 +583,8 @@ if examples.include? :comments
   wb.add_worksheet(:name => 'comments') do |sheet|
     sheet.add_row ['Can we build it?']
     sheet.add_comment :ref => 'A1', :author => 'Bob', :text => 'Yes We Can!'
+    sheet.add_comment :ref => 'A2', :author => 'Bob', :text => 'Yes We Can! - but I dont think  you need to know about it!', :visible => false
+
   end
 end
 

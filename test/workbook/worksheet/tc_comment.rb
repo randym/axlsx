@@ -5,7 +5,7 @@ class TestComment < Test::Unit::TestCase
     p = Axlsx::Package.new
     wb = p.workbook
     @ws = wb.add_worksheet
-    @c1 = @ws.add_comment :ref => 'A1', :text => 'penut machine', :author => 'crank'
+    @c1 = @ws.add_comment :ref => 'A1', :text => 'penut machine', :author => 'crank', :visible => false
     @c2 = @ws.add_comment :ref => 'C3', :text => 'rust bucket', :author => 'PO'
   end
 
@@ -28,6 +28,10 @@ class TestComment < Test::Unit::TestCase
     assert_equal(@c2.author_index, 0)
   end
 
+  def test_visible
+    assert_equal(false, @c1.visible)
+    assert_equal(true, @c2.visible)
+  end
   def test_ref
     assert(@c1.ref == 'A1')
     assert(@c2.ref == 'C3')
