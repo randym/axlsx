@@ -22,6 +22,7 @@ module Axlsx
   require 'axlsx/drawing/ser_axis.rb'
   require 'axlsx/drawing/cat_axis.rb'
   require 'axlsx/drawing/val_axis.rb'
+  require 'axlsx/drawing/axes.rb'
 
   require 'axlsx/drawing/marker.rb'
 

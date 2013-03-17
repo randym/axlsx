@@ -2,25 +2,22 @@ require 'tc_helper.rb'
 
 class TestAxis < Test::Unit::TestCase
   def setup
-    
-    @axis = Axlsx::Axis.new 12345, 54321, :gridlines => false, :title => 'Foo'
+    @axis = Axlsx::Axis.new :gridlines => false, :title => 'Foo'
   end
 
-  def teardown
-  end
 
   def test_initialization
-    assert_equal(@axis.axPos, :b, "axis position default incorrect")
-    assert_equal(@axis.tickLblPos, :nextTo, "tick label position default incorrect")
-    assert_equal(@axis.tickLblPos, :nextTo, "tick label position default incorrect")
+    assert_equal(@axis.ax_pos, :b, "axis position default incorrect")
+    assert_equal(@axis.tick_lbl_pos, :nextTo, "tick label position default incorrect")
+    assert_equal(@axis.tick_lbl_pos, :nextTo, "tick label position default incorrect")
     assert_equal(@axis.crosses, :autoZero, "tick label position default incorrect")
     assert(@axis.scaling.is_a?(Axlsx::Scaling) && @axis.scaling.orientation == :minMax, "scaling default incorrect")
-    assert_raise(ArgumentError) { Axlsx::Axis.new( -1234, 'abcd') }
     assert_equal('Foo', @axis.title.text)
   end
 
   def test_color
     @axis.color = "00FF00"
+    @axis.cross_axis = Axlsx::CatAxis.new
     str  = '<?xml version="1.0" encoding="UTF-8"?>'
     str << '<c:chartSpace xmlns:c="' << Axlsx::XML_NS_C << '" xmlns:a="' << Axlsx::XML_NS_A << '">'
     doc = Nokogiri::XML(@axis.to_xml_string(str)) 
@@ -35,15 +32,15 @@ class TestAxis < Test::Unit::TestCase
       sheet.add_row ['cat', 7, 9, 10]
       sheet.add_chart(Axlsx::Line3DChart) do |chart|
         chart.add_series :data => sheet['B2:D2'], :labels => sheet['B1']
-        chart.valAxis.title = sheet['A1']
-        assert_equal('battle victories', chart.valAxis.title.text)  
+        chart.val_axis.title = sheet['A1']
+        assert_equal('battle victories', chart.val_axis.title.text)
       end
     end
   end
 
   def test_axis_position
-    assert_raise(ArgumentError, "requires valid axis position") { @axis.axPos = :nowhere }
-    assert_nothing_raised("accepts valid axis position") { @axis.axPos = :r }
+    assert_raise(ArgumentError, "requires valid axis position") { @axis.ax_pos = :nowhere }
+    assert_nothing_raised("accepts valid axis position") { @axis.ax_pos = :r }
   end
 
   def test_label_rotation
@@ -55,13 +52,13 @@ class TestAxis < Test::Unit::TestCase
   end
 
   def test_tick_label_position
-    assert_raise(ArgumentError, "requires valid tick label position") { @axis.tickLblPos = :nowhere }
-    assert_nothing_raised("accepts valid tick label position") { @axis.tickLblPos = :high }
+    assert_raise(ArgumentError, "requires valid tick label position") { @axis.tick_lbl_pos = :nowhere }
+    assert_nothing_raised("accepts valid tick label position") { @axis.tick_lbl_pos = :high }
   end
 
   def test_format_code
-    assert_raise(ArgumentError, "requires valid format code") { @axis.format_code = 1 }
-    assert_nothing_raised("accepts valid format code") { @axis.tickLblPos = :high }
+    assert_raise(ArgumentError, "requires valid format code") { @axis.format_code = :high }
+    assert_nothing_raised("accepts valid format code") { @axis.format_code = "00.##"  }
   end
 
   def test_crosses
@@ -75,12 +72,13 @@ class TestAxis < Test::Unit::TestCase
   end
   
   def test_to_xml_string
+    @axis.cross_axis = Axlsx::CatAxis.new
     str  = '<?xml version="1.0" encoding="UTF-8"?>'
     str << '<c:chartSpace xmlns:c="' << Axlsx::XML_NS_C << '" xmlns:a="' << Axlsx::XML_NS_A << '">'
     doc = Nokogiri::XML(@axis.to_xml_string(str)) 
     assert(doc.xpath('//a:noFill'))
     assert(doc.xpath("//c:crosses[@val='#{@axis.crosses.to_s}']"))
-    assert(doc.xpath("//c:crossAx[@val='#{@axis.crossAx.to_s}']"))
+    assert(doc.xpath("//c:crossAx[@val='#{@axis.cross_axis.to_s}']"))
     assert(doc.xpath("//a:bodyPr[@rot='#{@axis.label_rotation.to_s}']"))
     assert(doc.xpath("//a:t[text()='Foo']"))
   end

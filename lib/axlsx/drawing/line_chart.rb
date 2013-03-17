@@ -23,17 +23,19 @@ module Axlsx
 
     # the category axis
     # @return [CatAxis]
-    attr_reader :catAxis
+    def cat_axis
+      axes[:cat_axis]
+    end
+    alias :catAxis :cat_axis
 
     # the category axis
     # @return [ValAxis]
-    attr_reader :valAxis
+    def val_axis
+      axes[:val_axis]
+    end
+    alias :valAxis :val_axis
 
-    # the category axis
-    # @return [Axis]
-    attr_reader :serAxis
-
-    # must be one of  [:percentStacked, :clustered, :standard, :stacked]
+     # must be one of  [:percentStacked, :clustered, :standard, :stacked]
     # @return [Symbol]
     attr_reader :grouping
 
@@ -46,12 +48,6 @@ module Axlsx
     def initialize(frame, options={})
       @vary_colors = false
       @grouping = :standard
-      @catAxId = rand(8 ** 8)
-      @valAxId = rand(8 ** 8)
-      @serAxId = rand(8 ** 8)
-      @catAxis = CatAxis.new(@catAxId, @valAxId)
-      @valAxis = ValAxis.new(@valAxId, @catAxId)
-      @serAxis = SerAxis.new(@serAxId, @valAxId)
       super(frame, options)
       @series_type = LineSeries
       @d_lbls = nil
@@ -59,8 +55,17 @@ module Axlsx
 
     # @see grouping
     def grouping=(v)
-      RestrictionValidator.validate "Bar3DChart.grouping", [:percentStacked, :standard, :stacked], v
+      RestrictionValidator.validate "LineChart.grouping", [:percentStacked, :standard, :stacked], v
       @grouping = v
+    end
+
+    def node_name
+      path = self.class.to_s
+      if i = path.rindex('::')
+        path = path[(i+2)..-1]
+      end
+      path[0] = path[0].chr.downcase
+      path
     end
 
     # Serializes the object
@@ -68,20 +73,20 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       super(str) do |str_inner|
-        str_inner << "<c:#{self.class.name.demodulize.camelcase(:lower)}>"
+        str_inner << "<c:" << node_name << ">"
         str_inner << '<c:grouping val="' << grouping.to_s << '"/>'
         str_inner << '<c:varyColors val="' << vary_colors.to_s << '"/>'
         @series.each { |ser| ser.to_xml_string(str_inner) }
-        @d_lbls.to_xml_string(str) if @d_lbls
+        @d_lbls.to_xml_string(str_inner) if @d_lbls
         yield str_inner if block_given?
-        str_inner << '<c:axId val="' << @catAxId.to_s << '"/>'
-        str_inner << '<c:axId val="' << @valAxId.to_s << '"/>'
-        str_inner << '<c:axId val="' << @serAxId.to_s << '"/>'
-        str_inner << "</c:#{self.class.name.demodulize.camelcase(:lower)}>"
-        @catAxis.to_xml_string str_inner
-        @valAxis.to_xml_string str_inner
-        @serAxis.to_xml_string str_inner
+        axes.to_xml_string(str_inner, :ids => true)
+        str_inner << "</c:" << node_name << ">"
+        axes.to_xml_string(str_inner)
       end
+    end
+
+    def axes
+      @axes ||= Axes.new(:cat_axis => CatAxis, :val_axis => ValAxis)
     end
   end
 end

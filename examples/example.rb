@@ -455,7 +455,7 @@ if examples.include? :line_chart
     4.times do
       sheet.add_row [ rand(24)+1, rand(24)+1]
     end
-    sheet.add_chart(Axlsx::Line3DChart, :title => "Simple Line Chart", :rotX => 30, :rotY => 20) do |chart|
+    sheet.add_chart(Axlsx::Line3DChart, :title => "Simple 3D Line Chart", :rotX => 30, :rotY => 20) do |chart|
       chart.start_at 0, 5
       chart.end_at 10, 20
       chart.add_series :data => sheet["A3:A6"], :title => sheet["A2"]
@@ -463,6 +463,15 @@ if examples.include? :line_chart
       chart.catAxis.title = 'X Axis'
       chart.valAxis.title = 'Y Axis'
     end
+    sheet.add_chart(Axlsx::LineChart, :title => "Simple Line Chart", :rotX => 30, :rotY => 20) do |chart|
+      chart.start_at 0, 21
+      chart.end_at 10, 41
+      chart.add_series :data => sheet["A3:A6"], :title => sheet["A2"]
+      chart.add_series :data => sheet["B3:B6"], :title => sheet["B2"]
+      chart.catAxis.title = 'X Axis'
+      chart.valAxis.title = 'Y Axis'
+    end
+
   end
 end
 #```

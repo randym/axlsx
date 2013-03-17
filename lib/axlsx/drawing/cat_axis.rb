@@ -4,23 +4,15 @@ module Axlsx
   class CatAxis < Axis
 
     # Creates a new CatAxis object
-    # @param [Integer] ax_id the id of this axis. Inherited
-    # @param [Integer] cross_ax the id of the perpendicular axis. Inherited
-    # @option options [Symbol] ax_pos. Inherited
-    # @option options [Symbol] tick_lbl_pos. Inherited
-    # @option options [Symbol] crosses. Inherited
-    # @option options [Boolean] auto
-    # @option options [Symbol] lbl_algn
-    # @option options [Integer] lbl_offset
     # @option options [Integer] tick_lbl_skip
     # @option options [Integer] tick_mark_skip
-    def initialize(ax_id, cross_ax, options={})
+    def initialize(options={})
       @tick_lbl_skip = 1
       @tick_mark_skip = 1
       self.auto = 1
       self.lbl_algn = :ctr
       self.lbl_offset = "100"
-      super(ax_id, cross_ax, options)
+      super(options)
     end
 
     # From the docs: This element specifies that this axis is a date or text axis based on the data that is used for the axis labels, not a specific choice.

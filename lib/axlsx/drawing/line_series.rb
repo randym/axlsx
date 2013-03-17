@@ -28,6 +28,7 @@ module Axlsx
     # @option options [Array, SimpleTypedList] labels
     # @param [Chart] chart
     def initialize(chart, options={})
+      @show_marker = false
       @labels, @data = nil, nil
       super(chart, options)
       @labels = AxDataSource.new(:data => options[:labels]) unless options[:labels].nil?
