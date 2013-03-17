@@ -144,7 +144,10 @@ module Axlsx
     def company=(v) Axlsx::validate_string v; @company = v; end
     alias :Company= :company=
     # Sets the pages property of your app.xml file
-    def pages=(v) Axlsx::validate_int v; @pages = v; end
+    def pages=(v) 
+      Axlsx::validate_int v.to_i
+      @pages = v
+    end
 
     # Sets the words property of your app.xml file
     def words=(v) Axlsx::validate_int v; @words = v; end
@@ -215,9 +218,16 @@ module Axlsx
     alias :AppVersion= :app_version=
 
     # Sets the doc_security property of your app.xml file
-    def doc_security=(v) Axlsx::validate_int v; @doc_security = v; end
+    def doc_security=(v)
+      Axlsx::validate_int v.to_i
+      @doc_security = v
+    end
     alias :DocSecurity= :doc_security=
 
+    def parse_xml(xml)
+      options = xml.xpath("//*").inject({}){|hash, node| hash.merge!({node.name => node.text}) }
+      parse_options options
+    end
     # Serialize the app.xml document
     # @return [String]
     def to_xml_string(str = '')

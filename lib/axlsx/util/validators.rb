@@ -85,7 +85,7 @@ module Axlsx
   # @raise [ArgumentError] raised if the value is not a Fixnum or Integer value greater or equal to 0
   # @return [Boolean] true if the data is valid
   def self.validate_unsigned_int(v)
-    DataTypeValidator.validate(:unsigned_int, [Fixnum, Integer], v, lambda { |arg| arg.respond_to?(:>=) && arg >= 0 })
+    DataTypeValidator.validate(:unsigned_int, [Fixnum, Integer], v.to_i, lambda { |arg| arg.respond_to?(:>=) && arg >= 0 })
   end
 
   # Requires that the value is a Fixnum Integer or Float and is greater or equal to 0

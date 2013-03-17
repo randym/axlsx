@@ -5,7 +5,8 @@ module Axlsx
   # @note Packages manage their own core object.
   # @see Package#core
   class Core
- 
+    include OptionsParser
+
     # Creates a new Core object.
     # @option options [String] creator
     def initialize(options={})
@@ -15,6 +16,13 @@ module Axlsx
     # The author of the document. By default this is 'axlsx'
     # @return [String]
     attr_accessor :creator
+
+
+    def parse_xml(xml)
+      options = xml.xpath("//dc:*").inject({}) {|hash, node| hash.merge!({node.name => node.text}) }
+      parse_options options
+      # pull any dcterms or dc element into a hash and parse_options
+    end
 
     # serializes the core.xml document
     # @return [String]

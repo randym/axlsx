@@ -4,7 +4,7 @@ $:.unshift "#{File.dirname(__FILE__)}/../lib"
 require 'axlsx'
 require 'csv'
 require 'benchmark'
-Axlsx::trust_input = true
+# Axlsx::trust_input = true
 row = []
 input = (32..126).to_a.pack('U*').chars.to_a
 20.times { row << input.shuffle.join}
