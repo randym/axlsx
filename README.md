@@ -247,7 +247,7 @@ done without the help of the people below.
 
 [rfc2616](https://github.com/rfc2616) - for FINALLY working out the interop issues with google docs.
 
-[straydogstudio](https://github.com/straydocstudio) - For making an AWESOME axlsx templating gem for rails.
+[straydogstudio](https://github.com/straydogstudio) - For making an AWESOME axlsx templating gem for rails.
 
 [MitchellAJ](https://github.com/MitchellAJ) - For catching a bug in font_size calculations, finding some old code in an example and above all for reporting all of that brilliantly
 
