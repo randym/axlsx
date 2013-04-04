@@ -36,6 +36,8 @@ module Axlsx
                             :stopIfTrue, :timePeriod
 
     # Formula
+    # The formula or value to match against (e.g. 5 with an operator of :greaterThan to specify cell_value > 5).
+    # If the operator is :between or :notBetween, use an array to specify [minimum, maximum]
     # @return [String]
     attr_reader :formula
 
