@@ -647,8 +647,8 @@ if examples.include? :conditional_formatting
   money = wb.styles.add_style(:format_code => '0,000', :border => Axlsx::STYLE_THIN_BORDER)
 
   # define the style for conditional formatting
-  profitable = wb.styles.add_style( :fg_color=>"FF428751",
-                                   :type => :dxf)
+  profitable = wb.styles.add_style( :fg_color => "FF428751", :type => :dxf )
+  unprofitable = wb.styles.add_style( :fg_color => "FF0000", :type => :dxf )
 
   wb.add_worksheet(:name => "Conditional Cell Is") do |sheet|
 
@@ -663,6 +663,8 @@ if examples.include? :conditional_formatting
 
     # Apply conditional formatting to range B3:B100 in the worksheet
     sheet.add_conditional_formatting("B3:B100", { :type => :cellIs, :operator => :greaterThan, :formula => "100000", :dxfId => profitable, :priority => 1 })
+    # Apply conditional using the between operator; NOTE: supply an array to :formula for between/notBetween
+    sheet.add_conditional_formatting("C3:C100", { :type => :cellIs, :operator => :between, :formula => ["0.00%","100.00%"], :dxfId => unprofitable, :priority => 1 })
   end
 
   wb.add_worksheet(:name => "Conditional Color Scale") do |sheet|
