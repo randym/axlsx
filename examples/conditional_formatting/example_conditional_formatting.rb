@@ -11,8 +11,8 @@ percent = book.styles.add_style(:format_code => "0.00%", :border => Axlsx::STYLE
 money = book.styles.add_style(:format_code => '0,000', :border => Axlsx::STYLE_THIN_BORDER)
 
 # define the style for conditional formatting
-profitable = book.styles.add_style( :fg_color=>"FF428751",
-                                    :type => :dxf)
+profitable = book.styles.add_style( :fg_color => "FF428751", :type => :dxf )
+unprofitable = wb.styles.add_style( :fg_color => "FF0000", :type => :dxf )
 
 book.add_worksheet(:name => "Cell Is") do |ws|
 
@@ -27,6 +27,8 @@ book.add_worksheet(:name => "Cell Is") do |ws|
 
 # Apply conditional formatting to range B3:B100 in the worksheet
   ws.add_conditional_formatting("B3:B100", { :type => :cellIs, :operator => :greaterThan, :formula => "100000", :dxfId => profitable, :priority => 1 })
+# Apply conditional using the between operator; NOTE: supply an array to :formula for between/notBetween
+  sheet.add_conditional_formatting("C3:C100", { :type => :cellIs, :operator => :between, :formula => ["0.00%","100.00%"], :dxfId => unprofitable, :priority => 1 })
 end
 
 book.add_worksheet(:name => "Color Scale") do |ws|

@@ -25,7 +25,7 @@ module Axlsx
     # @option options [Integer] stdDev The number of standard deviations above or below the average to match
     # @option options [Boolean] stopIfTrue Stop evaluating rules after this rule matches
     # @option options [Symbol]  timePeriod The time period in a date occuring... rule
-    # @option options [String] formula The formula to match against in i.e. an equal rule
+    # @option options [String] formula The formula to match against in i.e. an equal rule. Use a [minimum, maximum] array for cellIs between/notBetween conditionals.
     def initialize(options={})
       @color_scale = @data_bar = @icon_set = @formula = nil
       parse_options options
@@ -36,6 +36,8 @@ module Axlsx
                             :stopIfTrue, :timePeriod
 
     # Formula
+    # The formula or value to match against (e.g. 5 with an operator of :greaterThan to specify cell_value > 5).
+    # If the operator is :between or :notBetween, use an array to specify [minimum, maximum]
     # @return [String]
     attr_reader :formula
 
@@ -180,7 +182,7 @@ module Axlsx
     # @see timePeriod
     def timePeriod=(v); Axlsx::validate_time_period_type(v); @timePeriod = v end
     # @see formula
-    def formula=(v); Axlsx::validate_string(v); @formula = v end
+    def formula=(v); [*v].each {|x| Axlsx::validate_string(x) }; @formula = v end
 
     # @see color_scale
     def color_scale=(v)
@@ -208,7 +210,7 @@ module Axlsx
       str << '<cfRule '
       serialized_attributes str
       str << '>'
-      str << '<formula>' << self.formula << '</formula>' if @formula
+      str << '<formula>' << [*self.formula].join('</formula><formula>') << '</formula>' if @formula
       @color_scale.to_xml_string(str) if @color_scale && @type == :colorScale
       @data_bar.to_xml_string(str) if @data_bar && @type == :dataBar
       @icon_set.to_xml_string(str) if @icon_set && @type == :iconSet
