@@ -23,6 +23,12 @@ module Axlsx
       # @param [String] str The string instance this run will be concated to.
       # @return [String]
       def run_xml_string(cell, str = '')
+        t = cell.value.to_s
+        if t[0, 1] == ' ' || t[-1, 1] == ' '
+          t = '<t xml:space="preserve">' << t << '</t>'
+        else
+          t = '<t>' << t << '</t>'
+        end
         if cell.is_text_run?
           data = cell.instance_values.reject{|key, value| value == nil || key == 'value' || key == 'type' }
           keys = data.keys & Cell::INLINE_STYLES
@@ -37,9 +43,9 @@ module Axlsx
               str << "<" << key.to_s << " val='" << data[key].to_s << "'/>"
             end
           end
-          str << "</rPr>" << "<t>" << cell.value.to_s << "</t></r>"
+          str << "</rPr>" << t << "</r>"
         else
-          str << "<t>" << cell.value.to_s << "</t>"
+          str << t
         end
         str
       end
