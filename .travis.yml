@@ -1,4 +1,5 @@
 language: ruby
+bundler_args: --without profile
 notifications:
   irc: "irc.freenode.org#axlsx"
   email:
