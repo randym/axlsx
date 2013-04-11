@@ -13,3 +13,7 @@ tmp
 *.pem
 *.pfx
 examples/sprk2012
+.ruby-version
+.bundle/config
+.~lock*
+*.qcachegrind
