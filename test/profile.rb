@@ -1,10 +1,5 @@
 #!/usr/bin/env ruby -s
 
-# Usage:
-# > ruby test/profile.rb
-# > pprof.rb --gif /tmp/axlsx > /tmp/axlsx.gif
-# > open /tmp/axlsx_noautowidth.gif
-
 $:.unshift "#{File.dirname(__FILE__)}/../lib"
 require 'axlsx'
 require 'ruby-prof'
