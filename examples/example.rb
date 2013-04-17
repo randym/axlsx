@@ -408,7 +408,7 @@ if examples.include? :bar_chart
     sheet.add_row ["A Simple Bar Chart"]
     %w(first second third).each { |label| sheet.add_row [label, rand(24)+1] }
     sheet.add_chart(Axlsx::Bar3DChart, :start_at => "A6", :end_at => "F20") do |chart|
-      chart.add_series :data => sheet["B2:B4"], :labels => sheet["A2:A4"], :title => sheet["A1"]
+      chart.add_series :data => sheet["B2:B4"], :labels => sheet["A2:A4"], :title => sheet["A1"], :colors => ["00FF00", "0000FF"]
     end
   end
 end
@@ -423,7 +423,7 @@ if examples.include? :chart_gridlines
     sheet.add_row ["Bar Chart without gridlines"]
     %w(first second third).each { |label| sheet.add_row [label, rand(24)+1] }
     sheet.add_chart(Axlsx::Bar3DChart, :start_at => "A6", :end_at => "F20") do |chart|
-      chart.add_series :data => sheet["B2:B4"], :labels => sheet["A2:A4"]
+      chart.add_series :data => sheet["B2:B4"], :labels => sheet["A2:A4"], :colors => ["00FF00", "FF0000"]
       chart.valAxis.gridlines = false
       chart.catAxis.gridlines = false
     end
@@ -458,16 +458,16 @@ if examples.include? :line_chart
     sheet.add_chart(Axlsx::Line3DChart, :title => "Simple 3D Line Chart", :rotX => 30, :rotY => 20) do |chart|
       chart.start_at 0, 5
       chart.end_at 10, 20
-      chart.add_series :data => sheet["A3:A6"], :title => sheet["A2"]
-      chart.add_series :data => sheet["B3:B6"], :title => sheet["B2"]
+      chart.add_series :data => sheet["A3:A6"], :title => sheet["A2"], :color => "0000FF"
+      chart.add_series :data => sheet["B3:B6"], :title => sheet["B2"], :color => "FF0000"
       chart.catAxis.title = 'X Axis'
       chart.valAxis.title = 'Y Axis'
     end
     sheet.add_chart(Axlsx::LineChart, :title => "Simple Line Chart", :rotX => 30, :rotY => 20) do |chart|
       chart.start_at 0, 21
       chart.end_at 10, 41
-      chart.add_series :data => sheet["A3:A6"], :title => sheet["A2"]
-      chart.add_series :data => sheet["B3:B6"], :title => sheet["B2"]
+      chart.add_series :data => sheet["A3:A6"], :title => sheet["A2"], :color => "FF0000"
+      chart.add_series :data => sheet["B3:B6"], :title => sheet["B2"], :color => "00FF00"
       chart.catAxis.title = 'X Axis'
       chart.valAxis.title = 'Y Axis'
     end
@@ -488,8 +488,8 @@ if examples.include? :scatter_chart
     sheet.add_chart(Axlsx::ScatterChart, :title => "example 7: Scatter Chart") do |chart|
       chart.start_at 0, 4
       chart.end_at 10, 19
-      chart.add_series :xData => sheet["B1:E1"], :yData => sheet["B2:E2"], :title => sheet["A1"]
-      chart.add_series :xData => sheet["B3:E3"], :yData => sheet["B4:E4"], :title => sheet["A3"]
+      chart.add_series :xData => sheet["B1:E1"], :yData => sheet["B2:E2"], :title => sheet["A1"], :color => "FF0000"
+      chart.add_series :xData => sheet["B3:E3"], :yData => sheet["B4:E4"], :title => sheet["A3"], :color => "00FF00"
     end
   end
 end
