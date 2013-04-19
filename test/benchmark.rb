@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby -s
-# -*- coding: utf-8 -*-
 $:.unshift "#{File.dirname(__FILE__)}/../lib"
 require 'axlsx'
 require 'csv'
