@@ -41,7 +41,7 @@ module Axlsx
 str << <<SHAME_ON_YOU
 
 <v:shape id="#{@id}" type="#_x0000_t202" fillcolor="#ffffa1 [80]" o:insetmode="auto"
-  style="visiblity:#{@visible ? 'visible' : 'hidden'}">
+  style="visibility:#{@visible ? 'visible' : 'hidden'}">
   <v:fill color2="#ffffa1 [80]"/>
   <v:shadow on="t" obscured="t"/>
   <v:path o:connecttype="none"/>
