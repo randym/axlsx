@@ -64,6 +64,9 @@ module Axlsx
       str
     end
 
+    # The axes for the scatter chart. ScatterChart has an x_val_axis and
+    # a y_val_axis
+    # @return [Axes]
     def axes
       @axes ||= Axes.new(:x_val_axis => ValAxis, :y_val_axis => ValAxis)
     end

@@ -59,6 +59,10 @@ module Axlsx
       @grouping = v
     end
 
+    # The node name to use in serialization. As LineChart is used as the
+    # base class for Liine3DChart we need to be sure to serialize the
+    # chart based on the actual class type and not a fixed node name.
+    # @return [String]
     def node_name
       path = self.class.to_s
       if i = path.rindex('::')
@@ -85,6 +89,9 @@ module Axlsx
       end
     end
 
+    # The axes for this chart. LineCharts have a category and value
+    # axis.
+    # @return [Axes]
     def axes
       @axes ||= Axes.new(:cat_axis => CatAxis, :val_axis => ValAxis)
     end

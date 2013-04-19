@@ -141,6 +141,9 @@ module Axlsx
       end
     end
 
+    # A hash of axes used by this chart. Bar charts have a value and
+    # category axes specified via axex[:val_axes] and axes[:cat_axis]
+    # @return [Axes]
     def axes
      @axes ||= Axes.new(:val_axis => ValAxis, :cat_axis => CatAxis)
     end

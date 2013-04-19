@@ -1,6 +1,13 @@
 CHANGELOG
 ---------
-
+- **November.5.12**:1.3.2
+  - MASSIVE REFACTORING
+  - Patch for apostrophes in worksheet names
+  - added sheet_by_name for workbook so you can now find your worksheets
+    by name
+  - added insert_worksheet so you can now add a worksheet to an
+    arbitrary position in the worksheets list.
+  - reduced memory consumption for package parts post serialization
 - **September.30.12**: 1.3.1
   - Improved control character handling
   - Added stored auto filter values and date grouping items
@@ -221,3 +228,4 @@ in value caches
   - Updated documentation
 
 ##October.20.11: 0.1.0 release
+

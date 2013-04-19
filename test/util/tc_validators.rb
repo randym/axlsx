@@ -158,7 +158,11 @@ class TestValidators < Test::Unit::TestCase
     assert_raise(ArgumentError) { Axlsx.validate_split_state_type 'frozen_split' }
     assert_raise(ArgumentError) { Axlsx.validate_split_state_type 0 }
   end
-
+ 
+  def test_validate_integerish
+    assert_raise(ArgumentError) { Axlsx.validate_integerish :foo }
+    [1, 1.4, "a"].each { |test_value| assert_nothing_raised { Axlsx.validate_integerish test_value } }
+  end
   def test_validate_family
     assert_raise(ArgumentError) { Axlsx.validate_family 0 }
     (1..5).each do |item|

@@ -17,27 +17,29 @@ appreciation for the gem, please don't hesitate to make a donation.
 
 **Author**: Randy Morgan
 
-**Copyright**: 2011 - 2012
+**Copyright**: 2011 - 2013
 
 **License**: MIT License
 
-**Latest Version**: 1.3.5
+**Latest Version**: 1.3.6
 
-**Ruby Version**: 1.8.7, 1.9.2, 1.9.3
+**Ruby Version**: 1.8.7 (soon to be depreciated!!!), 1.9.2, 1.9.3, 2.0.0
 
 **JRuby Version**: 1.6.7 1.8 and 1.9 modes
 
 **Rubinius Version**: rubinius 2.0.0dev * lower versions may run, this gem always tests against head.
 
-**Release Date**: February 4th 2013
+**Release Date**: April 19th 2013
 
 If you are working in rails, or with active record see:
-* http://github.com/randym/acts_as_xlsx
+[acts_as_xlsx](http://github.com/randym/acts_as_xlsx)
+
 acts_as_xlsx is a simple ActiveRecord mixin that lets you generate a workbook with:
 
     ```ruby
     Posts.where(created_at > Time.now-30.days).to_xlsx
     ```
+
 
 ** and **
 
@@ -46,6 +48,12 @@ Axlsx_Rails provides an Axlsx renderer so you can move all your spreadsheet code
 
 There are guides for using axlsx and acts_as_xlsx here:
 [http://axlsx.blog.randym.net](http://axlsx.blog.randym.net)
+
+If you are working with ActiveAdmin see:
+
+[activeadmin_axlsx](http://github.com/randym/activeadmin_axlsx)
+
+It provies a plugin and dsl for generating downloadable reports.
 
 The examples directory contains a number of more specific examples as
 well.
@@ -152,6 +160,13 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
+- **April.19.13**:1.3.6
+  - Fixed LibreOffice/OpenOffice issue to properly apply colors to lines
+    in charts.
+  - Added support for specifying between/notBetween formula in an array.
+    *thanks* straydogstudio!
+  - Added standard line chart support. *thanks* scambra
+  - Fixed straydogstudio's link in the README. *thanks* nogara!
 - **February.4.13**:1.3.5
   - converted vary_colors for chart data to instance variable with appropriate defulats for the various charts.
   - Added trust_input method on Axlsx to instruct the serializer to skip HTML escaping. This will give you a tremendous performance boost,
@@ -172,14 +187,6 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
   - Improvements in autowidth calculation.
 - **November.8.12**:1.3.3
   - Patched cell run styles for u and validation for family
-- **November.5.12**:1.3.2
-  - MASSIVE REFACTORING
-  - Patch for apostrophes in worksheet names
-  - added sheet_by_name for workbook so you can now find your worksheets
-    by name
-  - added insert_worksheet so you can now add a worksheet to an
-    arbitrary position in the worksheets list.
-  - reduced memory consumption for package parts post serialization
 
 Please see the {file:CHANGELOG.md} document for past release information.
 
@@ -262,11 +269,13 @@ air and our feet on the ground.
 
 [ball-hayden](https://github.com/ball-hayden) - For making sure we only get the right characters in our sheet names.
 
-[nibus](https://github.com/nibus) - For patching sheet name unequeness.
+[nibus](https://github.com/nibus) - For patching sheet name uniqueness.
+
+[scambra](https://github.com/scambra) - for keeping our lines in line!
 
 #Copyright and License
 ----------
 
-Axlsx &copy; 2011-2012 by [Randy Morgan](mailto:digial.ipseity@gmail.com). 
+Axlsx &copy; 2011-2013 by [Randy Morgan](mailto:digial.ipseity@gmail.com). 
 
 Axlsx is licensed under the MIT license. Please see the LICENSE document for more information.

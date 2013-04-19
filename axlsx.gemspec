@@ -20,7 +20,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'rubyzip', '>= 0.9.5'
   s.add_runtime_dependency "htmlentities", "~> 4.3.1"
 
-# This has been removed until JRuby can support the native extensions for redcarpet or yard removes the dependency
   s.add_development_dependency 'yard'
   s.add_development_dependency 'kramdown'
   s.add_development_dependency 'simplecov'

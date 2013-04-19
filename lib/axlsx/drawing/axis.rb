@@ -7,7 +7,7 @@ module Axlsx
     include Axlsx::OptionsParser
 
     # Creates an Axis object
-    # @param [Integer] cross_axis the perpendicular axis
+    # @option options [Axis] cross_axis the perpendicular axis
     # @option options [Symbol] ax_pos
     # @option options [Symbol] crosses
     # @option options [Symbol] tick_lbl_pos
@@ -90,7 +90,9 @@ module Axlsx
     def color=(color_rgb)
       @color = color_rgb
     end
-
+    
+    # The crossing axis for this axis
+    # @param [Axis] axis
     def cross_axis=(axis)
        DataTypeValidator.validate "#{self.class}.cross_axis", [Axis], axis
        @cross_axis = axis
