@@ -29,7 +29,7 @@ appreciation for the gem, please don't hesitate to make a donation.
 
 **Rubinius Version**: rubinius 2.0.0dev * lower versions may run, this gem always tests against head.
 
-**Release Date**: April 19th 2013
+**Release Date**: April 24th 2013
 
 If you are working in rails, or with active record see:
 [acts_as_xlsx](http://github.com/randym/acts_as_xlsx)
@@ -160,7 +160,7 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
-- **April.19.13**:1.3.6
+- **April.24.13**:1.3.6
   - Fixed LibreOffice/OpenOffice issue to properly apply colors to lines
     in charts.
   - Added support for specifying between/notBetween formula in an array.
