@@ -160,7 +160,7 @@ class TestValidators < Test::Unit::TestCase
   end
  
   def test_validate_integerish
-    assert_raise(ArgumentError) { Axlsx.validate_integerish :foo }
+    assert_raise(ArgumentError) { Axlsx.validate_integerish Axlsx }
     [1, 1.4, "a"].each { |test_value| assert_nothing_raised { Axlsx.validate_integerish test_value } }
   end
   def test_validate_family
