@@ -8,7 +8,6 @@ Axlsx::trust_input = true
 row = []
 input = (32..126).to_a.pack('U*').chars.to_a
 20.times { row << input.shuffle.join}
-row_with_spaces = row.map{ |v| " #{v}" }
 times = 3000
 Benchmark.bmbm(30) do |x|
 
@@ -70,18 +69,5 @@ Benchmark.bmbm(30) do |x|
       end
     end
   }
-
-  x.report('preserve-spaces') {
-    p = Axlsx::Package.new
-    p.workbook do |wb|
-      wb.add_worksheet do |sheet|
-        times.times do
-          sheet << row_with_spaces
-        end
-      end
-    end
-    s = p.to_stream()
-    File.open('example_preserve_spaces.xlsx', 'w') { |f| f.write(s.read) }
-  }
 end
-File.delete("example.csv", "example_streamed.xlsx", "example_shared.xlsx", "example_autowidth.xlsx", "example_noautowidth.xlsx", "example_preserve_spaces.xlsx")
+File.delete("example.csv", "example_streamed.xlsx", "example_shared.xlsx", "example_autowidth.xlsx", "example_noautowidth.xlsx")

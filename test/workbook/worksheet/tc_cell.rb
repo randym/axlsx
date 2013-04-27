@@ -275,20 +275,7 @@ class TestCell < Test::Unit::TestCase
     end
     doc = Nokogiri::XML(ws.to_xml_string)
     assert(doc.xpath("//f[@text()='IF(2+2=4,4,5)']"))
-  end
 
-  def test_to_xml_string_with_leading_or_trailing_spaces
-    # Check that xml:space="preserve" has been added when cell contains leading or trailing spaces
-    @c.type = :string
-    @c.value = " a"
-    c_xml = Nokogiri::XML(@c.to_xml_string(1,1))
-    assert(c_xml.xpath("//t/@xml:space='preserve'"))
-    @c.value = "a "
-    c_xml = Nokogiri::XML(@c.to_xml_string(1,1))
-    assert(c_xml.xpath("//t/@xml:space='preserve'"))
-    @c.value = "a"
-    c_xml = Nokogiri::XML(@c.to_xml_string(1,1))
-    assert(!c_xml.xpath("//t/@xml:space='preserve'"))
   end
 
   def test_font_size_with_custom_style_and_no_sz
