@@ -37,6 +37,7 @@ module Axlsx
       @page_setup = PageSetup.new options[:page_setup]  if options[:page_setup]
       @print_options = PrintOptions.new options[:print_options] if options[:print_options]
       @header_footer = HeaderFooter.new options[:header_footer] if options[:header_footer]
+      @preserve_spaces = options.fetch(:preserve_spaces, true)
     end
 
     # The name of the worksheet
@@ -326,6 +327,10 @@ module Axlsx
       DataTypeValidator.validate "Worksheet.auto_filter", String, v
       auto_filter.range = v
     end
+
+    # Accessor for controlling whether leading and trailing spaces in cells are
+    # preserved or ignored. The default is to preserve spaces.
+    attr_accessor :preserve_spaces
 
     # The part name of this worksheet
     # @return [String]
@@ -699,7 +704,9 @@ module Axlsx
     # Helper method for parsingout the root node for worksheet
     # @return [String]
     def worksheet_node
-      "<worksheet xmlns=\"%s\" xmlns:r=\"%s\">" % [XML_NS, XML_NS_R]
+      (@preserve_spaces ?
+        "<worksheet xmlns=\"%s\" xmlns:r=\"%s\" xml:space=\"preserve\">" :
+        "<worksheet xmlns=\"%s\" xmlns:r=\"%s\">") % [XML_NS, XML_NS_R]
     end
 
     def sheet_data
