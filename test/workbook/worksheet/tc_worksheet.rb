@@ -352,15 +352,6 @@ class TestWorksheet < Test::Unit::TestCase
     assert(schema.validate(doc).map{ |e| puts e.message; e }.empty?, "error free validation")
   end
 
-  def test_to_xml_string_with_preserve_spaces
-    # Check that xml:space="preserve" has been added when preserve_spaces is set
-    ws_xml = Nokogiri::XML(@ws.to_xml_string)
-    assert(ws_xml.xpath("//xmlns:worksheet/@xml:space='preserve'"))
-    @ws.preserve_spaces = false
-    ws_xml = Nokogiri::XML(@ws.to_xml_string)
-    assert(!ws_xml.xpath("//xmlns:worksheet/@xml:space='preserve'"))
-  end
-
   def test_styles
     assert(@ws.styles.is_a?(Axlsx::Styles), 'worksheet provides access to styles')
   end

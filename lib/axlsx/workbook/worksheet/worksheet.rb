@@ -37,9 +37,9 @@ module Axlsx
       @page_setup = PageSetup.new options[:page_setup]  if options[:page_setup]
       @print_options = PrintOptions.new options[:print_options] if options[:print_options]
       @header_footer = HeaderFooter.new options[:header_footer] if options[:header_footer]
-      @preserve_spaces = options.fetch(:preserve_spaces, true)
     end
 
+    
     # The name of the worksheet
     # @return [String]
     def name
@@ -634,6 +634,11 @@ module Axlsx
     end
 
     private
+
+    def xml_space
+      workbook.xml_space
+    end
+
     def outline(collection, range, level = 1, collapsed = true)
        range.each do |index|
         unless (item = collection[index]).nil?
@@ -704,9 +709,7 @@ module Axlsx
     # Helper method for parsingout the root node for worksheet
     # @return [String]
     def worksheet_node
-      (@preserve_spaces ?
-        "<worksheet xmlns=\"%s\" xmlns:r=\"%s\" xml:space=\"preserve\">" :
-        "<worksheet xmlns=\"%s\" xmlns:r=\"%s\">") % [XML_NS, XML_NS_R]
+       "<worksheet xmlns=\"%s\" xmlns:r=\"%s\" xml:space=\"#{xml_space}\">" % [XML_NS, XML_NS_R]
     end
 
     def sheet_data

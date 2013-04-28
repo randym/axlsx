@@ -160,6 +160,10 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
+- **April.??.13**:1.37
+  - Added space preservation for cell text. This will allow whitespace
+    in cell text both when using shared strings and when serializing
+    directly to the cell.
 - **April.24.13**:1.3.6
   - Fixed LibreOffice/OpenOffice issue to properly apply colors to lines
     in charts.
@@ -271,7 +275,9 @@ air and our feet on the ground.
 
 [nibus](https://github.com/nibus) - For patching sheet name uniqueness.
 
-[scambra](https://github.com/scambra) - for keeping our lines in line!
+[scambra](https://github.com/scambra) - For keeping our lines in line!
+
+[agardiner](https://github.com/agardiner) - For the preservation of space. 
 
 #Copyright and License
 ----------

@@ -13,6 +13,8 @@
   <xsd:import 
     namespace="http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing"
     schemaLocation="dml-spreadsheetDrawing.xsd"/>
+  <xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+
   <xsd:complexType name="CT_AutoFilter">
     <xsd:sequence>
       <xsd:element name="filterColumn" minOccurs="0" maxOccurs="unbounded" type="CT_FilterColumn"/>
@@ -2213,6 +2215,7 @@
       <xsd:element name="tableParts" type="CT_TableParts" minOccurs="0" maxOccurs="1"/>
       <xsd:element name="extLst" type="CT_ExtensionList" minOccurs="0" maxOccurs="1"/>
     </xsd:sequence>
+    <xsd:attribute ref="xml:space"/>
   </xsd:complexType>
   <xsd:complexType name="CT_SheetData">
     <xsd:sequence>

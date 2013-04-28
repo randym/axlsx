@@ -24,6 +24,12 @@ class TestSharedStringsTable < Test::Unit::TestCase
     assert_equal(sst.unique_count, 4)
   end
 
+  def test_uses_workbook_xml_space
+    assert_equal(@p.workbook.xml_space, @p.workbook.shared_strings.xml_space)
+    @p.workbook.xml_space = :default
+    assert_equal(:default, @p.workbook.shared_strings.xml_space)
+  end
+
   def test_valid_document
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@p.workbook.shared_strings.to_xml_string)

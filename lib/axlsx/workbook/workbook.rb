@@ -285,7 +285,25 @@ require 'axlsx/workbook/worksheet/selection.rb'
     # generates a shared string object against all cells in all worksheets.
     # @return [SharedStringTable]
     def shared_strings
-      SharedStringsTable.new(worksheets.collect { |ws| ws.cells })
+      SharedStringsTable.new(worksheets.collect { |ws| ws.cells }, xml_space)
+    end
+
+    # The xml:space attribute for the worksheet.
+    # This determines how whitespace is handled withing the document.
+    # The most relevant part being whitespace in the cell text.
+    # allowed values are :preserve and :default. Axlsx uses :preserve unless
+    # you explicily set this to :default.
+    # @return Symbol
+    def xml_space
+      @xml_space ||= :preserve
+    end
+
+    # Sets the xml:space attribute for the worksheet
+    # @see Worksheet#xml_space
+    # @param [Symbol] space must be one of :preserve or :default
+    def xml_space=(space)
+      Axlsx::RestrictionValidator.validate(:xml_space, [:preserve, :default], space)
+      @xml_space = space;
     end
 
     # returns a range of cells in a worksheet

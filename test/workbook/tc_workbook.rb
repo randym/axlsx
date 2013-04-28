@@ -9,6 +9,23 @@ class TestWorkbook < Test::Unit::TestCase
   def teardown
   end
 
+  def test_worksheet_users_xml_space
+    sheet = @wb.add_worksheet(:name => 'foo')
+    ws_xml = Nokogiri::XML(sheet.to_xml_string)
+    assert(ws_xml.xpath("//xmlns:worksheet/@xml:space='preserve'"))
+
+    @wb.xml_space = :default
+    ws_xml = Nokogiri::XML(sheet.to_xml_string)
+    assert(ws_xml.xpath("//xmlns:worksheet/@xml:space='default'"))
+  end
+
+  def test_xml_space
+    assert_equal(:preserve, @wb.xml_space)
+    @wb.xml_space = :default
+    assert_equal(:default, @wb.xml_space)
+    assert_raise(ArgumentError) { @wb.xml_space = :none }
+  end
+
   def test_no_autowidth
     assert_equal(@wb.use_autowidth, true)
     assert_raise(ArgumentError) {@wb.use_autowidth = 0.1}
