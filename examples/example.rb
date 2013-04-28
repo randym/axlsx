@@ -309,6 +309,7 @@ end
 
 #```ruby
 if examples.include? :mbcs
+  wb.styles.fonts.first.name = 'Arial Unicode MS'
   wb.add_worksheet(:name => "日本語でのシート名") do |sheet|
     sheet.add_row ["日本語"]
     sheet.add_row ["华语/華語"]
