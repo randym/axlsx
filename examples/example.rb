@@ -57,6 +57,7 @@ if examples.include? :basic
   wb.add_worksheet(:name => "Basic Worksheet") do |sheet|
     sheet.add_row ["First Column", "Second", "Third"]
     sheet.add_row [1, 2, 3]
+    sheet.add_row ['     preserving whitespace']
   end
 end
 #```
