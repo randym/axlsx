@@ -205,7 +205,7 @@ class TestWorksheet < Test::Unit::TestCase
   def test_cols
     @ws.add_row [1,2,3,4]
     @ws.add_row [1,2,3,4]
-    @ws.add_row [1,2,3,4]
+    @ws.add_row [1,2,3]
     @ws.add_row [1,2,3,4]
     c = @ws.cols[1]
     assert_equal(c.size, 4)

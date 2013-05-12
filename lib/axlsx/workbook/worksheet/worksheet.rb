@@ -39,7 +39,6 @@ module Axlsx
       @header_footer = HeaderFooter.new options[:header_footer] if options[:header_footer]
     end
 
-    
     # The name of the worksheet
     # @return [String]
     def name
@@ -115,14 +114,14 @@ module Axlsx
       @rows ||=  SimpleTypedList.new Row
     end
 
-    # returns the sheet data as columnw
+    # returns the sheet data as columns
     def cols
       @rows.transpose
     end
 
-    # An range that excel will apply an autfilter to "A1:B3"
+    # An range that excel will apply an auto-filter to "A1:B3"
     # This will turn filtering on for the cells in the range.
-    # The first row is considered the header, while subsequent rows are considerd to be data.
+    # The first row is considered the header, while subsequent rows are considered to be data.
     # @return String
     def auto_filter
       @auto_filter ||= AutoFilter.new self
