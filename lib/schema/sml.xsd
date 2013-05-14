@@ -1799,6 +1799,7 @@
     </xsd:sequence>
     <xsd:attribute name="count" type="xsd:unsignedInt" use="optional"/>
     <xsd:attribute name="uniqueCount" type="xsd:unsignedInt" use="optional"/>
+    <xsd:attribute ref="xml:space"/>
   </xsd:complexType>
   <xsd:simpleType name="ST_PhoneticType">
     <xsd:restriction base="xsd:string">

@@ -49,7 +49,7 @@ module Axlsx
     def to_xml_string(str='')
       str << '<?xml version="1.0" encoding="UTF-8"?><sst xmlns="' << XML_NS << '"'
       str << ' count="' << @count.to_s << '" uniqueCount="' << unique_count.to_s << '"'
-      str << 'xml:space="' << xml_space.to_s << '>' << @shared_xml_string << '</sst>'
+      str << ' xml:space="' << xml_space.to_s << '">' << @shared_xml_string << '</sst>'
     end
 
     private
