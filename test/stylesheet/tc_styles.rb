@@ -150,7 +150,7 @@ class TestStyles < Test::Unit::TestCase
     assert_equal(@styles.parse_fill_options(:bg_color => "DE").class, Fixnum, "return index of fill if not :dxf type")
     assert_equal(@styles.parse_fill_options(:bg_color => "DE", :type => :dxf).class, Axlsx::Fill, "return fill object if :dxf type")
     f = @styles.parse_fill_options(:bg_color => "DE", :type => :dxf)
-    assert(f.fill_type.fgColor.rgb == "FFDEDEDE")
+    assert(f.fill_type.bgColor.rgb == "FFDEDEDE")
   end
 
   def test_parse_protection_options
@@ -210,7 +210,7 @@ class TestStyles < Test::Unit::TestCase
     assert_equal(0, style, "returns the zero-based dxfId")
 
     dxf = @styles.dxfs.last
-    assert_equal(@styles.dxfs.last.fill.fill_type.fgColor.rgb, "FF000000", "fill created with color")
+    assert_equal(@styles.dxfs.last.fill.fill_type.bgColor.rgb, "FF000000", "fill created with color")
 
     assert_equal(font_count, (@styles.fonts.size), "font not created under styles")
     assert_equal(fill_count, (@styles.fills.size), "fill not created under styles")
