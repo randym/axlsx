@@ -17,12 +17,14 @@ module Axlsx
     #
     # @param [Hash] options A hash that you can use to specify the author and workbook for this package.
     # @option options [String] :author The author of the document
+    # @option options [Time] :created_at Timestamp in the document properties (defaults to current time).
     # @option options [Boolean] :use_shared_strings This is passed to the workbook to specify that shared strings should be used when serializing the package.
     # @example Package.new :author => 'you!', :workbook => Workbook.new
     def initialize(options={})
       @workbook = nil
       @core, @app  =  Core.new, App.new
       @core.creator = options[:author] || @core.creator
+      @core.created = options[:created_at]
       parse_options options
       yield self if block_given?
     end

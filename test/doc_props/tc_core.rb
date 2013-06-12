@@ -23,6 +23,13 @@ class TestCore < Test::Unit::TestCase
     assert_equal(@doc.xpath('//dcterms:created').text, @time, "dcterms:created incorrect")
   end
 
+  def test_created_as_option
+    time = Time.utc(2013, 1, 1, 12, 00)
+    c = Axlsx::Core.new :created => time
+    doc = Nokogiri::XML(c.to_xml_string)
+    assert_equal(doc.xpath('//dcterms:created').text, time.xmlschema, "dcterms:created incorrect")
+  end
+
   def test_populates_default_name
     assert_equal(@doc.xpath('//dc:creator').text, "axlsx", "Default name not populated")
   end
