@@ -105,6 +105,12 @@ class TestPackage < Test::Unit::TestCase
     assert(Axlsx::Package.new.workbook.worksheets.size == 0, 'Workbook should not have sheets by default')
   end
 
+  def test_created_at_is_propagated_to_core
+    time = Time.utc(2013, 1, 1, 12, 0)
+    p = Axlsx::Package.new :created_at => time
+    assert_equal(time, p.core.created)
+  end
+
   def test_serialization
     assert_nothing_raised do
       begin
