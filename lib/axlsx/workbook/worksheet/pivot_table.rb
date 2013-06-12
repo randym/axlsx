@@ -23,9 +23,12 @@ module Axlsx
       @columns = []
       @data = []
       @pages = []
+      @subtotal = 'sum'
       parse_options options
       yield self if block_given?
     end
+
+    attr_writer :subtotal
 
     # The reference to the table data
     # @return [String]
@@ -190,7 +193,7 @@ module Axlsx
         data.each do |datum_value|
           str << '<dataField name="Sum of ' << datum_value << '" ' <<
                             'fld="' << header_index_of(datum_value).to_s << '" ' <<
-                            'baseField="0" baseItem="0"/>'
+                            'baseField="0" baseItem="0" subtotal="' << @subtotal << '"/>'
         end
         str << '</dataFields>'
       end
