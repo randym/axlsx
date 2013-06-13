@@ -191,7 +191,7 @@ module Axlsx
       unless data.empty?
         str << '<dataFields count="' << data.size.to_s << '">'
         data.each do |datum_value|
-          str << '<dataField name="Sum of ' << datum_value << '" ' <<
+          str << "<dataField name=\"#{@subtotal} of " << datum_value << '" ' <<
                             'fld="' << header_index_of(datum_value).to_s << '" ' <<
                             'baseField="0" baseItem="0" subtotal="' << @subtotal << '"/>'
         end
