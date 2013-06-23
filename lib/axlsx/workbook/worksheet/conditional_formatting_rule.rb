@@ -182,7 +182,7 @@ module Axlsx
     # @see timePeriod
     def timePeriod=(v); Axlsx::validate_time_period_type(v); @timePeriod = v end
     # @see formula
-    def formula=(v); [*v].each {|x| Axlsx::validate_string(x) }; @formula = v end
+    def formula=(v); [*v].each {|x| Axlsx::validate_string(x) }; @formula = [*v].map { |form| ::CGI.escapeHTML(form) } end
 
     # @see color_scale
     def color_scale=(v)
