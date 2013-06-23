@@ -28,7 +28,9 @@ module Axlsx
     # serialized. Otherwise, each axis is serialized in full. 
     def to_xml_string(str = '', options = {})
       if options[:ids]
-        axes.inject(str) { |string, axis| string << '<c:axId val="' << axis[1].id.to_s << '"/>' }
+        # CatAxis must come first in the XML (for Microsoft Excel at least)
+        sorted = axes.sort_by { |name, axis| axis.kind_of?(CatAxis) ? 0 : 1 }
+        sorted.inject(str) { |string, axis| string << '<c:axId val="' << axis[1].id.to_s << '"/>' }        
       else
         axes.each { |axis| axis[1].to_xml_string(str) }
       end
