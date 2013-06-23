@@ -115,8 +115,13 @@ module Axlsx
     end
 
     # returns the sheet data as columns
-    def cols
-      @rows.transpose
+    # If you pass a block, it will be evaluated whenever a row does not have a
+    # cell at a specific index. The block will be called with the row and column
+    # index in the missing cell was found.
+    # @example
+    #     cols { |row_index, column_index| p "warn - row #{row_index} is does not have a cell at #{column_index}
+    def cols(&block)
+      @rows.transpose(&block)
     end
 
     # An range that excel will apply an auto-filter to "A1:B3"

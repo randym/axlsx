@@ -21,7 +21,7 @@ appreciation for the gem, please don't hesitate to make a donation.
 
 **License**: MIT License
 
-**Latest Version**: 1.3.6
+**Latest Version**: 1.3.7
 
 **Ruby Version**: 1.8.7 (soon to be depreciated!!!), 1.9.2, 1.9.3, 2.0.0
 
@@ -29,7 +29,7 @@ appreciation for the gem, please don't hesitate to make a donation.
 
 **Rubinius Version**: rubinius 2.0.0dev * lower versions may run, this gem always tests against head.
 
-**Release Date**: April 24th 2013
+**Release Date**: June ? 2013
 
 If you are working in rails, or with active record see:
 [acts_as_xlsx](http://github.com/randym/acts_as_xlsx)
@@ -160,7 +160,9 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
-- **April.??.13**:1.37
+- **June.?.13**:1.3.7
+  - Bugfix: transposition of cells for Worksheet#cols now supports 
+    incongruent column counts.counts
   - Added space preservation for cell text. This will allow whitespace
     in cell text both when using shared strings and when serializing
     directly to the cell.
