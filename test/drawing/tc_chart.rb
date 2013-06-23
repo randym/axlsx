@@ -106,6 +106,6 @@ class TestChart < Test::Unit::TestCase
     schema = Nokogiri::XML::Schema(File.open(Axlsx::DRAWING_XSD))
     @chart.display_blanks_as = :span
     doc = Nokogiri::XML(@chart.to_xml_string)
-    assert(doc.xpath("//c:dispBlanksAs[@val='span']"))
+    assert_equal("span", doc.xpath("//c:dispBlanksAs").attr("val").value, "did not use the display_blanks_as configuration")
   end
 end

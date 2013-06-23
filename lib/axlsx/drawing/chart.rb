@@ -173,8 +173,7 @@ module Axlsx
         str << '</c:legend>'
       end
       str << '<c:plotVisOnly val="1"/>'
-      str << '<c:dispBlanksAs val="zero"/>'
-      # str << '<c:dispBlanksAs val="' << display_blanks_as.to_s << '"/>'
+      str << '<c:dispBlanksAs val="' << display_blanks_as.to_s << '"/>'
       str << '<c:showDLblsOverMax val="1"/>'
       str << '</c:chart>'
       str << '<c:printSettings>'
