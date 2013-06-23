@@ -45,6 +45,14 @@ class TestChart < Test::Unit::TestCase
     assert_equal(false, @chart.vary_colors)
   end
 
+  def test_display_blanks_as
+    assert_equal(:gap, @chart.display_blanks_as, "default is not :gap")
+    assert_raise(ArgumentError, "did not validate possible values") { @chart.display_blanks_as = :hole }
+    assert_nothing_raised { @chart.display_blanks_as = :zero }
+    assert_nothing_raised { @chart.display_blanks_as = :span }
+    assert_equal(:span, @chart.display_blanks_as)
+  end
+
   def test_start_at
     @chart.start_at 15, 25
     assert_equal(@chart.graphic_frame.anchor.from.col, 15)
@@ -94,4 +102,10 @@ class TestChart < Test::Unit::TestCase
     assert(errors.empty?, "error free validation")
   end
 
+  def test_to_xml_string_for_display_blanks_as
+    schema = Nokogiri::XML::Schema(File.open(Axlsx::DRAWING_XSD))
+    @chart.display_blanks_as = :span
+    doc = Nokogiri::XML(@chart.to_xml_string)
+    assert(doc.xpath("//c:dispBlanksAs[@val='span']"))
+  end
 end
