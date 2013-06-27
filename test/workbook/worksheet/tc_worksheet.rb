@@ -212,6 +212,13 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(c[0].value, 2)
   end
 
+  def test_cols_with_block
+    @ws.add_row [1,2,3]
+    @ws.add_row [1]
+    cols = @ws.cols {|row, column| :foo }
+    assert_equal(:foo, cols[1][1])
+  end
+
   def test_row_style
     @ws.add_row [1,2,3,4]
     @ws.add_row [1,2,3,4]
