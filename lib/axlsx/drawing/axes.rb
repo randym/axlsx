@@ -5,9 +5,11 @@ module Axlsx
   class Axes
 
     # @param [Hash] options options used to generate axis each key
-    # should be an axis name like :val_axix and its value should be the
-    # class of the axis type to construct.
+    # should be an axis name like :val_axis and its value should be the
+    # class of the axis type to construct. The :cat_axis, if there is one,
+    # must come first (we assume a Ruby 1.9+ Hash or an OrderedHash).
     def initialize(options={})
+      raise(ArgumentError, "CatAxis must come first") if options.keys.include?(:cat_axis) && options.keys.first != :cat_axis
       options.each do |name, axis_class|
         add_axis(name, axis_class)
       end
@@ -28,7 +30,9 @@ module Axlsx
     # serialized. Otherwise, each axis is serialized in full. 
     def to_xml_string(str = '', options = {})
       if options[:ids]
-        axes.inject(str) { |string, axis| string << '<c:axId val="' << axis[1].id.to_s << '"/>' }
+        # CatAxis must come first in the XML (for Microsoft Excel at least)
+        sorted = axes.sort_by { |name, axis| axis.kind_of?(CatAxis) ? 0 : 1 }
+        sorted.inject(str) { |string, axis| string << '<c:axId val="' << axis[1].id.to_s << '"/>' }        
       else
         axes.each { |axis| axis[1].to_xml_string(str) }
       end
