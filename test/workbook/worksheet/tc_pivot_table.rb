@@ -1,5 +1,17 @@
 require 'tc_helper.rb'
 
+
+def shared_test_pivot_table_xml_validity(pivot_table)
+  schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
+  doc = Nokogiri::XML(pivot_table.to_xml_string)
+  errors = []
+  schema.validate(doc).each do |error|
+    errors.push error
+    puts error.message
+  end
+  assert(errors.empty?, "error free validation")
+end
+
 class TestPivotTable < Test::Unit::TestCase
   def setup
     p = Axlsx::Package.new
@@ -33,8 +45,15 @@ class TestPivotTable < Test::Unit::TestCase
     end
     assert_equal(['Year', 'Month'], pivot_table.rows)
     assert_equal(['Type'], pivot_table.columns)
-    assert_equal(['Sales'], pivot_table.data)
+    assert_equal([{:ref=>"Sales"}], pivot_table.data)
     assert_equal(['Region'], pivot_table.pages)
+  end
+
+  def test_add_pivot_table_with_options_on_data_field
+    pivot_table = @ws.add_pivot_table('G5:G6', 'A1:D5') do |pt|
+      pt.data = [{:ref=>"Sales", :subtotal => 'average'}]
+    end
+    assert_equal([{:ref=>"Sales", :subtotal => 'average'}], pivot_table.data)
   end
 
   def test_header_indices
@@ -73,14 +92,7 @@ class TestPivotTable < Test::Unit::TestCase
 
   def test_to_xml_string
     pivot_table = @ws.add_pivot_table('G5:G6', 'A1:D5')
-    schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
-    doc = Nokogiri::XML(pivot_table.to_xml_string)
-    errors = []
-    schema.validate(doc).each do |error|
-      errors.push error
-      puts error.message
-    end
-    assert(errors.empty?, "error free validation")
+    shared_test_pivot_table_xml_validity(pivot_table)
   end
 
   def test_to_xml_string_with_configuration
@@ -90,13 +102,13 @@ class TestPivotTable < Test::Unit::TestCase
       pt.data = ['Sales']
       pt.pages = ['Region']
     end
-    schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
-    doc = Nokogiri::XML(pivot_table.to_xml_string)
-    errors = []
-    schema.validate(doc).each do |error|
-      errors.push error
-      puts error.message
+    shared_test_pivot_table_xml_validity(pivot_table)
+  end
+
+  def test_to_xml_string_with_options_on_data_field
+    pivot_table = @ws.add_pivot_table('G5:G6', 'A1:E5') do |pt|
+      pt.data = [{:ref=>"Sales", :subtotal => 'average'}]
     end
-    assert(errors.empty?, "error free validation")
+    shared_test_pivot_table_xml_validity(pivot_table)
   end
 end
