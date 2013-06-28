@@ -290,4 +290,11 @@ module Axlsx
   def self.validate_split_state_type(v)
     RestrictionValidator.validate :split_state_type, [:frozen, :frozen_split, :split], v
   end
+
+  # Requires that the value is a valid "display blanks as" type.
+  # valid types must be one of gap, span, zero
+  # @param [Any] v The value validated
+  def self.validate_display_blanks_as(v)
+    RestrictionValidator.validate :display_blanks_as, [:gap, :span, :zero], v
+  end
 end
