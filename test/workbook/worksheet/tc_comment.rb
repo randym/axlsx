@@ -49,11 +49,11 @@ class TestComment < Test::Unit::TestCase
     assert(@c1.vml_shape.bottom_row == pos[1]+4)
   end
 
-  def to_xml_string
+  def test_to_xml_string
     doc = Nokogiri::XML(@c1.to_xml_string)
     assert_equal(doc.xpath("//comment[@ref='#{@c1.ref}']").size, 1)
-    assert_equal(doc.xpath("//comment[@authorId='#{@c1.author_index.to}']").size, 1)
-    assert_equal(doc.xpath("//t[text()='#{@c1.author}']").size, 1)
+    assert_equal(doc.xpath("//comment[@authorId='#{@c1.author_index.to_s}']").size, 1)
+    assert_equal(doc.xpath("//t[text()='#{@c1.author}:\n']").size, 1)
     assert_equal(doc.xpath("//t[text()='#{@c1.text}']").size, 1)
   end
 
