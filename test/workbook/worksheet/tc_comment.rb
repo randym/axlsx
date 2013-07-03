@@ -57,5 +57,16 @@ class TestComment < Test::Unit::TestCase
     assert_equal(doc.xpath("//t[text()='#{@c1.text}']").size, 1)
   end
 
+  def test_comment_text_contain_author_and_text
+    comment = @ws.add_comment :ref => 'C4', :text => 'some text', :author => 'Bob'
+    doc = Nokogiri::XML(comment.to_xml_string)
+    assert_equal("Bob:\nsome text", doc.xpath("//comment/text").text)
+  end
+
+  def test_comment_text_does_not_contain_stray_colon_if_author_blank
+    comment = @ws.add_comment :ref => 'C5', :text => 'some text', :author => ''
+    doc = Nokogiri::XML(comment.to_xml_string)
+    assert_equal("some text", doc.xpath("//comment/text").text)
+  end
 end
 

@@ -64,10 +64,11 @@ module Axlsx
     def to_xml_string(str = "")
       author = @comments.authors[author_index]
       str << '<comment ref="' << ref << '" authorId="' << author_index.to_s << '">'
-      str << '<text><r>'
-      str << '<rPr> <b/><color indexed="81"/></rPr>'
-      str << '<t>' << ::CGI.escapeHTML(author.to_s) << ':
-</t></r>'
+      str << '<text>'
+      unless author.to_s == ""
+        str << '<r><rPr><b/><color indexed="81"/></rPr>'
+        str << "<t>" << ::CGI.escapeHTML(author.to_s) << ":\n</t></r>"
+      end
       str << '<r>'
       str << '<rPr><color indexed="81"/></rPr>'
       str << '<t>' << ::CGI.escapeHTML(text) << '</t></r></text>'
