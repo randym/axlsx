@@ -5,7 +5,7 @@ class TestComment < Test::Unit::TestCase
     p = Axlsx::Package.new
     wb = p.workbook
     @ws = wb.add_worksheet
-    @c1 = @ws.add_comment :ref => 'A1', :text => 'penut machine', :author => 'crank', :visible => false
+    @c1 = @ws.add_comment :ref => 'A1', :text => 'text with special char <', :author => 'author with special char <', :visible => false
     @c2 = @ws.add_comment :ref => 'C3', :text => 'rust bucket', :author => 'PO'
   end
 
@@ -14,12 +14,12 @@ class TestComment < Test::Unit::TestCase
   end
 
   def test_author
-    assert(@c1.author == 'crank')
+    assert(@c1.author == 'author with special char <')
     assert(@c2.author == 'PO')
   end
 
   def test_text
-    assert(@c1.text == 'penut machine')
+    assert(@c1.text == 'text with special char <')
     assert(@c2.text == 'rust bucket')
   end
 
