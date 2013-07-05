@@ -32,22 +32,13 @@ class TestWorksheetHyperlink < Test::Unit::TestCase
     assert_equal(@options[:ref], @a.ref)
   end
 
-  def test_id
-    @a.target = :external
-
-    assert_equal("rId1", @a.id)
-    @a.target = :internal
-    assert_equal(nil, @a.id)
-  end
-
-
   def test_to_xml_string_with_non_external
     doc = Nokogiri::XML(@ws.to_xml_string)
     assert_equal(doc.xpath("//xmlns:hyperlink[@ref='#{@a.ref}']").size, 1)
     assert_equal(doc.xpath("//xmlns:hyperlink[@tooltip='#{@a.tooltip}']").size, 1)
     assert_equal(doc.xpath("//xmlns:hyperlink[@location='#{@a.location}']").size, 1)
     assert_equal(doc.xpath("//xmlns:hyperlink[@display='#{@a.display}']").size, 1)
-    assert_equal(doc.xpath("//xmlns:hyperlink[@r:id='#{@a.id}']").size, 0)
+    assert_equal(doc.xpath("//xmlns:hyperlink[@r:id]").size, 0)
   end
 
   def test_to_xml_stirng_with_external
@@ -57,7 +48,7 @@ class TestWorksheetHyperlink < Test::Unit::TestCase
     assert_equal(doc.xpath("//xmlns:hyperlink[@tooltip='#{@a.tooltip}']").size, 1)
     assert_equal(doc.xpath("//xmlns:hyperlink[@display='#{@a.display}']").size, 1)
     assert_equal(doc.xpath("//xmlns:hyperlink[@location='#{@a.location}']").size, 0)
-    assert_equal(doc.xpath("//xmlns:hyperlink[@r:id='#{@a.id}']").size, 1)
+    assert_equal(doc.xpath("//xmlns:hyperlink[@r:id='#{@a.relationship.Id}']").size, 1)
   end
 end
 

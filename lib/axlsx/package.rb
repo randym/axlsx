@@ -339,9 +339,9 @@ module Axlsx
     # @private
     def relationships
       rels = Axlsx::Relationships.new
-      rels << Relationship.new(WORKBOOK_R, WORKBOOK_PN)
-      rels << Relationship.new(CORE_R, CORE_PN)
-      rels << Relationship.new(APP_R, APP_PN)
+      rels << Relationship.new(self, WORKBOOK_R, WORKBOOK_PN)
+      rels << Relationship.new(self, CORE_R, CORE_PN)
+      rels << Relationship.new(self, APP_R, APP_PN)
       rels.lock
       rels
     end

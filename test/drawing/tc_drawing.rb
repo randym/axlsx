@@ -53,11 +53,6 @@ class TestDrawing < Test::Unit::TestCase
     assert_equal(@ws.drawing.rels_pn, "drawings/_rels/drawing1.xml.rels")
   end
 
-  def test_rId
-    @ws.add_chart(Axlsx::Pie3DChart)
-    assert_equal(@ws.drawing.rId, "rId1")
-  end
-
   def test_index
     @ws.add_chart(Axlsx::Pie3DChart)
     assert_equal(@ws.drawing.index, @ws.workbook.drawings.index(@ws.drawing))

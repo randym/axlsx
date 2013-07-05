@@ -93,4 +93,10 @@ class TestPic < Test::Unit::TestCase
     assert(errors.empty?, "error free validation")
   end
 
+  def test_to_xml_has_correct_r_id
+    r_id = @image.anchor.drawing.relationships.for(@image).Id
+    doc = Nokogiri::XML(@image.anchor.drawing.to_xml_string)
+    assert_equal r_id, doc.xpath("//a:blip").first["r:embed"]
+  end
+  
 end
