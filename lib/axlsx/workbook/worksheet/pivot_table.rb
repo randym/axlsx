@@ -135,18 +135,12 @@ module Axlsx
       @cache_definition ||= PivotTableCacheDefinition.new(self)
     end
 
-    # The worksheet relationships. This is managed automatically by the worksheet
+    # The relationships for this pivot table.
     # @return [Relationships]
     def relationships
       r = Relationships.new
-      r << Relationship.new(PIVOT_TABLE_CACHE_DEFINITION_R, "../#{cache_definition.pn}")
+      r << Relationship.new(cache_definition, PIVOT_TABLE_CACHE_DEFINITION_R, "../#{cache_definition.pn}")
       r
-    end
-
-    # The relation reference id for this table
-    # @return [String]
-    def rId
-      "rId#{index+1}"
     end
 
     # Serializes the object

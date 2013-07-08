@@ -11,10 +11,17 @@ require 'axlsx/rels/relationship.rb'
       super Relationship
     end
     
+    # The relationship instance for the given source object, or nil if none exists.
+    # @see Relationship#source_obj
+    # @return [Relationship]
+    def for(source_obj)
+      @list.find{ |rel| rel.source_obj == source_obj }
+    end
+    
     def to_xml_string(str = '')
       str << '<?xml version="1.0" encoding="UTF-8"?>'
       str << '<Relationships xmlns="' << RELS_R << '">'
-      each_with_index { |rel, index| rel.to_xml_string(index+1, str) }
+      each{ |rel| rel.to_xml_string(str) }
       str << '</Relationships>'
     end
 

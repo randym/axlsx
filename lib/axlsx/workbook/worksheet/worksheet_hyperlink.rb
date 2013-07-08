@@ -45,18 +45,13 @@ module Axlsx
       @ref = cell_reference
     end
 
-       # The relationship required by this hyperlink when the taget is :external
+    # The relationship instance for this hyperlink.
+    # A relationship is only required if `@target` is `:external`. If not, this method will simply return `nil`.
+    # @see #target=
     # @return [Relationship]
     def relationship
       return unless @target == :external
-      Relationship.new HYPERLINK_R, location, :target_mode => :External
-    end
-
-    # The id of the relationship for this object
-    # @return [String]
-    def id
-      return unless @target == :external
-      "rId#{(@worksheet.relationships_index_of(self)+1)}"
+      Relationship.new(self, HYPERLINK_R, location, :target_mode => :External)
     end
 
     # Seralize the object
@@ -73,7 +68,7 @@ module Axlsx
     # r:id should only be specified for external targets.
     # @return [Hash]
     def location_or_id
-      @target == :external ?  { :"r:id" => id } : { :location => Axlsx::coder.encode(location) }
+      @target == :external ?  { :"r:id" => relationship.Id } : { :location => Axlsx::coder.encode(location) }
     end
   end
 end

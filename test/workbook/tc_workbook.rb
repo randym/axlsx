@@ -116,5 +116,10 @@ class TestWorkbook < Test::Unit::TestCase
     assert_equal(doc.xpath('//xmlns:workbook/xmlns:definedNames/xmlns:definedName').inner_text, @wb.worksheets[0].auto_filter.defined_name)
   end
 
-
+  def test_to_xml_uses_correct_rIds_for_pivotCache
+    ws = @wb.add_worksheet
+    pivot_table = ws.add_pivot_table('G5:G6', 'A1:D5')
+    doc = Nokogiri::XML(@wb.to_xml_string)
+    assert_equal pivot_table.cache_definition.rId, doc.xpath("//xmlns:pivotCache").first["r:id"]
+  end
 end

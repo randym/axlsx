@@ -100,6 +100,7 @@ module Axlsx
     #   File.open('example_streamed.xlsx', 'w') { |f| f.write(s.read) }
     def serialize(output, confirm_valid=false)
       return false unless !confirm_valid || self.validate.empty?
+      Relationship.clear_cached_instances
       Zip::ZipOutputStream.open(output) do |zip|
         write_parts(zip)
       end
@@ -112,6 +113,7 @@ module Axlsx
     # @return [StringIO|Boolean] False if confirm_valid and validation errors exist. rewound string IO if not.
     def to_stream(confirm_valid=false)
       return false unless !confirm_valid || self.validate.empty?
+      Relationship.clear_cached_instances
       zip = write_parts(Zip::ZipOutputStream.new("streamed", true))
       stream = zip.close_buffer
       stream.rewind
@@ -339,9 +341,9 @@ module Axlsx
     # @private
     def relationships
       rels = Axlsx::Relationships.new
-      rels << Relationship.new(WORKBOOK_R, WORKBOOK_PN)
-      rels << Relationship.new(CORE_R, CORE_PN)
-      rels << Relationship.new(APP_R, APP_PN)
+      rels << Relationship.new(self, WORKBOOK_R, WORKBOOK_PN)
+      rels << Relationship.new(self, CORE_R, CORE_PN)
+      rels << Relationship.new(self, APP_R, APP_PN)
       rels.lock
       rels
     end

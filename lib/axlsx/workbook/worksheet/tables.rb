@@ -17,7 +17,7 @@ module Axlsx
     # returns the relationships required by this collection
     def relationships
       return [] if empty?
-      map{ |table| Relationship.new(TABLE_R, "../#{table.pn}") }
+      map{ |table| Relationship.new(table, TABLE_R, "../#{table.pn}") }
     end
 
     def to_xml_string(str = "")

@@ -36,8 +36,8 @@ class TestTable < Test::Unit::TestCase
   end
 
   def test_rId
-    @ws.add_table("A1:D5")
-    assert_equal(@ws.tables.first.rId, "rId1")
+    table = @ws.add_table("A1:D5")
+    assert_equal @ws.relationships.for(table).Id, table.rId
   end
 
   def test_index

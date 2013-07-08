@@ -83,26 +83,19 @@ module Axlsx
     # @return [String]
     attr_accessor :tooltip
 
-    # Returns a relationship object for this hyperlink
-    # @return [Axlsx::Relationship]
+    # The relationship object for this hyperlink.
+    # @return [Relationship]
     def relationship
-      Relationship.new(HYPERLINK_R, href, :target_mode => :External)
+      Relationship.new(self, HYPERLINK_R, href, :target_mode => :External)
     end
+
     # Serializes the object
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
       str << '<a:hlinkClick '
-      serialized_attributes str, {:'r:id' => "rId#{id}", :'xmlns:r' => XML_NS_R }
+      serialized_attributes str, {:'r:id' => relationship.Id, :'xmlns:r' => XML_NS_R }
       str << '/>'
-    end
-
-    private
-
-    # The relational ID for this hyperlink
-    # @return [Integer]
-    def id
-      @parent.anchor.drawing.index_of(self)+1
     end
 
   end

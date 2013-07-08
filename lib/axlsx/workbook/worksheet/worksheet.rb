@@ -348,10 +348,11 @@ module Axlsx
       "#{WORKSHEET_RELS_PN % (index+1)}"
     end
 
-    # The relationship Id of thiw worksheet
+    # The relationship id of this worksheet.
     # @return [String]
+    # @see Relationship#Id
     def rId
-      "rId#{index+1}"
+      @workbook.relationships.for(self).Id
     end
 
     # The index of this worksheet in the owning Workbook's worksheets list.
@@ -572,14 +573,6 @@ module Axlsx
            worksheet_drawing.relationship,
            pivot_tables.relationships].flatten.compact || []
       r
-    end
-
-    # identifies the index of an object withing the collections used in generating relationships for the worksheet
-    # @param [Any] object the object to search for
-    # @return [Integer] The index of the object
-    def relationships_index_of(object)
-      objects = [tables.to_a, worksheet_comments.comments.to_a, hyperlinks.to_a, worksheet_drawing.drawing].flatten.compact || []
-      objects.index(object)
     end
 
     # Returns the cell or cells defined using excel style A1:B3 references.
