@@ -14,9 +14,7 @@ module Axlsx
       # Generate and return a unique id. Used for setting {#Id}.
       # @return [String]
       def next_free_id
-        @next_free_id_counter ||= 0
-        @next_free_id_counter += 1
-        "rId#{@next_free_id_counter}"
+        "rId#{@instances.size + 1}"
       end
     end
 
