@@ -6,4 +6,5 @@ SimpleCov.start do
 end
 
 require 'test/unit'
+require "timecop"
 require "axlsx.rb"

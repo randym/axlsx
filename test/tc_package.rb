@@ -123,6 +123,16 @@ class TestPackage < Test::Unit::TestCase
       end
     end
   end
+  
+  # See comment for Package#zip_entry_for_part
+  def test_serialization_creates_identical_files_at_any_time_if_created_at_is_set
+    @package.core.created = Time.now
+    zip_content_now = @package.to_stream.string
+    Timecop.travel(3600) do
+      zip_content_then = @package.to_stream.string
+      assert zip_content_then == zip_content_now, "zip files are not identical"
+    end
+  end
 
   def test_validation
     assert_equal(@package.validate.size, 0, @package.validate)

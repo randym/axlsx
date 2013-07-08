@@ -158,12 +158,12 @@ module Axlsx
       p = parts
       p.each do |part|
         unless part[:doc].nil?
-          zip.put_next_entry(part[:entry])
+          zip.put_next_entry(zip_entry_for_part(part))
           entry = ['1.9.2', '1.9.3'].include?(RUBY_VERSION) ? part[:doc].force_encoding('BINARY') : part[:doc]
           zip.puts(entry)
         end
         unless part[:path].nil?
-          zip.put_next_entry(part[:entry]);
+          zip.put_next_entry(zip_entry_for_part(part))
           # binread for 1.9.3
           zip.write IO.respond_to?(:binread) ? IO.binread(part[:path]) : IO.read(part[:path])
         end
@@ -171,6 +171,22 @@ module Axlsx
       zip
     end
 
+    # Generate a ZipEntry for the given package part.
+    # The important part here is to explicitly set the timestamp for the zip entry: Serializing axlsx packages 
+    # with identical contents should result in identical zip files – however, the timestamp of a zip entry
+    # defaults to the time of serialization and therefore the zip file contents would be different every time
+    # the package is serialized.
+    #
+    # Note: {Core#created} also defaults to the current time – so to generate identical axlsx packages you have
+    # to set this explicitly, too (eg. with `Package.new(created_at: Time.local(2013, 1, 1))`).
+    #
+    # @param part A hash describing a part of this pacakge (see {#parts})
+    # @return [Zip::ZipEntry]
+    def zip_entry_for_part(part)
+      timestamp = Zip::DOSTime.at(@core.created.to_i)
+      Zip::ZipEntry.new("", part[:entry], "", "", 0, 0, Zip::ZipEntry::DEFLATED, 0, timestamp)
+    end
+    
     # The parts of a package
     # @return [Array] An array of hashes that define the entry, document and schema for each part of the package.
     # @private
