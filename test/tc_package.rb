@@ -133,6 +133,17 @@ class TestPackage < Test::Unit::TestCase
       assert zip_content_then == zip_content_now, "zip files are not identical"
     end
   end
+  
+  def test_serialization_creates_identical_files_for_identical_packages
+    package_1, package_2 = 2.times.map do 
+      Axlsx::Package.new(created_at: Time.utc(2013, 1, 1)).tap do |p|
+        p.workbook.add_worksheet(:name => "Basic Worksheet") do |sheet|
+          sheet.add_row [1, 2, 3]
+        end
+      end
+    end
+    assert package_1.to_stream.string == package_2.to_stream.string, "zip files are not identical"
+  end
 
   def test_validation
     assert_equal(@package.validate.size, 0, @package.validate)

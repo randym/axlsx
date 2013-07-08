@@ -11,7 +11,23 @@ module Axlsx
         @instances ||= []
       end
       
-      # Generate and return a unique id. Used for setting {#Id}.
+      # Clear cached instances.
+      # 
+      # This should be called before serializing a package (see {Package#serialize} and
+      # {Package#to_stream}) to make sure that serialization is idempotent (i.e. 
+      # Relationship instances are generated with the same IDs everytime the package
+      # is serialized).
+      # 
+      # Also, calling this avoids memory leaks (cached instances lingering around 
+      # forever). 
+      def clear_cached_instances
+        @instances = []
+      end
+      
+      # Generate and return a unique id (eg. `rId123`) Used for setting {#Id}. 
+      #
+      # The generated id depends on the number of cached instances, so using
+      # {clear_cached_instances} will automatically reset the generated ids, too.
       # @return [String]
       def next_free_id
         "rId#{@instances.size + 1}"
