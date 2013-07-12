@@ -22,15 +22,10 @@ module Axlsx
       @chart = chart_type.new(self, options)
     end
 
-    # The relationship id for this graphic
+    # The relationship id for this graphic frame.
     # @return [String]
-    #
-    # NOTE: Discontinued. This should not be part of GraphicFrame.
-    # The drawing object maintains relationships and needs to be queried to determine the relationship id of any given graphic data child object.
-    #
     def rId
-      warn('axlsx::DEPRECIATED: GraphicFrame#rId has been depreciated. relationship id is determed by the drawing object')
-      "rId#{@anchor.index+1}"
+      @anchor.drawing.relationships.for(chart).Id
     end
 
     # Serializes the object
@@ -49,7 +44,7 @@ module Axlsx
       str << '</xdr:xfrm>'
       str << '<a:graphic>'
       str << '<a:graphicData uri="' << XML_NS_C << '">'
-      str << '<c:chart xmlns:c="' << XML_NS_C << '" xmlns:r="' << XML_NS_R << '" r:id="rId' << (@anchor.drawing.index_of(@chart)+1).to_s << '"/>'
+      str << '<c:chart xmlns:c="' << XML_NS_C << '" xmlns:r="' << XML_NS_R << '" r:id="' << rId << '"/>'
       str << '</a:graphicData>'
       str << '</a:graphic>'
       str << '</xdr:graphicFrame>'

@@ -121,12 +121,6 @@ module Axlsx
       @worksheet.workbook.drawings.index(self)
     end
 
-    # The relation reference id for this drawing
-    # @return [String]
-    def rId
-      "rId#{index+1}"
-    end
-
     # The part name for this drawing
     # @return [String]
     def pn
@@ -140,15 +134,7 @@ module Axlsx
       "#{DRAWING_RELS_PN % (index+1)}"
     end
 
-    # The index of a chart, image or hyperlink object this drawing contains
-    def index_of(object)
-      child_objects.index(object)
-    end
-
-
-    # An ordered list of objects this drawing holds
-    # It is important that the objects are returned in the same order each time for 
-    # releationship indexing in the package
+    # A list of objects this drawing holds.
     # @return [Array]
     def child_objects
       charts + images + hyperlinks

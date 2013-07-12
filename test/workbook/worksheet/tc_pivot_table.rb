@@ -72,11 +72,6 @@ class TestPivotTable < Test::Unit::TestCase
     assert_equal(@ws.pivot_tables.first.pn, "pivotTables/pivotTable1.xml")
   end
 
-  def test_rId
-    @ws.add_pivot_table('G5:G6', 'A1:D5')
-    assert_equal(@ws.pivot_tables.first.rId, "rId1")
-  end
-
   def test_index
     @ws.add_pivot_table('G5:G6', 'A1:D5')
     assert_equal(@ws.pivot_tables.first.index, @ws.workbook.pivot_tables.index(@ws.pivot_tables.first))

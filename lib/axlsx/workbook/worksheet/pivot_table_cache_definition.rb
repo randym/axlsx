@@ -35,10 +35,11 @@ module Axlsx
       index + 1
     end
 
-    # The relation reference id for this table
+    # The relationship id for this pivot table cache definition.
+    # @see Relationship#Id
     # @return [String]
     def rId
-      "rId#{index + 1}"
+      pivot_table.relationships.for(self).Id
     end
 
     # Serializes the object

@@ -80,10 +80,10 @@ module Axlsx
     # Default :gap (although this really should vary by chart type and grouping)
     attr_reader :display_blanks_as
 
-    # returns a relationship object for the chart
-    # @return [Axlsx::Relationship]
+    # The relationship object for this chart.
+    # @return [Relationship]
     def relationship
-      Relationship.new(CHART_R, "../#{pn}")
+      Relationship.new(self, CHART_R, "../#{pn}")
     end
 
     # The index of this chart in the workbooks charts collection

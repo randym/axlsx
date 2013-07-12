@@ -21,7 +21,7 @@ class TestPivotTableCacheDefinition < Test::Unit::TestCase
   end
 
   def test_rId
-    assert_equal('rId1', @cache_definition.rId)
+    assert_equal @pivot_table.relationships.for(@cache_definition).Id, @cache_definition.rId
   end
 
   def test_index

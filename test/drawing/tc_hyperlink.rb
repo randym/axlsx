@@ -51,10 +51,6 @@ class TestHyperlink < Test::Unit::TestCase
     assert_equal(@hyperlink.highlightClick, false )
   end
 
-  def test_id
-    assert_equal(@hyperlink.send(:id), 2)
-  end
-
   def test_history
     assert_nothing_raised { @hyperlink.history = false }
     assert_raise(ArgumentError) {@hyperlink.history = "bob"}
