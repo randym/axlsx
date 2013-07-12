@@ -136,7 +136,7 @@ class TestPackage < Test::Unit::TestCase
   
   def test_serialization_creates_identical_files_for_identical_packages
     package_1, package_2 = 2.times.map do 
-      Axlsx::Package.new(created_at: Time.utc(2013, 1, 1)).tap do |p|
+      Axlsx::Package.new(:created_at => Time.utc(2013, 1, 1)).tap do |p|
         p.workbook.add_worksheet(:name => "Basic Worksheet") do |sheet|
           sheet.add_row [1, 2, 3]
         end
