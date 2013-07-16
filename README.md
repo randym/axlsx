@@ -36,10 +36,9 @@ If you are working in rails, or with active record see:
 
 acts_as_xlsx is a simple ActiveRecord mixin that lets you generate a workbook with:
 
-    ```ruby
-    Posts.where(created_at > Time.now-30.days).to_xlsx
-    ```
-
+```ruby
+Posts.where(created_at > Time.now-30.days).to_xlsx
+```
 
 ** and **
 
@@ -71,45 +70,45 @@ With Axlsx you can create excel worksheets with charts, images (with links), aut
 Feature List
 ------------
 
-**1. Author xlsx documents: Axlsx is made to let you easily and quickly generate professional xlsx based reports that can be validated before serialization.
+1. Author xlsx documents: Axlsx is made to let you easily and quickly generate professional xlsx based reports that can be validated before serialization.
 
-**2. Generate 3D Pie, Line, Scatter and Bar Charts: With Axlsx chart generation and management is as easy as a few lines of code. You can build charts based off data in your worksheet or generate charts without any data in your sheet at all. Customize gridlines, label rotation and series colors as well.
+2. Generate 3D Pie, Line, Scatter and Bar Charts: With Axlsx chart generation and management is as easy as a few lines of code. You can build charts based off data in your worksheet or generate charts without any data in your sheet at all. Customize gridlines, label rotation and series colors as well.
 
-**3. Custom Styles: With guaranteed document validity, you can style borders, alignment, fills, fonts, and number formats in a single line of code. Those styles can be applied to an entire row, or a single cell anywhere in your workbook.
+3. Custom Styles: With guaranteed document validity, you can style borders, alignment, fills, fonts, and number formats in a single line of code. Those styles can be applied to an entire row, or a single cell anywhere in your workbook.
 
-**4. Automatic type support: Axlsx will automatically determine the type of data you are generating. In this release Float, Integer, String, Date, Time and Boolean types are automatically identified and serialized to your spreadsheet.
+4. Automatic type support: Axlsx will automatically determine the type of data you are generating. In this release Float, Integer, String, Date, Time and Boolean types are automatically identified and serialized to your spreadsheet.
 
-**5. Automatic and fixed column widths: Axlsx will automatically determine the appropriate width for your columns based on the content in the worksheet, or use any value you specify for the really funky stuff.
+5. Automatic and fixed column widths: Axlsx will automatically determine the appropriate width for your columns based on the content in the worksheet, or use any value you specify for the really funky stuff.
 
-**6. Support for automatically formatted 1904 and 1900 epochs configurable in the workbook.
+6. Support for automatically formatted 1904 and 1900 epochs configurable in the workbook.
 
-**7. Add jpg, gif and png images to worksheets with hyperlinks
+7. Add jpg, gif and png images to worksheets with hyperlinks
 
-**8. Reference cells in your worksheet with "A1" and "A1:D4" style references or from the workbook using "Sheet1!A3:B4" style references
+8. Reference cells in your worksheet with "A1" and "A1:D4" style references or from the workbook using "Sheet1!A3:B4" style references
 
-**9. Cell level style overrides for default and customized style objects
+9. Cell level style overrides for default and customized style objects
 
-**10. Support for formulas, merging, row and column outlining as well as
+10. Support for formulas, merging, row and column outlining as well as
 cell level input data validation.
 
-**12. Auto filtering tables with worksheet.auto_filter as well as support for Tables
+12. Auto filtering tables with worksheet.auto_filter as well as support for Tables
 
-**13. Export using shared strings or inline strings so we can inter-op with iWork Numbers (sans charts for now).
+13. Export using shared strings or inline strings so we can inter-op with iWork Numbers (sans charts for now).
 
-**14. Output to file or StringIO
+14. Output to file or StringIO
 
-**15. Support for page margins and print options
+15. Support for page margins and print options
 
-**16. Support for password and non password based sheet protection.
+16. Support for password and non password based sheet protection.
 
-**17. First stage interoperability support for GoogleDocs, LibreOffice,
+17. First stage interoperability support for GoogleDocs, LibreOffice,
 and Numbers
 
-**18. Support for defined names, which gives you repeated header rows for printing.
+18. Support for defined names, which gives you repeated header rows for printing.
 
-**19. Data labels for charts as well as series color customization.
+19. Data labels for charts as well as series color customization.
 
-**20. Support for sheet headers and footers
+20. Support for sheet headers and footers
 
 
 Installing
