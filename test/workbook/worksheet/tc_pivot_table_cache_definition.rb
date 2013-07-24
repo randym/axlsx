@@ -32,6 +32,14 @@ class TestPivotTableCacheDefinition < Test::Unit::TestCase
     assert_equal(1, @cache_definition.cache_id)
   end
 
+  def test_data_sheet
+    data_sheet = @ws.clone
+    data_sheet.name = "Pivot Table Data Source"
+    @pivot_table.data_sheet = data_sheet
+
+    assert(@cache_definition.to_xml_string.include?(data_sheet.name), "must set the data source correctly")
+  end
+
   def test_to_xml_string
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@cache_definition.to_xml_string)
