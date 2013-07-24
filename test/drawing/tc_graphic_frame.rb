@@ -17,14 +17,11 @@ class TestGraphicFrame < Test::Unit::TestCase
   end
 
   def test_rId
-    assert_equal(@frame.rId, "rId1")
-    chart = @ws.add_chart Axlsx::Chart
-    assert_equal(chart.graphic_frame.rId, "rId2")
+    assert_equal @ws.drawing.relationships.for(@chart).Id, @frame.rId
   end
 
-  def test_rId_with_image_and_chart
-    image = @ws.add_image :image_src => (File.dirname(__FILE__) + "/../../examples/image1.jpeg"), :start_at => [0,25], :width => 200, :height => 200
-    assert_equal(2, image.id)
-    assert_equal(1, @chart.index+1)
+  def test_to_xml_has_correct_rId
+    doc = Nokogiri::XML(@frame.to_xml_string)
+    assert_equal @frame.rId, doc.xpath("//c:chart", doc.collect_namespaces).first["r:id"]
   end
 end

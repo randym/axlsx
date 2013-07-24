@@ -6,8 +6,8 @@ class TestVmlShape < Test::Unit::TestCase
     p = Axlsx::Package.new
     wb = p.workbook
     @ws = wb.add_worksheet
-    @ws.add_comment :ref => 'A1', :text => 'penut machine', :author => 'crank'
-    @ws.add_comment :ref => 'C3', :text => 'rust bucket', :author => 'PO'
+    @ws.add_comment :ref => 'A1', :text => 'penut machine', :author => 'crank', :visible => true
+    @ws.add_comment :ref => 'C3', :text => 'rust bucket', :author => 'PO', :visible => false
     @comments = @ws.comments
   end
 
@@ -84,11 +84,17 @@ class TestVmlShape < Test::Unit::TestCase
     assert(shape.top_row == 3)
     assert_raise(ArgumentError) { shape.top_row = [] }
   end
-
+  def test_visible
+    shape = @comments.first.vml_shape
+    shape.visible = false
+    assert(shape.visible == false)
+    assert_raise(ArgumentError) { shape.visible = 'foo' }
+  end
   def test_to_xml_string
     str = @comments.vml_drawing.to_xml_string()
     doc = Nokogiri::XML(str)
     assert_equal(doc.xpath("//v:shape").size, 2)
+    assert_equal(1, doc.xpath("//x:Visible").size, 'ClientData/x:Visible element rendering')
     @comments.each do |comment|
       shape = comment.vml_shape
       assert(doc.xpath("//v:shape/x:ClientData/x:Row[text()='#{shape.row}']").size == 1)

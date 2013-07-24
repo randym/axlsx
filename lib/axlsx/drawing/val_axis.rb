@@ -6,21 +6,22 @@ module Axlsx
     # This element specifies how the value axis crosses the category axis.
     # must be one of [:between, :midCat]
     # @return [Symbol]
-    attr_reader :crossBetween
+    attr_reader :cross_between
+    alias :crossBetween :cross_between
 
     # Creates a new ValAxis object
-    # @param [Integer] axId the id of this axis
-    # @param [Integer] crossAx the id of the perpendicular axis
-    # @option options [Symbol] axPos
-    # @option options [Symbol] tickLblPos
-    # @option options [Symbol] crosses
-    # @option options [Symbol] crossesBetween
-    def initialize(axId, crossAx, options={})
-      self.crossBetween = :between
-      super(axId, crossAx, options)
+    # @option options [Symbol] crosses_between
+    def initialize(options={})
+      self.cross_between = :between
+      super(options)
     end
-    # @see crossBetween
-    def crossBetween=(v) RestrictionValidator.validate "ValAxis.crossBetween", [:between, :midCat], v; @crossBetween = v; end
+
+    # @see cross_between
+    def cross_between=(v)
+      RestrictionValidator.validate "ValAxis.cross_between", [:between, :midCat], v
+      @cross_between = v
+    end
+    alias :crossBetween= :cross_between=
 
     # Serializes the object
     # @param [String] str
@@ -28,7 +29,7 @@ module Axlsx
     def to_xml_string(str = '')
       str << '<c:valAx>'
       super(str)
-      str << '<c:crossBetween val="' << @crossBetween.to_s << '"/>'
+      str << '<c:crossBetween val="' << @cross_between.to_s << '"/>'
       str << '</c:valAx>'
     end
 

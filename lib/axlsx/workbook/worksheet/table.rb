@@ -47,10 +47,11 @@ module Axlsx
       "#{TABLE_PN % (index+1)}"
     end
 
-    # The relation reference id for this table
+    # The relationship id for this table.
+    # @see Relationship#Id
     # @return [String]
     def rId
-      "rId#{index+1}"
+      @sheet.relationships.for(self).Id
     end
 
     # The name of the Table.

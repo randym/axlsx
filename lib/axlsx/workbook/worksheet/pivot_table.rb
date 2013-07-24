@@ -95,10 +95,17 @@ module Axlsx
     # (see #data)
     def data=(v)
       DataTypeValidator.validate "#{self.class}.data", [Array], v
-      v.each do |ref|
-        DataTypeValidator.validate "#{self.class}.data[]", [String], ref
+      @data = []
+      v.each do |data_field|
+        if data_field.is_a? String
+          data_field = {:ref => data_field}
+        end
+        data_field.values.each do |value|
+          DataTypeValidator.validate "#{self.class}.data[]", [String], value
+        end
+        @data << data_field
       end
-      @data = v
+      @data
     end
 
     # The pages
@@ -138,18 +145,12 @@ module Axlsx
       @cache_definition ||= PivotTableCacheDefinition.new(self)
     end
 
-    # The worksheet relationships. This is managed automatically by the worksheet
+    # The relationships for this pivot table.
     # @return [Relationships]
     def relationships
       r = Relationships.new
-      r << Relationship.new(PIVOT_TABLE_CACHE_DEFINITION_R, "../#{cache_definition.pn}")
+      r << Relationship.new(cache_definition, PIVOT_TABLE_CACHE_DEFINITION_R, "../#{cache_definition.pn}")
       r
-    end
-
-    # The relation reference id for this table
-    # @return [String]
-    def rId
-      "rId#{index+1}"
     end
 
     # Serializes the object
@@ -196,11 +197,11 @@ module Axlsx
         str << '</pageFields>'
       end
       unless data.empty?
-        str << '<dataFields count="' << data.size.to_s << '">'
+        str << "<dataFields count=\"#{data.size}\">"
         data.each do |datum_value|
-          str << '<dataField name="Sum of ' << datum_value << '" ' <<
-                            'fld="' << header_index_of(datum_value).to_s << '" ' <<
-                            'baseField="0" baseItem="0"/>'
+          str << "<dataField name='#{@subtotal} of #{datum_value[:ref]}' fld='#{header_index_of(datum_value[:ref])}' baseField='0' baseItem='0'"
+          str << " subtotal='#{datum_value[:subtotal]}' " if datum_value[:subtotal]
+          str << "/>"
         end
         str << '</dataFields>'
       end

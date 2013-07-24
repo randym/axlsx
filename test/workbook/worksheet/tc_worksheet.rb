@@ -123,9 +123,7 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   def test_rId
-    assert_equal(@ws.rId, "rId1")
-    ws = @ws.workbook.add_worksheet
-    assert_equal(ws.rId, "rId2")
+    assert_equal @ws.workbook.relationships.for(@ws).Id, @ws.rId
   end
 
   def test_index
@@ -205,11 +203,18 @@ class TestWorksheet < Test::Unit::TestCase
   def test_cols
     @ws.add_row [1,2,3,4]
     @ws.add_row [1,2,3,4]
-    @ws.add_row [1,2,3,4]
+    @ws.add_row [1,2,3]
     @ws.add_row [1,2,3,4]
     c = @ws.cols[1]
     assert_equal(c.size, 4)
     assert_equal(c[0].value, 2)
+  end
+
+  def test_cols_with_block
+    @ws.add_row [1,2,3]
+    @ws.add_row [1]
+    cols = @ws.cols {|row, column| :foo }
+    assert_equal(:foo, cols[1][1])
   end
 
   def test_row_style
@@ -334,16 +339,16 @@ class TestWorksheet < Test::Unit::TestCase
   def test_to_xml_string_drawing
     @ws.add_chart Axlsx::Pie3DChart
     doc = Nokogiri::XML(@ws.to_xml_string)
-    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:drawing[@r:id="rId1"]').size, 1)
+    assert_equal @ws.send(:worksheet_drawing).relationship.Id, doc.xpath('//xmlns:worksheet/xmlns:drawing').first["r:id"]
   end
 
   def test_to_xml_string_tables
     @ws.add_row ["one", "two"]
     @ws.add_row [1, 2]
-    @ws.add_table "A1:B2"
+    table = @ws.add_table "A1:B2"
     doc = Nokogiri::XML(@ws.to_xml_string)
     assert_equal(doc.xpath('//xmlns:worksheet/xmlns:tableParts[@count="1"]').size, 1)
-    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:tableParts/xmlns:tablePart[@r:id="rId1"]').size, 1)
+    assert_equal table.rId, doc.xpath('//xmlns:worksheet/xmlns:tableParts/xmlns:tablePart').first["r:id"]
   end
 
   def test_to_xml_string

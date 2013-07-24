@@ -59,7 +59,6 @@ module Axlsx
     # break the xml and 1.8.7 does not support ordered hashes.
     # @param [String] str The string instance to which serialized data is appended
     # @param [Array] additional_attributes An array of additional attribute names.
-    # @param [Proc] block A which will be called with the value for each element.
     # @return [String] The serialized output.
     def serialized_element_attributes(str='', additional_attributes=[], &block)
       attrs = self.class.xml_element_attributes + additional_attributes

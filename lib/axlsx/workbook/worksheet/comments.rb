@@ -56,9 +56,9 @@ module Axlsx
     # The relationships required by this object
     # @return [Array]
     def relationships
-      [Relationship.new(VML_DRAWING_R, "../#{vml_drawing.pn}"),
-       Relationship.new(COMMENT_R, "../#{pn}"),
-       Relationship.new(COMMENT_R_NULL, "NULL")]
+      [Relationship.new(self, VML_DRAWING_R, "../#{vml_drawing.pn}"),
+       Relationship.new(self, COMMENT_R, "../#{pn}"),
+       Relationship.new(self, COMMENT_R_NULL, "NULL")]
     end
 
     # serialize the object

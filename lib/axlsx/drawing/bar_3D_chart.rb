@@ -10,12 +10,16 @@ module Axlsx
 
     # the category axis
     # @return [CatAxis]
-    attr_reader :cat_axis
+    def cat_axis
+      axes[:cat_axis]
+    end
     alias :catAxis :cat_axis
 
     # the value axis
     # @return [ValAxis]
-    attr_reader :val_axis
+    def val_axis
+      axes[:val_axis]
+    end
     alias :valAxis :val_axis
 
     # The direction of the bars in the chart
@@ -75,10 +79,6 @@ module Axlsx
     def initialize(frame, options={})
       @vary_colors = true
       @gap_width, @gap_depth, @shape = nil, nil, nil
-      @cat_ax_id = rand(8 ** 8)
-      @val_ax_id = rand(8 ** 8)
-      @cat_axis = CatAxis.new(@cat_ax_id, @val_ax_id)
-      @val_axis = ValAxis.new(@val_ax_id, @cat_ax_id, :tick_lbl_pos => :low, :ax_pos => :l)
       super(frame, options)
       @series_type = BarSeries
       @view_3D = View3D.new({:r_ang_ax=>1}.merge(options))
@@ -131,17 +131,21 @@ module Axlsx
         str_inner << '<c:grouping val="' << grouping.to_s << '"/>'
         str_inner << '<c:varyColors val="' << vary_colors.to_s << '"/>'
         @series.each { |ser| ser.to_xml_string(str_inner) }
-        @d_lbls.to_xml_string(str) if @d_lbls
+        @d_lbls.to_xml_string(str_inner) if @d_lbls
         str_inner << '<c:gapWidth val="' << @gap_width.to_s << '"/>' unless @gap_width.nil?
         str_inner << '<c:gapDepth val="' << @gap_depth.to_s << '"/>' unless @gap_depth.nil?
         str_inner << '<c:shape val="' << @shape.to_s << '"/>' unless @shape.nil?
-        str_inner << '<c:axId val="' << @cat_ax_id.to_s << '"/>'
-        str_inner << '<c:axId val="' << @val_ax_id.to_s << '"/>'
-        str_inner << '<c:axId val="0"/>'
+        axes.to_xml_string(str_inner, :ids => true)
         str_inner << '</c:bar3DChart>'
-        @cat_axis.to_xml_string str_inner
-        @val_axis.to_xml_string str_inner
+        axes.to_xml_string(str_inner)
       end
+    end
+
+    # A hash of axes used by this chart. Bar charts have a value and
+    # category axes specified via axes[:val_axes] and axes[:cat_axis]
+    # @return [Axes]
+    def axes
+     @axes ||= Axes.new(:cat_axis => CatAxis, :val_axis => ValAxis)
     end
   end
 end

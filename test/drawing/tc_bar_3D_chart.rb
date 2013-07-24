@@ -62,4 +62,10 @@ class TestBar3DChart < Test::Unit::TestCase
     assert(errors.empty?, "error free validation")
   end
 
+  def test_to_xml_string_has_axes_in_correct_order
+    str = @chart.to_xml_string
+    cat_axis_position = str.index(@chart.axes[:cat_axis].id.to_s)
+    val_axis_position = str.index(@chart.axes[:val_axis].id.to_s)
+    assert(cat_axis_position < val_axis_position, "cat_axis must occur earlier than val_axis in the XML")
+  end
 end

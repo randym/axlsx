@@ -7,17 +7,13 @@ module Axlsx
     include Axlsx::OptionsParser
 
     # Creates an Axis object
-    # @param [Integer] ax_id the id of this axis
-    # @param [Integer] cross_ax the id of the perpendicular axis
+    # @option options [Axis] cross_axis the perpendicular axis
     # @option options [Symbol] ax_pos
     # @option options [Symbol] crosses
     # @option options [Symbol] tick_lbl_pos
     # @raise [ArgumentError] If axi_id or cross_ax are not unsigned integers
-    def initialize(ax_id, cross_ax, options={})
-      Axlsx::validate_unsigned_int(ax_id)
-      Axlsx::validate_unsigned_int(cross_ax)
-      @ax_id = ax_id
-      @cross_ax = cross_ax
+    def initialize(options={})
+      @id = rand(8 ** 8)
       @format_code = "General"
       @delete = @label_rotation = 0
       @scaling = Scaling.new(:orientation=>:minMax)
@@ -37,13 +33,13 @@ module Axlsx
 
     # the id of the axis.
     # @return [Integer]
-    attr_reader :ax_id
-    alias :axID :ax_id
+    attr_reader :id
+    alias :axID :id
 
     # The perpendicular axis
     # @return [Integer]
-    attr_reader :cross_ax
-    alias :crossAx :cross_ax
+    attr_reader :cross_axis
+    alias :crossAx :cross_axis
 
     # The scaling of the axis
     # @see Scaling
@@ -93,6 +89,13 @@ module Axlsx
     # @see color
     def color=(color_rgb)
       @color = color_rgb
+    end
+    
+    # The crossing axis for this axis
+    # @param [Axis] axis
+    def cross_axis=(axis)
+       DataTypeValidator.validate "#{self.class}.cross_axis", [Axis], axis
+       @cross_axis = axis
     end
 
     # The position of the axis
@@ -147,7 +150,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      str << '<c:axId val="' << @ax_id.to_s << '"/>'
+      str << '<c:axId val="' << @id.to_s << '"/>'
       @scaling.to_xml_string str
       str << '<c:delete val="'<< @delete.to_s << '"/>'
       str << '<c:axPos val="' << @ax_pos.to_s << '"/>'
@@ -175,7 +178,7 @@ module Axlsx
       end
       # some potential value in implementing this in full. Very detailed!
       str << '<c:txPr><a:bodyPr rot="' << @label_rotation.to_s << '"/><a:lstStyle/><a:p><a:pPr><a:defRPr/></a:pPr><a:endParaRPr/></a:p></c:txPr>'
-      str << '<c:crossAx val="' << @cross_ax.to_s << '"/>'
+      str << '<c:crossAx val="' << @cross_axis.id.to_s << '"/>'
       str << '<c:crosses val="' << @crosses.to_s << '"/>'
     end
 

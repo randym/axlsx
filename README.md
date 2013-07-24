@@ -1,6 +1,6 @@
 Axlsx: Office Open XML Spreadsheet Generation
 ====================================
-[![Build Status](https://secure.travis-ci.org/randym/axlsx.png)](http://travis-ci.org/randym/axlsx/)
+[![Build Status](https://secure.travis-ci.org/randym/axlsx.png?branch=master)](http://travis-ci.org/randym/axlsx/)
 
 If you are using axlsx for comercial purposes, or just want to show your
 appreciation for the gem, please don't hesitate to make a donation.
@@ -17,27 +17,28 @@ appreciation for the gem, please don't hesitate to make a donation.
 
 **Author**: Randy Morgan
 
-**Copyright**: 2011 - 2012
+**Copyright**: 2011 - 2013
 
 **License**: MIT License
 
-**Latest Version**: 1.3.5
+**Latest Version**: 1.3.7
 
-**Ruby Version**: 1.8.7, 1.9.2, 1.9.3
+**Ruby Version**: 1.8.7 (soon to be depreciated!!!), 1.9.2, 1.9.3, 2.0.0
 
 **JRuby Version**: 1.6.7 1.8 and 1.9 modes
 
 **Rubinius Version**: rubinius 2.0.0dev * lower versions may run, this gem always tests against head.
 
-**Release Date**: February 4th 2013
+**Release Date**: June ? 2013
 
 If you are working in rails, or with active record see:
-* http://github.com/randym/acts_as_xlsx
+[acts_as_xlsx](http://github.com/randym/acts_as_xlsx)
+
 acts_as_xlsx is a simple ActiveRecord mixin that lets you generate a workbook with:
 
-    ```ruby
-    Posts.where(created_at > Time.now-30.days).to_xlsx
-    ```
+```ruby
+Posts.where(created_at > Time.now-30.days).to_xlsx
+```
 
 ** and **
 
@@ -46,6 +47,12 @@ Axlsx_Rails provides an Axlsx renderer so you can move all your spreadsheet code
 
 There are guides for using axlsx and acts_as_xlsx here:
 [http://axlsx.blog.randym.net](http://axlsx.blog.randym.net)
+
+If you are working with ActiveAdmin see:
+
+[activeadmin_axlsx](http://github.com/randym/activeadmin_axlsx)
+
+It provies a plugin and dsl for generating downloadable reports.
 
 The examples directory contains a number of more specific examples as
 well.
@@ -63,45 +70,45 @@ With Axlsx you can create excel worksheets with charts, images (with links), aut
 Feature List
 ------------
 
-**1. Author xlsx documents: Axlsx is made to let you easily and quickly generate professional xlsx based reports that can be validated before serialization.
+1. Author xlsx documents: Axlsx is made to let you easily and quickly generate professional xlsx based reports that can be validated before serialization.
 
-**2. Generate 3D Pie, Line, Scatter and Bar Charts: With Axlsx chart generation and management is as easy as a few lines of code. You can build charts based off data in your worksheet or generate charts without any data in your sheet at all. Customize gridlines, label rotation and series colors as well.
+2. Generate 3D Pie, Line, Scatter and Bar Charts: With Axlsx chart generation and management is as easy as a few lines of code. You can build charts based off data in your worksheet or generate charts without any data in your sheet at all. Customize gridlines, label rotation and series colors as well.
 
-**3. Custom Styles: With guaranteed document validity, you can style borders, alignment, fills, fonts, and number formats in a single line of code. Those styles can be applied to an entire row, or a single cell anywhere in your workbook.
+3. Custom Styles: With guaranteed document validity, you can style borders, alignment, fills, fonts, and number formats in a single line of code. Those styles can be applied to an entire row, or a single cell anywhere in your workbook.
 
-**4. Automatic type support: Axlsx will automatically determine the type of data you are generating. In this release Float, Integer, String, Date, Time and Boolean types are automatically identified and serialized to your spreadsheet.
+4. Automatic type support: Axlsx will automatically determine the type of data you are generating. In this release Float, Integer, String, Date, Time and Boolean types are automatically identified and serialized to your spreadsheet.
 
-**5. Automatic and fixed column widths: Axlsx will automatically determine the appropriate width for your columns based on the content in the worksheet, or use any value you specify for the really funky stuff.
+5. Automatic and fixed column widths: Axlsx will automatically determine the appropriate width for your columns based on the content in the worksheet, or use any value you specify for the really funky stuff.
 
-**6. Support for automatically formatted 1904 and 1900 epochs configurable in the workbook.
+6. Support for automatically formatted 1904 and 1900 epochs configurable in the workbook.
 
-**7. Add jpg, gif and png images to worksheets with hyperlinks
+7. Add jpg, gif and png images to worksheets with hyperlinks
 
-**8. Reference cells in your worksheet with "A1" and "A1:D4" style references or from the workbook using "Sheet1!A3:B4" style references
+8. Reference cells in your worksheet with "A1" and "A1:D4" style references or from the workbook using "Sheet1!A3:B4" style references
 
-**9. Cell level style overrides for default and customized style objects
+9. Cell level style overrides for default and customized style objects
 
-**10. Support for formulas, merging, row and column outlining as well as
+10. Support for formulas, merging, row and column outlining as well as
 cell level input data validation.
 
-**12. Auto filtering tables with worksheet.auto_filter as well as support for Tables
+12. Auto filtering tables with worksheet.auto_filter as well as support for Tables
 
-**13. Export using shared strings or inline strings so we can inter-op with iWork Numbers (sans charts for now).
+13. Export using shared strings or inline strings so we can inter-op with iWork Numbers (sans charts for now).
 
-**14. Output to file or StringIO
+14. Output to file or StringIO
 
-**15. Support for page margins and print options
+15. Support for page margins and print options
 
-**16. Support for password and non password based sheet protection.
+16. Support for password and non password based sheet protection.
 
-**17. First stage interoperability support for GoogleDocs, LibreOffice,
+17. First stage interoperability support for GoogleDocs, LibreOffice,
 and Numbers
 
-**18. Support for defined names, which gives you repeated header rows for printing.
+18. Support for defined names, which gives you repeated header rows for printing.
 
-**19. Data labels for charts as well as series color customization.
+19. Data labels for charts as well as series color customization.
 
-**20. Support for sheet headers and footers
+20. Support for sheet headers and footers
 
 
 Installing
@@ -152,6 +159,19 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
+- **June.?.13**:1.3.7
+  - Bugfix: transposition of cells for Worksheet#cols now supports 
+    incongruent column counts.counts
+  - Added space preservation for cell text. This will allow whitespace
+    in cell text both when using shared strings and when serializing
+    directly to the cell.
+- **April.24.13**:1.3.6
+  - Fixed LibreOffice/OpenOffice issue to properly apply colors to lines
+    in charts.
+  - Added support for specifying between/notBetween formula in an array.
+    *thanks* straydogstudio!
+  - Added standard line chart support. *thanks* scambra
+  - Fixed straydogstudio's link in the README. *thanks* nogara!
 - **February.4.13**:1.3.5
   - converted vary_colors for chart data to instance variable with appropriate defulats for the various charts.
   - Added trust_input method on Axlsx to instruct the serializer to skip HTML escaping. This will give you a tremendous performance boost,
@@ -172,14 +192,6 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
   - Improvements in autowidth calculation.
 - **November.8.12**:1.3.3
   - Patched cell run styles for u and validation for family
-- **November.5.12**:1.3.2
-  - MASSIVE REFACTORING
-  - Patch for apostrophes in worksheet names
-  - added sheet_by_name for workbook so you can now find your worksheets
-    by name
-  - added insert_worksheet so you can now add a worksheet to an
-    arbitrary position in the worksheets list.
-  - reduced memory consumption for package parts post serialization
 
 Please see the {file:CHANGELOG.md} document for past release information.
 
@@ -247,7 +259,7 @@ done without the help of the people below.
 
 [rfc2616](https://github.com/rfc2616) - for FINALLY working out the interop issues with google docs.
 
-[straydogstudio](https://github.com/straydocstudio) - For making an AWESOME axlsx templating gem for rails.
+[straydogstudio](https://github.com/straydogstudio) - For making an AWESOME axlsx templating gem for rails.
 
 [MitchellAJ](https://github.com/MitchellAJ) - For catching a bug in font_size calculations, finding some old code in an example and above all for reporting all of that brilliantly
 
@@ -262,11 +274,15 @@ air and our feet on the ground.
 
 [ball-hayden](https://github.com/ball-hayden) - For making sure we only get the right characters in our sheet names.
 
-[nibus](https://github.com/nibus) - For patching sheet name unequeness.
+[nibus](https://github.com/nibus) - For patching sheet name uniqueness.
+
+[scambra](https://github.com/scambra) - For keeping our lines in line!
+
+[agardiner](https://github.com/agardiner) - For the preservation of space. 
 
 #Copyright and License
 ----------
 
-Axlsx &copy; 2011-2012 by [Randy Morgan](mailto:digial.ipseity@gmail.com). 
+Axlsx &copy; 2011-2013 by [Randy Morgan](mailto:digial.ipseity@gmail.com). 
 
 Axlsx is licensed under the MIT license. Please see the LICENSE document for more information.

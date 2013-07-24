@@ -17,12 +17,14 @@ module Axlsx
     #
     # @param [Hash] options A hash that you can use to specify the author and workbook for this package.
     # @option options [String] :author The author of the document
+    # @option options [Time] :created_at Timestamp in the document properties (defaults to current time).
     # @option options [Boolean] :use_shared_strings This is passed to the workbook to specify that shared strings should be used when serializing the package.
     # @example Package.new :author => 'you!', :workbook => Workbook.new
     def initialize(options={})
       @workbook = nil
       @core, @app  =  Core.new, App.new
       @core.creator = options[:author] || @core.creator
+      @core.created = options[:created_at]
       parse_options options
       yield self if block_given?
     end
@@ -35,12 +37,6 @@ module Axlsx
     end
 
 
-    # Shortcut to specify that the workbook should use shared strings
-    # @see Workbook#use_shared_strings
-    def use_shared_strings=(v)
-      Axlsx::validate_boolean(v);
-      workbook.use_shared_strings = v
-    end
 
     # Shortcut to determine if the workbook is configured to use shared strings
     # @see Workbook#use_shared_strings
@@ -48,6 +44,12 @@ module Axlsx
       workbook.use_shared_strings
     end
 
+    # Shortcut to specify that the workbook should use shared strings
+    # @see Workbook#use_shared_strings
+    def use_shared_strings=(v)
+      Axlsx::validate_boolean(v);
+      workbook.use_shared_strings = v
+    end
     # The workbook this package will serialize or validate.
     # @return [Workbook] If no workbook instance has been assigned with this package a new Workbook instance is returned.
     # @raise ArgumentError if workbook parameter is not a Workbook instance.
@@ -98,6 +100,7 @@ module Axlsx
     #   File.open('example_streamed.xlsx', 'w') { |f| f.write(s.read) }
     def serialize(output, confirm_valid=false)
       return false unless !confirm_valid || self.validate.empty?
+      Relationship.clear_cached_instances
       Zip::ZipOutputStream.open(output) do |zip|
         write_parts(zip)
       end
@@ -110,6 +113,7 @@ module Axlsx
     # @return [StringIO|Boolean] False if confirm_valid and validation errors exist. rewound string IO if not.
     def to_stream(confirm_valid=false)
       return false unless !confirm_valid || self.validate.empty?
+      Relationship.clear_cached_instances
       zip = write_parts(Zip::ZipOutputStream.new("streamed", true))
       stream = zip.close_buffer
       stream.rewind
@@ -156,12 +160,12 @@ module Axlsx
       p = parts
       p.each do |part|
         unless part[:doc].nil?
-          zip.put_next_entry(part[:entry])
+          zip.put_next_entry(zip_entry_for_part(part))
           entry = ['1.9.2', '1.9.3'].include?(RUBY_VERSION) ? part[:doc].force_encoding('BINARY') : part[:doc]
           zip.puts(entry)
         end
         unless part[:path].nil?
-          zip.put_next_entry(part[:entry]);
+          zip.put_next_entry(zip_entry_for_part(part))
           # binread for 1.9.3
           zip.write IO.respond_to?(:binread) ? IO.binread(part[:path]) : IO.read(part[:path])
         end
@@ -169,6 +173,22 @@ module Axlsx
       zip
     end
 
+    # Generate a ZipEntry for the given package part.
+    # The important part here is to explicitly set the timestamp for the zip entry: Serializing axlsx packages 
+    # with identical contents should result in identical zip files – however, the timestamp of a zip entry
+    # defaults to the time of serialization and therefore the zip file contents would be different every time
+    # the package is serialized.
+    #
+    # Note: {Core#created} also defaults to the current time – so to generate identical axlsx packages you have
+    # to set this explicitly, too (eg. with `Package.new(created_at: Time.local(2013, 1, 1))`).
+    #
+    # @param part A hash describing a part of this pacakge (see {#parts})
+    # @return [Zip::ZipEntry]
+    def zip_entry_for_part(part)
+      timestamp = Zip::DOSTime.at(@core.created.to_i)
+      Zip::ZipEntry.new("", part[:entry], "", "", 0, 0, Zip::ZipEntry::DEFLATED, 0, timestamp)
+    end
+    
     # The parts of a package
     # @return [Array] An array of hashes that define the entry, document and schema for each part of the package.
     # @private
@@ -321,9 +341,9 @@ module Axlsx
     # @private
     def relationships
       rels = Axlsx::Relationships.new
-      rels << Relationship.new(WORKBOOK_R, WORKBOOK_PN)
-      rels << Relationship.new(CORE_R, CORE_PN)
-      rels << Relationship.new(APP_R, APP_PN)
+      rels << Relationship.new(self, WORKBOOK_R, WORKBOOK_PN)
+      rels << Relationship.new(self, CORE_R, CORE_PN)
+      rels << Relationship.new(self, APP_R, APP_PN)
       rels.lock
       rels
     end

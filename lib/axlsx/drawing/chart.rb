@@ -20,6 +20,7 @@ module Axlsx
       @graphic_frame.anchor.drawing.worksheet.workbook.charts << self
       @series = SimpleTypedList.new Series
       @show_legend = true
+      @display_blanks_as = :gap
       @series_type = Series
       @title = Title.new
       parse_options options
@@ -70,10 +71,19 @@ module Axlsx
     # @return [Boolean]
     attr_reader :show_legend
 
-    # returns a relationship object for the chart
-    # @return [Axlsx::Relationship]
+    # How to display blank values
+    # Options are
+    # * gap:  Display nothing
+    # * span: Not sure what this does
+    # * zero: Display as if the value were zero, not blank
+    # @return [Symbol]
+    # Default :gap (although this really should vary by chart type and grouping)
+    attr_reader :display_blanks_as
+
+    # The relationship object for this chart.
+    # @return [Relationship]
     def relationship
-      Relationship.new(CHART_R, "../#{pn}")
+      Relationship.new(self, CHART_R, "../#{pn}")
     end
 
     # The index of this chart in the workbooks charts collection
@@ -104,6 +114,12 @@ module Axlsx
     # @param [Boolean] v
     # @return [Boolean]
     def show_legend=(v) Axlsx::validate_boolean(v); @show_legend = v; end
+
+    # How to display blank values
+    # @see display_blanks_as
+    # @param [Symbol] v
+    # @return [Symbol]
+    def display_blanks_as=(v) Axlsx::validate_display_blanks_as(v); @display_blanks_as = v; end
 
     # The style for the chart.
     # see ECMA Part 1 §21.2.2.196
@@ -157,7 +173,7 @@ module Axlsx
         str << '</c:legend>'
       end
       str << '<c:plotVisOnly val="1"/>'
-      str << '<c:dispBlanksAs val="zero"/>'
+      str << '<c:dispBlanksAs val="' << display_blanks_as.to_s << '"/>'
       str << '<c:showDLblsOverMax val="1"/>'
       str << '</c:chart>'
       str << '<c:printSettings>'

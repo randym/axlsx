@@ -17,7 +17,7 @@ module Axlsx
     # returns the relationships required by this collection
     def relationships
       return [] if empty?
-      map{ |pivot_table| Relationship.new(PIVOT_TABLE_R, "../#{pivot_table.pn}") }
+      map{ |pivot_table| Relationship.new(pivot_table, PIVOT_TABLE_R, "../#{pivot_table.pn}") }
     end
   end
 

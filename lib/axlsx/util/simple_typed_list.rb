@@ -1,21 +1,9 @@
 # encoding: UTF-8
 module Axlsx
+
   # A SimpleTypedList is a type restrictive collection that allows some of the methods from Array and supports basic xml serialization.
   # @private
   class SimpleTypedList
-    # The class constants of allowed types
-    # @return [Array]
-    attr_reader :allowed_types
-
-    # The index below which items cannot be removed
-    # @return [Integer]
-    attr_reader :locked_at
-
-    # The tag name to use when serializing this object
-    # by default the parent node for all items in the list is the classname of the first allowed type with the first letter in lowercase.
-    # @return [String]
-    attr_reader :serialize_as
-
     # Creats a new typed list
     # @param [Array, Class] type An array of Class objects or a single Class object
     # @param [String] serialize_as The tag name to use in serialization
@@ -33,6 +21,38 @@ module Axlsx
       @serialize_as = serialize_as
     end
 
+    # The class constants of allowed types
+    # @return [Array]
+    attr_reader :allowed_types
+
+    # The index below which items cannot be removed
+    # @return [Integer]
+    attr_reader :locked_at
+
+    # The tag name to use when serializing this object
+    # by default the parent node for all items in the list is the classname of the first allowed type with the first letter in lowercase.
+    # @return [String]
+    attr_reader :serialize_as
+
+    # Transposes the list (without blowing up like ruby does)
+    # any non populated cell in the matrix will be a nil value
+    def transpose
+      return @list.clone if @list.size == 0
+      row_count = @list.size
+      max_column_count = @list.map{|row| row.cells.size}.max
+      result = Array.new(max_column_count) { Array.new(row_count) }
+      0..row_count.times do |row_index|
+        0..max_column_count.times do |column_index|
+          datum = if @list[row_index].cells.size >= max_column_count
+                    @list[row_index].cells[column_index]
+                  elsif block_given?
+                    yield(column_index, row_index)
+                  end
+          result[column_index][row_index] = datum
+        end
+      end
+      result
+    end
     # Lock this list at the current size
     # @return [self]
     def lock

@@ -270,14 +270,14 @@ require 'axlsx/workbook/worksheet/selection.rb'
     def relationships
       r = Relationships.new
       @worksheets.each do |sheet|
-        r << Relationship.new(WORKSHEET_R, WORKSHEET_PN % (r.size+1))
+        r << Relationship.new(sheet, WORKSHEET_R, WORKSHEET_PN % (r.size+1))
       end
       pivot_tables.each_with_index do |pivot_table, index|
-        r << Relationship.new(PIVOT_TABLE_CACHE_DEFINITION_R, PIVOT_TABLE_CACHE_DEFINITION_PN % (index+1))
+        r << Relationship.new(pivot_table.cache_definition, PIVOT_TABLE_CACHE_DEFINITION_R, PIVOT_TABLE_CACHE_DEFINITION_PN % (index+1))
       end
-      r << Relationship.new(STYLES_R,  STYLES_PN)
+      r << Relationship.new(self, STYLES_R,  STYLES_PN)
       if use_shared_strings
-          r << Relationship.new(SHARED_STRINGS_R,  SHARED_STRINGS_PN)
+          r << Relationship.new(self, SHARED_STRINGS_R,  SHARED_STRINGS_PN)
       end
       r
     end
@@ -285,7 +285,25 @@ require 'axlsx/workbook/worksheet/selection.rb'
     # generates a shared string object against all cells in all worksheets.
     # @return [SharedStringTable]
     def shared_strings
-      SharedStringsTable.new(worksheets.collect { |ws| ws.cells })
+      SharedStringsTable.new(worksheets.collect { |ws| ws.cells }, xml_space)
+    end
+
+    # The xml:space attribute for the worksheet.
+    # This determines how whitespace is handled withing the document.
+    # The most relevant part being whitespace in the cell text.
+    # allowed values are :preserve and :default. Axlsx uses :preserve unless
+    # you explicily set this to :default.
+    # @return Symbol
+    def xml_space
+      @xml_space ||= :preserve
+    end
+
+    # Sets the xml:space attribute for the worksheet
+    # @see Worksheet#xml_space
+    # @param [Symbol] space must be one of :preserve or :default
+    def xml_space=(space)
+      Axlsx::RestrictionValidator.validate(:xml_space, [:preserve, :default], space)
+      @xml_space = space;
     end
 
     # returns a range of cells in a worksheet
@@ -318,9 +336,8 @@ require 'axlsx/workbook/worksheet/selection.rb'
       defined_names.to_xml_string(str)
       unless pivot_tables.empty?
         str << '<pivotCaches>'
-        pivot_tables.each_with_index do |pivot_table, index|
-          rId = "rId#{@worksheets.size + index + 1  }"
-          str << '<pivotCache cacheId="' << pivot_table.cache_definition.cache_id.to_s << '" r:id="' << rId << '"/>'
+        pivot_tables.each do |pivot_table|
+          str << '<pivotCache cacheId="' << pivot_table.cache_definition.cache_id.to_s << '" r:id="' << pivot_table.cache_definition.rId << '"/>'
         end
         str << '</pivotCaches>'
       end

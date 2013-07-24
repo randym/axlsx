@@ -40,10 +40,11 @@ module Axlsx
       !comments.empty?
     end
 
-    # The index in the worksheet's relationships for the VML drawing that will render the comments
-    # @return [Integer]
-    def index
-      worksheet.relationships.index { |r| r.Type == VML_DRAWING_R } + 1
+    # The relationship id of the VML drawing that will render the comments.
+    # @see Relationship#Id
+    # @return [String]
+    def drawing_rId
+      comments.relationships.find{ |r| r.Type == VML_DRAWING_R }.Id
     end
 
     # Seraalize the object
@@ -51,7 +52,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       return unless has_comments?
-      str << "<legacyDrawing r:id='rId#{index}' />"
+      str << "<legacyDrawing r:id='#{drawing_rId}' />"
     end
   end
 end

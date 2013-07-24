@@ -105,6 +105,12 @@ class TestPackage < Test::Unit::TestCase
     assert(Axlsx::Package.new.workbook.worksheets.size == 0, 'Workbook should not have sheets by default')
   end
 
+  def test_created_at_is_propagated_to_core
+    time = Time.utc(2013, 1, 1, 12, 0)
+    p = Axlsx::Package.new :created_at => time
+    assert_equal(time, p.core.created)
+  end
+
   def test_serialization
     assert_nothing_raised do
       begin
@@ -116,6 +122,27 @@ class TestPackage < Test::Unit::TestCase
         puts "WARNING:: test_serialization requires write access."
       end
     end
+  end
+  
+  # See comment for Package#zip_entry_for_part
+  def test_serialization_creates_identical_files_at_any_time_if_created_at_is_set
+    @package.core.created = Time.now
+    zip_content_now = @package.to_stream.string
+    Timecop.travel(3600) do
+      zip_content_then = @package.to_stream.string
+      assert zip_content_then == zip_content_now, "zip files are not identical"
+    end
+  end
+  
+  def test_serialization_creates_identical_files_for_identical_packages
+    package_1, package_2 = 2.times.map do 
+      Axlsx::Package.new(:created_at => Time.utc(2013, 1, 1)).tap do |p|
+        p.workbook.add_worksheet(:name => "Basic Worksheet") do |sheet|
+          sheet.add_row [1, 2, 3]
+        end
+      end
+    end
+    assert package_1.to_stream.string == package_2.to_stream.string, "zip files are not identical"
   end
 
   def test_validation

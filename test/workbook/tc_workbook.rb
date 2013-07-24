@@ -9,6 +9,23 @@ class TestWorkbook < Test::Unit::TestCase
   def teardown
   end
 
+  def test_worksheet_users_xml_space
+    sheet = @wb.add_worksheet(:name => 'foo')
+    ws_xml = Nokogiri::XML(sheet.to_xml_string)
+    assert(ws_xml.xpath("//xmlns:worksheet/@xml:space='preserve'"))
+
+    @wb.xml_space = :default
+    ws_xml = Nokogiri::XML(sheet.to_xml_string)
+    assert(ws_xml.xpath("//xmlns:worksheet/@xml:space='default'"))
+  end
+
+  def test_xml_space
+    assert_equal(:preserve, @wb.xml_space)
+    @wb.xml_space = :default
+    assert_equal(:default, @wb.xml_space)
+    assert_raise(ArgumentError) { @wb.xml_space = :none }
+  end
+
   def test_no_autowidth
     assert_equal(@wb.use_autowidth, true)
     assert_raise(ArgumentError) {@wb.use_autowidth = 0.1}
@@ -99,5 +116,10 @@ class TestWorkbook < Test::Unit::TestCase
     assert_equal(doc.xpath('//xmlns:workbook/xmlns:definedNames/xmlns:definedName').inner_text, @wb.worksheets[0].auto_filter.defined_name)
   end
 
-
+  def test_to_xml_uses_correct_rIds_for_pivotCache
+    ws = @wb.add_worksheet
+    pivot_table = ws.add_pivot_table('G5:G6', 'A1:D5')
+    doc = Nokogiri::XML(@wb.to_xml_string)
+    assert_equal pivot_table.cache_definition.rId, doc.xpath("//xmlns:pivotCache").first["r:id"]
+  end
 end

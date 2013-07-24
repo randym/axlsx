@@ -22,6 +22,7 @@ module Axlsx
   require 'axlsx/drawing/ser_axis.rb'
   require 'axlsx/drawing/cat_axis.rb'
   require 'axlsx/drawing/val_axis.rb'
+  require 'axlsx/drawing/axes.rb'
 
   require 'axlsx/drawing/marker.rb'
 
@@ -33,6 +34,7 @@ module Axlsx
   require 'axlsx/drawing/chart.rb'
   require 'axlsx/drawing/pie_3D_chart.rb'
   require 'axlsx/drawing/bar_3D_chart.rb'
+  require 'axlsx/drawing/line_chart.rb'
   require 'axlsx/drawing/line_3D_chart.rb'
   require 'axlsx/drawing/scatter_chart.rb'
 
@@ -119,12 +121,6 @@ module Axlsx
       @worksheet.workbook.drawings.index(self)
     end
 
-    # The relation reference id for this drawing
-    # @return [String]
-    def rId
-      "rId#{index+1}"
-    end
-
     # The part name for this drawing
     # @return [String]
     def pn
@@ -138,15 +134,7 @@ module Axlsx
       "#{DRAWING_RELS_PN % (index+1)}"
     end
 
-    # The index of a chart, image or hyperlink object this drawing contains
-    def index_of(object)
-      child_objects.index(object)
-    end
-
-
-    # An ordered list of objects this drawing holds
-    # It is important that the objects are returned in the same order each time for 
-    # releationship indexing in the package
+    # A list of objects this drawing holds.
     # @return [Array]
     def child_objects
       charts + images + hyperlinks

@@ -41,24 +41,18 @@ module Axlsx
       @drawing.is_a? Drawing
     end
 
-    # The relationship required by this object
+    # The relationship instance for this drawing.
     # @return [Relationship]
     def relationship
       return unless has_drawing?
-      Relationship.new(DRAWING_R, "../#{drawing.pn}") 
-    end
-
-    # returns the index of the worksheet releationship that defines this drawing.
-    # @return [Integer]
-    def index
-       worksheet.relationships.index{ |r| r.Type == DRAWING_R } +1 
+      Relationship.new(self, DRAWING_R, "../#{drawing.pn}") 
     end
 
     # Serialize the drawing for the worksheet
     # @param [String] str
     def to_xml_string(str = '')
       return unless has_drawing? 
-      str << "<drawing r:id='rId#{index}'/>"
+      str << "<drawing r:id='#{relationship.Id}'/>"
     end
   end
 end

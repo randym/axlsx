@@ -114,14 +114,19 @@ module Axlsx
       @rows ||=  SimpleTypedList.new Row
     end
 
-    # returns the sheet data as columnw
-    def cols
-      @rows.transpose
+    # returns the sheet data as columns
+    # If you pass a block, it will be evaluated whenever a row does not have a
+    # cell at a specific index. The block will be called with the row and column
+    # index in the missing cell was found.
+    # @example
+    #     cols { |row_index, column_index| p "warn - row #{row_index} is does not have a cell at #{column_index}
+    def cols(&block)
+      @rows.transpose(&block)
     end
 
-    # An range that excel will apply an autfilter to "A1:B3"
+    # An range that excel will apply an auto-filter to "A1:B3"
     # This will turn filtering on for the cells in the range.
-    # The first row is considered the header, while subsequent rows are considerd to be data.
+    # The first row is considered the header, while subsequent rows are considered to be data.
     # @return String
     def auto_filter
       @auto_filter ||= AutoFilter.new self
@@ -327,6 +332,10 @@ module Axlsx
       auto_filter.range = v
     end
 
+    # Accessor for controlling whether leading and trailing spaces in cells are
+    # preserved or ignored. The default is to preserve spaces.
+    attr_accessor :preserve_spaces
+
     # The part name of this worksheet
     # @return [String]
     def pn
@@ -339,10 +348,11 @@ module Axlsx
       "#{WORKSHEET_RELS_PN % (index+1)}"
     end
 
-    # The relationship Id of thiw worksheet
+    # The relationship id of this worksheet.
     # @return [String]
+    # @see Relationship#Id
     def rId
-      "rId#{index+1}"
+      @workbook.relationships.for(self).Id
     end
 
     # The index of this worksheet in the owning Workbook's worksheets list.
@@ -565,14 +575,6 @@ module Axlsx
       r
     end
 
-    # identifies the index of an object withing the collections used in generating relationships for the worksheet
-    # @param [Any] object the object to search for
-    # @return [Integer] The index of the object
-    def relationships_index_of(object)
-      objects = [tables.to_a, worksheet_comments.comments.to_a, hyperlinks.to_a, worksheet_drawing.drawing].flatten.compact || []
-      objects.index(object)
-    end
-
     # Returns the cell or cells defined using excel style A1:B3 references.
     # @param [String|Integer] cell_def the string defining the cell or range of cells, or the rownumber
     # @return [Cell, Array]
@@ -629,6 +631,11 @@ module Axlsx
     end
 
     private
+
+    def xml_space
+      workbook.xml_space
+    end
+
     def outline(collection, range, level = 1, collapsed = true)
        range.each do |index|
         unless (item = collection[index]).nil?
@@ -699,7 +706,7 @@ module Axlsx
     # Helper method for parsingout the root node for worksheet
     # @return [String]
     def worksheet_node
-      "<worksheet xmlns=\"%s\" xmlns:r=\"%s\">" % [XML_NS, XML_NS_R]
+       "<worksheet xmlns=\"%s\" xmlns:r=\"%s\" xml:space=\"#{xml_space}\">" % [XML_NS, XML_NS_R]
     end
 
     def sheet_data

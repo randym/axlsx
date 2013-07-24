@@ -102,15 +102,10 @@ module Axlsx
       "#{IMAGE_PN % [(index+1), extname]}"
     end
 
-    # The relational id withing the drawing's relationships
-    def id
-      @anchor.drawing.charts.size + @anchor.drawing.images.index(self) + 1
-    end
-
-    # Returns a relationship object for this object
-    # @return Axlsx::Relationship
+    # The relationship object for this pic.
+    # @return [Relationship]
     def relationship
-      Relationship.new(IMAGE_R, "../#{pn}")
+      Relationship.new(self, IMAGE_R, "../#{pn}")
     end
 
     # providing access to the anchor's width attribute
@@ -177,7 +172,7 @@ module Axlsx
       picture_locking.to_xml_string(str)
       str << '</xdr:cNvPicPr></xdr:nvPicPr>'
       str << '<xdr:blipFill>'
-      str << '<a:blip xmlns:r ="' << XML_NS_R << '" r:embed="rId' << id.to_s <<  '"/>'
+      str << '<a:blip xmlns:r ="' << XML_NS_R << '" r:embed="' << relationship.Id <<  '"/>'
       str << '<a:stretch><a:fillRect/></a:stretch></xdr:blipFill><xdr:spPr>'
       str << '<a:xfrm><a:off x="0" y="0"/><a:ext cx="2336800" cy="2161540"/></a:xfrm>'
       str << '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></xdr:spPr></xdr:pic>'

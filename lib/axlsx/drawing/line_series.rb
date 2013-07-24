@@ -19,11 +19,16 @@ module Axlsx
     # @return [String]
     attr_reader :color
 
+    # show markers on values
+    # @return [Boolean]
+    attr_reader :show_marker
+
     # Creates a new series
     # @option options [Array, SimpleTypedList] data
     # @option options [Array, SimpleTypedList] labels
     # @param [Chart] chart
     def initialize(chart, options={})
+      @show_marker = false
       @labels, @data = nil, nil
       super(chart, options)
       @labels = AxDataSource.new(:data => options[:labels]) unless options[:labels].nil?
@@ -35,6 +40,12 @@ module Axlsx
       @color = v
     end
 
+    # @see show_marker
+    def show_marker=(v)
+      Axlsx::validate_boolean(v)
+      @show_marker = v
+    end
+
     # Serializes the object
     # @param [String] str
     # @return [String]
@@ -43,9 +54,16 @@ module Axlsx
         if color
           str << '<c:spPr><a:solidFill>'
           str << '<a:srgbClr val="' << color << '"/>'
-          str << '</a:solidFill></c:spPr>'
+          str << '</a:solidFill>'
+          str << '<a:ln w="28800">'
+          str << '<a:solidFill>'
+          str << '<a:srgbClr val="' << color << '"/>'
+          str << '</a:solidFill>'
+          str << '</a:ln>'
+          str << '<a:round/>'
+          str << '</c:spPr>'
         end
-
+        str << '<c:marker><c:symbol val="none"/></c:marker>' unless @show_marker
         @labels.to_xml_string(str) unless @labels.nil?
         @data.to_xml_string(str) unless @data.nil?
       end

@@ -130,6 +130,15 @@ class TestConditionalFormatting < Test::Unit::TestCase
     assert doc.xpath("//xmlns:worksheet/xmlns:conditionalFormatting//xmlns:cfRule[@type='cellIs'][@dxfId=0][@priority=1][@operator='greaterThan']//xmlns:formula='0.5'")
   end
 
+  def test_multiple_formulas
+    @ws.add_conditional_formatting "B3:B3", { :type => :cellIs, :dxfId => 0, :priority => 1, :operator => :between, :formula => ["1 <> 2","5"] }
+    doc = Nokogiri::XML.parse(@ws.to_xml_string)
+    p doc.xpath("//xmlns:worksheet/xmlns:conditionalFormatting//xmlns:cfRule[@type='cellIs'][@dxfId=0][@priority=1][@operator='between']")
+
+    assert doc.xpath("//xmlns:worksheet/xmlns:conditionalFormatting//xmlns:cfRule[@type='cellIs'][@dxfId=0][@priority=1][@operator='between']//xmlns:formula='1 <> 2'")
+    assert doc.xpath("//xmlns:worksheet/xmlns:conditionalFormatting//xmlns:cfRule[@type='cellIs'][@dxfId=0][@priority=1][@operator='between']//xmlns:formula='5'")
+  end
+
   def test_sqref
     assert_raise(ArgumentError) { @cf.sqref = 10 }
     assert_nothing_raised { @cf.sqref = "A1:A1" }
