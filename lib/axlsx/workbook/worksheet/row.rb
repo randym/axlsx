@@ -97,7 +97,7 @@ module Axlsx
       str << '</row>'
     end
 
-    # Adds a singel sell to the row based on the data provided and updates the worksheet's autofit data.
+    # Adds a single sell to the row based on the data provided and updates the worksheet's autofit data.
     # @return [Cell]
     def add_cell(value="", options={})
       c = Cell.new(self, value, options)
