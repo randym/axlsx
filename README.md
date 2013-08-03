@@ -23,7 +23,7 @@ appreciation for the gem, please don't hesitate to make a donation.
 
 **Latest Version**: 1.3.7
 
-**Ruby Version**: 1.8.7 (soon to be depreciated!!!), 1.9.2, 1.9.3, 2.0.0
+**Ruby Version**: 1.8.7 (soon to be deprecated!!!), 1.9.2, 1.9.3, 2.0.0
 
 **JRuby Version**: 1.6.7 1.8 and 1.9 modes
 
