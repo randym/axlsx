@@ -105,7 +105,7 @@ module Axlsx
     attr_reader :local_sheet_id
 
     # The local sheet index (0-based)
-    # @param [Integer] value the unsinged integer index of the sheet this defined_name applies to.
+    # @param [Integer] value the unsigned integer index of the sheet this defined_name applies to.
     def local_sheet_id=(value)
       Axlsx::validate_unsigned_int(value)
       @local_sheet_id = value
