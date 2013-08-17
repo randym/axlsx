@@ -199,8 +199,6 @@ class TestSheetView < Test::Unit::TestCase
 
     assert_equal(1, doc.xpath("//sheetView[@tabSelected='false']").size)
 
-    p doc.xpath("//sheetView")
-
     assert_equal(1, doc.xpath("//sheetView[@tabSelected='false'][@showWhiteSpace='false'][@showOutlineSymbols='false'][@showFormulas='false']
         [@rightToLeft='false'][@windowProtection='false'][@showZeros='true'][@showRuler='true']
         [@showRowColHeaders='true'][@showGridLines='true'][@defaultGridColor='true']
