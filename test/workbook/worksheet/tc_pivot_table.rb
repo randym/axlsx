@@ -36,6 +36,16 @@ class TestPivotTable < Test::Unit::TestCase
     assert_equal(@ws.pivot_tables.last, pivot_table, "must be added to worksheet pivot tables collection")
   end
 
+  def test_set_pivot_table_data_sheet
+    pivot_table = @ws.add_pivot_table('G5:G6', 'A1:D5')
+    data_sheet = @ws.clone
+    data_sheet.name = "Pivot Table Data Source"
+
+    assert_equal(pivot_table.data_sheet.name, @ws.name, "must default to the same sheet the pivot table is added to")
+    pivot_table.data_sheet = data_sheet
+    assert_equal(pivot_table.data_sheet.name, data_sheet.name, "data sheet assigned to pivot table")
+  end
+
   def test_add_pivot_table_with_config
     pivot_table = @ws.add_pivot_table('G5:G6', 'A1:D5') do |pt|
       pt.rows = ['Year', 'Month']
