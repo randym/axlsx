@@ -6,6 +6,7 @@ class TestPic < Test::Unit::TestCase
     @p = Axlsx::Package.new
     ws = @p.workbook.add_worksheet
     @test_img =  File.dirname(__FILE__) + "/../../examples/image1.jpeg"
+    @test_img_up = File.dirname(__FILE__) + "/../../examples/IMAGE1UP.JPEG"
     @image = ws.add_image :image_src => @test_img, :hyperlink => 'https://github.com/randym', :tooltip => "What's up doc?"
   end
 
@@ -77,7 +78,7 @@ class TestPic < Test::Unit::TestCase
   end
 
   def test_image_src_downcase
-    assert_nothing_raised { @image.image_src = @test_img.upcase }
+    assert_nothing_raised { @image.image_src = @test_img_up.upcase }
   end
 
   def test_descr
