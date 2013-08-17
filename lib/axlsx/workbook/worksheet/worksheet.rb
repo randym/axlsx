@@ -542,15 +542,7 @@ module Axlsx
         item.to_xml_string(str) if item
       end
       str << '</worksheet>'
-      sanitize(str)
-    end
-
-    # returns the provided string with all invalid control charaters
-    # removed.
-    # @param [String] str The sting to process
-    # @return [String]
-    def sanitize(str)
-      str.gsub(CONTROL_CHAR_REGEX, '')
+      Axlsx::sanitize(str)
     end
 
     # The worksheet relationships. This is managed automatically by the worksheet

@@ -41,7 +41,8 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string
-      '<?xml version="1.0" encoding="UTF-8"?><sst xmlns="' << XML_NS << '" count="' << @count.to_s << '" uniqueCount="' << unique_count.to_s << '">' << @shared_xml_string << '</sst>'
+      str = '<?xml version="1.0" encoding="UTF-8"?><sst xmlns="' << XML_NS << '" count="' << @count.to_s << '" uniqueCount="' << unique_count.to_s << '">' << @shared_xml_string << '</sst>'
+      str = Axlsx::sanitize(str)
     end
 
     private
