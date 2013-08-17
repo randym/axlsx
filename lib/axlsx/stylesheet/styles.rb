@@ -183,7 +183,7 @@ module Axlsx
     #                                 :border=>Axlsx::STYLE_THIN_BORDER)
     #
     #   # build your rows
-    #   ws.add_row ["Genreated At:", Time.now], :styles=>[nil, date_time]
+    #   ws.add_row ["Generated At:", Time.now], :styles=>[nil, date_time]
     #   ws.add_row ["Previous Year Quarterly Profits (JPY)"], :style=>title
     #   ws.add_row ["Quarter", "Profit", "% of Total"], :style=>title
     #   ws.add_row ["Q1", 4000, 40], :style=>[title, currency, percent]
