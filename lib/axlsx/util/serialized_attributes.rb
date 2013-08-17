@@ -48,11 +48,9 @@ module Axlsx
     end
 
     def declared_attributes
-      declared = instance_values
-      declared.each do |key, value|
-        declared.delete(key) if value == nil || !self.class.xml_attributes.include?(key.to_sym)
+      instance_values.select do |key, value|
+        value != nil && self.class.xml_attributes.include?(key.to_sym)
       end
-      declared
     end
 
     # serialized instance values at text nodes on a camelized element of the
