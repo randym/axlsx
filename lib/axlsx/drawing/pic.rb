@@ -37,7 +37,7 @@ module Axlsx
     attr_reader :descr
 
     # The path to the image you want to include
-    # Only local images are supported at this time and only jpg support
+    # Only local images are supported at this time.
     # @return [String]
     attr_reader :image_src
 
@@ -67,7 +67,7 @@ module Axlsx
 
     def image_src=(v)
       Axlsx::validate_string(v)
-      RestrictionValidator.validate 'Pic.image_src', ALLOWED_EXTENSIONS, File.extname(v).delete('.')
+      RestrictionValidator.validate 'Pic.image_src', ALLOWED_EXTENSIONS, File.extname(v.downcase).delete('.')
       raise ArgumentError, "File does not exist" unless File.exist?(v)
       @image_src = v
     end
@@ -89,7 +89,8 @@ module Axlsx
     # @return [String]
     def extname
       File.extname(image_src).delete('.') unless image_src.nil?
-    end 
+    end
+
     # The index of this image in the workbooks images collections
     # @return [Index]
     def index

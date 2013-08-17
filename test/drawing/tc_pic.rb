@@ -21,21 +21,21 @@ class TestPic < Test::Unit::TestCase
   def test_anchor_swapping
     #swap from one cell to two cell when end_at is specified
     assert(@image.anchor.is_a?(Axlsx::OneCellAnchor))
-    start_at = @image.anchor.from 
+    start_at = @image.anchor.from
     @image.end_at 10,5
     assert(@image.anchor.is_a?(Axlsx::TwoCellAnchor))
     assert_equal(start_at.col, @image.anchor.from.col)
     assert_equal(start_at.row, @image.anchor.from.row)
     assert_equal(10,@image.anchor.to.col)
     assert_equal(5, @image.anchor.to.row)
-  
+
     #swap from two cell to one cell when width or height are specified
     @image.width = 200
     assert(@image.anchor.is_a?(Axlsx::OneCellAnchor))
     assert_equal(start_at.col, @image.anchor.from.col)
     assert_equal(start_at.row, @image.anchor.from.row)
     assert_equal(200, @image.width)
-  
+
   end
   def test_hyperlink
     assert_equal(@image.hyperlink.href, "https://github.com/randym")
@@ -76,6 +76,10 @@ class TestPic < Test::Unit::TestCase
     assert_equal(@image.image_src, @test_img)
   end
 
+  def test_image_src_downcase
+    assert_nothing_raised { @image.image_src = @test_img.upcase }
+  end
+
   def test_descr
     assert_raise(ArgumentError) { @image.descr = 49 }
     assert_nothing_raised { @image.descr = "test" }
@@ -98,5 +102,5 @@ class TestPic < Test::Unit::TestCase
     doc = Nokogiri::XML(@image.anchor.drawing.to_xml_string)
     assert_equal r_id, doc.xpath("//a:blip").first["r:embed"]
   end
-  
+
 end
