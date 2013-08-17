@@ -47,11 +47,10 @@ module Axlsx
       end
       key_value_pairs.merge! additional_attributes
       key_value_pairs.each do |key, value|
-        str << "#{Axlsx.camel(key, false)}=\"#{value}\" "
+        str << "#{Axlsx.camel(key, false)}=\"#{Axlsx.camel(value, false)}\" "
       end
       str
     end
-
 
     # serialized instance values at text nodes on a camelized element of the
     # attribute name. You may pass in a block for evaluation against non nil
