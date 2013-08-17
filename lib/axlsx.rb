@@ -127,6 +127,14 @@ module Axlsx
     s.gsub(/_(.)/){ $1.upcase }
   end
 
+    # returns the provided string with all invalid control charaters
+    # removed.
+    # @param [String] str The sting to process
+    # @return [String]
+    def self.sanitize(str)
+      str.gsub(CONTROL_CHAR_REGEX, '')
+    end
+
 
   # Instructs the serializer to not try to escape cell value input. 
   # This will give you a huge speed bonus, but if you content has <, > or other xml character data
