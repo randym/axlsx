@@ -10,7 +10,7 @@ module Axlsx
     # Creates a new NumFmt object
     # @param [Hash] options Options for the number format object
     # @option [Integer] numFmtId The predefined format id or new format id for this format
-    # @option [String] fomratCode The format code for this number format
+    # @option [String] formatCode The format code for this number format
     def initialize(options={})
       @numFmtId = 0
       @formatCode = ""
@@ -23,7 +23,7 @@ module Axlsx
     # @see http://support.microsoft.com/kb/264372
     attr_reader :formatCode
 
-    # @return [Integer] An unsinged integer referencing a standard or custom number format.
+    # @return [Integer] An unsigned integer referencing a standard or custom number format.
     # @note
     #  These are the known formats I can dig up. The constant NUM_FMT_PERCENT is 9, and uses the default % formatting. Axlsx also defines a few formats for date and time that are commonly used in asia as NUM_FMT_YYYYMMDD and NUM_FRM_YYYYMMDDHHMMSS.
     #   1 0
