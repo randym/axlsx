@@ -78,7 +78,7 @@ class TestPic < Test::Unit::TestCase
   end
 
   def test_image_src_downcase
-    assert_nothing_raised { @image.image_src = @test_img_up.upcase }
+    assert_nothing_raised { @image.image_src = @test_img_up }
   end
 
   def test_descr
