@@ -136,7 +136,7 @@ module Axlsx
       def value_serialization(serialization_type, serialization_value, str = '')
         str << 't="' << serialization_type << '"' if serialization_type
         str << '><v>' << serialization_value << '</v>'
-      end 
+      end
 
 
     end

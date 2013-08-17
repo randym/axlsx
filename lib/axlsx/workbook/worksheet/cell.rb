@@ -302,7 +302,7 @@ module Axlsx
     def to_xml_string(r_index, c_index, str = '')
       CellSerializer.to_xml_string r_index, c_index, self, str
     end
-   
+
     def is_formula?
       @type == :string && @value.to_s.start_with?('=')
     end
@@ -318,9 +318,9 @@ module Axlsx
     end
 
     # returns the absolute or relative string style reference for
-    # this cell. 
+    # this cell.
     # @param [Boolean] absolute -when false a relative reference will be
-    # returned. 
+    # returned.
     # @return [String]
     def reference(absolute=true)
       absolute ? r_abs : r
@@ -353,7 +353,7 @@ module Axlsx
 
     # assigns the owning row for this cell.
     def row=(v) @row=v end
-    
+
     # Determines the cell type based on the cell value.
     # @note This is only used when a cell is created but no :type option is specified, the following rules apply:
     #   1. If the value is an instance of Date, the type is set to :date
@@ -375,7 +375,7 @@ module Axlsx
         :float
         # \A(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|0[1-9]|[1-2][0-9])
         # T(2[0-3]|[0-1][0-9]):([0-5][0-9]):([0-5][0-9])(\.[0-9]+)?
-        # (Z|[+-](?:2[0-3]|[0-1][0-9]):[0-5][0-9])?\Z 
+        # (Z|[+-](?:2[0-3]|[0-1][0-9]):[0-5][0-9])?\Z
       elsif v.to_s =~/\A(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|0[1-9]|[1-2][0-9])T(2[0-3]|[0-1][0-9]):([0-5][0-9]):([0-5][0-9])(\.[0-9]+)?(Z|[+-](?:2[0-3]|[0-1][0-9]):[0-5][0-9])?\Z/
         :iso_8601
       else

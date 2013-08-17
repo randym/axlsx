@@ -133,8 +133,6 @@ class TestConditionalFormatting < Test::Unit::TestCase
   def test_multiple_formulas
     @ws.add_conditional_formatting "B3:B3", { :type => :cellIs, :dxfId => 0, :priority => 1, :operator => :between, :formula => ["1 <> 2","5"] }
     doc = Nokogiri::XML.parse(@ws.to_xml_string)
-    p doc.xpath("//xmlns:worksheet/xmlns:conditionalFormatting//xmlns:cfRule[@type='cellIs'][@dxfId=0][@priority=1][@operator='between']")
-
     assert doc.xpath("//xmlns:worksheet/xmlns:conditionalFormatting//xmlns:cfRule[@type='cellIs'][@dxfId=0][@priority=1][@operator='between']//xmlns:formula='1 <> 2'")
     assert doc.xpath("//xmlns:worksheet/xmlns:conditionalFormatting//xmlns:cfRule[@type='cellIs'][@dxfId=0][@priority=1][@operator='between']//xmlns:formula='5'")
   end
