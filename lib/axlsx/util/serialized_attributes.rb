@@ -40,16 +40,19 @@ module Axlsx
     # @param [Hash] additional_attributes An option key value hash for
     # defining values that are not serializable attributes list.
     def serialized_attributes(str = '', additional_attributes = {})
-      key_value_pairs = instance_values
-      key_value_pairs.each do |key, value|
-        key_value_pairs.delete(key) if value == nil
-        key_value_pairs.delete(key) unless self.class.xml_attributes.include?(key.to_sym)
-      end
-      key_value_pairs.merge! additional_attributes
-      key_value_pairs.each do |key, value|
+      attributes = declared_attributes.merge! additional_attributes
+      attributes.each do |key, value|
         str << "#{Axlsx.camel(key, false)}=\"#{Axlsx.camel(value, false)}\" "
       end
       str
+    end
+
+    def declared_attributes
+      declared = instance_values
+      declared.each do |key, value|
+        declared.delete(key) if value == nil || !self.class.xml_attributes.include?(key.to_sym)
+      end
+      declared
     end
 
     # serialized instance values at text nodes on a camelized element of the
