@@ -37,6 +37,8 @@ module Axlsx
       @page_setup = PageSetup.new options[:page_setup]  if options[:page_setup]
       @print_options = PrintOptions.new options[:print_options] if options[:print_options]
       @header_footer = HeaderFooter.new options[:header_footer] if options[:header_footer]
+      @row_breaks = RowBreaks.new
+      @col_breaks = ColBreaks.new
     end
 
     # The name of the worksheet
@@ -92,6 +94,14 @@ module Axlsx
     # @return [Array] of Table
     def pivot_tables
       @pivot_tables ||=  PivotTables.new self
+    end
+
+    def col_breaks
+      @col_breaks ||= ColBreaks.new
+    end
+
+    def row_breaks
+      @row_breaks ||= RowBreaks.new
     end
 
     # A typed collection of hyperlinks associated with this worksheet
@@ -498,6 +508,15 @@ module Axlsx
       image
     end
 
+    # Adds a page break (row break) to the worksheet
+    # @param row_index Zero-based row index of the page break.
+    def add_page_break(row_index, col_index=0)
+      row_breaks.add_break(id: row_index)
+      if col_index > 0
+        col_breaks.add_break(id: col_index)
+      end
+    end
+
     # This is a helper method that Lets you specify a fixed width for multiple columns in a worksheet in one go.
     # Axlsx is sparse, so if you have not set data for a column, you cannot set the width.
     # Setting a fixed column width to nil will revert the behaviour back to calculating the width for you on the next call to add_row.
@@ -652,7 +671,7 @@ module Axlsx
        sheet_data, sheet_calc_pr, @sheet_protection, protected_ranges,
        auto_filter, merged_cells, conditional_formattings,
        data_validations, hyperlinks, print_options, page_margins,
-       page_setup, header_footer, worksheet_drawing, worksheet_comments,
+       page_setup, header_footer, row_breaks, col_breaks, worksheet_drawing, worksheet_comments,
        tables]
     end
 

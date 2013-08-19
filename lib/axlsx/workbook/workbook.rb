@@ -35,6 +35,11 @@ require 'axlsx/workbook/worksheet/worksheet_comments.rb'
 require 'axlsx/workbook/worksheet/worksheet_hyperlink'
 require 'axlsx/workbook/worksheet/worksheet_hyperlinks'
 require 'axlsx/workbook/worksheet/break'
+require 'axlsx/workbook/worksheet/row_breaks'
+require 'axlsx/workbook/worksheet/col_breaks'
+
+
+
 require 'axlsx/workbook/worksheet/worksheet.rb'
 require 'axlsx/workbook/shared_strings_table.rb'
 require 'axlsx/workbook/defined_name.rb'

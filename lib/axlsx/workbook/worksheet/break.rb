@@ -16,26 +16,23 @@ module Axlsx
     # @option options [Integer] max Zero-based index of end row or column of the break. For row breaks, specifies column index; for column breaks, specifies row index.
     # @option options [Boolean] man Manual Break flag. 1 means the break is a manually inserted break.
     # @option option [Boolean] pt Flag indicating that a PivotTable created this break.
-    def initialize(worksheet, options={})
-      @worksheet = worksheet
+    def initialize(options={})
       parse_options options
       yield self if block_given?
     end
 
     unsigned_int_attr_accessor :id, :min, :max
-    boolean_attr_accessor :man, :pt
-    serializable_attributes :id, :min, :max, :man, :pt
 
-    attr_reader :worksheet
+    boolean_attr_accessor :man, :pt
+
+    serializable_attributes :id, :min, :max, :man, :pt
 
     # serializes the break to xml
     def to_xml_string(str='')
-      str << '<brk'
+      str << '<brk '
       serialized_attributes str
       str << '></brk>'
     end
-
   end
-
 end
 

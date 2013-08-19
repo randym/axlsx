@@ -167,6 +167,13 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(@ws.workbook.charts.size, 1, "add_chart adds a chart to the workbook")
   end
 
+  def test_add_page_break
+    assert(@ws.row_breaks.empty?)
+    assert(@ws.col_breaks.empty?)
+    @ws.add_page_break(10)
+    assert_equal(@ws.row_breaks.size, 1)
+  end
+
   def test_drawing
     assert @ws.drawing == nil
     @ws.add_chart(Axlsx::Pie3DChart)
@@ -291,6 +298,12 @@ class TestWorksheet < Test::Unit::TestCase
     doc = Nokogiri::XML(@ws.to_xml_string)
     assert_equal(doc.xpath('//xmlns:worksheet/xmlns:mergeCells/xmlns:mergeCell[@ref="A1:D1"]').size, 1)
     assert_equal(doc.xpath('//xmlns:worksheet/xmlns:mergeCells/xmlns:mergeCell[@ref="E1:F1"]').size, 1)
+  end
+
+  def test_to_xml_string_row_breaks
+    @ws.add_page_break(1)
+    doc = Nokogiri::XML(@ws.to_xml_string)
+    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:rowBreaks/xmlns:brk[@id="1"]').size, 1)
   end
 
   def test_to_xml_string_sheet_protection
