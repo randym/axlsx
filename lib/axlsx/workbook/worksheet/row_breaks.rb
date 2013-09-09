@@ -10,7 +10,7 @@ module Axlsx
 
     def add_break(options)
       # force feed the excel default
-      options.merge max: 16383, man: true
+      options.merge :max => 16383, :man => true
       @list << Break.new(options)
       last
     end

@@ -511,9 +511,9 @@ module Axlsx
     # Adds a page break (row break) to the worksheet
     # @param row_index Zero-based row index of the page break.
     def add_page_break(row_index, col_index=0)
-      row_breaks.add_break(id: row_index)
+      row_breaks.add_break(:id => row_index)
       if col_index > 0
-        col_breaks.add_break(id: col_index)
+        col_breaks.add_break(:id => col_index)
       end
     end
 
