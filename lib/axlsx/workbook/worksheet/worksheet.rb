@@ -509,12 +509,21 @@ module Axlsx
     end
 
     # Adds a page break (row break) to the worksheet
-    # @param row_index Zero-based row index of the page break.
-    def add_page_break(row_index, col_index=0)
-      row_breaks.add_break(:id => row_index)
-      if col_index > 0
-        col_breaks.add_break(:id => col_index)
+    # @param cell A Cell object or excel style string reference indicating where the break
+    # should be added to the sheet.
+    # @example
+    #   ws.add_page_break("A4")
+    def add_page_break(cell)
+      DataTypeValidator.validate "Worksheet#add_page_break cell", [String, Cell], cell
+      column_index, row_index = if cell.is_a?(String)
+          Axlsx.name_to_indices(cell)
+        else
+          cell.pos
+        end
+      if column_index > 0
+        col_breaks.add_break(:id => column_index)
       end
+      row_breaks.add_break(:id => row_index)
     end
 
     # This is a helper method that Lets you specify a fixed width for multiple columns in a worksheet in one go.
