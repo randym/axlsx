@@ -22,11 +22,14 @@ module Axlsx
 
     # Serialize the collection to xml
     # @param [String] str The string to append this lists xml to.
+    # <colBreaks count="1" manualBreakCount="1">
+    # <brk id="3" max="1048575" man="1"/>
+    # </colBreaks>
     def to_xml_string(str='')
       return if empty?
-      str << '<colBreaks count="' << @list.size << '" manualBreakCount="' << @list.size << '">'
+      str << '<colBreaks count="' << @list.count.to_s << '" manualBreakCount="' << @list.size.to_s << '">'
       each { |brk| brk.to_xml_string(str) }
-      str << '</rowBreaks>'
+      str << '</colBreaks>'
     end
   end
 end

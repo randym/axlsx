@@ -46,6 +46,8 @@ examples << :streaming
 examples << :shared_strings
 examples << :no_autowidth
 examples << :cached_formula
+examples << :page_breaks
+
 p = Axlsx::Package.new
 wb = p.workbook
 #```
@@ -278,12 +280,11 @@ if examples.include? :images
     img = File.expand_path('../image1.jpeg', __FILE__)
     # specifying the :hyperlink option will add a hyper link to your image.
     # @note - Numbers does not support this part of the specification.
-    sheet.add_image(:image_src => img, :noSelect => true, end_at: true, :noMove => true, :hyperlink=>"http://axlsx.blogspot.com") do |image|
+    sheet.add_image(:image_src => img, :noSelect => true, :noMove => true, :hyperlink=>"http://axlsx.blogspot.com") do |image|
       image.width=720
       image.height=666
       image.hyperlink.tooltip = "Labeled Link"
       image.start_at 2, 2
-      image.end_at 200, 200
     end
   end
 end
@@ -643,6 +644,7 @@ if examples.include? :sheet_view
   end
 end
 
+
 # conditional formatting
 #
 if examples.include? :conditional_formatting
@@ -713,7 +715,17 @@ if examples.include? :conditional_formatting
   end
 end
 
-##Validate and Serialize
+# Page Breaks
+if examples.include? :page_breaks
+  ws = wb.add_worksheet(:name => "page breaks") do |sheet|
+    sheet.add_row ["A"] * 10
+    sheet.add_row ["A"] * 10
+    sheet.add_page_break("A2")
+    sheet.add_page_break(sheet.rows.last.cells[5])
+  end
+end
+
+#Validate and Serialize
 
 #```ruby
 # Serialize directly to file

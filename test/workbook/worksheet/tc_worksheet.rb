@@ -170,7 +170,7 @@ class TestWorksheet < Test::Unit::TestCase
   def test_add_page_break
     assert(@ws.row_breaks.empty?)
     assert(@ws.col_breaks.empty?)
-    @ws.add_page_break(10)
+    @ws.add_page_break("A1")
     assert_equal(1, @ws.row_breaks.size)
     assert_equal(0, @ws.col_breaks.size)
   end
@@ -302,9 +302,9 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   def test_to_xml_string_row_breaks
-    @ws.add_page_break(1)
+  @ws.add_page_break("A1")
     doc = Nokogiri::XML(@ws.to_xml_string)
-    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:rowBreaks/xmlns:brk[@id="1"]').size, 1)
+    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:rowBreaks/xmlns:brk[@id="0"]').size, 1)
   end
 
   def test_to_xml_string_sheet_protection
