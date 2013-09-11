@@ -23,6 +23,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'yard'
   s.add_development_dependency 'kramdown'
   s.add_development_dependency 'timecop', "~> 0.6.1"
-  s.required_ruby_version = '>= 1.8.7'
+  s.required_ruby_version = '>= 1.9.2'
   s.require_path = 'lib'
 end

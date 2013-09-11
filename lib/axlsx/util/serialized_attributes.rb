@@ -47,6 +47,9 @@ module Axlsx
       str
     end
 
+    # A hash of instance variables that have been declared with
+    # seraialized_attributes and are not nil.
+    # This requires ruby 1.9.3 or higher
     def declared_attributes
       instance_values.select do |key, value|
         value != nil && self.class.xml_attributes.include?(key.to_sym)

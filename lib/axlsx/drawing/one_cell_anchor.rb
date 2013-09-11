@@ -48,6 +48,15 @@ module Axlsx
     # @return [Integer]
     attr_reader :height
 
+    # sets the starting position for the anchor.
+    # You can provide a String like "A1", an array like [0,0] or a cell object for the x parameter.
+    # We just 'figure it out' for you.
+    # @param [Array, String, Cell, Integer] x Accepts many inputs for defining the starting position of the cell.
+    # @param [Integer] y When x is an integer, this value is used for the row index at which the anchor starts.
+    def start_at(x, y=0)
+      from.coord x, y
+    end
+    #
     # @see height
     def height=(v) Axlsx::validate_unsigned_int(v); @height = v; end
 
