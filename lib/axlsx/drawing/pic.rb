@@ -144,9 +144,8 @@ module Axlsx
     # @param [Integer] x The column
     # @param [Integer] y The row
     # @return [Marker]
-    def start_at(x, y)
-      @anchor.from.col = x
-      @anchor.from.row = y
+    def start_at(x, y=nil)
+      @anchor.start_at x, y
       @anchor.from
     end
 
@@ -154,10 +153,9 @@ module Axlsx
     # @param [Integer] x The column
     # @param [Integer] y The row
     # @return [Marker]
-    def end_at(x, y)
+    def end_at(x, y=nil)
       use_two_cell_anchor unless @anchor.is_a?(TwoCellAnchor)
-      @anchor.to.col = x
-      @anchor.to.row = y
+      @anchor.end_at x, y
       @anchor.to
     end
 
@@ -185,22 +183,22 @@ module Axlsx
     # Changes the anchor to a one cell anchor.
     def use_one_cell_anchor
       return if @anchor.is_a?(OneCellAnchor)
-      swap_anchor(OneCellAnchor.new(@anchor.drawing, :from => @anchor.from))
+      new_anchor = OneCellAnchor.new(@anchor.drawing, :start_at => [@anchor.from.col, @anchor.from.row])
+      swap_anchor(new_anchor)
     end
 
     #changes the anchor type to a two cell anchor
     def use_two_cell_anchor
       return if @anchor.is_a?(TwoCellAnchor)
-      swap_anchor(TwoCellAnchor.new(@anchor.drawing)).tap do |new_anchor|
-        new_anchor.from.col = @anchor.from.col
-        new_anchor.from.row = @anchor.from.row
-      end
+      new_anchor = TwoCellAnchor.new(@anchor.drawing, :start_at => [@anchor.from.col, @anchor.from.row])
+      swap_anchor(new_anchor)
     end
 
     # refactoring of swapping code, law of demeter be damned!
     def swap_anchor(new_anchor)
       new_anchor.drawing.anchors.delete(new_anchor)
       @anchor.drawing.anchors[@anchor.drawing.anchors.index(@anchor)] = new_anchor
+      new_anchor.instance_variable_set "@object", @anchor.object
       @anchor = new_anchor
     end
   end

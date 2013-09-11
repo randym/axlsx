@@ -43,11 +43,14 @@ module Axlsx
     def rowOff=(v) Axlsx::validate_int v; @rowOff = v end
 
     # shortcut to set the column, row position for this marker
-    # @param col the column for the marker
-    # @param row the row of the marker
-    def coord(col, row)
-      self.col = col
-      self.row = row
+    # @param col the column for the marker, a Cell object or a string reference like "B7"
+    # or an Array.
+    # @param row the row of the marker. This is ignored if the col parameter is a Cell or
+    # String or Array.
+    def coord(col, row=0)
+      coordinates = parse_coord_args(col, row)
+      self.col = coordinates[0]
+      self.row = coordinates[1]
     end
 
     # Serializes the object
@@ -58,6 +61,23 @@ module Axlsx
         str << '<xdr:' << k.to_s << '>' << self.send(k).to_s << '</xdr:' << k.to_s << '>'
       end
     end
+    private
+
+    # handles multiple inputs for setting the position of a marker
+    # @see Chart#start_at
+    def parse_coord_args(x, y=0)
+      if x.is_a?(String)
+        x, y = *Axlsx::name_to_indices(x)
+      end
+      if x.is_a?(Cell)
+        x, y = *x.pos
+      end
+      if x.is_a?(Array)
+        x, y = *x
+      end
+      [x, y]
+    end
+
 
   end
 

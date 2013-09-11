@@ -170,9 +170,9 @@ class TestWorksheet < Test::Unit::TestCase
   def test_add_page_break
     assert(@ws.row_breaks.empty?)
     assert(@ws.col_breaks.empty?)
-    @ws.add_page_break("A1")
+    @ws.add_page_break("B1")
     assert_equal(1, @ws.row_breaks.size)
-    assert_equal(0, @ws.col_breaks.size)
+    assert_equal(1, @ws.col_breaks.size)
   end
 
   def test_drawing

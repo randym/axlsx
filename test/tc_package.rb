@@ -74,6 +74,8 @@ class TestPackage < Test::Unit::TestCase
 
     ws.add_pivot_table 'G5:G6', 'A1:B3'
 
+    ws.add_page_break "B2"
+
   end
 
   def test_use_autowidth

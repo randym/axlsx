@@ -720,8 +720,8 @@ if examples.include? :page_breaks
   ws = wb.add_worksheet(:name => "page breaks") do |sheet|
     sheet.add_row ["A"] * 10
     sheet.add_row ["A"] * 10
-    sheet.add_page_break("A2")
-    sheet.add_page_break(sheet.rows.last.cells[5])
+    sheet.add_page_break("B2")
+    sheet.sheet_view.view = :page_layout # so you can see the breaks!
   end
 end
 

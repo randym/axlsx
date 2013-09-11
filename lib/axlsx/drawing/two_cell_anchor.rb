@@ -5,6 +5,8 @@ module Axlsx
   # @see Worksheet#add_chart
   class TwoCellAnchor
 
+    include Axlsx::OptionsParser
+
     # A marker that defines the from cell anchor. The default from column and row are 0 and 0 respectively
     # @return [Marker]
     attr_reader :from
@@ -34,22 +36,23 @@ module Axlsx
       @drawing = drawing
       drawing.anchors << self
       @from, @to =  Marker.new, Marker.new(:col => 5, :row=>10)
+      parse_options options
     end
 
     # sets the col, row attributes for the from marker.
     # @note The recommended way to set the start position for graphical
     # objects is directly thru the object. 
     # @see Chart#start_at
-    def start_at(x, y)
-      set_marker_coords(x, y, from)
+    def start_at(x, y=nil)
+      from.coord x, y
     end
 
     # sets the col, row attributes for the to marker
     # @note the recommended way to set the to position for graphical
     # objects is directly thru the object
     # @see Char#end_at
-    def end_at(x, y)
-      set_marker_coords(x, y, to) 
+    def end_at(x, y=nil)
+      to.coord x, y
     end
 
     # Creates a graphic frame and chart object associated with this anchor
@@ -85,28 +88,5 @@ module Axlsx
       str << '<xdr:clientData/>'
       str << '</xdr:twoCellAnchor>'
     end
-    private 
-
-    # parses coordinates and sets up a marker's row/col propery
-    def set_marker_coords(x, y, marker)
-      marker.col, marker.row = *parse_coord_args(x, y)
-    end
-
-    # handles multiple inputs for setting the position of a marker
-    # @see Chart#start_at
-    def parse_coord_args(x, y=0)
-      if x.is_a?(String)
-        x, y = *Axlsx::name_to_indices(x)
-      end
-      if x.is_a?(Cell)
-        x, y = *x.pos
-      end
-      if x.is_a?(Array)
-        x, y = *x
-      end
-      [x, y]
-    end
-
-
   end
 end
