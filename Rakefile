@@ -24,11 +24,6 @@ task :test do
      end
 end
 
-task :report do
-  require 'cover_me'
-  CoverMe.complete!
-end
-
 task :release => :build do
   system "gem push axlsx-#{Axlsx::VERSION}.gem"
 end
