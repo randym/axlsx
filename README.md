@@ -242,11 +242,13 @@ p.serialize('simple.xlsx')
 #Thanks!
 
 Open source software is a community effort. None of this could have been
-done without the help of these awesome [contributors] (https://github.com/randym/axlsx/graphs/contributors)
+done without the help of these awesome folks.
+
+[contributors](https://github.com/randym/axlsx/graphs/contributors)
 
 #Copyright and License
 ----------
 
-Axlsx &copy; 2011-2013 by [Randy Morgan](mailto:digial.ipseity@gmail.com). 
+Axlsx &copy; 2011-2013 by [Randy Morgan](mailto:digial.ipseity@gmail.com).
 
 Axlsx is licensed under the MIT license. Please see the LICENSE document for more information.
