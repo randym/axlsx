@@ -96,10 +96,18 @@ module Axlsx
       @pivot_tables ||=  PivotTables.new self
     end
 
+    # A collection of column breaks added to this worksheet
+    # @note Please do not use this directly. Instead use
+    # add_page_break
+    # @see Worksheet#add_page_break
     def col_breaks
       @col_breaks ||= ColBreaks.new
     end
 
+    # A collection of row breaks added to this worksheet
+    # @note Please do not use this directly. Instead use
+    # add_page_break
+    # @see Worksheet#add_page_break
     def row_breaks
       @row_breaks ||= RowBreaks.new
     end

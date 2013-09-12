@@ -44,7 +44,7 @@ module Axlsx
     # @return [Worksheet]
     attr_writer :data_sheet
 
-    # (see #data_sheet)
+    # @see #data_sheet
     def data_sheet
       @data_sheet || @sheet
     end

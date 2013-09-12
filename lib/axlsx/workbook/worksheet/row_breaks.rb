@@ -8,11 +8,16 @@ module Axlsx
       super Break
     end
 
+    # Adds a row break
+    # @param [Hash] options The options for the break to be created.
+    # max and man values are fixed.
+    # @see Break
     def add_break(options)
       # force feed the excel default
       @list << Break.new(options.merge(:max => 16383, :man => true))
       last
     end
+ 
     # <rowBreaks count="3" manualBreakCount="3">
     # <brk id="1" max="16383" man="1"/>
     # <brk id="7" max="16383" man="1"/>
