@@ -9,7 +9,6 @@ module Axlsx
     include Axlsx::SerializedAttributes
 
     # Creates a new Break object
-    # @param worksheet The worksheet that owns this break
     # @param options A hash of attribute options for this break.
     # @option options [Integer] id Zero-based row or column Id of the page break. Breaks occur above the specified row and left of the specified column.
     # @option options [Integer] min Zero-based index of start row or column of the break. For row breaks, specifies column index; for column breaks, specifies row index.
