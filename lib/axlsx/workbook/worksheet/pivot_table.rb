@@ -253,7 +253,7 @@ module Axlsx
         '<pivotField axis="axisCol" compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1">' <<
           '<items count="1"><item t="default"/></items>' <<
         '</pivotField>'
-      elsif data.include? cell_ref
+      elsif data_refs.include? cell_ref
         '<pivotField dataField="1" compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1">' <<
         '</pivotField>'
       else
@@ -261,7 +261,9 @@ module Axlsx
         '</pivotField>'
       end
     end
-
+    def data_refs
+      data.map { |hash| hash[:ref] }
+    end
     def header_range
       range.gsub(/^(\w+?)(\d+)\:(\w+?)\d+$/, '\1\2:\3\2')
     end

@@ -167,13 +167,26 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(@ws.workbook.charts.size, 1, "add_chart adds a chart to the workbook")
   end
 
-  def test_add_page_break
+  def test_add_page_break_with_string_cell_ref
     assert(@ws.row_breaks.empty?)
     assert(@ws.col_breaks.empty?)
     @ws.add_page_break("B1")
     assert_equal(1, @ws.row_breaks.size)
     assert_equal(1, @ws.col_breaks.size)
   end
+
+  def test_add_page_break_with_cell
+    @ws.add_row [1, 2, 3, 4]
+    @ws.add_row [1, 2, 3, 4]
+
+
+    assert(@ws.row_breaks.empty?)
+    assert(@ws.col_breaks.empty?)
+    @ws.add_page_break(@ws.rows.last.cells[1])
+    assert_equal(1, @ws.row_breaks.size)
+    assert_equal(1, @ws.col_breaks.size)
+  end
+
 
   def test_drawing
     assert @ws.drawing == nil
