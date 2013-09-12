@@ -1,5 +1,13 @@
 CHANGELOG
 ---------
+- **November.25.12**:1.3.4
+  - Support for headers and footers for worksheets
+  - bug fix: Properly escape hyperlink urls
+  - Improvements in color_scale generation for conditional formatting
+  - Improvements in autowidth calculation.
+- **November.8.12**:1.3.3
+  - Patched cell run styles for u and validation for family
+
 - **November.5.12**:1.3.2
   - MASSIVE REFACTORING
   - Patch for apostrophes in worksheet names
