@@ -59,6 +59,7 @@ class TestPackage < Test::Unit::TestCase
       image.height=666
       image.hyperlink.tooltip = "Labeled Link"
       image.start_at 5, 5
+      image.end_at 10, 10
     end
     ws.add_image :image_src => File.expand_path('../../examples/image1.gif', __FILE__) do |image|
       image.start_at 0, 20

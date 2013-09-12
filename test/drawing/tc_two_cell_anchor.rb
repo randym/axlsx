@@ -10,9 +10,6 @@ class TestTwoCellAnchor < Test::Unit::TestCase
     @anchor = chart.graphic_frame.anchor
   end
 
-  def teardown
-  end
-
   def test_initialization
     assert(@anchor.from.col == 0)
     assert(@anchor.from.row == 0)
@@ -20,6 +17,9 @@ class TestTwoCellAnchor < Test::Unit::TestCase
     assert(@anchor.to.row == 10)
   end
 
+  def test_index
+    assert_equal(@anchor.index, @anchor.drawing.anchors.index(@anchor))
+  end
 
   def test_options
     assert_raise(ArgumentError, 'invalid start_at') { @ws.add_chart Axlsx::Chart, :start_at=>"1" }
