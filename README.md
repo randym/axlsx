@@ -21,15 +21,15 @@ appreciation for the gem, please don't hesitate to make a donation.
 
 **License**: MIT License
 
-**Latest Version**: 1.3.7
+**Latest Version**: 2.0.0
 
-**Ruby Version**: 1.8.7 (soon to be deprecated!!!), 1.9.2, 1.9.3, 2.0.0
+**Ruby Version**: 1.9.2, 1.9.3, 2.0.0
 
-**JRuby Version**: 1.6.7 1.8 and 1.9 modes
+**JRuby Version**: 1.9 modes
 
 **Rubinius Version**: rubinius 2.0.0dev * lower versions may run, this gem always tests against head.
 
-**Release Date**: June ? 2013
+**Release Date**: September 12th 2013
 
 If you are working in rails, or with active record see:
 [acts_as_xlsx](http://github.com/randym/acts_as_xlsx)
@@ -110,6 +110,9 @@ and Numbers
 
 20. Support for sheet headers and footers
 
+21. Pivot Tables
+
+22. Page Breaks
 
 Installing
 ----------
@@ -147,6 +150,7 @@ There is much, much more you can do with this gem. If you get stuck, grab me on 
 
 #Documentation
 --------------
+
 This gem is 100% documented with YARD, an exceptional documentation library. To see documentation for this, and all the gems installed on your system use:
 
      gem install yard
@@ -155,12 +159,25 @@ This gem is 100% documented with YARD, an exceptional documentation library. To 
 
 #Specs
 ------
+
 This gem has 100% test coverage using test/unit. To execute tests for this gem, simply run rake in the gem directory.
 
 #Change log
 ---------
-- **June.?.13**:1.3.7
-  - Bugfix: transposition of cells for Worksheet#cols now supports 
+
+- **September.12.13**:2.0.0
+  - DROPPED support for ruby 1.8.7
+  - Altered readme to link to contributors
+  - Lots of improvements to make charts and relations more stable.
+  - Patched color param mutation.
+  - Data sourced for pivot tables can now come from other sheets.
+  - Altered image file extension comparisons to be case insensitive.
+  - Added control character sanitization to shared strings.
+  - Added page breaks. see examples/example.rb for an example.
+  - Bugfix: single to dual cell anchors for images now swap properly so you can set the end_at position during instantiation, in a block or directly on the image.
+  - Improved how we convert date/time to include the UTC offset when provided.
+  - Pinned rubyzip to 0.9.9 for those who are not ready to go up. Please note that release 2.0.1 and on will be using the 1.n.n series of rubyzip
+  - Bugfix: transposition of cells for Worksheet#cols now supports
     incongruent column counts.counts
   - Added space preservation for cell text. This will allow whitespace
     in cell text both when using shared strings and when serializing
@@ -185,13 +202,6 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
   - Added support for descrete border edge styles
   - Improved validation of sheet names
   - Added support for formula value caching so that iOS and OSX preview can show the proper values. See Cell.add_row and the formula_values option.
-- **November.25.12**:1.3.4
-  - Support for headers and footers for worksheets
-  - bug fix: Properly escape hyperlink urls
-  - Improvements in color_scale generation for conditional formatting
-  - Improvements in autowidth calculation.
-- **November.8.12**:1.3.3
-  - Patched cell run styles for u and validation for family
 
 Please see the {file:CHANGELOG.md} document for past release information.
 
@@ -232,53 +242,7 @@ p.serialize('simple.xlsx')
 #Thanks!
 
 Open source software is a community effort. None of this could have been
-done without the help of the people below.
-
---------
-[ochko](https://github.com/ochko) - for performance fixes, kicking the crap out of axlsx and helping to maintain my general sanity.
-
-[kleine2](https://github.com/kleine2) - for generously donating in return for the image hyperlink feature.
-
-[ffmike](https://github.com/ffmike) - for knocking down an over restrictive i18n dependency, massive patience and great communication skills.
-
-[JonathanTron](https://github.com/JonathanTron) - for giving the gem some style, and making sure it applies.
-
-[JosephHalter](https://github.com/JosephHalter) - for making sure we arrive at the right time on the right date.
-
-[noniq](https://github.com/noniq) - for keeping true to the gem's style, and making sure what we put on paper does not get marginalized.
-
-[jurriaan](https://github.com/jurriaan) - for showing there is more than one way to skin a cat, and work with rows while you are at it.
-
-[joekain](https://github.com/joekain) - for keeping our references working even in the double digits!
-
-[moskrin](https://github.com/moskrin) - for keeping border creation on the edge.
-
-[scpike](https://github.com/scpike) - for keeping numbers fixed even when they are rational and a super clean implementation of conditional formatting.
-
-[janhuehne](https://github.com/janhuehne) - for working out the decoder ring and adding in cell level validation, and providing a support for window panes.
-
-[rfc2616](https://github.com/rfc2616) - for FINALLY working out the interop issues with google docs.
-
-[straydogstudio](https://github.com/straydogstudio) - For making an AWESOME axlsx templating gem for rails.
-
-[MitchellAJ](https://github.com/MitchellAJ) - For catching a bug in font_size calculations, finding some old code in an example and above all for reporting all of that brilliantly
-
-[ebenoist](https://github.com/ebenoist) - For taking control of control characters and keeping what is between the lines, between the lines.
-
-[adammathys](https://github.com/adammathys) - For getting our head in the
-air and our feet on the ground.
-
-[raiis](https://github.com/raiis) - For letting us specify diffent border styles on any edge.
-
-[alexrothenberg](https://github.com/alexrothenberg) - For an outstanding implementation of PivotTables, one of the last BIG chunks missing from the spec.
-
-[ball-hayden](https://github.com/ball-hayden) - For making sure we only get the right characters in our sheet names.
-
-[nibus](https://github.com/nibus) - For patching sheet name uniqueness.
-
-[scambra](https://github.com/scambra) - For keeping our lines in line!
-
-[agardiner](https://github.com/agardiner) - For the preservation of space. 
+done without the help of these awesome [contributors] (https://github.com/randym/axlsx/graphs/contributors)
 
 #Copyright and License
 ----------
