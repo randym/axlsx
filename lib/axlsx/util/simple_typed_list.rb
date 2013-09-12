@@ -41,8 +41,9 @@ module Axlsx
       row_count = @list.size
       max_column_count = @list.map{|row| row.cells.size}.max
       result = Array.new(max_column_count) { Array.new(row_count) }
-      0..row_count.times do |row_index|
-        0..max_column_count.times do |column_index|
+      # yes, I know it is silly, but that warning is really annoying
+      row_count.times do |row_index|
+         max_column_count.times do |column_index|
           datum = if @list[row_index].cells.size >= max_column_count
                     @list[row_index].cells[column_index]
                   elsif block_given?
