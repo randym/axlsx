@@ -24,6 +24,7 @@ module Axlsx
       @columns = []
       @data = []
       @pages = []
+      @subtotal = nil
       parse_options options
       yield self if block_given?
     end
