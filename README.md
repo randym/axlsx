@@ -164,7 +164,8 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 #Change log
 ---------
-
+- **
+  - Added smoothing for line charts
 - **September.12.13**:2.0.1
   - Unpinned rubyzip version
 - **September.12.13**:2.0.0
