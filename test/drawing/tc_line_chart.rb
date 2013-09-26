@@ -7,7 +7,6 @@ class TestLineChart < Test::Unit::TestCase
     ws = @p.workbook.add_worksheet
     @row = ws.add_row ["one", 1, Time.now]
     @chart = ws.add_chart Axlsx::LineChart, :title => "fishery"
-    @chart.smooth = true
   end
 
   def teardown

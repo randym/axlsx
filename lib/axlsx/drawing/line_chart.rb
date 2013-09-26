@@ -39,8 +39,6 @@ module Axlsx
     # @return [Symbol]
     attr_reader :grouping
 
-    attr_accessor :smooth
-
     # Creates a new line chart object
     # @param [GraphicFrame] frame The workbook that owns this chart.
     # @option options [Cell, String] title
@@ -85,7 +83,6 @@ module Axlsx
         @series.each { |ser| ser.to_xml_string(str_inner) }
         @d_lbls.to_xml_string(str_inner) if @d_lbls
         yield str_inner if block_given?
-        str_inner << '<c:smooth val="1"/>' if smooth
         axes.to_xml_string(str_inner, :ids => true)
         str_inner << "</c:" << node_name << ">"
         axes.to_xml_string(str_inner)

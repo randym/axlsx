@@ -23,12 +23,17 @@ module Axlsx
     # @return [Boolean]
     attr_reader :show_marker
 
+    # line smoothing on values
+    # @return [Boolean]
+    attr_reader :smooth
+
     # Creates a new series
     # @option options [Array, SimpleTypedList] data
     # @option options [Array, SimpleTypedList] labels
     # @param [Chart] chart
     def initialize(chart, options={})
       @show_marker = false
+      @smooth = false
       @labels, @data = nil, nil
       super(chart, options)
       @labels = AxDataSource.new(:data => options[:labels]) unless options[:labels].nil?
@@ -44,6 +49,12 @@ module Axlsx
     def show_marker=(v)
       Axlsx::validate_boolean(v)
       @show_marker = v
+    end
+
+    # @see smooth
+    def smooth=(v)
+      Axlsx::validate_boolean(v)
+      @smooth = v
     end
 
     # Serializes the object
@@ -66,6 +77,7 @@ module Axlsx
         str << '<c:marker><c:symbol val="none"/></c:marker>' unless @show_marker
         @labels.to_xml_string(str) unless @labels.nil?
         @data.to_xml_string(str) unless @data.nil?
+        str << '<c:smooth val="' << ((smooth) ? '1' : '0') << '"/>'
       end
     end
 
