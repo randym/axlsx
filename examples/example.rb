@@ -468,10 +468,9 @@ if examples.include? :line_chart
       chart.valAxis.title = 'Y Axis'
     end
     sheet.add_chart(Axlsx::LineChart, :title => "Simple Line Chart", :rotX => 30, :rotY => 20) do |chart|
-      chart.smooth = true
       chart.start_at 0, 21
       chart.end_at 10, 41
-      chart.add_series :data => sheet["A3:A6"], :title => sheet["A2"], :color => "FF0000"
+      chart.add_series :data => sheet["A3:A6"], :title => sheet["A2"], :color => "FF0000", show_marker => true, :smooth => true
       chart.add_series :data => sheet["B3:B6"], :title => sheet["B2"], :color => "00FF00"
       chart.catAxis.title = 'X Axis'
       chart.valAxis.title = 'Y Axis'

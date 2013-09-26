@@ -6,7 +6,7 @@ class TestLineSeries < Test::Unit::TestCase
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet :name=>"hmmm"
     chart = @ws.add_chart Axlsx::Line3DChart, :title => "fishery"
-    @series = chart.add_series :data=>[0,1,2], :labels=>["zero", "one", "two"], :title=>"bob", :color => "#FF0000", :show_marker => true
+    @series = chart.add_series :data=>[0,1,2], :labels=>["zero", "one", "two"], :title=>"bob", :color => "#FF0000", :show_marker => true, :smooth => true
   end
 
   def test_initialize
@@ -20,11 +20,19 @@ class TestLineSeries < Test::Unit::TestCase
     assert_equal(true, @series.show_marker)
     @series.show_marker = false
     assert_equal(false, @series.show_marker)
-  end  
+  end
+
+  def test_smooth
+    assert_equal(true, @series.smooth)
+    @series.smooth = false
+    assert_equal(false, @series.smooth)
+  end
+
   def test_to_xml_string
     doc = Nokogiri::XML(@series.to_xml_string)
     assert(doc.xpath("//srgbClr[@val='#{@series.color}']"))
     assert(doc.xpath("//marker"))
+    assert(doc.xpath("//smooth"))
   end
   #TODO serialization testing
 end
