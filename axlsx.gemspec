@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
   s.date        = Time.now.strftime('%Y-%m-%d')
   s.summary     = "excel OOXML (xlsx) with charts, styles, images and autowidth columns."
   s.has_rdoc    = 'axlsx'
+  s.license     = 'MIT'
   s.description = <<-eof
     xlsx spreadsheet generation with charts, images, automated column width, customizable styles and full schema validation. Axlsx helps you create beautiful Office Open XML Spreadsheet documents ( Excel, Google Spreadsheets, Numbers, LibreOffice) without having to understand the entire ECMA specification. Check out the README for some examples of how easy it is. Best of all, you can validate your xlsx file before serialization so you know for sure that anything generated is going to load on your client's machine.
   eof

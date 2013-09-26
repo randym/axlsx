@@ -42,16 +42,27 @@ in font name it means none specified. Both of font name and font type can be loc
 ## Workbook info and page numbering
 
 &P - code for "current page #"
+
 &N - code for "total pages"
+
 &D - code for "date"
+
 &T - code for "time"
+
 &G - code for "picture as background" 
+
 &U - code for "text single underline" 
+
 &E - code for "double underline"
+
 &Z - code for "this workbook's file path" 
+
 &F - code for "this workbook's file name"
+
 &A - code for "sheet tab name"
+
 &+ - code for add to page #.
+
 &- - code for subtract from page #. 
 
 &O - code for "outline style"
