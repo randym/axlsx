@@ -118,7 +118,7 @@ class TestPackage < Test::Unit::TestCase
     assert_nothing_raised do
       begin
         @package.serialize(@fname)
-        zf = Zip::File.open(@fname)
+        zf = Zip::ZipFile.open(@fname)
         @package.send(:parts).each{ |part| zf.get_entry(part[:entry]) }
         File.delete(@fname)
       rescue Errno::EACCES
@@ -126,7 +126,7 @@ class TestPackage < Test::Unit::TestCase
       end
     end
   end
-
+  
   # See comment for Package#zip_entry_for_part
   def test_serialization_creates_identical_files_at_any_time_if_created_at_is_set
     @package.core.created = Time.now
@@ -136,9 +136,9 @@ class TestPackage < Test::Unit::TestCase
       assert zip_content_then == zip_content_now, "zip files are not identical"
     end
   end
-
+  
   def test_serialization_creates_identical_files_for_identical_packages
-    package_1, package_2 = 2.times.map do
+    package_1, package_2 = 2.times.map do 
       Axlsx::Package.new(:created_at => Time.utc(2013, 1, 1)).tap do |p|
         p.workbook.add_worksheet(:name => "Basic Worksheet") do |sheet|
           sheet.add_row [1, 2, 3]
