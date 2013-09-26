@@ -40,6 +40,7 @@ class TestWorkbook < Test::Unit::TestCase
     assert_equal('foo', @wb.sheet_by_name('foo').name)
     
   end
+
   def test_date1904
     assert_equal(Axlsx::Workbook.date1904, @wb.date1904)
     @wb.date1904 = :false
@@ -105,6 +106,14 @@ class TestWorkbook < Test::Unit::TestCase
     assert(@wb.worksheets.empty?)
     @wb.to_xml_string
     assert(@wb.worksheets.size == 1)
+  end
+
+  def test_to_xml_sheet_visiblity
+    hidden = @wb.add_worksheet(:name=>'hidden')
+    hidden.state = 'hidden'
+    @wb.add_worksheet(:name=>'default')
+    doc = Nokogiri::XML(@wb.to_xml_string)
+    assert_equal "1", doc.xpath('//xmlns:workbookView').first["activeTab"]
   end
 
   def test_to_xml_string_defined_names
