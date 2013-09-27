@@ -342,6 +342,12 @@ module Axlsx
       @name=Axlsx::coder.encode(name)
     end
 
+    # Controls visiblity of this sheet. Set to "visible", "hidden" or "veryHidden".  Sheets are visible if not specified.
+    attr_accessor :state
+    def visible?
+      !["hidden", "veryHidden"].include?(state)
+    end
+
     # The auto filter range for the worksheet
     # @param [String] v
     # @see auto_filter

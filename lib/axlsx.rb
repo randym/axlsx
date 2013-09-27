@@ -23,7 +23,7 @@ require 'axlsx/workbook/workbook.rb'
 require 'axlsx/package.rb'
 #required gems
 require 'nokogiri'
-require 'zip'
+require 'zip/zip'
 
 #core dependencies
 require 'bigdecimal'
@@ -136,7 +136,7 @@ module Axlsx
     end
 
 
-  # Instructs the serializer to not try to escape cell value input.
+  # Instructs the serializer to not try to escape cell value input. 
   # This will give you a huge speed bonus, but if you content has <, > or other xml character data
   # the workbook will be invalid and excel will complain.
   def self.trust_input

@@ -331,9 +331,17 @@ require 'axlsx/workbook/worksheet/selection.rb'
       str << '<?xml version="1.0" encoding="UTF-8"?>'
       str << '<workbook xmlns="' << XML_NS << '" xmlns:r="' << XML_NS_R << '">'
       str << '<workbookPr date1904="' << @@date1904.to_s << '"/>'
+
+      first_sheet = @worksheets.detect {|sheet| sheet.visible?}
+      active_tab = @worksheets.index(first_sheet)
+      str << '<bookViews><workbookView activeTab="' + active_tab.to_s + '"/></bookViews>' if active_tab
+
       str << '<sheets>'
       @worksheets.each_with_index do |sheet, index|
-        str << '<sheet name="' << sheet.name << '" sheetId="' << (index+1).to_s << '" r:id="' << sheet.rId << '"/>'
+        str << '<sheet name="' << sheet.name << '" sheetId="' << (index+1).to_s << '"'
+        str << ' state="' << sheet.state << '"' if sheet.state
+        str << ' r:id="' << sheet.rId << '"'
+        str << '/>'
         if defined_name = sheet.auto_filter.defined_name
           add_defined_name defined_name, :name => '_xlnm._FilterDatabase', :local_sheet_id => index, :hidden => 1
         end
