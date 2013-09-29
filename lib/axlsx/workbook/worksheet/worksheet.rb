@@ -4,7 +4,7 @@ module Axlsx
   # The Worksheet class represents a worksheet in the workbook.
   class Worksheet
     include Axlsx::OptionsParser
-
+    include Axlsx::SerializedAttributes
     # definition of characters which are less than the maximum width of 0-9 in the default font for use in String#count.
     # This is used for autowidth calculations
     # @return [String]
@@ -24,11 +24,14 @@ module Axlsx
     def initialize(wb, options={})
       self.workbook = wb
       @sheet_protection = nil
-
       initialize_page_options(options)
       parse_options options
       @workbook.worksheets << self
+      @sheet_id = index + 1
+      yield self if block_given?
     end
+
+    serializable_attributes :sheet_id, :name, :state
 
     # Initalizes page margin, setup and print options
     # @param [Hash] options Options passed in from the initializer
@@ -45,6 +48,22 @@ module Axlsx
     # @return [String]
     def name
       @name ||=  "Sheet" + (index+1).to_s
+    end
+
+    # Specifies the visible state of this sheet. Allowed states are
+    # :visible, :hidden or :very_hidden. The default value is :visible.
+    #
+    # Worksheets in the :hidden state can be shown using the sheet formatting properties in excel.
+    # :very_hidden sheets should be inaccessible to end users.
+    # @param [Symbol] sheet_state The visible state for this sheet.
+    def state=(sheet_state)
+      RestrictionValidator.validate "Worksheet#state", [:visible, :hidden, :very_hidden], sheet_state
+      @state = sheet_state
+    end
+
+    # The visibility of this sheet
+    def state
+      @state ||= :visible
     end
 
     # The sheet calculation properties
@@ -142,7 +161,7 @@ module Axlsx
       @rows.transpose(&block)
     end
 
-    # An range that excel will apply an auto-filter to "A1:B3"
+    # A range that excel will apply an auto-filter to "A1:B3"
     # This will turn filtering on for the cells in the range.
     # The first row is considered the header, while subsequent rows are considered to be data.
     # @return String
@@ -348,6 +367,7 @@ module Axlsx
     def auto_filter=(v)
       DataTypeValidator.validate "Worksheet.auto_filter", String, v
       auto_filter.range = v
+      workbook.add_defined_name auto_filter.defined_name, name: '_xlnm.FilterDatabase', local_sheet_id: index, hidden: 1
     end
 
     # Accessor for controlling whether leading and trailing spaces in cells are
@@ -575,6 +595,14 @@ module Axlsx
       offset = options.delete(:col_offset) || 0
       cells = cols[(offset..-1)].map { |column| column[index] }.flatten.compact
       cells.each { |cell| cell.style = style }
+    end
+
+    # Returns a sheet node serialization for this sheet in the workbook.
+    def to_sheet_node_xml_string(str='')
+      str << '<sheet '
+      serialized_attributes str
+      str << "r:id='" << rId << "'"
+      str << '></sheet>'
     end
 
     # Serializes the worksheet object to an xml string
