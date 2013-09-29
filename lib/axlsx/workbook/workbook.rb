@@ -37,7 +37,8 @@ require 'axlsx/workbook/worksheet/worksheet_hyperlinks'
 require 'axlsx/workbook/worksheet/break'
 require 'axlsx/workbook/worksheet/row_breaks'
 require 'axlsx/workbook/worksheet/col_breaks'
-
+require 'axlsx/workbook/workbook_view'
+require 'axlsx/workbook/workbook_views'
 
 
 require 'axlsx/workbook/worksheet/worksheet.rb'
@@ -139,6 +140,10 @@ require 'axlsx/workbook/worksheet/selection.rb'
     # @return [SimpleTypedList]
     attr_reader :pivot_tables
 
+    # A collection of views for this workbook
+    def views
+      @views ||= WorkbookViews.new
+    end
 
     # A collection of defined names for this workbook
     # @note The recommended way to manage defined names is Workbook#add_defined_name
@@ -263,6 +268,10 @@ require 'axlsx/workbook/worksheet/selection.rb'
       worksheet
     end
 
+    def add_view(options={})
+      views << WorkbookView.new(options)
+    end
+
     # Adds a defined name to this workbook
     # @return [DefinedName]
     # @param [String] formula @see DefinedName
@@ -327,17 +336,13 @@ require 'axlsx/workbook/worksheet/selection.rb'
     # @param [String] str
     # @return [String]
     def to_xml_string(str='')
-      add_worksheet unless worksheets.size > 0
+      add_worksheet(name: 'Sheet1') unless worksheets.size > 0
       str << '<?xml version="1.0" encoding="UTF-8"?>'
       str << '<workbook xmlns="' << XML_NS << '" xmlns:r="' << XML_NS_R << '">'
       str << '<workbookPr date1904="' << @@date1904.to_s << '"/>'
+      views.to_xml_string(str)
       str << '<sheets>'
-      @worksheets.each_with_index do |sheet, index|
-        str << '<sheet name="' << sheet.name << '" sheetId="' << (index+1).to_s << '" r:id="' << sheet.rId << '"/>'
-        if defined_name = sheet.auto_filter.defined_name
-          add_defined_name defined_name, :name => '_xlnm._FilterDatabase', :local_sheet_id => index, :hidden => 1
-        end
-      end
+      worksheets.each { |sheet| sheet.to_sheet_node_xml_string(str) }
       str << '</sheets>'
       defined_names.to_xml_string(str)
       unless pivot_tables.empty?

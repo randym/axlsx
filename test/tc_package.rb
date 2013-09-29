@@ -11,6 +11,7 @@ class TestPackage < Test::Unit::TestCase
     ws.outline_level_columns 0, 1
     ws.add_hyperlink :ref => ws.rows.first.cells.last, :location => 'https://github.com/randym'
     ws.workbook.add_defined_name("#{ws.name}!A1:C2", :name => '_xlnm.Print_Titles', :hidden => true)
+    ws.workbook.add_view active_tab: 1, first_sheet: 0
     ws.protect_range('A1:C1')
     ws.protect_range(ws.rows.last.cells)
     ws.add_comment :author => 'alice', :text => 'Hi Bob', :ref => 'A12'

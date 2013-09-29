@@ -73,6 +73,15 @@ class TestWorksheet < Test::Unit::TestCase
     end
   end
 
+  def test_state
+    assert_equal(:visible, @ws.state)
+  end
+
+  def test_state_validation
+    assert_raise(ArgumentError) { @ws.state = :dead }
+    assert_nothing_raised { @ws.state = :very_hidden }
+  end
+
   def test_no_autowidth
     @ws.workbook.use_autowidth = false
     @ws.add_row [1,2,3,4]
