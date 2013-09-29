@@ -40,14 +40,15 @@ examples << :printing
 examples << :header_footer
 examples << :comments
 examples << :panes
+examples << :book_view
 examples << :sheet_view
+examples << :hiding_sheets
 examples << :conditional_formatting
 examples << :streaming
 examples << :shared_strings
 examples << :no_autowidth
 examples << :cached_formula
 examples << :page_breaks
-
 p = Axlsx::Package.new
 wb = p.workbook
 #```
@@ -644,7 +645,27 @@ if examples.include? :sheet_view
   end
 end
 
+## Book Views
+#
+## Book views let you specify which sheet the show as active when the user opens the work book as well as a bunch of other 
+## tuning values for the UI @see Axlsx::WorkbookView
+## ```ruby
+if examples.include? :book_view
+  # when you open example.xml the second sheet is selected, and the horizontal scroll bar is much smaller showing more sheets
+  wb.add_view tab_ratio: 800, active_tab: 1
+end
 
+## Hiding Sheets
+##
+## Sheets can be hidden with the state attribute
+if examples.include? :hiding_sheets
+  wb.add_worksheet name: 'hidden', state: :hidden do |sheet|
+    sheet.add_row ['you cant see me!']
+  end
+  wb.add_worksheet name: 'very hidden', state: :very_hidden do |sheet|
+    sheet.add_row ['you really cant see me!']
+  end
+end
 # conditional formatting
 #
 if examples.include? :conditional_formatting

@@ -297,4 +297,10 @@ module Axlsx
   def self.validate_display_blanks_as(v)
     RestrictionValidator.validate :display_blanks_as, [:gap, :span, :zero], v
   end
+
+  # Requires that the value is one of :visible, :hidden, :very_hidden
+  def self.validate_view_visibility(v)
+    RestrictionValidator.validate :visibility, [:visible, :hidden, :very_hidden], v
+  end
+
 end

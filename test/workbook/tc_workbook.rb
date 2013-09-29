@@ -53,6 +53,11 @@ class TestWorkbook < Test::Unit::TestCase
     assert_equal(1, @wb.defined_names.size)
   end
 
+  def test_add_view
+    @wb.add_view visibility: :hidden, window_width: 800
+    assert_equal(1, @wb.views.size)
+  end
+
   def test_shared_strings
     assert_equal(@wb.use_shared_strings, nil)
     assert_raise(ArgumentError) {@wb.use_shared_strings = 'bpb'}
@@ -114,6 +119,15 @@ class TestWorkbook < Test::Unit::TestCase
     end
     doc = Nokogiri::XML(@wb.to_xml_string)
     assert_equal(doc.xpath('//xmlns:workbook/xmlns:definedNames/xmlns:definedName').inner_text, @wb.worksheets[0].auto_filter.defined_name)
+  end
+
+  def test_to_xml_string_book_views
+    @wb.add_worksheet do |sheet|
+      sheet.add_row [1, "two"]
+    end
+    @wb.add_view active_tab: 0, first_sheet: 0
+    doc = Nokogiri::XML(@wb.to_xml_string)
+    assert_equal(1, doc.xpath('//xmlns:workbook/xmlns:bookViews/xmlns:workbookView[@activeTab=0]').size)
   end
 
   def test_to_xml_uses_correct_rIds_for_pivotCache
