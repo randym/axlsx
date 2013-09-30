@@ -165,7 +165,9 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 #Change log
 ---------
 - **
-  - Added smoothing for line charts
+  - Added Cell#name so you you can quickly create a defined name for a single cell in your workbook.
+  - Added full book view and sheet state management. This means you can specify how the workbook renders as well as manage sheet visibility.
+  - Added smoothing management for line charts series
 - **September.12.13**:2.0.1
   - Unpinned rubyzip version
 - **September.12.13**:2.0.0

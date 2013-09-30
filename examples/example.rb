@@ -280,13 +280,23 @@ if examples.include? :images
   wb.add_worksheet(:name => "Image with Hyperlink") do |sheet|
     img = File.expand_path('../image1.jpeg', __FILE__)
     # specifying the :hyperlink option will add a hyper link to your image.
+    #
     # @note - Numbers does not support this part of the specification.
+
     sheet.add_image(:image_src => img, :noSelect => true, :noMove => true, :hyperlink=>"http://axlsx.blogspot.com") do |image|
       image.width=720
       image.height=666
       image.hyperlink.tooltip = "Labeled Link"
-      image.start_at 2, 2
+      image.start_at 0, 0
     end
+
+    # position in block
+    sheet.add_image(:image_src => img, :noSelect => true, :noMove => true, :hyperlink=>"http://axlsx.blogspot.com") do |image|
+      image.start_at 22, 14
+      image.end_at 23, 17
+    end
+    # all in one go
+    sheet.add_image(:image_src => img, :start_at => [15, 33], :end_at => [20, 37], :noSelect => true, :noMove => true, :hyperlink=>"http://axlsx.blogspot.com")
   end
 end
 #```
