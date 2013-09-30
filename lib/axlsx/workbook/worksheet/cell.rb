@@ -326,6 +326,18 @@ module Axlsx
       absolute ? r_abs : r
     end
 
+
+    # Creates a defined name in the workbook for this cell.
+    def name=(label)
+      row.worksheet.workbook.add_defined_name "#{row.worksheet.name}!#{r_abs}", name: label
+      @name = label
+    end
+
+    # returns the name of the cell
+    def name
+      @name
+    end
+
     private
 
     # we scale the font size if bold style is applied to either the style font or
