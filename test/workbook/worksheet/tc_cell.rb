@@ -50,6 +50,12 @@ class TestCell < Test::Unit::TestCase
     assert_equal(@cAA.r_abs,"$AA$2", "needs to accept multi-digit columns")
   end
 
+  def test_name
+    @c.name = 'foo'
+    assert_equal(1, @ws.workbook.defined_names.size)
+    assert_equal('foo', @ws.workbook.defined_names.last.name)
+  end
+
   def test_style
     assert_raise(ArgumentError, "must reject invalid style indexes") { @c.style=@c.row.worksheet.workbook.styles.cellXfs.size }
     assert_nothing_raised("must allow valid style index changes") {@c.style=1}
