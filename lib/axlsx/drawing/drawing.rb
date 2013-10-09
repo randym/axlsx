@@ -8,6 +8,7 @@ module Axlsx
   require 'axlsx/drawing/bar_series.rb'
   require 'axlsx/drawing/line_series.rb'
   require 'axlsx/drawing/scatter_series.rb'
+  require 'axlsx/drawing/bubble_series.rb'
 
   require 'axlsx/drawing/scaling.rb'
   require 'axlsx/drawing/axis.rb'
@@ -37,6 +38,7 @@ module Axlsx
   require 'axlsx/drawing/line_chart.rb'
   require 'axlsx/drawing/line_3D_chart.rb'
   require 'axlsx/drawing/scatter_chart.rb'
+  require 'axlsx/drawing/bubble_chart.rb'
 
   require 'axlsx/drawing/picture_locking.rb'
   require 'axlsx/drawing/pic.rb'
