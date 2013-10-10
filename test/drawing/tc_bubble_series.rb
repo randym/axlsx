@@ -15,7 +15,7 @@ class TestBubbleSeries < Test::Unit::TestCase
 
   def test_to_xml_string
     doc = Nokogiri::XML(@chart.to_xml_string)
-    assert_equal(doc.xpath("//a:srgbClr[@val='#{@series.color}']").size,4)
+    assert_equal(doc.xpath("//a:srgbClr[@val='#{@series.color}']").size,2)
   end
 
 end

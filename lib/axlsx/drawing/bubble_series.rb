@@ -52,14 +52,6 @@ module Axlsx
           str << '<a:ln><a:solidFill>'
           str << '<a:srgbClr val="' << color << '"/></a:solidFill></a:ln>'
           str << '</c:spPr>'
-          str << '<c:marker>'
-          str << '<c:spPr><a:solidFill>'
-          str << '<a:srgbClr val="' << color << '"/>'
-          str << '</a:solidFill>'
-          str << '<a:ln><a:solidFill>'
-          str << '<a:srgbClr val="' << color << '"/></a:solidFill></a:ln>'
-          str << '</c:spPr>'
-          str << '</c:marker>'
         end
         @xData.to_xml_string(inner_str) unless @xData.nil?
         @yData.to_xml_string(inner_str) unless @yData.nil?
