@@ -33,7 +33,7 @@ module Axlsx
     # allowed element tag names
     # @return [Array]
     def self.allowed_tag_names
-      [:yVal, :val]
+      [:yVal, :val, :bubbleSize]
     end
 
      # sets the tag name for this data source

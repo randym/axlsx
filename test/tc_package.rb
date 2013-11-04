@@ -53,6 +53,11 @@ class TestPackage < Test::Unit::TestCase
       chart.d_lbls.show_val = true
     end
 
+    ws.add_chart(Axlsx::BubbleChart, :title => 'bubble chart') do |chart|
+      chart.add_series :xData => [1,2,3,4], :yData => [4,3,2,1], :yData => [1,3,2,4]
+      chart.d_lbls.show_val = true
+    end
+
     @fname = 'axlsx_test_serialization.xlsx'
     img = File.expand_path('../../examples/image1.jpeg', __FILE__)
     ws.add_image(:image_src => img, :noSelect => true, :noMove => true, :hyperlink=>"http://axlsx.blogspot.com") do |image|
@@ -177,7 +182,7 @@ class TestPackage < Test::Unit::TestCase
 
 
     #no mystery parts
-    assert_equal(24, p.size)
+    assert_equal(25, p.size)
 
   end
 
