@@ -177,9 +177,9 @@ module Axlsx
       str << '<c:showDLblsOverMax val="1"/>'
       str << '</c:chart>'
       str << '<c:printSettings>'
-      str << '<c:headerFooter/>'
+#      str << '<c:headerFooter/>'
       str << '<c:pageMargins b="1.0" l="0.75" r="0.75" t="1.0" header="0.5" footer="0.5"/>'
-      str << '<c:pageSetup/>'
+#      str << '<c:pageSetup/>'
       str << '</c:printSettings>'
       str << '</c:chartSpace>'
     end
