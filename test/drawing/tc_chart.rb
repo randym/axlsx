@@ -28,8 +28,8 @@ class TestChart < Test::Unit::TestCase
   end
 
   def test_hidden_title
-    # das ist der code, der Fehlen soll
-    # <a:t>fishery</a:t>
+    # this code must be missing
+    # <c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:t>fishery</a:t></a:r></a:p></c:rich></c:tx>
     @chart.show_title = false
     doc = Nokogiri::XML(@chart.to_xml_string)
     assert_equal(0, doc.xpath('//a:t[text()="fishery"]').size)
