@@ -20,6 +20,7 @@ module Axlsx
       @graphic_frame.anchor.drawing.worksheet.workbook.charts << self
       @series = SimpleTypedList.new Series
       @show_legend = true
+      @show_title = true
       @display_blanks_as = :gap
       @series_type = Series
       @title = Title.new
@@ -71,6 +72,10 @@ module Axlsx
     # @return [Boolean]
     attr_reader :show_legend
 
+    # Show the title in the chart
+    # @return [Boolean]
+    attr_reader :show_title
+
     # How to display blank values
     # Options are
     # * gap:  Display nothing
@@ -115,6 +120,12 @@ module Axlsx
     # @return [Boolean]
     def show_legend=(v) Axlsx::validate_boolean(v); @show_legend = v; end
 
+    # Show the title in the chart
+    # @param [Boolean] v
+    # @return [Boolean]
+    def show_title=(v) Axlsx::validate_boolean(v); @show_title = v; end
+
+
     # How to display blank values
     # @see display_blanks_as
     # @param [Symbol] v
@@ -146,6 +157,8 @@ module Axlsx
       @series.last
     end
 
+
+
     # Serializes the object
     # @param [String] str
     # @return [String]
@@ -155,7 +168,9 @@ module Axlsx
       str << '<c:date1904 val="' << Axlsx::Workbook.date1904.to_s << '"/>'
       str << '<c:style val="' << style.to_s << '"/>'
       str << '<c:chart>'
-      @title.to_xml_string str
+      if @show_title
+        @title.to_xml_string str
+      end
       str << '<c:autoTitleDeleted val="' << (@title == nil).to_s << '"/>'
       @view_3D.to_xml_string(str) if @view_3D
       str << '<c:floor><c:thickness val="0"/></c:floor>'

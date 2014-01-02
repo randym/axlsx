@@ -27,6 +27,14 @@ class TestChart < Test::Unit::TestCase
     assert_equal(@chart.title.cell, @row.cells.first)
   end
 
+  def test_hidden_title
+    # das ist der code, der Fehlen soll
+    # <a:t>fishery</a:t>
+    @chart.show_title = false
+    doc = Nokogiri::XML(@chart.to_xml_string)
+    assert_equal(0, doc.xpath('//a:t[text()="fishery"]').size)
+  end
+
   def test_to_from_marker_access
     assert(@chart.to.is_a?(Axlsx::Marker))
     assert(@chart.from.is_a?(Axlsx::Marker))
@@ -37,7 +45,7 @@ class TestChart < Test::Unit::TestCase
     assert_nothing_raised { @chart.style = 2 }
     assert_equal(@chart.style, 2)
   end
-  
+
   def test_vary_colors
     assert_equal(true, @chart.vary_colors)
     assert_raise(ArgumentError) { @chart.vary_colors = 7 }
