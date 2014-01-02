@@ -10,7 +10,7 @@ rvm:
   - 1.9.2
   - 1.9.3
   - 2.0.0
-  - rbx-19mode
+  - rbx
   - jruby-19mode
   - ruby-head
   - jruby-head
