@@ -151,7 +151,7 @@ module Axlsx
     #   ws = p.workbook.add_worksheet
     #
     #   # black text on a white background at 14pt with thin borders!
-    #   title = ws.style.add_style(:bg_color => "FFFF0000", :fg_color=>"#FF000000", :sz=>14,  :border=> {:style => :thin, :color => "FFFF0000"}
+    #   title = ws.styles.add_style(:bg_color => "FFFF0000", :fg_color=>"#FF000000", :sz=>14,  :border=> {:style => :thin, :color => "FFFF0000"}
     #
     #   ws.add_row ["Least Popular Pets"]
     #   ws.add_row ["", "Dry Skinned Reptiles", "Bald Cats", "Violent Parrots"], :style=>title
@@ -168,18 +168,18 @@ module Axlsx
     #   ws = p.workbook.add_worksheet
     #
     #   # define your styles
-    #   title = ws.style.add_style(:bg_color => "FFFF0000",
+    #   title = ws.styles.add_style(:bg_color => "FFFF0000",
     #                              :fg_color=>"#FF000000",
     #                              :border=>Axlsx::STYLE_THIN_BORDER,
     #                              :alignment=>{:horizontal => :center})
     #
-    #   date_time = ws.style.add_style(:num_fmt => Axlsx::NUM_FMT_YYYYMMDDHHMMSS,
+    #   date_time = ws.styles.add_style(:num_fmt => Axlsx::NUM_FMT_YYYYMMDDHHMMSS,
     #                                  :border=>Axlsx::STYLE_THIN_BORDER)
     #
-    #   percent = ws.style.add_style(:num_fmt => Axlsx::NUM_FMT_PERCENT,
+    #   percent = ws.styles.add_style(:num_fmt => Axlsx::NUM_FMT_PERCENT,
     #                                :border=>Axlsx::STYLE_THIN_BORDER)
     #
-    #   currency = ws.style.add_style(:format_code=>"¥#,##0;[Red]¥-#,##0",
+    #   currency = ws.styles.add_style(:format_code=>"¥#,##0;[Red]¥-#,##0",
     #                                 :border=>Axlsx::STYLE_THIN_BORDER)
     #
     #   # build your rows
