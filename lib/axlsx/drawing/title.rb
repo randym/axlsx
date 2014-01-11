@@ -43,8 +43,8 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      str << '<c:title>'
       unless @text.empty?
+        str << '<c:title>'
         str << '<c:tx>'
         if @cell.is_a?(Cell)
           str << '<c:strRef>'
@@ -68,11 +68,10 @@ module Axlsx
           str << '</c:rich>'
         end
         str << '</c:tx>'
-      end
       str << '<c:layout/>'
       str << '<c:overlay val="0"/>'
       str << '</c:title>'
+      end
     end
-
   end
 end

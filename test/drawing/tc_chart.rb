@@ -6,13 +6,14 @@ class TestChart < Test::Unit::TestCase
     @p = Axlsx::Package.new
     ws = @p.workbook.add_worksheet
     @row = ws.add_row ["one", 1, Time.now]
-    @chart = ws.add_chart Axlsx::Bar3DChart, :title => "fishery"
+    @chart = ws.add_chart Axlsx::Bar3DChart
   end
 
   def teardown
   end
 
   def test_initialization
+    @chart.title = 'fishery'
     assert_equal(@p.workbook.charts.last,@chart, "the chart is in the workbook")
     assert_equal(@chart.title.text, "fishery", "the title option has been applied")
     assert((@chart.series.is_a?(Axlsx::SimpleTypedList) && @chart.series.empty?), "The series is initialized and empty")
@@ -30,9 +31,8 @@ class TestChart < Test::Unit::TestCase
   def test_hidden_title
     # this code must be missing
     # <c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:t>fishery</a:t></a:r></a:p></c:rich></c:tx>
-    @chart.show_title = false
     doc = Nokogiri::XML(@chart.to_xml_string)
-    assert_equal(0, doc.xpath('//a:t[text()="fishery"]').size)
+    assert_equal(0, doc.xpath('//a:t').size)
   end
 
   def test_to_from_marker_access
