@@ -16,6 +16,10 @@ module Axlsx
     # @return [SeriesTitle]
     attr_reader :title
 
+    # The String of rgb color to apply to chart legend
+    # @return [String]
+    attr_reader :legend_color
+
     # Creates a new series
     # @param [Chart] chart
     # @option options [Integer] order
@@ -63,6 +67,14 @@ module Axlsx
       str << '<c:order val="' << (order || index).to_s << '"/>'
       title.to_xml_string(str) unless title.nil?
       yield str if block_given?
+      #set color at legend
+     if @legend_color
+        str << '<c:spPr>'
+        str << '<a:solidFill>'
+        str << '<a:srgbClr val="'<< legend_color.to_s << '"/>'
+        str << '</a:solidFill>'
+        str << '</c:spPr>'
+      end
       str << '</c:ser>'
     end
   end
