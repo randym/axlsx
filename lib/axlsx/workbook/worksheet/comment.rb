@@ -24,10 +24,9 @@ module Axlsx
     string_attr_accessor :text, :author
     boolean_attr_accessor :visible
 
-      # The owning Comments object
+    # The owning Comments object
     # @return [Comments]
     attr_reader :comments
-
 
     # The string based cell position reference (e.g. 'A1') that determines the positioning of this comment
     # @return [String|Cell]
@@ -53,7 +52,7 @@ module Axlsx
 
     # @see ref
     def ref=(v)
-      Axlsx::DataTypeValidator.validate "Comment.ref", [String, Cell], v
+      Axlsx::DataTypeValidator.validate :comment_ref, [String, Cell], v
       @ref = v if v.is_a?(String)
       @ref = v.r if v.is_a?(Cell)
     end
@@ -63,15 +62,15 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = "")
       author = @comments.authors[author_index]
-      str << '<comment ref="' << ref << '" authorId="' << author_index.to_s << '">'
+      str << ('<comment ref="' << ref << '" authorId="' << author_index.to_s << '">')
       str << '<text>'
       unless author.to_s == ""
         str << '<r><rPr><b/><color indexed="81"/></rPr>'
-        str << "<t>" << ::CGI.escapeHTML(author.to_s) << ":\n</t></r>"
+        str << ("<t>" << ::CGI.escapeHTML(author.to_s) << ":\n</t></r>")
       end
       str << '<r>'
       str << '<rPr><color indexed="81"/></rPr>'
-      str << '<t>' << ::CGI.escapeHTML(text) << '</t></r></text>'
+      str << ('<t>' << ::CGI.escapeHTML(text) << '</t></r></text>')
       str << '</comment>'
     end
 

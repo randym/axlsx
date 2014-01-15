@@ -60,8 +60,8 @@ module Axlsx
       # @param [String] str
       # @return [String]
       def to_xml_string(str = '')
-        super(str) do |str_inner|
-          str_inner << '<c:gapDepth val="' << @gap_depth.to_s << '"/>' unless @gap_depth.nil?
+        super(str) do
+          str << ('<c:gapDepth val="' << @gap_depth.to_s << '"/>') unless @gap_depth.nil?
         end
       end
   end

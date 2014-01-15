@@ -23,7 +23,7 @@ module Axlsx
     def to_xml_string(str = "")
       return if empty?
       str << "<tableParts count='#{size}'>"
-      @list.each { |table| str << "<tablePart r:id='#{table.rId}'/>" }
+      each { |table| str << "<tablePart r:id='#{table.rId}'/>" }
       str << '</tableParts>'
     end
   end

@@ -140,7 +140,7 @@ module Axlsx
     def to_xml_string(str = '')
       str << '<font>'
       instance_values.each do |k, v|
-        v.is_a?(Color) ? v.to_xml_string(str) : (str << '<' << k.to_s << ' val="' << v.to_s << '"/>')
+        v.is_a?(Color) ? v.to_xml_string(str) : (str << ('<' << k.to_s << ' val="' << v.to_s << '"/>'))
       end
       str << '</font>'
     end

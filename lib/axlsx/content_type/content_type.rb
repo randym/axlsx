@@ -16,7 +16,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       str << '<?xml version="1.0" encoding="UTF-8"?>'
-      str << '<Types xmlns="' << XML_NS_T << '">'
+      str << ('<Types xmlns="' << XML_NS_T << '">')
       each { |type| type.to_xml_string(str) }
       str << '</Types>'
     end

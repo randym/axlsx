@@ -38,26 +38,26 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      super(str) do |inner_str|
+      super(str) do
         # needs to override the super color here to push in ln/and something else!
         if color
           str << '<c:spPr><a:solidFill>'
-          str << '<a:srgbClr val="' << color << '"/>'
+          str << ('<a:srgbClr val="' << color << '"/>')
           str << '</a:solidFill>'
           str << '<a:ln><a:solidFill>'
-          str << '<a:srgbClr val="' << color << '"/></a:solidFill></a:ln>'
+          str << ('<a:srgbClr val="' << color << '"/></a:solidFill></a:ln>')
           str << '</c:spPr>'
           str << '<c:marker>'
           str << '<c:spPr><a:solidFill>'
-          str << '<a:srgbClr val="' << color << '"/>'
+          str << ('<a:srgbClr val="' << color << '"/>')
           str << '</a:solidFill>'
           str << '<a:ln><a:solidFill>'
-          str << '<a:srgbClr val="' << color << '"/></a:solidFill></a:ln>'
+          str << ('<a:srgbClr val="' << color << '"/></a:solidFill></a:ln>')
           str << '</c:spPr>'
           str << '</c:marker>'
         end
-        @xData.to_xml_string(inner_str) unless @xData.nil?
-        @yData.to_xml_string(inner_str) unless @yData.nil?
+        @xData.to_xml_string(str) unless @xData.nil?
+        @yData.to_xml_string(str) unless @yData.nil?
       end
       str
     end

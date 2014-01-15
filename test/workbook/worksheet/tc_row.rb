@@ -29,7 +29,7 @@ class TestRow < Test::Unit::TestCase
 
 
   def test_index
-    assert_equal(@row.index, @row.worksheet.rows.index(@row))
+    assert_equal(@row.row_index, @row.worksheet.rows.index(@row))
   end
 
   def test_add_cell

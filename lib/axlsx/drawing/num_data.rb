@@ -38,13 +38,13 @@ module Axlsx
 
     # serialize the object
     def to_xml_string(str = "")
-      str << '<c:' << @tag_name.to_s << '>'
-      str << '<c:formatCode>' << format_code.to_s << '</c:formatCode>'
-      str << '<c:ptCount val="' << @pt.size.to_s << '"/>'
+      str << ('<c:' << @tag_name.to_s << '>')
+      str << ('<c:formatCode>' << format_code.to_s << '</c:formatCode>')
+      str << ('<c:ptCount val="' << @pt.size.to_s << '"/>')
       @pt.each_with_index do |num_val, index|
         num_val.to_xml_string index, str
       end
-      str << '</c:' << @tag_name.to_s << '>'
+      str << ('</c:' << @tag_name.to_s << '>')
     end
 
   end

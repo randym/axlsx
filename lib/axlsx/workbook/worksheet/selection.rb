@@ -95,9 +95,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      str << '<selection '
-      serialized_attributes str
-      str << '/>'
+      serialized_tag 'selection', str
     end
   end
 end

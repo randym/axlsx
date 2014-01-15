@@ -125,19 +125,19 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      super(str) do |str_inner|
-        str_inner << '<c:bar3DChart>'
-        str_inner << '<c:barDir val="' << bar_dir.to_s << '"/>'
-        str_inner << '<c:grouping val="' << grouping.to_s << '"/>'
-        str_inner << '<c:varyColors val="' << vary_colors.to_s << '"/>'
-        @series.each { |ser| ser.to_xml_string(str_inner) }
-        @d_lbls.to_xml_string(str_inner) if @d_lbls
-        str_inner << '<c:gapWidth val="' << @gap_width.to_s << '"/>' unless @gap_width.nil?
-        str_inner << '<c:gapDepth val="' << @gap_depth.to_s << '"/>' unless @gap_depth.nil?
-        str_inner << '<c:shape val="' << @shape.to_s << '"/>' unless @shape.nil?
-        axes.to_xml_string(str_inner, :ids => true)
-        str_inner << '</c:bar3DChart>'
-        axes.to_xml_string(str_inner)
+      super(str) do
+        str << '<c:bar3DChart>'
+        str << ('<c:barDir val="' << bar_dir.to_s << '"/>')
+        str << ('<c:grouping val="' << grouping.to_s << '"/>')
+        str << ('<c:varyColors val="' << vary_colors.to_s << '"/>')
+        @series.each { |ser| ser.to_xml_string(str) }
+        @d_lbls.to_xml_string(str) if @d_lbls
+        str << ('<c:gapWidth val="' << @gap_width.to_s << '"/>') unless @gap_width.nil?
+        str << ('<c:gapDepth val="' << @gap_depth.to_s << '"/>') unless @gap_depth.nil?
+        str << ('<c:shape val="' << @shape.to_s << '"/>') unless @shape.nil?
+        axes.to_xml_string(str, :ids => true)
+        str << '</c:bar3DChart>'
+        axes.to_xml_string(str)
       end
     end
 

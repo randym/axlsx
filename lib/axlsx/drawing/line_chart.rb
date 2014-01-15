@@ -76,16 +76,16 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      super(str) do |str_inner|
-        str_inner << "<c:" << node_name << ">"
-        str_inner << '<c:grouping val="' << grouping.to_s << '"/>'
-        str_inner << '<c:varyColors val="' << vary_colors.to_s << '"/>'
-        @series.each { |ser| ser.to_xml_string(str_inner) }
-        @d_lbls.to_xml_string(str_inner) if @d_lbls
-        yield str_inner if block_given?
-        axes.to_xml_string(str_inner, :ids => true)
-        str_inner << "</c:" << node_name << ">"
-        axes.to_xml_string(str_inner)
+      super(str) do
+        str << ("<c:" << node_name << ">")
+        str << ('<c:grouping val="' << grouping.to_s << '"/>')
+        str << ('<c:varyColors val="' << vary_colors.to_s << '"/>')
+        @series.each { |ser| ser.to_xml_string(str) }
+        @d_lbls.to_xml_string(str) if @d_lbls
+        yield if block_given?
+        axes.to_xml_string(str, :ids => true)
+        str << ("</c:" << node_name << ">")
+        axes.to_xml_string(str)
       end
     end
 

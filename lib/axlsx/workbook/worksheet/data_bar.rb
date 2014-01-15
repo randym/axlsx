@@ -107,12 +107,10 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str="")
-      str << '<dataBar '
-      serialized_attributes str
-      str << '>'
-      value_objects.to_xml_string(str)
-      self.color.to_xml_string(str)
-      str << '</dataBar>'
+      serialized_tag('dataBar', str) do
+        value_objects.to_xml_string(str)
+        self.color.to_xml_string(str)
+      end
     end
 
     private

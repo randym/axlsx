@@ -15,8 +15,8 @@ module Axlsx
     # @see WorksheetHyperlink#initialize
     # @return [WorksheetHyperlink]
     def add(options)
-      @list << WorksheetHyperlink.new(@worksheet, options)
-      @list.last
+      self << WorksheetHyperlink.new(@worksheet, options)
+      last
     end
 
     # The relationships required by this collection's hyperlinks
@@ -31,7 +31,7 @@ module Axlsx
     def to_xml_string(str='')
       return if empty?
       str << '<hyperlinks>'
-      @list.each { |hyperlink| hyperlink.to_xml_string(str) }
+      each { |hyperlink| hyperlink.to_xml_string(str) }
       str << '</hyperlinks>'
     end
   end

@@ -48,11 +48,11 @@ module Axlsx
         str << '<c:tx>'
         if @cell.is_a?(Cell)
           str << '<c:strRef>'
-          str << '<c:f>' << Axlsx::cell_range([@cell]) << '</c:f>'
+          str << ('<c:f>' << Axlsx::cell_range([@cell]) << '</c:f>')
           str << '<c:strCache>'
           str << '<c:ptCount val="1"/>'
           str << '<c:pt idx="0">'
-          str << '<c:v>' << @text << '</c:v>'
+          str << ('<c:v>' << @text << '</c:v>')
           str << '</c:pt>'
           str << '</c:strCache>'
           str << '</c:strRef>'
@@ -62,7 +62,7 @@ module Axlsx
             str << '<a:lstStyle/>'
             str << '<a:p>'
               str << '<a:r>'
-                str << '<a:t>' << @text.to_s << '</a:t>'
+                str << ('<a:t>' << @text.to_s << '</a:t>')
               str << '</a:r>'
             str << '</a:p>'
           str << '</c:rich>'

@@ -70,9 +70,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '', tag_name = 'color')
-      str << "<" << tag_name << " "
-      serialized_attributes str
-      str << "/>"
+      serialized_tag('' + tag_name + '', str)
     end
   end
 end

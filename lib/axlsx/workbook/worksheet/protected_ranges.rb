@@ -20,7 +20,7 @@ module Axlsx
              elsif cells.is_a?(SimpleTypedList) || cells.is_a?(Array)
                Axlsx::cell_range(cells, false)
              end
-     @list << ProtectedRange.new(:sqref => sqref, :name => "Range#{size}")
+     self << ProtectedRange.new(:sqref => sqref, :name => "Range#{size}")
      last
     end
 

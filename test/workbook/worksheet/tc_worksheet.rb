@@ -398,10 +398,13 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   def test_to_xml_string_with_illegal_chars
+    old = Axlsx::trust_input
+    Axlsx::trust_input = false
     nasties =  "\v\u2028\u0001\u0002\u0003\u0004\u0005\u0006\u0007\u0008\u001f"
     @ws.add_row [nasties]
-    assert_equal(0, @ws.rows.last.cells.last.value.index("\v"))
-    assert_equal(nil,@ws.to_xml_string.index("\v"))
+    assert_equal(nil, @ws.rows.last.cells.last.value.index("\v"))
+    assert_equal(nil, @ws.to_xml_string.index("\v"))
+    Axlsx::trust_input = old
   end
 
   def test_to_xml_string_with_newlines

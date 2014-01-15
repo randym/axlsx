@@ -42,13 +42,11 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      str << "<headerFooter "
-      serialized_attributes str
-      str << ">"
-      serialized_element_attributes(str) do |value|
-        value = ::CGI.escapeHTML(value)
+      serialized_tag('headerFooter', str) do
+        serialized_element_attributes(str) do |value|
+          value = ::CGI.escapeHTML(value)
+        end
       end
-      str << "</headerFooter>"
     end
   end
 end

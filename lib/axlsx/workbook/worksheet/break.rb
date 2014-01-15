@@ -28,9 +28,7 @@ module Axlsx
 
     # serializes the break to xml
     def to_xml_string(str='')
-      str << '<brk '
-      serialized_attributes str
-      str << '></brk>'
+      serialized_tag('brk', str)
     end
   end
 end

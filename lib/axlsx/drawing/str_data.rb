@@ -29,12 +29,12 @@ module Axlsx
 
     # serialize the object
     def to_xml_string(str = "")
-      str << '<c:' << @tag_name.to_s << '>'
-      str << '<c:ptCount val="' << @pt.size.to_s << '"/>'
+      str << ('<c:' << @tag_name.to_s << '>')
+      str << ('<c:ptCount val="' << @pt.size.to_s << '"/>')
       @pt.each_with_index do |value, index|
         value.to_xml_string index, str
       end
-      str << '</c:' << @tag_name.to_s << '>'
+      str << ('</c:' << @tag_name.to_s << '>')
     end
 
   end
