@@ -555,7 +555,7 @@ module Axlsx
     end
 
     # This is a helper method that Lets you specify a fixed width for multiple columns in a worksheet in one go.
-    # Axlsx is sparse, so if you have not set data for a column, you cannot set the width.
+    # Note that you must call column_widths AFTER adding data, otherwise the width will not be set successfully.
     # Setting a fixed column width to nil will revert the behaviour back to calculating the width for you on the next call to add_row.
     # @example This would set the first and third column widhts but leave the second column in autofit state.
     #      ws.column_widths 7.2, nil, 3
