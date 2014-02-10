@@ -35,6 +35,11 @@ class TestChart < Test::Unit::TestCase
     assert_equal(0, doc.xpath('//a:t').size)
   end
 
+  def test_bg_color
+    doc = Nokogiri::XML(@chart.to_xml_string)
+    assert_equal(0, doc.xpath('//a:t', 'a:solidFill').size)
+  end
+
   def test_to_from_marker_access
     assert(@chart.to.is_a?(Axlsx::Marker))
     assert(@chart.from.is_a?(Axlsx::Marker))
