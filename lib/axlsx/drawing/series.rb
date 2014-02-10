@@ -20,12 +20,16 @@ module Axlsx
     # @return [String]
     attr_reader :legend_color
 
+    #The Hash of trendline options
+    # @return [Hash]
+    attr_reader :trendline
+
     # Creates a new series
     # @param [Chart] chart
     # @option options [Integer] order
     # @option options [String] title
     def initialize(chart, options={})
-      @order = nil
+      @order     = nil
       self.chart = chart
       @chart.series << self
       parse_options options
@@ -44,7 +48,9 @@ module Axlsx
     end
 
     # @see order
-    def order=(v)  Axlsx::validate_unsigned_int(v); @order = v; end
+    def order=(v)
+      Axlsx::validate_unsigned_int(v); @order = v;
+    end
 
     # @see title
     def title=(v)
@@ -53,10 +59,36 @@ module Axlsx
       @title = v
     end
 
+    # @see trendline
+    def trendline=(v)
+      @trendline = v
+    end
+
+    # set trendline_color
+    def trendline_color
+      if @trendline[:color]
+        @trendline[:color]
+      else
+        '00000'
+      end
+    end
+
+    #set trenline_weight
+    def trendline_weight
+      if @trendline[:weight].to_s
+      @trendline[:weight].to_s
+      else
+        '1'
+      end
+
+    end
+
     private
 
     # assigns the chart for this series
-    def chart=(v)  DataTypeValidator.validate "Series.chart", Chart, v; @chart = v; end
+    def chart=(v)
+      DataTypeValidator.validate "Series.chart", Chart, v; @chart = v;
+    end
 
     # Serializes the object
     # @param [String] str
@@ -68,12 +100,27 @@ module Axlsx
       title.to_xml_string(str) unless title.nil?
       yield str if block_given?
       #set color at legend
-     if @legend_color
+      if @legend_color
         str << '<c:spPr>'
         str << '<a:solidFill>'
         str << '<a:srgbClr val="'<< legend_color.to_s << '"/>'
         str << '</a:solidFill>'
         str << '</c:spPr>'
+      end
+
+      if @trendline
+        str << ' <c:trendline>'
+        str << ' <c:spPr>'
+        str << ' <a:ln w="' << trendline_weight << '8100">'
+        str << ' <a:solidFill>'
+        str << ' <a:srgbClr val="' << trendline_color << '"/>'
+        str << ' </a:solidFill>'
+        str << '       </a:ln>'
+        str << ' </c:spPr>'
+        str << '     <c:trendlineType val="linear"/>'
+        str << ' <c:dispRSqr val="0"/>'
+        str << ' <c:dispEq val="0"/>'
+        str << ' </c:trendline>'
       end
       str << '</c:ser>'
     end
