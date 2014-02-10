@@ -61,6 +61,33 @@ class TestAxis < Test::Unit::TestCase
     assert_nothing_raised("accepts valid format code") { @axis.format_code = "00.##"  }
   end
 
+  def create_chart_with_formatting(format_string=nil)
+    p = Axlsx::Package.new
+    p.workbook.add_worksheet(:name => "Formatting Test") do |sheet|
+      sheet.add_row(['test', 20])
+      sheet.add_chart(Axlsx::Bar3DChart, :start_at => [0,5], :end_at => [10, 20], :title => "Test Formatting") do |chart|
+        chart.add_series :data => sheet["B1:B1"], :labels => sheet["A1:A1"]
+        chart.val_axis.format_code = format_string if format_string
+        doc = Nokogiri::XML(chart.to_xml_string)
+        yield doc
+      end
+    end
+  end
+
+  def test_format_code_resets_source_linked
+    create_chart_with_formatting("#,##0.00") do |doc|
+      assert_equal(doc.xpath("//c:valAx/c:numFmt[@formatCode='#,##0.00']").size, 1)
+      assert_equal(doc.xpath("//c:valAx/c:numFmt[@sourceLinked='0']").size, 1)
+    end
+  end
+
+  def test_no_format_code_keeps_source_linked
+    create_chart_with_formatting do |doc|
+      assert_equal(doc.xpath("//c:valAx/c:numFmt[@formatCode='General']").size, 1)
+      assert_equal(doc.xpath("//c:valAx/c:numFmt[@sourceLinked='1']").size, 1)
+    end
+  end
+
   def test_crosses
     assert_raise(ArgumentError, "requires valid crosses") { @axis.crosses = 1 }
     assert_nothing_raised("accepts valid crosses") { @axis.crosses = :min }
