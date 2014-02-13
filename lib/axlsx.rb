@@ -121,10 +121,10 @@ module Axlsx
   # performs the increadible feat of changing snake_case to CamelCase
   # @param [String] s The snake case string to camelize
   # @return [String]
-  def self.camel(s="", all_caps = true)
+  def self.camel(s="", all_caps = true, camel_underscores = true)
     s = s.to_s
     s = s.capitalize if all_caps
-    s.gsub(/_(.)/){ $1.upcase }
+    camel_underscores ? s.gsub(/_(.)/){ $1.upcase } : s
   end
 
     # returns the provided string with all invalid control charaters
