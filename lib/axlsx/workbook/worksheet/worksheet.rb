@@ -367,7 +367,7 @@ module Axlsx
     def auto_filter=(v)
       DataTypeValidator.validate "Worksheet.auto_filter", String, v
       auto_filter.range = v
-      workbook.add_defined_name auto_filter.defined_name, name: '_xlnm.FilterDatabase', local_sheet_id: index, hidden: 1
+      workbook.add_defined_name auto_filter.defined_name, name: '_xlnm._FilterDatabase', local_sheet_id: index, hidden: 1
     end
 
     # Accessor for controlling whether leading and trailing spaces in cells are
