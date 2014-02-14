@@ -28,6 +28,7 @@ module Axlsx
       parse_options options
       @workbook.worksheets << self
       @sheet_id = index + 1
+      @row_enumerator = false
       yield self if block_given?
     end
 
@@ -148,7 +149,11 @@ module Axlsx
     # @return [SimpleTypedList]
     # @see Worksheet#add_row
     def rows
-      @rows ||=  SimpleTypedList.new Row
+      @rows ||= if Axlsx.lazy_row_fetching
+        RowContainer.new @row_enumerator
+      else
+        SimpleTypedList.new Row
+      end
     end
 
     # returns the sheet data as columns
@@ -455,6 +460,11 @@ module Axlsx
 
     alias :<< :add_row
 
+    # Allows you to pass in an enumerator that adds rows which will lazily fetch rows on render
+    def fetch_rows_with(enumerator)
+      @row_enumerator = enumerator
+    end
+
     # Add conditional formatting to this worksheet.
     #
     # @param [String] cells The range to apply the formatting to
@@ -608,15 +618,17 @@ module Axlsx
     # Serializes the worksheet object to an xml string
     # This intentionally does not use nokogiri for performance reasons
     # @return [String]
-    def to_xml_string
+    def to_xml_string(str='')
       auto_filter.apply if auto_filter.range
-      str = '<?xml version="1.0" encoding="UTF-8"?>'
+      str << '<?xml version="1.0" encoding="UTF-8"?>'
       str << worksheet_node
+      serialized_sheet_data
       serializable_parts.each do |item|
         item.to_xml_string(str) if item
       end
       str << '</worksheet>'
-      Axlsx::sanitize(str)
+      # Cannot sanitize if it is an Enumerator
+      Axlsx::sanitize(str) if str.class == String
     end
 
     # The worksheet relationships. This is managed automatically by the worksheet
@@ -767,6 +779,10 @@ module Axlsx
 
     def sheet_data
       @sheet_data ||= SheetData.new self
+    end
+
+    def serialized_sheet_data
+      @serialized_sheet_data ||= sheet_data.to_xml_string
     end
 
     def worksheet_drawing

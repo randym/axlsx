@@ -120,6 +120,11 @@ module Axlsx
       stream
     end
 
+    def to_streaming_body
+      Relationship.clear_cached_instances
+      Axlsx::Streaming::ZipBody.new(parts(:streaming => true), @core.created.to_i)
+    end
+
     # Encrypt the package into a CFB using the password provided
     # This is not ready yet
     def encrypt(file_name, password)
@@ -192,7 +197,7 @@ module Axlsx
     # The parts of a package
     # @return [Array] An array of hashes that define the entry, document and schema for each part of the package.
     # @private
-    def parts
+    def parts(options={})
       parts = [
        {:entry => RELS_PN, :doc => relationships.to_xml_string, :schema => RELS_XSD},
        {:entry => "xl/#{STYLES_PN}", :doc => workbook.styles.to_xml_string, :schema => SML_XSD},
@@ -240,7 +245,11 @@ module Axlsx
 
       workbook.worksheets.each do |sheet|
         parts << {:entry => "xl/#{sheet.rels_pn}", :doc => sheet.relationships.to_xml_string, :schema => RELS_XSD}
-        parts << {:entry => "xl/#{sheet.pn}", :doc => sheet.to_xml_string, :schema => SML_XSD}
+        if options[:streaming]
+          parts << {:entry => "xl/#{sheet.pn}", :doc => Enumerator.new { |y| sheet.to_xml_string(y) }, :schema => SML_XSD}
+        else
+          parts << {:entry => "xl/#{sheet.pn}", :doc => sheet.to_xml_string, :schema => SML_XSD}
+        end
       end
       parts
     end

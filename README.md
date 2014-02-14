@@ -95,7 +95,7 @@ cell level input data validation.
 
 13. Export using shared strings or inline strings so we can inter-op with iWork Numbers (sans charts for now).
 
-14. Output to file or StringIO
+14. Output to file or StringIO or Stream
 
 15. Support for page margins and print options
 

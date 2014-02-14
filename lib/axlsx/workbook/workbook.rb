@@ -37,6 +37,7 @@ require 'axlsx/workbook/worksheet/worksheet_hyperlinks'
 require 'axlsx/workbook/worksheet/break'
 require 'axlsx/workbook/worksheet/row_breaks'
 require 'axlsx/workbook/worksheet/col_breaks'
+require 'axlsx/workbook/worksheet/row_container'
 require 'axlsx/workbook/workbook_view'
 require 'axlsx/workbook/workbook_views'
 
