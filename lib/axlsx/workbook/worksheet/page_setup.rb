@@ -234,9 +234,14 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      str << '<pageSetup '
-      serialized_attributes str
-      str << '/>'
+      cstr = ''
+      cstr << '<pageSetup '
+      serialized_attributes cstr
+      cstr << '/>'
+      if cstr != '<pageSetup />'
+        str << cstr
+      end
+      str
     end
   end
 end
