@@ -47,8 +47,8 @@ module Axlsx
       columns.last
     end
 
-    # actually performs the filtering of rows who's cells do not 
-    # match the filter.  
+    # actually performs the filtering of rows who's cells do not
+    # match the filter.
     def apply
       first_cell, last_cell = range.split(':')
       start_point = Axlsx::name_to_indices(first_cell)

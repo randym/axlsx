@@ -38,7 +38,7 @@ class TestWorkbook < Test::Unit::TestCase
     @wb.add_worksheet(:name=>'foo')
     @wb.add_worksheet(:name=>'bar')
     assert_equal('foo', @wb.sheet_by_name('foo').name)
-    
+
   end
   def test_date1904
     assert_equal(Axlsx::Workbook.date1904, @wb.date1904)
@@ -71,7 +71,7 @@ class TestWorkbook < Test::Unit::TestCase
     assert_equal(@wb.worksheets.first, ws, "the worksheet returned is the worksheet added")
     assert_equal(ws.name, "bob", "name option gets passed to worksheet")
   end
-  
+
   def test_insert_worksheet
     @wb.add_worksheet(:name => 'A')
     @wb.add_worksheet(:name => 'B')

@@ -598,6 +598,7 @@ module Axlsx
 
     # Returns a sheet node serialization for this sheet in the workbook.
     def to_sheet_node_xml_string(str='')
+      add_autofilter_defined_name_to_workbook
       str << '<sheet '
       serialized_attributes str
       str << "r:id='" << rId << "'"
@@ -608,10 +609,8 @@ module Axlsx
     # This intentionally does not use nokogiri for performance reasons
     # @return [String]
     def to_xml_string
-      if auto_filter.range
-        auto_filter.apply
-        workbook.add_defined_name auto_filter.defined_name, name: '_xlnm._FilterDatabase', local_sheet_id: index, hidden: 1
-      end
+      add_autofilter_defined_name_to_workbook
+      auto_filter.apply if auto_filter.range
       str = '<?xml version="1.0" encoding="UTF-8"?>'
       str << worksheet_node
       serializable_parts.each do |item|
@@ -793,6 +792,11 @@ module Axlsx
 
     def find_or_create_column_info(index)
       column_info[index] ||= Col.new(index + 1, index + 1)
+    end
+
+    def add_autofilter_defined_name_to_workbook
+      return if workbook.defined_names.any?{|dn| dn.name=='_xlnm._FilterDatabase'} || !auto_filter.range
+      workbook.add_defined_name auto_filter.defined_name, name: '_xlnm._FilterDatabase', local_sheet_id: index, hidden: 1
     end
 
   end
