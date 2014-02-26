@@ -33,7 +33,7 @@ module Axlsx
     end
 
     # instance values that must be serialized as their own elements - e.g. not attributes.
-    CHILD_ELEMENTS = [:formula1, :formula2]
+    CHILD_ELEMENTS = [:formula1, :formula2].freeze
 
     # Formula1
     # Available for type whole, decimal, date, time, textLength, list, custom
@@ -218,8 +218,8 @@ module Axlsx
       str << '<dataValidation '
       str << instance_values.map { |key, value| '' << key << '="' << value.to_s << '"' if (valid_attributes.include?(key.to_sym) and not CHILD_ELEMENTS.include?(key.to_sym)) }.join(' ')
       str << '>'
-      str << '<formula1>' << self.formula1 << '</formula1>' if @formula1 and valid_attributes.include?(:formula1)
-      str << '<formula2>' << self.formula2 << '</formula2>' if @formula2 and valid_attributes.include?(:formula2)
+      str << ('<formula1>' << self.formula1 << '</formula1>') if @formula1 and valid_attributes.include?(:formula1)
+      str << ('<formula2>' << self.formula2 << '</formula2>') if @formula2 and valid_attributes.include?(:formula2)
       str << '</dataValidation>'
     end
 

@@ -9,28 +9,28 @@ module Axlsx
     
     # parse and assign string attribute
     def parse_string attr_name, xpath
-      send("#{attr_name.to_s}=", parse_value(xpath))
+      send("#{attr_name}=", parse_value(xpath))
     end
     
     # parse convert and assign node text to symbol
     def parse_symbol attr_name, xpath
       v = parse_value xpath
       v = v.to_sym unless v.nil?
-      send("#{attr_name.to_s}=", v)
+      send("#{attr_name}=", v)
     end
     
     # parse, convert and assign note text to integer
     def parse_integer attr_name, xpath
       v = parse_value xpath
       v = v.to_i if v.respond_to?(:to_i)
-      send("#{attr_name.to_s}=", v)
+      send("#{attr_name}=", v)
     end
     
     # parse, convert and assign node text to float
     def parse_float attr_name, xpath
       v = parse_value xpath
       v = v.to_f if v.respond_to?(:to_f)
-      send("#{attr_name.to_s}=", v)
+      send("#{attr_name}=", v)
     end
 
     # return node text based on xpath

@@ -58,7 +58,7 @@ module Axlsx
     # @param [String, Cell] v
     # @return [Title]
     def name=(v)
-      DataTypeValidator.validate "#{self.class}.name", [String], v
+      DataTypeValidator.validate :table_name, [String], v
       if v.is_a?(String)
         @name = v
       end
@@ -75,12 +75,12 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       str << '<?xml version="1.0" encoding="UTF-8"?>'
-      str << '<table xmlns="' << XML_NS << '" id="' << (index+1).to_s << '" name="' << @name << '" displayName="' << @name.gsub(/\s/,'_') << '" '
-      str << 'ref="' << @ref << '" totalsRowShown="0">'
-      str << '<autoFilter ref="' << @ref << '"/>'
-      str << '<tableColumns count="' << header_cells.length.to_s << '">'
+      str << ('<table xmlns="' << XML_NS << '" id="' << (index+1).to_s << '" name="' << @name << '" displayName="' << @name.gsub(/\s/,'_') << '" ')
+      str << ('ref="' << @ref << '" totalsRowShown="0">')
+      str << ('<autoFilter ref="' << @ref << '"/>')
+      str << ('<tableColumns count="' << header_cells.length.to_s << '">')
       header_cells.each_with_index do |cell,index|
-        str << '<tableColumn id ="' << (index+1).to_s << '" name="' << cell.value << '"/>'
+        str << ('<tableColumn id ="' << (index+1).to_s << '" name="' << cell.value << '"/>')
       end
       str << '</tableColumns>'
       table_style_info.to_xml_string(str)

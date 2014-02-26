@@ -19,7 +19,7 @@ module Axlsx
       # @param [Array] symbols An array of symbols representing the
       # names of the attributes you will add to your class.
       def string_attr_accessor(*symbols)
-        validated_attr_accessor(symbols, 'validate_string')
+        validated_attr_accessor(symbols, :validate_string)
       end
 
 
@@ -27,25 +27,25 @@ module Axlsx
       # @param [Array] symbols An array of symbols representing the
       # names of the attributes you will add to your class
       def unsigned_int_attr_accessor(*symbols)
-        validated_attr_accessor(symbols, 'validate_unsigned_int')
+        validated_attr_accessor(symbols, :validate_unsigned_int)
       end
 
       # Creates one or more float (double?) attr_accessors
       # @param [Array] symbols An array of symbols representing the
       # names of the attributes you will add to your class
       def float_attr_accessor(*symbols)
-        validated_attr_accessor(symbols, 'validate_float')
+        validated_attr_accessor(symbols, :validate_float)
       end
 
       # Creates on or more boolean validated attr_accessors
       # @param [Array] symbols An array of symbols representing the
       # names of the attributes you will add to your class.
       def boolean_attr_accessor(*symbols)
-        validated_attr_accessor(symbols, 'validate_boolean')
+        validated_attr_accessor(symbols, :validate_boolean)
       end
 
       # Template for defining validated write accessors
-      SETTER = "def %s=(value) Axlsx::%s(value); @%s = value; end"
+      SETTER = "def %s=(value) Axlsx::%s(value); @%s = value; end".freeze
 
       # Creates the reader and writer access methods
       # @param [Array] symbols The names of the attributes to create
@@ -55,7 +55,7 @@ module Axlsx
       def validated_attr_accessor(symbols, validator)
         symbols.each do |symbol|
           attr_reader symbol
-          module_eval(SETTER % [symbol.to_s, validator, symbol.to_s], __FILE__, __LINE__)
+          module_eval(SETTER % [symbol, validator, symbol], __FILE__, __LINE__)
         end
       end
     end

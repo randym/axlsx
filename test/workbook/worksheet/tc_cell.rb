@@ -34,7 +34,7 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_pos
-    assert_equal(@c.pos, [@c.index, @c.row.index])
+    assert_equal(@c.pos, [@c.index, @c.row.index(@c)])
   end
 
   def test_r

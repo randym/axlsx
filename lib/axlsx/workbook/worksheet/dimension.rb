@@ -43,13 +43,13 @@ module Axlsx
     # The first cell in the dimension
     # @return [String]
     def first_cell_reference
-      dimension_reference(worksheet.rows.first.cells.first, Dimension.default_first)
+      dimension_reference(worksheet.rows.first.first, Dimension.default_first)
     end
 
     # the last cell in the dimension
     # @return [String]
     def last_cell_reference
-      dimension_reference(worksheet.rows.last.cells.last, Dimension.default_last)
+      dimension_reference(worksheet.rows.last.last, Dimension.default_last)
     end
 
     private

@@ -16,7 +16,7 @@ module Axlsx
     # Break will be passed to the created break object.
     # @see Break
     def add_break(options)
-      @list << Break.new(options.merge(:max => 1048575, :man => true))
+      self << Break.new(options.merge(:max => 1048575, :man => true))
       last
     end
 
@@ -27,7 +27,7 @@ module Axlsx
     # </colBreaks>
     def to_xml_string(str='')
       return if empty?
-      str << '<colBreaks count="' << @list.size.to_s << '" manualBreakCount="' << @list.size.to_s << '">'
+      str << ('<colBreaks count="' << size.to_s << '" manualBreakCount="' << size.to_s << '">')
       each { |brk| brk.to_xml_string(str) }
       str << '</colBreaks>'
     end

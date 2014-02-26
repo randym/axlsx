@@ -70,9 +70,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      str << '<numFmt '
-      serialized_attributes str
-      str << '/>'
+      serialized_tag('numFmt', str)
     end
 
   end

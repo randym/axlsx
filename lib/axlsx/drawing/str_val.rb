@@ -26,7 +26,7 @@ module Axlsx
     # serialize the object
     def to_xml_string(idx, str = "")
       Axlsx::validate_unsigned_int(idx)
-      str << '<c:pt idx="' << idx.to_s << '"><c:v>' << v.to_s << '</c:v></c:pt>'
+      str << ('<c:pt idx="' << idx.to_s << '"><c:v>' << v.to_s << '</c:v></c:pt>')
     end
   end
 end

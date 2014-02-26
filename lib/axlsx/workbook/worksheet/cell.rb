@@ -30,17 +30,23 @@ module Axlsx
     # @option options [String] color an 8 letter rgb specification
     # @option options [Number] formula_value The value to cache for a formula cell.
     # @option options [Symbol] scheme must be one of :none, major, :minor
-    def initialize(row, value="", options={})
-      self.row=row
-      @value = nil
-      #@value = @font_name = @charset = @family = @b = @i = @strike = @outline = @shadow = nil
-      #@formula_value = @condense = @u = @vertAlign = @sz = @color = @scheme = @extend = @ssti = nil
-      @styles = row.worksheet.workbook.styles
-      @row.cells << self
-      parse_options options
-      @style ||= 0
-      @type ||= cell_type_from_value(value)
-      @value = cast_value(value)
+    def initialize(row, value = nil, options = {})
+      @row = row
+      # Do not use instance vars if not needed to use less RAM
+      # And do not call parse_options on frequently used options
+      # to get less GC cycles
+      type = options.delete(:type) || cell_type_from_value(value)
+      self.type = type unless type == :string
+      
+
+      val = options.delete(:style)
+      self.style = val unless val.nil? || val == 0
+      val = options.delete(:formula_value)
+      self.formula_value = val unless val.nil?
+      
+      parse_options(options) 
+
+      self.value = value
     end
 
     # this is the cached value for formula cells. If you want the values to render in iOS/Mac OSX preview
@@ -53,15 +59,20 @@ module Axlsx
     # needs to define bla=(v) and bla methods on the class that hook into a
     # set_attr method that kicks the suplied validator and updates the instance_variable
     # for the key
-    INLINE_STYLES = ['value', 'type', 'font_name', 'charset',
-                     'family', 'b', 'i', 'strike','outline',
-                     'shadow', 'condense', 'extend', 'u',
-                     'vertAlign', 'sz', 'color', 'scheme']
+    INLINE_STYLES = [:value, :type, :font_name, :charset,
+                     :family, :b, :i, :strike, :outline,
+                     :shadow, :condense, :extend, :u,
+                     :vertAlign, :sz, :color, :scheme].freeze
+                     
+    CELL_TYPES = [:date, :time, :float, :integer, 
+                  :string, :boolean, :iso_8601].freeze
 
     # The index of the cellXfs item to be applied to this cell.
     # @return [Integer]
     # @see Axlsx::Styles
-    attr_reader :style
+    def style
+      defined?(@style) ? @style : 0
+    end
 
     # The row this cell belongs to.
     # @return [Row]
@@ -78,18 +89,21 @@ module Axlsx
     #   :string to :integer or :float, type conversions always return 0 or 0.0
     #   :string, :integer, or :float to :time conversions always return the original value as a string and set the cells type to :string.
     #  No support is currently implemented for parsing time strings.
-    attr_reader :type
+    def type
+      defined?(@type) ? @type : :string
+    end
+    
     # @see type
     def type=(v)
-      RestrictionValidator.validate "Cell.type", [:date, :time, :float, :integer, :string, :boolean, :iso_8601], v
-      @type=v
-      self.value = @value unless @value.nil?
+      RestrictionValidator.validate :cell_type, CELL_TYPES, v
+      @type = v
+      self.value = @value unless !defined?(@value) || @value.nil?
     end
-
 
     # The value of this cell.
     # @return [String, Integer, Float, Time, Boolean] casted value based on cell's type attribute.
     attr_reader :value
+    
     # @see value
     def value=(v)
       #TODO: consider doing value based type determination first?
@@ -99,16 +113,16 @@ module Axlsx
     # Indicates that the cell has one or more of the custom cell styles applied.
     # @return [Boolean]
     def is_text_run?
-      @is_text_run ||= false
+      defined?(@is_text_run) && @is_text_run
     end
 
     # Indicates if the cell is good for shared string table
     def plain_string?
-      @type == :string &&         # String typed
+      type == :string &&         # String typed
         !is_text_run? &&          # No inline styles
         !@value.nil? &&           # Not nil
         !@value.empty? &&         # Not empty
-        !@value.start_with?('=')  # Not a formula
+        !@value.start_with?(?=)  # Not a formula
     end
 
     # The inline font_name property for the cell
@@ -231,7 +245,7 @@ module Axlsx
     attr_reader :vertAlign
     # @see vertAlign
     def vertAlign=(v)
-      RestrictionValidator.validate "Cell.vertAlign", [:baseline, :subscript, :superscript], v
+      RestrictionValidator.validate :cell_vertAlign, [:baseline, :subscript, :superscript], v
       set_run_style nil, :vertAlign, v
     end
 
@@ -241,7 +255,7 @@ module Axlsx
     attr_reader :scheme
     # @see scheme
     def scheme=(v)
-      RestrictionValidator.validate "Cell.schema", [:none, :major, :minor], v
+      RestrictionValidator.validate :cell_scheme, [:none, :major, :minor], v
       set_run_style nil, :scheme, v
     end
 
@@ -251,14 +265,14 @@ module Axlsx
 
     # @return [Integer] The index of the cell in the containing row.
     def index
-      @row.cells.index(self)
+      @row.index(self)
     end
 
     # @return [String] The alpha(column)numeric(row) reference for this sell.
     # @example Relative Cell Reference
     #   ws.rows.first.cells.first.r #=> "A1"
     def r
-      Axlsx::cell_r index, @row.index
+      Axlsx::cell_r index, @row.row_index
     end
 
     # @return [String] The absolute alpha(column)numeric(row) reference for this sell.
@@ -272,14 +286,14 @@ module Axlsx
     # @raise [ArgumentError] Invalid cellXfs id if the value provided is not within cellXfs items range.
     def style=(v)
       Axlsx::validate_unsigned_int(v)
-      count = @styles.cellXfs.size
+      count = styles.cellXfs.size
       raise ArgumentError, "Invalid cellXfs id" unless v < count
       @style = v
     end
 
-    # @return [Array] of x/y coordinates in the cheet for this cell.
+    # @return [Array] of x/y coordinates in the sheet for this cell.
     def pos
-      [index, row.index]
+      [index, row.row_index]
     end
 
     # Merges all the cells in a range created between this cell and the cell or string name for a cell  provided
@@ -304,17 +318,14 @@ module Axlsx
     end
 
     def is_formula?
-      @type == :string && @value.to_s.start_with?('=')
+      type == :string && @value.to_s.start_with?(?=)
     end
 
     # This is still not perfect...
-    #  - scaling is not linear as font sizes increst
-    #  - different fonts have different mdw and char widths
+    #  - scaling is not linear as font sizes increase
     def autowidth
-      return if is_formula? || value == nil
-      mdw = 1.78 #This is the widest width of 0..9 in arial@10px)
-      font_scale = (font_size/10.0).to_f
-      ((value.to_s.count(Worksheet.thin_chars) * mdw + 5) / mdw * 256) / 256.0 * font_scale
+      return if is_formula? || value.nil?
+      (value.to_s.count(Worksheet::THIN_CHARS) + 3.0) * (font_size/10.0)
     end
 
     # returns the absolute or relative string style reference for
@@ -326,7 +337,6 @@ module Axlsx
       absolute ? r_abs : r
     end
 
-
     # Creates a defined name in the workbook for this cell.
     def name=(label)
       row.worksheet.workbook.add_defined_name "#{row.worksheet.name}!#{r_abs}", name: label
@@ -334,25 +344,27 @@ module Axlsx
     end
 
     # returns the name of the cell
-    def name
-      @name
-    end
+    attr_reader :name
 
     private
+    
+    def styles
+      row.worksheet.styles
+    end
 
     # we scale the font size if bold style is applied to either the style font or
     # the cell itself. Yes, it is a bit of a hack, but it is much better than using
     # imagemagick and loading metrics for every character.
     def font_size
-      font = @styles.fonts[@styles.cellXfs[style].fontId] || @styles.fonts[0]
-      size_from_styles = (font.b || b) ? font.sz * 1.5 : font.sz
-      sz || size_from_styles
+      return sz if sz
+      font = styles.fonts[styles.cellXfs[style].fontId] || styles.fonts[0]
+      (font.b || (defined?(@b) && @b)) ? (font.sz * 1.5) : font.sz
     end
 
     # Utility method for setting inline style attributes
-    def set_run_style( validator, attr, value)
-      return unless INLINE_STYLES.include?(attr.to_s)
-      Axlsx.send(validator, value) unless validator == nil
+    def set_run_style(validator, attr, value)
+      return unless INLINE_STYLES.include?(attr.to_sym)
+      Axlsx.send(validator, value) unless validator.nil?
       self.instance_variable_set :"@#{attr.to_s}", value
       @is_text_run = true
     end
@@ -362,9 +374,6 @@ module Axlsx
       Axlsx::validate_unsigned_int(v)
       @ssti = v
     end
-
-    # assigns the owning row for this cell.
-    def row=(v) @row=v end
 
     # Determines the cell type based on the cell value.
     # @note This is only used when a cell is created but no :type option is specified, the following rules apply:
@@ -381,14 +390,11 @@ module Axlsx
         :time
       elsif v.is_a?(TrueClass) || v.is_a?(FalseClass)
         :boolean
-      elsif v.to_s =~ /\A[+-]?\d+?\Z/ #numeric
+      elsif v.to_s =~ Axlsx::NUMERIC_REGEX
         :integer
-      elsif v.to_s =~ /\A[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?\Z/ #float
+      elsif v.to_s =~ Axlsx::FLOAT_REGEX
         :float
-        # \A(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|0[1-9]|[1-2][0-9])
-        # T(2[0-3]|[0-1][0-9]):([0-5][0-9]):([0-5][0-9])(\.[0-9]+)?
-        # (Z|[+-](?:2[0-3]|[0-1][0-9]):[0-5][0-9])?\Z
-      elsif v.to_s =~/\A(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|0[1-9]|[1-2][0-9])T(2[0-3]|[0-1][0-9]):([0-5][0-9]):([0-5][0-9])(\.[0-9]+)?(Z|[+-](?:2[0-3]|[0-1][0-9]):[0-5][0-9])?\Z/
+      elsif v.to_s =~ Axlsx::ISO_8601_REGEX
         :iso_8601
       else
         :string
@@ -401,26 +407,27 @@ module Axlsx
     # @see Axlsx#date1904
     def cast_value(v)
       return nil if v.nil?
-      if @type == :date
+      case type
+      when :date
         self.style = STYLE_DATE if self.style == 0
         v
-      elsif (@type == :time && v.is_a?(Time)) || (@type == :time && v.respond_to?(:to_time))
+      when :time
         self.style = STYLE_DATE if self.style == 0
         v.respond_to?(:to_time) ? v.to_time : v
-      elsif @type == :float
+      when :float
         v.to_f
-      elsif @type == :integer
+      when :integer
         v.to_i
-      elsif @type == :boolean
+      when :boolean
         v ? 1 : 0
-      elsif @type == :iso_8601
+      when :iso_8601
         #consumer is responsible for ensuring the iso_8601 format when specifying this type
         v
       else
-        @type = :string
         # TODO find a better way to do this as it accounts for 30% of
         # processing time in benchmarking...
-        Axlsx::trust_input ? v.to_s : ::CGI.escapeHTML(v.to_s)
+        
+        Axlsx::trust_input ? v.to_s : ::CGI.escapeHTML(Axlsx::sanitize(v.to_s))
       end
     end
 

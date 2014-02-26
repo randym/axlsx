@@ -76,9 +76,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      str << '<sheetProtection '
-      serialized_attributes str
-      str << '/>'
+      serialized_tag('sheetProtection', str)
     end
 
     private

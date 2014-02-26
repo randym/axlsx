@@ -52,19 +52,17 @@ module Axlsx
     # @return [Boolean] true if validation succeeds.
     # @see validate_boolean
     def self.validate(name, types, v, other=false)
-      types = [types] unless types.is_a? Array
       if other.is_a?(Proc)
          raise ArgumentError, (ERR_TYPE % [v.inspect, name, types.inspect]) unless other.call(v)
       end
-      if v.class == Class
-        types.each { |t| return if v.ancestors.include?(t) }
-      else
-        types.each { |t| return if v.is_a?(t) }
+      v_class = v.is_a?(Class) ? v : v.class
+      Array(types).each do |t| 
+        return if v_class <= t
       end
       raise ArgumentError, (ERR_TYPE % [v.inspect, name, types.inspect])
     end
   end
-
+  
 
   # Requires that the value can be converted to an integer
   # @para, [Any] v the value to validate
@@ -80,12 +78,15 @@ module Axlsx
   def self.validate_angle(v)
     raise ArgumentError, (ERR_ANGLE % v.inspect) unless (v.to_i >= -5400000 && v.to_i <= 5400000)
   end
+  
+  UINT_VALIDATOR = lambda { |arg| arg.respond_to?(:>=) && arg >= 0 }
+  
   # Requires that the value is a Fixnum or Integer and is greater or equal to 0
   # @param [Any] v The value validated
   # @raise [ArgumentError] raised if the value is not a Fixnum or Integer value greater or equal to 0
   # @return [Boolean] true if the data is valid
   def self.validate_unsigned_int(v)
-    DataTypeValidator.validate(:unsigned_int, [Fixnum, Integer], v, lambda { |arg| arg.respond_to?(:>=) && arg >= 0 })
+    DataTypeValidator.validate(:unsigned_int, Integer, v, UINT_VALIDATOR)
   end
 
   # Requires that the value is a Fixnum Integer or Float and is greater or equal to 0
@@ -93,13 +94,13 @@ module Axlsx
   # @raise [ArgumentError] raised if the value is not a Fixnun, Integer, Float value greater or equal to 0
   # @return [Boolean] true if the data is valid
   def self.validate_unsigned_numeric(v)
-    DataTypeValidator.validate("Invalid column width", [Fixnum, Integer, Float], v, lambda { |arg| arg.respond_to?(:>=) && arg.to_i >= 0 })
+    DataTypeValidator.validate(:unsigned_numeric, Numeric, v, UINT_VALIDATOR)
   end
 
-  # Requires that the value is a Fixnum or Integer
+  # Requires that the value is a Integer
   # @param [Any] v The value validated
   def self.validate_int(v)
-    DataTypeValidator.validate :unsigned_int, [Fixnum, Integer], v
+    DataTypeValidator.validate :signed_int, Integer, v
   end
 
   # Requires that the value is a form that can be evaluated as a boolean in an xml document.
@@ -107,7 +108,7 @@ module Axlsx
   # it must be one of 0, 1, "true", "false", :true, :false, true, false, "0", or "1"
   # @param [Any] v The value validated
   def self.validate_boolean(v)
-    DataTypeValidator.validate(:boolean, [Fixnum, String, Integer, Symbol, TrueClass, FalseClass], v, lambda { |arg| [0, 1, "true", "false", :true, :false, true, false, "0", "1"].include?(arg) })
+    DataTypeValidator.validate(:boolean, [String, Integer, Symbol, TrueClass, FalseClass], v, lambda { |arg| [0, 1, "true", "false", :true, :false, true, false, "0", "1"].include?(arg) })
   end
 
   # Requires that the value is a String
@@ -130,12 +131,12 @@ module Axlsx
 
   # Requires that the value is an integer ranging from 10 to 400.
   def self.validate_scale_10_400(v)
-    DataTypeValidator.validate "page_scale", [Fixnum, Integer], v, lambda { |arg| arg >= 10 && arg <= 400 }
+    DataTypeValidator.validate "page_scale", Integer, v, lambda { |arg| arg >= 10 && arg <= 400 }
   end
 
   # Requires that the value is an integer ranging from 10 to 400 or 0.
   def self.validate_scale_0_10_400(v)
-    DataTypeValidator.validate "page_scale", [Fixnum, Integer], v, lambda { |arg| arg == 0 || (arg >= 10 && arg <= 400) }
+    DataTypeValidator.validate "page_scale", Integer, v, lambda { |arg| arg == 0 || (arg >= 10 && arg <= 400) }
   end
 
   # Requires that the value is one of :default, :landscape, or :portrait.

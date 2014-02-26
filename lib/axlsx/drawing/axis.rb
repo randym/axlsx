@@ -150,10 +150,10 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      str << '<c:axId val="' << @id.to_s << '"/>'
+      str << ('<c:axId val="' << @id.to_s << '"/>')
       @scaling.to_xml_string str
-      str << '<c:delete val="'<< @delete.to_s << '"/>'
-      str << '<c:axPos val="' << @ax_pos.to_s << '"/>'
+      str << ('<c:delete val="' << @delete.to_s << '"/>')
+      str << ('<c:axPos val="' << @ax_pos.to_s << '"/>')
       str << '<c:majorGridlines>'
       # TODO shape properties need to be extracted into a class
       if gridlines == false
@@ -165,21 +165,21 @@ module Axlsx
       end
       str << '</c:majorGridlines>'
       @title.to_xml_string(str) unless @title == nil
-      str << '<c:numFmt formatCode="' << @format_code << '" sourceLinked="1"/>'
+      str << ('<c:numFmt formatCode="' << @format_code << '" sourceLinked="1"/>')
       str << '<c:majorTickMark val="none"/>'
       str << '<c:minorTickMark val="none"/>'
-      str << '<c:tickLblPos val="' << @tick_lbl_pos.to_s << '"/>'
+      str << ('<c:tickLblPos val="' << @tick_lbl_pos.to_s << '"/>')
       # TODO - this is also being used for series colors
       # time to extract this into a class spPr - Shape Properties
       if @color
         str << '<c:spPr><a:ln><a:solidFill>'
-        str << '<a:srgbClr val="' << @color << '"/>'
+        str << ('<a:srgbClr val="' << @color << '"/>')
         str << '</a:solidFill></a:ln></c:spPr>'
       end
       # some potential value in implementing this in full. Very detailed!
-      str << '<c:txPr><a:bodyPr rot="' << @label_rotation.to_s << '"/><a:lstStyle/><a:p><a:pPr><a:defRPr/></a:pPr><a:endParaRPr/></a:p></c:txPr>'
-      str << '<c:crossAx val="' << @cross_axis.id.to_s << '"/>'
-      str << '<c:crosses val="' << @crosses.to_s << '"/>'
+      str << ('<c:txPr><a:bodyPr rot="' << @label_rotation.to_s << '"/><a:lstStyle/><a:p><a:pPr><a:defRPr/></a:pPr><a:endParaRPr/></a:p></c:txPr>')
+      str << ('<c:crossAx val="' << @cross_axis.id.to_s << '"/>')
+      str << ('<c:crosses val="' << @crosses.to_s << '"/>')
     end
 
   end

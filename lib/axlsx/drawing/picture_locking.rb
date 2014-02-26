@@ -35,9 +35,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      str << '<a:picLocks '
-      serialized_attributes str
-      str << '/>'
+      serialized_tag('a:picLocks', str)
     end
 
   end

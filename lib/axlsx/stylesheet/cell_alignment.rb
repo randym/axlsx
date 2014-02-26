@@ -125,9 +125,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      str << '<alignment '
-      serialized_attributes str
-      str << '/>'
+      serialized_tag('alignment', str)
     end
 
   end

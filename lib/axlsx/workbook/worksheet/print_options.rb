@@ -33,9 +33,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      str << '<printOptions '
-      serialized_attributes str
-      str << '/>'
+      serialized_tag 'printOptions', str
     end
   end
 end

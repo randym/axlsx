@@ -237,9 +237,7 @@ include Axlsx::SerializedAttributes
       # Serialize the object to xml
       # @param [String] str The string object this serialization will be concatenated to.
       def to_xml_string(str = '')
-        str << '<dateGroupItem '
-        serialized_attributes str
-        str << '/>'
+        serialized_tag('dateGroupItem', str)
       end
     end
   end

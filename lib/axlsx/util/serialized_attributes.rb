@@ -18,9 +18,7 @@ module Axlsx
       end
 
       # a reader for those attributes
-      def xml_attributes
-        @xml_attributes
-      end
+      attr_reader :xml_attributes
 
       # This helper registers the attributes that will be formatted as elements.
       def serializable_element_attributes(*symbols)
@@ -28,8 +26,20 @@ module Axlsx
       end
 
       # attr reader for element attributes
-      def xml_element_attributes
-        @xml_element_attributes
+      attr_reader :xml_element_attributes
+    end
+
+    # creates a XML tag with serialized attributes
+    # @see SerializedAttributes#serialized_attributes
+    def serialized_tag(tagname, str, additional_attributes = {}, &block)
+      str << "<#{tagname} "
+      serialized_attributes(str, additional_attributes)
+      if block_given?
+        str << '>'
+        yield
+        str << "</#{tagname}>"
+      else
+        str << '/>'
       end
     end
 

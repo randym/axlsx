@@ -72,7 +72,6 @@ class TestSimpleTypedList < Test::Unit::TestCase
   def test_equality
     @list.push 1
     @list.push 2
-    assert_equal(@list, [1,2])
-    
+    assert_equal(@list.to_ary, [1,2])
   end
 end

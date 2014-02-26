@@ -6,14 +6,14 @@ module Axlsx
 
     # Packing for the Storage when pushing an array of items into a byte stream
     # Name, name length, type, color, left sibling, right sibling, child, classid, state, created, modified, sector, size
-    PACKING = "s32 s1 c2 l3 x16 x4 q2 l q"
+    PACKING = "s32 s1 c2 l3 x16 x4 q2 l q".freeze
 
     # storage types
     TYPES = {
       :root=>5,
       :stream=>2,
       :storage=>1
-    }
+    }.freeze
 
     # Creates a byte string for this storage
     # @return [String] 
@@ -45,7 +45,7 @@ module Axlsx
     # Sets the color for this storage
     # @param [Integer] v Must be one of the COLORS constant hash values
     def color=(v)
-      RestrictionValidator.validate "Storage.color", COLORS.values, v      
+      RestrictionValidator.validate :storage_color, COLORS.values, v      
       @color = v
     end
 
@@ -116,7 +116,7 @@ module Axlsx
     # Sets the type for this storage. 
     # @param [Integer] v the type to specify must be one of the TYPES constant hash values. 
     def type=(v)
-      RestrictionValidator.validate "Storage.type", TYPES.values, v      
+      RestrictionValidator.validate :storage_type, TYPES.values, v      
       @type = v
     end
 

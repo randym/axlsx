@@ -14,7 +14,7 @@ module Axlsx
     # @see Break
     def add_break(options)
       # force feed the excel default
-      @list << Break.new(options.merge(:max => 16383, :man => true))
+      self << Break.new(options.merge(:max => 16383, :man => true))
       last
     end
  
@@ -25,7 +25,7 @@ module Axlsx
     # </rowBreaks>
     def to_xml_string(str='')
       return if empty?
-      str << '<rowBreaks count="' << @list.size.to_s << '" manualBreakCount="' << @list.size.to_s << '">'
+      str << ('<rowBreaks count="' << self.size.to_s << '" manualBreakCount="' << self.size.to_s << '">')
       each { |brk| brk.to_xml_string(str) }
       str << '</rowBreaks>'
     end

@@ -54,9 +54,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      str << '<cfvo '
-      serialized_attributes str
-      str << ' />'
+      serialized_tag('cfvo', str)
     end
   end
 end

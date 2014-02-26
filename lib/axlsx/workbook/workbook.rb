@@ -338,8 +338,8 @@ require 'axlsx/workbook/worksheet/selection.rb'
     def to_xml_string(str='')
       add_worksheet(name: 'Sheet1') unless worksheets.size > 0
       str << '<?xml version="1.0" encoding="UTF-8"?>'
-      str << '<workbook xmlns="' << XML_NS << '" xmlns:r="' << XML_NS_R << '">'
-      str << '<workbookPr date1904="' << @@date1904.to_s << '"/>'
+      str << ('<workbook xmlns="' << XML_NS << '" xmlns:r="' << XML_NS_R << '">')
+      str << ('<workbookPr date1904="' << @@date1904.to_s << '"/>')
       views.to_xml_string(str)
       str << '<sheets>'
       worksheets.each { |sheet| sheet.to_sheet_node_xml_string(str) }
@@ -348,7 +348,7 @@ require 'axlsx/workbook/worksheet/selection.rb'
       unless pivot_tables.empty?
         str << '<pivotCaches>'
         pivot_tables.each do |pivot_table|
-          str << '<pivotCache cacheId="' << pivot_table.cache_definition.cache_id.to_s << '" r:id="' << pivot_table.cache_definition.rId << '"/>'
+          str << ('<pivotCache cacheId="' << pivot_table.cache_definition.cache_id.to_s << '" r:id="' << pivot_table.cache_definition.rId << '"/>')
         end
         str << '</pivotCaches>'
       end

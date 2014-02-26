@@ -11,7 +11,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      return if @list.empty?
+      return if empty?
       str << "<bookViews>"
       each { |view| view.to_xml_string(str) }
       str << '</bookViews>'

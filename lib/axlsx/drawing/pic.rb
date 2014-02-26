@@ -165,17 +165,16 @@ module Axlsx
     def to_xml_string(str = '')
       str << '<xdr:pic>'
       str << '<xdr:nvPicPr>'
-      str << '<xdr:cNvPr id="2" name="' << name.to_s << '" descr="' << descr.to_s << '">'
+      str << ('<xdr:cNvPr id="2" name="' << name.to_s << '" descr="' << descr.to_s << '">')
       @hyperlink.to_xml_string(str) if @hyperlink.is_a?(Hyperlink)
       str << '</xdr:cNvPr><xdr:cNvPicPr>'
       picture_locking.to_xml_string(str)
       str << '</xdr:cNvPicPr></xdr:nvPicPr>'
       str << '<xdr:blipFill>'
-      str << '<a:blip xmlns:r ="' << XML_NS_R << '" r:embed="' << relationship.Id <<  '"/>'
+      str << ('<a:blip xmlns:r ="' << XML_NS_R << '" r:embed="' << relationship.Id << '"/>')
       str << '<a:stretch><a:fillRect/></a:stretch></xdr:blipFill><xdr:spPr>'
       str << '<a:xfrm><a:off x="0" y="0"/><a:ext cx="2336800" cy="2161540"/></a:xfrm>'
       str << '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></xdr:spPr></xdr:pic>'
-
     end
 
     private

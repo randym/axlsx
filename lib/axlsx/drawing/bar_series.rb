@@ -52,20 +52,20 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      super(str) do |str_inner|
+      super(str) do
 
         colors.each_with_index do |c, index|
-          str_inner << '<c:dPt>'
-          str_inner << '<c:idx val="' << index.to_s << '"/>'
-          str_inner << '<c:spPr><a:solidFill>'
-          str_inner << '<a:srgbClr val="' << c << '"/>'
-          str_inner << '</a:solidFill></c:spPr></c:dPt>'
+          str << '<c:dPt>'
+          str << ('<c:idx val="' << index.to_s << '"/>')
+          str << '<c:spPr><a:solidFill>'
+          str << ('<a:srgbClr val="' << c << '"/>')
+          str << '</a:solidFill></c:spPr></c:dPt>'
         end
 
-        @labels.to_xml_string(str_inner) unless @labels.nil?
-        @data.to_xml_string(str_inner) unless @data.nil?
+        @labels.to_xml_string(str) unless @labels.nil?
+        @data.to_xml_string(str) unless @data.nil?
         # this is actually only required for shapes other than box 
-        str_inner << '<c:shape val="' << shape.to_s << '"></c:shape>'
+        str << ('<c:shape val="' << shape.to_s << '"></c:shape>')
       end
     end
 

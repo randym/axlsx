@@ -9,7 +9,7 @@ module Axlsx
     end
 
     def to_xml_string(str='')
-      @list.each { |cfvo| cfvo.to_xml_string(str) }
+      each { |cfvo| cfvo.to_xml_string(str) }
     end
   end
 end
