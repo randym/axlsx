@@ -14,15 +14,16 @@ module Axlsx
     # @option options [Array|String|Cell] start_at The X, Y coordinates defining the top left corner of the chart.
     # @option options [Array|String|Cell] end_at The X, Y coordinates defining the bottom right corner of the chart.
     def initialize(frame, options={})
-      @style = 18
-      @view_3D = nil
+      @style        = 18
+      @view_3D      = nil
       @graphic_frame=frame
       @graphic_frame.anchor.drawing.worksheet.workbook.charts << self
-      @series = SimpleTypedList.new Series
-      @show_legend = true
+      @series            = SimpleTypedList.new Series
+      @show_legend       = true
       @display_blanks_as = :gap
-      @series_type = Series
-      @title = Title.new
+      @series_type       = Series
+      @title             = Title.new
+      @bg_color          = nil
       parse_options options
       start_at(*options[:start_at]) if options[:start_at]
       end_at(*options[:end_at]) if options[:end_at]
@@ -53,10 +54,16 @@ module Axlsx
     # Indicates that colors should be varied by datum
     # @return [Boolean]
     attr_reader :vary_colors
- 
+
     # Configures the vary_colors options for this chart
     # @param [Boolean] v The value to set
-    def vary_colors=(v) Axlsx::validate_boolean(v); @vary_colors = v; end
+    def vary_colors=(v)
+      Axlsx::validate_boolean(v); @vary_colors = v;
+    end
+
+    # the background color for chart
+    # @return [String]
+    attr_reader :bg_color
 
     # The title object for the chart.
     # @return [Title]
@@ -70,6 +77,7 @@ module Axlsx
     # Show the legend in the chart
     # @return [Boolean]
     attr_reader :show_legend
+
 
     # How to display blank values
     # Options are
@@ -98,6 +106,11 @@ module Axlsx
       "#{CHART_PN % (index+1)}"
     end
 
+    # @see color
+    def bg_color=(v)
+      @bg_color = v
+    end
+
     # The title object for the chart.
     # @param [String, Cell] v
     # @return [Title]
@@ -113,18 +126,24 @@ module Axlsx
     # Show the legend in the chart
     # @param [Boolean] v
     # @return [Boolean]
-    def show_legend=(v) Axlsx::validate_boolean(v); @show_legend = v; end
+    def show_legend=(v)
+      Axlsx::validate_boolean(v); @show_legend = v;
+    end
 
     # How to display blank values
     # @see display_blanks_as
     # @param [Symbol] v
     # @return [Symbol]
-    def display_blanks_as=(v) Axlsx::validate_display_blanks_as(v); @display_blanks_as = v; end
+    def display_blanks_as=(v)
+      Axlsx::validate_display_blanks_as(v); @display_blanks_as = v;
+    end
 
     # The style for the chart.
     # see ECMA Part 1 §21.2.2.196
     # @param [Integer] v must be between 1 and 48
-    def style=(v) DataTypeValidator.validate "Chart.style", Integer, v, lambda { |arg| arg >= 1 && arg <= 48 }; @style = v; end
+    def style=(v)
+      DataTypeValidator.validate "Chart.style", Integer, v, lambda { |arg| arg >= 1 && arg <= 48 }; @style = v;
+    end
 
     # backwards compatibility to allow chart.to and chart.from access to anchor markers
     # @note This will be disconinued in version 2.0.0. Please use the end_at method
@@ -145,6 +164,7 @@ module Axlsx
       @series_type.new(self, options)
       @series.last
     end
+
 
     # Serializes the object
     # @param [String] str
@@ -176,6 +196,14 @@ module Axlsx
       str << '<c:dispBlanksAs val="' << display_blanks_as.to_s << '"/>'
       str << '<c:showDLblsOverMax val="1"/>'
       str << '</c:chart>'
+      # chart background
+      if @bg_color
+        str << '<c:spPr>'
+        str << '<a:solidFill>'
+        str << '<a:srgbClr val="' << @bg_color << '"/>'
+        str << '</a:solidFill>'
+        str << '</c:spPr>'
+      end
       str << '<c:printSettings>'
       str << '<c:headerFooter/>'
       str << '<c:pageMargins b="1.0" l="0.75" r="0.75" t="1.0" header="0.5" footer="0.5"/>'
@@ -224,7 +252,10 @@ module Axlsx
     end
 
     # sets the view_3D object for the chart
-    def view_3D=(v) DataTypeValidator.validate "#{self.class}.view_3D", View3D, v; @view_3D = v; end
+    def view_3D=(v)
+      DataTypeValidator.validate "#{self.class}.view_3D", View3D, v; @view_3D = v;
+    end
+
     alias :view3D= :view_3D=
 
   end
