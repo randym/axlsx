@@ -514,7 +514,18 @@ class TestWorksheet < Test::Unit::TestCase
     assert_raise(ArgumentError) { @ws.auto_filter = 123 }
     @ws.auto_filter.range = "A1:D9"
     assert_equal(@ws.auto_filter.range, "A1:D9")
+    @ws.to_xml_string
+    assert(@wb.defined_names.any?{|defined_name| defined_name.name=='_xlnm._FilterDatabase'})
+  end
+
+  def test_auto_filter_assign
+    assert(@ws.auto_filter.range.nil?)
     assert(@wb.defined_names.none?{|defined_name| defined_name.name=='_xlnm._FilterDatabase'})
+    assert_raise(ArgumentError) { @ws.auto_filter = 123 }
+    @ws.auto_filter = "A1:D9"
+    assert_equal(@ws.auto_filter.range, "A1:D9")
+    @ws.to_xml_string
+    assert(@wb.defined_names.any?{|defined_name| defined_name.name=='_xlnm._FilterDatabase'})
   end
 
   def test_sheet_pr_for_auto_filter

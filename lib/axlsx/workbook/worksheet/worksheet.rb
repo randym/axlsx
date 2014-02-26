@@ -367,7 +367,6 @@ module Axlsx
     def auto_filter=(v)
       DataTypeValidator.validate "Worksheet.auto_filter", String, v
       auto_filter.range = v
-      workbook.add_defined_name auto_filter.defined_name, name: '_xlnm._FilterDatabase', local_sheet_id: index, hidden: 1
     end
 
     # Accessor for controlling whether leading and trailing spaces in cells are
@@ -609,7 +608,10 @@ module Axlsx
     # This intentionally does not use nokogiri for performance reasons
     # @return [String]
     def to_xml_string
-      auto_filter.apply if auto_filter.range
+      if auto_filter.range
+        auto_filter.apply
+        workbook.add_defined_name auto_filter.defined_name, name: '_xlnm._FilterDatabase', local_sheet_id: index, hidden: 1
+      end
       str = '<?xml version="1.0" encoding="UTF-8"?>'
       str << worksheet_node
       serializable_parts.each do |item|
