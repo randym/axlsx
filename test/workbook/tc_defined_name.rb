@@ -1,14 +1,14 @@
 require 'tc_helper'
 
 class TestDefinedNames < Test::Unit::TestCase
-  def setup 
+  def setup
     @dn = Axlsx::DefinedName.new('Sheet1!A1:A1')
   end
 
   def test_initialize
     assert_equal('Sheet1!A1:A1', @dn.formula)
   end
-  
+
   def test_string_attributes
     %w(short_cut_key status_bar help description custom_menu comment).each do |attr|
       assert_raise(ArgumentError, 'only strings allowed in string attributes') { @dn.send("#{attr}=", 1) }
@@ -29,13 +29,21 @@ class TestDefinedNames < Test::Unit::TestCase
     assert_nothing_raised { @dn.local_sheet_id = 1 }
   end
 
+  def test_do_not_camelcase_value_for_name
+    @dn.name = '_xlnm._FilterDatabase'
+    doc = Nokogiri::XML(@dn.to_xml_string)
+    assert_equal(doc.xpath("//definedName[@name='_xlnm._FilterDatabase']").size, 1)
+    assert_equal('Sheet1!A1:A1', doc.xpath('//definedName').text)
+  end
+
   def test_to_xml_string
     assert_raise(ArgumentError, 'name is required for serialization') { @dn.to_xml_string }
     @dn.name = '_xlnm.Print_Titles'
     @dn.hidden = true
     doc = Nokogiri::XML(@dn.to_xml_string)
-    assert(doc.xpath("//definedName[@name='_xlnm.Print_Titles']"))
-    assert(doc.xpath("//definedName[@hidden='true']"))
+    assert_equal(doc.xpath("//definedName[@name='_xlnm.Print_Titles']").size, 1)
+    assert_equal(doc.xpath("//definedName[@hidden='true']").size, 1)
     assert_equal('Sheet1!A1:A1', doc.xpath('//definedName').text)
   end
+
 end
