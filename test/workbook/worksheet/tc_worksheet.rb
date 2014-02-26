@@ -510,9 +510,11 @@ class TestWorksheet < Test::Unit::TestCase
 
   def test_auto_filter
     assert(@ws.auto_filter.range.nil?)
+    assert(@wb.defined_names.none?{|defined_name| defined_name.name=='_xlnm._FilterDatabase'})
     assert_raise(ArgumentError) { @ws.auto_filter = 123 }
     @ws.auto_filter.range = "A1:D9"
     assert_equal(@ws.auto_filter.range, "A1:D9")
+    assert(@wb.defined_names.none?{|defined_name| defined_name.name=='_xlnm._FilterDatabase'})
   end
 
   def test_sheet_pr_for_auto_filter
