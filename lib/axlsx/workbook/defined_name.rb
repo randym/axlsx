@@ -116,7 +116,7 @@ module Axlsx
     boolean_attr_accessor :workbook_parameter, :publish_to_server, :xlm, :vb_proceedure, :function, :hidden
 
     serializable_attributes :short_cut_key, :status_bar, :help, :description, :custom_menu, :comment,
-      :workbook_parameter, :publish_to_server, :xlm, :vb_proceedure, :function, :hidden, :name, :local_sheet_id
+      :workbook_parameter, :publish_to_server, :xlm, :vb_proceedure, :function, :hidden, :local_sheet_id
 
     def to_xml_string(str='')
       raise ArgumentError, 'you must specify the name for this defined name. Please read the documentation for Axlsx::DefinedName for more details' unless name
