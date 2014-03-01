@@ -24,20 +24,12 @@ module Axlsx
       # @return [String]
       def run_xml_string(cell, str = '')
         if cell.is_text_run?
-          data = cell.instance_values.reject{ |key, value| value == nil || key == 'value' || key == 'type' }
-          keys = data.keys & Cell::INLINE_STYLES
-          str << '<r><rPr>'
-          keys.each do |key|
-            case key
-            when :font_name
-              str << ('<rFont val="' << cell.font_name << '"/>')
-            when :color
-              str << data[key].to_xml_string
-            else
-              str << ('<' << key.to_s << ' val="' << data[key].to_s << '"/>')
-            end
-          end
-          str << ('</rPr><t>' << cell.value.to_s << '</t></r>')
+          valid = RichTextRun::INLINE_STYLES - [:value, :type]
+          data = Hash[cell.instance_values.map{ |k, v| [k.to_sym, v] }] 
+          data = data.select { |key, value| valid.include?(key) && !value.nil? }
+          RichText.new(cell.value.to_s, data).to_xml_string(str)
+        elsif cell.contains_rich_text?
+          cell.value.to_xml_string(str)
         else
           str << ('<t>' << cell.value.to_s << '</t>')
         end
@@ -121,21 +113,29 @@ module Axlsx
         if cell.is_formula?
           formula_serialization cell, str
         elsif !cell.ssti.nil?
-          value_serialization 's', cell.ssti.to_s, str
+          value_serialization 's', cell.ssti, str
         else
           inline_string_serialization cell, str
+        end
+      end
+      
+      def richtext(cell, str)
+        if cell.ssti.nil?
+          inline_string_serialization cell, str
+        else
+          value_serialization 's', cell.ssti, str
         end
       end
 
       private
 
       def numeric(cell, str = '')
-        value_serialization 'n', cell.value.to_s, str
+        value_serialization 'n', cell.value, str
       end
 
       def value_serialization(serialization_type, serialization_value, str = '')
-        str << ('t="' << serialization_type << '"') if serialization_type
-        str << ('><v>' << serialization_value << '</v>')
+        str << ('t="' << serialization_type.to_s << '"') if serialization_type
+        str << ('><v>' << serialization_value.to_s << '</v>')
       end
 
 

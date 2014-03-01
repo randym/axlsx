@@ -5,6 +5,8 @@ require 'axlsx/workbook/worksheet/auto_filter/auto_filter.rb'
 require 'axlsx/workbook/worksheet/date_time_converter.rb'
 require 'axlsx/workbook/worksheet/protected_range.rb'
 require 'axlsx/workbook/worksheet/protected_ranges.rb'
+require 'axlsx/workbook/worksheet/rich_text_run'
+require 'axlsx/workbook/worksheet/rich_text'
 require 'axlsx/workbook/worksheet/cell_serializer.rb'
 require 'axlsx/workbook/worksheet/cell.rb'
 require 'axlsx/workbook/worksheet/page_margins.rb'
@@ -292,7 +294,7 @@ require 'axlsx/workbook/worksheet/selection.rb'
       end
       r << Relationship.new(self, STYLES_R,  STYLES_PN)
       if use_shared_strings
-          r << Relationship.new(self, SHARED_STRINGS_R,  SHARED_STRINGS_PN)
+          r << Relationship.new(self, SHARED_STRINGS_R, SHARED_STRINGS_PN)
       end
       r
     end

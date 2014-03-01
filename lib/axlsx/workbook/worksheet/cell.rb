@@ -47,6 +47,9 @@ module Axlsx
       parse_options(options) 
 
       self.value = value
+      if value.is_a?(RichText)
+        value.cell = self
+      end
     end
 
     # this is the cached value for formula cells. If you want the values to render in iOS/Mac OSX preview
@@ -64,7 +67,7 @@ module Axlsx
                      :shadow, :condense, :extend, :u,
                      :vertAlign, :sz, :color, :scheme].freeze
                      
-    CELL_TYPES = [:date, :time, :float, :integer, 
+    CELL_TYPES = [:date, :time, :float, :integer, :richtext,
                   :string, :boolean, :iso_8601].freeze
 
     # The index of the cellXfs item to be applied to this cell.
@@ -113,9 +116,13 @@ module Axlsx
     # Indicates that the cell has one or more of the custom cell styles applied.
     # @return [Boolean]
     def is_text_run?
-      defined?(@is_text_run) && @is_text_run
+      defined?(@is_text_run) && @is_text_run && !contains_rich_text?
+    end 
+    
+    def contains_rich_text?
+      type == :richtext
     end
-
+    
     # Indicates if the cell is good for shared string table
     def plain_string?
       type == :string &&         # String typed
@@ -321,13 +328,6 @@ module Axlsx
       type == :string && @value.to_s.start_with?(?=)
     end
 
-    # This is still not perfect...
-    #  - scaling is not linear as font sizes increase
-    def autowidth
-      return if is_formula? || value.nil?
-      (value.to_s.count(Worksheet::THIN_CHARS) + 3.0) * (font_size/10.0)
-    end
-
     # returns the absolute or relative string style reference for
     # this cell.
     # @param [Boolean] absolute -when false a relative reference will be
@@ -345,11 +345,35 @@ module Axlsx
 
     # returns the name of the cell
     attr_reader :name
+    
+    def autowidth
+      return if is_formula? || value.nil?
+      if contains_rich_text?
+        string_width('', font_size) + value.autowidth
+      elsif styles.cellXfs[style].alignment && styles.cellXfs[style].alignment.wrap_text
+        max_width = 0
+        value.to_s.split(/\r?\n/).each do |line|
+          width = string_width(line, font_size)
+          max_width = width if width > max_width
+        end
+        max_width
+      else
+        string_width(value, font_size)
+      end
+    end
 
     private
     
     def styles
       row.worksheet.styles
+    end
+    
+    # Returns the width of a string according to the current style
+    # This is still not perfect...
+    #  - scaling is not linear as font sizes increase
+    def string_width(string, font_size)
+      font_scale = font_size / 10.0
+      (string.to_s.count(Worksheet::THIN_CHARS) + 3.0) * (font_size/10.0)
     end
 
     # we scale the font size if bold style is applied to either the style font or
@@ -396,6 +420,8 @@ module Axlsx
         :float
       elsif v.to_s =~ Axlsx::ISO_8601_REGEX
         :iso_8601
+      elsif v.is_a? RichText
+        :richtext
       else
         :string
       end
@@ -407,6 +433,7 @@ module Axlsx
     # @see Axlsx#date1904
     def cast_value(v)
       return nil if v.nil?
+      return v if v.is_a? RichText
       case type
       when :date
         self.style = STYLE_DATE if self.style == 0
