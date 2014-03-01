@@ -38,7 +38,7 @@ module Axlsx
       @xml_space = xml_space
       @unique_cells = {}
       @shared_xml_string = ""
-      shareable_cells = cells.flatten.select{ |cell| cell.plain_string? }
+      shareable_cells = cells.flatten.select{ |cell| cell.plain_string? || cell.contains_rich_text? }
       @count = shareable_cells.size
       resolve(shareable_cells)
     end

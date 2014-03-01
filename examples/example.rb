@@ -49,6 +49,8 @@ examples << :shared_strings
 examples << :no_autowidth
 examples << :cached_formula
 examples << :page_breaks
+examples << :rich_text
+
 p = Axlsx::Package.new
 wb = p.workbook
 #```
@@ -794,8 +796,7 @@ if examples.include? :no_autowidth
 end
 #```
 
-
-
+#```ruby
 if examples.include? :cached_formula
   p = Axlsx::Package.new
   p.use_shared_strings = true
@@ -805,4 +806,23 @@ if examples.include? :cached_formula
   end
   p.serialize 'cached_formula.xlsx'
 end
+#```
 
+#```ruby
+if examples.include? :rich_text
+  p = Axlsx::Package.new
+  p.use_shared_strings = true
+  wb = p.workbook
+  wrap_text = wb.styles.add_style({:alignment => {:horizontal => :center, :vertical => :center, :wrap_text => true}}  )
+  rt = Axlsx::RichText.new
+  rt.add_run('I\'m bold, ', :b => true)
+  rt.add_run('I\'m italic, ', :i => true)
+  rt.add_run('I\'m strike' + "\n", :strike => true)
+  rt.add_run('I\'m bold, italic and strike' + "\n", :b => true, :i => true, :strike => true)
+  rt.add_run('I\'m style-less :D')
+  wb.add_worksheet(:name => "RichText") do | sheet |
+    sheet.add_row [rt], :style => wrap_text
+  end
+  p.serialize 'rich_text.xlsx'
+end
+#```

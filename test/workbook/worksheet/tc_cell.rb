@@ -95,6 +95,7 @@ class TestCell < Test::Unit::TestCase
     assert_equal(@c.send(:cell_type_from_value, true), :boolean)
     assert_equal(@c.send(:cell_type_from_value, false), :boolean)
     assert_equal(@c.send(:cell_type_from_value, 1.0/10**6), :float)
+    assert_equal(@c.send(:cell_type_from_value, Axlsx::RichText.new), :richtext)
     assert_equal(:iso_8601, @c.send(:cell_type_from_value, '2008-08-30T01:45:36.123+09:00'))
   end
 
@@ -106,6 +107,8 @@ class TestCell < Test::Unit::TestCase
     @c.type = :float
     assert_equal(@c.send(:cast_value, "1.0"), 1.0)
     @c.type = :string
+    assert_equal(@c.send(:cast_value, nil), nil)
+    @c.type = :richtext
     assert_equal(@c.send(:cast_value, nil), nil)
     @c.type = :float
     assert_equal(@c.send(:cast_value, nil), nil)
@@ -301,11 +304,11 @@ class TestCell < Test::Unit::TestCase
     assert_equal(sz, 52)
   end
   
-
   def test_cell_with_sz
     @c.sz = 25
     assert_equal(25, @c.send(:font_size))
   end
+  
   def test_to_xml
     # TODO This could use some much more stringent testing related to the xml content generated!
     @ws.add_row [Time.now, Date.today, true, 1, 1.0, "text", "=sum(A1:A2)", "2013-01-13T13:31:25.123"]
@@ -319,7 +322,5 @@ class TestCell < Test::Unit::TestCase
       puts error.message
     end
     assert(errors.empty?, "error free validation")
-
   end
-
 end
