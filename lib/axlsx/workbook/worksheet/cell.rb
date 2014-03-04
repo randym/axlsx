@@ -307,12 +307,12 @@ module Axlsx
     # @see worksheet.merge_cells
     # @param [Cell, String] target The last cell, or str ref for the cell in the merge range
     def merge(target)
-      range_end = if target.is_a?(String)
-                    target
-                  elsif(target.is_a?(Cell))
-                    target.r
-                  end
-      self.row.worksheet.merge_cells "#{self.r}:#{range_end}" unless range_end.nil?
+      start, stop = if target.is_a?(String)
+                      [self.r, target]
+                    elsif(target.is_a?(Cell))
+                      Axlsx.sort_cells([self, target]).map { |c| c.r }
+                    end
+      self.row.worksheet.merge_cells "#{start}:#{stop}" unless stop.nil?
     end
 
     # Serializes the cell
