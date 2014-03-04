@@ -3,7 +3,7 @@ module Axlsx
     
     include Axlsx::OptionsParser
     
-    attr_accessor :value
+    attr_reader :value
     
     INLINE_STYLES = [:font_name, :charset,
                      :family, :b, :i, :strike, :outline,
@@ -13,6 +13,10 @@ module Axlsx
     def initialize(value, options={})
       self.value = value
       parse_options(options) 
+    end
+    
+    def value=(value)
+      @value = Axlsx::trust_input ? value.to_s : ::CGI.escapeHTML(Axlsx::sanitize(value.to_s))
     end
     
     attr_accessor :cell
@@ -122,7 +126,6 @@ module Axlsx
     # @param [String] v The 8 character representation for an rgb color #FFFFFFFF"
     def color=(v)
       @color = v.is_a?(Color) ? v : Color.new(:rgb=>v)
-      @is_text_run = true
     end
 
     # The inline sz property for the cell
@@ -187,7 +190,6 @@ module Axlsx
       return unless INLINE_STYLES.include?(attr.to_sym)
       Axlsx.send(validator, value) unless validator.nil?
       self.instance_variable_set :"@#{attr.to_s}", value
-      @is_text_run = true
     end
     
     def to_xml_string(str = '')
