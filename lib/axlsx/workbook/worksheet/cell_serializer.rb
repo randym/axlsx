@@ -95,6 +95,15 @@ module Axlsx
         str << ('<v>' << cell.formula_value.to_s << '</v>') unless cell.formula_value.nil?
       end
 
+      # Serializes cells that are type array formula
+      # @param [Cell] cell The cell that is being serialized
+      # @param [String] str The string the serialized content will be appended to.
+      # @return [String]
+      def array_formula_serialization(cell, str='')
+        str << ('t="str">' << '<f t="array" ref="' << cell.r << '">' << cell.value.to_s.sub('{=', '').sub(/}$/, '') << '</f>')
+        str << ('<v>' << cell.formula_value.to_s << '</v>') unless cell.formula_value.nil?
+      end
+
       # Serializes cells that are type inline_string
       # @param [Cell] cell The cell that is being serialized
       # @param [String] str The string the serialized content will be appended to.
@@ -110,7 +119,9 @@ module Axlsx
       # @param [String] str The string the serialized content will be appended to.
       # @return [String]
       def string(cell, str='')
-        if cell.is_formula?
+        if cell.is_array_formula?
+          array_formula_serialization cell, str
+        elsif cell.is_formula?
           formula_serialization cell, str
         elsif !cell.ssti.nil?
           value_serialization 's', cell.ssti, str

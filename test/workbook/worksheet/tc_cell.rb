@@ -287,6 +287,18 @@ class TestCell < Test::Unit::TestCase
 
   end
 
+  def test_to_xml_string_array_formula
+    p = Axlsx::Package.new
+    ws = p.workbook.add_worksheet do |sheet|
+      sheet.add_row ["{=SUM(C2:C11*D2:D11)}"]
+    end
+    doc = Nokogiri::XML(ws.to_xml_string)
+    doc.remove_namespaces!
+    assert(doc.xpath("//f[text()='SUM(C2:C11*D2:D11)']"))
+    assert(doc.xpath("//f[@t='array']"))
+    assert(doc.xpath("//f[@ref='A1']"))
+  end
+
   def test_font_size_with_custom_style_and_no_sz
     @c.style = @c.row.worksheet.workbook.styles.add_style :bg_color => 'FF00FF'
     sz = @c.send(:font_size)

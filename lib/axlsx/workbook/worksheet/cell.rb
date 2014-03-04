@@ -328,6 +328,10 @@ module Axlsx
       type == :string && @value.to_s.start_with?(?=)
     end
 
+    def is_array_formula?
+      type == :string && @value.to_s.start_with?('{=') && @value.to_s.end_with?('}')
+    end
+
     # returns the absolute or relative string style reference for
     # this cell.
     # @param [Boolean] absolute -when false a relative reference will be
