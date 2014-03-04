@@ -225,6 +225,13 @@ class TestCell < Test::Unit::TestCase
     @c.merge @row.cells.last
     assert_equal(@c.row.worksheet.send(:merged_cells).last, "A1:C1")
   end
+  
+  def test_reverse_merge_with_cell
+    @c.row.add_cell 2
+    @c.row.add_cell 3
+    @row.cells.last.merge @c
+    assert_equal(@c.row.worksheet.send(:merged_cells).last, "A1:C1")
+  end
 
   def test_ssti
     assert_raise(ArgumentError, "ssti must be an unsigned integer!") { @c.send(:ssti=, -1) }
