@@ -47,9 +47,7 @@ module Axlsx
       parse_options(options) 
 
       self.value = value
-      if value.is_a?(RichText)
-        value.cell = self
-      end
+      value.cell = self if contains_rich_text?
     end
 
     # this is the cached value for formula cells. If you want the values to render in iOS/Mac OSX preview
@@ -436,8 +434,7 @@ module Axlsx
     #   About Time - Time in OOXML is *different* from what you might expect. The history as to why is interesting, but you can safely assume that if you are generating docs on a mac, you will want to specify Workbook.1904 as true when using time typed values.
     # @see Axlsx#date1904
     def cast_value(v)
-      return nil if v.nil?
-      return v if v.is_a? RichText
+      return v if v.is_a?(RichText) || v.nil?
       case type
       when :date
         self.style = STYLE_DATE if self.style == 0
@@ -457,8 +454,7 @@ module Axlsx
       else
         # TODO find a better way to do this as it accounts for 30% of
         # processing time in benchmarking...
-        
-        Axlsx::trust_input ? v.to_s : ::CGI.escapeHTML(Axlsx::sanitize(v.to_s))
+        Axlsx::trust_input ? v.to_s : Axlsx::sanitize(::CGI.escapeHTML(v.to_s))
       end
     end
 
