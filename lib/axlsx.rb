@@ -22,9 +22,16 @@ require 'axlsx/rels/relationships.rb'
 require 'axlsx/drawing/drawing.rb'
 require 'axlsx/workbook/workbook.rb'
 require 'axlsx/package.rb'
+
 #required gems
-require 'nokogiri'
 require 'zip'
+
+#optional gems
+begin
+  require 'escape_utils'
+  require 'escape_utils/html/cgi'
+rescue LoadError
+end
 
 #core dependencies
 require 'bigdecimal'
