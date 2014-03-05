@@ -3,8 +3,6 @@ module Axlsx
   # The Cell Serializer class contains the logic for serializing cells based on their type.
   class CellSerializer
     class << self
-
-
       # Calls the proper serialization method based on type.
       # @param [Integer] row_index The index of the cell's row
       # @param [Integer] column_index The index of the cell's column
@@ -17,7 +15,6 @@ module Axlsx
         self.send(method, cell, str)
         str << '</c>'
       end 
-
 
       # builds an xml text run based on this cells attributes.
       # @param [String] str The string instance this run will be concated to.
@@ -43,7 +40,6 @@ module Axlsx
       def iso_8601(cell, str='')
         value_serialization 'd', cell.value, str
       end
-
 
       # serializes cells that are type date
       # @param [Cell] cell The cell that is being serialized
@@ -84,7 +80,6 @@ module Axlsx
       def integer(cell, str = '')
         numeric cell, str
       end
-
 
       # Serializes cells that are type formula
       # @param [Cell] cell The cell that is being serialized
@@ -130,6 +125,10 @@ module Axlsx
         end
       end
       
+      # Serializes cells that are of the type richtext
+      # @param [Cell] cell The cell that is being serialized
+      # @param [String] str The string the serialized content will be appended to.
+      # @return [String]
       def richtext(cell, str)
         if cell.ssti.nil?
           inline_string_serialization cell, str

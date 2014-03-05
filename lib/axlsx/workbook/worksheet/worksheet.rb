@@ -442,10 +442,10 @@ module Axlsx
     # @option options [Array] widths each member of the widths array will affect how auto_fit behavies.
     # @option options [Float] height the row's height (in points)
     def add_row(values=[], options={})
-      Row.new(self, values, options)
-      update_column_info @rows.last, options.delete(:widths)
-      yield @rows.last if block_given?
-      @rows.last
+      row = Row.new(self, values, options)
+      update_column_info row, options.delete(:widths)
+      yield row if block_given?
+      row
     end
 
     alias :<< :add_row
@@ -597,7 +597,7 @@ module Axlsx
       add_autofilter_defined_name_to_workbook
       str << '<sheet '
       serialized_attributes str
-      str << ("r:id='" << rId << '\'></sheet>')
+      str << ('r:id="' << rId << '"></sheet>')
     end
 
     # Serializes the worksheet object to an xml string
