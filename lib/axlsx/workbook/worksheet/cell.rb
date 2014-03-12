@@ -363,6 +363,17 @@ module Axlsx
         string_width(value, font_size)
       end
     end
+    
+    # Returns the sanatized value
+    # TODO find a better way to do this as it accounts for 30% of
+    # processing time in benchmarking...
+    def clean_value
+      if type == :string && !Axlsx::trust_input
+        Axlsx::sanitize(::CGI.escapeHTML(@value.to_s))
+      else
+        @value.to_s
+      end
+    end
 
     private
     
@@ -452,9 +463,7 @@ module Axlsx
         #consumer is responsible for ensuring the iso_8601 format when specifying this type
         v
       else
-        # TODO find a better way to do this as it accounts for 30% of
-        # processing time in benchmarking...
-        Axlsx::trust_input ? v.to_s : Axlsx::sanitize(::CGI.escapeHTML(v.to_s))
+        v.to_s
       end
     end
 

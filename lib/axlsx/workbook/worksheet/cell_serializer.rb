@@ -28,7 +28,7 @@ module Axlsx
         elsif cell.contains_rich_text?
           cell.value.to_xml_string(str)
         else
-          str << ('<t>' << cell.value.to_s << '</t>')
+          str << ('<t>' << cell.clean_value << '</t>')
         end
         str
       end
@@ -86,7 +86,7 @@ module Axlsx
       # @param [String] str The string the serialized content will be appended to.
       # @return [String]
       def formula_serialization(cell, str='')
-        str << ('t="str"><f>' << cell.value.to_s.sub('=', '') << '</f>')
+        str << ('t="str"><f>' << cell.clean_value.to_s.sub('=', '') << '</f>')
         str << ('<v>' << cell.formula_value.to_s << '</v>') unless cell.formula_value.nil?
       end
 
@@ -95,7 +95,7 @@ module Axlsx
       # @param [String] str The string the serialized content will be appended to.
       # @return [String]
       def array_formula_serialization(cell, str='')
-        str << ('t="str">' << '<f t="array" ref="' << cell.r << '">' << cell.value.to_s.sub('{=', '').sub(/}$/, '') << '</f>')
+        str << ('t="str">' << '<f t="array" ref="' << cell.r << '">' << cell.clean_value.to_s.sub('{=', '').sub(/}$/, '') << '</f>')
         str << ('<v>' << cell.formula_value.to_s << '</v>') unless cell.formula_value.nil?
       end
 
