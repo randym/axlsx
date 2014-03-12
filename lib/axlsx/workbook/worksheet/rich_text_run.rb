@@ -16,7 +16,7 @@ module Axlsx
     end
     
     def value=(value)
-      @value = Axlsx::trust_input ? value.to_s : ::CGI.escapeHTML(Axlsx::sanitize(value.to_s))
+      @value = value
     end
     
     attr_accessor :cell
@@ -208,7 +208,8 @@ module Axlsx
           str << ('<' << key.to_s << ' val="' << xml_value(data[key]) << '"/>')
         end
       end
-      str << ('</rPr><t>' << @value.to_s << '</t></r>')
+      clean_value = Axlsx::trust_input ? @value.to_s : ::CGI.escapeHTML(Axlsx::sanitize(@value.to_s))
+      str << ('</rPr><t>' << clean_value << '</t></r>')
     end
     
     private
