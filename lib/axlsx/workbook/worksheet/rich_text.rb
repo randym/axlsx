@@ -6,7 +6,6 @@ module Axlsx
       yield self if block_given?
     end
 
-    attr_reader :runs
     attr_reader :cell
     
     def cell=(cell)
