@@ -114,7 +114,7 @@ module Axlsx
     def to_stream(confirm_valid=false)
       return false unless !confirm_valid || self.validate.empty?
       Relationship.clear_cached_instances
-      zip = write_parts(Zip::OutputStream.new("streamed", true))
+      zip = write_parts(Zip::OutputStream.new(StringIO.new, true))
       stream = zip.close_buffer
       stream.rewind
       stream
