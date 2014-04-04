@@ -113,8 +113,8 @@ class TestConditionalFormatting < Test::Unit::TestCase
                  :percent => false, :rank => 0, :stdDev => 1, :stopIfTrue => true, :timePeriod => :today,
                  :formula => "0.0"})
     doc = Nokogiri::XML.parse(cf.to_xml_string)
-    assert_equal(1, doc.xpath(".//conditionalFormatting//cfRule[@type='cellIs'][@aboveAverage='false'][@bottom='false'][@dxfId=0][@equalAverage='false'][@priority=2][@operator='lessThan'][@text=''][@percent='false'][@rank=0][@stdDev=1][@stopIfTrue='true'][@timePeriod='today']").size)
-    assert doc.xpath(".//conditionalFormatting//cfRule[@type='cellIs'][@aboveAverage='false'][@bottom='false'][@dxfId=0][@equalAverage='false'][@priority=2][@operator='lessThan'][@text=''][@percent='false'][@rank=0][@stdDev=1][@stopIfTrue='true'][@timePeriod='today']//formula=0.0")
+    assert_equal(1, doc.xpath(".//conditionalFormatting//cfRule[@type='cellIs'][@aboveAverage=0][@bottom=0][@dxfId=0][@equalAverage=0][@priority=2][@operator='lessThan'][@text=''][@percent=0][@rank=0][@stdDev=1][@stopIfTrue=1][@timePeriod='today']").size)
+    assert doc.xpath(".//conditionalFormatting//cfRule[@type='cellIs'][@aboveAverage=0][@bottom=0][@dxfId=0][@equalAverage=0][@priority=2][@operator='lessThan'][@text=''][@percent=0][@rank=0][@stdDev=1][@stopIfTrue=1][@timePeriod='today']//formula=0.0")
   end
 
   def test_to_xml

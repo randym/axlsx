@@ -137,6 +137,18 @@ module Axlsx
     str.delete!(CONTROL_CHARS)
     str
   end
+  
+  # If value is boolean return 1 or 0
+  # else return the value
+  # @param [Object] value The value to process
+  # @return [Object]
+  def self.booleanize(value)
+    if value == true || value == false
+      value ? 1 : 0
+    else
+      value
+    end
+  end
 
   # Instructs the serializer to not try to escape cell value input.
   # This will give you a huge speed bonus, but if you content has <, > or other xml character data

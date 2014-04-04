@@ -44,6 +44,6 @@ class TestBreak < Test::Unit::TestCase
 
   def test_to_xml_string
     doc = Nokogiri::XML(@break.to_xml_string)
-    assert_equal(doc.xpath('//brk[@id="1"][@min="1"][@max="10"][@pt="false"][@man="true"]').size, 1)
+    assert_equal(doc.xpath('//brk[@id="1"][@min="1"][@max="10"][@pt=0][@man=1]').size, 1)
   end
 end

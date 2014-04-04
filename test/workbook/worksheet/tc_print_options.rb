@@ -42,7 +42,7 @@ class TestPrintOptions < Test::Unit::TestCase
   def test_to_xml
     @po.set(:grid_lines => true, :headings => true, :horizontal_centered => true, :vertical_centered => true)
     doc = Nokogiri::XML.parse(@po.to_xml_string)
-    assert_equal(1, doc.xpath(".//printOptions[@gridLines='true'][@headings='true'][@horizontalCentered='true'][@verticalCentered='true']").size)
+    assert_equal(1, doc.xpath(".//printOptions[@gridLines=1][@headings=1][@horizontalCentered=1][@verticalCentered=1]").size)
   end
 
   def test_grid_lines

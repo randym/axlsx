@@ -2,9 +2,9 @@
 require 'tc_helper.rb'
 
 # <xsd:complexType name="CT_SheetProtection">
-# <xsd:attribute name="sheet" type="xsd:boolean" use="optional" default="false"/>
-# <xsd:attribute name="objects" type="xsd:boolean" use="optional" default="false"/>
-# <xsd:attribute name="scenarios" type="xsd:boolean" use="optional" default="false"/>
+# <xsd:attribute name="sheet" type="xsd:boolean" use="optional" default=0/>
+# <xsd:attribute name="objects" type="xsd:boolean" use="optional" default=0/>
+# <xsd:attribute name="scenarios" type="xsd:boolean" use="optional" default=0/>
 # <xsd:attribute name="formatCells" type="xsd:boolean" use="optional" default="true"/>
 # <xsd:attribute name="formatColumns" type="xsd:boolean" use="optional" default="true"/>
 # <xsd:attribute name="formatRows" type="xsd:boolean" use="optional" default="true"/>
@@ -13,11 +13,11 @@ require 'tc_helper.rb'
 # <xsd:attribute name="insertHyperlinks" type="xsd:boolean" use="optional" default="true"/>
 # <xsd:attribute name="deleteColumns" type="xsd:boolean" use="optional" default="true"/>
 # <xsd:attribute name="deleteRows" type="xsd:boolean" use="optional" default="true"/>
-# <xsd:attribute name="selectLockedCells" type="xsd:boolean" use="optional" default="false"/>
+# <xsd:attribute name="selectLockedCells" type="xsd:boolean" use="optional" default=0/>
 # <xsd:attribute name="sort" type="xsd:boolean" use="optional" default="true"/>
 # <xsd:attribute name="autoFilter" type="xsd:boolean" use="optional" default="true"/>
 # <xsd:attribute name="pivotTables" type="xsd:boolean" use="optional" default="true"/>
-# <xsd:attribute name="selectUnlockedCells" type="xsd:boolean" use="optional" default="false"/>
+# <xsd:attribute name="selectUnlockedCells" type="xsd:boolean" use="optional" default=0/>
 # <xsd:attribute name="password" type="xsd:string" use="optional" default="nil"/>
 # </xsd:complexType>
  

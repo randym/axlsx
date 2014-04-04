@@ -40,6 +40,9 @@ class TestWorkbookView < Test::Unit::TestCase
     xml = @book_view.to_xml_string
     doc = Nokogiri::XML(xml)
     @options.each do |key, value|
+      if value == true || value == false
+        value = value ? 1 : 0
+      end
       path = "workbookView[@#{Axlsx.camel(key, false)}='#{value}']"
       assert_equal(1, doc.xpath(path).size)
     end

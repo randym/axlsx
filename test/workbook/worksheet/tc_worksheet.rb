@@ -269,7 +269,7 @@ class TestWorksheet < Test::Unit::TestCase
   def test_to_xml_string_fit_to_page
     @ws.page_setup.fit_to_width = 1
     doc = Nokogiri::XML(@ws.to_xml_string)
-    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:sheetPr/xmlns:pageSetUpPr[@fitToPage="true"]').size, 1)
+    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:sheetPr/xmlns:pageSetUpPr[@fitToPage=1]').size, 1)
   end
 
   def test_to_xml_string_dimensions
@@ -286,13 +286,13 @@ class TestWorksheet < Test::Unit::TestCase
   def test_to_xml_string_selected
     @ws.selected = true
     doc = Nokogiri::XML(@ws.to_xml_string)
-    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:sheetViews/xmlns:sheetView[@tabSelected="true"]').size, 1)
+    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:sheetViews/xmlns:sheetView[@tabSelected=1]').size, 1)
   end
 
   def test_to_xml_string_show_gridlines
     @ws.show_gridlines = false
     doc = Nokogiri::XML(@ws.to_xml_string)
-    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:sheetViews/xmlns:sheetView[@showGridLines="false"]').size, 1)
+    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:sheetViews/xmlns:sheetView[@showGridLines=0]').size, 1)
   end
 
   def test_to_xml_string_auto_fit_data
@@ -359,7 +359,7 @@ class TestWorksheet < Test::Unit::TestCase
       po.horizontal_centered = true
     end
     doc = Nokogiri::XML(@ws.to_xml_string)
-    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:printOptions[@gridLines="true"][@horizontalCentered="true"]').size, 1)
+    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:printOptions[@gridLines=1][@horizontalCentered=1]').size, 1)
   end
 
   def test_to_xml_string_header_footer
@@ -369,7 +369,7 @@ class TestWorksheet < Test::Unit::TestCase
       hf.odd_header = 'Test Header'
     end
     doc = Nokogiri::XML(@ws.to_xml_string)
-    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:headerFooter[@differentFirst="false"][@differentOddEven="false"]').size, 1)
+    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:headerFooter[@differentFirst=0][@differentOddEven=0]').size, 1)
   end
 
   def test_to_xml_string_drawing
@@ -535,7 +535,7 @@ class TestWorksheet < Test::Unit::TestCase
     @ws.auto_filter.range = 'A1:D9'
     @ws.auto_filter.add_column 0, :filters, :filter_items => [1]
     doc = Nokogiri::XML(@ws.to_xml_string)
-    assert(doc.xpath('//sheetPr[@filterMode="true"]'))
+    assert(doc.xpath('//sheetPr[@filterMode=1]'))
   end
 
   def test_outline_level_rows

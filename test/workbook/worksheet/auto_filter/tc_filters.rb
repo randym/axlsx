@@ -44,7 +44,7 @@ class TestFilters < Test::Unit::TestCase
 
   def test_to_xml_string
     doc = Nokogiri::XML(@filters.to_xml_string)
-    assert_equal(1, doc.xpath('//filters[@blank="true"]').size)
+    assert_equal(1, doc.xpath('//filters[@blank=1]').size)
   end
 end
 

@@ -38,7 +38,7 @@ class TestIconSet < Test::Unit::TestCase
 
   def test_to_xml_string
     doc = Nokogiri::XML.parse(@icon_set.to_xml_string)
-    assert_equal(doc.xpath(".//iconSet[@iconSet='3TrafficLights1'][@percent='true'][@reverse='false'][@showValue='true']").size, 1)
+    assert_equal(doc.xpath(".//iconSet[@iconSet='3TrafficLights1'][@percent=1][@reverse=0][@showValue=1]").size, 1)
     assert_equal(doc.xpath(".//iconSet//cfvo").size, 3)
   end
 

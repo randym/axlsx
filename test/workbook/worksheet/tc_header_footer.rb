@@ -109,7 +109,7 @@ class TestHeaderFooter < Test::Unit::TestCase
     )
 
     doc = Nokogiri::XML.parse(@hf.to_xml_string)
-    assert_equal(1, doc.xpath(".//headerFooter[@differentFirst='true'][@differentOddEven='true']").size)
+    assert_equal(1, doc.xpath(".//headerFooter[@differentFirst=1][@differentOddEven=1]").size)
 
     assert_equal(1, doc.xpath(".//headerFooter/oddHeader").size)
     assert_equal('oh', doc.xpath(".//headerFooter/oddHeader").text)
@@ -134,7 +134,7 @@ class TestHeaderFooter < Test::Unit::TestCase
     )
 
     doc = Nokogiri::XML.parse(@hf.to_xml_string)
-    assert_equal(1, doc.xpath(".//headerFooter[@differentOddEven='false']").size)
+    assert_equal(1, doc.xpath(".//headerFooter[@differentOddEven=0]").size)
     assert_equal(0, doc.xpath(".//headerFooter[@differentFirst]").size)
 
     assert_equal(1, doc.xpath(".//headerFooter/oddHeader").size)

@@ -38,7 +38,7 @@ class TestDataBar < Test::Unit::TestCase
 
   def test_to_xml_string
     doc = Nokogiri::XML.parse(@data_bar.to_xml_string)
-    assert_equal(doc.xpath(".//dataBar[@minLength=10][@maxLength=90][@showValue='true']").size, 1)
+    assert_equal(doc.xpath(".//dataBar[@minLength=10][@maxLength=90][@showValue=1]").size, 1)
     assert_equal(doc.xpath(".//dataBar//cfvo").size, 2)
     assert_equal(doc.xpath(".//dataBar//color").size, 1)
   end

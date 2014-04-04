@@ -197,11 +197,11 @@ class TestSheetView < Test::Unit::TestCase
 
     doc = Nokogiri::XML.parse(@ws.sheet_view.to_xml_string)
 
-    assert_equal(1, doc.xpath("//sheetView[@tabSelected='false']").size)
+    assert_equal(1, doc.xpath("//sheetView[@tabSelected=0]").size)
 
-    assert_equal(1, doc.xpath("//sheetView[@tabSelected='false'][@showWhiteSpace='false'][@showOutlineSymbols='false'][@showFormulas='false']
-        [@rightToLeft='false'][@windowProtection='false'][@showZeros='true'][@showRuler='true']
-        [@showRowColHeaders='true'][@showGridLines='true'][@defaultGridColor='true']
+    assert_equal(1, doc.xpath("//sheetView[@tabSelected=0][@showWhiteSpace=0][@showOutlineSymbols=0][@showFormulas=0]
+        [@rightToLeft=0][@windowProtection=0][@showZeros=1][@showRuler=1]
+        [@showRowColHeaders=1][@showGridLines=1][@defaultGridColor=1]
         [@zoomScale='100'][@workbookViewId='0'][@zoomScaleSheetLayoutView='0'][@zoomScalePageLayoutView='0']
         [@zoomScaleNormal='0'][@view='pageBreakPreview']").size)
   end

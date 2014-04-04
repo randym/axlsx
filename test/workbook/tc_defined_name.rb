@@ -42,7 +42,7 @@ class TestDefinedNames < Test::Unit::TestCase
     @dn.hidden = true
     doc = Nokogiri::XML(@dn.to_xml_string)
     assert_equal(doc.xpath("//definedName[@name='_xlnm.Print_Titles']").size, 1)
-    assert_equal(doc.xpath("//definedName[@hidden='true']").size, 1)
+    assert_equal(doc.xpath("//definedName[@hidden='1']").size, 1)
     assert_equal('Sheet1!A1:A1', doc.xpath('//definedName').text)
   end
 

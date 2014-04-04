@@ -74,13 +74,13 @@ class TestSheetFormatPr < Test::Unit::TestCase
 
   def test_to_xml_string
     doc = Nokogiri::XML(@sheet_format_pr.to_xml_string)
-    assert doc.xpath("sheetFormatPr[@thickBottom='true']")
+    assert doc.xpath("sheetFormatPr[@thickBottom=1]")
     assert doc.xpath("sheetFormatPr[@baseColWidth=5]")
     assert doc.xpath("sheetFormatPr[@default_col_width=7.2]")
     assert doc.xpath("sheetFormatPr[@default_row_height=5.2]")
-    assert doc.xpath("sheetFormatPr[@custom_height='true']")
-    assert doc.xpath("sheetFormatPr[@zero_height='false']")
-    assert doc.xpath("sheetFormatPr[@thick_top='true']")
+    assert doc.xpath("sheetFormatPr[@custom_height=1]")
+    assert doc.xpath("sheetFormatPr[@zero_height=0]")
+    assert doc.xpath("sheetFormatPr[@thick_top=1]")
     assert doc.xpath("sheetFormatPr[@outline_level_row=0]")
     assert doc.xpath("sheetFormatPr[@outline_level_col=0]")
   end

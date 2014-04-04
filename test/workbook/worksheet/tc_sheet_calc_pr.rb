@@ -13,6 +13,6 @@ class TestSheetCalcPr < Test::Unit::TestCase
 
   def test_to_xml_string
     doc = Nokogiri::XML(@sheet_calc_pr.to_xml_string)
-    assert_equal 1, doc.xpath('//sheetCalcPr[@fullCalcOnLoad="false"]').size
+    assert_equal 1, doc.xpath('//sheetCalcPr[@fullCalcOnLoad=0]').size
   end
 end
