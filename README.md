@@ -11,7 +11,7 @@ appreciation for the gem, please don't hesitate to make a donation.
 
 **Git**:[http://github.com/randym/axlsx](http://github.com/randym/axlsx)
 
-**Twitter**: [https://twitter.com/#!/morgan_randy](https://twitter.com/#!/morgan_randy)
+**Twitter**: [https://twitter.com/morgan_randy](https://twitter.com/morgan_randy)
 
 **Google Group**: [https://groups.google.com/forum/?fromgroups#!forum/axlsx](https://groups.google.com/forum/?fromgroups#!forum/axlsx)
 
@@ -50,7 +50,7 @@ There are guides for using axlsx and acts_as_xlsx here:
 
 If you are working with ActiveAdmin see:
 
-[activeadmin_axlsx](http://github.com/randym/activeadmin_axlsx)
+[activeadmin-axlsx](http://github.com/randym/activeadmin-axlsx)
 
 It provies a plugin and dsl for generating downloadable reports.
 
