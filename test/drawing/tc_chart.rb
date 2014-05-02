@@ -6,13 +6,14 @@ class TestChart < Test::Unit::TestCase
     @p = Axlsx::Package.new
     ws = @p.workbook.add_worksheet
     @row = ws.add_row ["one", 1, Time.now]
-    @chart = ws.add_chart Axlsx::Bar3DChart, :title => "fishery"
+    @chart = ws.add_chart Axlsx::Bar3DChart
   end
 
   def teardown
   end
 
   def test_initialization
+    @chart.title = 'fishery'
     assert_equal(@p.workbook.charts.last,@chart, "the chart is in the workbook")
     assert_equal(@chart.title.text, "fishery", "the title option has been applied")
     assert((@chart.series.is_a?(Axlsx::SimpleTypedList) && @chart.series.empty?), "The series is initialized and empty")
@@ -27,6 +28,18 @@ class TestChart < Test::Unit::TestCase
     assert_equal(@chart.title.cell, @row.cells.first)
   end
 
+  def test_hidden_title
+    # this code must be missing
+    # <c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:t>fishery</a:t></a:r></a:p></c:rich></c:tx>
+    doc = Nokogiri::XML(@chart.to_xml_string)
+    assert_equal(0, doc.xpath('//a:t').size)
+  end
+
+  def test_bg_color
+    doc = Nokogiri::XML(@chart.to_xml_string)
+    assert_equal(0, doc.xpath('//a:t', 'a:solidFill').size)
+  end
+
   def test_to_from_marker_access
     assert(@chart.to.is_a?(Axlsx::Marker))
     assert(@chart.from.is_a?(Axlsx::Marker))
@@ -37,7 +50,7 @@ class TestChart < Test::Unit::TestCase
     assert_nothing_raised { @chart.style = 2 }
     assert_equal(@chart.style, 2)
   end
-  
+
   def test_vary_colors
     assert_equal(true, @chart.vary_colors)
     assert_raise(ArgumentError) { @chart.vary_colors = 7 }

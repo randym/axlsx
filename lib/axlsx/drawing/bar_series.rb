@@ -53,6 +53,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       super(str) do |str_inner|
+        @legend_color = @colors.first
 
         colors.each_with_index do |c, index|
           str_inner << '<c:dPt>'
