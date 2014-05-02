@@ -75,8 +75,8 @@ module Axlsx
 
     #set trenline_weight
     def trendline_weight
-      if @trendline[:weight].to_s
-      @trendline[:weight].to_s
+      if @trendline[:weight]
+        @trendline[:weight].to_s
       else
         '1'
       end
@@ -109,18 +109,18 @@ module Axlsx
       end
 
       if @trendline
-        str << ' <c:trendline>'
-        str << ' <c:spPr>'
-        str << ' <a:ln w="' << trendline_weight << '8100">'
-        str << ' <a:solidFill>'
-        str << ' <a:srgbClr val="' << trendline_color << '"/>'
-        str << ' </a:solidFill>'
-        str << '       </a:ln>'
-        str << ' </c:spPr>'
-        str << '     <c:trendlineType val="linear"/>'
-        str << ' <c:dispRSqr val="0"/>'
-        str << ' <c:dispEq val="0"/>'
-        str << ' </c:trendline>'
+        str << '<c:trendline>'
+        str << '<c:spPr>'
+        str << '<a:ln w="' << trendline_weight << '">'
+        str << '<a:solidFill>'
+        str << '<a:srgbClr val="' << trendline_color << '"/>'
+        str << '</a:solidFill>'
+        str << '</a:ln>'
+        str << '</c:spPr>'
+        str << '<c:trendlineType val="linear"/>'
+        str << '<c:dispRSqr val="0"/>'
+        str << '<c:dispEq val="0"/>'
+        str << '</c:trendline>'
       end
       str << '</c:ser>'
     end
