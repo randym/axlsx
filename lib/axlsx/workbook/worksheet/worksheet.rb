@@ -790,7 +790,7 @@ module Axlsx
     end
 
     def add_autofilter_defined_name_to_workbook
-      return if workbook.defined_names.any?{|dn| dn.name=='_xlnm._FilterDatabase'} || !auto_filter.range
+      return if !auto_filter.range
       workbook.add_defined_name auto_filter.defined_name, name: '_xlnm._FilterDatabase', local_sheet_id: index, hidden: 1
     end
 
