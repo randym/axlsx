@@ -11,7 +11,7 @@ module Axlsx
     # class methods applied to all includers
     module ClassMethods
 
-      # This is the method to be used in inheriting classes to specify 
+      # This is the method to be used in inheriting classes to specify
       # which of the instance values are serializable
       def serializable_attributes(*symbols)
         @xml_attributes = symbols
@@ -43,7 +43,7 @@ module Axlsx
       end
     end
 
-    # serializes the instance values of the defining object based on the 
+    # serializes the instance values of the defining object based on the
     # list of serializable attributes.
     # @param [String] str The string instance to append this
     # serialization to.
@@ -52,7 +52,8 @@ module Axlsx
     def serialized_attributes(str = '', additional_attributes = {})
       attributes = declared_attributes.merge! additional_attributes
       attributes.each do |key, value|
-        str << "#{Axlsx.camel(key, false)}=\"#{Axlsx.camel(Axlsx.booleanize(value), false)}\" "
+        new_value = Axlsx.camel(value, false).gsub('"','&quot;').gsub("<", '&lt;').gsub(">", '&gt;')
+        str << "#{Axlsx.camel(key, false)}=\"#{new_value}\" "
       end
       str
     end
