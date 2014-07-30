@@ -1,6 +1,6 @@
 require 'tc_helper'
 
-class TestDLbls < Test::Unit::TestCase
+class TestDLbls < Minitest::Unit::TestCase
 
   def setup
     @d_lbls = Axlsx::DLbls.new(Axlsx::Pie3DChart)
@@ -32,13 +32,13 @@ class TestDLbls < Test::Unit::TestCase
     assert_equal(:t, d_lbls.d_lbl_pos, "d_lbl_pos set by options")
   end
   def test_d_lbl_pos
-    assert_raise(ArgumentError, 'invlaid label positions are rejected') { @d_lbls.d_lbl_pos = :upside_down }
+    assert_raises(ArgumentError, 'invlaid label positions are rejected') { @d_lbls.d_lbl_pos = :upside_down }
     assert_nothing_raised('accepts valid label position') { @d_lbls.d_lbl_pos = :ctr }
   end
 
   def test_boolean_attributes
     @boolean_attributes.each do |attr|
-      assert_raise(ArgumentError, "rejects non boolean value for #{attr}") { @d_lbls.send("#{attr}=", :foo) }
+      assert_raises(ArgumentError, "rejects non boolean value for #{attr}") { @d_lbls.send("#{attr}=", :foo) }
       assert_nothing_raised("accepts boolean value for #{attr}") { @d_lbls.send("#{attr}=", true) }
       assert_nothing_raised("accepts boolean value for #{attr}") { @d_lbls.send("#{attr}=", false) }
     end

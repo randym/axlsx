@@ -2,7 +2,7 @@
 require 'tc_helper.rb'
 
 
-class TestDataValidation < Test::Unit::TestCase
+class TestDataValidation < Minitest::Unit::TestCase
   def setup
     #inverse defaults
     @boolean_options = { :allowBlank => false, :showDropDown => true, :showErrorMessage => false, :showInputMessage => true }
@@ -44,105 +44,105 @@ class TestDataValidation < Test::Unit::TestCase
   
   def test_boolean_attribute_validation
     @boolean_options.each do |key, value|
-      assert_raise(ArgumentError, "#{key} must be boolean") { @dv.send("#{key}=".to_sym, 'A') }
+      assert_raises(ArgumentError, "#{key} must be boolean") { @dv.send("#{key}=".to_sym, 'A') }
       assert_nothing_raised { @dv.send("#{key}=".to_sym, true) }
     end
   end
   
   def test_string_attribute_validation
     @string_options.each do |key, value|
-      assert_raise(ArgumentError, "#{key} must be string") { @dv.send("#{key}=".to_sym, :symbol) }
+      assert_raises(ArgumentError, "#{key} must be string") { @dv.send("#{key}=".to_sym, :symbol) }
       assert_nothing_raised { @dv.send("#{key}=".to_sym, "foo") }
     end
   end
   
   def test_symbol_attribute_validation
     @symbol_options.each do |key, value|
-      assert_raise(ArgumentError, "#{key} must be symbol") { @dv.send("#{key}=".to_sym, "foo") }
+      assert_raises(ArgumentError, "#{key} must be symbol") { @dv.send("#{key}=".to_sym, "foo") }
       assert_nothing_raised { @dv.send("#{key}=".to_sym, value) }
     end
   end
   
   def test_formula1
-    assert_raise(ArgumentError) { @dv.formula1 = 10 }
+    assert_raises(ArgumentError) { @dv.formula1 = 10 }
     assert_nothing_raised { @dv.formula1 = "=SUM(A1:A1)" }
     assert_equal(@dv.formula1, "=SUM(A1:A1)")
   end
   
   def test_formula2
-    assert_raise(ArgumentError) { @dv.formula2 = 10 }
+    assert_raises(ArgumentError) { @dv.formula2 = 10 }
     assert_nothing_raised { @dv.formula2 = "=SUM(A1:A1)" }
     assert_equal(@dv.formula2, "=SUM(A1:A1)")
   end
   
   def test_allowBlank
-    assert_raise(ArgumentError) { @dv.allowBlank = "foo´" }
+    assert_raises(ArgumentError) { @dv.allowBlank = "foo´" }
     assert_nothing_raised { @dv.allowBlank = false }
     assert_equal(@dv.allowBlank, false)
   end
   
   def test_error
-    assert_raise(ArgumentError) { @dv.error = :symbol }
+    assert_raises(ArgumentError) { @dv.error = :symbol }
     assert_nothing_raised { @dv.error = "This is a error message" }
     assert_equal(@dv.error, "This is a error message")
   end
   
   def test_errorStyle
-    assert_raise(ArgumentError) { @dv.errorStyle = "foo" }
+    assert_raises(ArgumentError) { @dv.errorStyle = "foo" }
     assert_nothing_raised { @dv.errorStyle = :information }
     assert_equal(@dv.errorStyle, :information)
   end
   
   def test_errorTitle
-    assert_raise(ArgumentError) { @dv.errorTitle = :symbol }
+    assert_raises(ArgumentError) { @dv.errorTitle = :symbol }
     assert_nothing_raised { @dv.errorTitle = "This is the error title" }
     assert_equal(@dv.errorTitle, "This is the error title")
   end
   
   def test_operator
-    assert_raise(ArgumentError) { @dv.operator = "foo" }
+    assert_raises(ArgumentError) { @dv.operator = "foo" }
     assert_nothing_raised { @dv.operator = :greaterThan }
     assert_equal(@dv.operator, :greaterThan)
   end
   
   def test_prompt
-    assert_raise(ArgumentError) { @dv.prompt = :symbol }
+    assert_raises(ArgumentError) { @dv.prompt = :symbol }
     assert_nothing_raised { @dv.prompt = "This is a prompt message" }
     assert_equal(@dv.prompt, "This is a prompt message")
   end
   
   def test_promptTitle
-    assert_raise(ArgumentError) { @dv.promptTitle = :symbol }
+    assert_raises(ArgumentError) { @dv.promptTitle = :symbol }
     assert_nothing_raised { @dv.promptTitle = "This is the prompt title" }
     assert_equal(@dv.promptTitle, "This is the prompt title")
   end
   
   def test_showDropDown
-    assert_raise(ArgumentError) { @dv.showDropDown = "foo´" }
+    assert_raises(ArgumentError) { @dv.showDropDown = "foo´" }
     assert_nothing_raised { @dv.showDropDown = false }
     assert_equal(@dv.showDropDown, false)
   end
   
   def test_showErrorMessage
-    assert_raise(ArgumentError) { @dv.showErrorMessage = "foo´" }
+    assert_raises(ArgumentError) { @dv.showErrorMessage = "foo´" }
     assert_nothing_raised { @dv.showErrorMessage = false }
     assert_equal(@dv.showErrorMessage, false)
   end
   
   def test_showInputMessage
-    assert_raise(ArgumentError) { @dv.showInputMessage = "foo´" }
+    assert_raises(ArgumentError) { @dv.showInputMessage = "foo´" }
     assert_nothing_raised { @dv.showInputMessage = false }
     assert_equal(@dv.showInputMessage, false)
   end
   
   def test_sqref
-    assert_raise(ArgumentError) { @dv.sqref = 10 }
+    assert_raises(ArgumentError) { @dv.sqref = 10 }
     assert_nothing_raised { @dv.sqref = "A1:A1" }
     assert_equal(@dv.sqref, "A1:A1")
   end
   
   def test_type
-    assert_raise(ArgumentError) { @dv.type = "foo" }
+    assert_raises(ArgumentError) { @dv.type = "foo" }
     assert_nothing_raised { @dv.type = :list }
     assert_equal(@dv.type, :list)
   end

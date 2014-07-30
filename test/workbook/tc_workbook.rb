@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestWorkbook < Test::Unit::TestCase
+class TestWorkbook < Minitest::Unit::TestCase
   def setup
     p = Axlsx::Package.new
     @wb = p.workbook
@@ -23,12 +23,12 @@ class TestWorkbook < Test::Unit::TestCase
     assert_equal(:preserve, @wb.xml_space)
     @wb.xml_space = :default
     assert_equal(:default, @wb.xml_space)
-    assert_raise(ArgumentError) { @wb.xml_space = :none }
+    assert_raises(ArgumentError) { @wb.xml_space = :none }
   end
 
   def test_no_autowidth
     assert_equal(@wb.use_autowidth, true)
-    assert_raise(ArgumentError) {@wb.use_autowidth = 0.1}
+    assert_raises(ArgumentError) {@wb.use_autowidth = 0.1}
     assert_nothing_raised {@wb.use_autowidth = false}
     assert_equal(@wb.use_autowidth, false)
   end
@@ -60,7 +60,7 @@ class TestWorkbook < Test::Unit::TestCase
 
   def test_shared_strings
     assert_equal(@wb.use_shared_strings, nil)
-    assert_raise(ArgumentError) {@wb.use_shared_strings = 'bpb'}
+    assert_raises(ArgumentError) {@wb.use_shared_strings = 'bpb'}
     assert_nothing_raised {@wb.use_shared_strings = :true}
   end
 
@@ -102,7 +102,7 @@ class TestWorkbook < Test::Unit::TestCase
     ws = @wb.add_worksheet :name=>'fish'
     ws.add_row [1,2,3]
     ws.add_row [4,5,6]
-    assert_raise(ArgumentError, "no sheet name part") { @wb["A1:C2"]}
+    assert_raises(ArgumentError, "no sheet name part") { @wb["A1:C2"]}
     assert_equal @wb['fish!A1:C2'].size, 6
   end
 

@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestChart < Test::Unit::TestCase
+class TestChart < Minitest::Unit::TestCase
 
   def setup
     @p = Axlsx::Package.new
@@ -33,21 +33,21 @@ class TestChart < Test::Unit::TestCase
   end
 
   def test_style
-    assert_raise(ArgumentError) { @chart.style = 49 }
+    assert_raises(ArgumentError) { @chart.style = 49 }
     assert_nothing_raised { @chart.style = 2 }
     assert_equal(@chart.style, 2)
   end
   
   def test_vary_colors
     assert_equal(true, @chart.vary_colors)
-    assert_raise(ArgumentError) { @chart.vary_colors = 7 }
+    assert_raises(ArgumentError) { @chart.vary_colors = 7 }
     assert_nothing_raised { @chart.vary_colors = false }
     assert_equal(false, @chart.vary_colors)
   end
 
   def test_display_blanks_as
     assert_equal(:gap, @chart.display_blanks_as, "default is not :gap")
-    assert_raise(ArgumentError, "did not validate possible values") { @chart.display_blanks_as = :hole }
+    assert_raises(ArgumentError, "did not validate possible values") { @chart.display_blanks_as = :hole }
     assert_nothing_raised { @chart.display_blanks_as = :zero }
     assert_nothing_raised { @chart.display_blanks_as = :span }
     assert_equal(:span, @chart.display_blanks_as)

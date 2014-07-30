@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestHyperlink < Test::Unit::TestCase
+class TestHyperlink < Minitest::Unit::TestCase
 
   def setup
     @p = Axlsx::Package.new
@@ -41,19 +41,19 @@ class TestHyperlink < Test::Unit::TestCase
 
   def test_endSnd
     assert_nothing_raised { @hyperlink.endSnd = "true" }
-    assert_raise(ArgumentError) {@hyperlink.endSnd = "bob"}
+    assert_raises(ArgumentError) {@hyperlink.endSnd = "bob"}
     assert_equal(@hyperlink.endSnd, "true")
   end
 
   def test_highlightClick
     assert_nothing_raised { @hyperlink.highlightClick = false }
-    assert_raise(ArgumentError) {@hyperlink.highlightClick = "bob"}
+    assert_raises(ArgumentError) {@hyperlink.highlightClick = "bob"}
     assert_equal(@hyperlink.highlightClick, false )
   end
 
   def test_history
     assert_nothing_raised { @hyperlink.history = false }
-    assert_raise(ArgumentError) {@hyperlink.history = "bob"}
+    assert_raises(ArgumentError) {@hyperlink.history = "bob"}
     assert_equal(@hyperlink.history, false )
   end
 

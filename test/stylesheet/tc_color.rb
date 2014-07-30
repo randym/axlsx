@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestColor < Test::Unit::TestCase
+class TestColor < Minitest::Unit::TestCase
 
   def setup
     @item = Axlsx::Color.new
@@ -16,13 +16,13 @@ class TestColor < Test::Unit::TestCase
   end
 
   def test_auto
-    assert_raise(ArgumentError) { @item.auto = -1 }
+    assert_raises(ArgumentError) { @item.auto = -1 }
     assert_nothing_raised { @item.auto = true }
     assert_equal(@item.auto, true )
   end
 
   def test_rgb
-    assert_raise(ArgumentError) { @item.rgb = -1 }
+    assert_raises(ArgumentError) { @item.rgb = -1 }
     assert_nothing_raised { @item.rgb = "FF00FF00" }
     assert_equal(@item.rgb, "FF00FF00" )
   end
@@ -34,7 +34,7 @@ class TestColor < Test::Unit::TestCase
   end
 
   def test_tint
-    assert_raise(ArgumentError) { @item.tint = -1 }
+    assert_raises(ArgumentError) { @item.tint = -1 }
     assert_nothing_raised { @item.tint = -1.0 }
     assert_equal(@item.tint, -1.0 )
   end

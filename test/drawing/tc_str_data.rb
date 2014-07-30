@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestStrData < Test::Unit::TestCase
+class TestStrData < Minitest::Unit::TestCase
 
   def setup
     @str_data = Axlsx::StrData.new :data => ["1", "2", "3"]

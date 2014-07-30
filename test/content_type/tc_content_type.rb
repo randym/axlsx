@@ -1,7 +1,7 @@
 # encoding: UTF-8
 require 'tc_helper.rb'
 
-class TestContentType < Test::Unit::TestCase
+class TestContentType < Minitest::Unit::TestCase
   def setup
     @package = Axlsx::Package.new
     @doc = Nokogiri::XML(@package.send(:content_types).to_xml_string)

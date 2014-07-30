@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestColorScale < Test::Unit::TestCase
+class TestColorScale < Minitest::Unit::TestCase
   def setup
     @color_scale = Axlsx::ColorScale.new
   end

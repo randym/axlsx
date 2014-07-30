@@ -1,7 +1,7 @@
 # encoding: UTF-8
 require 'tc_helper.rb'
 
-class TestPackage < Test::Unit::TestCase
+class TestPackage < Minitest::Unit::TestCase
   def setup
     @package = Axlsx::Package.new
     ws = @package.workbook.add_worksheet
@@ -92,17 +92,17 @@ class TestPackage < Test::Unit::TestCase
 
   def test_core_accessor
     assert_equal(@package.core, @package.instance_values["core"])
-    assert_raise(NoMethodError) {@package.core = nil }
+    assert_raises(NoMethodError) {@package.core = nil }
   end
 
   def test_app_accessor
     assert_equal(@package.app, @package.instance_values["app"])
-    assert_raise(NoMethodError) {@package.app = nil }
+    assert_raises(NoMethodError) {@package.app = nil }
   end
 
   def test_use_shared_strings
     assert_equal(@package.use_shared_strings, nil)
-    assert_raise(ArgumentError) {@package.use_shared_strings 9}
+    assert_raises(ArgumentError) {@package.use_shared_strings 9}
     assert_nothing_raised {@package.use_shared_strings = true}
     assert_equal(@package.use_shared_strings, @package.workbook.use_shared_strings)
   end

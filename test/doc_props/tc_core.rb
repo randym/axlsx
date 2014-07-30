@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestCore < Test::Unit::TestCase
+class TestCore < Minitest::Unit::TestCase
 
   def setup
     @core = Axlsx::Core.new

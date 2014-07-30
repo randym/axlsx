@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestAxis < Test::Unit::TestCase
+class TestAxis < Minitest::Unit::TestCase
   def setup
     @axis = Axlsx::Axis.new :gridlines => false, :title => 'Foo'
   end
@@ -39,25 +39,25 @@ class TestAxis < Test::Unit::TestCase
   end
 
   def test_axis_position
-    assert_raise(ArgumentError, "requires valid axis position") { @axis.ax_pos = :nowhere }
+    assert_raises(ArgumentError, "requires valid axis position") { @axis.ax_pos = :nowhere }
     assert_nothing_raised("accepts valid axis position") { @axis.ax_pos = :r }
   end
 
   def test_label_rotation
-    assert_raise(ArgumentError, "requires valid angle") { @axis.label_rotation = :nowhere }
-    assert_raise(ArgumentError, "requires valid angle") { @axis.label_rotation = 91 }
-    assert_raise(ArgumentError, "requires valid angle") { @axis.label_rotation = -91 }
+    assert_raises(ArgumentError, "requires valid angle") { @axis.label_rotation = :nowhere }
+    assert_raises(ArgumentError, "requires valid angle") { @axis.label_rotation = 91 }
+    assert_raises(ArgumentError, "requires valid angle") { @axis.label_rotation = -91 }
     assert_nothing_raised("accepts valid angle") { @axis.label_rotation = 45 }
     assert_equal(@axis.label_rotation, 45 * 60000)
   end
 
   def test_tick_label_position
-    assert_raise(ArgumentError, "requires valid tick label position") { @axis.tick_lbl_pos = :nowhere }
+    assert_raises(ArgumentError, "requires valid tick label position") { @axis.tick_lbl_pos = :nowhere }
     assert_nothing_raised("accepts valid tick label position") { @axis.tick_lbl_pos = :high }
   end
 
   def test_format_code
-    assert_raise(ArgumentError, "requires valid format code") { @axis.format_code = :high }
+    assert_raises(ArgumentError, "requires valid format code") { @axis.format_code = :high }
     assert_nothing_raised("accepts valid format code") { @axis.format_code = "00.##"  }
   end
 
@@ -89,12 +89,12 @@ class TestAxis < Test::Unit::TestCase
   end
 
   def test_crosses
-    assert_raise(ArgumentError, "requires valid crosses") { @axis.crosses = 1 }
+    assert_raises(ArgumentError, "requires valid crosses") { @axis.crosses = 1 }
     assert_nothing_raised("accepts valid crosses") { @axis.crosses = :min }
   end
 
   def test_gridlines
-    assert_raise(ArgumentError, "requires valid gridlines") { @axis.gridlines = 'alice' }
+    assert_raises(ArgumentError, "requires valid gridlines") { @axis.gridlines = 'alice' }
     assert_nothing_raised("accepts valid crosses") { @axis.gridlines = false }
   end
   

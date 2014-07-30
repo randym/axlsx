@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestPrintOptions < Test::Unit::TestCase
+class TestPrintOptions < Minitest::Unit::TestCase
 
   def setup
     p = Axlsx::Package.new
@@ -46,25 +46,25 @@ class TestPrintOptions < Test::Unit::TestCase
   end
 
   def test_grid_lines
-    assert_raise(ArgumentError) { @po.grid_lines = 99 }
+    assert_raises(ArgumentError) { @po.grid_lines = 99 }
     assert_nothing_raised { @po.grid_lines = true }
     assert_equal(@po.grid_lines, true)
   end
 
   def test_headings
-    assert_raise(ArgumentError) { @po.headings = 99 }
+    assert_raises(ArgumentError) { @po.headings = 99 }
     assert_nothing_raised { @po.headings = true }
     assert_equal(@po.headings, true)
   end
 
   def test_horizontal_centered
-    assert_raise(ArgumentError) { @po.horizontal_centered = 99 }
+    assert_raises(ArgumentError) { @po.horizontal_centered = 99 }
     assert_nothing_raised { @po.horizontal_centered = true }
     assert_equal(@po.horizontal_centered, true)
   end
 
   def test_vertical_centered
-    assert_raise(ArgumentError) { @po.vertical_centered = 99 }
+    assert_raises(ArgumentError) { @po.vertical_centered = 99 }
     assert_nothing_raised { @po.vertical_centered = true }
     assert_equal(@po.vertical_centered, true)
   end

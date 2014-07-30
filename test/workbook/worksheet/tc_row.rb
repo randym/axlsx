@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestRow < Test::Unit::TestCase
+class TestRow < Minitest::Unit::TestCase
 
   def setup
     p = Axlsx::Package.new
@@ -61,32 +61,32 @@ class TestRow < Test::Unit::TestCase
   end
 
   def test_height
-    assert_raise(ArgumentError) { @row.height = -3 }
+    assert_raises(ArgumentError) { @row.height = -3 }
     assert_nothing_raised { @row.height = 15 }
     assert_equal(15, @row.height)
   end
 
 
   def test_ph
-    assert_raise(ArgumentError) { @row.ph = -3 }
+    assert_raises(ArgumentError) { @row.ph = -3 }
     assert_nothing_raised { @row.ph = true }
     assert_equal(true, @row.ph)
   end
 
   def test_hidden
-    assert_raise(ArgumentError) { @row.hidden = -3 }
+    assert_raises(ArgumentError) { @row.hidden = -3 }
     assert_nothing_raised { @row.hidden = true }
     assert_equal(true, @row.hidden)
   end
 
   def test_collapsed
-    assert_raise(ArgumentError) { @row.collapsed = -3 }
+    assert_raises(ArgumentError) { @row.collapsed = -3 }
     assert_nothing_raised { @row.collapsed = true }
     assert_equal(true, @row.collapsed)
   end
 
   def test_outlineLevel
-    assert_raise(ArgumentError) { @row.outlineLevel = -3 }
+    assert_raises(ArgumentError) { @row.outlineLevel = -3 }
     assert_nothing_raised { @row.outlineLevel = 2 }
     assert_equal(2, @row.outlineLevel)
   end

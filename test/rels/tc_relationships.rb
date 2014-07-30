@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestRelationships < Test::Unit::TestCase
+class TestRelationships < Minitest::Unit::TestCase
 
   def test_for
     source_obj_1, source_obj_2 = Object.new, Object.new

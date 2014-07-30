@@ -163,4 +163,8 @@ module Axlsx
   def self.trust_input=(trust_me)
     @trust_input = trust_me
   end
+
+  def self.to_emu_units(v)
+    v * 9525 # 914400 / 96
+  end
 end

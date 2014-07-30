@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestTable < Test::Unit::TestCase
+class TestTable < Minitest::Unit::TestCase
   def setup
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet

@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestStrVal < Test::Unit::TestCase
+class TestStrVal < Minitest::Unit::TestCase
 
   def setup
     @str_val = Axlsx::StrVal.new :v => "1"

@@ -1,6 +1,6 @@
 # encoding: UTF-8
 require 'tc_helper.rb'
-class TestProtectedRange < Test::Unit::TestCase
+class TestProtectedRange < Minitest::Unit::TestCase
 def setup
   @p = Axlsx::Package.new
   @ws = @p.workbook.add_worksheet { |sheet| sheet.add_row [1,2,3,4,5,6,7,8,9] }

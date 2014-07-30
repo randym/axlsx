@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 require 'tc_helper.rb'
 
-class TestDateTimeConverter < Test::Unit::TestCase
+class TestDateTimeConverter < Minitest::Unit::TestCase
   def setup
     @margin_of_error = 0.000_001
     @extended_time_range = begin

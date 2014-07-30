@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestPageMargins < Test::Unit::TestCase
+class TestPageMargins < Minitest::Unit::TestCase
 
   def setup
     p = Axlsx::Package.new
@@ -60,37 +60,37 @@ class TestPageMargins < Test::Unit::TestCase
   end
 
   def test_left
-    assert_raise(ArgumentError) { @pm.left = -1.2 }
+    assert_raises(ArgumentError) { @pm.left = -1.2 }
     assert_nothing_raised { @pm.left = 1.5 }
     assert_equal(@pm.left, 1.5)
   end
 
   def test_right
-    assert_raise(ArgumentError) { @pm.right = -1.2 }
+    assert_raises(ArgumentError) { @pm.right = -1.2 }
     assert_nothing_raised { @pm.right = 1.5 }
     assert_equal(@pm.right, 1.5)
   end
 
   def test_top
-    assert_raise(ArgumentError) { @pm.top = -1.2 }
+    assert_raises(ArgumentError) { @pm.top = -1.2 }
     assert_nothing_raised { @pm.top = 1.5 }
     assert_equal(@pm.top, 1.5)
   end
 
   def test_bottom
-    assert_raise(ArgumentError) { @pm.bottom = -1.2 }
+    assert_raises(ArgumentError) { @pm.bottom = -1.2 }
     assert_nothing_raised { @pm.bottom = 1.5 }
     assert_equal(@pm.bottom, 1.5)
   end
 
   def test_header
-    assert_raise(ArgumentError) { @pm.header = -1.2 }
+    assert_raises(ArgumentError) { @pm.header = -1.2 }
     assert_nothing_raised { @pm.header = 1.5 }
     assert_equal(@pm.header, 1.5)
   end
 
   def test_footer
-    assert_raise(ArgumentError) { @pm.footer = -1.2 }
+    assert_raises(ArgumentError) { @pm.footer = -1.2 }
     assert_nothing_raised { @pm.footer = 1.5 }
     assert_equal(@pm.footer, 1.5)
   end

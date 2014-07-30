@@ -12,7 +12,7 @@ def shared_test_pivot_table_xml_validity(pivot_table)
   assert(errors.empty?, "error free validation")
 end
 
-class TestPivotTable < Test::Unit::TestCase
+class TestPivotTable < Minitest::Unit::TestCase
   def setup
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet

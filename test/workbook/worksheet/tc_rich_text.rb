@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class RichText < Test::Unit::TestCase
+class RichText < Minitest::Unit::TestCase
   def setup
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet :name => "hmmmz"

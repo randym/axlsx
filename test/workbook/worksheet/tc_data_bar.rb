@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestDataBar < Test::Unit::TestCase
+class TestDataBar < Minitest::Unit::TestCase
   def setup
     @data_bar = Axlsx::DataBar.new :color => "FF638EC6"
   end
@@ -19,19 +19,19 @@ class TestDataBar < Test::Unit::TestCase
 
 
   def test_minLength
-    assert_raise(ArgumentError) { @data_bar.minLength = :invalid_type }
+    assert_raises(ArgumentError) { @data_bar.minLength = :invalid_type }
     assert_nothing_raised { @data_bar.minLength =  0}
     assert_equal(@data_bar.minLength, 0)
   end
 
   def test_maxLength
-    assert_raise(ArgumentError) { @data_bar.maxLength = :invalid_type }
+    assert_raises(ArgumentError) { @data_bar.maxLength = :invalid_type }
     assert_nothing_raised { @data_bar.maxLength =  0}
     assert_equal(@data_bar.maxLength, 0)
   end
 
   def test_showValue
-    assert_raise(ArgumentError) { @data_bar.showValue = :invalid_type }
+    assert_raises(ArgumentError) { @data_bar.showValue = :invalid_type }
     assert_nothing_raised { @data_bar.showValue =  false}
     assert_equal(@data_bar.showValue, false)
   end

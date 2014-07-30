@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestOneCellAnchor < Test::Unit::TestCase
+class TestOneCellAnchor < Minitest::Unit::TestCase
 
   def setup
     @p = Axlsx::Package.new
@@ -33,25 +33,25 @@ class TestOneCellAnchor < Test::Unit::TestCase
   end
 
   def test_width
-    assert_raise(ArgumentError) { @anchor.width = "a" }
+    assert_raises(ArgumentError) { @anchor.width = "a" }
     assert_nothing_raised { @anchor.width = 600 }
     assert_equal(@anchor.width, 600)
   end
 
   def test_height
-    assert_raise(ArgumentError) { @anchor.height = "a" }
+    assert_raises(ArgumentError) { @anchor.height = "a" }
     assert_nothing_raised { @anchor.height = 400 }
     assert_equal(400, @anchor.height)
   end
 
   def test_ext
     ext = @anchor.send(:ext)
-    assert_equal(ext[:cx], (@anchor.width * 914400 / 96))
-    assert_equal(ext[:cy], (@anchor.height * 914400 / 96))
+    assert_equal(ext[:cx], Axlsx.to_emu_units(@anchor.width))
+    assert_equal(ext[:cy], Axlsx.to_emu_units(@anchor.height))
   end
 
   def test_options
-    assert_raise(ArgumentError, 'invalid start_at') { @ws.add_image :image_src=>@test_img, :start_at=>[1] }
+    assert_raises(ArgumentError, 'invalid start_at') { @ws.add_image :image_src=>@test_img, :start_at=>[1] }
     i = @ws.add_image :image_src=>@test_img, :start_at => [1,2], :width=>100, :height=>200, :name=>"someimage", :descr=>"a neat image"
 
     assert_equal("a neat image", i.descr)

@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestBorder < Test::Unit::TestCase
+class TestBorder < Minitest::Unit::TestCase
   def setup
     @b = Axlsx::Border.new
   end
@@ -14,19 +14,19 @@ class TestBorder < Test::Unit::TestCase
   end
 
   def test_diagonalUp
-    assert_raise(ArgumentError) { @b.diagonalUp = :red }
+    assert_raises(ArgumentError) { @b.diagonalUp = :red }
     assert_nothing_raised { @b.diagonalUp = true }
     assert_equal(@b.diagonalUp, true )
   end
 
   def test_diagonalDown
-    assert_raise(ArgumentError) { @b.diagonalDown = :red }
+    assert_raises(ArgumentError) { @b.diagonalDown = :red }
     assert_nothing_raised { @b.diagonalDown = true }
     assert_equal(@b.diagonalDown, true )
   end
 
   def test_outline
-    assert_raise(ArgumentError) { @b.outline = :red }
+    assert_raises(ArgumentError) { @b.outline = :red }
     assert_nothing_raised { @b.outline = true }
     assert_equal(@b.outline, true )
   end

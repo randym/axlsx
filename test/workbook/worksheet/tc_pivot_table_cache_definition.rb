@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestPivotTableCacheDefinition < Test::Unit::TestCase
+class TestPivotTableCacheDefinition < Minitest::Unit::TestCase
   def setup
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet

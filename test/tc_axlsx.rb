@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestAxlsx < Test::Unit::TestCase
+class TestAxlsx < Minitest::Unit::TestCase
 
   def setup_wide
     @wide_test_points = { "A3" =>      0,

@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestBarSeries < Test::Unit::TestCase
+class TestBarSeries < Minitest::Unit::TestCase
 
   def setup
     p = Axlsx::Package.new
@@ -22,7 +22,7 @@ class TestBarSeries < Test::Unit::TestCase
   end
 
   def test_shape
-    assert_raise(ArgumentError, "require valid shape") { @series.shape = :teardropt }
+    assert_raises(ArgumentError, "require valid shape") { @series.shape = :teardropt }
     assert_nothing_raised("allow valid shape") { @series.shape = :box }
     assert(@series.shape == :box)
   end

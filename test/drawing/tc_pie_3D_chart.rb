@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestPie3DChart < Test::Unit::TestCase
+class TestPie3DChart < Minitest::Unit::TestCase
 
   def setup
     p = Axlsx::Package.new

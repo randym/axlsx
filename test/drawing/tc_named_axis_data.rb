@@ -1,6 +1,6 @@
 # require 'tc_helper.rb'
 
-# class TestNamedAxisData < Test::Unit::TestCase
+# class TestNamedAxisData < Minitest::Unit::TestCase
 
 #   def setup
 #     p = Axlsx::Package.new

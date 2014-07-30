@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestCell < Test::Unit::TestCase
+class TestCell < Minitest::Unit::TestCase
 
   def setup
     p = Axlsx::Package.new
@@ -57,13 +57,13 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_style
-    assert_raise(ArgumentError, "must reject invalid style indexes") { @c.style=@c.row.worksheet.workbook.styles.cellXfs.size }
+    assert_raises(ArgumentError, "must reject invalid style indexes") { @c.style=@c.row.worksheet.workbook.styles.cellXfs.size }
     assert_nothing_raised("must allow valid style index changes") {@c.style=1}
     assert_equal(@c.style, 1)
   end
 
   def test_type
-    assert_raise(ArgumentError, "type must be :string, :integer, :float, :date, :time, :boolean") { @c.type = :array }
+    assert_raises(ArgumentError, "type must be :string, :integer, :float, :date, :time, :boolean") { @c.type = :array }
     assert_nothing_raised("type can be changed") { @c.type = :string }
     assert_equal(@c.value, "1.0", "changing type casts the value")
     assert_equal(:float, @row.add_cell(1.0/10**7).type, 'properly identify exponential floats as float type')
@@ -73,7 +73,7 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_value
-    assert_raise(ArgumentError, "type must be :string, :integer, :float, :date, :time, :boolean") { @c.type = :array }
+    assert_raises(ArgumentError, "type must be :string, :integer, :float, :date, :time, :boolean") { @c.type = :array }
     assert_nothing_raised("type can be changed") { @c.type = :string }
     assert_equal(@c.value, "1.0", "changing type casts the value")
   end
@@ -120,62 +120,62 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_color
-    assert_raise(ArgumentError) { @c.color = -1.1 }
+    assert_raises(ArgumentError) { @c.color = -1.1 }
     assert_nothing_raised { @c.color = "FF00FF00" }
     assert_equal(@c.color.rgb, "FF00FF00")
   end
 
   def test_scheme
-    assert_raise(ArgumentError) { @c.scheme = -1.1 }
+    assert_raises(ArgumentError) { @c.scheme = -1.1 }
     assert_nothing_raised { @c.scheme = :major }
     assert_equal(@c.scheme, :major)
   end
 
   def test_vertAlign
-    assert_raise(ArgumentError) { @c.vertAlign = -1.1 }
+    assert_raises(ArgumentError) { @c.vertAlign = -1.1 }
     assert_nothing_raised { @c.vertAlign = :baseline }
     assert_equal(@c.vertAlign, :baseline)
   end
 
   def test_sz
-    assert_raise(ArgumentError) { @c.sz = -1.1 }
+    assert_raises(ArgumentError) { @c.sz = -1.1 }
     assert_nothing_raised { @c.sz = 12 }
     assert_equal(@c.sz, 12)
   end
 
   def test_extend
-    assert_raise(ArgumentError) { @c.extend = -1.1 }
+    assert_raises(ArgumentError) { @c.extend = -1.1 }
     assert_nothing_raised { @c.extend = false }
     assert_equal(@c.extend, false)
   end
 
   def test_condense
-    assert_raise(ArgumentError) { @c.condense = -1.1 }
+    assert_raises(ArgumentError) { @c.condense = -1.1 }
     assert_nothing_raised { @c.condense = false }
     assert_equal(@c.condense, false)
   end
 
   def test_shadow
-    assert_raise(ArgumentError) { @c.shadow = -1.1 }
+    assert_raises(ArgumentError) { @c.shadow = -1.1 }
     assert_nothing_raised { @c.shadow = false }
     assert_equal(@c.shadow, false)
   end
 
   def test_outline
-    assert_raise(ArgumentError) { @c.outline = -1.1 }
+    assert_raises(ArgumentError) { @c.outline = -1.1 }
     assert_nothing_raised { @c.outline = false }
     assert_equal(@c.outline, false)
   end
 
   def test_strike
-    assert_raise(ArgumentError) { @c.strike = -1.1 }
+    assert_raises(ArgumentError) { @c.strike = -1.1 }
     assert_nothing_raised { @c.strike = false }
     assert_equal(@c.strike, false)
   end
 
   def test_u
     @c.type = :string
-    assert_raise(ArgumentError) { @c.u = -1.1 }
+    assert_raises(ArgumentError) { @c.u = -1.1 }
     assert_nothing_raised { @c.u = :single }
     assert_equal(@c.u, :single)
     doc = Nokogiri::XML(@c.to_xml_string(1,1))
@@ -183,31 +183,31 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_i
-    assert_raise(ArgumentError) { @c.i = -1.1 }
+    assert_raises(ArgumentError) { @c.i = -1.1 }
     assert_nothing_raised { @c.i = false }
     assert_equal(@c.i, false)
   end
 
   def test_rFont
-    assert_raise(ArgumentError) { @c.font_name = -1.1 }
+    assert_raises(ArgumentError) { @c.font_name = -1.1 }
     assert_nothing_raised { @c.font_name = "Arial" }
     assert_equal(@c.font_name, "Arial")
   end
 
   def test_charset
-    assert_raise(ArgumentError) { @c.charset = -1.1 }
+    assert_raises(ArgumentError) { @c.charset = -1.1 }
     assert_nothing_raised { @c.charset = 1 }
     assert_equal(@c.charset, 1)
   end
 
   def test_family
-    assert_raise(ArgumentError) { @c.family = -1.1 }
+    assert_raises(ArgumentError) { @c.family = -1.1 }
     assert_nothing_raised { @c.family = 5 }
     assert_equal(@c.family, 5)
   end
 
   def test_b
-    assert_raise(ArgumentError) { @c.b = -1.1 }
+    assert_raises(ArgumentError) { @c.b = -1.1 }
     assert_nothing_raised { @c.b = false }
     assert_equal(@c.b, false)
   end
@@ -234,7 +234,7 @@ class TestCell < Test::Unit::TestCase
   end
 
   def test_ssti
-    assert_raise(ArgumentError, "ssti must be an unsigned integer!") { @c.send(:ssti=, -1) }
+    assert_raises(ArgumentError, "ssti must be an unsigned integer!") { @c.send(:ssti=, -1) }
     @c.send :ssti=, 1
     assert_equal(@c.ssti, 1)
   end
