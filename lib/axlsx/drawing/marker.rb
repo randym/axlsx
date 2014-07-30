@@ -57,9 +57,14 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
+      overrides = {
+        :colOff => Axlsx.to_emu_units(colOff),
+        :rowOff => Axlsx.to_emu_units(rowOff)
+      }
       [:col, :colOff, :row, :rowOff].each do |k|
-        str << ('<xdr:' << k.to_s << '>' << self.send(k).to_s << '</xdr:' << k.to_s << '>')
+        str << ('<xdr:' << k.to_s << '>' << (overrides[k] || self.send(k)).to_s << '</xdr:' << k.to_s << '>')
       end
+      str
     end
     private
 
