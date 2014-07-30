@@ -1,11 +1,11 @@
 require 'tc_helper.rb'
 
-class TestRelationships < Test::Unit::TestCase
+class TestRelationships < Minitest::Unit::TestCase
   
   def test_instances_with_different_attributes_have_unique_ids
     rel_1 = Axlsx::Relationship.new(Object.new, Axlsx::WORKSHEET_R, 'target')
     rel_2 = Axlsx::Relationship.new(Object.new, Axlsx::COMMENT_R, 'foobar')
-    assert_not_equal rel_1.Id, rel_2.Id
+    refute_equal rel_1.Id, rel_2.Id
   end
   
   def test_instances_with_same_attributes_share_id
@@ -22,17 +22,17 @@ class TestRelationships < Test::Unit::TestCase
     
     rel_3 = Axlsx::Relationship.new(source_obj, Axlsx::HYPERLINK_R, 'target', :target_mode => :External)
     rel_4 = Axlsx::Relationship.new(source_obj, Axlsx::HYPERLINK_R, '../target', :target_mode => :External)
-    assert_not_equal rel_3.Id, rel_4.Id
+    refute_equal rel_3.Id, rel_4.Id
   end
   
   def test_type
-    assert_raise(ArgumentError) { Axlsx::Relationship.new nil, 'type', 'target' }
+    assert_raises(ArgumentError) { Axlsx::Relationship.new nil, 'type', 'target' }
     assert_nothing_raised { Axlsx::Relationship.new nil, Axlsx::WORKSHEET_R, 'target' }
     assert_nothing_raised { Axlsx::Relationship.new nil, Axlsx::COMMENT_R, 'target' }
   end
 
   def test_target_mode
-    assert_raise(ArgumentError) { Axlsx::Relationship.new nil, 'type', 'target', :target_mode => "FISH" }
+    assert_raises(ArgumentError) { Axlsx::Relationship.new nil, 'type', 'target', :target_mode => "FISH" }
     assert_nothing_raised { Axlsx::Relationship.new( nil, Axlsx::WORKSHEET_R, 'target', :target_mode => :External) }
   end
 

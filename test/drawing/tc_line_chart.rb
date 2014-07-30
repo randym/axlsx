@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestLineChart < Test::Unit::TestCase
+class TestLineChart < Minitest::Unit::TestCase
 
   def setup
     @p = Axlsx::Package.new
@@ -20,7 +20,7 @@ class TestLineChart < Test::Unit::TestCase
   end
 
   def test_grouping
-    assert_raise(ArgumentError, "require valid grouping") { @chart.grouping = :inverted }
+    assert_raises(ArgumentError, "require valid grouping") { @chart.grouping = :inverted }
     assert_nothing_raised("allow valid grouping") { @chart.grouping = :stacked }
     assert(@chart.grouping == :stacked)
   end

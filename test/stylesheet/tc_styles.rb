@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestStyles < Test::Unit::TestCase
+class TestStyles < Minitest::Unit::TestCase
   def setup
     @styles = Axlsx::Styles.new
   end
@@ -22,7 +22,7 @@ class TestStyles < Test::Unit::TestCase
     @styles.add_style :border => {:style => :thin, :color => "FFFF0000"}
     assert_equal(@styles.borders.size, border_count + 1)
     assert_equal(@styles.borders.last.prs.last.color.rgb, "FFFF0000")
-    assert_raise(ArgumentError) { @styles.add_style :border => {:color => "FFFF0000"} }
+    assert_raises(ArgumentError) { @styles.add_style :border => {:color => "FFFF0000"} }
     assert_equal @styles.borders.last.prs.size, 4
   end
 
@@ -53,8 +53,8 @@ class TestStyles < Test::Unit::TestCase
   end
 
   def test_parse_border_options_hash_required_keys
-    assert_raise(ArgumentError, "Require color key") { @styles.parse_border_options(:border => { :style => :thin }) }
-    assert_raise(ArgumentError, "Require style key") { @styles.parse_border_options(:border => { :color => "FF0d0d0d" }) }
+    assert_raises(ArgumentError, "Require color key") { @styles.parse_border_options(:border => { :style => :thin }) }
+    assert_raises(ArgumentError, "Require style key") { @styles.parse_border_options(:border => { :color => "FF0d0d0d" }) }
     assert_nothing_raised { @styles.parse_border_options(:border => { :style => :thin, :color => "FF000000"} ) }
   end
 
@@ -90,7 +90,7 @@ class TestStyles < Test::Unit::TestCase
 
   def test_parse_border_options_integer_xf
     assert_equal(@styles.parse_border_options(:border => 1), 1)
-    assert_raise(ArgumentError, "unknown border index") {@styles.parse_border_options(:border => 100) }
+    assert_raises(ArgumentError, "unknown border index") {@styles.parse_border_options(:border => 100) }
   end
 
   def test_parse_border_options_integer_dxf
@@ -182,7 +182,7 @@ class TestStyles < Test::Unit::TestCase
     assert_equal(xf.alignment.horizontal, :left, "horizontal alignment applied")
     assert_equal(xf.protection.hidden, true, "hidden protection set")
     assert_equal(xf.protection.locked, true, "cell locking set")
-    assert_raise(ArgumentError, "should reject invalid borderId") { @styles.add_style :border => 2 }
+    assert_raises(ArgumentError, "should reject invalid borderId") { @styles.add_style :border => 2 }
 
 
     assert_equal(xf.applyProtection, true, "protection applied")
@@ -196,7 +196,7 @@ class TestStyles < Test::Unit::TestCase
     @styles.add_style :border => {:style => :thin, :color => "FFFF0000"}, :type => :dxf
     assert_equal(@styles.borders.size, border_count, "styles borders not affected")
     assert_equal(@styles.dxfs.last.border.prs.last.color.rgb, "FFFF0000")
-    assert_raise(ArgumentError) { @styles.add_style :border => {:color => "FFFF0000"}, :type => :dxf }
+    assert_raises(ArgumentError) { @styles.add_style :border => {:color => "FFFF0000"}, :type => :dxf }
     assert_equal @styles.borders.last.prs.size, 4
   end
 
@@ -222,7 +222,7 @@ class TestStyles < Test::Unit::TestCase
     assert_equal(dxf.alignment.horizontal, :left, "horizontal alignment applied")
     assert_equal(dxf.protection.hidden, true, "hidden protection set")
     assert_equal(dxf.protection.locked, true, "cell locking set")
-    assert_raise(ArgumentError, "should reject invalid borderId") { @styles.add_style :border => 3 }
+    assert_raises(ArgumentError, "should reject invalid borderId") { @styles.add_style :border => 3 }
   end
 
   def test_multiple_dxf

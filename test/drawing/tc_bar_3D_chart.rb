@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestBar3DChart < Test::Unit::TestCase
+class TestBar3DChart < Minitest::Unit::TestCase
 
   def setup
     @p = Axlsx::Package.new
@@ -21,32 +21,32 @@ class TestBar3DChart < Test::Unit::TestCase
   end
 
   def test_bar_direction
-    assert_raise(ArgumentError, "require valid bar direction") { @chart.bar_dir = :left }
+    assert_raises(ArgumentError, "require valid bar direction") { @chart.bar_dir = :left }
     assert_nothing_raised("allow valid bar direction") { @chart.bar_dir = :col }
     assert(@chart.bar_dir == :col)
   end
 
  def test_grouping
-   assert_raise(ArgumentError, "require valid grouping") { @chart.grouping = :inverted }
+   assert_raises(ArgumentError, "require valid grouping") { @chart.grouping = :inverted }
    assert_nothing_raised("allow valid grouping") { @chart.grouping = :standard }
    assert(@chart.grouping == :standard)
  end
 
 
  def test_gapWidth
-   assert_raise(ArgumentError, "require valid gap width") { @chart.gap_width = 200 }
+   assert_raises(ArgumentError, "require valid gap width") { @chart.gap_width = 200 }
    assert_nothing_raised("allow valid gapWidth") { @chart.gap_width = "200%" }
    assert(@chart.gap_width == "200%")
  end
 
  def test_gapDepth
-   assert_raise(ArgumentError, "require valid gap_depth") { @chart.gap_depth = 200 }
+   assert_raises(ArgumentError, "require valid gap_depth") { @chart.gap_depth = 200 }
    assert_nothing_raised("allow valid gap_depth") { @chart.gap_depth = "200%" }
    assert(@chart.gap_depth == "200%")
  end
 
   def test_shape
-    assert_raise(ArgumentError, "require valid shape") { @chart.shape = :star }
+    assert_raises(ArgumentError, "require valid shape") { @chart.shape = :star }
     assert_nothing_raised("allow valid shape") { @chart.shape = :cone }
     assert(@chart.shape == :cone)
   end

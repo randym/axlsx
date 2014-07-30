@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestTwoCellAnchor < Test::Unit::TestCase
+class TestTwoCellAnchor < Minitest::Unit::TestCase
 
   def setup
     p = Axlsx::Package.new
@@ -22,10 +22,10 @@ class TestTwoCellAnchor < Test::Unit::TestCase
   end
 
   def test_options
-    assert_raise(ArgumentError, 'invalid start_at') { @ws.add_chart Axlsx::Chart, :start_at=>"1" }
-    assert_raise(ArgumentError, 'invalid end_at') { @ws.add_chart Axlsx::Chart, :start_at=>[1,2], :end_at => ["a", 4] }
+    assert_raises(ArgumentError, 'invalid start_at') { @ws.add_chart Axlsx::Chart, :start_at=>"1" }
+    assert_raises(ArgumentError, 'invalid end_at') { @ws.add_chart Axlsx::Chart, :start_at=>[1,2], :end_at => ["a", 4] }
     # this is actually raised in the graphic frame
-    assert_raise(ArgumentError, 'invalid Chart') { @ws.add_chart Axlsx::TwoCellAnchor }
+    assert_raises(ArgumentError, 'invalid Chart') { @ws.add_chart Axlsx::TwoCellAnchor }
     a = @ws.add_chart Axlsx::Chart, :start_at => [15, 35], :end_at => [90, 45]
     assert_equal(a.graphic_frame.anchor.from.col, 15)
     assert_equal(a.graphic_frame.anchor.from.row, 35)

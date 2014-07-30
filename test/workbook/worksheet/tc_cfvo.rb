@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestCfvo < Test::Unit::TestCase
+class TestCfvo < Minitest::Unit::TestCase
   def setup
     @cfvo = Axlsx::Cfvo.new(:val => "0", :type => :min)
   end
@@ -11,13 +11,13 @@ class TestCfvo < Test::Unit::TestCase
   end
 
   def test_type
-    assert_raise(ArgumentError) { @cfvo.type = :invalid_type }
+    assert_raises(ArgumentError) { @cfvo.type = :invalid_type }
     assert_nothing_raised { @cfvo.type = :max }
     assert_equal(@cfvo.type, :max)
   end
 
   def test_gte
-    assert_raise(ArgumentError) { @cfvo.gte = :bob }
+    assert_raises(ArgumentError) { @cfvo.gte = :bob }
     assert_equal(@cfvo.gte, true)
     assert_nothing_raised { @cfvo.gte = false }
     assert_equal(@cfvo.gte, false)

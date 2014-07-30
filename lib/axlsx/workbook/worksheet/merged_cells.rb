@@ -17,7 +17,7 @@ module Axlsx
     def add(cells)
       self << if cells.is_a?(String)
                  cells
-               elsif cells.is_a?(Array)
+               elsif cells.is_a?(Array) || cells.is_a?(SimpleTypedList)
                  Axlsx::cell_range(cells, false)
                end
     end

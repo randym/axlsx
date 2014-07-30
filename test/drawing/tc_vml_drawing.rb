@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestVmlDrawing < Test::Unit::TestCase
+class TestVmlDrawing < Minitest::Unit::TestCase
 
   def setup
     p = Axlsx::Package.new
@@ -12,7 +12,7 @@ class TestVmlDrawing < Test::Unit::TestCase
   end
 
   def test_initialize
-    assert_raise(ArgumentError) { Axlsx::VmlDrawing.new }
+    assert_raises(ArgumentError) { Axlsx::VmlDrawing.new }
   end
 
   def test_to_xml_string

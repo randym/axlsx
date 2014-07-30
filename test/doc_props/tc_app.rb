@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestApp < Test::Unit::TestCase
+class TestApp < Minitest::Unit::TestCase
   def setup
     options = {
       :'Template' => 'Foo.xlt',

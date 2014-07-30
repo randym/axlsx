@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestNumVal < Test::Unit::TestCase
+class TestNumVal < Minitest::Unit::TestCase
 
   def setup
     @num_val = Axlsx::NumVal.new :v => 1
@@ -12,7 +12,7 @@ class TestNumVal < Test::Unit::TestCase
   end
 
   def test_format_code
-    assert_raise(ArgumentError) {@num_val.format_code = 7}
+    assert_raises(ArgumentError) {@num_val.format_code = 7}
     assert_nothing_raised {@num_val.format_code = 'foo_bar'}
   end
 

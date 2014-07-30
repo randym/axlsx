@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestAxlsx < Test::Unit::TestCase
+class TestAxlsx < Minitest::Unit::TestCase
 
   def setup_wide
     @wide_test_points = { "A3" =>      0,
@@ -22,11 +22,12 @@ class TestAxlsx < Test::Unit::TestCase
     assert_equal false, Axlsx.trust_input
   end
 
-
   def test_trust_input_can_be_set_to_true
-    Axlsx.trust_input = true
+    old_value, Axlsx.trust_input = Axlsx.trust_input, true
     assert_equal true, Axlsx.trust_input
+    Axlsx.trust_input = old_value
   end
+
   def test_cell_range_relative
     p = Axlsx::Package.new
     ws = p.workbook.add_worksheet

@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestBubbleChart < Test::Unit::TestCase
+class TestBubbleChart < Minitest::Unit::TestCase
   def setup
     @p = Axlsx::Package.new
     @chart = nil

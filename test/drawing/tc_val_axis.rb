@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestValAxis < Test::Unit::TestCase
+class TestValAxis < Minitest::Unit::TestCase
   def setup
     @axis = Axlsx::ValAxis.new
   end
@@ -17,7 +17,7 @@ class TestValAxis < Test::Unit::TestCase
   end
 
   def test_crossBetween
-    assert_raise(ArgumentError, "requires valid crossBetween") { @axis.cross_between = :my_eyes }
+    assert_raises(ArgumentError, "requires valid crossBetween") { @axis.cross_between = :my_eyes }
     assert_nothing_raised("accepts valid crossBetween") { @axis.cross_between = :midCat }
   end
 

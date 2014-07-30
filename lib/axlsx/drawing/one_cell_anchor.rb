@@ -7,7 +7,7 @@ module Axlsx
   class OneCellAnchor
 
     include Axlsx::OptionsParser
- 
+
     # Creates a new OneCellAnchor object and an Pic associated with it.
     # @param [Drawing] drawing
     # @option options [Array] start_at the col, row to start at
@@ -89,9 +89,7 @@ module Axlsx
     # !{:cx=>[Integer], :cy=>[Integer]
     # @return [Hash]
     def ext
-      cy = @height * 914400 / 96
-      cx = @width * 914400 / 96
-      {:cy=>cy, :cx=>cx}
+      {:cy=>Axlsx.to_emu_units(@height), :cx=>Axlsx.to_emu_units(@width)}
     end
 
   end

@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestVmlShape < Test::Unit::TestCase
+class TestVmlShape < Minitest::Unit::TestCase
 
   def setup
     p = Axlsx::Package.new
@@ -12,7 +12,7 @@ class TestVmlShape < Test::Unit::TestCase
   end
 
   def test_initialize
-    assert_raise(ArgumentError) { Axlsx::VmlDrawing.new }
+    assert_raises(ArgumentError) { Axlsx::VmlDrawing.new }
   end
 
   def test_row
@@ -33,62 +33,62 @@ class TestVmlShape < Test::Unit::TestCase
     shape = @comments.first.vml_shape
     shape.left_column = 3
     assert(shape.left_column == 3)
-    assert_raise(ArgumentError) { shape.left_column = [] }
+    assert_raises(ArgumentError) { shape.left_column = [] }
   end
 
   def test_left_offset
     shape = @comments.first.vml_shape
     shape.left_offset = 3
     assert(shape.left_offset == 3)
-    assert_raise(ArgumentError) { shape.left_offset = [] }
+    assert_raises(ArgumentError) { shape.left_offset = [] }
   end
 
   def test_right_column
     shape = @comments.first.vml_shape
     shape.right_column = 3
     assert(shape.right_column == 3)
-    assert_raise(ArgumentError) { shape.right_column = [] }
+    assert_raises(ArgumentError) { shape.right_column = [] }
   end
 
   def test_right_offset
     shape = @comments.first.vml_shape
     shape.right_offset = 3
     assert(shape.right_offset == 3)
-    assert_raise(ArgumentError) { shape.right_offset = [] }
+    assert_raises(ArgumentError) { shape.right_offset = [] }
   end
 
   def test_top_offset
     shape = @comments.first.vml_shape
     shape.top_offset = 3
     assert(shape.top_offset == 3)
-    assert_raise(ArgumentError) { shape.top_offset = [] }
+    assert_raises(ArgumentError) { shape.top_offset = [] }
   end
 
   def test_bottom_offset
     shape = @comments.first.vml_shape
     shape.bottom_offset = 3
     assert(shape.bottom_offset == 3)
-    assert_raise(ArgumentError) { shape.bottom_offset = [] }
+    assert_raises(ArgumentError) { shape.bottom_offset = [] }
   end
 
   def test_bottom_row
     shape = @comments.first.vml_shape
     shape.bottom_row = 3
     assert(shape.bottom_row == 3)
-    assert_raise(ArgumentError) { shape.bottom_row = [] }
+    assert_raises(ArgumentError) { shape.bottom_row = [] }
   end
 
   def test_top_row
     shape = @comments.first.vml_shape
     shape.top_row = 3
     assert(shape.top_row == 3)
-    assert_raise(ArgumentError) { shape.top_row = [] }
+    assert_raises(ArgumentError) { shape.top_row = [] }
   end
   def test_visible
     shape = @comments.first.vml_shape
     shape.visible = false
     assert(shape.visible == false)
-    assert_raise(ArgumentError) { shape.visible = 'foo' }
+    assert_raises(ArgumentError) { shape.visible = 'foo' }
   end
   def test_to_xml_string
     str = @comments.vml_drawing.to_xml_string()

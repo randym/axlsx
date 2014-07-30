@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestPieSeries < Test::Unit::TestCase
+class TestPieSeries < Minitest::Unit::TestCase
 
   def setup
     p = Axlsx::Package.new
@@ -17,7 +17,7 @@ class TestPieSeries < Test::Unit::TestCase
   end
 
   def test_explosion
-    assert_raise(ArgumentError, "require valid explosion") { @series.explosion = :lots }
+    assert_raises(ArgumentError, "require valid explosion") { @series.explosion = :lots }
     assert_nothing_raised("allow valid explosion") { @series.explosion = 20 }
     assert(@series.explosion == 20)
   end

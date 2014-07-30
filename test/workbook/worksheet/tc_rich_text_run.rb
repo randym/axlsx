@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class RichTextRun < Test::Unit::TestCase
+class RichTextRun < Minitest::Unit::TestCase
   def setup
     @p = Axlsx::Package.new
     @ws = @p.workbook.add_worksheet :name => "hmmmz"
@@ -48,62 +48,62 @@ class RichTextRun < Test::Unit::TestCase
   end
   
   def test_color
-    assert_raise(ArgumentError) { @rtr.color = -1.1 }
+    assert_raises(ArgumentError) { @rtr.color = -1.1 }
     assert_nothing_raised { @rtr.color = "FF00FF00" }
     assert_equal(@rtr.color.rgb, "FF00FF00")
   end
 
   def test_scheme
-    assert_raise(ArgumentError) { @rtr.scheme = -1.1 }
+    assert_raises(ArgumentError) { @rtr.scheme = -1.1 }
     assert_nothing_raised { @rtr.scheme = :major }
     assert_equal(@rtr.scheme, :major)
   end
 
   def test_vertAlign
-    assert_raise(ArgumentError) { @rtr.vertAlign = -1.1 }
+    assert_raises(ArgumentError) { @rtr.vertAlign = -1.1 }
     assert_nothing_raised { @rtr.vertAlign = :baseline }
     assert_equal(@rtr.vertAlign, :baseline)
   end
 
   def test_sz
-    assert_raise(ArgumentError) { @rtr.sz = -1.1 }
+    assert_raises(ArgumentError) { @rtr.sz = -1.1 }
     assert_nothing_raised { @rtr.sz = 12 }
     assert_equal(@rtr.sz, 12)
   end
 
   def test_extend
-    assert_raise(ArgumentError) { @rtr.extend = -1.1 }
+    assert_raises(ArgumentError) { @rtr.extend = -1.1 }
     assert_nothing_raised { @rtr.extend = false }
     assert_equal(@rtr.extend, false)
   end
 
   def test_condense
-    assert_raise(ArgumentError) { @rtr.condense = -1.1 }
+    assert_raises(ArgumentError) { @rtr.condense = -1.1 }
     assert_nothing_raised { @rtr.condense = false }
     assert_equal(@rtr.condense, false)
   end
 
   def test_shadow
-    assert_raise(ArgumentError) { @rtr.shadow = -1.1 }
+    assert_raises(ArgumentError) { @rtr.shadow = -1.1 }
     assert_nothing_raised { @rtr.shadow = false }
     assert_equal(@rtr.shadow, false)
   end
 
   def test_outline
-    assert_raise(ArgumentError) { @rtr.outline = -1.1 }
+    assert_raises(ArgumentError) { @rtr.outline = -1.1 }
     assert_nothing_raised { @rtr.outline = false }
     assert_equal(@rtr.outline, false)
   end
 
   def test_strike
-    assert_raise(ArgumentError) { @rtr.strike = -1.1 }
+    assert_raises(ArgumentError) { @rtr.strike = -1.1 }
     assert_nothing_raised { @rtr.strike = false }
     assert_equal(@rtr.strike, false)
   end
 
   def test_u
     @c.type = :string
-    assert_raise(ArgumentError) { @c.u = -1.1 }
+    assert_raises(ArgumentError) { @c.u = -1.1 }
     assert_nothing_raised { @c.u = :single }
     assert_equal(@c.u, :single)
     doc = Nokogiri::XML(@c.to_xml_string(1,1))
@@ -111,31 +111,31 @@ class RichTextRun < Test::Unit::TestCase
   end
 
   def test_i
-    assert_raise(ArgumentError) { @c.i = -1.1 }
+    assert_raises(ArgumentError) { @c.i = -1.1 }
     assert_nothing_raised { @c.i = false }
     assert_equal(@c.i, false)
   end
 
   def test_rFont
-    assert_raise(ArgumentError) { @c.font_name = -1.1 }
+    assert_raises(ArgumentError) { @c.font_name = -1.1 }
     assert_nothing_raised { @c.font_name = "Arial" }
     assert_equal(@c.font_name, "Arial")
   end
 
   def test_charset
-    assert_raise(ArgumentError) { @c.charset = -1.1 }
+    assert_raises(ArgumentError) { @c.charset = -1.1 }
     assert_nothing_raised { @c.charset = 1 }
     assert_equal(@c.charset, 1)
   end
 
   def test_family
-    assert_raise(ArgumentError) { @c.family = -1.1 }
+    assert_raises(ArgumentError) { @c.family = -1.1 }
     assert_nothing_raised { @c.family = 5 }
     assert_equal(@c.family, 5)
   end
 
   def test_b
-    assert_raise(ArgumentError) { @c.b = -1.1 }
+    assert_raises(ArgumentError) { @c.b = -1.1 }
     assert_nothing_raised { @c.b = false }
     assert_equal(@c.b, false)
   end

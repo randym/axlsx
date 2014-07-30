@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestAutoFilter < Test::Unit::TestCase
+class TestAutoFilter < Minitest::Unit::TestCase
 
   def setup
     ws = Axlsx::Package.new.workbook.add_worksheet

@@ -1,6 +1,6 @@
 require 'tc_helper'
 
-class TestHeaderFooter < Test::Unit::TestCase
+class TestHeaderFooter < Minitest::Unit::TestCase
 
   def setup
     @p = Axlsx::Package.new
@@ -53,14 +53,14 @@ class TestHeaderFooter < Test::Unit::TestCase
 
   def test_string_attributes
     %w(odd_header odd_footer even_header even_footer first_header first_footer).each do |attr|
-      assert_raise(ArgumentError, 'only strings allowed in string attributes') { @hf.send("#{attr}=", 1) }
+      assert_raises(ArgumentError, 'only strings allowed in string attributes') { @hf.send("#{attr}=", 1) }
       assert_nothing_raised { @hf.send("#{attr}=", 'test_string') }
     end
   end
 
   def test_boolean_attributes
    %w(different_first different_odd_even).each do |attr|
-      assert_raise(ArgumentError, 'only booleanish allowed in string attributes') { @hf.send("#{attr}=", 'foo') }
+      assert_raises(ArgumentError, 'only booleanish allowed in string attributes') { @hf.send("#{attr}=", 'foo') }
       assert_nothing_raised { @hf.send("#{attr}=", 1) }
     end
   end

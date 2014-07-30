@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestScatterChart < Test::Unit::TestCase
+class TestScatterChart < Minitest::Unit::TestCase
   def setup
     @p = Axlsx::Package.new
     @chart = nil
@@ -25,7 +25,7 @@ class TestScatterChart < Test::Unit::TestCase
   def test_scatter_style
     @chart.scatterStyle = :marker
     assert(@chart.scatterStyle == :marker)
-    assert_raise(ArgumentError) { @chart.scatterStyle = :buckshot }
+    assert_raises(ArgumentError) { @chart.scatterStyle = :buckshot }
   end
   def test_initialization
     assert_equal(@chart.scatterStyle, :lineMarker, "scatterStyle defualt incorrect")

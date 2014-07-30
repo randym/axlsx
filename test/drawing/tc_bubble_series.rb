@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestBubbleSeries < Test::Unit::TestCase
+class TestBubbleSeries < Minitest::Unit::TestCase
 
   def setup
     p = Axlsx::Package.new

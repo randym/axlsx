@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestComment < Test::Unit::TestCase
+class TestComment < Minitest::Unit::TestCase
   def setup
     p = Axlsx::Package.new
     wb = p.workbook
@@ -10,7 +10,7 @@ class TestComment < Test::Unit::TestCase
   end
 
   def test_initailize
-    assert_raise(ArgumentError) { Axlsx::Comment.new }
+    assert_raises(ArgumentError) { Axlsx::Comment.new }
   end
 
   def test_author

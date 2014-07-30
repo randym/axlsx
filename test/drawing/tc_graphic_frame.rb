@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestGraphicFrame < Test::Unit::TestCase
+class TestGraphicFrame < Minitest::Unit::TestCase
   def setup
     p = Axlsx::Package.new
     @ws = p.workbook.add_worksheet

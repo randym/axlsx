@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestConditionalFormatting < Test::Unit::TestCase
+class TestConditionalFormatting < Minitest::Unit::TestCase
 
   def setup
     p = Axlsx::Package.new
@@ -138,85 +138,85 @@ class TestConditionalFormatting < Test::Unit::TestCase
   end
 
   def test_sqref
-    assert_raise(ArgumentError) { @cf.sqref = 10 }
+    assert_raises(ArgumentError) { @cf.sqref = 10 }
     assert_nothing_raised { @cf.sqref = "A1:A1" }
     assert_equal(@cf.sqref, "A1:A1")
   end
 
   def test_type
-    assert_raise(ArgumentError) { @cfr.type = "illegal" }
+    assert_raises(ArgumentError) { @cfr.type = "illegal" }
     assert_nothing_raised { @cfr.type = :containsBlanks }
     assert_equal(@cfr.type, :containsBlanks)
   end
 
   def test_above_average
-    assert_raise(ArgumentError) { @cfr.aboveAverage = "illegal" }
+    assert_raises(ArgumentError) { @cfr.aboveAverage = "illegal" }
     assert_nothing_raised { @cfr.aboveAverage = true }
     assert_equal(@cfr.aboveAverage, true)
   end
 
   def test_equal_average
-    assert_raise(ArgumentError) { @cfr.equalAverage = "illegal" }
+    assert_raises(ArgumentError) { @cfr.equalAverage = "illegal" }
     assert_nothing_raised { @cfr.equalAverage = true }
     assert_equal(@cfr.equalAverage, true)
   end
 
   def test_bottom
-    assert_raise(ArgumentError) { @cfr.bottom = "illegal" }
+    assert_raises(ArgumentError) { @cfr.bottom = "illegal" }
     assert_nothing_raised { @cfr.bottom = true }
     assert_equal(@cfr.bottom, true)
   end
 
   def test_operator
-    assert_raise(ArgumentError) { @cfr.operator = "cellIs" }
+    assert_raises(ArgumentError) { @cfr.operator = "cellIs" }
     assert_nothing_raised { @cfr.operator = :notBetween }
     assert_equal(@cfr.operator, :notBetween)
   end
 
   def test_dxf_id
-    assert_raise(ArgumentError) { @cfr.dxfId = "illegal" }
+    assert_raises(ArgumentError) { @cfr.dxfId = "illegal" }
     assert_nothing_raised { @cfr.dxfId = 1 }
     assert_equal(@cfr.dxfId, 1)
   end
 
   def test_priority
-    assert_raise(ArgumentError) { @cfr.priority = -1.0 }
+    assert_raises(ArgumentError) { @cfr.priority = -1.0 }
     assert_nothing_raised { @cfr.priority = 1 }
     assert_equal(@cfr.priority, 1)
   end
 
   def test_text
-    assert_raise(ArgumentError) { @cfr.text = 1.0 }
+    assert_raises(ArgumentError) { @cfr.text = 1.0 }
     assert_nothing_raised { @cfr.text = "testing" }
     assert_equal(@cfr.text, "testing")
   end
 
   def test_percent
-    assert_raise(ArgumentError) { @cfr.percent = "10%" } #WRONG!
+    assert_raises(ArgumentError) { @cfr.percent = "10%" } #WRONG!
     assert_nothing_raised { @cfr.percent = true }
     assert_equal(@cfr.percent, true)
   end
 
   def test_rank
-    assert_raise(ArgumentError) { @cfr.rank = -1 }
+    assert_raises(ArgumentError) { @cfr.rank = -1 }
     assert_nothing_raised { @cfr.rank = 1 }
     assert_equal(@cfr.rank, 1)
   end
 
   def test_std_dev
-    assert_raise(ArgumentError) { @cfr.stdDev = -1 }
+    assert_raises(ArgumentError) { @cfr.stdDev = -1 }
     assert_nothing_raised { @cfr.stdDev = 1 }
     assert_equal(@cfr.stdDev, 1)
   end
 
   def test_stop_if_true
-    assert_raise(ArgumentError) { @cfr.stopIfTrue = "illegal" }
+    assert_raises(ArgumentError) { @cfr.stopIfTrue = "illegal" }
     assert_nothing_raised { @cfr.stopIfTrue = false }
     assert_equal(@cfr.stopIfTrue, false)
   end
 
   def test_time_period
-    assert_raise(ArgumentError) { @cfr.timePeriod = "illegal" }
+    assert_raises(ArgumentError) { @cfr.timePeriod = "illegal" }
     assert_nothing_raised { @cfr.timePeriod = :today }
     assert_equal(@cfr.timePeriod, :today)
   end

@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestScatterSeries < Test::Unit::TestCase
+class TestScatterSeries < Minitest::Unit::TestCase
 
   def setup
     p = Axlsx::Package.new

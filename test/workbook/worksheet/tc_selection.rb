@@ -1,32 +1,32 @@
 # encoding: UTF-8
 require 'tc_helper.rb'
 
-class TestSelection < Test::Unit::TestCase
+class TestSelection < Minitest::Unit::TestCase
   def setup
     @options = { :active_cell => 'A2', :active_cell_id => 1, :pane => :top_left, :sqref => 'A2'  }
     @selection = Axlsx::Selection.new(@options)
   end
 
   def test_active_cell
-    assert_raise(ArgumentError) { @selection.active_cell = :active_cell }
+    assert_raises(ArgumentError) { @selection.active_cell = :active_cell }
     assert_nothing_raised { @selection.active_cell = "F5" }
     assert_equal(@selection.active_cell, "F5")
   end
 
   def test_active_cell_id
-    assert_raise(ArgumentError) { @selection.active_cell_id = "foo" }
+    assert_raises(ArgumentError) { @selection.active_cell_id = "foo" }
     assert_nothing_raised { @selection.active_cell_id = 11 }
     assert_equal(@selection.active_cell_id, 11)
   end
 
   def test_pane
-    assert_raise(ArgumentError) { @selection.pane = "foo´" }
+    assert_raises(ArgumentError) { @selection.pane = "foo´" }
     assert_nothing_raised { @selection.pane = :bottom_right }
     assert_equal(@selection.pane, "bottomRight")
   end
 
   def test_sqref
-    assert_raise(ArgumentError) { @selection.sqref = :sqref }
+    assert_raises(ArgumentError) { @selection.sqref = :sqref }
     assert_nothing_raised { @selection.sqref = "G32" }
     assert_equal(@selection.sqref, "G32")
   end

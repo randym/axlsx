@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestDxf < Test::Unit::TestCase
+class TestDxf < Minitest::Unit::TestCase
 
   def setup
     @item = Axlsx::Dxf.new
@@ -20,37 +20,37 @@ class TestDxf < Test::Unit::TestCase
   end
 
   def test_alignment
-    assert_raise(ArgumentError) { @item.alignment = -1.1 }
+    assert_raises(ArgumentError) { @item.alignment = -1.1 }
     assert_nothing_raised { @item.alignment = Axlsx::CellAlignment.new }
     assert(@item.alignment.is_a?(Axlsx::CellAlignment))
   end
 
   def test_protection
-    assert_raise(ArgumentError) { @item.protection = -1.1 }
+    assert_raises(ArgumentError) { @item.protection = -1.1 }
     assert_nothing_raised { @item.protection = Axlsx::CellProtection.new }
     assert(@item.protection.is_a?(Axlsx::CellProtection))
   end
 
   def test_numFmt
-    assert_raise(ArgumentError) { @item.numFmt = 1 }
+    assert_raises(ArgumentError) { @item.numFmt = 1 }
     assert_nothing_raised { @item.numFmt = Axlsx::NumFmt.new }
     assert @item.numFmt.is_a? Axlsx::NumFmt
   end
 
   def test_fill
-    assert_raise(ArgumentError) { @item.fill =  1 }
+    assert_raises(ArgumentError) { @item.fill =  1 }
     assert_nothing_raised { @item.fill = Axlsx::Fill.new(Axlsx::PatternFill.new(:patternType =>:solid, :fgColor=> Axlsx::Color.new(:rgb => "FF000000"))) }
     assert @item.fill.is_a? Axlsx::Fill
   end
 
   def test_font
-    assert_raise(ArgumentError) { @item.font = 1 }
+    assert_raises(ArgumentError) { @item.font = 1 }
     assert_nothing_raised { @item.font = Axlsx::Font.new }
     assert @item.font.is_a? Axlsx::Font 
   end
 
   def test_border
-    assert_raise(ArgumentError) { @item.border = 1 }
+    assert_raises(ArgumentError) { @item.border = 1 }
     assert_nothing_raised { @item.border = Axlsx::Border.new }
     assert @item.border.is_a? Axlsx::Border
   end

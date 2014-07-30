@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestSharedStringsTable < Test::Unit::TestCase
+class TestSharedStringsTable < Minitest::Unit::TestCase
 
   def setup
     @p = Axlsx::Package.new :use_shared_strings=>true

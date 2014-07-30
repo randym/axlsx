@@ -1,6 +1,6 @@
 require 'tc_helper'
 
-class TestSheetCalcPr < Test::Unit::TestCase
+class TestSheetCalcPr < Minitest::Unit::TestCase
 
   def setup
     @sheet_calc_pr = Axlsx::SheetCalcPr.new(:full_calc_on_load => false)

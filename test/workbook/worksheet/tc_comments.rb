@@ -1,6 +1,6 @@
 require 'tc_helper.rb'
 
-class TestComments < Test::Unit::TestCase
+class TestComments < Minitest::Unit::TestCase
   def setup
     p = Axlsx::Package.new
     wb = p.workbook
@@ -10,16 +10,16 @@ class TestComments < Test::Unit::TestCase
   end
 
   def test_initialize
-    assert_raise(ArgumentError) { Axlsx::Comments.new }
+    assert_raises(ArgumentError) { Axlsx::Comments.new }
     assert(@ws.comments.vml_drawing.is_a?(Axlsx::VmlDrawing))
   end
 
   def test_add_comment
     assert_equal(@ws.comments.size, 2)
-    assert_raise(ArgumentError) { @ws.comments.add_comment() }
-    assert_raise(ArgumentError) { @ws.comments.add_comment(:text => 'Yes We Can', :ref => 'A1') }
-    assert_raise(ArgumentError) { @ws.comments.add_comment(:author => 'bob', :ref => 'A1') }
-    assert_raise(ArgumentError) { @ws.comments.add_comment(:author => 'bob', :text => 'Yes We Can')}
+    assert_raises(ArgumentError) { @ws.comments.add_comment() }
+    assert_raises(ArgumentError) { @ws.comments.add_comment(:text => 'Yes We Can', :ref => 'A1') }
+    assert_raises(ArgumentError) { @ws.comments.add_comment(:author => 'bob', :ref => 'A1') }
+    assert_raises(ArgumentError) { @ws.comments.add_comment(:author => 'bob', :text => 'Yes We Can')}
     assert_nothing_raised { @ws.comments.add_comment(:author => 'bob', :text => 'Yes We Can', :ref => 'A1') }
     assert_equal(@ws.comments.size, 3)
   end
