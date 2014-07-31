@@ -50,6 +50,7 @@ examples << :no_autowidth
 examples << :cached_formula
 examples << :page_breaks
 examples << :rich_text
+examples = [:multi_chart]
 
 p = Axlsx::Package.new
 wb = p.workbook
@@ -659,7 +660,7 @@ end
 
 ## Book Views
 #
-## Book views let you specify which sheet the show as active when the user opens the work book as well as a bunch of other 
+## Book views let you specify which sheet the show as active when the user opens the work book as well as a bunch of other
 ## tuning values for the UI @see Axlsx::WorkbookView
 ## ```ruby
 if examples.include? :book_view
@@ -824,5 +825,33 @@ if examples.include? :rich_text
     sheet.add_row [rt], :style => wrap_text
   end
   p.serialize 'rich_text.xlsx'
+end
+#```
+
+#```ruby
+if examples.include? :multi_chart
+  p = Axlsx::Package.new
+  wb = p.workbook
+  wb.add_worksheet(:name => "Line Chart") do |sheet|
+    sheet.add_row ["Simple Line Chart"]
+    sheet.add_row %w(first second)
+    4.times do
+      sheet.add_row [ rand(24)+1, rand(24)+1]
+    end
+    sheet.add_chart(Axlsx::MultiChart) do |mchart|
+      mchart.add_sub_chart(Axlsx::BarChart, :title => "Simple 3D Bar Chart", :rotX => 30, :rotY => 20, :barDir => :col) do |chart|
+        chart.start_at 0, 5
+        chart.end_at 10, 20
+        chart.add_series :data => sheet["A3:A6"], :title => sheet["A2"], :color => "0000FF"
+        chart.catAxis.title = 'X Axis'
+        chart.valAxis.title = 'Y Axis'
+      end
+      mchart.add_sub_chart(Axlsx::LineChart, :title => "Simple Line Chart", :rotX => 30, :rotY => 20) do |chart|
+        chart.add_series :data => sheet["A3:A6"], :title => sheet["A2"], :labels => [], :color => "FF0000", :show_marker => true, :smooth => true
+      end
+
+    end
+  end
+  p.serialize 'multi_chart.xlsx'
 end
 #```
