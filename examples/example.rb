@@ -50,7 +50,7 @@ examples << :no_autowidth
 examples << :cached_formula
 examples << :page_breaks
 examples << :rich_text
-examples = [:multi_chart]
+examples << :multi_chart
 
 p = Axlsx::Package.new
 wb = p.workbook
