@@ -52,7 +52,7 @@ module Axlsx
     def serialized_attributes(str = '', additional_attributes = {})
       attributes = declared_attributes.merge! additional_attributes
       attributes.each do |key, value|
-        new_value = Axlsx.camel(Axlsx.booleanize(value), false).gsub('"','&quot;').gsub("<", '&lt;').gsub(">", '&gt;')
+        new_value = Axlsx.quick_escape(Axlsx.camel(Axlsx.booleanize(value), false))
         str << "#{Axlsx.camel(key, false)}=\"#{new_value}\" "
       end
       str

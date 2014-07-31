@@ -13,7 +13,7 @@ module Axlsx
       str << '<c:strCache>'
       str << '<c:ptCount val="1"/>'
       str << '<c:pt idx="0">'
-      str << ('<c:v>' << @text << '</c:v>')
+      str << ('<c:v>' << Axlsx.quick_escape(@text.to_s) << '</c:v>')
       str << '</c:pt>'
       str << '</c:strCache>'
       str << '</c:strRef>'
