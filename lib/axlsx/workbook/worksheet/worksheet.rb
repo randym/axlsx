@@ -20,12 +20,12 @@ module Axlsx
     def initialize(wb, options={})
       self.workbook = wb
       @sheet_protection = nil
-      # Autoset the name or else we'll get an error if we don't set it
-      name
       initialize_page_options(options)
       parse_options options
       @workbook.worksheets << self
       @sheet_id = index + 1
+      # Autoset the name or else we'll get an error if we don't set it
+      name
       yield self if block_given?
     end
 

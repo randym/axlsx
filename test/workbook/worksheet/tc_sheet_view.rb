@@ -10,8 +10,8 @@ class TestSheetView < Minitest::Unit::TestCase
       :show_row_col_headers => false, :show_ruler => false, :show_zeros => false, :window_protection => true }
     @symbol_options = { :view => :page_break_preview }
     @nil_options = { :color_id => 2, :top_left_cell => 'A2' }
-    @int_0 = { :zoom_scale_normal => 100, :zoom_scale_page_layout_view => 100, :zoom_scale_sheet_layout_view => 100, :workbook_view_id => 2 }
-    @int_100 = { :zoom_scale => 10 }
+    @int_0 = { :workbook_view_id => 2 }
+    @int_100 = { :zoom_scale => 10, :zoom_scale_normal => 100, :zoom_scale_page_layout_view => 100, :zoom_scale_sheet_layout_view => 100 }
 
     @integer_options = { :color_id => 2, :workbook_view_id => 2 }.merge(@int_0).merge(@int_100)
     @string_options = { :top_left_cell => 'A2' }
@@ -202,8 +202,8 @@ class TestSheetView < Minitest::Unit::TestCase
     assert_equal(1, doc.xpath("//sheetView[@tabSelected=0][@showWhiteSpace=0][@showOutlineSymbols=0][@showFormulas=0]
         [@rightToLeft=0][@windowProtection=0][@showZeros=1][@showRuler=1]
         [@showRowColHeaders=1][@showGridLines=1][@defaultGridColor=1]
-        [@zoomScale='100'][@workbookViewId='0'][@zoomScaleSheetLayoutView='0'][@zoomScalePageLayoutView='0']
-        [@zoomScaleNormal='0'][@view='pageBreakPreview']").size)
+        [@zoomScale='100'][@workbookViewId='0'][@zoomScaleSheetLayoutView='100'][@zoomScalePageLayoutView='100']
+        [@zoomScaleNormal='100'][@view='pageBreakPreview']").size)
   end
 
   def test_add_selection
