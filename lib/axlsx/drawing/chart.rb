@@ -23,6 +23,7 @@ module Axlsx
       @display_blanks_as = :gap
       @series_type = Series
       @title = Title.new
+      @d_table = nil
       parse_options options
       start_at(*options[:start_at]) if options[:start_at]
       end_at(*options[:end_at]) if options[:end_at]
@@ -32,6 +33,8 @@ module Axlsx
     # The 3D view properties for the chart
     attr_reader :view_3D
     alias :view3D :view_3D
+
+    attr_reader :d_table
 
     # A reference to the graphic frame that owns this chart
     # @return [GraphicFrame]
@@ -53,7 +56,7 @@ module Axlsx
     # Indicates that colors should be varied by datum
     # @return [Boolean]
     attr_reader :vary_colors
- 
+
     # Configures the vary_colors options for this chart
     # @param [Boolean] v The value to set
     def vary_colors=(v) Axlsx::validate_boolean(v); @vary_colors = v; end
@@ -164,6 +167,7 @@ module Axlsx
       str << '<c:plotArea>'
       str << '<c:layout/>'
       yield if block_given?
+      @d_table.to_xml_string(str) if @d_table
       str << '</c:plotArea>'
       if @show_legend
         str << '<c:legend>'
@@ -227,6 +231,7 @@ module Axlsx
     def view_3D=(v) DataTypeValidator.validate "#{self.class}.view_3D", View3D, v; @view_3D = v; end
     alias :view3D= :view_3D=
 
+    def d_table=(v) DataTypeValidator.validate "#{self.class}.d_table", DTable, v; @d_table = v; end
   end
 
 end

@@ -27,6 +27,7 @@ module Axlsx
     def initialize(frame, options = {})
       super(frame, options)
       @sub_charts ||= SimpleTypedList.new(Chart)
+      @d_table = DTable.new(self.class)
     end
 
     # Add a sub_chart
