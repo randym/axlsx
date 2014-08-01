@@ -522,14 +522,28 @@ class TestWorksheet < Test::Unit::TestCase
   end
 
   def test_auto_filter_assign
+    other_ws = @wb.add_worksheet
+
     assert(@ws.auto_filter.range.nil?)
+    assert(other_ws.auto_filter.range.nil?)
     assert(@wb.defined_names.none?{|defined_name| defined_name.name=='_xlnm._FilterDatabase'})
     assert_raise(ArgumentError) { @ws.auto_filter = 123 }
+
     @ws.auto_filter = "A1:D9"
     assert_equal(@ws.auto_filter.range, "A1:D9")
+
+    other_ws.auto_filter = "A1:D2"
+    assert_equal(other_ws.auto_filter.range, "A1:D2")
+
     @ws.to_xml_string
-    assert(@wb.defined_names.any?{|defined_name| defined_name.name=='_xlnm._FilterDatabase'})
+    other_ws.to_xml_string
+
+    filter_database = @wb.defined_names.select{|defined_name| defined_name.name=='_xlnm._FilterDatabase'}
+    assert_equal(2, filter_database.size)
+    assert_equal(@ws.index, filter_database[0].local_sheet_id)
+    assert_equal(other_ws.index, filter_database[1].local_sheet_id)
   end
+
 
   def test_sheet_pr_for_auto_filter
     @ws.auto_filter.range = 'A1:D9'
