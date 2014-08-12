@@ -70,7 +70,9 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      serialized_tag('numFmt', str)
+      str << '<numFmt '
+      instance_values.each{ |k,v| str << "#{Axlsx.camel(k, false)}=\"#{Axlsx.quick_escape(v)}\" " }
+      str << '/>'
     end
 
   end
