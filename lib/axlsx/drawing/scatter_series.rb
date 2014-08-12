@@ -21,9 +21,21 @@ module Axlsx
     # @return [String]
     attr_reader :color
 
+    # Line smoothing between data points
+    # @return [Boolean]
+    attr_reader :smooth
+    
     # Creates a new ScatterSeries
     def initialize(chart, options={})
       @xData, @yData = nil
+      if options[:smooth].nil?
+        # If caller hasn't specified smoothing or not, turn smoothing on or off based on scatter style
+        @smooth = [:smooth, :smoothMarker].include?(chart.scatter_style)
+      else
+        # Set smoothing according to the option provided
+        Axlsx::validate_boolean(options[:smooth])
+        @smooth = options[:smooth]
+      end
       super(chart, options)
       @xData = AxDataSource.new(:tag_name => :xVal, :data => options[:xData]) unless options[:xData].nil?
       @yData = NumDataSource.new({:tag_name => :yVal, :data => options[:yData]}) unless options[:yData].nil?
@@ -34,6 +46,12 @@ module Axlsx
       @color = v
     end
 
+    # @see smooth
+    def smooth=(v)
+      Axlsx::validate_boolean(v)
+      @smooth = v
+    end
+    
     # Serializes the object
     # @param [String] str
     # @return [String]
@@ -58,6 +76,7 @@ module Axlsx
         end
         @xData.to_xml_string(str) unless @xData.nil?
         @yData.to_xml_string(str) unless @yData.nil?
+        str << ('<c:smooth val="' << ((smooth) ? '1' : '0') << '"/>')
       end
       str
     end
