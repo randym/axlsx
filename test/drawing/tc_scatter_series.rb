@@ -34,7 +34,7 @@ class TestScatterSeries < Test::Unit::TestCase
   def test_explicit_unsmoothing
     @chart = @ws.add_chart Axlsx::ScatterChart, :title => "Smooth Chart, Unsmooth Series", :scatter_style => :smoothMarker
     @series = @chart.add_series :xData=>[1,2,4], :yData=>[1,3,9], :title=>"unsmoothed exponents", :smooth => false
-    assert(!@series.smooth"series is not smooth when overriding chart default")
+    assert(!@series.smooth, "series is not smooth when overriding chart default")
   end    
 
   def test_to_xml_string
