@@ -2,7 +2,7 @@ require File.expand_path('../lib/axlsx/version', __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = 'axlsx'
-  s.version     = Axlsx::VERSION
+  s.version     = "1.3.6"
   s.author	= "Randy Morgan"
   s.email       = 'digital.ipseity@gmail.com'
   s.homepage 	= 'https://github.com/randym/axlsx'
