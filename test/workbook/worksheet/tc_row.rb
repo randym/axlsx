@@ -52,8 +52,9 @@ class TestRow < Test::Unit::TestCase
     r = @ws.add_row [1,2,3], :style=>[1]
     assert_equal(r.cells.first.style, 1, "only apply style to cells with at the same index of of the style array")
     assert_equal(r.cells.last.style, 0, "only apply style to cells with at the same index of of the style array")
-    r = @ws.add_row [1,2,Date.today], :style=>Hash.new(1).merge(Date => 14)
-    assert_equal(r.cells.last.style, 14, "only apply style to cells with class")
+    new_style = @ws.workbook.styles.add_style :bg_color => 'FF00FF'
+    r = @ws.add_row [1,2,Date.today], :style=>Hash.new(1).merge(Date => new_style)
+    assert_equal(r.cells.last.style, new_style, "only apply style to cells with class")
     r.cells[0..1].each do |c|
       assert_equal(c.style, 1, "apply default style")
     end
