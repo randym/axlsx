@@ -7,4 +7,5 @@ end
 
 require 'test/unit'
 require "timecop"
+require 'nokogiri'
 require "axlsx.rb"

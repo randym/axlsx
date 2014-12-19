@@ -263,6 +263,7 @@ module Axlsx
     # @return [Array] An array of all validation errors encountered.
     # @private
     def validate_single_doc(schema, doc)
+      require 'nokogiri'
       schema = Nokogiri::XML::Schema(File.open(schema))
       doc = Nokogiri::XML(doc)
       errors = []
@@ -270,6 +271,8 @@ module Axlsx
         errors << error
       end
       errors
+    rescue
+      warn "Please install Nokogiri if you want to validate your documents."
     end
 
     # Appends override objects for drawings, charts, and sheets as they exist in your workbook to the default content types.
