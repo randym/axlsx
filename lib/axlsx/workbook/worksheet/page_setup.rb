@@ -44,13 +44,13 @@ module Axlsx
 
     # Number of horizontal pages to fit on.
     # @note PageSetup#fit_to is the recomended way to manage page fitting as only specifying one of width/height will result in the counterpart
-    # being set to 1. 
+    # being set to 1.
     # @return [Integer]
     attr_reader :fit_to_width
 
     # Orientation of the page (:default, :landscape, :portrait)
     # @return [Symbol]
-    attr_reader :orientation 
+    attr_reader :orientation
 
     # Height of paper (string containing a number followed by a unit identifier: "297mm", "11in")
     # @return [String]
@@ -74,18 +74,18 @@ module Axlsx
     #7 = Executive paper (7.25 in. by 10.5 in.)
     #8 = A3 paper (297 mm by 420 mm)
     #9 = A4 paper (210 mm by 297 mm)
-    #10 = A4 small paper (210 mm by 297 mm) 
+    #10 = A4 small paper (210 mm by 297 mm)
     #11 = A5 paper (148 mm by 210 mm)
     #12 = B4 paper (250 mm by 353 mm)
     #13 = B5 paper (176 mm by 250 mm)
     #14 = Folio paper (8.5 in. by 13 in.)
-    #15 = Quarto paper (215 mm by 275 mm) 
+    #15 = Quarto paper (215 mm by 275 mm)
     #16 = Standard paper (10 in. by 14 in.)
     #17 = Standard paper (11 in. by 17 in.)
     #18 = Note paper (8.5 in. by 11 in.)
-    #19 = #9 envelope (3.875 in. by 8.875 in.) 
-    #20 = #10 envelope (4.125 in. by 9.5 in.) 
-    #21 = #11 envelope (4.5 in. by 10.375 in.) 
+    #19 = #9 envelope (3.875 in. by 8.875 in.)
+    #20 = #10 envelope (4.125 in. by 9.5 in.)
+    #21 = #11 envelope (4.5 in. by 10.375 in.)
     #22 = #12 envelope (4.75 in. by 11 in.)
     #23 = #14 envelope (5 in. by 11.5 in.) 24 = C paper (17 in. by 22 in.)
     #25 = D paper (22 in. by 34 in.)
@@ -105,7 +105,7 @@ module Axlsx
     #40 = German standard fanfold (8.5 in. by 12 in.)
     #41 = German legal fanfold (8.5 in. by 13 in.)
     #42 = ISO B4 (250 mm by 353 mm)
-    #43 = Japanese double postcard (200 mm by 148 mm) 
+    #43 = Japanese double postcard (200 mm by 148 mm)
     #44 = Standard paper (9 in. by 11 in.)
     #45 = Standard paper (10 in. by 11 in.)
     #46 = Standard paper (15 in. by 11 in.)
@@ -116,9 +116,9 @@ module Axlsx
     #53 = A4 extra paper (236 mm by 322 mm)
     #54 = Letter transverse paper (8.275 in. by 11 in.)
     #55 = A4 transverse paper (210 mm by 297 mm)
-    #56 = Letter extra transverse paper (9.275 in. by 12 in.) 
-    #57 = SuperA/SuperA/A4 paper (227 mm by 356 mm) 
-    #58 = SuperB/SuperB/A3 paper (305 mm by 487 mm) 
+    #56 = Letter extra transverse paper (9.275 in. by 12 in.)
+    #57 = SuperA/SuperA/A4 paper (227 mm by 356 mm)
+    #58 = SuperB/SuperB/A3 paper (305 mm by 487 mm)
     #59 = Letter plus paper (8.5 in. by 12.69 in.)
     #60 = A4 plus paper (210 mm by 330 mm)
     #61 = A5 transverse paper (148 mm by 210 mm)
@@ -128,8 +128,8 @@ module Axlsx
     #65 = ISO B5 extra paper (201 mm by 276 mm)
     #66 = A2 paper (420 mm by 594 mm)
     #67 = A3 transverse paper (297 mm by 420 mm)
-    #68 = A3 extra transverse paper (322 mm by 445 mm) 
-    #69 = Japanese Double Postcard (200 mm x 148 mm) 
+    #68 = A3 extra transverse paper (322 mm by 445 mm)
+    #69 = Japanese Double Postcard (200 mm x 148 mm)
     #70 = A6 (105 mm x 148 mm
     #71 = Japanese Envelope Kaku #2
     #72 = Japanese Envelope Kaku #3
@@ -142,7 +142,7 @@ module Axlsx
     #79 = B4 (JIS) Rotated (364 mm x 257 mm)
     #80 = B5 (JIS) Rotated (257 mm x 182 mm)
     #81 = Japanese Postcard Rotated (148 mm x 100 mm)
-    #82 = Double Japanese Postcard Rotated (148 mm x 200 mm) 
+    #82 = Double Japanese Postcard Rotated (148 mm x 200 mm)
     #83 = A6 Rotated (148 mm x 105 mm)
     #84 = Japanese Envelope Kaku #2 Rotated
     #85 = Japanese Envelope Kaku #3 Rotated
@@ -210,20 +210,20 @@ module Axlsx
     # @see scale
     def scale=(v); Axlsx::validate_scale_10_400(v); @scale = v; end
 
-    # convenience method to achieve sanity when setting fit_to_width and fit_to_height 
+    # convenience method to achieve sanity when setting fit_to_width and fit_to_height
     # as they both default to 1 if only their counterpart is specified.
     # @note This method will overwrite any value you explicitly set via the fit_to_height or fit_to_width methods.
-    # @option options [Integer] width The number of pages to fit this worksheet on horizontally. Default 9999
-    # @option options [Integer] height The number of pages to fit this worksheet on vertically. Default 9999
+    # @option options [Integer] width The number of pages to fit this worksheet on horizontally. Default 999
+    # @option options [Integer] height The number of pages to fit this worksheet on vertically. Default 999
     def fit_to(options={})
-      self.fit_to_width = options[:width] || 9999
-      self.fit_to_height = options[:height] || 9999
+      self.fit_to_width = options[:width] || 999
+      self.fit_to_height = options[:height] || 999
       [@fit_to_width, @fit_to_height]
     end
 
 
     # helper method for worksheet to determine if the page setup is configured for fit to page printing
-    # We treat any page set up that has a value set for fit_to_width or fit_to_height value as fit_to_page. 
+    # We treat any page set up that has a value set for fit_to_width or fit_to_height value as fit_to_page.
     # @return [Boolean]
     def fit_to_page?
       # is there some better what to express this?

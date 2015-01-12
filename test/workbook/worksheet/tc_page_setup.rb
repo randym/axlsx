@@ -63,7 +63,7 @@ class TestPageSetup < Test::Unit::TestCase
     assert(@ps.fit_to_width == nil && @ps.fit_to_height == nil)
     assert(@ps.fit_to_page? == false)
   end
-  
+
   def test_with_height_fit_to_page?
     assert(@ps.fit_to_width == nil && @ps.fit_to_height == nil)
     @ps.set(:fit_to_height => 1)
@@ -131,9 +131,9 @@ class TestPageSetup < Test::Unit::TestCase
 
   def test_fit_to
     fits = @ps.fit_to(:width => 1)
-    assert_equal([1, 9999], fits)
+    assert_equal([1, 999], fits)
     fits = @ps.fit_to :height => 1
-    assert_equal(fits, [9999,1])
+    assert_equal(fits, [999 ,1])
     fits = @ps.fit_to :height => 7, :width => 2
     assert_equal(fits, [2, 7])
     assert_raise(ArgumentError) { puts @ps.fit_to(:width => true)}

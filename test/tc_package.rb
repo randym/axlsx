@@ -54,7 +54,7 @@ class TestPackage < Test::Unit::TestCase
     end
 
     ws.add_chart(Axlsx::BubbleChart, :title => 'bubble chart') do |chart|
-      chart.add_series :xData => [1,2,3,4], :yData => [4,3,2,1], :yData => [1,3,2,4]
+      chart.add_series :xData => [1,2,3,4], :yData => [1,3,2,4]
       chart.d_lbls.show_val = true
     end
 
