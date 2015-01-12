@@ -1,6 +1,7 @@
 # encoding: UTF-8
 module Axlsx
   require 'axlsx/drawing/d_lbls.rb'
+  require 'axlsx/drawing/d_table.rb'
   require 'axlsx/drawing/title.rb'
   require 'axlsx/drawing/series_title.rb'
   require 'axlsx/drawing/series.rb'
@@ -33,7 +34,9 @@ module Axlsx
 
   require 'axlsx/drawing/view_3D.rb'
   require 'axlsx/drawing/chart.rb'
+  require 'axlsx/drawing/multi_chart.rb'
   require 'axlsx/drawing/pie_3D_chart.rb'
+  require 'axlsx/drawing/bar_chart.rb'
   require 'axlsx/drawing/bar_3D_chart.rb'
   require 'axlsx/drawing/line_chart.rb'
   require 'axlsx/drawing/line_3D_chart.rb'
