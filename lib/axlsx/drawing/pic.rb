@@ -23,6 +23,7 @@ module Axlsx
       start_at(*options[:start_at]) if options[:start_at]
       yield self if block_given?
       @picture_locking = PictureLocking.new(options)
+      @alpha = options[:alpha] if options[:alpha]
     end
 
     # allowed file extenstions
@@ -171,7 +172,11 @@ module Axlsx
       picture_locking.to_xml_string(str)
       str << '</xdr:cNvPicPr></xdr:nvPicPr>'
       str << '<xdr:blipFill>'
-      str << ('<a:blip xmlns:r ="' << XML_NS_R << '" r:embed="' << relationship.Id << '"/>')
+      str << ('<a:blip xmlns:r ="' << XML_NS_R << '" r:embed="' << relationship.Id << '">')
+      if @alpha
+        str << "<a:alphaModFix amt=\"#{@alpha}\"/>"
+      end
+      str << '</a:blip>'
       str << '<a:stretch><a:fillRect/></a:stretch></xdr:blipFill><xdr:spPr>'
       str << '<a:xfrm><a:off x="0" y="0"/><a:ext cx="2336800" cy="2161540"/></a:xfrm>'
       str << '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></xdr:spPr></xdr:pic>'
