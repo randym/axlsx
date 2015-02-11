@@ -314,7 +314,7 @@ module Axlsx
         c_types << Axlsx::Override.new(:PartName => "/xl/#{sheet.pn}",
                                          :ContentType => WORKSHEET_CT)
       end
-      exts = workbook.images.map { |image| image.extname }
+      exts = workbook.images.map { |image| image.extname.downcase }
       exts.uniq.each do |ext|
         ct = if  ['jpeg', 'jpg'].include?(ext)
                JPEG_CT
