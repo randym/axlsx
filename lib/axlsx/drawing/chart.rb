@@ -183,7 +183,7 @@ module Axlsx
       str << '</c:plotArea>'
       if @show_legend
         str << '<c:legend>'
-        str << '<c:legendPos val="' << @legend_position << '"/>'
+        str << ('<c:legendPos val="' << @legend_position.to_s << '"/>')
         str << '<c:layout/>'
         str << '<c:overlay val="0"/>'
         str << '</c:legend>'
