@@ -11,6 +11,7 @@ module Axlsx
     # @param [GraphicalFrame] frame The frame that holds this chart.
     # @option options [Cell, String] title
     # @option options [Boolean] show_legend
+    # @option options [Symbol] legend_position
     # @option options [Array|String|Cell] start_at The X, Y coordinates defining the top left corner of the chart.
     # @option options [Array|String|Cell] end_at The X, Y coordinates defining the bottom right corner of the chart.
     def initialize(frame, options={})
@@ -138,9 +139,7 @@ module Axlsx
     # @param [Integer] v must be between 1 and 48
     def style=(v) DataTypeValidator.validate "Chart.style", Integer, v, lambda { |arg| arg >= 1 && arg <= 48 }; @style = v; end
 
-    # Set the position of the chart's legend.
-    # see ECMA Part 1 §21.2.2.196
-    # @param [Symbol] v must be between 1 and 48
+    # @see legend_position
     def legend_position=(v) RestrictionValidator.validate "Chart.legend_position", [:b, :l, :r, :t, :tr], v; @legend_position = v; end
 
     # backwards compatibility to allow chart.to and chart.from access to anchor markers
