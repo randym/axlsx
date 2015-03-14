@@ -11,6 +11,7 @@ module Axlsx
     # @param [GraphicalFrame] frame The frame that holds this chart.
     # @option options [Cell, String] title
     # @option options [Boolean] show_legend
+    # @option options [Symbol] legend_position
     # @option options [Array|String|Cell] start_at The X, Y coordinates defining the top left corner of the chart.
     # @option options [Array|String|Cell] end_at The X, Y coordinates defining the bottom right corner of the chart.
     def initialize(frame, options={})
@@ -20,6 +21,7 @@ module Axlsx
       @graphic_frame.anchor.drawing.worksheet.workbook.charts << self
       @series = SimpleTypedList.new Series
       @show_legend = true
+      @legend_position = :r
       @display_blanks_as = :gap
       @series_type = Series
       @title = Title.new
@@ -70,6 +72,17 @@ module Axlsx
     # Show the legend in the chart
     # @return [Boolean]
     attr_reader :show_legend
+
+    # Set the location of the chart's legend
+    # @return [Symbol] The position of this legend
+    # @note
+    #  The following are allowed
+    #    :b
+    #    :l
+    #    :r
+    #    :t
+    #    :tr
+    attr_reader :legend_position
 
     # How to display blank values
     # Options are
@@ -126,6 +139,9 @@ module Axlsx
     # @param [Integer] v must be between 1 and 48
     def style=(v) DataTypeValidator.validate "Chart.style", Integer, v, lambda { |arg| arg >= 1 && arg <= 48 }; @style = v; end
 
+    # @see legend_position
+    def legend_position=(v) RestrictionValidator.validate "Chart.legend_position", [:b, :l, :r, :t, :tr], v; @legend_position = v; end
+
     # backwards compatibility to allow chart.to and chart.from access to anchor markers
     # @note This will be disconinued in version 2.0.0. Please use the end_at method
     def to
@@ -167,7 +183,7 @@ module Axlsx
       str << '</c:plotArea>'
       if @show_legend
         str << '<c:legend>'
-        str << '<c:legendPos val="r"/>'
+        str << ('<c:legendPos val="' << @legend_position.to_s << '"/>')
         str << '<c:layout/>'
         str << '<c:overlay val="0"/>'
         str << '</c:legend>'
