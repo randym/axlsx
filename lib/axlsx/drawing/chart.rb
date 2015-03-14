@@ -25,6 +25,7 @@ module Axlsx
       @display_blanks_as = :gap
       @series_type = Series
       @title = Title.new
+      @bg_color = nil
       parse_options options
       start_at(*options[:start_at]) if options[:start_at]
       end_at(*options[:end_at]) if options[:end_at]
@@ -92,6 +93,10 @@ module Axlsx
     # @return [Symbol]
     # Default :gap (although this really should vary by chart type and grouping)
     attr_reader :display_blanks_as
+
+    # Background color for the chart
+    # @return [String]
+    attr_reader :bg_color
 
     # The relationship object for this chart.
     # @return [Relationship]
@@ -162,6 +167,12 @@ module Axlsx
       @series.last
     end
 
+    # Assigns a background color to chart area
+    def bg_color=(v)
+      DataTypeValidator.validate(:color, Color, Color.new(:rgb => v))
+      @bg_color = v
+    end
+
     # Serializes the object
     # @param [String] str
     # @return [String]
@@ -192,6 +203,16 @@ module Axlsx
       str << ('<c:dispBlanksAs val="' << display_blanks_as.to_s << '"/>')
       str << '<c:showDLblsOverMax val="1"/>'
       str << '</c:chart>'
+      if bg_color
+        str << '<c:spPr>'
+        str << '<a:solidFill>'
+        str << '<a:srgbClr val="' << bg_color << '"/>'
+        str << '</a:solidFill>'
+        str << '<a:ln>'
+        str << '<a:noFill/>'
+        str << '</a:ln>'
+        str << '</c:spPr>'
+      end
       str << '<c:printSettings>'
       str << '<c:headerFooter/>'
       str << '<c:pageMargins b="1.0" l="0.75" r="0.75" t="1.0" header="0.5" footer="0.5"/>'
