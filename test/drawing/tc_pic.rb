@@ -79,6 +79,10 @@ class TestPic < Test::Unit::TestCase
 
   def test_image_src_downcase
     assert_nothing_raised { @image.image_src = @test_img_up }
+    ct = @p.send(:content_types).detect do |t|
+      t.respond_to?(:extension) && t.extension.downcase == @image.extname.downcase
+    end
+    assert_equal("image/jpeg", ct.content_type)
   end
 
   def test_descr
