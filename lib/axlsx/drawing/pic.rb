@@ -23,7 +23,7 @@ module Axlsx
       start_at(*options[:start_at]) if options[:start_at]
       yield self if block_given?
       @picture_locking = PictureLocking.new(options)
-      @alpha = options[:alpha] if options[:alpha]
+      @opacity = options[:opacity] * 100000 if options[:opacity] #accepts value beween 0..1
     end
 
     # allowed file extenstions
@@ -173,8 +173,8 @@ module Axlsx
       str << '</xdr:cNvPicPr></xdr:nvPicPr>'
       str << '<xdr:blipFill>'
       str << ('<a:blip xmlns:r ="' << XML_NS_R << '" r:embed="' << relationship.Id << '">')
-      if @alpha
-        str << "<a:alphaModFix amt=\"#{@alpha}\"/>"
+      if @opacity
+        str << "<a:alphaModFix amt=\"#{@opacity}\"/>"
       end
       str << '</a:blip>'
       str << '<a:stretch><a:fillRect/></a:stretch></xdr:blipFill><xdr:spPr>'
