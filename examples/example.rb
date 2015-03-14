@@ -14,6 +14,7 @@ examples << :surrounding_border
 examples << :deep_custom_borders
 examples << :row_column_style
 examples << :fixed_column_width
+examples << :height
 examples << :outline_level
 examples << :merge_cells
 examples << :images
@@ -245,6 +246,21 @@ if examples.include? :fixed_column_width
     sheet.column_widths nil, 3, 5, nil
   end
 end
+
+
+##Specifying Row height
+
+#```ruby
+if examples.include? :height
+  wb.styles do |s|
+    head = s.add_style :bg_color => "00", :fg_color => "FF"
+    wb.add_worksheet(:name => "fixed row height") do |sheet|
+      sheet.add_row ["This row will have a fixed height", "It will overwite the default row height"], :height => 30
+      sheet.add_row ["This row can have a different height too"], :height => 10, :style => head
+    end
+  end
+end
+
 
 #```ruby
 if examples.include? :outline_level
