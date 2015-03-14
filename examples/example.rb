@@ -211,6 +211,7 @@ if examples.include? :row_column_style
     head = s.add_style :bg_color => "00", :fg_color => "FF"
     percent = s.add_style :num_fmt => 9
     wb.add_worksheet(:name => "Columns and Rows") do |sheet|
+      # Note: you must add rows to the document *BEFORE* applying column styles to them
       sheet.add_row ['col 1', 'col 2', 'col 3', 'col 4', 'col5']
       sheet.add_row [1, 2, 0.3, 4, 5.0]
       sheet.add_row [1, 2, 0.2, 4, 5.0]
