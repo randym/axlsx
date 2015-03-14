@@ -23,7 +23,7 @@ module Axlsx
       start_at(*options[:start_at]) if options[:start_at]
       yield self if block_given?
       @picture_locking = PictureLocking.new(options)
-      @opacity = options[:opacity] * 100000 if options[:opacity] #accepts value beween 0..1
+      @opacity = (options[:opacity] * 100000).round if options[:opacity] #accepts value beween 0..1
     end
 
     # allowed file extenstions
