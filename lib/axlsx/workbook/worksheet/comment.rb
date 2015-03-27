@@ -66,7 +66,7 @@ module Axlsx
       str << '<text>'
       unless author.to_s == ""
         str << '<r><rPr><b/><color indexed="81"/></rPr>'
-        str << ('<t xml:space="preserve">' << ::CGI.escapeHTML(author.to_s) << ":\n</t></r>")
+        str << ('<t>' << ::CGI.escapeHTML(author.to_s) << ":\n</t></r>")
       end
       str << '<r>'
       str << '<rPr><color indexed="81"/></rPr>'

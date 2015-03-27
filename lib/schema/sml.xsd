@@ -1851,7 +1851,7 @@
   </xsd:complexType>
   <xsd:complexType name="CT_Rst">
     <xsd:sequence>
-      <xsd:element name="t" type="CT_StringWithSpace" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="t" type="s:ST_Xstring" minOccurs="0" maxOccurs="1"/>
       <xsd:element name="r" type="CT_RElt" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element name="rPh" type="CT_PhoneticRun" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element name="phoneticPr" minOccurs="0" maxOccurs="1" type="CT_PhoneticPr"/>
