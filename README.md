@@ -2,7 +2,7 @@ Axlsx: Office Open XML Spreadsheet Generation
 ====================================
 [![Build Status](https://secure.travis-ci.org/randym/axlsx.png?branch=master)](http://travis-ci.org/randym/axlsx/)
 
-If you are using axlsx for comercial purposes, or just want to show your
+If you are using axlsx for commercial purposes, or just want to show your
 appreciation for the gem, please don't hesitate to make a donation.
 
 [![Click here to lend your support to: axlsx and make a donation at www.pledgie.com !](http://www.pledgie.com/campaigns/17814.png?skin_name=chrome)](http://www.pledgie.com/campaigns/17814)
