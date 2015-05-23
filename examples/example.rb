@@ -51,6 +51,7 @@ examples << :no_autowidth
 examples << :cached_formula
 examples << :page_breaks
 examples << :rich_text
+examples << :tab_color
 
 p = Axlsx::Package.new
 wb = p.workbook
@@ -843,3 +844,14 @@ if examples.include? :rich_text
   p.serialize 'rich_text.xlsx'
 end
 #```
+
+##Change tab color of sheet
+
+#```ruby
+if examples.include? :tab_color
+  wb.add_worksheet(:name => "Change Tab Color") do |sheet|
+    sheet.add_row ["Check", "out", "the", "Tab Color", "below!"]
+    sheet.sheet_pr.tab_color = "FFFF6666"
+  end
+end
+##```
