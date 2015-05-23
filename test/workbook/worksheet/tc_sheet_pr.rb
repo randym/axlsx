@@ -17,11 +17,16 @@ class TestSheetPr < Test::Unit::TestCase
       :sync_ref => 'foo'
     }
     @sheet_pr = Axlsx::SheetPr.new(worksheet, @options)
+    @sheet_pr.tab_color = "FFFF6666"
   end
 
   def test_initialization
     @options.each do |key, value|
       assert_equal value, @sheet_pr.send(key)
     end
+  end
+
+  def test_tab_color
+    assert_equal "FFFF6666", @sheet_pr.tab_color
   end
 end
