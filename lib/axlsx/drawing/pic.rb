@@ -25,8 +25,8 @@ module Axlsx
       @picture_locking = PictureLocking.new(options)
     end
 
-    # allowed file extenstions
-    ALLOWED_EXTENSIONS = ['gif', 'jpeg', 'png', 'jpg']
+    # allowed mime types
+    ALLOWED_MIME_TYPES = %w(image/jpeg image/png image/gif)
 
     # The name to use for this picture
     # @return [String]
@@ -67,7 +67,7 @@ module Axlsx
 
     def image_src=(v)
       Axlsx::validate_string(v)
-      RestrictionValidator.validate 'Pic.image_src', ALLOWED_EXTENSIONS, File.extname(v.downcase).delete('.')
+      RestrictionValidator.validate 'Pic.image_src', ALLOWED_MIME_TYPES, MimeMagic.by_magic(File.open(v)).to_s
       raise ArgumentError, "File does not exist" unless File.exist?(v)
       @image_src = v
     end
