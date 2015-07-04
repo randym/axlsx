@@ -8,7 +8,7 @@ module Axlsx
 
     serializable_attributes :sync_horizontal,
                             :sync_vertical,
-                            :transtion_evaluation,
+                            :transition_evaluation,
                             :transition_entry,
                             :published,
                             :filter_mode,
@@ -20,7 +20,7 @@ module Axlsx
     # waving magic show to set up the attriubte accessors
     boolean_attr_accessor :sync_horizontal,
                           :sync_vertical,
-                          :transtion_evaluation,
+                          :transition_evaluation,
                           :transition_entry,
                           :published,
                           :filter_mode,

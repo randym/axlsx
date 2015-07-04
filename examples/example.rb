@@ -677,7 +677,7 @@ end
 
 ## Book Views
 #
-## Book views let you specify which sheet the show as active when the user opens the work book as well as a bunch of other 
+## Book views let you specify which sheet the show as active when the user opens the work book as well as a bunch of other
 ## tuning values for the UI @see Axlsx::WorkbookView
 ## ```ruby
 if examples.include? :book_view
@@ -849,9 +849,13 @@ end
 
 #```ruby
 if examples.include? :tab_color
+  p = Axlsx::Package.new
+  p.use_shared_strings = true
+  wb = p.workbook
   wb.add_worksheet(:name => "Change Tab Color") do |sheet|
     sheet.add_row ["Check", "out", "the", "Tab Color", "below!"]
     sheet.sheet_pr.tab_color = "FFFF6666"
   end
+  p.serialize 'tab_color.xlsx'
 end
 ##```
