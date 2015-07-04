@@ -52,7 +52,7 @@ If you are working with ActiveAdmin see:
 
 [activeadmin-axlsx](http://github.com/randym/activeadmin-axlsx)
 
-It provies a plugin and dsl for generating downloadable reports.
+It provides a plugin and dsl for generating downloadable reports.
 
 The examples directory contains a number of more specific examples as
 well.
