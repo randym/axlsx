@@ -119,6 +119,19 @@ class TestCell < Test::Unit::TestCase
     assert_equal("2012-10-10T12:24", @c.send(:cast_value, "2012-10-10T12:24"))
   end
 
+  def test_cast_time_subclass
+    subtime = Class.new(Time) do
+      def to_time
+        raise "#to_time of Time subclass should not be called"
+      end
+    end
+
+    time = subtime.now
+
+    @c.type = :time
+    assert_equal(time, @c.send(:cast_value, time))
+  end
+
   def test_color
     assert_raise(ArgumentError) { @c.color = -1.1 }
     assert_nothing_raised { @c.color = "FF00FF00" }
