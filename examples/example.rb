@@ -701,6 +701,7 @@ end
 if examples.include? :conditional_formatting
   percent = wb.styles.add_style(:format_code => "0.00%", :border => Axlsx::STYLE_THIN_BORDER)
   money = wb.styles.add_style(:format_code => '0,000', :border => Axlsx::STYLE_THIN_BORDER)
+  status = wb.styles.add_style(:border => Axlsx::STYLE_THIN_BORDER)
 
   # define the style for conditional formatting
   profitable = wb.styles.add_style( :fg_color => "FF428751", :type => :dxf )
@@ -763,6 +764,19 @@ if examples.include? :conditional_formatting
     # Apply conditional formatting to range B3:B100 in the worksheet
     icon_set = Axlsx::IconSet.new
     sheet.add_conditional_formatting("B3:B100", { :type => :iconSet, :dxfId => profitable, :priority => 1, :icon_set => icon_set })
+  end
+
+  wb.add_worksheet(:name => "Contains Text") do |sheet|
+    sheet.add_row ["Previous Year Quarterly Profits (JPY)"]
+    sheet.add_row ["Quarter", "Profit", "% of Total", "Status"]
+    offset = 3
+    rows = 20
+    offset.upto(rows + offset) do |i|
+      sheet.add_row ["Q#{i}", 10000*((rows/2-i) * (rows/2-i)), "=100*B#{i}/SUM(B3:B#{rows+offset})", (10000*((rows/2-i) * (rows/2-i))) > 100000 ? "PROFIT" : "LOSS"], :style=>[nil, money, percent, status]
+    end
+  # Apply conditional formatting to range D3:D100 in the worksheet to match words.
+    sheet.add_conditional_formatting("D3:D100", { :type => :containsText, :operator => :equal, :text => "PROFIT", :dxfId => profitable, :priority => 1 })
+    sheet.add_conditional_formatting("D3:D100", { :type => :containsText, :operator => :equal, :text => "LOSS", :dxfId => unprofitable, :priority => 1 })
   end
 end
 
