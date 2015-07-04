@@ -1,6 +1,7 @@
 # encoding: UTF-8
 require 'htmlentities'
 require 'axlsx/version.rb'
+require 'mimemagic'
 
 require 'axlsx/util/simple_typed_list.rb'
 require 'axlsx/util/constants.rb'
@@ -11,6 +12,7 @@ require 'axlsx/util/options_parser'
 # to be included with parsable intitites.
 #require 'axlsx/util/parser.rb'
 require 'axlsx/util/string'
+require 'axlsx/util/mime_type_utils'
 
 require 'axlsx/stylesheet/styles.rb'
 

@@ -5,8 +5,10 @@ class TestPic < Test::Unit::TestCase
   def setup
     @p = Axlsx::Package.new
     ws = @p.workbook.add_worksheet
-    @test_img =  File.dirname(__FILE__) + "/../../examples/image1.jpeg"
-    @test_img_up = File.dirname(__FILE__) + "/../../examples/IMAGE1UP.JPEG"
+    @test_img = @test_img_jpg =  File.dirname(__FILE__) + "/../../examples/image1.jpeg"
+    @test_img_png =  File.dirname(__FILE__) + "/../../examples/image1.png"
+    @test_img_gif =  File.dirname(__FILE__) + "/../../examples/image1.gif"
+    @test_img_fake =  File.dirname(__FILE__) + "/../../examples/image1_fake.jpg"
     @image = ws.add_image :image_src => @test_img, :hyperlink => 'https://github.com/randym', :tooltip => "What's up doc?"
   end
 
@@ -70,19 +72,12 @@ class TestPic < Test::Unit::TestCase
   end
 
   def test_image_src
-    assert_raise(ArgumentError) { @image.image_src = 49 }
-    assert_raise(ArgumentError) { @image.image_src = 'Unknown' }
     assert_raise(ArgumentError) { @image.image_src = __FILE__ }
-    assert_nothing_raised { @image.image_src = @test_img }
-    assert_equal(@image.image_src, @test_img)
-  end
-
-  def test_image_src_downcase
-    assert_nothing_raised { @image.image_src = @test_img_up }
-    ct = @p.send(:content_types).detect do |t|
-      t.respond_to?(:extension) && t.extension.downcase == @image.extname.downcase
-    end
-    assert_equal("image/jpeg", ct.content_type)
+    assert_raise(ArgumentError) { @image.image_src = @test_img_fake }
+    assert_nothing_raised { @image.image_src = @test_img_gif }
+    assert_nothing_raised { @image.image_src = @test_img_png }
+    assert_nothing_raised { @image.image_src = @test_img_jpg }
+    assert_equal(@image.image_src, @test_img_jpg)
   end
 
   def test_descr
