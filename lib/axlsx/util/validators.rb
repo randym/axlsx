@@ -304,4 +304,8 @@ module Axlsx
     RestrictionValidator.validate :visibility, [:visible, :hidden, :very_hidden], v
   end
 
+  # Requires that the value is one of :default, :circle, :dash, :diamond, :dot, :picture, :plus, :square, :star, :triangle, :x
+  def self.validate_marker_symbol(v)
+    RestrictionValidator.validate :marker_symbol, [:default, :circle, :dash, :diamond, :dot, :picture, :plus, :square, :star, :triangle, :x], v
+  end
 end
