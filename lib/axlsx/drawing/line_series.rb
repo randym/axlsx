@@ -57,7 +57,7 @@ module Axlsx
     end
 
     # @see marker_symbol
-    def marker_symbol(v)
+    def marker_symbol=(v)
       Axlsx::validate_marker_symbol(v)
       @marker_symbol = v
     end
