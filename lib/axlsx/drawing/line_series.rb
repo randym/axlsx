@@ -23,6 +23,10 @@ module Axlsx
     # @return [Boolean]
     attr_reader :show_marker
 
+    # custom marker symbol
+    # @return [String]
+    attr_reader :marker_symbol
+
     # line smoothing on values
     # @return [Boolean]
     attr_reader :smooth
@@ -33,6 +37,7 @@ module Axlsx
     # @param [Chart] chart
     def initialize(chart, options={})
       @show_marker = false
+      @marker_symbol = options[:marker_symbol] ? options[:marker_symbol] : :default
       @smooth = false
       @labels, @data = nil, nil
       super(chart, options)
@@ -49,6 +54,12 @@ module Axlsx
     def show_marker=(v)
       Axlsx::validate_boolean(v)
       @show_marker = v
+    end
+
+    # @see marker_symbol
+    def marker_symbol=(v)
+      Axlsx::validate_marker_symbol(v)
+      @marker_symbol = v
     end
 
     # @see smooth
@@ -74,7 +85,13 @@ module Axlsx
           str << '<a:round/>'
           str << '</c:spPr>'
         end
-        str << '<c:marker><c:symbol val="none"/></c:marker>' unless @show_marker
+
+        if !@show_marker
+          str << '<c:marker><c:symbol val="none"/></c:marker>'
+        elsif @marker_symbol != :default
+          str << '<c:marker><c:symbol val="' + @marker_symbol.to_s + '"/></c:marker>'
+        end
+
         @labels.to_xml_string(str) unless @labels.nil?
         @data.to_xml_string(str) unless @data.nil?
         str << ('<c:smooth val="' << ((smooth) ? '1' : '0') << '"/>')

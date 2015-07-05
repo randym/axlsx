@@ -91,7 +91,7 @@ class TestValidators < Test::Unit::TestCase
     assert_raise(ArgumentError) { Axlsx.validate_scale_10_400 10.0 }
     assert_raise(ArgumentError) { Axlsx.validate_scale_10_400 400.1 }
     assert_raise(ArgumentError) { Axlsx.validate_scale_10_400 "99" }
-    
+
     #scale_0_10_400
     assert_nothing_raised { Axlsx.validate_scale_0_10_400 0 }
     assert_nothing_raised { Axlsx.validate_scale_0_10_400 10 }
@@ -101,7 +101,7 @@ class TestValidators < Test::Unit::TestCase
     assert_raise(ArgumentError) { Axlsx.validate_scale_0_10_400 10.0 }
     assert_raise(ArgumentError) { Axlsx.validate_scale_0_10_400 400.1 }
     assert_raise(ArgumentError) { Axlsx.validate_scale_0_10_400 "99" }
-    
+
     #page_orientation
     assert_nothing_raised { Axlsx.validate_page_orientation :default }
     assert_nothing_raised { Axlsx.validate_page_orientation :landscape }
@@ -109,7 +109,7 @@ class TestValidators < Test::Unit::TestCase
     assert_raise(ArgumentError) { Axlsx.validate_page_orientation nil }
     assert_raise(ArgumentError) { Axlsx.validate_page_orientation 1 }
     assert_raise(ArgumentError) { Axlsx.validate_page_orientation "landscape" }
-    
+
     #data_validation_error_style
     [:information, :stop, :warning].each do |sym|
       assert_nothing_raised { Axlsx.validate_data_validation_error_style sym }
@@ -117,7 +117,7 @@ class TestValidators < Test::Unit::TestCase
     assert_raise(ArgumentError) { Axlsx.validate_data_validation_error_style :other_symbol }
     assert_raise(ArgumentError) { Axlsx.validate_data_validation_error_style 'warning' }
     assert_raise(ArgumentError) { Axlsx.validate_data_validation_error_style 0 }
-    
+
     #data_validation_operator
     [:lessThan, :lessThanOrEqual, :equal, :notEqual, :greaterThanOrEqual, :greaterThan, :between, :notBetween].each do |sym|
       assert_nothing_raised { Axlsx.validate_data_validation_operator sym }
@@ -125,7 +125,7 @@ class TestValidators < Test::Unit::TestCase
     assert_raise(ArgumentError) { Axlsx.validate_data_validation_error_style :other_symbol }
     assert_raise(ArgumentError) { Axlsx.validate_data_validation_error_style 'lessThan' }
     assert_raise(ArgumentError) { Axlsx.validate_data_validation_error_style 0 }
-    
+
     #data_validation_type
     [:custom, :data, :decimal, :list, :none, :textLength, :time, :whole].each do |sym|
       assert_nothing_raised { Axlsx.validate_data_validation_type sym }
@@ -133,7 +133,7 @@ class TestValidators < Test::Unit::TestCase
     assert_raise(ArgumentError) { Axlsx.validate_data_validation_error_style :other_symbol }
     assert_raise(ArgumentError) { Axlsx.validate_data_validation_error_style 'decimal' }
     assert_raise(ArgumentError) { Axlsx.validate_data_validation_error_style 0 }
-    
+
     #sheet_view_type
     [:normal, :page_break_preview, :page_layout].each do |sym|
       assert_nothing_raised { Axlsx.validate_sheet_view_type sym }
@@ -141,7 +141,7 @@ class TestValidators < Test::Unit::TestCase
     assert_raise(ArgumentError) { Axlsx.validate_data_validation_error_style :other_symbol }
     assert_raise(ArgumentError) { Axlsx.validate_data_validation_error_style 'page_layout' }
     assert_raise(ArgumentError) { Axlsx.validate_data_validation_error_style 0 }
-    
+
     #active_pane_type
     [:bottom_left, :bottom_right, :top_left, :top_right].each do |sym|
       assert_nothing_raised { Axlsx.validate_pane_type sym }
@@ -149,7 +149,7 @@ class TestValidators < Test::Unit::TestCase
     assert_raise(ArgumentError) { Axlsx.validate_pane_type :other_symbol }
     assert_raise(ArgumentError) { Axlsx.validate_pane_type 'bottom_left' }
     assert_raise(ArgumentError) { Axlsx.validate_pane_type 0 }
-    
+
     #split_state_type
     [:frozen, :frozen_split, :split].each do |sym|
       assert_nothing_raised { Axlsx.validate_split_state_type sym }
@@ -157,8 +157,32 @@ class TestValidators < Test::Unit::TestCase
     assert_raise(ArgumentError) { Axlsx.validate_split_state_type :other_symbol }
     assert_raise(ArgumentError) { Axlsx.validate_split_state_type 'frozen_split' }
     assert_raise(ArgumentError) { Axlsx.validate_split_state_type 0 }
+
+    #display_blanks_as
+    [:gap, :span, :zero].each do |sym|
+      assert_nothing_raised { Axlsx.validate_display_blanks_as sym }
+    end
+    assert_raise(ArgumentError) { Axlsx.validate_display_blanks_as :other_symbol }
+    assert_raise(ArgumentError) { Axlsx.validate_display_blanks_as 'other_blank' }
+    assert_raise(ArgumentError) { Axlsx.validate_display_blanks_as 0 }
+
+    #view_visibility
+    [:visible, :hidden, :very_hidden].each do |sym|
+      assert_nothing_raised { Axlsx.validate_view_visibility sym }
+    end
+    assert_raise(ArgumentError) { Axlsx.validate_view_visibility :other_symbol }
+    assert_raise(ArgumentError) { Axlsx.validate_view_visibility 'other_visibility' }
+    assert_raise(ArgumentError) { Axlsx.validate_view_visibility 0 }
+
+    #marker_symbol
+    [:default, :circle, :dash, :diamond, :dot, :picture, :plus, :square, :star, :triangle, :x].each do |sym|
+      assert_nothing_raised { Axlsx.validate_marker_symbol sym }
+    end
+    assert_raise(ArgumentError) { Axlsx.validate_marker_symbol :other_symbol }
+    assert_raise(ArgumentError) { Axlsx.validate_marker_symbol 'other_marker' }
+    assert_raise(ArgumentError) { Axlsx.validate_marker_symbol 0 }
   end
- 
+
   def test_validate_integerish
     assert_raise(ArgumentError) { Axlsx.validate_integerish Axlsx }
     [1, 1.4, "a"].each { |test_value| assert_nothing_raised { Axlsx.validate_integerish test_value } }
@@ -179,7 +203,7 @@ class TestValidators < Test::Unit::TestCase
 
   def test_range_validation
      # exclusive
-     assert_raise(ArgumentError) { Axlsx::RangeValidator.validate('foo', 1, 10, 10, false) } 
+     assert_raise(ArgumentError) { Axlsx::RangeValidator.validate('foo', 1, 10, 10, false) }
      # inclusive by default
      assert_nothing_raised { Axlsx::RangeValidator.validate('foo', 1, 10, 10) }
   end
