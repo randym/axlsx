@@ -96,6 +96,15 @@ require 'axlsx/workbook/worksheet/selection.rb'
       @use_shared_strings = v
     end
 
+    # If true reverse the order in which the workbook is serialized
+    # @return [Boolean]
+    attr_reader :is_reversed
+
+    def is_reversed=(v)
+      Axlsx::validate_boolean(v)
+      @is_reversed = v
+    end
+
 
    # A collection of worksheets associated with this workbook.
     # @note The recommended way to manage worksheets is add_worksheet
@@ -344,7 +353,11 @@ require 'axlsx/workbook/worksheet/selection.rb'
       str << ('<workbookPr date1904="' << @@date1904.to_s << '"/>')
       views.to_xml_string(str)
       str << '<sheets>'
-      worksheets.each { |sheet| sheet.to_sheet_node_xml_string(str) }
+      if is_reversed
+        worksheets.reverse_each { |sheet| sheet.to_sheet_node_xml_string(str) }
+      else
+        worksheets.each { |sheet| sheet.to_sheet_node_xml_string(str) }
+      end
       str << '</sheets>'
       defined_names.to_xml_string(str)
       unless pivot_tables.empty?
