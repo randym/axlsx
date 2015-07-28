@@ -128,6 +128,11 @@ module Axlsx
       end
     end
 
+    # The size of the Title object of the chart.
+    def title_size=(v)
+      @title.text_size = v unless v.to_s.empty?
+    end
+
     # Show the legend in the chart
     # @param [Boolean] v
     # @return [Boolean]
