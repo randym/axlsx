@@ -1,4 +1,6 @@
 language: ruby
+sudo: false
+cache: bundler
 bundler_args: --without profile
 notifications:
   irc: "irc.freenode.org#axlsx"
