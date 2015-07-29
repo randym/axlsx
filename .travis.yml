@@ -16,6 +16,7 @@ rvm:
   - 2.2
   - rbx
   - jruby-19mode
+  - jruby-9.0.0.0
   - ruby-head
   - jruby-head
 matrix:
