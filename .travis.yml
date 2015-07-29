@@ -2,6 +2,8 @@ language: ruby
 sudo: false
 cache: bundler
 bundler_args: --without profile
+env:
+  - JRUBY_OPTS="-Xcli.debug=true --debug"
 notifications:
   irc: "irc.freenode.org#axlsx"
   email:
@@ -16,10 +18,10 @@ rvm:
   - 2.2
   - rbx
   - jruby-19mode
-  - jruby-9.0.0.0
   - ruby-head
   - jruby-head
 matrix:
   allow_failures:
     - rvm: ruby-head
+    - rvm: jruby-9.0.0.0
     - rvm: jruby-head
