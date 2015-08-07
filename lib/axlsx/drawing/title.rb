@@ -7,21 +7,38 @@ module Axlsx
     # @return [String]
     attr_reader :text
 
+    # Text size property
+    # @return [String]
+    attr_reader :text_size
+
     # The cell that holds the text for the title. Setting this property will automatically update the text attribute.
     # @return [Cell]
     attr_reader :cell
 
     # Creates a new Title object
     # @param [String, Cell] title The cell or string to be used for the chart's title
-    def initialize(title="")
+    def initialize(title="", title_size="")
       self.cell = title if title.is_a?(Cell)
       self.text = title.to_s unless title.is_a?(Cell)
+      if title_size.to_s.empty?
+        self.text_size = "1600"
+      else
+        self.text_size = title_size.to_s
+      end
     end
 
     # @see text
     def text=(v)
       DataTypeValidator.validate 'Title.text', String, v
       @text = v
+      @cell = nil
+      v
+    end
+
+    # @see text_size
+    def text_size=(v)
+      DataTypeValidator.validate 'Title.text_size', String, v
+      @text_size = v
       @cell = nil
       v
     end
@@ -62,6 +79,7 @@ module Axlsx
             str << '<a:lstStyle/>'
             str << '<a:p>'
               str << '<a:r>'
+                str << ('<a:rPr sz="' << @text_size.to_s << '"/>')
                 str << ('<a:t>' << @text.to_s << '</a:t>')
               str << '</a:r>'
             str << '</a:p>'
