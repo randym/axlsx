@@ -153,7 +153,7 @@ There is much, much more you can do with this gem. If you get stuck, grab me on 
 
 This gem is 100% documented with YARD, an exceptional documentation library. To see documentation for this, and all the gems installed on your system use:
 
-     gem install yard
+     gem install yard kramdown
 
      yard server -g
 
