@@ -67,7 +67,7 @@ module Axlsx
   APP_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties".freeze
 
   # core rels namespace
-  CORE_R = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/metadata/core-properties".freeze
+  CORE_R = "http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties".freeze
 
   # digital signature rels namespace
   DIGITAL_SIGNATURE_R = "http://schemas.openxmlformats.org/package/2006/relationships/digital- signature/signature".freeze
