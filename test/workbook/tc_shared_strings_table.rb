@@ -49,7 +49,7 @@ class TestSharedStringsTable < Test::Unit::TestCase
     assert @p.workbook.shared_strings.unique_cells.has_key?(nasties)
 
     # test that none of the control characters are in the XML output for shared strings
-    assert_no_match /#{Axlsx::CONTROL_CHARS}/, @p.workbook.shared_strings.to_xml_string
+    assert_no_match(/#{Axlsx::CONTROL_CHARS}/, @p.workbook.shared_strings.to_xml_string)
 
     # assert that the shared string was normalized to remove the control characters
     assert_not_nil @p.workbook.shared_strings.to_xml_string.index("helloworld")
