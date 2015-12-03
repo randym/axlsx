@@ -23,6 +23,7 @@ module Axlsx
       @show_legend = true
       @legend_position = :r
       @display_blanks_as = :gap
+      @rounded_corners = true
       @series_type = Series
       @title = Title.new
       @bg_color = nil
@@ -97,6 +98,11 @@ module Axlsx
     # Background color for the chart
     # @return [String]
     attr_reader :bg_color
+
+    # Use rounded corners for the chart?
+    # It defaults to true
+    # @return [Boolean]
+    attr_reader :rounded_corners
 
     # The relationship object for this chart.
     # @return [Relationship]
@@ -178,6 +184,11 @@ module Axlsx
       @bg_color = v
     end
 
+    # Should the chart have rounded corners?
+    # @param [Boolean] v
+    # @return [Boolean]
+    def rounded_corners=(v) Axlsx::validate_boolean(v); @rounded_corners = v; end
+
     # Serializes the object
     # @param [String] str
     # @return [String]
@@ -185,6 +196,7 @@ module Axlsx
       str << '<?xml version="1.0" encoding="UTF-8"?>'
       str << ('<c:chartSpace xmlns:c="' << XML_NS_C << '" xmlns:a="' << XML_NS_A << '" xmlns:r="' << XML_NS_R << '">')
       str << ('<c:date1904 val="' << Axlsx::Workbook.date1904.to_s << '"/>')
+      str << '<c:roundedCorners val="0"/>' if !@rounded_corners
       str << ('<c:style val="' << style.to_s << '"/>')
       str << '<c:chart>'
       @title.to_xml_string str
