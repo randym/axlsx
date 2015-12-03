@@ -28,14 +28,28 @@ module Axlsx
     end
     alias :catAxis :cat_axis
 
-    # the category axis
+    # the values axis
     # @return [ValAxis]
     def val_axis
       axes[:val_axis]
     end
     alias :valAxis :val_axis
 
-     # must be one of  [:percentStacked, :clustered, :standard, :stacked]
+    # the secondary category axis
+    # @return [sec_cat_axis]
+    def sec_cat_axis
+      axes[:sec_cat_axis]
+    end
+    alias :secCatAxis :sec_cat_axis
+
+    # the secondary values axis
+    # @return [sec_val_axis]
+    def sec_val_axis
+      axes[:sec_val_axis]
+    end
+    alias :secValAxis :sec_val_axis
+
+    # must be one of  [:percentStacked, :clustered, :standard, :stacked]
     # @return [Symbol]
     attr_reader :grouping
 
@@ -76,24 +90,80 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      super(str) do
-        str << ("<c:" << node_name << ">")
-        str << ('<c:grouping val="' << grouping.to_s << '"/>')
-        str << ('<c:varyColors val="' << vary_colors.to_s << '"/>')
-        @series.each { |ser| ser.to_xml_string(str) }
-        @d_lbls.to_xml_string(str) if @d_lbls
-        yield if block_given?
-        axes.to_xml_string(str, :ids => true)
-        str << ("</c:" << node_name << ">")
-        axes.to_xml_string(str)
+      if @series.all? {|s| s.on_primary_axis} then
+        # Only a primary val axis
+        super(str) do
+          str << ("<c:" << node_name << ">")
+          str << ('<c:grouping val="' << grouping.to_s << '"/>')
+          str << ('<c:varyColors val="' << vary_colors.to_s << '"/>')
+          @series.each { |ser| ser.to_xml_string(str) }
+          @d_lbls.to_xml_string(str) if @d_lbls
+          yield if block_given?
+          axes.to_xml_string(str, :ids => true)
+          str << ("</c:" << node_name << ">")
+          axes.to_xml_string(str)
+        end
+      else
+        # Two value axes
+        super(str) do
+          # First axis
+          str << ("<c:" << node_name << ">")
+          str << ('<c:grouping val="' << grouping.to_s << '"/>')
+          str << ('<c:varyColors val="' << vary_colors.to_s << '"/>')
+          @series.select {|s| s.on_primary_axis}.each { |s| s.to_xml_string(str) }
+          @d_lbls.to_xml_string(str) if @d_lbls
+          yield if block_given?
+          str << ('<c:axId val="' << axes[:cat_axis].id.to_s << '"/>')
+          str << ('<c:axId val="' << axes[:val_axis].id.to_s << '"/>')
+          str << ("</c:" << node_name << ">")
+
+          # Secondary axis
+          str << ("<c:" << node_name << ">")
+          str << ('<c:grouping val="' << grouping.to_s << '"/>')
+          str << ('<c:varyColors val="' << vary_colors.to_s << '"/>')
+          @series.select {|s| !s.on_primary_axis}.each { |s| s.to_xml_string(str) }
+          @d_lbls.to_xml_string(str) if @d_lbls
+          yield if block_given?
+          str << ('<c:axId val="' << axes[:sec_cat_axis].id.to_s << '"/>')
+          str << ('<c:axId val="' << axes[:sec_val_axis].id.to_s << '"/>')
+          str << ("</c:" << node_name << ">")
+
+          # The axes
+          axes.to_xml_string(str)
+        end
       end
     end
 
     # The axes for this chart. LineCharts have a category and value
-    # axis.
+    # axis. If any series is on the secondary axis we will have two
+    # category and two value axes.
     # @return [Axes]
     def axes
-      @axes ||= Axes.new(:cat_axis => CatAxis, :val_axis => ValAxis)
+      if @axes.nil? then
+        # add the normal axes
+        @axes = Axes.new(:cat_axis => CatAxis, :val_axis => ValAxis)
+
+        # add the secondary axes if needed
+        if @series.any? {|s| !s.on_primary_axis} then
+          if @axes[:sec_cat_axis].nil? then
+            @axes.add_axis(:sec_cat_axis, Axlsx::CatAxis)
+            sec_cat_axis = @axes[:sec_cat_axis]
+            sec_cat_axis.ax_pos = :b
+            sec_cat_axis.delete = 1
+            sec_cat_axis.gridlines = false
+          end
+          if @axes[:sec_val_axis].nil? then
+            @axes.add_axis(:sec_val_axis, Axlsx::ValAxis)
+            sec_val_axis = @axes[:sec_val_axis]
+            sec_val_axis.ax_pos = :r
+            sec_val_axis.gridlines = false
+            sec_val_axis.crosses = :max
+          end
+        end
+      end
+
+      # return
+      @axes
     end
   end
 end

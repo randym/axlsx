@@ -15,11 +15,12 @@ module Axlsx
       end
     end
 
-    # [] provides assiciative access to a specic axis store in an axes
+    # [] provides associative access to a specic axis store in an axes
     # instance. 
     # @return [Axis]
     def [](name)
-      axes.assoc(name)[1]
+      a = axes.assoc(name)
+      if a.nil? then nil else a[1] end
     end
 
     # Serializes the object

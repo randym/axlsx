@@ -31,6 +31,10 @@ module Axlsx
     # @return [Boolean]
     attr_reader :smooth
 
+    # on primary or secondary axis
+    # @return [Boolean]
+    attr_reader :on_primary_axis
+
     # Creates a new series
     # @option options [Array, SimpleTypedList] data
     # @option options [Array, SimpleTypedList] labels
@@ -39,6 +43,7 @@ module Axlsx
       @show_marker = false
       @marker_symbol = options[:marker_symbol] ? options[:marker_symbol] : :default
       @smooth = false
+      @on_primary_axis = true
       @labels, @data = nil, nil
       super(chart, options)
       @labels = AxDataSource.new(:data => options[:labels]) unless options[:labels].nil?
@@ -66,6 +71,12 @@ module Axlsx
     def smooth=(v)
       Axlsx::validate_boolean(v)
       @smooth = v
+    end
+
+    # is it on the primary axis?
+    def on_primary_axis=(v)
+      Axlsx::validate_boolean(v)
+      @on_primary_axis = v
     end
 
     # Serializes the object

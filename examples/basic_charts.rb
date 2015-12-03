@@ -54,5 +54,36 @@ wb.add_worksheet(:name => "Colored Pie Chart") do |sheet|
   end
 end
 
+# secondary axis in line chart
+ wb.add_worksheet(:name => "Secondary axis") do |sheet|
+  sheet.add_row %w(first second)
+  10.times do
+    sheet.add_row [ rand(24)+1, rand(24)*100+1]
+  end
+  sheet.add_chart(Axlsx::LineChart, :title => "Simple Line Chart", :rotX => 30, :rotY => 20) do |chart|
+    chart.start_at 0, 5
+    chart.end_at 10, 25
+    chart.add_series :data => sheet["A2:A11"], :title => sheet["A1"], :color => "5B9BD5", :show_marker => true, :smooth => true
+    chart.add_series :data => sheet["B2:B11"], :title => sheet["B1"], :color => "ED7D31", :on_primary_axis => false
+
+    chart.catAxis.title = 'X Axis'
+    chart.valAxis.title = 'Primary Axis'
+    chart.secValAxis.title = "Secondary Axis"
+
+    # Set the text color of the title
+    chart.catAxis.title.text_color = "404040"
+    chart.valAxis.title.text_color = "5B9BD5"
+    chart.secValAxis.title.text_color = "ED7D31"
+
+    # Set the color of the axis values
+    chart.valAxis.text_color = "5B9BD5"
+    chart.secValAxis.text_color = "ED7D31"
+
+    # Set the luminance
+    chart.catAxis.gridlines_luminance = 0.25
+    chart.valAxis.gridlines_luminance = 0.25
+  end
+ end
+
 p.serialize('basic_charts.xlsx')
 
