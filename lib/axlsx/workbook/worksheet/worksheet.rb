@@ -152,7 +152,7 @@ module Axlsx
     # cell at a specific index. The block will be called with the row and column
     # index in the missing cell was found.
     # @example
-    #     cols { |row_index, column_index| p "warn - row #{row_index} is does not have a cell at #{column_index}
+    #     cols { |row_index, column_index| puts "warn - row #{row_index} does not have a cell at #{column_index}" }
     def cols(&block)
       @rows.transpose(&block)
     end
