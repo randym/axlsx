@@ -24,6 +24,7 @@ module Axlsx
       parse_options options
       @workbook.worksheets << self
       @sheet_id = index + 1
+      name
       yield self if block_given?
     end
 
