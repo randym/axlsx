@@ -44,6 +44,10 @@ module Axlsx
 
   # Validate that the class of the value provided is either an instance or the class of the allowed types and that any specified additional validation returns true.
   class DataTypeValidator
+    class << self
+      attr_accessor :disable
+    end
+
     # Perform validation
     # @param [String] name The name of what is being validated. This is included in the error message
     # @param [Array, Class] types A single class or array of classes that the value is validated against.
@@ -51,18 +55,19 @@ module Axlsx
     # @raise [ArugumentError] Raised if the class of the value provided is not in the specified array of types or the block passed returns false
     # @return [Boolean] true if validation succeeds.
     # @see validate_boolean
-    def self.validate(name, types, v, other=false)
+    def self.validate(name, types, v, other = false)
+      return if @disable
+
       if other.is_a?(Proc)
          raise ArgumentError, (ERR_TYPE % [v.inspect, name, types.inspect]) unless other.call(v)
       end
       v_class = v.is_a?(Class) ? v : v.class
-      Array(types).each do |t| 
+      Array(types).each do |t|
         return if v_class <= t
       end
       raise ArgumentError, (ERR_TYPE % [v.inspect, name, types.inspect])
     end
   end
-  
 
   # Requires that the value can be converted to an integer
   # @para, [Any] v the value to validate
@@ -78,15 +83,15 @@ module Axlsx
   def self.validate_angle(v)
     raise ArgumentError, (ERR_ANGLE % v.inspect) unless (v.to_i >= -5400000 && v.to_i <= 5400000)
   end
-  
-  UINT_VALIDATOR = lambda { |arg| arg.respond_to?(:>=) && arg >= 0 }
-  
+
   # Requires that the value is a Fixnum or Integer and is greater or equal to 0
   # @param [Any] v The value validated
   # @raise [ArgumentError] raised if the value is not a Fixnum or Integer value greater or equal to 0
   # @return [Boolean] true if the data is valid
   def self.validate_unsigned_int(v)
-    DataTypeValidator.validate(:unsigned_int, Integer, v, UINT_VALIDATOR)
+    if !v.is_a?(Integer) || v < 0
+      raise ArgumentError, (ERR_TYPE % [v.inspect, :unsigned_int, [Integer].inspect])
+    end
   end
 
   # Requires that the value is a Fixnum Integer or Float and is greater or equal to 0
@@ -94,33 +99,45 @@ module Axlsx
   # @raise [ArgumentError] raised if the value is not a Fixnun, Integer, Float value greater or equal to 0
   # @return [Boolean] true if the data is valid
   def self.validate_unsigned_numeric(v)
-    DataTypeValidator.validate(:unsigned_numeric, Numeric, v, UINT_VALIDATOR)
+    if !v.is_a?(Numeric) || v < 0
+      raise ArgumentError, (ERR_TYPE % [v.inspect, :unsigned_int, [Numeric].inspect])
+    end
   end
 
   # Requires that the value is a Integer
   # @param [Any] v The value validated
   def self.validate_int(v)
-    DataTypeValidator.validate :signed_int, Integer, v
+    unless v.is_a?(Integer)
+      raise ArgumentError, (ERR_TYPE % [v.inspect, :signed_int, [Integer].inspect])
+    end
   end
+
+  BOOLEAN_VALUES = [0, 1, "true", "false", :true, :false, true, false, "0", "1"]
 
   # Requires that the value is a form that can be evaluated as a boolean in an xml document.
   # The value must be an instance of Fixnum, String, Integer, Symbol, TrueClass or FalseClass and
   # it must be one of 0, 1, "true", "false", :true, :false, true, false, "0", or "1"
   # @param [Any] v The value validated
   def self.validate_boolean(v)
-    DataTypeValidator.validate(:boolean, [String, Integer, Symbol, TrueClass, FalseClass], v, lambda { |arg| [0, 1, "true", "false", :true, :false, true, false, "0", "1"].include?(arg) })
+    unless BOOLEAN_VALUES.include?(v)
+      raise ArgumentError, (ERR_TYPE % [v.inspect, :boolean, [String, Integer, Symbol, TrueClass, FalseClass].inspect])
+    end
   end
 
   # Requires that the value is a String
   # @param [Any] v The value validated
   def self.validate_string(v)
-    DataTypeValidator.validate :string, String, v
+    unless v.is_a?(String)
+      raise ArgumentError, (ERR_TYPE % [v.inspect, :string, [String].inspect])
+    end
   end
 
   # Requires that the value is a Float
   # @param [Any] v The value validated
   def self.validate_float(v)
-    DataTypeValidator.validate :float, Float, v
+    unless v.is_a?(Float)
+      raise ArgumentError, (ERR_TYPE % [v.inspect, :float, [Float].inspect])
+    end
   end
 
   # Requires that the value is a string containing a positive decimal number followed by one of the following units:

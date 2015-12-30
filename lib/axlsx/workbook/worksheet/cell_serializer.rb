@@ -8,13 +8,14 @@ module Axlsx
       # @param [Integer] column_index The index of the cell's column
       # @param [String] str The string to apend serialization to.
       # @return [String]
-      def to_xml_string(row_index, column_index, cell, str='')
-        str << ('<c r="' << Axlsx::cell_r(column_index, row_index) << '" s="' << cell.style.to_s << '" ')
+
+      def to_xml_string(row_index, column_index, cell, str = '')
+        str << %{<c r="#{Axlsx::cell_r(column_index, row_index)}" s="#{cell.style.to_s}" }
         return str << '/>' if cell.value.nil?
         method = cell.type
         self.send(method, cell, str)
         str << '</c>'
-      end 
+      end
 
       # builds an xml text run based on this cells attributes.
       # @param [String] str The string instance this run will be concated to.
