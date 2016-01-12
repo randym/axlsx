@@ -10,11 +10,11 @@ module Axlsx
     # @option options [String] creator
     # @option options [Time] created
     def initialize(options={})
-      @creator = options[:creator] || 'axlsx'
+      @creator = options[:creator]
       @created = options[:created]
     end
 
-    # The author of the document. By default this is 'axlsx'
+    # The author of the document. By default this is nil.
     # @return [String]
     attr_accessor :creator
 
@@ -28,7 +28,7 @@ module Axlsx
       str << ('<cp:coreProperties xmlns:cp="' << CORE_NS << '" xmlns:dc="' << CORE_NS_DC << '" ')
       str << ('xmlns:dcmitype="' << CORE_NS_DCMIT << '" xmlns:dcterms="' << CORE_NS_DCT << '" ')
       str << ('xmlns:xsi="' << CORE_NS_XSI << '">')
-      str << ('<dc:creator>' << self.creator << '</dc:creator>')
+      str << ('<dc:creator>' << (self.creator || '') << '</dc:creator>')
       str << ('<dcterms:created xsi:type="dcterms:W3CDTF">' << (created || Time.now).strftime('%Y-%m-%dT%H:%M:%S') << 'Z</dcterms:created>')
       str << '<cp:revision>0</cp:revision>'
       str << '</cp:coreProperties>'

@@ -31,7 +31,7 @@ class TestCore < Test::Unit::TestCase
   end
 
   def test_populates_default_name
-    assert_equal(@doc.xpath('//dc:creator').text, "axlsx", "Default name not populated")
+    assert_equal(@doc.xpath('//dc:creator').text, "", "Default name populated")
   end
 
   def test_creator_as_option
