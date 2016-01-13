@@ -66,7 +66,7 @@ module Axlsx
     # The OutlinePr for this sheet pr object
     # @return [OutlinePr]
     def outline_pr
-      @outline_pr ||= OutlinePr.new( @worksheet )
+      @outline_pr ||= OutlinePr.new
     end
 
     # @see tab_color
