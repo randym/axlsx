@@ -56,7 +56,7 @@ module Axlsx
     # @return [Boolean] true if validation succeeds.
     # @see validate_boolean
     def self.validate(name, types, v, other = false)
-      return if @disable
+      return if defined?(@disable) && @disable
 
       if other.is_a?(Proc)
          raise ArgumentError, (ERR_TYPE % [v.inspect, name, types.inspect]) unless other.call(v)

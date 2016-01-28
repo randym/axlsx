@@ -83,7 +83,7 @@ module Axlsx
     # @return [SimpleTypedList]
     def +(v)
       v.each do |item|
-        validate_element(v)
+        validate_element(item)
         @list << item
       end
     end
@@ -135,13 +135,13 @@ module Axlsx
     def validate_element(v)
       if @allowed_types.size == 1
         unless v.is_a?(@allowed_types.first)
-          raise ArgumentError, "element should be instance of #{@allowed_types.inspect}"
+          raise ArgumentError, "element should be instance of #{@allowed_types.first} given #{v.class}"
         end
       else
         @allowed_types.each do |klass|
           return if v.is_a?(klass)
         end
-        raise ArgumentError, "element should be instance of #{@allowed_types.inspect}"
+        raise ArgumentError, "element should be instance of #{@allowed_types.inspect} given #{v.class}"
       end
     end
 
@@ -160,7 +160,7 @@ module Axlsx
     # determines if the index is protected
     # @param [Integer] index
     def protected? index
-      return index < (@locked_at || -1)
+      return index < (defined?(@locked_at) && @locked_at || -1)
     end
 
     DESTRUCTIVE = ['replace', 'insert', 'collect!', 'map!', 'pop', 'delete_if',
