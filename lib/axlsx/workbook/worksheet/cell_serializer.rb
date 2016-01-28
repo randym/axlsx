@@ -29,7 +29,7 @@ module Axlsx
         elsif cell.contains_rich_text?
           cell.value.to_xml_string(str)
         else
-          str << ('<t>' << cell.clean_value << '</t>')
+          str << "<t>#{cell.clean_value}</t>"
         end
         str
       end
