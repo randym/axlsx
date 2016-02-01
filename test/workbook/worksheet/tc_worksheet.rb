@@ -573,5 +573,15 @@ class TestWorksheet < Test::Unit::TestCase
     assert_raise(ArgumentError) { @wb.add_worksheet(:name => 'Sheet1') }
     assert_equal(1, @wb.worksheets.size)
   end
+  
+  def test_worksheet_only_includes_outline_pr_when_set
+    doc = Nokogiri::XML(@ws.to_xml_string)
+    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:sheetPr/xmlns:outlinePr').size, 0)
 
+    @ws.sheet_pr.outline_pr.summary_below = false
+    @ws.sheet_pr.outline_pr.summary_right = true
+    doc = Nokogiri::XML(@ws.to_xml_string)
+    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:sheetPr/xmlns:outlinePr').size, 1)
+    assert_equal(doc.xpath('//xmlns:worksheet/xmlns:sheetPr/xmlns:outlinePr[@summaryBelow=0][@summaryRight=1]').size, 1)
+  end
 end
