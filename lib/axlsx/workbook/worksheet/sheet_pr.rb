@@ -1,6 +1,6 @@
 module Axlsx
 
-  # The SheetPr class manages serialization fo a worksheet's sheetPr element.
+  # The SheetPr class manages serialization of a worksheet's sheetPr element.
   class SheetPr
     include Axlsx::OptionsParser
     include Axlsx::Accessors
@@ -33,6 +33,7 @@ module Axlsx
     def initialize(worksheet, options={})
       raise ArgumentError, "you must provide a worksheet" unless worksheet.is_a?(Worksheet)
       @worksheet = worksheet
+      @outline_pr = nil
       parse_options options
     end
 
@@ -51,6 +52,7 @@ module Axlsx
       update_properties
       str << "<sheetPr #{serialized_attributes}>"
       tab_color.to_xml_string(str, 'tabColor') if tab_color
+      outline_pr.to_xml_string(str) if @outline_pr
       page_setup_pr.to_xml_string(str)
       str << "</sheetPr>"
     end
@@ -59,6 +61,12 @@ module Axlsx
     # @return [PageSetUpPr]
     def page_setup_pr
       @page_setup_pr ||= PageSetUpPr.new
+    end
+    
+    # The OutlinePr for this sheet pr object
+    # @return [OutlinePr]
+    def outline_pr
+      @outline_pr ||= OutlinePr.new
     end
 
     # @see tab_color
