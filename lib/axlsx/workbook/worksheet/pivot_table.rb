@@ -24,7 +24,6 @@ module Axlsx
       @columns = []
       @data = []
       @pages = []
-      @subtotal = nil
       parse_options options
       yield self if block_given?
     end
@@ -200,8 +199,10 @@ module Axlsx
       unless data.empty?
         str << "<dataFields count=\"#{data.size}\">"
         data.each do |datum_value|
-          str << "<dataField name='#{@subtotal} of #{datum_value[:ref]}' fld='#{header_index_of(datum_value[:ref])}' baseField='0' baseItem='0'"
-          str << " subtotal='#{datum_value[:subtotal]}' " if datum_value[:subtotal]
+          subtotal = datum_value[:subtotal] || 'sum'
+          ref = datum_value[:ref]
+          str << "<dataField name='#{subtotal.capitalize} of #{ref}' fld='#{header_index_of(ref)}' baseField='0' baseItem='0'"
+          str << " subtotal='#{subtotal}' "
           str << "/>"
         end
         str << '</dataFields>'
@@ -247,7 +248,7 @@ module Axlsx
       elsif columns.include? cell_ref
         '<pivotField axis="axisCol" compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1">' + '<items count="1"><item t="default"/></items>' + '</pivotField>'
       elsif pages.include? cell_ref
-        '<pivotField axis="axisCol" compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1">' + '<items count="1"><item t="default"/></items>' + '</pivotField>'
+        '<pivotField axis="axisPage" compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1">' + '<items count="1"><item t="default"/></items>' + '</pivotField>'
       elsif data_refs.include? cell_ref
         '<pivotField dataField="1" compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1">' + '</pivotField>'
       else
