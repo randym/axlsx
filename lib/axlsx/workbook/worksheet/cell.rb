@@ -341,7 +341,7 @@ module Axlsx
 
     # Creates a defined name in the workbook for this cell.
     def name=(label)
-      row.worksheet.workbook.add_defined_name "#{row.worksheet.name}!#{r_abs}", name: label
+      row.worksheet.workbook.add_defined_name "'#{row.worksheet.name}'!#{r_abs}", name: label
       @name = label
     end
 
