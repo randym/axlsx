@@ -66,7 +66,7 @@ module Axlsx
                      :vertAlign, :sz, :color, :scheme].freeze
 
     CELL_TYPES = [:date, :time, :float, :integer, :richtext,
-                  :string, :boolean, :iso_8601].freeze
+                  :string, :boolean, :iso_8601, :text].freeze
 
     # The index of the cellXfs item to be applied to this cell.
     # @return [Integer]
