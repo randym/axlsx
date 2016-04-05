@@ -141,8 +141,12 @@ module Axlsx
       # @param [Cell] cell The cell that is being serialized
       # @param [String] str The string the serialized content will be appended to.
       # @return [String]
-      def text(cell, str='')
-        inline_string_serialization cell, str
+      def text(cell, str)
+        if cell.ssti.nil?
+          inline_string_serialization cell, str
+        else
+          value_serialization 's', cell.ssti, str
+        end
       end
 
       private

@@ -123,7 +123,7 @@ module Axlsx
 
     # Indicates if the cell is good for shared string table
     def plain_string?
-      type == :string &&         # String typed
+      (type == :string || type == :text) &&         # String typed
         !is_text_run? &&          # No inline styles
         !@value.nil? &&           # Not nil
         !@value.empty? &&         # Not empty
@@ -368,7 +368,7 @@ module Axlsx
     # TODO find a better way to do this as it accounts for 30% of
     # processing time in benchmarking...
     def clean_value
-      if type == :string && !Axlsx::trust_input
+      if (type == :string || type == :text) && !Axlsx::trust_input
         Axlsx::sanitize(::CGI.escapeHTML(@value.to_s))
       else
         @value.to_s
