@@ -152,6 +152,8 @@ require 'axlsx/workbook/worksheet/selection.rb'
     # @return [SimpleTypedList]
     attr_reader :pivot_tables
 
+    attr_reader :auto_width
+
     # A collection of views for this workbook
     def views
       @views ||= WorkbookViews.new
@@ -219,7 +221,7 @@ require 'axlsx/workbook/worksheet/selection.rb'
       @tables = SimpleTypedList.new Table
       @pivot_tables = SimpleTypedList.new PivotTable
       @comments = SimpleTypedList.new Comments
-
+      @auto_width = options.fetch(:auto_width, true)
 
       @use_autowidth = true
 
@@ -261,6 +263,7 @@ require 'axlsx/workbook/worksheet/selection.rb'
     # @option options [String] name The name of the worksheet
     # @option options [Hash] page_margins The page margins for the worksheet
     def insert_worksheet(index=0, options={})
+      options[:auto_width] = auto_width
       worksheet = Worksheet.new(self, options)
       @worksheets.delete_at(@worksheets.size - 1)
       @worksheets.insert(index, worksheet)
@@ -275,6 +278,7 @@ require 'axlsx/workbook/worksheet/selection.rb'
     # @option options [Hash] page_margins The page margins for the worksheet.
     # @see Worksheet#initialize
     def add_worksheet(options={})
+      options[:auto_width] = auto_width
       worksheet = Worksheet.new(self, options)
       yield worksheet if block_given?
       worksheet

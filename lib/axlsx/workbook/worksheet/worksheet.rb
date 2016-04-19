@@ -8,7 +8,9 @@ module Axlsx
     # definition of characters which are less than the maximum width of 0-9 in the default font for use in String#count.
     # This is used for autowidth calculations
     THIN_CHARS = '^.acfijklrstxzFIJL()-'.freeze
-    
+
+    attr_reader :auto_width
+
     # Creates a new worksheet.
     # @note the recommended way to manage worksheets is Workbook#add_worksheet
     # @see Workbook#add_worksheet
@@ -20,6 +22,7 @@ module Axlsx
     def initialize(wb, options={})
       self.workbook = wb
       @sheet_protection = nil
+      @auto_width = options.fetch(:auto_width, true)
       initialize_page_options(options)
       parse_options options
       @workbook.worksheets << self
@@ -443,7 +446,11 @@ module Axlsx
     # @option options [Float] height the row's height (in points)
     def add_row(values=[], options={})
       row = Row.new(self, values, options)
-      update_column_info row, options.delete(:widths)
+      if auto_width
+        update_column_info(row, options.delete(:widths))
+      else
+        update_column_info_without_auto_width(row, options.delete(:widths))
+      end
       yield row if block_given?
       row
     end
@@ -782,6 +789,16 @@ module Axlsx
         col = find_or_create_column_info(index)
         next if width == :ignore
         col.update_width(cell, width, workbook.use_autowidth)
+      end
+    end
+
+    def update_column_info_without_auto_width(cells, widths=nil)
+      return if column_info.present? && column_info[cells.count - 1].present? # if we already have a column_info for all cells then exit to save time
+      cells.count.times do |index|
+        cell = cells[index]
+        width = widths ? widths[index] : nil
+        col = find_or_create_column_info(index)
+        next if width == :ignore
       end
     end
 

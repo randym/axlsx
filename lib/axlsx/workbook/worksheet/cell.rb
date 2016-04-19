@@ -427,12 +427,12 @@ module Axlsx
         :time
       elsif v.is_a?(TrueClass) || v.is_a?(FalseClass)
         :boolean
-      elsif v.to_s =~ Axlsx::NUMERIC_REGEX
-        :integer
-      elsif v.to_s =~ Axlsx::FLOAT_REGEX
+      elsif v.is_a?(Float) || v.is_a?(BigDecimal)
         :float
-      elsif v.to_s =~ Axlsx::ISO_8601_REGEX
-        :iso_8601
+      elsif v.is_a?(Numeric)
+        :integer
+      # elsif v.to_s =~ Axlsx::ISO_8601_REGEX
+      #   :iso_8601
       elsif v.is_a? RichText
         :richtext
       else

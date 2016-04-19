@@ -13,6 +13,8 @@ module Axlsx
     # see Core
     attr_reader :core
 
+    attr_reader :auto_width
+
     # Initializes your package
     #
     # @param [Hash] options A hash that you can use to specify the author and workbook for this package.
@@ -25,6 +27,7 @@ module Axlsx
       @core, @app = Core.new, App.new
       @core.creator = options[:author] || @core.creator
       @core.created = options[:created_at]
+      @auto_width = options.fetch(:auto_width, true)
       parse_options options
       yield self if block_given?
     end
@@ -35,8 +38,6 @@ module Axlsx
       Axlsx::validate_boolean(v);
       workbook.use_autowidth = v
     end
-
-
 
     # Shortcut to determine if the workbook is configured to use shared strings
     # @see Workbook#use_shared_strings
@@ -63,7 +64,7 @@ module Axlsx
     #     #     # set the workbook after creating the package
     #     wb = Package.new().workbook = Workbook.new
     def workbook
-      @workbook || @workbook = Workbook.new
+      @workbook || @workbook = Workbook.new({auto_width: auto_width})
       yield @workbook if block_given?
       @workbook
     end
@@ -76,7 +77,10 @@ module Axlsx
     #end
 
     # @see workbook
-    def workbook=(workbook) DataTypeValidator.validate :Package_workbook, Workbook, workbook; @workbook = workbook; end
+    def workbook=(workbook)
+      DataTypeValidator.validate(:Package_workbook, Workbook, workbook)
+      @workbook = workbook
+    end
 
     # Serialize your workbook to disk as an xlsx document.
     #
@@ -360,4 +364,3 @@ module Axlsx
     end
   end
 end
-

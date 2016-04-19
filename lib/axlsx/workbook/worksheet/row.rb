@@ -6,7 +6,7 @@ module Axlsx
   class Row < SimpleTypedList
     include SerializedAttributes
     include Accessors
-    
+
     # No support is provided for the following attributes
     # spans
     # thickTop
@@ -63,7 +63,7 @@ module Axlsx
     # @see Row#s
     def s=(v)
       Axlsx.validate_unsigned_numeric(v)
-      @custom_format = true 
+      @custom_format = true
       @s = v
     end
 
@@ -72,7 +72,7 @@ module Axlsx
       Axlsx.validate_unsigned_numeric(v)
       @outline_level = v
     end
-    
+
     alias :outlineLevel= :outline_level=
 
     # The index of this row in the worksheet
@@ -118,7 +118,7 @@ module Axlsx
         @ht = v
       end
     end
-    
+
     # return cells
     def cells
       self
@@ -141,7 +141,8 @@ module Axlsx
     def array_to_cells(values, options={})
       DataTypeValidator.validate :array_to_cells, Array, values
       types, style, formula_values = options.delete(:types), options.delete(:style), options.delete(:formula_values)
-      values.each_with_index do |value, index|
+      values.size.times do |index|
+        value = values[index]
         options[:style] = style.is_a?(Array) ? style[index] : style if style
         options[:type] = types.is_a?(Array) ? types[index] : types if types
         options[:formula_value] = formula_values[index] if formula_values.is_a?(Array)

@@ -4,14 +4,16 @@ require "date"
 module Axlsx
   # The DateTimeConverter class converts both data and time types to their apprpriate excel serializations
   class DateTimeConverter
+    EPOCH_1904 = 24107.0 # number of days from 1904-01-01 to 1970-01-01
+    EPOCH_1900 = 25569.0 # number of days from 1899-12-30 to 1970-01-01
 
     # The date_to_serial method converts Date objects to the equivelant excel serialized forms
     # @param [Date] date the date to be serialized
     # @return [Numeric]
     def self.date_to_serial(date)
-      epoch = Axlsx::Workbook::date1904 ? Date.new(1904) : Date.new(1899, 12, 30)
+      epoch = Axlsx::Workbook::date1904 ? EPOCH_1904 : EPOCH_1900
       offset_date = date.respond_to?(:utc_offset) ? date + date.utc_offset.seconds : date
-      (offset_date - epoch).to_f
+      offset_date.strftime("%s").to_f / 86400.0 + epoch
     end
 
     # The time_to_serial methond converts a Time object its excel serialized form.
