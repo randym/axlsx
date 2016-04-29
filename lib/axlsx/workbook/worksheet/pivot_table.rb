@@ -159,16 +159,16 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       str << '<?xml version="1.0" encoding="UTF-8"?>'
-      str << ('<pivotTableDefinition xmlns="' << XML_NS << '" name="' << name << '" cacheId="' << cache_definition.cache_id.to_s << '"  dataOnRows="1" applyNumberFormats="0" applyBorderFormats="0" applyFontFormats="0" applyPatternFormats="0" applyAlignmentFormats="0" applyWidthHeightFormats="1" dataCaption="Data" showMultipleLabel="0" showMemberPropertyTips="0" useAutoFormatting="1" indent="0" compact="0" compactData="0" gridDropZones="1" multipleFieldFilters="0">')
-      str << (  '<location firstDataCol="1" firstDataRow="1" firstHeaderRow="1" ref="' << ref << '"/>')
-      str << (  '<pivotFields count="' << header_cells_count.to_s << '">')
+      str << ('<pivotTableDefinition xmlns="' << XML_NS << '" name="' << name << '" cacheId="' << cache_definition.cache_id.to_s << '"  dataOnRows="0" applyNumberFormats="0" applyBorderFormats="0" applyFontFormats="0" applyPatternFormats="0" applyAlignmentFormats="0" applyWidthHeightFormats="1" dataCaption="Data" showMultipleLabel="0" showMemberPropertyTips="0" useAutoFormatting="1" indent="0" compact="0" compactData="0" gridDropZones="1" multipleFieldFilters="0" mergeItem="1" fieldListSortAscending="1">')
+      str << ('<location firstDataCol="1" firstDataRow="1" firstHeaderRow="1" ref="' << ref << '"/>')
+      str << ('<pivotFields count="' << header_cells_count.to_s << '">')
       header_cell_values.each do |cell_value|
-        str <<   pivot_field_for(cell_value)
+        str << pivot_field_for(cell_value)
       end
-      str <<   '</pivotFields>'
+      str << '</pivotFields>'
+      offset = data.size > 1 ? 1 : 0
       if rows.empty?
-        str << '<rowFields count="1"><field x="-2"/></rowFields>'
-        str << '<rowItems count="2"><i><x/></i> <i i="1"><x v="1"/></i></rowItems>'
+        str << '<rowItems count="1"><i/></rowItems>'
       else
         str << ('<rowFields count="' << rows.size.to_s << '">')
         rows.each do |row_value|
@@ -182,12 +182,15 @@ module Axlsx
         str << '</rowItems>'
       end
       if columns.empty?
-        str << '<colItems count="1"><i/></colItems>'
+        if data.size > 1
+          str << '<colFields count="1"><field x="-2"/></colFields>'
+        end
       else
-        str << ('<colFields count="' << columns.size.to_s << '">')
+        str << ('<colFields count="' << (columns.size + 1).to_s << '">')
         columns.each do |column_value|
           str << ('<field x="' << header_index_of(column_value).to_s << '"/>')
         end
+        str << ('<field x="-2"/>') if data.size > 1
         str << '</colFields>'
       end
       unless pages.empty?
@@ -200,12 +203,13 @@ module Axlsx
       unless data.empty?
         str << "<dataFields count=\"#{data.size}\">"
         data.each do |datum_value|
-          str << "<dataField name='#{@subtotal} of #{datum_value[:ref]}' fld='#{header_index_of(datum_value[:ref])}' baseField='0' baseItem='0'"
+          str << "<dataField name='Sum of #{datum_value[:ref]}' fld='#{header_index_of(datum_value[:ref])}' baseField='0' baseItem='0'"
           str << " subtotal='#{datum_value[:subtotal]}' " if datum_value[:subtotal]
           str << "/>"
         end
         str << '</dataFields>'
       end
+      str << '<pivotTableStyleInfo name="PivotStyleMedium11" showLastColumn="1" showColStripes="0" showRowStripes="0" showColHeaders="1" showRowHeaders="1"/>'
       str << '</pivotTableDefinition>'
     end
 
