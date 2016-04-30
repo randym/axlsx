@@ -44,13 +44,21 @@ module Axlsx
       raise ArgumentError, "Comment requires ref" unless options[:ref]
       self << Comment.new(self, options)
       yield last if block_given?
+      clear_author_caches
       last
     end
 
     # A sorted list of the unique authors in the contained comments
     # @return [Array]
     def authors
-      map { |comment| comment.author.to_s }.uniq.sort
+      @authors ||= map { |comment| comment.author.to_s }.uniq.sort
+    end
+
+    # Returns the index of the given author in the sorted authors array
+    # @param [String] author An author
+    # @return [Integer]
+    def author_index(author)
+      (@author_indexes ||= {})[author] ||= authors.index(author)
     end
 
     # The relationships required by this object
@@ -75,6 +83,13 @@ module Axlsx
       end
       str << '</commentList></comments>'
 
+    end
+
+    protected
+
+    def clear_author_caches
+      @authors = nil
+      @author_indexes = nil
     end
 
   end
