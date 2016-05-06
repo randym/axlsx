@@ -78,6 +78,20 @@ class TestPivotTable < Test::Unit::TestCase
     assert_equal(%w(A1 B1 C1 D1 E1), pivot_table.header_cell_refs)
   end
 
+  def test_ordering_header_values
+    @ws << [2012,  "Dec",  "East",   "Soda", "23456"]
+    @ws << [2012,  "Jan",  "East",   "Soda", "34567"]
+    pivot_table = @ws.add_pivot_table('G5:G6', 'A1:E5') do |pt|
+      pt.rows = ['Year', 'Month']
+      pt.columns = ['Type']
+      pt.data = ['Sales']
+      pt.pivot_field_sort_by('Month') { |month_str| month_str }
+    end
+    shared_test_pivot_table_xml_validity(pivot_table)
+    doc = Nokogiri::XML(pivot_table.to_xml_string)
+    assert_equal(['1', '2', '0', nil], doc.css('pivotFields pivotField')[1].css('items item').map { |xml_item| xml_item['x'] })
+  end
+
   def test_pn
     @ws.add_pivot_table('G5:G6', 'A1:D5')
     assert_equal(@ws.pivot_tables.first.pn, "pivotTables/pivotTable1.xml")
