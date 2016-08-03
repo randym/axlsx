@@ -100,11 +100,13 @@ module Axlsx
     #   File.open('example_streamed.xlsx', 'w') { |f| f.write(s.read) }
     def serialize(output, confirm_valid=false)
       return false unless !confirm_valid || self.validate.empty?
-      Relationship.clear_cached_instances
+      Relationship.initialize_cached_instances
       Zip::OutputStream.open(output) do |zip|
         write_parts(zip)
       end
       true
+    ensure
+      Relationship.clear_cached_instances
     end
 
 
@@ -113,11 +115,13 @@ module Axlsx
     # @return [StringIO|Boolean] False if confirm_valid and validation errors exist. rewound string IO if not.
     def to_stream(confirm_valid=false)
       return false unless !confirm_valid || self.validate.empty?
-      Relationship.clear_cached_instances
+      Relationship.initialize_cached_instances
       zip = write_parts(Zip::OutputStream.new(StringIO.new, true))
       stream = zip.close_buffer
       stream.rewind
       stream
+    ensure
+      Relationship.clear_cached_instances
     end
 
     # Encrypt the package into a CFB using the password provided

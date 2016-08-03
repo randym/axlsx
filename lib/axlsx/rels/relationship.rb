@@ -8,20 +8,28 @@ module Axlsx
       # Keeps track of all instances of this class.
       # @return [Array]
       def instances
-        @instances ||= []
+        Thread.current[:axlsx_relationship_cached_instances] ||= []
       end
-      
-      # Clear cached instances.
+
+      # Initialize cached instances.
       # 
       # This should be called before serializing a package (see {Package#serialize} and
       # {Package#to_stream}) to make sure that serialization is idempotent (i.e. 
       # Relationship instances are generated with the same IDs everytime the package
       # is serialized).
+      def initialize_cached_instances
+        Thread.current[:axlsx_relationship_cached_instances] = []
+      end
+      
+      # Clear cached instances.
+      # 
+      # This should be called after serializing a package (see {Package#serialize} and
+      # {Package#to_stream}) to free the memory allocated for cache.
       # 
       # Also, calling this avoids memory leaks (cached instances lingering around 
       # forever). 
       def clear_cached_instances
-        @instances = []
+        Thread.current[:axlsx_relationship_cached_instances] = nil
       end
       
       # Generate and return a unique id (eg. `rId123`) Used for setting {#Id}. 
@@ -30,7 +38,7 @@ module Axlsx
       # {clear_cached_instances} will automatically reset the generated ids, too.
       # @return [String]
       def next_free_id
-        "rId#{@instances.size + 1}"
+        "rId#{instances.size + 1}"
       end
     end
 
