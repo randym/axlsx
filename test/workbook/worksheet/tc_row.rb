@@ -27,6 +27,11 @@ class TestRow < Test::Unit::TestCase
     r.cells.each { |c| assert_equal(c.style,1) }
   end
 
+  def test_color
+    r = @ws.add_row([1,2,3,4,5])
+    r.color = "FF00FF00"
+    r.cells.each { |c| assert_equal(c.color.rgb, "FF00FF00") }
+  end
 
   def test_index
     assert_equal(@row.row_index, @row.worksheet.rows.index(@row))
