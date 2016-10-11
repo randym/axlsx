@@ -19,6 +19,8 @@ module Axlsx
                  cells
                elsif cells.is_a?(Array)
                  Axlsx::cell_range(cells, false)
+               elsif cells.is_a?(Row)
+                 Axlsx::cell_range(cells, false)
                end
     end
 
