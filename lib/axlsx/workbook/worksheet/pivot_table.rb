@@ -218,7 +218,7 @@ module Axlsx
         str << '</dataFields>'
       end
       # custom style
-      if style_info.present?
+      unless style_info.empty?
         str << '<pivotTableStyleInfo'
           style_info.each do |k,v|
             str << ' ' << k.to_s << '="' << v.to_s << '"'
