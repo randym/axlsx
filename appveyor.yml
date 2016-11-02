@@ -1,6 +1,7 @@
 version: 2.1.0.{build}-{branch}
 
 environment:
+  LC_ALL: en_US.UTF-8
   matrix:
     - RUBY_VERSION: 23
     - RUBY_VERSION: 22
