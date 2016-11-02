@@ -1,7 +1,11 @@
 version: 2.1.0.{build}-{branch}
 
+# Windows-1252
+
 environment:
-  LC_ALL: en_US.UTF-8
+  RUBY_OPTS: -E UTF-8
+  LC_ALL: UTF-8
+  LANG: UTF-8
   matrix:
     - RUBY_VERSION: 23
     - RUBY_VERSION: 22
