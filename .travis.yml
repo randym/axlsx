@@ -2,30 +2,33 @@ language: ruby
 sudo: false
 cache: bundler
 bundler_args: --without profile
-env:
-  - JRUBY_OPTS="-Xcli.debug=true --debug"
+  
 notifications:
   irc: "irc.freenode.org#axlsx"
   email:
     recipients:
       - digital.ipseity@gmail.com
     on_success: always
-rvm:
-  - 1.9.2
-  - 1.9.3
-  - 2.0
-  - 2.1
-  - 2.2
-  - rbx
-  - rbx-2
-  - jruby-19mode
-  - jruby-9.0.0.0
-  - ruby-head
-  - jruby-head
+
 matrix:
+  include:
+    - rvm: 1.9.2
+    - rvm: 1.9.3
+    - rvm: 2.0
+    - rvm: 2.1
+    - rvm: 2.2
+    - rvm: rbx
+    - rvm: rbx-2
+    - rvm: jruby-19mode
+      env: JRUBY_OPTS="-Xcli.debug=true --debug"
+    - rvm: jruby-9.1.5.0
+      env: JRUBY_OPTS="-Xcli.debug=true --debug"
+    - rvm: ruby-head
+    - rvm: jruby-head
+      env: JRUBY_OPTS="-Xcli.debug=true --debug"
   allow_failures:
     - rvm: rbx
     - rvm: rbx-2
     - rvm: ruby-head
-    - rvm: jruby-9.0.0.0
+    - rvm: jruby-9.1.5.0
     - rvm: jruby-head
