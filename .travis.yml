@@ -14,7 +14,6 @@ notifications:
 
 matrix:
   include:
-    - rvm: 1.9.2
     - rvm: 1.9.3
     - rvm: 2.0
     - rvm: 2.1
