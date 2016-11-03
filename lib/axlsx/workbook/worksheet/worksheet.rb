@@ -628,10 +628,11 @@ module Axlsx
 
     # Returns the cell or cells defined using excel style A1:B3 references.
     # @param [String|Integer] cell_def the string defining the cell or range of cells, or the rownumber
+    # @param [Hash] Options. Can set :in_bound to true to specify that we always return existing cell even if the range exceeds the sheet's data.
     # @return [Cell, Array]
-    def [] (cell_def)
+    def [] (cell_def, options = {})
       return rows[cell_def] if cell_def.is_a?(Integer)
-      parts = cell_def.split(':').map{ |part| name_to_cell part }
+      parts = cell_def.split(':').map { |part| name_to_cell(part, options) }
       if parts.size == 1
         parts.first
       else
@@ -641,10 +642,13 @@ module Axlsx
 
     # returns the column and row index for a named based cell
     # @param [String] name The cell or cell range to return. "A1" will return the first cell of the first row.
-    # @return [Cell]
-    def name_to_cell(name)
+    # @param [Hash] Options. Can set :in_bound to true to specify that we always return existing cell even if the range exceeds the sheet's data.
+    # @return [Cell] Will return last row or column if ranges exceed the rows and columns of the data sheet and option :in_bound is set to true
+    def name_to_cell(name, options = {})
       col_index, row_index = *Axlsx::name_to_indices(name)
+      row_index = rows.size-1 if options[:in_bound] && row_index >= rows.size
       r = rows[row_index]
+      col_index = r.size-1 if options[:in_bound] && col_index >= r.size
       r[col_index] if r
     end
 

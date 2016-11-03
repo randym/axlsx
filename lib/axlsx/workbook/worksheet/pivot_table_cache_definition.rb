@@ -54,7 +54,29 @@ module Axlsx
       str << (  '<cacheFields count="' << pivot_table.header_cells_count.to_s << '">')
       pivot_table.header_cells.each do |cell|
         str << (  '<cacheField name="' << cell.value << '" numFmtId="0">')
-        str <<     '<sharedItems count="0">'
+        header_name = cell.value
+        unique_values = (pivot_table.rows.include?(header_name) || pivot_table.columns.include?(header_name) ? pivot_table.unique_values_for_header(header_name) : [])
+        contains_string = false
+        contains_number = false
+        contains_integer = false
+        min_value = nil
+        max_value = nil
+        items_tags = []
+        unique_values.each do |value|
+          if value.is_a?(Numeric)
+            tag_name = 'n'
+            contains_number = true
+            contains_integer = true if value.is_a?(Integer)
+            min_value = value if min_value.nil? || value < min_value
+            max_value = value if max_value.nil? || value > max_value
+          else
+            tag_name = 's'
+            contains_string = true
+          end
+          items_tags << "<#{tag_name} v=\"#{value}\"/>"
+        end
+        str <<     "<sharedItems count=\"#{unique_values.size}\" containsSemiMixedTypes=\"#{contains_number ? '0' : '1'}\" containsInteger=\"#{contains_integer ? '1' : '0'}\" containsNumber=\"#{contains_number ? '1' : '0'}\" containsString=\"#{contains_string ? '1' : '0'}\"#{min_value.nil? ? '' : " minValue=\"#{min_value}\""}#{max_value.nil? ? '' : " maxValue=\"#{max_value}\""}>"
+        str << items_tags.join
         str <<     '</sharedItems>'
         str <<   '</cacheField>'
       end
