@@ -49,9 +49,9 @@ class TestAxlsx < Test::Unit::TestCase
     p = Axlsx::Package.new
     ws = p.workbook.add_worksheet
     row = ws.add_row
-    c1 = row.add_cell
-    c2 = row.add_cell
-    c3 = row.add_cell
+    row.add_cell
+    row.add_cell
+    row.add_cell
     assert_equal("A1:C1", Axlsx.cell_range(row, false))
   end
 
