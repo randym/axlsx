@@ -294,7 +294,7 @@ class TestCell < Test::Unit::TestCase
     @c.font_name = 'arial'
     @c.color = 'FF0000'
     c_xml = Nokogiri::XML(@c.to_xml_string(1,1))
-    assert(c_xml.xpath("//b"))
+    assert(c_xml.xpath("//b").any?)
   end
 
   def test_to_xml_string_formula
@@ -303,8 +303,8 @@ class TestCell < Test::Unit::TestCase
       sheet.add_row ["=IF(2+2=4,4,5)"]
     end
     doc = Nokogiri::XML(ws.to_xml_string)
-    assert(doc.xpath("//f[@text()='IF(2+2=4,4,5)']"))
-
+    doc.remove_namespaces!
+    assert(doc.xpath("//f[text()='IF(2+2=4,4,5)']").any?)
   end
 
   def test_to_xml_string_array_formula
@@ -314,9 +314,9 @@ class TestCell < Test::Unit::TestCase
     end
     doc = Nokogiri::XML(ws.to_xml_string)
     doc.remove_namespaces!
-    assert(doc.xpath("//f[text()='SUM(C2:C11*D2:D11)']"))
-    assert(doc.xpath("//f[@t='array']"))
-    assert(doc.xpath("//f[@ref='A1']"))
+    assert(doc.xpath("//f[text()='SUM(C2:C11*D2:D11)']").any?)
+    assert(doc.xpath("//f[@t='array']").any?)
+    assert(doc.xpath("//f[@ref='A1']").any?)
   end
 
   def test_to_xml_string_text_formula
