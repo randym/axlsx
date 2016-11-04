@@ -14,7 +14,7 @@ module Axlsx
         method = cell.type
         self.send(method, cell, str)
         str << '</c>'
-      end 
+      end
 
       # builds an xml text run based on this cells attributes.
       # @param [String] str The string instance this run will be concated to.
@@ -22,7 +22,7 @@ module Axlsx
       def run_xml_string(cell, str = '')
         if cell.is_text_run?
           valid = RichTextRun::INLINE_STYLES - [:value, :type]
-          data = Hash[cell.instance_values.map{ |k, v| [k.to_sym, v] }] 
+          data = Hash[cell.instance_values.map{ |k, v| [k.to_sym, v] }]
           data = data.select { |key, value| valid.include?(key) && !value.nil? }
           RichText.new(cell.value.to_s, data).to_xml_string(str)
         elsif cell.contains_rich_text?
@@ -124,12 +124,24 @@ module Axlsx
           inline_string_serialization cell, str
         end
       end
-      
+
       # Serializes cells that are of the type richtext
       # @param [Cell] cell The cell that is being serialized
       # @param [String] str The string the serialized content will be appended to.
       # @return [String]
       def richtext(cell, str)
+        if cell.ssti.nil?
+          inline_string_serialization cell, str
+        else
+          value_serialization 's', cell.ssti, str
+        end
+      end
+
+      # Serializes cells that are of the type text
+      # @param [Cell] cell The cell that is being serialized
+      # @param [String] str The string the serialized content will be appended to.
+      # @return [String]
+      def text(cell, str)
         if cell.ssti.nil?
           inline_string_serialization cell, str
         else
