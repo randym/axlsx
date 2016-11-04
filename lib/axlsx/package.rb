@@ -76,7 +76,10 @@ module Axlsx
     #end
 
     # @see workbook
-    def workbook=(workbook) DataTypeValidator.validate :Package_workbook, Workbook, workbook; @workbook = workbook; end
+    def workbook=(workbook)
+      DataTypeValidator.validate(:Package_workbook, Workbook, workbook)
+      @workbook = workbook
+    end
 
     # Serialize your workbook to disk as an xlsx document.
     #

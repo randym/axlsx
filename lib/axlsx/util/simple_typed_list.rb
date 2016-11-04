@@ -82,9 +82,9 @@ module Axlsx
     # one of the allowed types
     # @return [SimpleTypedList]
     def +(v)
-      v.each do |item| 
-        DataTypeValidator.validate :SimpleTypedList_plus, @allowed_types, item
-        @list << item 
+      v.each do |item|
+        validate_element(item)
+        @list << item
       end
     end
 
@@ -93,7 +93,7 @@ module Axlsx
     # @raise [ArgumentError] if the value being added is not one fo the allowed types
     # @return [Integer] returns the index of the item added.
     def <<(v)
-      DataTypeValidator.validate :SimpleTypedList_push, @allowed_types, v
+      validate_element(v)
       @list << v
       @list.size - 1
     end 
@@ -126,10 +126,23 @@ module Axlsx
     # @raise [ArgumentError] if the index is protected by locking
     # @raise [ArgumentError] if the item is not one of the allowed types
     def []=(index, v)
-      DataTypeValidator.validate :SimpleTypedList_insert, @allowed_types, v
+      validate_element(v)
       raise ArgumentError, "Item is protected and cannot be changed" if protected? index
       @list[index] = v
       v
+    end
+
+    def validate_element(v)
+      if @allowed_types.size == 1
+        unless v.is_a?(@allowed_types.first)
+          raise ArgumentError, "element should be instance of #{@allowed_types.first} given #{v.class}"
+        end
+      else
+        @allowed_types.each do |klass|
+          return if v.is_a?(klass)
+        end
+        raise ArgumentError, "element should be instance of #{@allowed_types.inspect} given #{v.class}"
+      end
     end
 
     # inserts an item at the index specfied
@@ -138,7 +151,7 @@ module Axlsx
     # @raise [ArgumentError] if the index is protected by locking
     # @raise [ArgumentError] if the index is not one of the allowed types
     def insert(index, v)
-      DataTypeValidator.validate :SimpleTypedList_insert, @allowed_types, v
+      validate_element(v)
       raise ArgumentError, "Item is protected and cannot be changed" if protected? index
       @list.insert(index, v)
       v
@@ -147,8 +160,7 @@ module Axlsx
     # determines if the index is protected
     # @param [Integer] index
     def protected? index
-      return false unless locked_at.is_a? Fixnum
-      index < locked_at
+      return index < (defined?(@locked_at) && @locked_at || -1)
     end
 
     DESTRUCTIVE = ['replace', 'insert', 'collect!', 'map!', 'pop', 'delete_if',
@@ -164,7 +176,7 @@ module Axlsx
         end
       }
     end
-                   
+
     def to_xml_string(str = '')
       classname = @allowed_types[0].name.split('::').last
       el_name = serialize_as.to_s || (classname[0,1].downcase + classname[1..-1])

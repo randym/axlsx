@@ -3,6 +3,10 @@ $:.unshift "#{File.dirname(__FILE__)}/../lib"
 require 'axlsx'
 require 'csv'
 require 'benchmark'
+
+Encoding.default_external = Encoding::UTF_8
+Encoding.default_internal = Encoding::UTF_8
+
 Axlsx::trust_input = true
 row = []
 input = (32..126).to_a.pack('U*').chars.to_a
@@ -12,6 +16,7 @@ Benchmark.bmbm(30) do |x|
 
   x.report('axlsx_noautowidth') {
     p = Axlsx::Package.new
+    p.use_autowidth = false
     p.workbook do |wb|
       wb.add_worksheet do |sheet|
         times.times do
@@ -19,7 +24,6 @@ Benchmark.bmbm(30) do |x|
         end
       end
     end
-    p.use_autowidth = false
     p.serialize("example_noautowidth.xlsx")
   }
 
@@ -69,4 +73,5 @@ Benchmark.bmbm(30) do |x|
     end
   }
 end
+
 File.delete("example.csv", "example_streamed.xlsx", "example_shared.xlsx", "example_autowidth.xlsx", "example_noautowidth.xlsx")
