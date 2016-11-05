@@ -25,10 +25,19 @@ module Axlsx
       @data = []
       @pages = []
       @subtotal = nil
+      @style_info = {}
+      @no_subtotals_on_headers = []
       parse_options options
       yield self if block_given?
     end
-
+    
+    # Style info for the pivot table
+    attr_accessor :style_info
+    
+    
+    # Defines the headers in which subtotals are not to be included
+    attr_accessor :no_subtotals_on_headers
+    
     # The reference to the table data
     # @return [String]
     attr_reader :ref
@@ -158,12 +167,12 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      str << '<?xml version="1.0" encoding="UTF-8"?>'
+      str << '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
       str << ('<pivotTableDefinition xmlns="' << XML_NS << '" name="' << name << '" cacheId="' << cache_definition.cache_id.to_s << '"  dataOnRows="1" applyNumberFormats="0" applyBorderFormats="0" applyFontFormats="0" applyPatternFormats="0" applyAlignmentFormats="0" applyWidthHeightFormats="1" dataCaption="Data" showMultipleLabel="0" showMemberPropertyTips="0" useAutoFormatting="1" indent="0" compact="0" compactData="0" gridDropZones="1" multipleFieldFilters="0">')
       str << (  '<location firstDataCol="1" firstDataRow="1" firstHeaderRow="1" ref="' << ref << '"/>')
       str << (  '<pivotFields count="' << header_cells_count.to_s << '">')
       header_cell_values.each do |cell_value|
-        str <<   pivot_field_for(cell_value)
+        str <<   pivot_field_for(cell_value,!no_subtotals_on_headers.include?(cell_value))
       end
       str <<   '</pivotFields>'
       if rows.empty?
@@ -172,6 +181,7 @@ module Axlsx
       else
         str << ('<rowFields count="' << rows.size.to_s << '">')
         rows.each do |row_value|
+          #str << ('<field x="' << header_index_of(row_value).to_s << '"/>')
           str << ('<field x="' << header_index_of(row_value).to_s << '"/>')
         end
         str << '</rowFields>'
@@ -193,18 +203,27 @@ module Axlsx
       unless pages.empty?
         str << ('<pageFields count="' << pages.size.to_s << '">')
         pages.each do |page_value|
-          str << ('<pageField fld="' << header_index_of(page_value).to_s << '"/>')
+          str << ('<pageField fld="' << header_index_of(page_value).to_s << '" hier="-1"/>')
         end
         str << '</pageFields>'
       end
       unless data.empty?
         str << "<dataFields count=\"#{data.size}\">"
         data.each do |datum_value|
-          str << "<dataField name='#{@subtotal} of #{datum_value[:ref]}' fld='#{header_index_of(datum_value[:ref])}' baseField='0' baseItem='0'"
-          str << " subtotal='#{datum_value[:subtotal]}' " if datum_value[:subtotal]
+          # The correct name prefix in ["Sum","Average", etc...]
+          str << "<dataField name=\"#{(datum_value[:subtotal]||'').titleize} of #{datum_value[:ref]}\" fld=\"#{header_index_of(datum_value[:ref])}\" baseField=\"0\" baseItem=\"0\""
+          str << " subtotal=\"#{datum_value[:subtotal]}\" " if datum_value[:subtotal]
           str << "/>"
         end
         str << '</dataFields>'
+      end
+      # custom style
+      unless style_info.empty?
+        str << '<pivotTableStyleInfo'
+          style_info.each do |k,v|
+            str << ' ' << k.to_s << '="' << v.to_s << '"'
+          end
+        str << ' />'
       end
       str << '</pivotTableDefinition>'
     end
@@ -241,13 +260,17 @@ module Axlsx
 
     private
 
-    def pivot_field_for(cell_ref)
+    def pivot_field_for(cell_ref, subtotal=true)
       if rows.include? cell_ref
-        '<pivotField axis="axisRow" compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1">' + '<items count="1"><item t="default"/></items>' + '</pivotField>'
+        unless subtotal
+          '<pivotField axis="axisRow" compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1" defaultSubtotal="0">' + '</pivotField>'
+        else 
+          '<pivotField axis="axisRow" compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1">' + '<items count="1"><item t="default"/></items>' + '</pivotField>'
+        end
       elsif columns.include? cell_ref
         '<pivotField axis="axisCol" compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1">' + '<items count="1"><item t="default"/></items>' + '</pivotField>'
       elsif pages.include? cell_ref
-        '<pivotField axis="axisCol" compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1">' + '<items count="1"><item t="default"/></items>' + '</pivotField>'
+        '<pivotField axis="axisPage" compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1">' + '<items count="1"><item t="default"/></items>' + '</pivotField>'
       elsif data_refs.include? cell_ref
         '<pivotField dataField="1" compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1">' + '</pivotField>'
       else
