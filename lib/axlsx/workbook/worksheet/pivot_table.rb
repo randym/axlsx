@@ -26,6 +26,7 @@ module Axlsx
       @pages = []
       @subtotal = nil
       @no_subtotals_on_headers = []
+      @style_info = {}
       parse_options options
       yield self if block_given?
     end
@@ -33,6 +34,10 @@ module Axlsx
     # Defines the headers in which subtotals are not to be included
     # @return[Array]
     attr_accessor :no_subtotals_on_headers
+
+    # Style info for the pivot table
+    # @return[Hash]
+    attr_accessor :style_info
 
     # The reference to the table data
     # @return [String]
@@ -206,11 +211,19 @@ module Axlsx
         str << "<dataFields count=\"#{data.size}\">"
         data.each do |datum_value|
           # The correct name prefix in ["Sum","Average", etc...]
-          str << "<dataField name=\"#{(datum_value[:subtotal]||'')} of #{datum_value[:ref]}\" fld=\"#{header_index_of(datum_value[:ref])}\" baseField=\"0\" baseItem=\"0\""
-          str << " subtotal=\"#{datum_value[:subtotal]}\" " if datum_value[:subtotal]
+          str << "<dataField name='#{(datum_value[:subtotal]||'')} of #{datum_value[:ref]}' fld='#{header_index_of(datum_value[:ref])}' baseField='0' baseItem='0'"
+          str << " subtotal='#{datum_value[:subtotal]}' " if datum_value[:subtotal]
           str << "/>"
         end
         str << '</dataFields>'
+      end
+      # custom pivot table style
+      unless style_info.empty?
+        str << '<pivotTableStyleInfo'
+        style_info.each do |k,v|
+          str << ' ' << k.to_s << '="' << v.to_s << '"'
+        end
+        str << ' />'
       end
       str << '</pivotTableDefinition>'
     end
