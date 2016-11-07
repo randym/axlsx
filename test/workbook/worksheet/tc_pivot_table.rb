@@ -67,7 +67,15 @@ class TestPivotTable < Test::Unit::TestCase
     assert_equal([{:ref=>"Sales", :subtotal => 'average'}], pivot_table.data)
   end
 
-  def test_header_indices
+  def test_add_pivot_table_with_row_without_subtotals
+    pivot_table = @ws.add_pivot_table('G5:G6', 'A1:D5', {:no_subtotals_on_headers=>['Year']}) do |pt|
+      pt.data = ['Sales']
+      pt.rows = ['Year','Month']
+    end
+    assert_equal(['Year'], pivot_table.no_subtotals_on_headers)
+  end
+
+ def test_header_indices
     pivot_table = @ws.add_pivot_table('G5:G6', 'A1:E5')
     assert_equal(0,   pivot_table.header_index_of('Year'   ))
     assert_equal(1,   pivot_table.header_index_of('Month'  ))
