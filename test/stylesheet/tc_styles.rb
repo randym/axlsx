@@ -133,7 +133,7 @@ class TestStyles < Test::Unit::TestCase
       :font_name => "woot font"
     }
     assert_equal(@styles.parse_font_options {}, nil, "noop if no font keys are set")
-    assert_equal(@styles.parse_font_options(:b=>1).class, Fixnum, "return index of font if not :dxf type")
+    assert(@styles.parse_font_options(:b=>1).is_a?(Integer), "return index of font if not :dxf type")
     assert_equal(@styles.parse_font_options(:b=>1, :type => :dxf).class, Axlsx::Font, "return font object if :dxf type")
 
     f = @styles.parse_font_options(options.merge(:type => :dxf))
@@ -147,7 +147,7 @@ class TestStyles < Test::Unit::TestCase
 
   def test_parse_fill_options
     assert_equal(@styles.parse_fill_options {}, nil, "noop if no fill keys are set")
-    assert_equal(@styles.parse_fill_options(:bg_color => "DE").class, Fixnum, "return index of fill if not :dxf type")
+    assert(@styles.parse_fill_options(:bg_color => "DE").is_a?(Integer), "return index of fill if not :dxf type")
     assert_equal(@styles.parse_fill_options(:bg_color => "DE", :type => :dxf).class, Axlsx::Fill, "return fill object if :dxf type")
     f = @styles.parse_fill_options(:bg_color => "DE", :type => :dxf)
     assert(f.fill_type.bgColor.rgb == "FFDEDEDE")

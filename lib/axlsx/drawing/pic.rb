@@ -53,7 +53,7 @@ module Axlsx
     attr_reader :hyperlink
 
     # Picture opacity
-    # @return [Fixnum]
+    # @return [Integer]
     attr_reader :opacity
 
     # sets or updates a hyperlink for this image.

@@ -555,7 +555,7 @@ module Axlsx
     # @example This would set the first and third column widhts but leave the second column in autofit state.
     #      ws.column_widths 7.2, nil, 3
     # @note For updating only a single column it is probably easier to just set the width of the ws.column_info[col_index].width directly
-    # @param [Integer|Float|Fixnum|nil] widths
+    # @param [Integer|Float|nil] widths
     def column_widths(*widths)
       widths.each_with_index do |value, index|
         next if value == nil
