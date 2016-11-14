@@ -136,4 +136,10 @@ class TestWorkbook < Test::Unit::TestCase
     doc = Nokogiri::XML(@wb.to_xml_string)
     assert_equal pivot_table.cache_definition.rId, doc.xpath("//xmlns:pivotCache").first["r:id"]
   end
+  
+  def test_worksheet_name_is_intact_after_serialized_into_xml
+    sheet = @wb.add_worksheet(:name => '_Example')
+    wb_xml = Nokogiri::XML(@wb.to_xml_string)
+    assert_equal sheet.name, wb_xml.xpath('//xmlns:workbook/xmlns:sheets/*[1]/@name').to_s
+  end
 end
