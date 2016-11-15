@@ -147,7 +147,7 @@ module Axlsx
     # determines if the index is protected
     # @param [Integer] index
     def protected? index
-      return false unless locked_at.is_a? Fixnum
+      return false unless locked_at.is_a? Integer
       index < locked_at
     end
 

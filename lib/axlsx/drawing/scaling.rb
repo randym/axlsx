@@ -6,7 +6,7 @@ module Axlsx
     include Axlsx::OptionsParser
 
     # creates a new Scaling object
-    # @option options [Integer, Fixnum] logBase
+    # @option options [Integer] logBase
     # @option options [Symbol] orientation
     # @option options [Float] max
     # @option options [Float] min
@@ -35,7 +35,7 @@ module Axlsx
     attr_reader :min
 
     # @see logBase
-    def logBase=(v) DataTypeValidator.validate "Scaling.logBase", [Integer, Fixnum], v, lambda { |arg| arg >= 2 && arg <= 1000}; @logBase = v; end
+    def logBase=(v) DataTypeValidator.validate "Scaling.logBase", [Integer], v, lambda { |arg| arg >= 2 && arg <= 1000}; @logBase = v; end
     # @see orientation
     def orientation=(v) RestrictionValidator.validate "Scaling.orientation", [:minMax, :maxMin], v; @orientation = v; end
     # @see max
