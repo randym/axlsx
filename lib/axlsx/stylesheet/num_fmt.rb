@@ -73,5 +73,14 @@ module Axlsx
       serialized_tag('numFmt', str)
     end
 
+    # Override to avoid removing underscores
+    def serialized_attributes(str = '', additional_attributes = {})
+      attributes = declared_attributes.merge! additional_attributes
+      attributes.each do |key, value|
+        str << "#{Axlsx.camel(key, false)}=\"#{Axlsx.booleanize(value)}\" "
+      end
+      str
+    end
+
   end
 end
