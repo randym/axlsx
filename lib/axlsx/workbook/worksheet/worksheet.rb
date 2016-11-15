@@ -27,7 +27,7 @@ module Axlsx
       yield self if block_given?
     end
 
-    serializable_attributes :sheet_id, :name, :state
+    serializable_attributes :sheet_id, :state
 
     # Initalizes page margin, setup and print options
     # @param [Hash] options Options passed in from the initializer
@@ -597,6 +597,7 @@ module Axlsx
       add_autofilter_defined_name_to_workbook
       str << '<sheet '
       serialized_attributes str
+      str << ('name="' << name << '" ')
       str << ('r:id="' << rId << '"></sheet>')
     end
 
