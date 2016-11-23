@@ -13,7 +13,7 @@ group :test do
 end
 
 group :profile do
-  gem 'ruby-prof'
+  gem 'ruby-prof', :platforms => :ruby
 end
 
 platforms :rbx do
