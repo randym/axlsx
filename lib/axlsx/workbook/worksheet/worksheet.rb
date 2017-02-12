@@ -638,6 +638,53 @@ module Axlsx
       outline column_info, (start_index..end_index), level, collapsed
     end
 
+    # The excel-style reference of the top-left cell of this worksheet, e.g., A1
+    # @return String
+    def top_left_reference
+      raise "worksheet has no data" if rows.empty? or rows.first.empty?
+      rows.first.first.r
+    end
+
+    # The excel-style reference of the bottom-right cell of this worksheet, e.g., D5
+    # This method is useful when you want to apply auto_filter or table to dynamic length data.
+    #
+    # @example
+    #     Axlsx::Package.new do |p|
+    #       p.workbook.add_worksheet(:name => "Table 2") do |sheet|
+    #         sheet.add_row ["Build Matrix"]
+    #         sheet.add_row ["Build", "Duration", "Finished", "Rvm"]
+    #         sheet.add_row ["19.1", "1 min 32 sec", "about 10 hours ago", "1.8.7"]
+    #         sheet.add_row ["19.2", "1 min 28 sec", "about 10 hours ago", "1.9.2"]
+    #         sheet.add_row ["19.3", "1 min 35 sec", "about 10 hours ago", "1.9.3"]
+    #         sheet.auto_filter = "A2:#{sheet.bottom_right_reference}" # => 'A2:D5'
+    #         sheet.auto_filter.add_column 3, :filters, :filter_items => ['1.9.2']
+    #       end
+    #    end
+    # @return String
+    def bottom_right_reference
+      raise "worksheet has no data" if rows.empty? or rows.last.empty?
+      rows.last.last.r
+    end
+
+    # The excel-style reference of the range of this worksheet, e.g., A1:D5
+    # This method is useful when you just want to apply auto_filter or table to whole worksheet.
+    #
+    # @example
+    #     Axlsx::Package.new do |p|
+    #       p.workbook.add_worksheet(:name => "Table") do |sheet|
+    #         sheet.add_row ["Build", "Duration", "Finished", "Rvm"]
+    #         sheet.add_row ["19.1", "1 min 32 sec", "about 10 hours ago", "1.8.7"]
+    #         sheet.add_row ["19.2", "1 min 28 sec", "about 10 hours ago", "1.9.2"]
+    #         sheet.add_row ["19.3", "1 min 35 sec", "about 10 hours ago", "1.9.3"]
+    #         sheet.auto_filter = sheet.range_reference # => "A1:D4"
+    #         sheet.auto_filter.add_column 3, :filters, :filter_items => ['1.9.2']
+    #       end
+    #    end
+    # @return String
+    def range_reference
+      "#{top_left_reference}:#{bottom_right_reference}"
+    end
+
     private
 
     def xml_space

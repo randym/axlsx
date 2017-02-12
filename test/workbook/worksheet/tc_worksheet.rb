@@ -161,6 +161,28 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(range.last, @ws.rows.last.cells.last)
   end
 
+  def test_corner_reference
+    @ws.add_row [1, 2, 3]
+    @ws.add_row [4, 5, 6]
+    assert_equal(@ws.top_left_reference, "A1")
+    assert_equal(@ws.bottom_right_reference, "C2")
+  end
+
+  def test_corner_reference_raise_exception_if_no_row
+    assert_raise(RuntimeError, "worksheet has no data"){ @ws.top_left_reference }
+    assert_raise(RuntimeError, "worksheet has no data"){ @ws.bottom_right_reference }
+  end
+
+  def test_range_reference
+    @ws.add_row [1, 2, 3]
+    @ws.add_row [4, 5, 6]
+    assert_equal(@ws.range_reference, 'A1:C2')
+  end
+
+  def test_range_reference_raise_exception_if_no_row
+    assert_raise(RuntimeError, "worksheet has no data"){ @ws.range_reference }
+  end
+
   def test_add_row
     assert(@ws.rows.empty?, "sheet has no rows by default")
     r = @ws.add_row([1,2,3])
