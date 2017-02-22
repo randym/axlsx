@@ -14,11 +14,11 @@ notifications:
 
 matrix:
   include:
-    - rvm: 2.0
     - rvm: 2.1
     - rvm: 2.2
     - rvm: 2.3.3
     - rvm: 2.0.0
+    - rvm: 2.4.0
     - rvm: rbx-3
     - rvm: jruby-19mode
       env: JRUBY_OPTS="-Xcli.debug=true --debug"
