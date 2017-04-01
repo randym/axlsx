@@ -266,6 +266,11 @@ class TestWorksheet < Test::Unit::TestCase
     end
   end
 
+  def test_to_sheet_node_xml_string_without_name
+    doc = Nokogiri::XML(@ws.to_sheet_node_xml_string)
+    assert_equal(doc.xpath('/sheet/@name').size, 1)
+  end
+
   def test_to_xml_string_fit_to_page
     @ws.page_setup.fit_to_width = 1
     doc = Nokogiri::XML(@ws.to_xml_string)
