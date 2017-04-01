@@ -280,6 +280,10 @@ require 'axlsx/workbook/worksheet/selection.rb'
       worksheet
     end
 
+    # Adds a new WorkbookView
+    # @return WorkbookViews
+    # @option options [Hash] options passed into the added WorkbookView
+    # @see WorkbookView#initialize
     def add_view(options={})
       views << WorkbookView.new(options)
     end

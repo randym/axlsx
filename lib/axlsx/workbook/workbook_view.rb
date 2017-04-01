@@ -33,7 +33,7 @@ module Axlsx
 
 
     # Creates a new BookView object
-    # @params [Hash] options  A hash of key/value pairs that will be mapped to this instances attributes.
+    # @param [Hash] options  A hash of key/value pairs that will be mapped to this instances attributes.
     # @option [Symbol] visibility Specifies visible state of the workbook window. The default value for this attribute is :visible.
     # @option [Boolean] minimized Specifies a boolean value that indicates whether the workbook window is minimized.
     # @option [Boolean] show_horizontal_scroll Specifies a boolean value that indicates whether to display the horizontal scroll bar in the user interface.
@@ -41,7 +41,7 @@ module Axlsx
     # @option [Boolean] show_sheet_tabs Specifies a boolean value that indicates whether to display the sheet tabs in the user interface.
     # @option [Integer] tab_ratio Specifies ratio between the workbook tabs bar and the horizontal scroll bar.
     # @option [Integer] first_sheet Specifies the index to the first sheet in this book view.
-    # @option [Integer] active_tab Specifies an unsignedInt that contains the index to the active sheet in this book view. 
+    # @option [Integer] active_tab Specifies an unsignedInt that contains the index to the active sheet in this book view.
     # @option [Integer] x_window Specifies the X coordinate for the upper left corner of the workbook window. The unit of measurement for this value is twips.
     # @option [Integer] y_window Specifies the Y coordinate for the upper left corner of the workbook window. The unit of measurement for this value is twips.
     # @option [Integer] window_width Specifies the width of the workbook window. The unit of measurement for this value is twips.
@@ -68,7 +68,9 @@ module Axlsx
                           :show_sheet_tabs, :auto_filter_date_grouping
 
 
-
+    # Serialize the WorkbookView
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
        str << '<workbookView '
        serialized_attributes str
