@@ -1,5 +1,10 @@
 CHANGELOG
 ---------
+- **April.1.17**:3.0.0-pre
+  - Support for ruby versions limited to officially supported version
+  - Updates to dependency gems, especially nokogiri and ruby-zip
+  - Patch options parsing for two cell anchor
+  - Remove support for depreciated worksheet members
 - **November.25.12**:1.3.4
   - Support for headers and footers for worksheets
   - bug fix: Properly escape hyperlink urls
