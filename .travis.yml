@@ -4,7 +4,7 @@ dist: trusty
 group: beta
 cache: bundler
 bundler_args: --without profile
-  
+
 notifications:
   irc: "irc.freenode.org#axlsx"
   email:
@@ -14,10 +14,8 @@ notifications:
 
 matrix:
   include:
-    - rvm: 2.1
     - rvm: 2.2.7
     - rvm: 2.3.4
-    - rvm: 2.0.0
     - rvm: 2.4.1
     - rvm: rbx-3
     - rvm: jruby-19mode
