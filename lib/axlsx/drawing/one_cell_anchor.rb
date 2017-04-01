@@ -7,7 +7,7 @@ module Axlsx
   class OneCellAnchor
 
     include Axlsx::OptionsParser
- 
+
     # Creates a new OneCellAnchor object and an Pic associated with it.
     # @param [Drawing] drawing
     # @option options [Array] start_at the col, row to start at
@@ -23,6 +23,7 @@ module Axlsx
       drawing.anchors << self
       @from = Marker.new
       parse_options options
+      start_at(*options[:start_at]) if options[:start_at]
       @object = Pic.new(self, options)
     end
 
