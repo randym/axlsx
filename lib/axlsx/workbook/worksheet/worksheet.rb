@@ -264,7 +264,7 @@ module Axlsx
       @header_footer
     end
 
-    # convinience method to access all cells in this worksheet
+    # convenience method to access all cells in this worksheet
     # @return [Array] cells
     def cells
       rows.flatten
