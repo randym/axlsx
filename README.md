@@ -70,7 +70,7 @@ With Axlsx you can create excel worksheets with charts, images (with links), and
 Feature List
 ------------
 
-1. Author xlsx documents: Axlsx make you easily and quickly generate professional xlsx based reports that can be validated before serialization.
+1. Author xlsx documents: Axlsx makes you easily and quickly generate professional xlsx based reports that can be validated before serialization.
 
 2. Generate 3D Pie, Line, Scatter and Bar Charts: With Axlsx chart generation and management is as easy as writing a few lines of codes. You can build charts based off data either in your worksheet or not. You can customize gridlines, label rotation and series colors as well.
 
