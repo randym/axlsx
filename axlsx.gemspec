@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "htmlentities", "~> 4.3.4"
   s.add_runtime_dependency "mimemagic", "~> 0.3"
 
-  s.add_development_dependency 'yard'
+  s.add_development_dependency 'yard', "~> 0.9.8"
   s.add_development_dependency 'kramdown'
   s.add_development_dependency 'timecop', "~> 0.8.1"
   s.required_ruby_version = '>= 1.9.2'
