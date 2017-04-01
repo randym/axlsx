@@ -37,11 +37,16 @@ module Axlsx
       drawing.anchors << self
       @from, @to =  Marker.new, Marker.new(:col => 5, :row=>10)
       parse_options options
+
+      # bit of a hack to work around the fact that the coords for start at and end at
+      # are passed in as an array when specified in intialization options - however
+      start_at(*options[:start_at]) if options[:start_at]
+      end_at(*options[:end_at]) if options[:end_at]
     end
 
     # sets the col, row attributes for the from marker.
     # @note The recommended way to set the start position for graphical
-    # objects is directly thru the object. 
+    # objects is directly thru the object.
     # @see Chart#start_at
     def start_at(x, y=nil)
       from.coord x, y
