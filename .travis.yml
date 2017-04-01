@@ -25,6 +25,9 @@ matrix:
     - rvm: ruby-head
     - rvm: jruby-head
       env: JRUBY_OPTS="-Xcli.debug=true --debug"
+    - services: docker
+      before_install: docker build . -f ci/Dockerfile -t axlsx
+      script: docker run axlsx ci/validate-xlsx-files.sh
   allow_failures:
     - rvm: rbx-3
     - rvm: ruby-head
