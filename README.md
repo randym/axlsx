@@ -61,7 +61,7 @@ Synopsis
 --------
 
 Axlsx is an Office Open XML Spreadsheet generator for the Ruby programming language.
-With Axlsx you can create excel worksheets with charts, images (with links), automated and fixed column widths, customized styles, functions, tables, conditional formatting, print options, comments, merged cells, auto filters, file and stream serialization  as well as full schema validation. Axlsx excels at helping you generate beautiful Office Open XML Spreadsheet documents without having to understand the entire ECMA specification.
+With Axlsx you can create excel worksheets with charts, images (with links), and tables with automated and fixed column widths; you can customize styles, functions, and conditional formatting; you can make comments, merge cells and work with other functions such as auto filters, file and stream serialization  as well as full schema validation. Axlsx excels at helping you generate beautiful Office Open XML Spreadsheet documents even without any experience of ECMA.
 
 ![Screen 1](https://github.com/randym/axlsx/raw/master/examples/sample.png)
 
@@ -70,15 +70,15 @@ With Axlsx you can create excel worksheets with charts, images (with links), aut
 Feature List
 ------------
 
-1. Author xlsx documents: Axlsx is made to let you easily and quickly generate professional xlsx based reports that can be validated before serialization.
+1. Author xlsx documents: Axlsx make you easily and quickly generate professional xlsx based reports that can be validated before serialization.
 
-2. Generate 3D Pie, Line, Scatter and Bar Charts: With Axlsx chart generation and management is as easy as a few lines of code. You can build charts based off data in your worksheet or generate charts without any data in your sheet at all. Customize gridlines, label rotation and series colors as well.
+2. Generate 3D Pie, Line, Scatter and Bar Charts: With Axlsx chart generation and management is as easy as writing a few lines of codes. You can build charts based off data either in your worksheet or not. You can customize gridlines, label rotation and series colors as well.
 
 3. Custom Styles: With guaranteed document validity, you can style borders, alignment, fills, fonts, and number formats in a single line of code. Those styles can be applied to an entire row, or a single cell anywhere in your workbook.
 
 4. Automatic type support: Axlsx will automatically determine the type of data you are generating. In this release Float, Integer, String, Date, Time and Boolean types are automatically identified and serialized to your spreadsheet.
 
-5. Automatic and fixed column widths: Axlsx will automatically determine the appropriate width for your columns based on the content in the worksheet, or use any value you specify for the really funky stuff.
+5. Automatic and fixed column widths: Axlsx will automatically determine the appropriate width for your columns based on the content in the worksheet, or use any value you specify.
 
 6. Support for automatically formatted 1904 and 1900 epochs configurable in the workbook.
 
@@ -224,7 +224,7 @@ values.
 related to themes, which axlsx does not implement at this time.
 
 2. Google Docs
-   - Images are known to not work with google docs
+   - Images do not work with google docs
    - border colors do not work
 
 3. Numbers
