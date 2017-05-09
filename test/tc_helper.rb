@@ -8,3 +8,5 @@ end
 require 'test/unit'
 require "timecop"
 require "axlsx.rb"
+# MIME detection for Microsoft Office 2007+ formats
+require 'mimemagic/overlay'
