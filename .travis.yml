@@ -33,6 +33,7 @@ matrix:
     - rvm: ruby-head
     - rvm: jruby-9.1.8.0
     - rvm: jruby-head
+    - services: docker
 
 # https://github.com/jruby/jruby/wiki/FAQs#why-is-jruby-so-slow-to-install-via-rvm
 # https://docs.travis-ci.com/user/installing-dependencies#Installing-Packages-with-the-APT-Addon
