@@ -22,7 +22,7 @@ matrix:
     - rvm: rbx-3
     - rvm: jruby-19mode
       env: JRUBY_OPTS="-Xcli.debug=true --debug"
-    - rvm: jruby-9.1.8.0
+    - rvm: jruby-9.1.10.0
       env: JRUBY_OPTS="-Xcli.debug=true --debug"
     - rvm: ruby-head
     - rvm: jruby-head
@@ -30,7 +30,7 @@ matrix:
   allow_failures:
     - rvm: rbx-3
     - rvm: ruby-head
-    - rvm: jruby-9.1.8.0
+    - rvm: jruby-9.1.10.0
     - rvm: jruby-head
 
 # https://github.com/jruby/jruby/wiki/FAQs#why-is-jruby-so-slow-to-install-via-rvm
