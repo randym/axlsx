@@ -10,14 +10,17 @@ require 'axlsx/rels/relationship.rb'
     def initialize
       super Relationship
     end
-    
+
     # The relationship instance for the given source object, or nil if none exists.
     # @see Relationship#source_obj
     # @return [Relationship]
     def for(source_obj)
       find{ |rel| rel.source_obj == source_obj }
     end
-    
+
+    # serialize relationships
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       str << '<?xml version="1.0" encoding="UTF-8"?>'
       str << ('<Relationships xmlns="' << RELS_R << '">')

@@ -20,6 +20,9 @@ module Axlsx
       map{ |table| Relationship.new(table, TABLE_R, "../#{table.pn}") }
     end
 
+    # renders the tables xml
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = "")
       return if empty?
       str << "<tableParts count='#{size}'>"

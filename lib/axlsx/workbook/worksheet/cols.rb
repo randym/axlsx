@@ -1,6 +1,6 @@
 module Axlsx
 
-  # The cols class manages the col object used to manage column widths. 
+  # The cols class manages the col object used to manage column widths.
   # This is where the magic happens with autowidth
   class Cols < SimpleTypedList
 
@@ -10,11 +10,14 @@ module Axlsx
       @worksheet = worksheet
     end
 
+    # Serialize the Cols object
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
      return if empty?
      str << '<cols>'
      each { |item| item.to_xml_string(str) }
-     str << '</cols>' 
+     str << '</cols>'
     end
   end
 end

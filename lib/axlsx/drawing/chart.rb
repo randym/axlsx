@@ -56,7 +56,7 @@ module Axlsx
     # Indicates that colors should be varied by datum
     # @return [Boolean]
     attr_reader :vary_colors
- 
+
     # Configures the vary_colors options for this chart
     # @param [Boolean] v The value to set
     def vary_colors=(v) Axlsx::validate_boolean(v); @vary_colors = v; end
@@ -129,6 +129,8 @@ module Axlsx
     end
 
     # The size of the Title object of the chart.
+    # @param [String] v The size for the title object
+    # @see Title
     def title_size=(v)
       @title.text_size = v unless v.to_s.empty?
     end

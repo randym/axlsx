@@ -65,6 +65,7 @@ module Axlsx
                      :shadow, :condense, :extend, :u,
                      :vertAlign, :sz, :color, :scheme].freeze
 
+    # An array of valid cell types
     CELL_TYPES = [:date, :time, :float, :integer, :richtext,
                   :string, :boolean, :iso_8601, :text].freeze
 
@@ -79,7 +80,7 @@ module Axlsx
     # @return [Row]
     attr_reader :row
 
-    # The cell's data type. Currently only six types are supported, :date, :time, :float, :integer, :string and :boolean.
+    # The cell's data type.
     # Changing the type for a cell will recast the value into that type. If no type option is specified in the constructor, the type is
     # automatically determed.
     # @see Cell#cell_type_from_value
@@ -348,6 +349,8 @@ module Axlsx
     # returns the name of the cell
     attr_reader :name
 
+    # Attempts to determine the correct width for this cell's content
+    # @return [Float]
     def autowidth
       return if is_formula? || value.nil?
       if contains_rich_text?

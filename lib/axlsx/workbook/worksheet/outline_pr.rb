@@ -18,7 +18,7 @@ module Axlsx
                           :apply_styles
 
     # Creates a new OutlinePr object
-    # @param [Worksheet] worksheet The worksheet that owns this OutlinePr object
+    # @param [Hash] options used to create the outline_pr
     def initialize(options = {})
       parse_options options
     end

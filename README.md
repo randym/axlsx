@@ -17,17 +17,17 @@ appreciation for the gem, please don't hesitate to make a donation.
 
 **Author**: Randy Morgan
 
-**Copyright**: 2011 - 2013
+**Copyright**: 2011 - 2017
 
 **License**: MIT License
 
-**Latest Version**: 2.0.1
+**Latest Version**: 3.0.0
 
-**Ruby Version**: 1.9.2, 1.9.3, 2.0.0
+**Ruby Version**: 2.2.7, 2.3.4, 2.4.1
 
 **JRuby Version**: 1.9 modes
 
-**Rubinius Version**: rubinius 2.0.0dev * lower versions may run, this gem always tests against head.
+**Rubinius Version**: rubinius 3 * lower versions may run, this gem always tests against head.
 
 **Release Date**: September 12th 2013
 
