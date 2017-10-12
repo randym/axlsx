@@ -128,7 +128,7 @@ module Axlsx
     # @option options [Boolean] i Indicates if the text should be italicised
     # @option options [Boolean] u Indicates if the text should be underlined
     # @option options [Boolean] strike Indicates if the text should be rendered with a strikethrough
-    # @option options [Boolean] strike Indicates if the text should be rendered with a shadow
+    # @option options [Boolean] shadow Indicates if the text should be rendered with a shadow
     # @option options [Integer] charset The character set to use.
     # @option options [Integer] family The font family to use.
     # @option options [String] font_name The name of the font to use
