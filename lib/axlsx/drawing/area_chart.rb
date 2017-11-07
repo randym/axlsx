@@ -49,7 +49,7 @@ module Axlsx
       @vary_colors = false
       @grouping = :standard
       super(frame, options)
-      @series_type = LineSeries
+      @series_type = AreaSeries
       @d_lbls = nil
     end
 

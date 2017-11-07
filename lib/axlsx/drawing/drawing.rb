@@ -36,6 +36,7 @@ module Axlsx
   require 'axlsx/drawing/chart.rb'
   require 'axlsx/drawing/pie_3D_chart.rb'
   require 'axlsx/drawing/bar_3D_chart.rb'
+  require 'axlsx/drawing/bar_chart.rb'
   require 'axlsx/drawing/line_chart.rb'
   require 'axlsx/drawing/line_3D_chart.rb'
   require 'axlsx/drawing/scatter_chart.rb'

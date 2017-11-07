@@ -14,7 +14,7 @@ class TestAreaChart < Test::Unit::TestCase
 
   def test_initialization
     assert_equal(@chart.grouping, :standard, "grouping defualt incorrect")
-    assert_equal(@chart.series_type, Axlsx::LineSeries, "series type incorrect")
+    assert_equal(@chart.series_type, Axlsx::AreaSeries, "series type incorrect")
     assert(@chart.cat_axis.is_a?(Axlsx::CatAxis), "category axis not created")
     assert(@chart.val_axis.is_a?(Axlsx::ValAxis), "value access not created")
   end
