@@ -136,10 +136,10 @@ module Axlsx
   # @param [String] str The string to process
   # @return [String]
   def self.sanitize(str)
-    str.delete!(CONTROL_CHARS)
+    str.delete(CONTROL_CHARS)
     str
   end
-  
+
   # If value is boolean return 1 or 0
   # else return the value
   # @param [Object] value The value to process
