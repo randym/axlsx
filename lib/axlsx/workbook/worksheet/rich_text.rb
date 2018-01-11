@@ -1,5 +1,7 @@
 module Axlsx
+
   class RichText < SimpleTypedList
+
     def initialize(text = nil, options={})
       super(RichTextRun)
       add_run(text, options) unless text.nil?
@@ -7,12 +9,12 @@ module Axlsx
     end
 
     attr_reader :cell
-    
+
     def cell=(cell)
       @cell = cell
       each { |run| run.cell = cell }
     end
-    
+
     def autowidth
       widtharray = [0] # Are arrays the best way of solving this problem?
       each { |run| run.autowidth(widtharray) }
@@ -22,7 +24,7 @@ module Axlsx
     def add_run(text, options={})
       self << RichTextRun.new(text, options)
     end
-    
+
     def runs
       self
     end
