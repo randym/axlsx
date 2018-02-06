@@ -79,4 +79,25 @@ class TestAxlsx < Test::Unit::TestCase
     assert_equal([['Z5', 'AA5', 'AB5'], ['Z6', 'AA6', 'AB6']], Axlsx::range_to_a('Z5:AB6'))
   end
 
+  def test_sanitize_frozen_control_strippped
+    needs_sanitize = "legit\x08".freeze # Backspace control char
+
+    assert_equal(Axlsx.sanitize(needs_sanitize), 'legit', 'should strip control chars')
+  end
+
+  def test_sanitize_unfrozen_control_strippped
+    needs_sanitize = "legit\x08" # Backspace control char
+    sanitized_str = Axlsx.sanitize(needs_sanitize)
+
+    assert_equal(sanitized_str,           'legit',                  'should strip control chars')
+    assert_equal(sanitized_str.object_id, sanitized_str.object_id,  'should preserve object')
+  end
+
+  def test_sanitize_unfrozen_no_sanitize
+    legit_str = 'legit'
+    sanitized_str = Axlsx.sanitize(legit_str)
+
+    assert_equal(sanitized_str,           legit_str,            'should preserve value')
+    assert_equal(sanitized_str.object_id, legit_str.object_id,  'should preserve object')
+  end
 end
