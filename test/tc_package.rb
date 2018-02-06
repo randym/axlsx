@@ -154,6 +154,11 @@ class TestPackage < Test::Unit::TestCase
     assert package_1.to_stream.string == package_2.to_stream.string, "zip files are not identical"
   end
 
+  def test_serialization_creates_files_with_excel_mime_type
+    assert_equal(MimeMagic.by_magic(@package.to_stream).type,
+                 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+  end
+
   def test_validation
     assert_equal(@package.validate.size, 0, @package.validate)
     Axlsx::Workbook.send(:class_variable_set, :@@date1904, 9900)
