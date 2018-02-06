@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# encoding: utf-8
 module Axlsx
   # Package is responsible for managing all the bits and peices that Open Office XML requires to make a valid
   # xlsx document including valdation and serialization.
@@ -253,7 +253,9 @@ module Axlsx
         parts << {:entry => "xl/#{sheet.rels_pn}", :doc => sheet.relationships, :schema => RELS_XSD}
         parts << {:entry => "xl/#{sheet.pn}", :doc => sheet, :schema => SML_XSD}
       end
-      parts
+
+      # Sort parts for correct MIME detection
+      parts.sort_by { |part| part[:entry] }
     end
 
     # Performs xsd validation for a signle document
