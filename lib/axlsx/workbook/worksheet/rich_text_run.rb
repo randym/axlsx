@@ -169,7 +169,7 @@ module Axlsx
 
     # Tries to work out the width of the longest line in the run
     # @param [Array] widtharray this array is populated with the widths of each line in the run.
-    # @returns [Array]
+    # @return [Array]
     def autowidth(widtharray)
       return if value.nil?
       if styles.cellXfs[style].alignment && styles.cellXfs[style].alignment.wrap_text
