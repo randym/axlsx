@@ -9,10 +9,7 @@ class TestPic < Test::Unit::TestCase
     @test_img_png =  File.dirname(__FILE__) + "/../../examples/image1.png"
     @test_img_gif =  File.dirname(__FILE__) + "/../../examples/image1.gif"
     @test_img_fake =  File.dirname(__FILE__) + "/../../examples/image1_fake.jpg"
-    @image = ws.add_image :image_src => @test_img, :hyperlink => 'https://github.com/randym', :tooltip => "What's up doc?"
-  end
-
-  def teardown
+    @image = ws.add_image :image_src => @test_img, :hyperlink => 'https://github.com/randym', :tooltip => "What's up doc?", :opacity => 5
   end
 
   def test_initialization
@@ -40,6 +37,7 @@ class TestPic < Test::Unit::TestCase
     assert_equal(200, @image.width)
 
   end
+
   def test_hyperlink
     assert_equal(@image.hyperlink.href, "https://github.com/randym")
     @image.hyperlink = "http://axlsx.blogspot.com"
@@ -102,5 +100,4 @@ class TestPic < Test::Unit::TestCase
     doc = Nokogiri::XML(@image.anchor.drawing.to_xml_string)
     assert_equal r_id, doc.xpath("//a:blip").first["r:embed"]
   end
-
 end

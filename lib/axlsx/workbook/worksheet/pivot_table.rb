@@ -170,12 +170,12 @@ module Axlsx
     def to_xml_string(str = '')
       str << '<?xml version="1.0" encoding="UTF-8"?>'
       str << ('<pivotTableDefinition xmlns="' << XML_NS << '" name="' << name << '" cacheId="' << cache_definition.cache_id.to_s << '"  dataOnRows="1" applyNumberFormats="0" applyBorderFormats="0" applyFontFormats="0" applyPatternFormats="0" applyAlignmentFormats="0" applyWidthHeightFormats="1" dataCaption="Data" showMultipleLabel="0" showMemberPropertyTips="0" useAutoFormatting="1" indent="0" compact="0" compactData="0" gridDropZones="1" multipleFieldFilters="0">')
-      str << (  '<location firstDataCol="1" firstDataRow="1" firstHeaderRow="1" ref="' << ref << '"/>')
-      str << (  '<pivotFields count="' << header_cells_count.to_s << '">')
+      str << ('<location firstDataCol="1" firstDataRow="1" firstHeaderRow="1" ref="' << ref << '"/>')
+      str << ('<pivotFields count="' << header_cells_count.to_s << '">')
       header_cell_values.each do |cell_value|
-        str <<   pivot_field_for(cell_value,!no_subtotals_on_headers.include?(cell_value))
+        str << pivot_field_for(cell_value, !no_subtotals_on_headers.include?(cell_value))
       end
-      str <<   '</pivotFields>'
+      str << '</pivotFields>'
       if rows.empty?
         str << '<rowFields count="1"><field x="-2"/></rowFields>'
         str << '<rowItems count="2"><i><x/></i> <i i="1"><x v="1"/></i></rowItems>'
@@ -263,25 +263,25 @@ module Axlsx
     def pivot_field_for(cell_ref, subtotal=true)
       if rows.include? cell_ref
         if subtotal
-          '<pivotField axis="axisRow" compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1">' + '<items count="1"><item t="default"/></items>' + '</pivotField>'
+          '<pivotField axis="axisRow" compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1"><items count="1"><item t="default"/></items></pivotField>'
         else
-          '<pivotField axis="axisRow" compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1" defaultSubtotal="0">' + '</pivotField>'
+          '<pivotField axis="axisRow" compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1" defaultSubtotal="0"></pivotField>'
         end
       elsif columns.include? cell_ref
-        '<pivotField axis="axisCol" compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1">' + '<items count="1"><item t="default"/></items>' + '</pivotField>'
+        '<pivotField axis="axisCol" compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1"><items count="1"><item t="default"/></items></pivotField>'
       elsif pages.include? cell_ref
-        '<pivotField axis="axisPage" compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1">' + '<items count="1"><item t="default"/></items>' + '</pivotField>'
+        '<pivotField axis="axisPage" compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1"><items count="1"><item t="default"/></items></pivotField>'
       elsif data_refs.include? cell_ref
-        '<pivotField dataField="1" compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1">' + '</pivotField>'
+        '<pivotField dataField="1" compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1"></pivotField>'
       else
-        '<pivotField compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1">' + '</pivotField>'
+        '<pivotField compact="0" outline="0" subtotalTop="0" showAll="0" includeNewItemsInFilter="1"></pivotField>'
       end
     end
-    
+
     def data_refs
       data.map { |hash| hash[:ref] }
     end
-    
+
     def header_range
       range.gsub(/^(\w+?)(\d+)\:(\w+?)\d+$/, '\1\2:\3\2')
     end

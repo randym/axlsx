@@ -27,7 +27,7 @@ module Axlsx
     # Line smoothing between data points
     # @return [Boolean]
     attr_reader :smooth
-    
+
     # Creates a new ScatterSeries
     def initialize(chart, options={})
       @xData, @yData = nil
@@ -55,7 +55,7 @@ module Axlsx
       Axlsx::validate_boolean(v)
       @smooth = v
     end
-    
+
     # @see ln_width
     def ln_width=(v)
       @ln_width = v
@@ -85,7 +85,7 @@ module Axlsx
         end
         if ln_width
           str << '<c:spPr>'
-          str << '<a:ln w="' << ln_width << '"/>'
+          str << '<a:ln w="' << ln_width.to_s << '"/>'
           str << '</c:spPr>'
         end
         @xData.to_xml_string(str) unless @xData.nil?

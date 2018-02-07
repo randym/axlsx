@@ -7,7 +7,7 @@ class RichTextRun < Test::Unit::TestCase
     @p.workbook.styles.add_style :sz => 20
     @rtr = Axlsx::RichTextRun.new('hihihi', b: true, i: false)
     @rtr2 = Axlsx::RichTextRun.new('hihi2hi2', b: false, i: true)
-    @rt = Axlsx::RichText.new 
+    @rt = Axlsx::RichText.new
     @rt.runs << @rtr
     @rt.runs << @rtr2
     @row = @ws.add_row [@rt]
@@ -19,7 +19,7 @@ class RichTextRun < Test::Unit::TestCase
     assert_equal(@rtr.b, true)
     assert_equal(@rtr.i, false)
   end
-  
+
   def test_font_size_with_custom_style_and_no_sz
     @c.style = @c.row.worksheet.workbook.styles.add_style :bg_color => 'FF00FF'
     sz = @rtr.send(:font_size)
@@ -41,12 +41,12 @@ class RichTextRun < Test::Unit::TestCase
     sz2 = @rtr2.send(:font_size)
     assert_equal(sz2, 52)
   end
-  
+
   def test_rtr_with_sz
     @rtr.sz = 25
     assert_equal(25, @rtr.send(:font_size))
   end
-  
+
   def test_color
     assert_raise(ArgumentError) { @rtr.color = -1.1 }
     assert_nothing_raised { @rtr.color = "FF00FF00" }
@@ -129,9 +129,9 @@ class RichTextRun < Test::Unit::TestCase
   end
 
   def test_family
-    assert_raise(ArgumentError) { @c.family = -1.1 }
-    assert_nothing_raised { @c.family = 5 }
-    assert_equal(@c.family, 5)
+    assert_raise(ArgumentError) { @rtr.family = 0 }
+    assert_nothing_raised { @rtr.family = 1 }
+    assert_equal(@rtr.family, 1)
   end
 
   def test_b
@@ -139,11 +139,11 @@ class RichTextRun < Test::Unit::TestCase
     assert_nothing_raised { @c.b = false }
     assert_equal(@c.b, false)
   end
-  
+
   def test_multiline_autowidth
     wrap = @p.workbook.styles.add_style({:alignment => {:wrap_text => true}})
     awtr = Axlsx::RichTextRun.new('I\'m bold' + "\n", :b => true)
-    rt = Axlsx::RichText.new 
+    rt = Axlsx::RichText.new
     rt.runs << awtr
     @ws.add_row [rt], :style => wrap
     ar = [0]
@@ -151,7 +151,7 @@ class RichTextRun < Test::Unit::TestCase
     assert_equal(ar.length, 2)
     assert_equal(ar.last, 0)
   end
-  
+
   def test_to_xml
     schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
     doc = Nokogiri::XML(@ws.to_xml_string)
@@ -161,7 +161,7 @@ class RichTextRun < Test::Unit::TestCase
       errors.push error
     end
     assert(errors.empty?, "error free validation")
-    
+
     assert(doc.xpath('//rPr/b[@val=1]'))
     assert(doc.xpath('//rPr/i[@val=0]'))
     assert(doc.xpath('//rPr/b[@val=0]'))

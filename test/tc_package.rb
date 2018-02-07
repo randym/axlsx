@@ -7,6 +7,12 @@ class TestPackage < Test::Unit::TestCase
     ws = @package.workbook.add_worksheet
     ws.add_row ['Can', 'we', 'build it?']
     ws.add_row ['Yes!', 'We', 'can!']
+    @rt = Axlsx::RichText.new
+    @rt.add_run "run 1", :b => true, :i => false
+    ws.add_row [@rt]
+
+    ws.rows.last.add_cell('b', :type => :text)
+
     ws.outline_level_rows 0, 1
     ws.outline_level_columns 0, 1
     ws.add_hyperlink :ref => ws.rows.first.cells.last, :location => 'https://github.com/randym'
@@ -193,6 +199,7 @@ class TestPackage < Test::Unit::TestCase
 
   def test_shared_strings_requires_part
     @package.use_shared_strings = true
+    @package.to_stream #ensure all cell_serializer paths are hit
     p = @package.send(:parts)
     assert_equal(p.select{ |part| part[:entry] =~/xl\/sharedStrings.xml/}.size, 1, "shared strings table missing")
   end

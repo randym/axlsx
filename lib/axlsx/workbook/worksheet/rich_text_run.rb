@@ -154,19 +154,6 @@ module Axlsx
       set_run_style nil, :scheme, v
     end
 
-    # The Shared Strings Table index for this cell
-    # @return [Integer]
-    attr_reader :ssti
-
-    # @return [Integer] The cellXfs item index applied to this cell.
-    # @raise [ArgumentError] Invalid cellXfs id if the value provided is not within cellXfs items range.
-    def style=(v)
-      Axlsx::validate_unsigned_int(v)
-      count = styles.cellXfs.size
-      raise ArgumentError, "Invalid cellXfs id" unless v < count
-      @style = v
-    end
-
     # Tries to work out the width of the longest line in the run
     # @param [Array] widtharray this array is populated with the widths of each line in the run.
     # @return [Array]

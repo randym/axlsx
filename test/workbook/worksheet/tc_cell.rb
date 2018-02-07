@@ -4,6 +4,7 @@ class TestCell < Test::Unit::TestCase
 
   def setup
     p = Axlsx::Package.new
+    p.use_shared_strings = true
     @ws = p.workbook.add_worksheet :name=>"hmmm"
     p.workbook.styles.add_style :sz=>20
     @row = @ws.add_row
@@ -54,6 +55,19 @@ class TestCell < Test::Unit::TestCase
     @c.name = 'foo'
     assert_equal(1, @ws.workbook.defined_names.size)
     assert_equal('foo', @ws.workbook.defined_names.last.name)
+  end
+
+  def test_autowidth
+    style = @c.row.worksheet.workbook.styles.add_style({:alignment => {:horizontal => :center, :vertical => :center, :wrap_text => true}}  )
+    @c.style = style
+    assert_equal(@c.autowidth, 5.5)
+  end
+
+  def test_time
+    @c.type = :time
+    now = DateTime.now
+    @c.value = now
+    assert_equal(@c.value, now.to_time)
   end
 
   def test_style

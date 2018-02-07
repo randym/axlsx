@@ -159,8 +159,6 @@ module Axlsx
         str << ('t="' << serialization_type.to_s << '"') if serialization_type
         str << ('><v>' << serialization_value.to_s << '</v>')
       end
-
-
     end
   end
 end

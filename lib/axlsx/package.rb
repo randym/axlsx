@@ -147,11 +147,7 @@ module Axlsx
       errors = []
       parts.each do |part|
         unless part[:schema].nil?
-          if part[:doc].is_a? String
-            errors.concat validate_single_doc(part[:schema], part[:doc])
-          else
-            errors.concat validate_single_doc(part[:schema], part[:doc].to_xml_string)
-          end
+          errors.concat validate_single_doc(part[:schema], part[:doc].to_xml_string)
         end
       end
       errors
@@ -165,20 +161,13 @@ module Axlsx
     def write_parts(zip)
       p = parts
       p.each do |part|
-        #next unless part[:entry] == CORE_PN
         unless part[:doc].nil?
           zip.put_next_entry(zip_entry_for_part(part))
-          if part[:doc].is_a? String
-            entry = ['1.9.2', '1.9.3'].include?(RUBY_VERSION) ? part[:doc].force_encoding('BINARY') : part[:doc]
-            zip.puts(entry)
-          else
-            part[:doc].to_xml_string(zip)
-          end
+          part[:doc].to_xml_string(zip)
         end
         unless part[:path].nil?
           zip.put_next_entry(zip_entry_for_part(part))
-          # binread for 1.9.3
-          zip.write IO.respond_to?(:binread) ? IO.binread(part[:path]) : IO.read(part[:path])
+          zip.write IO.read(part[:path])
         end
       end
       zip
