@@ -437,15 +437,15 @@ class TestWorksheet < Test::Unit::TestCase
   def test_relationships
     @ws.add_row [1,2,3]
     assert(@ws.relationships.empty?, "No Drawing relationship until you add a chart")
-    c = @ws.add_chart Axlsx::Pie3DChart
+    @ws.add_chart Axlsx::Pie3DChart
     assert_equal(@ws.relationships.size, 1, "adding a chart creates the relationship")
-    c = @ws.add_chart Axlsx::Pie3DChart
+    @ws.add_chart Axlsx::Pie3DChart
     assert_equal(@ws.relationships.size, 1, "multiple charts still only result in one relationship")
-    c = @ws.add_comment :text => 'builder', :author => 'bob', :ref => @ws.rows.last.cells.last
+    @ws.add_comment :text => 'builder', :author => 'bob', :ref => @ws.rows.last.cells.last
     assert_equal(@ws.relationships.size, 3, "adding a comment adds 2 relationships")
-    c = @ws.add_comment :text => 'not that is a comment!', :author => 'travis', :ref => "A1"
+    @ws.add_comment :text => 'not that is a comment!', :author => 'travis', :ref => "A1"
     assert_equal(@ws.relationships.size, 3, "adding multiple comments in the same worksheet should not add any additional comment relationships")
-    c = @ws.add_pivot_table 'G5:G6', 'A1:D10'
+    @ws.add_pivot_table 'G5:G6', 'A1:D10'
     assert_equal(@ws.relationships.size, 4, "adding a pivot table adds 1 relationship")
   end
 

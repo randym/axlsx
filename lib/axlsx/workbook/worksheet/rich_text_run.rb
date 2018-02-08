@@ -1,10 +1,13 @@
 module Axlsx
+
+  # The RichTextRun class creates and self serializing text run.
   class RichTextRun
 
     include Axlsx::OptionsParser
 
     attr_reader :value
 
+    # A list of allowed inline style attributes used for validation
     INLINE_STYLES = [:font_name, :charset,
                      :family, :b, :i, :strike, :outline,
                      :shadow, :condense, :extend, :u,
@@ -182,6 +185,9 @@ module Axlsx
       self.instance_variable_set :"@#{attr.to_s}", value
     end
 
+    # Serializes the RichTextRun
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       valid = RichTextRun::INLINE_STYLES
       data = Hash[self.instance_values.map{ |k, v| [k.to_sym, v] }]

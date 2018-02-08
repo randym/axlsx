@@ -47,9 +47,9 @@ class TestTable < Test::Unit::TestCase
 
   def test_relationships
     assert(@ws.relationships.empty?)
-    table = @ws.add_table("A1:D5")
+    @ws.add_table("A1:D5")
     assert_equal(@ws.relationships.size, 1, "adding a table adds a relationship")
-    table = @ws.add_table("F1:J5")
+    @ws.add_table("F1:J5")
     assert_equal(@ws.relationships.size, 2, "adding a table adds a relationship")
   end
 
@@ -64,5 +64,4 @@ class TestTable < Test::Unit::TestCase
     end
     assert(errors.empty?, "error free validation")
   end
-
 end
