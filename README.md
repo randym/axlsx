@@ -5,8 +5,6 @@ Axlsx: Office Open XML Spreadsheet Generation
 If you are using axlsx for commercial purposes, or just want to show your
 appreciation for the gem, please don't hesitate to make a donation.
 
-[![Click here to lend your support to: axlsx and make a donation at www.pledgie.com !](http://www.pledgie.com/campaigns/17814.png?skin_name=chrome)](http://www.pledgie.com/campaigns/17814)
-
 **IRC**:[irc.freenode.net / #axlsx](irc://irc.freenode.net/axlsx)
 
 **Git**:[http://github.com/randym/axlsx](http://github.com/randym/axlsx)
