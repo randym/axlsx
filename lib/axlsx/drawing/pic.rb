@@ -115,7 +115,6 @@ module Axlsx
     end
 
     # providing access to the anchor's width attribute
-    # @param [Integer] v
     # @see OneCellAnchor.width
     def width
       return unless @anchor.is_a?(OneCellAnchor)
@@ -129,7 +128,6 @@ module Axlsx
     end
 
     # providing access to update the anchor's height attribute
-    # @param [Integer] v
     # @see OneCellAnchor.width
     # @note this is a noop if you are using a TwoCellAnchor
     def height

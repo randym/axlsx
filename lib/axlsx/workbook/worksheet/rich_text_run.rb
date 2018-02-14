@@ -1,26 +1,29 @@
 module Axlsx
+
+  # The RichTextRun class creates and self serializing text run.
   class RichTextRun
-    
+
     include Axlsx::OptionsParser
-    
+
     attr_reader :value
-    
+
+    # A list of allowed inline style attributes used for validation
     INLINE_STYLES = [:font_name, :charset,
                      :family, :b, :i, :strike, :outline,
                      :shadow, :condense, :extend, :u,
                      :vertAlign, :sz, :color, :scheme].freeze
-    
+
     def initialize(value, options={})
       self.value = value
-      parse_options(options) 
+      parse_options(options)
     end
-    
+
     def value=(value)
       @value = value
     end
-    
+
     attr_accessor :cell
-    
+
     # The inline font_name property for the cell
     # @return [String]
     attr_reader :font_name
@@ -154,19 +157,9 @@ module Axlsx
       set_run_style nil, :scheme, v
     end
 
-    # The Shared Strings Table index for this cell
-    # @return [Integer]
-    attr_reader :ssti
-    
-    # @return [Integer] The cellXfs item index applied to this cell.
-    # @raise [ArgumentError] Invalid cellXfs id if the value provided is not within cellXfs items range.
-    def style=(v)
-      Axlsx::validate_unsigned_int(v)
-      count = styles.cellXfs.size
-      raise ArgumentError, "Invalid cellXfs id" unless v < count
-      @style = v
-    end
-
+    # Tries to work out the width of the longest line in the run
+    # @param [Array] widtharray this array is populated with the widths of each line in the run.
+    # @return [Array]
     def autowidth(widtharray)
       return if value.nil?
       if styles.cellXfs[style].alignment && styles.cellXfs[style].alignment.wrap_text
@@ -184,19 +177,22 @@ module Axlsx
       end
       widtharray
     end
-    
+
     # Utility method for setting inline style attributes
     def set_run_style(validator, attr, value)
       return unless INLINE_STYLES.include?(attr.to_sym)
       Axlsx.send(validator, value) unless validator.nil?
       self.instance_variable_set :"@#{attr.to_s}", value
     end
-    
+
+    # Serializes the RichTextRun
+    # @param [String] str
+    # @return [String]
     def to_xml_string(str = '')
       valid = RichTextRun::INLINE_STYLES
-      data = Hash[self.instance_values.map{ |k, v| [k.to_sym, v] }] 
+      data = Hash[self.instance_values.map{ |k, v| [k.to_sym, v] }]
       data = data.select { |key, value| valid.include?(key) && !value.nil? }
-      
+
       str << '<r><rPr>'
       data.keys.each do |key|
         case key
@@ -211,9 +207,9 @@ module Axlsx
       clean_value = Axlsx::trust_input ? @value.to_s : ::CGI.escapeHTML(Axlsx::sanitize(@value.to_s))
       str << ('</rPr><t>' << clean_value << '</t></r>')
     end
-    
+
     private
-    
+
     # Returns the width of a string according to the current style
     # This is still not perfect...
     #  - scaling is not linear as font sizes increase
@@ -221,7 +217,7 @@ module Axlsx
       font_scale = font_size / 10.0
       string.count(Worksheet::THIN_CHARS) * font_scale
     end
-    
+
     # we scale the font size if bold style is applied to either the style font or
     # the cell itself. Yes, it is a bit of a hack, but it is much better than using
     # imagemagick and loading metrics for every character.
@@ -230,15 +226,15 @@ module Axlsx
       font = styles.fonts[styles.cellXfs[style].fontId] || styles.fonts[0]
       (font.b || (defined?(@b) && @b)) ? (font.sz * 1.5) : font.sz
     end
-    
+
     def style
       cell.style
     end
-    
+
     def styles
-      cell.row.worksheet.styles 
+      cell.row.worksheet.styles
     end
-    
+
     # Converts the value to the correct XML representation (fixes issues with
     # Numbers)
     def xml_value value

@@ -6,7 +6,7 @@ class TestChart < Test::Unit::TestCase
     @p = Axlsx::Package.new
     ws = @p.workbook.add_worksheet
     @row = ws.add_row ["one", 1, Time.now]
-    @chart = ws.add_chart Axlsx::Bar3DChart, :title => "fishery"
+    @chart = ws.add_chart Axlsx::Bar3DChart, :title => "fishery", :bg_color => "000000"
   end
 
   def teardown
@@ -27,17 +27,30 @@ class TestChart < Test::Unit::TestCase
     assert_equal(@chart.title.cell, @row.cells.first)
   end
 
-  def test_to_from_marker_access
-    assert(@chart.to.is_a?(Axlsx::Marker))
-    assert(@chart.from.is_a?(Axlsx::Marker))
-  end
-
   def test_style
     assert_raise(ArgumentError) { @chart.style = 49 }
     assert_nothing_raised { @chart.style = 2 }
     assert_equal(@chart.style, 2)
   end
-  
+
+  def test_to_from_marker_access
+    assert(@chart.to.is_a?(Axlsx::Marker))
+    assert(@chart.from.is_a?(Axlsx::Marker))
+  end
+
+  def test_bg_color
+    assert_raise(ArgumentError) { @chart.bg_color = 2 }
+    assert_nothing_raised { @chart.bg_color = "FFFFFF" }
+    assert_equal(@chart.bg_color, "FFFFFF")
+
+  end
+
+  def test_title_size
+    assert_raise(ArgumentError) { @chart.title_size = 2 }
+    assert_nothing_raised { @chart.title_size = "100" }
+    assert_equal(@chart.title.text_size, "100")
+  end
+
   def test_vary_colors
     assert_equal(true, @chart.vary_colors)
     assert_raise(ArgumentError) { @chart.vary_colors = 7 }
@@ -63,7 +76,7 @@ class TestChart < Test::Unit::TestCase
     @chart.start_at [5,6]
     assert_equal(@chart.graphic_frame.anchor.from.col, 5)
     assert_equal(@chart.graphic_frame.anchor.from.row, 6)
-    
+
   end
 
   def test_end_at
@@ -76,7 +89,7 @@ class TestChart < Test::Unit::TestCase
     @chart.end_at [10,11]
     assert_equal(@chart.graphic_frame.anchor.to.col, 10)
     assert_equal(@chart.graphic_frame.anchor.to.row, 11)
-  
+
   end
 
   def test_add_series
@@ -88,13 +101,13 @@ class TestChart < Test::Unit::TestCase
   def test_pn
     assert_equal(@chart.pn, "charts/chart1.xml")
   end
-  
+
   def test_d_lbls
     assert_equal(nil, @chart.instance_values[:d_lbls])
     @chart.d_lbls.d_lbl_pos = :t
     assert(@chart.d_lbls.is_a?(Axlsx::DLbls), 'DLbls instantiated on access')
   end
-  
+
   def test_to_xml_string
     schema = Nokogiri::XML::Schema(File.open(Axlsx::DRAWING_XSD))
     doc = Nokogiri::XML(@chart.to_xml_string)

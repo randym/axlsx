@@ -33,6 +33,12 @@ class TestWorkbook < Test::Unit::TestCase
     assert_equal(@wb.use_autowidth, false)
   end
 
+  def test_is_reversed
+    assert_equal(@wb.is_reversed, nil)
+    assert_raise(ArgumentError) {@wb.is_reversed = 0.1}
+    assert_nothing_raised {@wb.is_reversed = true }
+    assert_equal(@wb.use_autowidth, true)
+  end
 
   def test_sheet_by_name_retrieval
     @wb.add_worksheet(:name=>'foo')
@@ -98,7 +104,16 @@ class TestWorkbook < Test::Unit::TestCase
     end
     assert(errors.empty?, "error free validation")
   end
-  def test_range_requires__valid_sheet
+
+  def test_to_xml_reversed
+    @wb.is_reversed = true
+    @wb.add_worksheet(:name => 'first')
+    second = @wb.add_worksheet(:name => 'second')
+    doc = Nokogiri::XML(@wb.to_xml_string)
+    assert_equal second.name, doc.xpath('//xmlns:workbook/xmlns:sheets/*[1]/@name').to_s
+  end
+
+  def test_range_requires_valid_sheet
     ws = @wb.add_worksheet :name=>'fish'
     ws.add_row [1,2,3]
     ws.add_row [4,5,6]
@@ -136,7 +151,7 @@ class TestWorkbook < Test::Unit::TestCase
     doc = Nokogiri::XML(@wb.to_xml_string)
     assert_equal pivot_table.cache_definition.rId, doc.xpath("//xmlns:pivotCache").first["r:id"]
   end
-  
+
   def test_worksheet_name_is_intact_after_serialized_into_xml
     sheet = @wb.add_worksheet(:name => '_Example')
     wb_xml = Nokogiri::XML(@wb.to_xml_string)

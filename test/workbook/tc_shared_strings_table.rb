@@ -4,10 +4,12 @@ class TestSharedStringsTable < Test::Unit::TestCase
 
   def setup
     @p = Axlsx::Package.new :use_shared_strings=>true
+
     ws = @p.workbook.add_worksheet
     ws.add_row ['a', 1, 'b']
     ws.add_row ['b', 1, 'c']
     ws.add_row ['c', 1, 'd']
+    ws.rows.last.add_cell('b', :type => :text)
   end
 
   def test_workbook_has_shared_strings
@@ -16,7 +18,7 @@ class TestSharedStringsTable < Test::Unit::TestCase
 
   def test_count
     sst = @p.workbook.shared_strings
-    assert_equal(sst.count, 6)
+    assert_equal(sst.count, 7)
   end
 
   def test_unique_count
@@ -54,5 +56,4 @@ class TestSharedStringsTable < Test::Unit::TestCase
     # assert that the shared string was normalized to remove the control characters
     assert_not_nil @p.workbook.shared_strings.to_xml_string.index("helloworld")
   end
-
 end

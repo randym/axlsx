@@ -117,12 +117,7 @@ class TestPivotTable < Test::Unit::TestCase
   end
 
   def test_to_xml_string
-    pivot_table = @ws.add_pivot_table('G5:G6', 'A1:D5')
-    shared_test_pivot_table_xml_validity(pivot_table)
-  end
-
-  def test_to_xml_string_with_configuration
-    pivot_table = @ws.add_pivot_table('G5:G6', 'A1:E5') do |pt|
+    pivot_table = @ws.add_pivot_table('G5:G6', 'A1:E5', {:no_subtotals_on_headers=>['Year']}) do |pt|
       pt.rows = ['Year', 'Month']
       pt.columns = ['Type']
       pt.data = ['Sales']

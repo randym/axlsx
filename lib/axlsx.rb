@@ -11,7 +11,6 @@ require 'axlsx/util/serialized_attributes'
 require 'axlsx/util/options_parser'
 # to be included with parsable intitites.
 #require 'axlsx/util/parser.rb'
-require 'axlsx/util/string'
 require 'axlsx/util/mime_type_utils'
 
 require 'axlsx/stylesheet/styles.rb'

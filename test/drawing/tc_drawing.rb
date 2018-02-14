@@ -59,9 +59,9 @@ class TestDrawing < Test::Unit::TestCase
   end
 
   def test_relationships
-    chart = @ws.add_chart(Axlsx::Pie3DChart, :title=>"bob", :start_at=>[0,0], :end_at=>[1,1])
+    @ws.add_chart(Axlsx::Pie3DChart, :title=>"bob", :start_at=>[0,0], :end_at=>[1,1])
     assert_equal(@ws.drawing.relationships.size, 1, "adding a chart adds a relationship")
-    chart = @ws.add_chart(Axlsx::Pie3DChart, :title=>"nancy", :start_at=>[1,5], :end_at=>[5,10])
+    @ws.add_chart(Axlsx::Pie3DChart, :title=>"nancy", :start_at=>[1,5], :end_at=>[5,10])
     assert_equal(@ws.drawing.relationships.size, 2, "adding a chart adds a relationship")
   end
 

@@ -19,6 +19,11 @@ class TestTitle < Test::Unit::TestCase
     assert(@title.cell == nil)
   end
 
+  def test_initialize_title_size
+    title = Axlsx::Title.new 'bob', 90
+    assert_equal "90", title.text_size
+  end
+
   def test_text
     assert_raise(ArgumentError, "text must be a string") { @title.text = 123 }
     @title.cell = @row.cells.first

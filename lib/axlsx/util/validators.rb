@@ -56,13 +56,13 @@ module Axlsx
          raise ArgumentError, (ERR_TYPE % [v.inspect, name, types.inspect]) unless other.call(v)
       end
       v_class = v.is_a?(Class) ? v : v.class
-      Array(types).each do |t| 
+      Array(types).each do |t|
         return if v_class <= t
       end
       raise ArgumentError, (ERR_TYPE % [v.inspect, name, types.inspect])
     end
   end
-  
+
 
   # Requires that the value can be converted to an integer
   # @para, [Any] v the value to validate
@@ -78,7 +78,8 @@ module Axlsx
   def self.validate_angle(v)
     raise ArgumentError, (ERR_ANGLE % v.inspect) unless (v.to_i >= -5400000 && v.to_i <= 5400000)
   end
-  
+
+  # Validates an unsigned intger
   UINT_VALIDATOR = lambda { |arg| arg.respond_to?(:>=) && arg >= 0 }
 
   # Requires that the value is a Integer and is greater or equal to 0
@@ -148,7 +149,7 @@ module Axlsx
     RestrictionValidator.validate "cell run style u", [:none, :single, :double, :singleAccounting, :doubleAccounting], v
   end
 
-  # validates cell style family which must be between 1 and 5 
+  # validates cell style family which must be between 1 and 5
   def self.validate_family(v)
     RestrictionValidator.validate "cell run style family", 1..5, v
   end
