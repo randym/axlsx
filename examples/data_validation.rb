@@ -23,7 +23,9 @@ p.workbook.add_worksheet do |ws|
     :errorStyle => :information,
     :showInputMessage => true,
     :promptTitle => 'Be careful!',
-    :prompt => 'We really want a value between 5 and 10, but it is OK if you want to break the rules.'})
+    :prompt => %{We really want a value between 5 and 10,
+but it is OK if you want to break the rules.
+}})
 
  ws.add_data_validation("B1:B5", {
    :type => :textLength,
@@ -58,7 +60,7 @@ p.workbook.add_worksheet do |ws|
     :error => 'Please use the dropdown selector to choose the value',
     :errorStyle => :stop,
     :showInputMessage => true,
-    :prompt => 'Choose the value from the dropdown'})
+    :prompt => '&amp; Choose the value from the dropdown'})
 
 end
 
