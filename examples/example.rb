@@ -873,3 +873,4 @@ if examples.include? :tab_color
   p.serialize 'tab_color.xlsx'
 end
 ##```
+
