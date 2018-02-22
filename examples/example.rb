@@ -22,6 +22,7 @@ examples << :format_dates
 examples << :mbcs
 examples << :formula
 examples << :auto_filter
+examples << :sheet_protection
 examples << :data_types
 examples << :override_data_types
 examples << :hyperlinks
@@ -585,6 +586,7 @@ if examples.include? :defined_name
   wb.add_worksheet(:name => 'defined name') do |sheet|
     sheet.add_row [1, 2, 17, '=FOOBAR']
     wb.add_defined_name("'defined name'!$C1", :local_sheet_id => sheet.index, :name => 'FOOBAR')
+    wb.add_defined_name("'defined name'!$A$1:$C$1", :local_sheet_id => sheet.index, :name => '_xlnm.Print_Area')
   end
 end
 
@@ -592,10 +594,17 @@ end
 if examples.include? :sheet_protection
   unlocked = wb.styles.add_style :locked => false
   wb.add_worksheet(:name => 'Sheet Protection') do |sheet|
-    sheet.sheet_protection.password = 'fish'
-    sheet.add_row [1, 2 ,3] # These cells will be locked
-    sheet.add_row [4, 5, 6], :style => unlocked # these cells will not!
+    sheet.sheet_protection do |protection|
+      protection.password = 'fish'
+      protection.auto_filter = false
+    end
+
+    sheet.add_row [1, 2 ,3],  :style => unlocked # These cells will be locked
+    sheet.add_row [4, 5, 6]
+    sheet.add_row [7, 8, 9]
+    sheet.auto_filter = "A1:C3"
   end
+
 end
 
 ##Specify page margins and other options for printing
