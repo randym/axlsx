@@ -642,7 +642,7 @@ module Axlsx
     # @return String
     def top_left_reference
       raise "worksheet has no data" if rows.empty? or rows.first.empty?
-      rows.first.first.r
+      'A1'
     end
 
     # The excel-style reference of the bottom-right cell of this worksheet, e.g., D5
