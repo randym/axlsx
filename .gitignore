@@ -4,6 +4,7 @@ unzip
 coverage
 .yardoc
 coverage.data
+vendor
 *.gem
 *.xlsx
 example.csv

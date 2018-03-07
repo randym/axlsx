@@ -1,0 +1,4 @@
+.git
+.bundle
+vendor
+ci/Dockerfile

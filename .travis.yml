@@ -26,11 +26,15 @@ matrix:
     - rvm: ruby-head
     - rvm: jruby-head
       env: JRUBY_OPTS="-Xcli.debug=true --debug"
+    - services: docker
+      before_install: docker build . -f ci/Dockerfile -t axlsx
+      script: docker run axlsx ci/validate-xlsx-files.sh
   allow_failures:
     - rvm: rbx-3
     - rvm: ruby-head
     - rvm: jruby-9.1.8.0
     - rvm: jruby-head
+    - services: docker
 
 # https://github.com/jruby/jruby/wiki/FAQs#why-is-jruby-so-slow-to-install-via-rvm
 # https://docs.travis-ci.com/user/installing-dependencies#Installing-Packages-with-the-APT-Addon
