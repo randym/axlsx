@@ -16,7 +16,7 @@ module Axlsx
     attr_reader :labels
 
     # The shabe of the bars or columns
-    # must be one of  [:percentStacked, :clustered, :standard, :stacked]
+    # must be one of  [:cone, :coneToMax, :box, :cylinder, :pyramid, :pyramidToMax]
     # @return [Symbol]
     attr_reader :shape
 
