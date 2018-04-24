@@ -20,17 +20,18 @@ matrix:
     - rvm: 2.4.2
     - rvm: rbx-3
     - rvm: jruby-19mode
-      env: JRUBY_OPTS="-Xcli.debug=true --debug"
-    - rvm: jruby-9.1.8.0
-      env: JRUBY_OPTS="-Xcli.debug=true --debug"
+    - rvm: jruby-9.1.17.0
     - rvm: ruby-head
     - rvm: jruby-head
-      env: JRUBY_OPTS="-Xcli.debug=true --debug"
   allow_failures:
     - rvm: rbx-3
     - rvm: ruby-head
-    - rvm: jruby-9.1.8.0
+    - rvm: jruby-9.1.17.0
     - rvm: jruby-head
+
+env:
+  global:
+    - JRUBY_OPTS="-Xcli.debug=true --debug"
 
 # https://github.com/jruby/jruby/wiki/FAQs#why-is-jruby-so-slow-to-install-via-rvm
 # https://docs.travis-ci.com/user/installing-dependencies#Installing-Packages-with-the-APT-Addon
