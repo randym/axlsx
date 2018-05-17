@@ -5,9 +5,9 @@ Axlsx: Office Open XML Spreadsheet Generation
 If you are using axlsx for commercial purposes, or just want to show your
 appreciation for the gem, please don't hesitate to make a donation.
 
-**IRC**:[irc.freenode.net / #axlsx](irc://irc.freenode.net/axlsx)
+**IRC**: [irc.freenode.net / #axlsx](irc://irc.freenode.net/axlsx)
 
-**Git**:[http://github.com/randym/axlsx](http://github.com/randym/axlsx)
+**Git**: [http://github.com/randym/axlsx](http://github.com/randym/axlsx)
 
 **Twitter**: [https://twitter.com/morgan_randy](https://twitter.com/morgan_randy)
 
@@ -38,7 +38,7 @@ acts_as_xlsx is a simple ActiveRecord mixin that lets you generate a workbook wi
 Posts.where(created_at > Time.now-30.days).to_xlsx
 ```
 
-** and **
+**and**
 
 * http://github.com/straydogstudio/axlsx_rails
 Axlsx_Rails provides an Axlsx renderer so you can move all your spreadsheet code from your controller into view files. Partials are supported so you can organize any code into reusable chunks (e.g. cover sheets, common styling, etc.) You can use it with acts_as_xlsx, placing the to_xlsx call in a view and add ':package => xlsx_package' to the parameter list. Now you can keep your controllers thin!
@@ -119,7 +119,7 @@ To install Axlsx, use the following command:
 
     $ gem install axlsx
 
-#Examples
+Examples
 ------
 
 The example listing is getting overly large to maintain here.
@@ -146,7 +146,7 @@ Please see the [examples](https://github.com/randym/axlsx/tree/master/examples/e
 
 There is much, much more you can do with this gem. If you get stuck, grab me on IRC or submit an issue to GitHub. Chances are that it has already been implemented. If it hasn't - let's take a look at adding it in.
 
-#Documentation
+Documentation
 --------------
 
 This gem is 100% documented with YARD, an exceptional documentation library. To see documentation for this, and all the gems installed on your system use:
@@ -155,20 +155,20 @@ This gem is 100% documented with YARD, an exceptional documentation library. To 
 
      yard server -g
 
-#Specs
+Specs
 ------
 
 This gem has 100% test coverage using test/unit. To execute tests for this gem, simply run rake in the gem directory.
 
-#Change log
+Change log
 ---------
 - **
   - Added Cell#name so you you can quickly create a defined name for a single cell in your workbook.
   - Added full book view and sheet state management. This means you can specify how the workbook renders as well as manage sheet visibility.
   - Added smoothing management for line charts series
-- **September.12.13**:2.0.1
+- **September.12.13**: 2.0.1
   - Unpinned rubyzip version
-- **September.12.13**:2.0.0
+- **September.12.13**: 2.0.0
   - DROPPED support for ruby 1.8.7
   - Altered readme to link to contributors
   - Lots of improvements to make charts and relations more stable.
@@ -185,14 +185,14 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
   - Added space preservation for cell text. This will allow whitespace
     in cell text both when using shared strings and when serializing
     directly to the cell.
-- **April.24.13**:1.3.6
+- **April.24.13**: 1.3.6
   - Fixed LibreOffice/OpenOffice issue to properly apply colors to lines
     in charts.
   - Added support for specifying between/notBetween formula in an array.
     *thanks* straydogstudio!
   - Added standard line chart support. *thanks* scambra
   - Fixed straydogstudio's link in the README. *thanks* nogara!
-- **February.4.13**:1.3.5
+- **February.4.13**: 1.3.5
   - converted vary_colors for chart data to instance variable with appropriate defulats for the various charts.
   - Added trust_input method on Axlsx to instruct the serializer to skip HTML escaping. This will give you a tremendous performance boost,
     Please be sure that you will never have <, >, etc in your content or the XML will be invalid.
@@ -208,7 +208,9 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 Please see the {file:CHANGELOG.md} document for past release information.
 
-# Known interoperability issues.
+Known interoperability issues.
+------------------------------
+
 As axslx implements the Office Open XML (ECMA-376 spec) much of the
 functionality is interoperable with other spreadsheet software. Below is
 a listing of some known issues.
@@ -241,15 +243,16 @@ related to themes, which axlsx does not implement at this time.
    - charts do not render
 
 
-#Thanks!
+Thanks!
+-------
 
 Open source software is a community effort. None of this could have been
 done without the help of these awesome folks.
 
 [contributors](https://github.com/randym/axlsx/graphs/contributors)
 
-#Copyright and License
-----------
+Copyright and License
+---------------------
 
 Axlsx &copy; 2011-2013 by [Randy Morgan](mailto:digial.ipseity@gmail.com).
 
