@@ -119,7 +119,7 @@ To install Axlsx, use the following command:
 
     $ gem install axlsx
 
-#Examples
+## Examples
 ------
 
 The example listing is getting overly large to maintain here.
@@ -146,7 +146,7 @@ Please see the [examples](https://github.com/randym/axlsx/tree/master/examples/e
 
 There is much, much more you can do with this gem. If you get stuck, grab me on IRC or submit an issue to GitHub. Chances are that it has already been implemented. If it hasn't - let's take a look at adding it in.
 
-#Documentation
+## Documentation
 --------------
 
 This gem is 100% documented with YARD, an exceptional documentation library. To see documentation for this, and all the gems installed on your system use:
@@ -155,12 +155,12 @@ This gem is 100% documented with YARD, an exceptional documentation library. To 
 
      yard server -g
 
-#Specs
+## Specs
 ------
 
 This gem has 100% test coverage using test/unit. To execute tests for this gem, simply run rake in the gem directory.
 
-#Change log
+## Change log
 ---------
 - **
   - Added Cell#name so you you can quickly create a defined name for a single cell in your workbook.
@@ -208,7 +208,7 @@ This gem has 100% test coverage using test/unit. To execute tests for this gem, 
 
 Please see the {file:CHANGELOG.md} document for past release information.
 
-# Known interoperability issues.
+## Known interoperability issues.
 As axslx implements the Office Open XML (ECMA-376 spec) much of the
 functionality is interoperable with other spreadsheet software. Below is
 a listing of some known issues.
@@ -241,14 +241,14 @@ related to themes, which axlsx does not implement at this time.
    - charts do not render
 
 
-#Thanks!
+## Thanks!
 
 Open source software is a community effort. None of this could have been
 done without the help of these awesome folks.
 
-[contributors](https://github.com/randym/axlsx/graphs/contributors)
+[Contributors](https://github.com/randym/axlsx/graphs/contributors)
 
-#Copyright and License
+## Copyright and License
 ----------
 
 Axlsx &copy; 2011-2013 by [Randy Morgan](mailto:digial.ipseity@gmail.com).
