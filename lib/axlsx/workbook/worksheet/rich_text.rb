@@ -5,11 +5,21 @@ module Axlsx
 
     # creates a new RichText collection
     # @param [String] text -optional The text to use in creating the first RichTextRun
+    # @param [Array] text -optional An array of Hashes to use to create multiple RichTextRuns
     # @param [Object] options -optional The options to use in creating the first RichTextRun
     # @yield [RichText] self
     def initialize(text = nil, options={})
       super(RichTextRun)
-      add_run(text, options) unless text.nil?
+      unless text.nil?
+        if text.is_a?(Array)
+          text.each do |run_hash|
+            add_run(run_hash[:text], run_hash[:options] || {})
+          end
+        else
+          add_run(text, options)
+        end
+      end
+
       yield self if block_given?
     end
 
