@@ -24,6 +24,16 @@ class RichText < Test::Unit::TestCase
     row = @ws.add_row [rt_direct, rt_indirect]
     assert_equal(row[0].to_xml_string(0,0), row[1].to_xml_string(0,0))
   end
+
+  def test_initialize_with_array_of_hashes
+    assert_equal(@c.value, @rt)
+    rt_from_array = Axlsx::RichText.new([{ :text => 'hi', :options => { :i => true }}, { :text => 'hi', :options => { :i => true }}])
+    assert_equal(rt_from_array.runs.length, 2)
+    rt_direct_and_indirect = Axlsx::RichText.new('hi', :i => true)
+    rt_direct_and_indirect.add_run('hi', :i => true)
+    row = @ws.add_row [rt_from_array, rt_direct_and_indirect]
+    assert_equal(row[0].to_xml_string(0,0), row[1].to_xml_string(0,0))
+  end
   
   def test_textruns
     runs = @rt.runs
