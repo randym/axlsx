@@ -1,5 +1,5 @@
-Axlsx: Office Open XML Spreadsheet Generation
-====================================
+# Axlsx: Office Open XML Spreadsheet Generation
+
 [![Build Status](https://secure.travis-ci.org/randym/axlsx.svg?branch=master)](http://travis-ci.org/randym/axlsx/)
 
 If you are using axlsx for commercial purposes, or just want to show your
@@ -55,8 +55,7 @@ It provides a plugin and dsl for generating downloadable reports.
 The examples directory contains a number of more specific examples as
 well.
 
-Synopsis
---------
+## Synopsis
 
 Axlsx is an Office Open XML Spreadsheet generator for the Ruby programming language.
 With Axlsx you can create excel worksheets with charts, images (with links), automated and fixed column widths, customized styles, functions, tables, conditional formatting, print options, comments, merged cells, auto filters, file and stream serialization  as well as full schema validation. Axlsx excels at helping you generate beautiful Office Open XML Spreadsheet documents without having to understand the entire ECMA specification.
@@ -65,8 +64,7 @@ With Axlsx you can create excel worksheets with charts, images (with links), aut
 
 
 
-Feature List
-------------
+## Feature List
 
 1. Author xlsx documents: Axlsx is made to let you easily and quickly generate professional xlsx based reports that can be validated before serialization.
 
@@ -112,15 +110,15 @@ and Numbers
 
 22. Page Breaks
 
-Installing
-----------
+## Installing
 
 To install Axlsx, use the following command:
 
-    $ gem install axlsx
+```
+$ gem install axlsx
+```
 
-#Examples
-------
+## Examples
 
 The example listing is getting overly large to maintain here.
 If you are using Yard, you will be able to see the examples in line below.
@@ -146,22 +144,23 @@ Please see the [examples](https://github.com/randym/axlsx/tree/master/examples/e
 
 There is much, much more you can do with this gem. If you get stuck, grab me on IRC or submit an issue to GitHub. Chances are that it has already been implemented. If it hasn't - let's take a look at adding it in.
 
-#Documentation
---------------
+## Documentation
 
 This gem is 100% documented with YARD, an exceptional documentation library. To see documentation for this, and all the gems installed on your system use:
 
-     gem install yard kramdown
+```
+gem install yard kramdown
 
-     yard server -g
+yard server -g
+```
 
-#Specs
-------
+You can also view the documentation online at at [https://www.rubydoc.info/github/randym/axlsx](https://www.rubydoc.info/github/randym/axlsx).
+
+## Specs
 
 This gem has 100% test coverage using test/unit. To execute tests for this gem, simply run rake in the gem directory.
 
-#Change log
----------
+## Change log
 - **
   - Added Cell#name so you you can quickly create a defined name for a single cell in your workbook.
   - Added full book view and sheet state management. This means you can specify how the workbook renders as well as manage sheet visibility.
@@ -241,15 +240,14 @@ related to themes, which axlsx does not implement at this time.
    - charts do not render
 
 
-#Thanks!
+## Thanks!
 
 Open source software is a community effort. None of this could have been
 done without the help of these awesome folks.
 
 [contributors](https://github.com/randym/axlsx/graphs/contributors)
 
-#Copyright and License
-----------
+## Copyright and License
 
 Axlsx &copy; 2011-2013 by [Randy Morgan](mailto:digial.ipseity@gmail.com).
 
