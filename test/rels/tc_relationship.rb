@@ -14,10 +14,10 @@ class TestRelationships < Test::Unit::TestCase
     assert_equal instance.Id, Axlsx::Relationship.new(source_obj, Axlsx::WORKSHEET_R, 'target').Id
   end
 
-  def test_instances_cache_is_thread_safe
+  def test_ids_cache_is_thread_safe
     cache1, cache2 = nil
-    t1 = Thread.new { cache1 = Axlsx::Relationship.instances }
-    t2 = Thread.new { cache2 = Axlsx::Relationship.instances }
+    t1 = Thread.new { cache1 = Axlsx::Relationship.ids_cache }
+    t2 = Thread.new { cache2 = Axlsx::Relationship.ids_cache }
     [t1, t2].each(&:join)
     assert_not_same(cache1, cache2)
   end

@@ -5,40 +5,40 @@ module Axlsx
   class Relationship
     
     class << self
-      # Keeps track of all instances of this class.
+      # Keeps track of relationship ids in use.
       # @return [Array]
-      def instances
-        Thread.current[:axlsx_relationship_cached_instances] ||= []
+      def ids_cache
+        Thread.current[:axlsx_relationship_ids_cache] ||= {}
       end
 
-      # Initialize cached instances.
+      # Initialize cached ids.
       # 
       # This should be called before serializing a package (see {Package#serialize} and
       # {Package#to_stream}) to make sure that serialization is idempotent (i.e. 
       # Relationship instances are generated with the same IDs everytime the package
       # is serialized).
-      def initialize_cached_instances
-        Thread.current[:axlsx_relationship_cached_instances] = []
+      def initialize_ids_cache
+        Thread.current[:axlsx_relationship_ids_cache] = {}
       end
       
-      # Clear cached instances.
+      # Clear cached ids.
       # 
       # This should be called after serializing a package (see {Package#serialize} and
       # {Package#to_stream}) to free the memory allocated for cache.
       # 
-      # Also, calling this avoids memory leaks (cached instances lingering around 
+      # Also, calling this avoids memory leaks (cached ids lingering around 
       # forever). 
-      def clear_cached_instances
-        Thread.current[:axlsx_relationship_cached_instances] = nil
+      def clear_ids_cache
+        Thread.current[:axlsx_relationship_ids_cache] = nil
       end
       
       # Generate and return a unique id (eg. `rId123`) Used for setting {#Id}. 
       #
-      # The generated id depends on the number of cached instances, so using
-      # {clear_cached_instances} will automatically reset the generated ids, too.
+      # The generated id depends on the number of previously cached ids, so using
+      # {clear_ids_cache} will automatically reset the generated ids, too.
       # @return [String]
       def next_free_id
-        "rId#{instances.size + 1}"
+        "rId#{ids_cache.size + 1}"
       end
     end
 
@@ -88,12 +88,7 @@ module Axlsx
       self.Target=target
       self.Type=type
       self.TargetMode = options[:target_mode] if options[:target_mode]
-      @Id = if (existing = self.class.instances.find{ |i| should_use_same_id_as?(i) })
-        existing.Id
-      else
-        self.class.next_free_id
-      end
-      self.class.instances << self
+      @Id = (self.class.ids_cache[ids_cache_key] ||= self.class.next_free_id)
     end
 
     # @see Target
@@ -114,7 +109,7 @@ module Axlsx
       str << '/>'
     end
     
-    # Whether this relationship should use the same id as `other`.
+    # A key that determines whether this relationship should use already generated id.
     #
     # Instances designating the same relationship need to use the same id. We can not simply
     # compare the {#Target} attribute, though: `foo/bar.xml`, `../foo/bar.xml`, 
@@ -124,13 +119,11 @@ module Axlsx
     # then {#Target} will be an absolute URL and thus can safely be compared).
     #
     # @todo Implement comparison of {#Target} based on normalized path names.
-    # @param other [Relationship]
-    def should_use_same_id_as?(other)
-      result = self.source_obj == other.source_obj && self.Type == other.Type && self.TargetMode == other.TargetMode
-      if self.TargetMode == :External
-        result &&= self.Target == other.Target
-      end
-      result
+    # @return [Array]
+    def ids_cache_key
+      key = [source_obj, self.Type, self.TargetMode]
+      key << self.Target if self.TargetMode == :External
+      key
     end
     
   end
