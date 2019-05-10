@@ -38,8 +38,8 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       super(str) do
-        str << '<c:bubbleChart>'
-        str << ('<c:varyColors val="' << vary_colors.to_s << '"/>')
+        str << '<c:bubbleChart>'\
+               "<c:varyColors val=\"#{vary_colors}\"/>"
         @series.each { |ser| ser.to_xml_string(str) }
         d_lbls.to_xml_string(str) if @d_lbls
         axes.to_xml_string(str, :ids => true)

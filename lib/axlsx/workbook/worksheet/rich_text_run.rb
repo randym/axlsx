@@ -197,15 +197,15 @@ module Axlsx
       data.keys.each do |key|
         case key
         when :font_name
-          str << ('<rFont val="' << font_name << '"/>')
+          str << "<rFont val=\"#{font_name}\"/>"
         when :color
           str << data[key].to_xml_string
         else
-          str << ('<' << key.to_s << ' val="' << xml_value(data[key]) << '"/>')
+          str << "<#{key} val=\"#{xml_value(data[key])}\"/>"
         end
       end
       clean_value = Axlsx::trust_input ? @value.to_s : ::CGI.escapeHTML(Axlsx::sanitize(@value.to_s))
-      str << ('</rPr><t>' << clean_value << '</t></r>')
+      str << "</rPr><t>#{clean_value}</t></r>"
     end
 
     private

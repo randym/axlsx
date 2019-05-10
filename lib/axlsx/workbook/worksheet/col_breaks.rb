@@ -1,7 +1,7 @@
 module Axlsx
 
   # A collection of Brake objects.
-  # Please do not use this class directly. Instead use 
+  # Please do not use this class directly. Instead use
   # Worksheet#add_break
   class ColBreaks < SimpleTypedList
 
@@ -12,7 +12,7 @@ module Axlsx
 
     # A column break specific helper for adding a break.
     # @param [Hash] options A list of options to pass into the Break object
-    # The max and man options are fixed, however any other valid option for 
+    # The max and man options are fixed, however any other valid option for
     # Break will be passed to the created break object.
     # @see Break
     def add_break(options)
@@ -27,7 +27,7 @@ module Axlsx
     # </colBreaks>
     def to_xml_string(str='')
       return if empty?
-      str << ('<colBreaks count="' << size.to_s << '" manualBreakCount="' << size.to_s << '">')
+      str << "<colBreaks count=\"#{size}\" manualBreakCount=\"#{size}\">"
       each { |brk| brk.to_xml_string(str) }
       str << '</colBreaks>'
     end

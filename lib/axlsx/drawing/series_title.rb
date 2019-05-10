@@ -7,17 +7,17 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      str << '<c:tx>'
-      str << '<c:strRef>'
-      str << ('<c:f>' << Axlsx::cell_range([@cell]) << '</c:f>')
-      str << '<c:strCache>'
-      str << '<c:ptCount val="1"/>'
-      str << '<c:pt idx="0">'
-      str << ('<c:v>' << @text << '</c:v>')
-      str << '</c:pt>'
-      str << '</c:strCache>'
-      str << '</c:strRef>'
-      str << '</c:tx>'
+      str << '<c:tx>'\
+             '<c:strRef>'\
+             "<c:f>#{Axlsx::cell_range([@cell])}</c:f>"\
+             '<c:strCache>'\
+             '<c:ptCount val="1"/>'\
+             '<c:pt idx="0">'\
+             "<c:v>#{@text}</c:v>"\
+             '</c:pt>'\
+             '</c:strCache>'\
+             '</c:strRef>'\
+             '</c:tx>'
     end
   end
 end

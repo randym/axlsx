@@ -47,13 +47,13 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       super(str) do
-        str << '<c:explosion val="' + @explosion + '"/>' unless @explosion.nil?
+        str << "<c:explosion val=\"#{@explosion}\"/>" unless @explosion.nil?
         colors.each_with_index do |c, index|
-          str << '<c:dPt>'
-          str << ('<c:idx val="' << index.to_s << '"/>')
-          str << '<c:spPr><a:solidFill>'
-          str << ('<a:srgbClr val="' << c << '"/>')
-          str << '</a:solidFill></c:spPr></c:dPt>'
+          str << '<c:dPt>'\
+                 "<c:idx val=\"#{index}\"/>"\
+                 '<c:spPr><a:solidFill>'\
+                 "<a:srgbClr val=\"#{c}\"/>"\
+                 '</a:solidFill></c:spPr></c:dPt>'
         end
         @labels.to_xml_string str unless @labels.nil?
         @data.to_xml_string str unless @data.nil?

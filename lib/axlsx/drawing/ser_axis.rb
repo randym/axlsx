@@ -35,8 +35,8 @@ module Axlsx
     def to_xml_string(str = '')
       str << '<c:serAx>'
       super(str)
-      str << ('<c:tickLblSkip val="' << @tick_lbl_skip.to_s << '"/>') unless @tick_lbl_skip.nil?
-      str << ('<c:tickMarkSkip val="' << @tick_mark_skip.to_s << '"/>') unless @tick_mark_skip.nil?
+      str << "<c:tickLblSkip val=\"#{@tick_lbl_skip}\"/>" unless @tick_lbl_skip.nil?
+      str << "<c:tickMarkSkip val=\"#{@tick_mark_skip}\"/>" unless @tick_mark_skip.nil?
       str << '</c:serAx>'
     end
   end

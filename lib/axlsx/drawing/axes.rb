@@ -1,5 +1,5 @@
 module Axlsx
-  
+
   # The Axes class creates and manages axis information and
   # serialization for charts.
   class Axes
@@ -16,7 +16,7 @@ module Axlsx
     end
 
     # [] provides assiciative access to a specic axis store in an axes
-    # instance. 
+    # instance.
     # @return [Axis]
     def [](name)
       axes.assoc(name)[1]
@@ -27,12 +27,12 @@ module Axlsx
     # @param [Hash] options
     # @option options ids
     # If the ids option is specified only the axis identifier is
-    # serialized. Otherwise, each axis is serialized in full. 
+    # serialized. Otherwise, each axis is serialized in full.
     def to_xml_string(str = '', options = {})
       if options[:ids]
         # CatAxis must come first in the XML (for Microsoft Excel at least)
         sorted = axes.sort_by { |name, axis| axis.kind_of?(CatAxis) ? 0 : 1 }
-        sorted.each { |axis| str << ('<c:axId val="' << axis[1].id.to_s << '"/>') }        
+        sorted.each { |axis| str << "<c:axId val=\"#{axis[1].id}\"/>" }
       else
         axes.each { |axis| axis[1].to_xml_string(str) }
       end

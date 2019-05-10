@@ -35,8 +35,8 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       super(str) do
-        str << '<c:pie3DChart>'
-        str << ('<c:varyColors val="' << vary_colors.to_s << '"/>')
+        str << '<c:pie3DChart>'\
+               "<c:varyColors val=\"#{vary_colors}\"/>"
         @series.each { |ser| ser.to_xml_string(str) }
         d_lbls.to_xml_string(str) if @d_lbls
         str << '</c:pie3DChart>'

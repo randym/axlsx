@@ -22,8 +22,8 @@ require 'axlsx/rels/relationship.rb'
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      str << '<?xml version="1.0" encoding="UTF-8"?>'
-      str << ('<Relationships xmlns="' << RELS_R << '">')
+      str << '<?xml version="1.0" encoding="UTF-8"?>'\
+             "<Relationships xmlns=\"#{RELS_R}\">"
       each{ |rel| rel.to_xml_string(str) }
       str << '</Relationships>'
     end

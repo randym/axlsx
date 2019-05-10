@@ -58,7 +58,7 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       [:col, :colOff, :row, :rowOff].each do |k|
-        str << ('<xdr:' << k.to_s << '>' << self.send(k).to_s << '</xdr:' << k.to_s << '>')
+        str << "<xdr:#{k}>#{self.send(k)}</xdr:#{k}>"
       end
     end
     private

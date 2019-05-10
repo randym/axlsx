@@ -5,7 +5,7 @@ module Axlsx
   # @note The recommended way to manage the sheet view is via Worksheet#sheet_view
   # @see Worksheet#sheet_view
   class SheetView
-   
+
     include Axlsx::OptionsParser
     include Axlsx::Accessors
     include Axlsx::SerializedAttributes
@@ -66,11 +66,11 @@ module Axlsx
     # @return [Hash]
     attr_reader :selections
 
-    #  
+    #
     # Color Id
     # Index to the color value for row/column
-    # text headings and gridlines. This is an 
-    # 'index color value' (ICV) rather than 
+    # text headings and gridlines. This is an
+    # 'index color value' (ICV) rather than
     # rgb value.
     # @see type
     # @return [Integer]
@@ -78,18 +78,18 @@ module Axlsx
     attr_reader :color_id
 
     # Top Left Visible Cell
-    # Location of the top left visible cell Location 
+    # Location of the top left visible cell Location
     # of the top left visible cell in the bottom right
     # pane (when in Left-to-Right mode).
     # @see type
     # @return [String]
     # default nil
     attr_reader :top_left_cell
-    
-    
+
+
     # View Type
     # Indicates the view type.
-    # Options are 
+    # Options are
     #  * normal: Normal view
     #  * page_break_preview: Page break preview
     #  * page_layout: Page Layout View
@@ -99,62 +99,62 @@ module Axlsx
     attr_reader :view
 
     # Workbook View Index
-    # Zero-based index of this workbook view, pointing 
+    # Zero-based index of this workbook view, pointing
     # to a workbookView element in the bookViews collection.
     # @see type
-    # @return [Integer] 
+    # @return [Integer]
     # default 0
     attr_reader :workbook_view_id
 
     # Zoom Scale
-    # Window zoom magnification for current view 
+    # Window zoom magnification for current view
     # representing percent values. This attribute
-    # is restricted to values ranging from 10 to 400. 
+    # is restricted to values ranging from 10 to 400.
     # Horizontal & Vertical scale together.
-    # Current view can be Normal, Page Layout, or 
+    # Current view can be Normal, Page Layout, or
     # Page Break Preview.
     # @see type
-    # @return [Integer] 
+    # @return [Integer]
     # default 100
     attr_reader :zoom_scale
 
 
     # Zoom Scale Normal View
-    # Zoom magnification to use when in normal view, 
-    # representing percent values. This attribute is 
-    # restricted to values ranging from 10 to 400. 
+    # Zoom magnification to use when in normal view,
+    # representing percent values. This attribute is
+    # restricted to values ranging from 10 to 400.
     # Horizontal & Vertical scale together.
-    # Applies for worksheets only; zero implies the 
+    # Applies for worksheets only; zero implies the
     # automatic setting.
     # @see type
-    # @return [Integer] 
+    # @return [Integer]
     # default 0
     attr_reader :zoom_scale_normal
 
 
     # Zoom Scale Page Layout View
-    # Zoom magnification to use when in page layout 
-    # view, representing percent values. This attribute 
-    # is restricted to values ranging from 10 to 400. 
+    # Zoom magnification to use when in page layout
+    # view, representing percent values. This attribute
+    # is restricted to values ranging from 10 to 400.
     # Horizontal & Vertical scale together.
-    # Applies for worksheets only; zero implies 
+    # Applies for worksheets only; zero implies
     # the automatic setting.
     # @see type
-    # @return [Integer] 
+    # @return [Integer]
     # default 0
     attr_reader :zoom_scale_page_layout_view
 
 
     # Zoom Scale Page Break Preview
-    # Zoom magnification to use when in page break 
-    # preview, representing percent values. This 
-    # attribute is restricted to values ranging 
+    # Zoom magnification to use when in page break
+    # preview, representing percent values. This
+    # attribute is restricted to values ranging
     # from 10 to 400. Horizontal & Vertical scale
     # together.
-    # Applies for worksheet only; zero implies 
+    # Applies for worksheet only; zero implies
     # the automatic setting.
     # @see type
-    # @return [Integer] 
+    # @return [Integer]
     # default 0
     attr_reader :zoom_scale_sheet_layout_view
 
@@ -172,7 +172,7 @@ module Axlsx
     # @see top_left_cell
     def top_left_cell=(v)
       cell = (v.class == Axlsx::Cell ? v.r_abs : v)
-      Axlsx::validate_string(cell)  
+      Axlsx::validate_string(cell)
       @top_left_cell = cell
     end
 
@@ -198,16 +198,16 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      str << '<sheetViews>'
-      str << '<sheetView '
+      str << '<sheetViews>'\
+             '<sheetView '
       serialized_attributes str
       str << '>'
       @pane.to_xml_string(str) if @pane
       @selections.each do |key, selection|
         selection.to_xml_string(str)
       end
-      str << '</sheetView>'
-      str << '</sheetViews>'
+      str << '</sheetView>'\
+             '</sheetViews>'
     end
   end
 end

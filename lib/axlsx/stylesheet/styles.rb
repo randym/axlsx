@@ -133,7 +133,7 @@ module Axlsx
     # @option options [Integer] family The font family to use.
     # @option options [String] font_name The name of the font to use
     # @option options [Integer] num_fmt The number format to apply
-    # @option options [String] format_code The formatting to apply. 
+    # @option options [String] format_code The formatting to apply.
     # @option options [Integer|Hash] border The border style to use.
     #   borders support style, color and edges options @see parse_border_options
     # @option options [String] bg_color The background color to apply to the cell
@@ -305,12 +305,12 @@ module Axlsx
 
     # parses Style#add_style options for borders.
     # @note noop if :border is not specified in options
-    # @option options [Hash|Integer] A border style definition hash or the index of an existing border. 
-    # Border style definition hashes must include :style and :color key-value entries and 
-    # may include an :edges entry that references an array of symbols identifying which border edges 
+    # @option options [Hash|Integer] A border style definition hash or the index of an existing border.
+    # Border style definition hashes must include :style and :color key-value entries and
+    # may include an :edges entry that references an array of symbols identifying which border edges
     # you wish to apply the style or any other valid Border initializer options.
     # If the :edges entity is not provided the style is applied to all edges of cells that reference this style.
-	# Also available :border_top, :border_right, :border_bottom and :border_left options with :style and/or :color 
+	# Also available :border_top, :border_right, :border_bottom and :border_left options with :style and/or :color
 	# key-value entries, which override :border values.
     # @example
     #   #apply a thick red border to the top and bottom
@@ -362,7 +362,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      str << ('<styleSheet xmlns="' << XML_NS << '">')
+      str << "<styleSheet xmlns=\"#{XML_NS}\">"
       [:numFmts, :fonts, :fills, :borders, :cellStyleXfs, :cellXfs, :cellStyles, :dxfs, :tableStyles].each do |key|
         self.instance_values[key.to_s].to_xml_string(str) unless self.instance_values[key.to_s].nil?
       end

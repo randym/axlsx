@@ -120,9 +120,9 @@ module Axlsx
 
     def to_xml_string(str='')
       raise ArgumentError, 'you must specify the name for this defined name. Please read the documentation for Axlsx::DefinedName for more details' unless name
-      str << ('<definedName ' << 'name="' << name << '" ')
+      str << "<definedName name=\"#{name}\" "
       serialized_attributes str
-      str << ('>' << @formula << '</definedName>')
+      str << ">#{@formula}</definedName>"
     end
   end
 end

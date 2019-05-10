@@ -109,7 +109,7 @@ module Axlsx
     def element_for_attribute(name, namespace='')
       val = instance_values[name]
       return "" if val == nil
-      "<%s:%s val='%s'/>" % [namespace, Axlsx::camel(name, false), val]
+      "<#{namespace}:#{Axlsx::camel(name, false)} val='#{val}'/>"
     end
   end
 end

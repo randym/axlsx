@@ -17,7 +17,7 @@ module Axlsx
       self << Break.new(options.merge(:max => 16383, :man => true))
       last
     end
- 
+
     # <rowBreaks count="3" manualBreakCount="3">
     # <brk id="1" max="16383" man="1"/>
     # <brk id="7" max="16383" man="1"/>
@@ -25,7 +25,7 @@ module Axlsx
     # </rowBreaks>
     def to_xml_string(str='')
       return if empty?
-      str << ('<rowBreaks count="' << self.size.to_s << '" manualBreakCount="' << self.size.to_s << '">')
+      str << "<rowBreaks count=\"#{self.size}\" manualBreakCount=\"#{self.size}\">"
       each { |brk| brk.to_xml_string(str) }
       str << '</rowBreaks>'
     end

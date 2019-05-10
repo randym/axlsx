@@ -8,8 +8,8 @@ module Axlsx
       # @param [Integer] column_index The index of the cell's column
       # @param [String] str The string to apend serialization to.
       # @return [String]
-      def to_xml_string(row_index, column_index, cell, str='')
-        str << ('<c r="' << Axlsx::cell_r(column_index, row_index) << '" s="' << cell.style.to_s << '" ')
+      def to_xml_string(row_index, column_index, cell, str = '')
+        str << "<c r=\"#{Axlsx::cell_r(column_index, row_index)}\" s=\"#{cell.style}\" "
         return str << '/>' if cell.value.nil?
         method = cell.type
         self.send(method, cell, str)
@@ -28,7 +28,7 @@ module Axlsx
         elsif cell.contains_rich_text?
           cell.value.to_xml_string(str)
         else
-          str << ('<t>' << cell.clean_value << '</t>')
+          str << "<t>#{cell.clean_value}</t>"
         end
         str
       end
@@ -37,7 +37,7 @@ module Axlsx
       # @param [Cell] cell The cell that is being serialized
       # @param [String] str The string the serialized content will be appended to.
       # @return [String]
-      def iso_8601(cell, str='')
+      def iso_8601(cell, str = '')
         value_serialization 'd', cell.value, str
       end
 
@@ -86,8 +86,8 @@ module Axlsx
       # @param [String] str The string the serialized content will be appended to.
       # @return [String]
       def formula_serialization(cell, str='')
-        str << ('t="str"><f>' << cell.clean_value.to_s.sub('=', '') << '</f>')
-        str << ('<v>' << cell.formula_value.to_s << '</v>') unless cell.formula_value.nil?
+        str << "t=\"str\"><f>#{cell.clean_value.to_s.sub('=', '')}</f>"
+        str << "<v>#{cell.formula_value}</v>" unless cell.formula_value.nil?
       end
 
       # Serializes cells that are type array formula
@@ -95,8 +95,8 @@ module Axlsx
       # @param [String] str The string the serialized content will be appended to.
       # @return [String]
       def array_formula_serialization(cell, str='')
-        str << ('t="str">' << '<f t="array" ref="' << cell.r << '">' << cell.clean_value.to_s.sub('{=', '').sub(/}$/, '') << '</f>')
-        str << ('<v>' << cell.formula_value.to_s << '</v>') unless cell.formula_value.nil?
+        clean_value = cell.clean_value.to_s.sub('{=', ''); clean_value.sub!(/}$/, ''); str << "t=\"str\"><f t=\"array\" ref=\"#{cell.r}\">#{clean_value}</f>"
+        str << "<v>#{cell.formula_value}</v>" unless cell.formula_value.nil?
       end
 
       # Serializes cells that are type inline_string
@@ -156,8 +156,8 @@ module Axlsx
       end
 
       def value_serialization(serialization_type, serialization_value, str = '')
-        str << ('t="' << serialization_type.to_s << '"') if serialization_type
-        str << ('><v>' << serialization_value.to_s << '</v>')
+        str << "t=\"#{serialization_type}\"" if serialization_type
+        str << "><v>#{serialization_value}</v>"
       end
     end
   end

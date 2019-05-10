@@ -46,16 +46,16 @@ module Axlsx
     # serialize the object
     # @param [String] str
     def to_xml_string(str="")
-      str << ('<c:' << tag_name.to_s << '>')
+      str << "<c:#{tag_name}>"
       if @f
-        str << ('<c:' << @ref_tag_name.to_s << '>')
-        str << ('<c:f>' << @f.to_s << '</c:f>')
+        str << "<c:#{@ref_tag_name}>"\
+               "<c:f>#{@f}</c:f>"
       end
       @data.to_xml_string str
       if @f
-        str << ('</c:' << @ref_tag_name.to_s << '>')
+        str << "</c:#{@ref_tag_name}>"
       end
-      str << ('</c:' << tag_name.to_s << '>')
+      str << "</c:#{tag_name}>"
     end
   end
 end

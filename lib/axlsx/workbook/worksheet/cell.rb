@@ -328,7 +328,8 @@ module Axlsx
     end
 
     def is_array_formula?
-      type == :string && @value.to_s.start_with?('{=') && @value.to_s.end_with?('}')
+      value = @value.to_s
+      type == :string && value.start_with?('{=') && value.end_with?('}')
     end
 
     # returns the absolute or relative string style reference for

@@ -23,8 +23,8 @@ module Axlsx
 
     # Serialize the contenty type to xml
     def to_xml_string(node_name = '', str = '')
-      str << "<#{node_name} "
-      str << instance_values.map { |key, value| Axlsx::camel(key) << '="' << value.to_s << '"' }.join(' ')
+      str << "<#{node_name}"
+      instance_values.each { |key, value| str << " #{Axlsx::camel(key)}=\"#{value}\"" }
       str << '/>'
     end
 

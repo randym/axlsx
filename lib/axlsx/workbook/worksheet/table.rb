@@ -64,7 +64,7 @@ module Axlsx
       end
     end
 
-    # TableStyleInfo for the table. 
+    # TableStyleInfo for the table.
     # initialization can be fed via the :style_info option
     def table_style_info
       @table_style_info ||= TableStyleInfo.new
@@ -74,13 +74,13 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      str << '<?xml version="1.0" encoding="UTF-8"?>'
-      str << ('<table xmlns="' << XML_NS << '" id="' << (index+1).to_s << '" name="' << @name << '" displayName="' << @name.gsub(/\s/,'_') << '" ')
-      str << ('ref="' << @ref << '" totalsRowShown="0">')
-      str << ('<autoFilter ref="' << @ref << '"/>')
-      str << ('<tableColumns count="' << header_cells.length.to_s << '">')
+      str << '<?xml version="1.0" encoding="UTF-8"?>'\
+             "<table xmlns=\"#{XML_NS}\" id=\"#{index + 1}\" name=\"#{@name}\" displayName=\"#{@name.gsub(/\s/,'_')}\" "\
+             "ref=\"#{@ref}\" totalsRowShown=\"0\">"\
+             "<autoFilter ref=\"#{@ref}\"/>"\
+             "<tableColumns count=\"#{header_cells.length}\">"
       header_cells.each_with_index do |cell,index|
-        str << ('<tableColumn id ="' << (index+1).to_s << '" name="' << cell.value << '"/>')
+        str << "<tableColumn id =\"#{index + 1}\" name=\"#{cell.value}\"/>"
       end
       str << '</tableColumns>'
       table_style_info.to_xml_string(str)

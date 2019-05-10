@@ -553,8 +553,8 @@ module Axlsx
       add_autofilter_defined_name_to_workbook
       str << '<sheet '
       serialized_attributes str
-      str << ('name="' << name << '" ')
-      str << ('r:id="' << rId << '"></sheet>')
+      str << "name=\"#{name}\" "\
+             "r:id=\"#{rId}\"></sheet>"
     end
 
     # Serializes the worksheet object to an xml string

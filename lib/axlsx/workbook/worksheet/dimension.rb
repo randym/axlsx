@@ -1,7 +1,7 @@
 module Axlsx
 
   # This class manages the dimensions for a worksheet.
-  # While this node is optional in the specification some readers like 
+  # While this node is optional in the specification some readers like
   # LibraOffice require this node to render the sheet
   class Dimension
 
@@ -31,13 +31,13 @@ module Axlsx
     # @return [String]
     def sqref
       "#{first_cell_reference}:#{last_cell_reference}"
-    end 
+    end
 
     # serialize the object
     # @return [String]
     def to_xml_string(str = '')
       return if worksheet.rows.empty?
-      str << "<dimension ref=\"%s\"></dimension>" % sqref
+      str << "<dimension ref=\"#{sqref}\"></dimension>"
     end
 
     # The first cell in the dimension

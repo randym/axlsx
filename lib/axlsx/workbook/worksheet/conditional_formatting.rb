@@ -7,7 +7,7 @@ module Axlsx
   class ConditionalFormatting
 
    include Axlsx::OptionsParser
-   
+
     # Creates a new {ConditionalFormatting} object
     # @option options [Array] rules The rules to apply
     # @option options [String] sqref The range to apply the rules to
@@ -74,8 +74,8 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      str << ('<conditionalFormatting sqref="' << sqref << '">')
-      str << rules.collect{ |rule| rule.to_xml_string }.join(' ')
+      str << "<conditionalFormatting sqref=\"#{sqref}\">"
+      rules.each { |rule| str << rule.to_xml_string }
       str << '</conditionalFormatting>'
     end
   end

@@ -210,7 +210,7 @@ module Axlsx
       str << '<cfRule '
       serialized_attributes str
       str << '>'
-      str << ('<formula>' << [*self.formula].join('</formula><formula>') << '</formula>') if @formula
+      str << "<formula>#{self.formula.join('</formula><formula>')}</formula>" if @formula
       @color_scale.to_xml_string(str) if @color_scale && @type == :colorScale
       @data_bar.to_xml_string(str) if @data_bar && @type == :dataBar
       @icon_set.to_xml_string(str) if @icon_set && @type == :iconSet

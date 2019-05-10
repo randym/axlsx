@@ -49,10 +49,10 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       str << '<c:scaling>'
-      str << ('<c:logBase val="' << @logBase.to_s << '"/>') unless @logBase.nil?
-      str << ('<c:orientation val="' << @orientation.to_s << '"/>') unless @orientation.nil?
-      str << ('<c:min val="' << @min.to_s << '"/>') unless @min.nil?
-      str << ('<c:max val="' << @max.to_s << '"/>') unless @max.nil?
+      str << "<c:logBase val=\"#{@logBase}\"/>" unless @logBase.nil?
+      str << "<c:orientation val=\"#{@orientation}\"/>" unless @orientation.nil?
+      str << "<c:min val=\"#{@min}\"/>" unless @min.nil?
+      str << "<c:max val=\"#{@max}\"/>" unless @max.nil?
       str << '</c:scaling>'
     end
 

@@ -58,9 +58,9 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      str << '<c:ser>'
-      str << ('<c:idx val="' << index.to_s << '"/>')
-      str << ('<c:order val="' << (order || index).to_s << '"/>')
+      str << '<c:ser>'\
+             "<c:idx val=\"#{index}\"/>"\
+             "<c:order val=\"#{order || index}\"/>"
       title.to_xml_string(str) unless title.nil?
       yield if block_given?
       str << '</c:ser>'

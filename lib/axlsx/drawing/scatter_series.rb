@@ -68,29 +68,29 @@ module Axlsx
       super(str) do
         # needs to override the super color here to push in ln/and something else!
         if color
-          str << '<c:spPr><a:solidFill>'
-          str << ('<a:srgbClr val="' << color << '"/>')
-          str << '</a:solidFill>'
-          str << '<a:ln><a:solidFill>'
-          str << ('<a:srgbClr val="' << color << '"/></a:solidFill></a:ln>')
-          str << '</c:spPr>'
-          str << '<c:marker>'
-          str << '<c:spPr><a:solidFill>'
-          str << ('<a:srgbClr val="' << color << '"/>')
-          str << '</a:solidFill>'
-          str << '<a:ln><a:solidFill>'
-          str << ('<a:srgbClr val="' << color << '"/></a:solidFill></a:ln>')
-          str << '</c:spPr>'
-          str << '</c:marker>'
+          str << '<c:spPr><a:solidFill>'\
+                 "<a:srgbClr val=\"#{color}\"/>"\
+                 '</a:solidFill>'\
+                 '<a:ln><a:solidFill>'\
+                 "<a:srgbClr val=\"#{color}\"/></a:solidFill></a:ln>"\
+                 '</c:spPr>'\
+                 '<c:marker>'\
+                 '<c:spPr><a:solidFill>'\
+                 "<a:srgbClr val=\"#{color}\"/>"\
+                 '</a:solidFill>'\
+                 '<a:ln><a:solidFill>'\
+                 "<a:srgbClr val=\"#{color}\"/></a:solidFill></a:ln>"\
+                 '</c:spPr>'\
+                 '</c:marker>'
         end
         if ln_width
-          str << '<c:spPr>'
-          str << '<a:ln w="' << ln_width.to_s << '"/>'
-          str << '</c:spPr>'
+          str << '<c:spPr>'\
+                 "<a:ln w=\"#{ln_width}\"/>"
+                 '</c:spPr>'
         end
         @xData.to_xml_string(str) unless @xData.nil?
         @yData.to_xml_string(str) unless @yData.nil?
-        str << ('<c:smooth val="' << ((smooth) ? '1' : '0') << '"/>')
+        str << "<c:smooth val=\"#{smooth ? 1 : 0}\"/>"
       end
       str
     end

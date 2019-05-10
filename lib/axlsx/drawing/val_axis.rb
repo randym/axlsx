@@ -29,8 +29,8 @@ module Axlsx
     def to_xml_string(str = '')
       str << '<c:valAx>'
       super(str)
-      str << ('<c:crossBetween val="' << @cross_between.to_s << '"/>')
-      str << '</c:valAx>'
+      str << "<c:crossBetween val=\"#{@cross_between}\"/>"\
+             '</c:valAx>'
     end
 
   end

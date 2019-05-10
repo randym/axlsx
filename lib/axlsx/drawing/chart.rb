@@ -184,48 +184,48 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      str << '<?xml version="1.0" encoding="UTF-8"?>'
-      str << ('<c:chartSpace xmlns:c="' << XML_NS_C << '" xmlns:a="' << XML_NS_A << '" xmlns:r="' << XML_NS_R << '">')
-      str << ('<c:date1904 val="' << Axlsx::Workbook.date1904.to_s << '"/>')
-      str << ('<c:style val="' << style.to_s << '"/>')
-      str << '<c:chart>'
+      str << '<?xml version="1.0" encoding="UTF-8"?>'\
+             "<c:chartSpace xmlns:c=\"#{XML_NS_C}\" xmlns:a=\"#{XML_NS_A}\" xmlns:r=\"#{XML_NS_R}\">"\
+             "<c:date1904 val=\"#{Axlsx::Workbook.date1904}\"/>"
+      str << "<c:style val=\"#{style}\"/>"\
+             '<c:chart>'
       @title.to_xml_string str
-      str << ('<c:autoTitleDeleted val="' << (@title == nil).to_s << '"/>')
+      str << "<c:autoTitleDeleted val=\"#{@title == nil}\"/>"
       @view_3D.to_xml_string(str) if @view_3D
-      str << '<c:floor><c:thickness val="0"/></c:floor>'
-      str << '<c:sideWall><c:thickness val="0"/></c:sideWall>'
-      str << '<c:backWall><c:thickness val="0"/></c:backWall>'
-      str << '<c:plotArea>'
-      str << '<c:layout/>'
+      str << '<c:floor><c:thickness val="0"/></c:floor>'\
+             '<c:sideWall><c:thickness val="0"/></c:sideWall>'\
+             '<c:backWall><c:thickness val="0"/></c:backWall>'\
+             '<c:plotArea>'\
+             '<c:layout/>'
       yield if block_given?
       str << '</c:plotArea>'
       if @show_legend
-        str << '<c:legend>'
-        str << ('<c:legendPos val="' << @legend_position.to_s << '"/>')
-        str << '<c:layout/>'
-        str << '<c:overlay val="0"/>'
-        str << '</c:legend>'
+        str << '<c:legend>'\
+               "<c:legendPos val=\"#{@legend_position}\"/>"\
+               '<c:layout/>'\
+               '<c:overlay val="0"/>'\
+               '</c:legend>'
       end
-      str << '<c:plotVisOnly val="1"/>'
-      str << ('<c:dispBlanksAs val="' << display_blanks_as.to_s << '"/>')
-      str << '<c:showDLblsOverMax val="1"/>'
-      str << '</c:chart>'
+      str << '<c:plotVisOnly val="1"/>'\
+             "<c:dispBlanksAs val=\"#{display_blanks_as}\"/>"\
+             '<c:showDLblsOverMax val="1"/>'\
+             '</c:chart>'
       if bg_color
-        str << '<c:spPr>'
-        str << '<a:solidFill>'
-        str << '<a:srgbClr val="' << bg_color << '"/>'
-        str << '</a:solidFill>'
-        str << '<a:ln>'
-        str << '<a:noFill/>'
-        str << '</a:ln>'
-        str << '</c:spPr>'
+        str << '<c:spPr>'\
+               '<a:solidFill>'\
+               "<a:srgbClr val=\"#{bg_color}\"/>"\
+               '</a:solidFill>'\
+               '<a:ln>'\
+               '<a:noFill/>'\
+               '</a:ln>'\
+               '</c:spPr>'
       end
-      str << '<c:printSettings>'
-      str << '<c:headerFooter/>'
-      str << '<c:pageMargins b="1.0" l="0.75" r="0.75" t="1.0" header="0.5" footer="0.5"/>'
-      str << '<c:pageSetup/>'
-      str << '</c:printSettings>'
-      str << '</c:chartSpace>'
+      str << '<c:printSettings>'\
+             '<c:headerFooter/>'\
+             '<c:pageMargins b="1.0" l="0.75" r="0.75" t="1.0" header="0.5" footer="0.5"/>'\
+             '<c:pageSetup/>'\
+             '</c:printSettings>'\
+             '</c:chartSpace>'
     end
 
     # This is a short cut method to set the anchor start marker position

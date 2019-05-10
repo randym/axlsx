@@ -82,16 +82,16 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      str << '<xdr:twoCellAnchor>'
-      str << '<xdr:from>'
+      str << '<xdr:twoCellAnchor>'\
+             '<xdr:from>'
       from.to_xml_string str
-      str << '</xdr:from>'
-      str << '<xdr:to>'
+      str << '</xdr:from>'\
+             '<xdr:to>'
       to.to_xml_string str
       str << '</xdr:to>'
       object.to_xml_string(str)
-      str << '<xdr:clientData/>'
-      str << '</xdr:twoCellAnchor>'
+      str << '<xdr:clientData/>'\
+             '</xdr:twoCellAnchor>'
     end
   end
 end

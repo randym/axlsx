@@ -62,16 +62,16 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = "")
       author = @comments.authors[author_index]
-      str << ('<comment ref="' << ref << '" authorId="' << author_index.to_s << '">')
+      str << "<comment ref=\"#{ref}\" authorId=\"#{author_index}\">"
       str << '<text>'
       unless author.to_s == ""
-        str << '<r><rPr><b/><color indexed="81"/></rPr>'
-        str << ("<t>" << ::CGI.escapeHTML(author.to_s) << ":\n</t></r>")
+        str << '<r><rPr><b/><color indexed="81"/></rPr>'\
+               "<t>#{::CGI.escapeHTML(author.to_s)}:\n</t></r>"
       end
-      str << '<r>'
-      str << '<rPr><color indexed="81"/></rPr>'
-      str << ('<t>' << ::CGI.escapeHTML(text) << '</t></r></text>')
-      str << '</comment>'
+      str << '<r>'\
+             '<rPr><color indexed="81"/></rPr>'\
+             "<t>#{::CGI.escapeHTML(text)}</t></r></text>"\
+             '</comment>'
     end
 
     private
@@ -82,7 +82,7 @@ module Axlsx
       pos = Axlsx::name_to_indices(ref)
       @vml_shape = VmlShape.new(:row => pos[1], :column => pos[0], :visible => @visible) do |vml|
         vml.left_column = vml.column
-        vml.right_column = vml.column + 2 
+        vml.right_column = vml.column + 2
         vml.top_row = vml.row
          vml.bottom_row = vml.row + 4
       end

@@ -74,27 +74,27 @@ module Axlsx
     def to_xml_string(str = '')
       super(str) do
         if color
-          str << '<c:spPr><a:solidFill>'
-          str << ('<a:srgbClr val="' << color << '"/>')
-          str << '</a:solidFill>'
-          str << '<a:ln w="28800">'
-          str << '<a:solidFill>'
-          str << ('<a:srgbClr val="' << color << '"/>')
-          str << '</a:solidFill>'
-          str << '</a:ln>'
-          str << '<a:round/>'
-          str << '</c:spPr>'
+          str << '<c:spPr><a:solidFill>'\
+                 "<a:srgbClr val=\"#{color}\"/>"\
+                 '</a:solidFill>'\
+                 '<a:ln w="28800">'\
+                 '<a:solidFill>'\
+                 "<a:srgbClr val=\"#{color}\"/>"\
+                 '</a:solidFill>'\
+                 '</a:ln>'\
+                 '<a:round/>'\
+                 '</c:spPr>'
         end
 
         if !@show_marker
           str << '<c:marker><c:symbol val="none"/></c:marker>'
         elsif @marker_symbol != :default
-          str << '<c:marker><c:symbol val="' + @marker_symbol.to_s + '"/></c:marker>'
+          str << "<c:marker><c:symbol val=\"#{@marker_symbol}\"/></c:marker>"
         end
 
         @labels.to_xml_string(str) unless @labels.nil?
         @data.to_xml_string(str) unless @data.nil?
-        str << ('<c:smooth val="' << ((smooth) ? '1' : '0') << '"/>')
+        str << "<c:smooth val=\"#{smooth ? 1 : 0}\"/>"
       end
     end
 
