@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 #  <definedNames>
 #    <definedName name="_xlnm.Print_Titles" localSheetId="0">Sheet1!$1:$1</definedName>
 #  </definedNames>
@@ -118,7 +119,7 @@ module Axlsx
     serializable_attributes :short_cut_key, :status_bar, :help, :description, :custom_menu, :comment,
       :workbook_parameter, :publish_to_server, :xlm, :vb_proceedure, :function, :hidden, :local_sheet_id
 
-    def to_xml_string(str='')
+    def to_xml_string(str = String.new)
       raise ArgumentError, 'you must specify the name for this defined name. Please read the documentation for Axlsx::DefinedName for more details' unless name
       str << "<definedName name=\"#{name}\" "
       serialized_attributes str

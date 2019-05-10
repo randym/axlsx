@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
 
   # The LineChart is a two dimentional line chart (who would have guessed?) that you can add to your worksheet.
@@ -75,7 +76,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       super(str) do
         str << "<c:#{node_name}>"\
                "<c:grouping val=\"#{grouping}\"/>"\

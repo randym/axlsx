@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
   # The Fill is a formatting object that manages the background color, and pattern for cells.
   # @note The recommended way to manage styles in your workbook is to use Styles#add_style.
@@ -21,7 +22,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       str << '<fill>'
       @fill_type.to_xml_string(str)
       str << '</fill>'

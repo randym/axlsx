@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
   # a Pic object represents an image in your worksheet
   # Worksheet#add_image is the recommended way to manage images in your sheets
@@ -165,7 +166,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       str << '<xdr:pic>'\
              '<xdr:nvPicPr>'\
              "<xdr:cNvPr id=\"2\" name=\"#{name}\" descr=\"#{descr}\">"

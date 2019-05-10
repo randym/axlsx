@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
 
   # A PieSeries defines the data and labels and explosion for pie charts series.
@@ -45,7 +46,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       super(str) do
         str << "<c:explosion val=\"#{@explosion}\"/>" unless @explosion.nil?
         colors.each_with_index do |c, index|

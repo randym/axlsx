@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
   # Table
   # @note Worksheet#add_table is the recommended way to create tables for your worksheets.
@@ -73,7 +74,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       str << '<?xml version="1.0" encoding="UTF-8"?>'\
              "<table xmlns=\"#{XML_NS}\" id=\"#{index + 1}\" name=\"#{@name}\" displayName=\"#{@name.gsub(/\s/,'_')}\" "\
              "ref=\"#{@ref}\" totalsRowShown=\"0\">"\

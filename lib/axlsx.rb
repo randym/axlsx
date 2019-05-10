@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 require 'htmlentities'
 require 'axlsx/version.rb'
 require 'mimemagic'
@@ -90,7 +91,7 @@ module Axlsx
   # @note This follows the standard spreadsheet convention of naming columns A to Z, followed by AA to AZ etc.
   # @return [String]
   def self.col_ref(index)
-    chars = ''
+    chars = String.new
     while index >= 26 do
       index, char = index.divmod(26)
       chars.prepend((char + 65).chr)

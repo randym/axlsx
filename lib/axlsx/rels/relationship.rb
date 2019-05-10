@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
   # A relationship defines a reference between package parts.
   # @note Packages automatically manage relationships.
@@ -99,7 +100,7 @@ module Axlsx
     # serialize relationship
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       h = self.instance_values.reject{|k, _| k == "source_obj"}
       str << '<Relationship'
       h.each { |key, value| str << " #{key}=\"#{Axlsx::coder.encode(value.to_s)}\"" }

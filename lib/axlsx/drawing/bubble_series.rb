@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
 
   # A BubbleSeries defines the x/y position and bubble size of data in the chart
@@ -42,7 +43,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       super(str) do
         # needs to override the super color here to push in ln/and something else!
         if color

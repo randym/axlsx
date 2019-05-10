@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # Page setup settings for printing a worksheet. All settings are optional.
   #
@@ -233,7 +234,7 @@ module Axlsx
     # Serializes the page settings element.
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       serialized_tag('pageSetup', str)
     end
   end

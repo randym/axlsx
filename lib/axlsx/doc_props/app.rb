@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
 
   # App represents the app.xml document. The attributes for this object are primarily managed by the application the end user uses to edit the document. None of the attributes are required to serialize a valid xlsx object.
@@ -220,7 +221,7 @@ module Axlsx
 
     # Serialize the app.xml document
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       str << '<?xml version="1.0" encoding="UTF-8"?>'\
              "<Properties xmlns=\"#{APP_NS}\" xmlns:vt=\"#{APP_NS_VT}\">"
       instance_values.each do |key, value|

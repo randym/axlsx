@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # The filterColumn collection identifies a particular column in the AutoFilter
   # range and specifies filter information that has been applied to this column.
@@ -85,7 +86,7 @@ module Axlsx
     end
 
     # Serialize the object to xml
-    def to_xml_string(str='')
+    def to_xml_string(str = String.new)
       str << "<filterColumn #{serialized_attributes}>"
       @filter.to_xml_string(str)
       str << "</filterColumn>"

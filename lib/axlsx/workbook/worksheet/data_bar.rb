@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # Conditional Format Rule data bar object
   # Describes a data bar conditional formatting rule.
@@ -106,7 +107,7 @@ module Axlsx
     # Serialize this object to an xml string
     # @param [String] str
     # @return [String]
-    def to_xml_string(str="")
+    def to_xml_string(str = String.new)
       serialized_tag('dataBar', str) do
         value_objects.to_xml_string(str)
         self.color.to_xml_string(str)

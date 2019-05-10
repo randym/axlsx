@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # This module defines some utils related with mime type detection
   module MimeTypeUtils

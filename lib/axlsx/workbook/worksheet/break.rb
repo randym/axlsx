@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
 
   # The Break class stores the details for row and column page breaks.
@@ -27,7 +28,7 @@ module Axlsx
     serializable_attributes :id, :min, :max, :man, :pt
 
     # serializes the break to xml
-    def to_xml_string(str='')
+    def to_xml_string(str = String.new)
       serialized_tag('brk', str)
     end
   end

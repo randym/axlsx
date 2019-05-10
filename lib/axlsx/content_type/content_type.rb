@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
   require 'axlsx/content_type/abstract_content_type.rb'
   require 'axlsx/content_type/default.rb'
@@ -14,7 +15,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       str << '<?xml version="1.0" encoding="UTF-8"?>'\
              "<Types xmlns=\"#{XML_NS_T}\">"
       each { |type| type.to_xml_string(str) }

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# frozen_string_literal: true
 module Axlsx
 require 'axlsx/workbook/worksheet/sheet_calc_pr.rb'
 require 'axlsx/workbook/worksheet/auto_filter/auto_filter.rb'
@@ -351,7 +352,7 @@ require 'axlsx/workbook/worksheet/selection.rb'
     # Serialize the workbook
     # @param [String] str
     # @return [String]
-    def to_xml_string(str='')
+    def to_xml_string(str = String.new)
       add_worksheet(name: 'Sheet1') unless worksheets.size > 0
       str << '<?xml version="1.0" encoding="UTF-8"?>'\
              "<workbook xmlns=\"#{XML_NS}\" xmlns:r=\"#{XML_NS_R}\">"\

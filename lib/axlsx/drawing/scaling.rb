@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
   # The Scaling class defines axis scaling
   class Scaling
@@ -47,7 +48,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       str << '<c:scaling>'
       str << "<c:logBase val=\"#{@logBase}\"/>" unless @logBase.nil?
       str << "<c:orientation val=\"#{@orientation}\"/>" unless @orientation.nil?

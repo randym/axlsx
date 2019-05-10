@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
   # The Parser module mixes in a number of methods to help in generating a model from xml
   # This module is not included in the axlsx library at this time. It is for future development only,

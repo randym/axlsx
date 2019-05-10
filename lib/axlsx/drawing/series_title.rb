@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
   # A series title is a Title with a slightly different serialization than chart titles.
   class SeriesTitle < Title
@@ -6,7 +7,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       str << '<c:tx>'\
              '<c:strRef>'\
              "<c:f>#{Axlsx::cell_range([@cell])}</c:f>"\

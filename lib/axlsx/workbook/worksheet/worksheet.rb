@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
 
   # The Worksheet class represents a worksheet in the workbook.
@@ -549,7 +550,7 @@ module Axlsx
     end
 
     # Returns a sheet node serialization for this sheet in the workbook.
-    def to_sheet_node_xml_string(str='')
+    def to_sheet_node_xml_string(str = String.new)
       add_autofilter_defined_name_to_workbook
       str << '<sheet '
       serialized_attributes str
@@ -560,7 +561,7 @@ module Axlsx
     # Serializes the worksheet object to an xml string
     # This intentionally does not use nokogiri for performance reasons
     # @return [String]
-    def to_xml_string str=''
+    def to_xml_string(str = String.new)
       add_autofilter_defined_name_to_workbook
       auto_filter.apply if auto_filter.range
       str << '<?xml version="1.0" encoding="UTF-8"?>'

@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
   # Data validation allows the validation of cell data
   #
@@ -212,7 +213,7 @@ module Axlsx
     # Serializes the data validation
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       valid_attributes = get_valid_attributes
 
       str << '<dataValidation'

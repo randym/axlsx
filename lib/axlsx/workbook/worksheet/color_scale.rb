@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # Conditional Format Rule color scale object
   # Describes a gradated color scale in this conditional formatting rule.
@@ -85,7 +86,7 @@ module Axlsx
     # Serialize this color_scale object data to an xml string
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       str << '<colorScale>'
       value_objects.to_xml_string(str)
       colors.each { |color| color.to_xml_string(str) }

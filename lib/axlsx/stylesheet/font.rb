@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
   # The Font class details a font instance for use in styling cells.
   # @note The recommended way to manage fonts, and other styles is Styles#add_style
@@ -137,7 +138,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       str << '<font>'
       instance_values.each do |k, v|
         v.is_a?(Color) ? v.to_xml_string(str) : (str << "<#{k} val=\"#{Axlsx.booleanize(v)}\"/>")

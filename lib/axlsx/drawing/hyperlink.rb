@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
   # a hyperlink object adds an action to an image when clicked so that when the image is clicked the link is fecthed.
   # @note using the hyperlink option when calling add_image on a drawing object is the recommended way to manage hyperlinks
@@ -92,7 +93,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       serialized_tag 'a:hlinkClick', str, {:'r:id' => relationship.Id, :'xmlns:r' => XML_NS_R }
     end
 

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
 
   # The cols class manages the col object used to manage column widths.
@@ -13,7 +14,7 @@ module Axlsx
     # Serialize the Cols object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
      return if empty?
      str << '<cols>'
      each { |item| item.to_xml_string(str) }

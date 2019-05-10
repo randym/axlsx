@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
 
   # A collection of Brake objects.
@@ -25,7 +26,7 @@ module Axlsx
     # <colBreaks count="1" manualBreakCount="1">
     # <brk id="3" max="1048575" man="1"/>
     # </colBreaks>
-    def to_xml_string(str='')
+    def to_xml_string(str = String.new)
       return if empty?
       str << "<colBreaks count=\"#{size}\" manualBreakCount=\"#{size}\">"
       each { |brk| brk.to_xml_string(str) }

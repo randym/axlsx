@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
 
   # A numeric data source for use by charts.
@@ -45,7 +46,7 @@ module Axlsx
 
     # serialize the object
     # @param [String] str
-    def to_xml_string(str="")
+    def to_xml_string(str = String.new)
       str << "<c:#{tag_name}>"
       if @f
         str << "<c:#{@ref_tag_name}>"\

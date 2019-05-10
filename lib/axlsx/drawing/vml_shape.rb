@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
 
   # A VmlShape is used to position and render a comment.
@@ -37,7 +38,7 @@ module Axlsx
     # serialize the shape to a string
     # @param [String] str
     # @return [String]
-    def to_xml_string(str ='')
+    def to_xml_string(str = String.new)
 str << <<SHAME_ON_YOU
 
 <v:shape id="#{@id}" type="#_x0000_t202" fillcolor="#ffffa1 [80]" o:insetmode="auto"

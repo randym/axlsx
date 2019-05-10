@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
 
   # This is a utility class for serialing the drawing node in a
@@ -50,7 +51,7 @@ module Axlsx
 
     # Serialize the drawing for the worksheet
     # @param [String] str
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       return unless has_drawing?
       str << "<drawing r:id='#{relationship.Id}'/>"
     end

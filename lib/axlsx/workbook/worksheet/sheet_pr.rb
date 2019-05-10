@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
 
   # The SheetPr class manages serialization of a worksheet's sheetPr element.
@@ -48,7 +49,7 @@ module Axlsx
     # Serialize the object
     # @param [String] str serialized output will be appended to this object if provided.
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       update_properties
       str << "<sheetPr #{serialized_attributes}>"
       tab_color.to_xml_string(str, 'tabColor') if tab_color

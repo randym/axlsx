@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
 
   #Sheet formatting properties
@@ -47,7 +48,7 @@ module Axlsx
     # serializes this object to an xml string
     # @param [String] str The string this objects serialization will be appended to
     # @return [String]
-    def to_xml_string(str='')
+    def to_xml_string(str = String.new)
       str << "<sheetFormatPr #{serialized_attributes}/>"
     end
 

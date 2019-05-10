@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# frozen_string_literal: true
 module Axlsx
 
   #This specifies the last string data used for a chart. (e.g. strLit and strCache)
@@ -28,7 +29,7 @@ module Axlsx
     end
 
     # serialize the object
-    def to_xml_string(str = "")
+    def to_xml_string(str = String.new)
       str << "<c:#{@tag_name}>"
       str << "<c:ptCount val=\"#{@pt.size}\"/>"
       @pt.each_with_index do |value, index|

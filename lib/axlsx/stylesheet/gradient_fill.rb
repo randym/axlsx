@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
   # A GradientFill defines the color and positioning for gradiant cell fill.
   # @see Open Office XML Part 1 §18.8.24
@@ -92,7 +93,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       str << '<gradientFill '
       serialized_attributes str
       str << '>'

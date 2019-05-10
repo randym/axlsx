@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
 
   # A simple, self serializing class for storing TextRuns
@@ -47,7 +48,7 @@ module Axlsx
     # renders the RichTextRuns in this collection
     # @param [String] str
     # @return [String]
-    def to_xml_string(str='')
+    def to_xml_string(str = String.new)
       each{ |run| run.to_xml_string(str) }
       str
     end

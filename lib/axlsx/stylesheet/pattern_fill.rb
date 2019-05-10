@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
   # A PatternFill is the pattern and solid fill styling for a cell.
   # @note The recommended way to manage styles is with Styles#add_style
@@ -58,7 +59,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       str << "<patternFill patternType=\"#{patternType}\">"
       if fgColor.is_a?(Color)
         fgColor.to_xml_string str, "fgColor"

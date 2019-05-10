@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
   # The Marker class defines a point in the worksheet that drawing anchors attach to.
   # @note The recommended way to manage markers is Worksheet#add_chart Markers are created for a two cell anchor based on the :start and :end options.
@@ -56,7 +57,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       [:col, :colOff, :row, :rowOff].each do |k|
         str << "<xdr:#{k}>#{self.send(k)}</xdr:#{k}>"
       end

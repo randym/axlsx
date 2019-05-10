@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
 
   # The Axes class creates and manages axis information and
@@ -28,7 +29,7 @@ module Axlsx
     # @option options ids
     # If the ids option is specified only the axis identifier is
     # serialized. Otherwise, each axis is serialized in full.
-    def to_xml_string(str = '', options = {})
+    def to_xml_string(str = String.new, options = {})
       if options[:ids]
         # CatAxis must come first in the XML (for Microsoft Excel at least)
         sorted = axes.sort_by { |name, axis| axis.kind_of?(CatAxis) ? 0 : 1 }

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# frozen_string_literal: true
 module Axlsx
   # Conditional formatting rules specify formulas whose evaluations
   # format cells
@@ -206,7 +207,7 @@ module Axlsx
     # Serializes the conditional formatting rule
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       str << '<cfRule '
       serialized_attributes str
       str << '>'

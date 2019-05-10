@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
 
   # A collection of break objects that define row breaks (page breaks) for printing and preview
@@ -23,7 +24,7 @@ module Axlsx
     # <brk id="7" max="16383" man="1"/>
     # <brk id="13" max="16383" man="1"/>
     # </rowBreaks>
-    def to_xml_string(str='')
+    def to_xml_string(str = String.new)
       return if empty?
       str << "<rowBreaks count=\"#{self.size}\" manualBreakCount=\"#{self.size}\">"
       each { |brk| brk.to_xml_string(str) }

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
 
   # This class extracts the common parts from Default and Override
@@ -22,7 +23,7 @@ module Axlsx
     alias :ContentType= :content_type=
 
     # Serialize the contenty type to xml
-    def to_xml_string(node_name = '', str = '')
+    def to_xml_string(node_name = '', str = String.new)
       str << "<#{node_name}"
       instance_values.each { |key, value| str << " #{Axlsx::camel(key)}=\"#{value}\"" }
       str << '/>'

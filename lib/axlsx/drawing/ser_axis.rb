@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
   #A SerAxis object defines a series axis
   class SerAxis < Axis
@@ -32,7 +33,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       str << '<c:serAx>'
       super(str)
       str << "<c:tickLblSkip val=\"#{@tick_lbl_skip}\"/>" unless @tick_lbl_skip.nil?

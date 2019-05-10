@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
 
   # This class manages the serialization of rows for worksheets
@@ -15,7 +16,7 @@ module Axlsx
     # Serialize the sheet data
     # @param [String] str the string this objects serializaton will be concacted to.
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       str << '<sheetData>'
       worksheet.rows.each_with_index do |row, index| 
         row.to_xml_string(index, str) 

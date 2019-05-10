@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# frozen_string_literal: true
 module Axlsx
 
   #This class specifies data for a particular data point. It is used for both numCache and numLit object
@@ -37,7 +38,7 @@ module Axlsx
     end
 
     # serialize the object
-    def to_xml_string(str = "")
+    def to_xml_string(str = String.new)
       str << "<c:#{@tag_name}>"
       str << "<c:formatCode>#{format_code}</c:formatCode>"
       str << "<c:ptCount val=\"#{@pt.size}\"/>"

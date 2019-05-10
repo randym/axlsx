@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
 
   # A SimpleTypedList is a type restrictive collection that allows some of the methods from Array and supports basic xml serialization.
@@ -165,7 +166,7 @@ module Axlsx
       }
     end
 
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       classname = @allowed_types[0].name.split('::').last
       el_name = serialize_as.to_s || (classname[0,1].downcase + classname[1..-1])
       str << "<#{el_name} count=\"#{size}\">"

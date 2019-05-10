@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # This module allows us to define a list of symbols defining which
   # attributes will be serialized for a class.
@@ -11,7 +12,7 @@ module Axlsx
     # class methods applied to all includers
     module ClassMethods
 
-      # This is the method to be used in inheriting classes to specify 
+      # This is the method to be used in inheriting classes to specify
       # which of the instance values are serializable
       def serializable_attributes(*symbols)
         @xml_attributes = symbols
@@ -43,13 +44,13 @@ module Axlsx
       end
     end
 
-    # serializes the instance values of the defining object based on the 
+    # serializes the instance values of the defining object based on the
     # list of serializable attributes.
     # @param [String] str The string instance to append this
     # serialization to.
     # @param [Hash] additional_attributes An option key value hash for
     # defining values that are not serializable attributes list.
-    def serialized_attributes(str = '', additional_attributes = {})
+    def serialized_attributes(str = String.new, additional_attributes = {})
       attributes = declared_attributes.merge! additional_attributes
       attributes.each do |key, value|
         str << "#{Axlsx.camel(key, false)}=\"#{Axlsx.camel(Axlsx.booleanize(value), false)}\" "
@@ -73,7 +74,7 @@ module Axlsx
     # @param [String] str The string instance to which serialized data is appended
     # @param [Array] additional_attributes An array of additional attribute names.
     # @return [String] The serialized output.
-    def serialized_element_attributes(str='', additional_attributes=[], &block)
+    def serialized_element_attributes(str = String.new, additional_attributes = [], &block)
       attrs = self.class.xml_element_attributes + additional_attributes
       values = instance_values
       attrs.each do |attribute_name|

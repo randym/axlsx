@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
 
   # The BarChart is a three dimentional barchart (who would have guessed?) that you can add to your worksheet.
@@ -116,7 +117,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       super(str) do
         str << '<c:barChart>'\
                "<c:barDir val=\"#{bar_dir}\"/>"\

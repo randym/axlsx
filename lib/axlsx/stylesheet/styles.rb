@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
   require 'axlsx/stylesheet/border.rb'
   require 'axlsx/stylesheet/border_pr.rb'
@@ -361,7 +362,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       str << "<styleSheet xmlns=\"#{XML_NS}\">"
       [:numFmts, :fonts, :fills, :borders, :cellStyleXfs, :cellXfs, :cellStyles, :dxfs, :tableStyles].each do |key|
         self.instance_values[key.to_s].to_xml_string(str) unless self.instance_values[key.to_s].nil?
