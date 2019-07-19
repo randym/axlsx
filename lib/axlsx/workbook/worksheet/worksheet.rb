@@ -397,9 +397,10 @@ module Axlsx
     # @option options [Array, Integer] style
     # @option options [Array] widths each member of the widths array will affect how auto_fit behavies.
     # @option options [Float] height the row's height (in points)
+    # @option options [Boolean] escape_formulas - whether or not to escape injected CSV formulas
     def add_row(values=[], options={})
       row = Row.new(self, values, options)
-      update_column_info row, options.delete(:widths)
+      update_column_info row, options
       yield row if block_given?
       row
     end
@@ -733,13 +734,25 @@ module Axlsx
 
     def workbook=(v) DataTypeValidator.validate "Worksheet.workbook", Workbook, v; @workbook = v; end
 
-    def update_column_info(cells, widths=nil)
+    def update_column_info(cells, options = {})
+      widths = options.delete(:widths)
+      escape_formulas = options.delete(:escape_formulas)
+
       cells.each_with_index do |cell, index|
         width = widths ? widths[index] : nil
+        sanitize_formulas_from_cell_value(cell) if escape_formulas == true
+
         col = find_or_create_column_info(index)
         next if width == :ignore
+
         col.update_width(cell, width, workbook.use_autowidth)
       end
+    end
+
+    def sanitize_formulas_from_cell_value(cell)
+      return if cell.value.empty?
+
+      cell.value.prepend("'") if %w[= + - @].include? cell.value[0]
     end
 
     def find_or_create_column_info(index)
