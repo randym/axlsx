@@ -60,6 +60,7 @@ module Axlsx
       [:col, :colOff, :row, :rowOff].each do |k|
         str << ('<xdr:' << k.to_s << '>' << self.send(k).to_s << '</xdr:' << k.to_s << '>')
       end
+      str
     end
     private
 
