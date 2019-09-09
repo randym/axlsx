@@ -4,6 +4,7 @@ All Axlsx related gems have been forked or moved to a community organization: ht
 * Axlsx
 * acts_as_axlsx
 * axlsx_rails
+* activeadmin-axlsx
 
 The gems will be released as is as a starting point to allow releases of other gems that depend on these gems. Submit issues as usual. 
 
@@ -18,9 +19,7 @@ appreciation for the gem, please don't hesitate to make a donation.
 
 **IRC**:[irc.freenode.net / #axlsx](irc://irc.freenode.net/axlsx)
 
-**Git**:[http://github.com/randym/axlsx](http://github.com/randym/axlsx)
-
-**Twitter**: [https://twitter.com/morgan_randy](https://twitter.com/morgan_randy)
+**Git**:[http://github.com/caxlsx/axlsx](http://github.com/randym/axlsx)
 
 **Google Group**: [https://groups.google.com/forum/?fromgroups#!forum/axlsx](https://groups.google.com/forum/?fromgroups#!forum/axlsx)
 
@@ -41,7 +40,7 @@ appreciation for the gem, please don't hesitate to make a donation.
 **Release Date**: September 12th 2013
 
 If you are working in rails, or with active record see:
-[acts_as_xlsx](http://github.com/randym/acts_as_xlsx)
+[acts_as_xlsx](http://github.com/caxlsx/acts_as_xlsx)
 
 acts_as_xlsx is a simple ActiveRecord mixin that lets you generate a workbook with:
 
@@ -51,7 +50,7 @@ Posts.where(created_at > Time.now-30.days).to_xlsx
 
 ** and **
 
-* http://github.com/straydogstudio/axlsx_rails
+* http://github.com/caxlsx/axlsx_rails
 Axlsx_Rails provides an Axlsx renderer so you can move all your spreadsheet code from your controller into view files. Partials are supported so you can organize any code into reusable chunks (e.g. cover sheets, common styling, etc.) You can use it with acts_as_xlsx, placing the to_xlsx call in a view and add ':package => xlsx_package' to the parameter list. Now you can keep your controllers thin!
 
 There are guides for using axlsx and acts_as_xlsx here:
@@ -59,7 +58,7 @@ There are guides for using axlsx and acts_as_xlsx here:
 
 If you are working with ActiveAdmin see:
 
-[activeadmin-axlsx](http://github.com/randym/activeadmin-axlsx)
+[activeadmin-axlsx](http://github.com/caxlsx/activeadmin-axlsx)
 
 It provides a plugin and dsl for generating downloadable reports.
 
@@ -72,7 +71,7 @@ Synopsis
 Axlsx is an Office Open XML Spreadsheet generator for the Ruby programming language.
 With Axlsx you can create excel worksheets with charts, images (with links), automated and fixed column widths, customized styles, functions, tables, conditional formatting, print options, comments, merged cells, auto filters, file and stream serialization  as well as full schema validation. Axlsx excels at helping you generate beautiful Office Open XML Spreadsheet documents without having to understand the entire ECMA specification.
 
-![Screen 1](https://github.com/randym/axlsx/raw/master/examples/sample.png)
+![Screen 1](https://github.com/caxlsx/axlsx/raw/master/examples/sample.png)
 
 
 
@@ -151,7 +150,7 @@ Axlsx::Package.new do |p|
 end
 ```
 
-Please see the [examples](https://github.com/randym/axlsx/tree/master/examples/example.rb) for more.
+Please see the [examples](https://github.com/caxlsx/axlsx/tree/master/examples/example.rb) for more.
 
 {include:file:examples/example.rb}
 
@@ -257,11 +256,9 @@ related to themes, which axlsx does not implement at this time.
 Open source software is a community effort. None of this could have been
 done without the help of these awesome folks.
 
-[contributors](https://github.com/randym/axlsx/graphs/contributors)
+[contributors](https://github.com/caxlsx/axlsx/graphs/contributors)
 
-#Copyright and License
+#License
 ----------
-
-Axlsx &copy; 2011-2013 by [Randy Morgan](mailto:digial.ipseity@gmail.com).
 
 Axlsx is licensed under the MIT license. Please see the LICENSE document for more information.
