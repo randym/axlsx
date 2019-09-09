@@ -1,3 +1,12 @@
+Notice: Community Axlsx organization
+===================================================
+All Axlsx related gems have been forked or moved to a community organization: http://github.com/caxlsx
+* Axlsx
+* acts_as_axlsx
+* axlsx_rails
+
+Please consider helping develop and test these gems.
+
 Axlsx: Office Open XML Spreadsheet Generation
 ====================================
 [![Build Status](https://secure.travis-ci.org/randym/axlsx.svg?branch=master)](http://travis-ci.org/randym/axlsx/)
