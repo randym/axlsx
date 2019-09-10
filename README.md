@@ -6,8 +6,6 @@ All Axlsx related gems have been forked or moved to a community organization: ht
 * axlsx_rails
 * activeadmin-axlsx
 
-The gems will be released as is as a starting point to allow releases of other gems that depend on these gems. Submit issues as usual. 
-
 Please consider helping develop and test these gems.
 
 Axlsx: Office Open XML Spreadsheet Generation
