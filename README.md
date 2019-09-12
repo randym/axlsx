@@ -10,7 +10,7 @@ Please consider helping develop and test these gems.
 
 Axlsx: Office Open XML Spreadsheet Generation
 ====================================
-[![Build Status](https://secure.travis-ci.org/randym/axlsx.svg?branch=master)](http://travis-ci.org/randym/axlsx/)
+[![Build Status](https://travis-ci.com/caxlsx/caxlsx.svg?branch=master)](https://travis-ci.com/caxlsx/caxlsx)
 
 If you are using axlsx for commercial purposes, or just want to show your
 appreciation for the gem, please don't hesitate to make a donation.
