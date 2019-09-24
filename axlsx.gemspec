@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.version     = Axlsx::VERSION
   s.authors     = ["Randy Morgan", "Jurriaan Pruis", "Noel Peden"]
   s.email       = 'noel@peden.biz'
-  s.homepage    = 'https://github.com/caxlsx/axlsx'
+  s.homepage    = 'https://github.com/caxlsx/caxlsx'
   s.platform    = Gem::Platform::RUBY
   s.date        = Time.now.strftime('%Y-%m-%d')
   s.summary     = "Excel OOXML (xlsx) with charts, styles, images and autowidth columns."
