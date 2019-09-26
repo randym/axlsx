@@ -17,7 +17,7 @@ appreciation for the gem, please don't hesitate to make a donation.
 
 **IRC**:[irc.freenode.net / #axlsx](irc://irc.freenode.net/axlsx)
 
-**Git**:[http://github.com/caxlsx/axlsx](http://github.com/randym/axlsx)
+**Git**:[http://github.com/caxlsx/axlsx](http://github.com/caxlsx/axlsx)
 
 **Google Group**: [https://groups.google.com/forum/?fromgroups#!forum/axlsx](https://groups.google.com/forum/?fromgroups#!forum/axlsx)
 
