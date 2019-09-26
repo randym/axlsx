@@ -125,7 +125,7 @@ Installing
 
 To install Axlsx, use the following command:
 
-    $ gem install axlsx
+    $ gem install caxlsx
 
 #Examples
 ------
