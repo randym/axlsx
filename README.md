@@ -17,7 +17,7 @@ appreciation for the gem, please don't hesitate to make a donation.
 
 **IRC**:[irc.freenode.net / #axlsx](irc://irc.freenode.net/axlsx)
 
-**Git**:[http://github.com/caxlsx/axlsx](http://github.com/caxlsx/axlsx)
+**Git**:[http://github.com/caxlsx/caxlsx](http://github.com/caxlsx/caxlsx)
 
 **Google Group**: [https://groups.google.com/forum/?fromgroups#!forum/axlsx](https://groups.google.com/forum/?fromgroups#!forum/axlsx)
 
@@ -38,9 +38,9 @@ appreciation for the gem, please don't hesitate to make a donation.
 **Release Date**: September 12th 2013
 
 If you are working in rails, or with active record see:
-[acts_as_xlsx](http://github.com/caxlsx/acts_as_xlsx)
+[acts_as_caxlsx](http://github.com/caxlsx/acts_as_caxlsx)
 
-acts_as_xlsx is a simple ActiveRecord mixin that lets you generate a workbook with:
+acts_as_caxlsx is a simple ActiveRecord mixin that lets you generate a workbook with:
 
 ```ruby
 Posts.where(created_at > Time.now-30.days).to_xlsx
@@ -56,7 +56,7 @@ There are guides for using axlsx and acts_as_xlsx here:
 
 If you are working with ActiveAdmin see:
 
-[activeadmin-axlsx](http://github.com/caxlsx/activeadmin-axlsx)
+[activeadmin-caxlsx](http://github.com/caxlsx/activeadmin-caxlsx)
 
 It provides a plugin and dsl for generating downloadable reports.
 
