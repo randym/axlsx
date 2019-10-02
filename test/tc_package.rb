@@ -236,6 +236,8 @@ class TestPackage < Test::Unit::TestCase
     # this is just a roundabout guess for a package as it is build now
     # in testing.
     assert(stream.size > 80000)
+    # Cached ids should be cleared
+    assert(Axlsx::Relationship.ids_cache.empty?)
   end
 
   def test_encrypt
