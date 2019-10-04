@@ -1,10 +1,5 @@
 CHANGELOG
 ---------
-- **April.1.17**:3.0.0-pre
-  - Support for ruby versions limited to officially supported version
-  - Updates to dependency gems, especially nokogiri and ruby-zip
-  - Patch options parsing for two cell anchor
-  - Remove support for depreciated worksheet members
 - **November.25.12**:1.3.4
   - Support for headers and footers for worksheets
   - bug fix: Properly escape hyperlink urls
@@ -12,7 +7,6 @@ CHANGELOG
   - Improvements in autowidth calculation.
 - **November.8.12**:1.3.3
   - Patched cell run styles for u and validation for family
-
 - **November.5.12**:1.3.2
   - MASSIVE REFACTORING
   - Patch for apostrophes in worksheet names

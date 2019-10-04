@@ -2,9 +2,9 @@ Notice: Community Axlsx organization
 ===================================================
 All Axlsx related gems have been forked or moved to a community organization: http://github.com/caxlsx
 * Axlsx
-* acts_as_axlsx
+* acts_as_caxlsx
 * axlsx_rails
-* activeadmin-axlsx
+* activeadmin-caxlsx
 
 Please consider helping develop and test these gems.
 
@@ -27,9 +27,9 @@ appreciation for the gem, please don't hesitate to make a donation.
 
 **License**: MIT License
 
-**Latest Version**: 3.0.0
+**Latest Version**: 3.0.1
 
-**Ruby Version**: 2.2.7, 2.3.4, 2.4.1
+**Ruby Version**: 2.3.8, 2.4.5, 2.5.3, 2.6.3
 
 **JRuby Version**: 1.9 modes
 
@@ -127,7 +127,7 @@ To install Axlsx, use the following command:
 
     $ gem install caxlsx
 
-#Examples
+Examples
 ------
 
 The example listing is getting overly large to maintain here.
@@ -154,7 +154,7 @@ Please see the [examples](https://github.com/caxlsx/axlsx/tree/master/examples/e
 
 There is much, much more you can do with this gem. If you get stuck, grab me on IRC or submit an issue to GitHub. Chances are that it has already been implemented. If it hasn't - let's take a look at adding it in.
 
-#Documentation
+Documentation
 --------------
 
 This gem is 100% documented with YARD, an exceptional documentation library. To see documentation for this, and all the gems installed on your system use:
@@ -163,13 +163,25 @@ This gem is 100% documented with YARD, an exceptional documentation library. To 
 
      yard server -g
 
-#Specs
+Specs
 ------
 
 This gem has 100% test coverage using test/unit. To execute tests for this gem, simply run rake in the gem directory.
 
-#Change log
+Change log
 ---------
+- **October.4.19**:3.0.1
+  - Support for ruby versions limited to officially supported version
+  - Updates to dependency gems, especially nokogiri and ruby-zip
+  - Fix Relationship.instances cache
+  - Autoload fix for Rails
+- **September.17.19**:3.0.0
+  - First release of caxlsx, fork of axlsx
+- **April.1.17**:3.0.0-pre
+  - Support for ruby versions limited to officially supported version
+  - Updates to dependency gems, especially nokogiri and ruby-zip
+  - Patch options parsing for two cell anchor
+  - Remove support for depreciated worksheet members
 - **
   - Added Cell#name so you you can quickly create a defined name for a single cell in your workbook.
   - Added full book view and sheet state management. This means you can specify how the workbook renders as well as manage sheet visibility.

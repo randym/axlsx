@@ -3,7 +3,7 @@ require File.expand_path('../lib/axlsx/version', __FILE__)
 Gem::Specification.new do |s|
   s.name        = 'caxlsx'
   s.version     = Axlsx::VERSION
-  s.authors     = ["Randy Morgan", "Jurriaan Pruis", "Noel Peden"]
+  s.authors     = ["Randy Morgan", "Jurriaan Pruis"]
   s.email       = 'noel@peden.biz'
   s.homepage    = 'https://github.com/caxlsx/caxlsx'
   s.platform    = Gem::Platform::RUBY
