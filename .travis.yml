@@ -9,13 +9,11 @@ notifications:
   irc: "irc.freenode.org#axlsx"
   email:
     recipients:
-      - digital.ipseity@gmail.com
+      - noel@peden.biz
     on_success: always
 
 matrix:
   include:
-    - rvm: 2.1
-    - rvm: 2.2.10
     - rvm: 2.3.5
     - rvm: 2.4.7
     - rvm: 2.5.6
