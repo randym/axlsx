@@ -261,14 +261,15 @@ related to themes, which axlsx does not implement at this time.
    - charts do not render
 
 
-#Thanks!
+Thanks!
+----------
 
 Open source software is a community effort. None of this could have been
 done without the help of these awesome folks.
 
-[contributors](https://github.com/caxlsx/axlsx/graphs/contributors)
+[contributors](https://github.com/caxlsx/caxlsx/graphs/contributors)
 
-#License
+License
 ----------
 
 Axlsx is licensed under the MIT license. Please see the LICENSE document for more information.
