@@ -23,7 +23,7 @@ Rake::TestTask.new do |t|
 end
 
 task :release => :build do
-  system "gem push axlsx-#{Axlsx::VERSION}.gem"
+  system "gem push caxlsx-#{Axlsx::VERSION}.gem"
 end
 
 task :default => :test

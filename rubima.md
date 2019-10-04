@@ -8,7 +8,7 @@ using CSV, a technology from the 1960's
 That has changed. There is a new gem, released in November of last year and still under active development
 that brings more to ruby and ruby on rails than was ever possible before for client reporting.
 
-The gem is axlsx (http://rubygems.org/gems/axlsx) 
+The gem is caxlsx (http://rubygems.org/gems/caxlsx) 
 
 Let's take a look at some of the things that it can do for you.
 
