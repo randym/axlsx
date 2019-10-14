@@ -62,11 +62,23 @@ class TestFont < Test::Unit::TestCase
     assert_equal(@item.i, true)
   end
 
-    # def u=(v) Axlsx::validate_boolean v; @u = v end
+    # def u=(v) Axlsx::validate_cell_u v; @u = v end
   def test_u
     assert_raise(ArgumentError) { @item.u = -7 }
+    assert_nothing_raised { @item.u = :single }
+    assert_equal(@item.u, :single)
+    doc = Nokogiri::XML(@item.to_xml_string)
+    assert(doc.xpath('//u[@val="single"]'))
+  end
+
+  def test_u_backward_compatibility
+    # backward compatibility for true
     assert_nothing_raised { @item.u = true }
-    assert_equal(@item.u, true)
+    assert_equal(@item.u, :single)
+
+    # backward compatibility for false
+    assert_nothing_raised { @item.u = false }
+    assert_equal(@item.u, :none)
   end
 
     # def strike=(v) Axlsx::validate_boolean v; @strike = v end

@@ -124,7 +124,7 @@ class TestStyles < Test::Unit::TestCase
       :sz => 20,
       :b => 1,
       :i => 1,
-      :u => 1,
+      :u => :single,
       :strike => 1,
       :outline => 1,
       :shadow => 1,
@@ -231,5 +231,31 @@ class TestStyles < Test::Unit::TestCase
     assert_equal(0, style, "returns the first dxfId")
     style = @styles.add_style :bg_color=>"FF000000", :fg_color=>"FFFFFFFF", :sz=>13, :alignment=>{:horizontal=>:left}, :border=>{:style => :thin, :color => "FFFF0000"}, :hidden=>true, :locked=>true, :type => :dxf
     assert_equal(1, style, "returns the second dxfId")
+  end
+
+  def test_valid_document_with_font_options
+    font_options = {
+      :fg_color => "FF050505",
+      :sz => 20,
+      :b => 1,
+      :i => 1,
+      :u => :single,
+      :strike => 1,
+      :outline => 1,
+      :shadow => 1,
+      :charset => 9,
+      :family => 1,
+      :font_name => "woot font"
+    }
+    @styles.add_style font_options
+
+    schema = Nokogiri::XML::Schema(File.open(Axlsx::SML_XSD))
+    doc = Nokogiri::XML(@styles.to_xml_string)
+    errors = []
+    schema.validate(doc).each do |error|
+      errors.push error
+      puts error.message
+    end
+    assert(errors.size == 0)
   end
 end

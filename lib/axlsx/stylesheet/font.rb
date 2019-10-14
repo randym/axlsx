@@ -76,7 +76,10 @@ module Axlsx
     attr_reader :i
 
     # Indicates if the font should be rendered underlined
-    # @return [Boolean]
+    # It must be one of :none, :single, :double, :singleAccounting, :doubleAccounting, true, false
+    # @return [String]
+    # @note
+    #  true or false is for backwards compatibility and is reassigned to :single or :none respectively
     attr_reader :u
 
     # Indicates if the font should be rendered with a strikthrough
@@ -118,7 +121,12 @@ module Axlsx
     # @see i
     def i=(v) Axlsx::validate_boolean v; @i = v end
     # @see u
-    def u=(v) Axlsx::validate_boolean v; @u = v end
+    def u=(v)
+      v = :single if (v == true || v == 1 || v == :true || v == 'true')
+      v = :none if (v == false || v == 0 || v == :false || v == 'false')
+      Axlsx::validate_cell_u v
+      @u = v
+    end
     # @see strike
     def strike=(v) Axlsx::validate_boolean v; @strike = v end
     # @see outline
