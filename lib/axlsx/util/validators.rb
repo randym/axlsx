@@ -92,7 +92,7 @@ module Axlsx
 
   # Requires that the value is a Integer or Float and is greater or equal to 0
   # @param [Any] v The value validated
-  # @raise [ArgumentError] raised if the value is not a Fixnun, Integer, Float value greater or equal to 0
+  # @raise [ArgumentError] raised if the value is not a Integer, Float value greater or equal to 0
   # @return [Boolean] true if the data is valid
   def self.validate_unsigned_numeric(v)
     DataTypeValidator.validate(:unsigned_numeric, Numeric, v, UINT_VALIDATOR)
