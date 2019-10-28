@@ -1,70 +1,14 @@
-Notice: Community Axlsx organization
-===================================================
-All Axlsx related gems have been forked or moved to a community organization: http://github.com/caxlsx
-* Axlsx
-* acts_as_caxlsx
-* axlsx_rails
-* activeadmin-caxlsx
-
-Please consider helping develop and test these gems.
-
-Axlsx: Office Open XML Spreadsheet Generation
-====================================
+# Axlsx (Community Continued Version)
 [![Build Status](https://travis-ci.com/caxlsx/caxlsx.svg?branch=master)](https://travis-ci.com/caxlsx/caxlsx)
 
-If you are using axlsx for commercial purposes, or just want to show your
-appreciation for the gem, please don't hesitate to make a donation.
+## Notice: Community Axlsx Organization
 
-**IRC**:[irc.freenode.net / #axlsx](irc://irc.freenode.net/axlsx)
+To better maintain the Axlsx ecosystem, all related gems have been forked or moved to the following community organization: 
 
-**Git**:[http://github.com/caxlsx/caxlsx](http://github.com/caxlsx/caxlsx)
+http://github.com/caxlsx
 
-**Google Group**: [https://groups.google.com/forum/?fromgroups#!forum/axlsx](https://groups.google.com/forum/?fromgroups#!forum/axlsx)
 
-**Author**: Randy Morgan
-
-**Copyright**: 2011 - 2017
-
-**License**: MIT License
-
-**Latest Version**: 3.0.1
-
-**Ruby Version**: 2.3.8, 2.4.5, 2.5.3, 2.6.3
-
-**JRuby Version**: 1.9 modes
-
-**Rubinius Version**: rubinius 3 * lower versions may run, this gem always tests against head.
-
-**Release Date**: September 12th 2013
-
-If you are working in rails, or with active record see:
-[acts_as_caxlsx](http://github.com/caxlsx/acts_as_caxlsx)
-
-acts_as_caxlsx is a simple ActiveRecord mixin that lets you generate a workbook with:
-
-```ruby
-Posts.where(created_at > Time.now-30.days).to_xlsx
-```
-
-** and **
-
-* http://github.com/caxlsx/axlsx_rails
-Axlsx_Rails provides an Axlsx renderer so you can move all your spreadsheet code from your controller into view files. Partials are supported so you can organize any code into reusable chunks (e.g. cover sheets, common styling, etc.) You can use it with acts_as_xlsx, placing the to_xlsx call in a view and add ':package => xlsx_package' to the parameter list. Now you can keep your controllers thin!
-
-There are guides for using axlsx and acts_as_xlsx here:
-[http://axlsx.blog.randym.net](http://axlsx.blog.randym.net)
-
-If you are working with ActiveAdmin see:
-
-[activeadmin-caxlsx](http://github.com/caxlsx/activeadmin-caxlsx)
-
-It provides a plugin and dsl for generating downloadable reports.
-
-The examples directory contains a number of more specific examples as
-well.
-
-Synopsis
---------
+## Synopsis
 
 Axlsx is an Office Open XML Spreadsheet generator for the Ruby programming language.
 With Axlsx you can create excel worksheets with charts, images (with links), automated and fixed column widths, customized styles, functions, tables, conditional formatting, print options, comments, merged cells, auto filters, file and stream serialization  as well as full schema validation. Axlsx excels at helping you generate beautiful Office Open XML Spreadsheet documents without having to understand the entire ECMA specification.
@@ -72,9 +16,7 @@ With Axlsx you can create excel worksheets with charts, images (with links), aut
 ![Screen 1](https://github.com/caxlsx/axlsx/raw/master/examples/sample.png)
 
 
-
-Feature List
-------------
+## Feature List
 
 1. Author xlsx documents: Axlsx is made to let you easily and quickly generate professional xlsx based reports that can be validated before serialization.
 
@@ -120,15 +62,14 @@ and Numbers
 
 22. Page Breaks
 
-Installing
-----------
 
-To install Axlsx, use the following command:
+## Install
 
-    $ gem install caxlsx
+```ruby
+gem 'caxlsx'
+```
 
-Examples
-------
+## Examples
 
 The example listing is getting overly large to maintain here.
 If you are using Yard, you will be able to see the examples in line below.
@@ -150,12 +91,10 @@ end
 
 Please see the [examples](https://github.com/caxlsx/axlsx/tree/master/examples/example.rb) for more.
 
-{include:file:examples/example.rb}
+There is much, much more you can do with this gem. Chances are that it has already been implemented. If it hasn't, let's take a look at adding it in.
 
-There is much, much more you can do with this gem. If you get stuck, grab me on IRC or submit an issue to GitHub. Chances are that it has already been implemented. If it hasn't - let's take a look at adding it in.
 
-Documentation
---------------
+## Documentation
 
 Detailed documentation is available at:
 
@@ -166,13 +105,20 @@ Additional documentation is listed below:
 - [Style Reference](https://github.com/caxlsx/caxlsx/blob/master/docs/style_reference.md)
 - [Header and Footer Codes](https://github.com/caxlsx/caxlsx/blob/master/docs/header_and_footer_codes.md)
 
+## Plugins & Integrations
 
-Specs
-------
+Currently the following additional gems are available:
 
-This gem has 100% test coverage using test/unit. To execute tests for this gem, simply run rake in the gem directory.
+- [acts_as_caxlsx](https://github.com/caxlsx/acts_as_caxlsx)
+  * Provides simple ActiveRecord integration
+- [axlsx_rails](https://github.com/caxlsx/axlsx_rails)
+  * Provides a `.axlsx` renderer to Rails so you can move all your spreadsheet code from your controller into view files.
+- [activeadmin-caxlsx](https://github.com/caxlsx/activeadmin-caxlsx)
+  * An Active Admin plugin that includes DSL to create downloadable reports.
 
-# Known interoperability issues.
+
+## Known Software Interoperability Issues
+
 As axslx implements the Office Open XML (ECMA-376 spec) much of the
 functionality is interoperable with other spreadsheet software. Below is
 a listing of some known issues.
@@ -189,31 +135,25 @@ related to themes, which axlsx does not implement at this time.
    - Images are known to not work with google docs
    - border colors do not work
 
-3. Numbers
-   - you must set 'use_shared_strings' to true. This is most
-     conveniently done just before rendering by calling Package.use_shared_strings = true prior to serialization.
-
-  ```ruby
-  p = Axlsx::Package.new
-  p.workbook.add_worksheet(:name => "Basic Worksheet") do |sheet|
-    sheet.add_row ["First Column", "Second", "Third"]
-    sheet.add_row [1, 2, 3]
-  end
-  p.use_shared_strings = true
-  p.serialize('simple.xlsx')
-  ```
+3. Apple Numbers
    - charts do not render
+   - you must set 'use_shared_strings' to true. This is most conveniently done just before rendering by calling Package.use_shared_strings = true prior to serialization.
+
+```ruby
+p = Axlsx::Package.new
+p.workbook.add_worksheet(:name => "Basic Worksheet") do |sheet|
+  sheet.add_row ["First Column", "Second", "Third"]
+  sheet.add_row [1, 2, 3]
+end
+p.use_shared_strings = true
+p.serialize('simple.xlsx')
+```
 
 
-Thanks!
-----------
+## Credits
 
-Open source software is a community effort. None of this could have been
-done without the help of these awesome folks.
+Originally created by Randy Morgan - @randym
 
-[contributors](https://github.com/caxlsx/caxlsx/graphs/contributors)
+Forked in 2019, to enable the community to maintain the Axlsx ecosystem - http://github.com/caxlsx
 
-License
-----------
-
-Axlsx is licensed under the MIT license. Please see the LICENSE document for more information.
+Open source software is a community effort. None of this could have been done without the help of [our Contributors](https://github.com/caxlsx/caxlsx/graphs/contributors).
