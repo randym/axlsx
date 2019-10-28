@@ -157,11 +157,15 @@ There is much, much more you can do with this gem. If you get stuck, grab me on 
 Documentation
 --------------
 
-This gem is 100% documented with YARD, an exceptional documentation library. To see documentation for this, and all the gems installed on your system use:
+Detailed documentation is available at:
 
-     gem install yard kramdown
+[https://www.rubydoc.info/gems/caxlsx/](https://www.rubydoc.info/gems/caxlsx/)
 
-     yard server -g
+Additional documentation is listed below:
+
+- [Style Reference](https://github.com/caxlsx/caxlsx/blob/master/docs/style_reference.md)
+- [Header and Footer Codes](https://github.com/caxlsx/caxlsx/blob/master/docs/header_and_footer_codes.md)
+
 
 Specs
 ------
