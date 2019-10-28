@@ -1,13 +1,77 @@
 CHANGELOG
 ---------
-- **November.25.12**:1.3.4
+
+- **October.4.19**: 3.0.1
+  - Support for ruby versions limited to officially supported version (Ruby v2.3+)
+  - Updates to dependency gems, especially nokogiri and ruby-zip
+  - Fix Relationship.instances cache
+  - Autoload fix for Rails
+
+- **September.17.19**: 3.0.0
+  - First release of caxlsx, fork of axlsx
+
+- **April.1.17**: 3.0.0-pre
+  - Support for ruby versions limited to officially supported version
+  - Updates to dependency gems, especially nokogiri and ruby-zip
+  - Patch options parsing for two cell anchor
+  - Remove support for depreciated worksheet members
+  - Added Cell#name so you you can quickly create a defined name for a single cell in your workbook.
+  - Added full book view and sheet state management. This means you can specify how the workbook renders as well as manage sheet visibility.
+  - Added smoothing management for line charts series
+
+- **September.12.13**: 2.0.1
+  - Unpinned rubyzip version
+
+- **September.12.13**: 2.0.0
+  - DROPPED support for ruby 1.8.7
+  - Altered readme to link to contributors
+  - Lots of improvements to make charts and relations more stable.
+  - Patched color param mutation.
+  - Data sourced for pivot tables can now come from other sheets.
+  - Altered image file extension comparisons to be case insensitive.
+  - Added control character sanitization to shared strings.
+  - Added page breaks. see examples/example.rb for an example.
+  - Bugfix: single to dual cell anchors for images now swap properly so you can set the end_at position during instantiation, in a block or directly on the image.
+  - Improved how we convert date/time to include the UTC offset when provided.
+  - Pinned rubyzip to 0.9.9 for those who are not ready to go up. Please note that release 2.0.1 and on will be using the 1.n.n series of rubyzip
+  - Bugfix: transposition of cells for Worksheet#cols now supports
+    incongruent column counts.counts
+  - Added space preservation for cell text. This will allow whitespace
+    in cell text both when using shared strings and when serializing
+    directly to the cell.
+
+- **April.24.13**: 1.3.6
+  - Fixed LibreOffice/OpenOffice issue to properly apply colors to lines
+    in charts.
+  - Added support for specifying between/notBetween formula in an array.
+    *thanks* straydogstudio!
+  - Added standard line chart support. *thanks* scambra
+  - Fixed straydogstudio's link in the README. *thanks* nogara!
+
+- **February.4.13**: 1.3.5
+  - converted vary_colors for chart data to instance variable with appropriate defulats for the various charts.
+  - Added trust_input method on Axlsx to instruct the serializer to skip HTML escaping. This will give you a tremendous performance boost,
+    Please be sure that you will never have <, >, etc in your content or the XML will be invalid.
+  - Rewrote cell serialization to improve performance
+  - Added iso_8601 type to support text based date and time management.
+  - Bug fix for relationahip management in drawings when you add images
+    and charts to the same worksheet drawing.
+  - Added outline_level_rows and outline_level_columns to worksheet to simplify setting up outlining in the worksheet.
+  - Added support for pivot tables
+  - Added support for descrete border edge styles
+  - Improved validation of sheet names
+  - Added support for formula value caching so that iOS and OSX preview can show the proper values. See Cell.add_row and the formula_values option.
+
+- **November.25.12**: 1.3.4
   - Support for headers and footers for worksheets
   - bug fix: Properly escape hyperlink urls
   - Improvements in color_scale generation for conditional formatting
   - Improvements in autowidth calculation.
-- **November.8.12**:1.3.3
+
+- **November.8.12**: 1.3.3
   - Patched cell run styles for u and validation for family
-- **November.5.12**:1.3.2
+
+- **November.5.12**: 1.3.2
   - MASSIVE REFACTORING
   - Patch for apostrophes in worksheet names
   - added sheet_by_name for workbook so you can now find your worksheets
@@ -15,6 +79,7 @@ CHANGELOG
   - added insert_worksheet so you can now add a worksheet to an
     arbitrary position in the worksheets list.
   - reduced memory consumption for package parts post serialization
+
 - **September.30.12**: 1.3.1
   - Improved control character handling
   - Added stored auto filter values and date grouping items
@@ -23,29 +88,35 @@ CHANGELOG
     all the predefined table styles.
   - Improved style management for fonts so they merge undefined values
     from the initial master.
+
 - **September.8.12**: 1.2.3
   - enhance exponential float/bigdecimal values rendering as strings intead
     of 'numbers' in excel.
   - added support for :none option on chart axis labels
   - added support for paper_size option on worksheet.page_setup
+
 - **August.27.12**: 1.2.2
    - minor patch for auto-filters
    - minor documentation improvements.
+
 - **August.12.12**: 1.2.1
    - Add support for hyperlinks in worksheets
    - Fix example that was using old style cell merging with concact.
    - Fix bug that occurs when calculating the font_size for cells that use a user specified style which does not define sz
+
 - **August.5.12**: 1.2.0
    - rebuilt worksheet serialization to clean up the code base a bit.
    - added data labels for charts
    - added table header printing for each sheet via defined_name. This
      means that when you print your worksheet, the header rows show for every page
-- **July.??.12**: 1.1.9 release
+
+- **July.??.12**: 1.1.9
    - lots of code clean up for worksheet
    - added in data labels for pie charts, line charts and bar charts.
    - bugfix chard with data in a sheet that has a space in the name are
      now auto updating formula based values
-- **July.14.12**: 1.1.8 release
+
+- **July.14.12**: 1.1.8
    - added html entity encoding for sheet names. This allows you to use
      characters like '<' and '&' in your sheet names.
    - new - first round google docs interoperability
@@ -54,7 +125,8 @@ CHANGELOG
      to PDF from Libra Office
    - various readability improvements and work standardizing attribute
      names to snake_case. Aliases are provided for backward compatiblity 
-- **June.11.12**: 1.1.7 release
+
+- **June.11.12**: 1.1.7
    - fix chart rendering issue when label offset is specified as a
      percentage in serialization and ensure that formula are not stored
 in value caches
@@ -62,7 +134,8 @@ in value caches
    - Add title property to axis so you can lable the x/y/series axis for
      charts.
    - Add sheet views with panes
-- **May.30.12**: 1.1.6 release
+
+- **May.30.12**: 1.1.6
    - data protection with passwords for sheets
    - cell level input validators
    - added support for two cell anchors for images
@@ -72,14 +145,15 @@ in value caches
    - added ph (phonetics) and s (style) attributes for row.
    - resolved all warnings generating from this gem.
    - improved comment relationship management for multiple comments
-- **May.13.12**: 1.1.5 release
+
+- **May.13.12**: 1.1.5
    - MOAR print options! You can now specify paper size, orientation,
      fit to width, page margings and gridlines for printing.
    - Support for adding comments to your worksheets
    - bugfix for applying style to empty cells
    - bugfix for parsing formula with multiple '='
 
-- **May.3.12:**: 1.1.4 release
+- **May.3.12:**: 1.1.4
    - MOAR examples
    - added outline level for rows and columns
    - rebuild of numeric and axis data sources for charts
@@ -91,23 +165,23 @@ in value caches
    - Added support for specifying the color of data series in charts.
    - bugfix using add_cell on row mismanaged calls to update_column_info.
 
-- ** April.25.12:**: 1.1.3 release
+- ** April.25.12:**: 1.1.3
    - Primarily because I am stupid.....Updates to readme to properly report version, add in missing docs and restructure example directory.
 
-- ** April.25.12:**: 1.1.2 release
+- ** April.25.12:**: 1.1.2
    - Conditional Formatting completely implemented.
    - refactoring / documentation for Style#add_style
    - added in label rotation for chart axis labels
    - bugfix to properly assign style and type info to cells when only partial information is provided in the types/style option
 
-- ** April.18.12**: 1.1.1 release
+- ** April.18.12**: 1.1.1
    - bugfix for autowidth calculations across multiple rows
    - bugfix for dimension calculations with nil cells.
    - REMOVED RMAGICK dependency WOOT!
    - Update readme to show screenshot of gem output.
    - Cleanup benchmark and add benchmark rake task
 
-- ** April.3.12**: 1.1.0 release
+- ** April.3.12**: 1.1.0
    - bugfix patch name_to_indecies to properly handle extended ranges.
    - bugfix properly serialize chart title.
    - lower rake minimum requirement for 1.8.7 apps that don't want to move on to 0.9 NOTE this will be reverted for 2.0.0 with workbook parsing!
@@ -122,7 +196,7 @@ in value caches
    - Major (like 7x faster!) performance updates.
    - Gem now supports for JRuby 1.6.7, as well as experimental support for Rubinius
 
-- ** March.5.12**: 1.0.18 release
+- ** March.5.12**: 1.0.18
    https://github.com/randym/axlsx/compare/1.0.17...1.0.18
    - bugfix custom borders are not properly applied when using styles.add_style
    - interop worksheet names must be 31 characters or less or some versions of office complain about repairs
@@ -132,14 +206,14 @@ in value caches
    - added << alias for add_row
    - removed presetting of date1904 based on authoring platform. Now defaults to use 1900 epoch (date1904 = false)
 
-- ** February.14.12**: 1.0.17 release
+- ** February.14.12**: 1.0.17
    https://github.com/randym/axlsx/compare/1.0.16...1.0.17
    - Added in support for serializing to StringIO
    - Added in support for using shared strings table. This makes most of the features in axlsx interoperable with iWorks Numbers
    - Added in support for fixed column_widths
    - Removed unneeded dependencies on active-support and i18n
 
-- ** February.2.12**: 1.0.16 release
+- ** February.2.12**: 1.0.16
    https://github.com/randym/axlsx/compare/1.0.15...1.0.16
    - Bug fix for schema file locations when validating in rails
    - Added hyperlink to images
@@ -147,14 +221,14 @@ in value caches
    - removed whitespace/indentation from xml outputs
    - col_style now skips rows that do not contain cells at the column index
 
-- **January.6.12**: 1.0.15 release
+- **January.6.12**: 1.0.15
    https://github.com/randym/axlsx/compare/1.0.14...1.0.15
    - Bug fix add_style specified number formats must be explicity applied for libraOffice
    - performance improvements from ochko when creating cells with options.
    - Bug fix setting types=>[:n] when adding a row incorrectly determines the cell type to be string as the value is null during creation.
    - Release in preparation for password protection merge
 
-- **December.14.11**: 1.0.14 release
+- **December.14.11**: 1.0.14
    - Added support for merging cells
    - Added support for auto filters
    - Improved auto width calculations
@@ -163,14 +237,14 @@ in value caches
    - Added access to app and core package objects so you can set the creator and other properties of the package
    - The beginning of password protected xlsx files - roadmapped for January release.
 
-- **December.8.11**: 1.0.13 release
+- **December.8.11**: 1.0.13
    -  Fixing .gemspec errors that caused gem to miss the lib directory. Sorry about that.
 
-- **December.7.11**: 1.0.12 release
+- **December.7.11**: 1.0.12
     DO NOT USE THIS VERSION = THE GEM IS BROKEN
   - changed dependency from 'zip' gem to 'rubyzip' and added conditional code to force binary encoding to resolve issue with excel 2011
   - Patched bug in app.xml that would ignore user specified properties.
-- **December.5.11**: 1.0.11 release
+- **December.5.11**: 1.0.11
   - Added [] methods to worksheet and workbook to provide name based access to cells.
   - Added support for functions as cell values
   - Updated color creation so that two character shorthand values can be used like 'FF' for 'FFFFFFFF' or 'D8' for 'FFD8D8D8'
@@ -178,7 +252,7 @@ in value caches
   - Clean up and support for 1.9.2 and travis integration
   - Added support for string based cell referencing to chart start_at and end_at. That means you can now use :start_at=>"A1" when using worksheet.add_chart, or chart.start_at ="A1" in addition to passing a cell or the x, y coordinates.
 
-- **October.30.11**: 1.0.10 release
+- **October.30.11**: 1.0.10
   - Updating gemspec to lower gem version requirements.
   - Added row.style assignation for updating the cell style for an entire row
   - Added col_style method to worksheet upate a the style for a column of cells
@@ -188,11 +262,11 @@ in value caches
   - fixed out of range bug in time calculations for 32bit time.
   - added i18n for active support
 
-- **October.26.11**: 1.0.9 release
+- **October.26.11**: 1.0.9
   - Updated to support ruby 1.9.3
   - Updated to eliminate all warnings originating in this gem
 
-- **October.23.11**: 1.0.8 release
+- **October.23.11**: 1.0.8
   - Added support for images (jpg, gif, png) in worksheets.
 
 - **October.23.11**: 1.0.7 released
@@ -206,10 +280,10 @@ in value caches
   - rebuild of anchor positioning to remove some spagetti code. Chart now supports a start_at and end_at method that accept an arrar for col/row positioning. See example6 for an example. You can still pass :start_at and :end_at options to worksheet.add_chart.
   - Refactored cat and val axis data to keep series serialization a bit more DRY
 
-##October.22.11: 1.0.6 release
+- **October.22.11**: 1.0.6
   - Bumping version to include docs. Bug in gemspec pointing to incorrect directory.
 
-##October.22.11: 1.05
+- **October.22.11**: 1.05
   - Added support for line charts
   - Updated examples and readme
   - Updated series title to be a real title ** NOTE ** If you are accessing titles directly you will need to update text assignation.
@@ -225,14 +299,13 @@ in value caches
   - Added style property to charts
   - Removed serialization write test as it most commonly fails when run from the gem's intalled directory
 
-##October.21.11: 1.0.4
+- **October.21.11**: 1.0.4
   - altered package to accept a filename string for serialization instead of a File object.
   - Updated specs to conform
   - More examples for readme
 
 
-##October.21.11: 1.0.3 release
+- **October.21.11**: 1.0.3
   - Updated documentation
 
-##October.20.11: 0.1.0 release
-
+- **October.20.11**: 0.1.0

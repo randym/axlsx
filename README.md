@@ -168,66 +168,6 @@ Specs
 
 This gem has 100% test coverage using test/unit. To execute tests for this gem, simply run rake in the gem directory.
 
-Change log
----------
-- **October.4.19**:3.0.1
-  - Support for ruby versions limited to officially supported version
-  - Updates to dependency gems, especially nokogiri and ruby-zip
-  - Fix Relationship.instances cache
-  - Autoload fix for Rails
-- **September.17.19**:3.0.0
-  - First release of caxlsx, fork of axlsx
-- **April.1.17**:3.0.0-pre
-  - Support for ruby versions limited to officially supported version
-  - Updates to dependency gems, especially nokogiri and ruby-zip
-  - Patch options parsing for two cell anchor
-  - Remove support for depreciated worksheet members
-- **
-  - Added Cell#name so you you can quickly create a defined name for a single cell in your workbook.
-  - Added full book view and sheet state management. This means you can specify how the workbook renders as well as manage sheet visibility.
-  - Added smoothing management for line charts series
-- **September.12.13**:2.0.1
-  - Unpinned rubyzip version
-- **September.12.13**:2.0.0
-  - DROPPED support for ruby 1.8.7
-  - Altered readme to link to contributors
-  - Lots of improvements to make charts and relations more stable.
-  - Patched color param mutation.
-  - Data sourced for pivot tables can now come from other sheets.
-  - Altered image file extension comparisons to be case insensitive.
-  - Added control character sanitization to shared strings.
-  - Added page breaks. see examples/example.rb for an example.
-  - Bugfix: single to dual cell anchors for images now swap properly so you can set the end_at position during instantiation, in a block or directly on the image.
-  - Improved how we convert date/time to include the UTC offset when provided.
-  - Pinned rubyzip to 0.9.9 for those who are not ready to go up. Please note that release 2.0.1 and on will be using the 1.n.n series of rubyzip
-  - Bugfix: transposition of cells for Worksheet#cols now supports
-    incongruent column counts.counts
-  - Added space preservation for cell text. This will allow whitespace
-    in cell text both when using shared strings and when serializing
-    directly to the cell.
-- **April.24.13**:1.3.6
-  - Fixed LibreOffice/OpenOffice issue to properly apply colors to lines
-    in charts.
-  - Added support for specifying between/notBetween formula in an array.
-    *thanks* straydogstudio!
-  - Added standard line chart support. *thanks* scambra
-  - Fixed straydogstudio's link in the README. *thanks* nogara!
-- **February.4.13**:1.3.5
-  - converted vary_colors for chart data to instance variable with appropriate defulats for the various charts.
-  - Added trust_input method on Axlsx to instruct the serializer to skip HTML escaping. This will give you a tremendous performance boost,
-    Please be sure that you will never have <, >, etc in your content or the XML will be invalid.
-  - Rewrote cell serialization to improve performance
-  - Added iso_8601 type to support text based date and time management.
-  - Bug fix for relationahip management in drawings when you add images
-    and charts to the same worksheet drawing.
-  - Added outline_level_rows and outline_level_columns to worksheet to simplify setting up outlining in the worksheet.
-  - Added support for pivot tables
-  - Added support for descrete border edge styles
-  - Improved validation of sheet names
-  - Added support for formula value caching so that iOS and OSX preview can show the proper values. See Cell.add_row and the formula_values option.
-
-Please see the {file:CHANGELOG.md} document for past release information.
-
 # Known interoperability issues.
 As axslx implements the Office Open XML (ECMA-376 spec) much of the
 functionality is interoperable with other spreadsheet software. Below is
