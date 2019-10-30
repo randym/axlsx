@@ -69,6 +69,10 @@ and Numbers
 gem 'caxlsx'
 ```
 
+## Contributing
+
+See [CONTRIBUTING.md](https://github.com/caxlsx/caxlsx/blob/master/CONTRIBUTING.md)
+
 ## Examples
 
 The example listing is getting overly large to maintain here.
