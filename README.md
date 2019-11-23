@@ -106,6 +106,7 @@ Detailed documentation is available at:
 
 Additional documentation is listed below:
 
+- [FAQ](https://github.com/caxlsx/caxlsx/wiki/FAQ) (work in progress)
 - [Style Reference](https://github.com/caxlsx/caxlsx/blob/master/docs/style_reference.md)
 - [Header and Footer Codes](https://github.com/caxlsx/caxlsx/blob/master/docs/header_and_footer_codes.md)
 
