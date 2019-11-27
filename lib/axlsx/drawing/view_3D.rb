@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
   # 3D attributes for a chart.
   class View3D
@@ -71,7 +72,7 @@ module Axlsx
     alias :hPercent= :h_percent=
 
       # @see rot_y
-      def rot_y=(v) 
+      def rot_y=(v)
         RangeValidator.validate "View3D.rot_y", 0, 360, v
         @rot_y = v
       end
@@ -96,7 +97,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       str << '<c:view3D>'
       %w(rot_x h_percent rot_y depth_percent r_ang_ax perspective).each do |key|
         str << element_for_attribute(key, 'c')
@@ -109,7 +110,7 @@ module Axlsx
     def element_for_attribute(name, namespace='')
       val = instance_values[name]
       return "" if val == nil
-      "<%s:%s val='%s'/>" % [namespace, Axlsx::camel(name, false), val]
+      "<#{namespace}:#{Axlsx::camel(name, false)} val='#{val}'/>"
     end
   end
 end

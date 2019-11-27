@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
   # A Title stores information about the title of a chart
   class Title
@@ -59,37 +60,37 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       str << '<c:title>'
       unless @text.empty?
         str << '<c:tx>'
         if @cell.is_a?(Cell)
-          str << '<c:strRef>'
-          str << ('<c:f>' << Axlsx::cell_range([@cell]) << '</c:f>')
-          str << '<c:strCache>'
-          str << '<c:ptCount val="1"/>'
-          str << '<c:pt idx="0">'
-          str << ('<c:v>' << @text << '</c:v>')
-          str << '</c:pt>'
-          str << '</c:strCache>'
-          str << '</c:strRef>'
+          str << '<c:strRef>'\
+                 "<c:f>#{Axlsx::cell_range([@cell])}</c:f>"\
+                 '<c:strCache>'\
+                 '<c:ptCount val="1"/>'\
+                 '<c:pt idx="0">'\
+                 "<c:v>#{@text}</c:v>"\
+                 '</c:pt>'\
+                 '</c:strCache>'\
+                 '</c:strRef>'
         else
-          str << '<c:rich>'
-            str << '<a:bodyPr/>'
-            str << '<a:lstStyle/>'
-            str << '<a:p>'
-              str << '<a:r>'
-                str << ('<a:rPr sz="' << @text_size.to_s << '"/>')
-                str << ('<a:t>' << @text.to_s << '</a:t>')
-              str << '</a:r>'
-            str << '</a:p>'
-          str << '</c:rich>'
+          str << '<c:rich>'\
+                   '<a:bodyPr/>'\
+                   '<a:lstStyle/>'\
+                   '<a:p>'\
+                     '<a:r>'\
+                       "<a:rPr sz=\"#{@text_size}\"/>"\
+                       "<a:t>#{@text}</a:t>"\
+                     '</a:r>'\
+                   '</a:p>'\
+                 '</c:rich>'
         end
         str << '</c:tx>'
       end
-      str << '<c:layout/>'
-      str << '<c:overlay val="0"/>'
-      str << '</c:title>'
+      str << '<c:layout/>'\
+             '<c:overlay val="0"/>'\
+             '</c:title>'
     end
 
   end

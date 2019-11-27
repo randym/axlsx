@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
 
   # A BubbleSeries defines the x/y position and bubble size of data in the chart
@@ -42,16 +43,16 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       super(str) do
         # needs to override the super color here to push in ln/and something else!
         if color
-          str << '<c:spPr><a:solidFill>'
-          str << ('<a:srgbClr val="' << color << '"/>')
-          str << '</a:solidFill>'
-          str << '<a:ln><a:solidFill>'
-          str << ('<a:srgbClr val="' << color << '"/></a:solidFill></a:ln>')
-          str << '</c:spPr>'
+          str << '<c:spPr><a:solidFill>'\
+                 "<a:srgbClr val=\"#{color}\"/>"\
+                 '</a:solidFill>'\
+                 '<a:ln><a:solidFill>'\
+                 "<a:srgbClr val=\"#{color}\"/></a:solidFill></a:ln>"\
+                 '</c:spPr>'
         end
         @xData.to_xml_string(str) unless @xData.nil?
         @yData.to_xml_string(str) unless @yData.nil?

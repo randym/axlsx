@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
 
   # A SimpleTypedList is a type restrictive collection that allows some of the methods from Array and supports basic xml serialization.
@@ -55,7 +56,7 @@ module Axlsx
       end
       result
     end
-    
+
     # Lock this list at the current size
     # @return [self]
     def lock
@@ -69,7 +70,7 @@ module Axlsx
       @locked_at = nil
       self
     end
-    
+
     def to_ary
       @list
     end
@@ -82,9 +83,9 @@ module Axlsx
     # one of the allowed types
     # @return [SimpleTypedList]
     def +(v)
-      v.each do |item| 
+      v.each do |item|
         DataTypeValidator.validate :SimpleTypedList_plus, @allowed_types, item
-        @list << item 
+        @list << item
       end
     end
 
@@ -96,10 +97,10 @@ module Axlsx
       DataTypeValidator.validate :SimpleTypedList_push, @allowed_types, v
       @list << v
       @list.size - 1
-    end 
-    
+    end
+
     alias :push :<<
-    
+
 
     # delete the item from the list
     # @param [Any] v The item to be deleted.
@@ -164,13 +165,13 @@ module Axlsx
         end
       }
     end
-                   
-    def to_xml_string(str = '')
+
+    def to_xml_string(str = String.new)
       classname = @allowed_types[0].name.split('::').last
       el_name = serialize_as.to_s || (classname[0,1].downcase + classname[1..-1])
-      str << ('<' << el_name << ' count="' << size.to_s << '">')
+      str << "<#{el_name} count=\"#{size}\">"
       each { |item| item.to_xml_string(str) }
-      str << ('</' << el_name << '>')
+      str << "</#{el_name}>"
     end
 
   end

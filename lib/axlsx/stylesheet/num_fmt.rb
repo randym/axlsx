@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
   # A NumFmt object defines an identifier and formatting code for data in cells.
   # @note The recommended way to manage styles is Styles#add_style
@@ -69,12 +70,12 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       serialized_tag('numFmt', str)
     end
 
     # Override to avoid removing underscores
-    def serialized_attributes(str = '', additional_attributes = {})
+    def serialized_attributes(str = String.new, additional_attributes = {})
       attributes = declared_attributes.merge! additional_attributes
       attributes.each do |key, value|
         str << "#{Axlsx.camel(key, false)}=\"#{Axlsx.booleanize(value)}\" "

@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
   #A CatAxis object defines a chart category axis
   class CatAxis < Axis
@@ -68,15 +69,15 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       str << '<c:catAx>'
       super(str)
-      str << ('<c:auto val="' << @auto.to_s << '"/>')
-      str << ('<c:lblAlgn val="' << @lbl_algn.to_s << '"/>')
-      str << ('<c:lblOffset val="' << @lbl_offset.to_i.to_s << '"/>')
-      str << ('<c:tickLblSkip val="' << @tick_lbl_skip.to_s << '"/>')
-      str << ('<c:tickMarkSkip val="' << @tick_mark_skip.to_s << '"/>')
-      str << '</c:catAx>'
+      str << "<c:auto val=\"#{@auto}\"/>"\
+             "<c:lblAlgn val=\"#{@lbl_algn}\"/>"\
+             "<c:lblOffset val=\"#{@lbl_offset.to_i}\"/>"\
+             "<c:tickLblSkip val=\"#{@tick_lbl_skip}\"/>"\
+             "<c:tickMarkSkip val=\"#{@tick_mark_skip}\"/>"\
+             '</c:catAx>'
     end
 
   end

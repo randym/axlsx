@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 require 'cgi'
 module Axlsx
   # A cell in a worksheet.
@@ -319,7 +320,7 @@ module Axlsx
     # @param [Integer] c_index The cell index in the row.
     # @param [String] str The string index the cell content will be appended to. Defaults to empty string.
     # @return [String] xml text for the cell
-    def to_xml_string(r_index, c_index, str = '')
+    def to_xml_string(r_index, c_index, str = String.new)
       CellSerializer.to_xml_string r_index, c_index, self, str
     end
 
@@ -328,7 +329,8 @@ module Axlsx
     end
 
     def is_array_formula?
-      type == :string && @value.to_s.start_with?('{=') && @value.to_s.end_with?('}')
+      value = @value.to_s
+      type == :string && value.start_with?('{=') && value.end_with?('}')
     end
 
     # returns the absolute or relative string style reference for

@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
   # The GradientStop object represents a color point in a gradient.
   # @see Open Office XML Part 1 §18.8.24
@@ -28,8 +29,8 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
-      str << ('<stop position="' << position.to_s << '">')
+    def to_xml_string(str = String.new)
+      str << "<stop position=\"#{position}\">"
       self.color.to_xml_string(str)
       str << '</stop>'
     end

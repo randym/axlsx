@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
 
   #A collection of hyperlink objects for a worksheet
@@ -28,7 +29,7 @@ module Axlsx
 
     # seralize the collection of hyperlinks
     # @return [String]
-    def to_xml_string(str='')
+    def to_xml_string(str = String.new)
       return if empty?
       str << '<hyperlinks>'
       each { |hyperlink| hyperlink.to_xml_string(str) }

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
 
   # The Cell Serializer class contains the logic for serializing cells based on their type.
@@ -8,8 +9,8 @@ module Axlsx
       # @param [Integer] column_index The index of the cell's column
       # @param [String] str The string to apend serialization to.
       # @return [String]
-      def to_xml_string(row_index, column_index, cell, str='')
-        str << ('<c r="' << Axlsx::cell_r(column_index, row_index) << '" s="' << cell.style.to_s << '" ')
+      def to_xml_string(row_index, column_index, cell, str = String.new)
+        str << "<c r=\"#{Axlsx::cell_r(column_index, row_index)}\" s=\"#{cell.style}\" "
         return str << '/>' if cell.value.nil?
         method = cell.type
         self.send(method, cell, str)
@@ -19,7 +20,7 @@ module Axlsx
       # builds an xml text run based on this cells attributes.
       # @param [String] str The string instance this run will be concated to.
       # @return [String]
-      def run_xml_string(cell, str = '')
+      def run_xml_string(cell, str = String.new)
         if cell.is_text_run?
           valid = RichTextRun::INLINE_STYLES - [:value, :type]
           data = Hash[cell.instance_values.map{ |k, v| [k.to_sym, v] }]
@@ -28,7 +29,7 @@ module Axlsx
         elsif cell.contains_rich_text?
           cell.value.to_xml_string(str)
         else
-          str << ('<t>' << cell.clean_value << '</t>')
+          str << "<t>#{cell.clean_value}</t>"
         end
         str
       end
@@ -37,7 +38,7 @@ module Axlsx
       # @param [Cell] cell The cell that is being serialized
       # @param [String] str The string the serialized content will be appended to.
       # @return [String]
-      def iso_8601(cell, str='')
+      def iso_8601(cell, str = String.new)
         value_serialization 'd', cell.value, str
       end
 
@@ -45,7 +46,7 @@ module Axlsx
       # @param [Cell] cell The cell that is being serialized
       # @param [String] str The string the serialized content will be appended to.
       # @return [String]
-      def date(cell, str='')
+      def date(cell, str = String.new)
         value_serialization false, DateTimeConverter::date_to_serial(cell.value).to_s, str
       end
 
@@ -53,7 +54,7 @@ module Axlsx
       # @param [Cell] cell The cell that is being serialized
       # @param [String] str The string the serialized content will be appended to.
       # @return [String]
-      def time(cell, str='')
+      def time(cell, str = String.new)
         value_serialization false, DateTimeConverter::time_to_serial(cell.value).to_s, str
       end
 
@@ -61,7 +62,7 @@ module Axlsx
       # @param [Cell] cell The cell that is being serialized
       # @param [String] str The string the serialized content will be appended to.
       # @return [String]
-      def boolean(cell, str='')
+      def boolean(cell, str = String.new)
         value_serialization 'b', cell.value.to_s, str
       end
 
@@ -69,7 +70,7 @@ module Axlsx
       # @param [Cell] cell The cell that is being serialized
       # @param [String] str The string the serialized content will be appended to.
       # @return [String]
-      def float(cell, str='')
+      def float(cell, str = String.new)
         numeric cell, str
       end
 
@@ -77,7 +78,7 @@ module Axlsx
       # @param [Cell] cell The cell that is being serialized
       # @param [String] str The string the serialized content will be appended to.
       # @return [String]
-      def integer(cell, str = '')
+      def integer(cell, str = String.new)
         numeric cell, str
       end
 
@@ -85,25 +86,25 @@ module Axlsx
       # @param [Cell] cell The cell that is being serialized
       # @param [String] str The string the serialized content will be appended to.
       # @return [String]
-      def formula_serialization(cell, str='')
-        str << ('t="str"><f>' << cell.clean_value.to_s.sub('=', '') << '</f>')
-        str << ('<v>' << cell.formula_value.to_s << '</v>') unless cell.formula_value.nil?
+      def formula_serialization(cell, str = String.new)
+        str << "t=\"str\"><f>#{cell.clean_value.to_s.sub('=', '')}</f>"
+        str << "<v>#{cell.formula_value}</v>" unless cell.formula_value.nil?
       end
 
       # Serializes cells that are type array formula
       # @param [Cell] cell The cell that is being serialized
       # @param [String] str The string the serialized content will be appended to.
       # @return [String]
-      def array_formula_serialization(cell, str='')
-        str << ('t="str">' << '<f t="array" ref="' << cell.r << '">' << cell.clean_value.to_s.sub('{=', '').sub(/}$/, '') << '</f>')
-        str << ('<v>' << cell.formula_value.to_s << '</v>') unless cell.formula_value.nil?
+      def array_formula_serialization(cell, str = String.new)
+        clean_value = cell.clean_value.to_s.sub('{=', ''); clean_value.sub!(/}$/, ''); str << "t=\"str\"><f t=\"array\" ref=\"#{cell.r}\">#{clean_value}</f>"
+        str << "<v>#{cell.formula_value}</v>" unless cell.formula_value.nil?
       end
 
       # Serializes cells that are type inline_string
       # @param [Cell] cell The cell that is being serialized
       # @param [String] str The string the serialized content will be appended to.
       # @return [String]
-      def inline_string_serialization(cell, str = '')
+      def inline_string_serialization(cell, str = String.new)
         str << 't="inlineStr"><is>'
         run_xml_string cell, str
         str << '</is>'
@@ -113,7 +114,7 @@ module Axlsx
       # @param [Cell] cell The cell that is being serialized
       # @param [String] str The string the serialized content will be appended to.
       # @return [String]
-      def string(cell, str='')
+      def string(cell, str = String.new)
         if cell.is_array_formula?
           array_formula_serialization cell, str
         elsif cell.is_formula?
@@ -151,13 +152,13 @@ module Axlsx
 
       private
 
-      def numeric(cell, str = '')
+      def numeric(cell, str = String.new)
         value_serialization 'n', cell.value, str
       end
 
-      def value_serialization(serialization_type, serialization_value, str = '')
-        str << ('t="' << serialization_type.to_s << '"') if serialization_type
-        str << ('><v>' << serialization_value.to_s << '</v>')
+      def value_serialization(serialization_type, serialization_value, str = String.new)
+        str << "t=\"#{serialization_type}\"" if serialization_type
+        str << "><v>#{serialization_value}</v>"
       end
     end
   end

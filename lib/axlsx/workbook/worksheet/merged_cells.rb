@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
 
   # A simple list of merged cells
@@ -27,7 +28,7 @@ module Axlsx
     # serialize the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       return if empty?
       str << "<mergeCells count='#{size}'>"
       each { |merged_cell| str << "<mergeCell ref='#{merged_cell}'></mergeCell>" }

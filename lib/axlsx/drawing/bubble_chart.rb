@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
 
   # The BubbleChart allows you to insert a bubble chart into your worksheet
@@ -36,10 +37,10 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       super(str) do
-        str << '<c:bubbleChart>'
-        str << ('<c:varyColors val="' << vary_colors.to_s << '"/>')
+        str << '<c:bubbleChart>'\
+               "<c:varyColors val=\"#{vary_colors}\"/>"
         @series.each { |ser| ser.to_xml_string(str) }
         d_lbls.to_xml_string(str) if @d_lbls
         axes.to_xml_string(str, :ids => true)

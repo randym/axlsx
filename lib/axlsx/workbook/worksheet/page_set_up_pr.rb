@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
 
   # Page setup properties of the worksheet
@@ -37,8 +38,8 @@ module Axlsx
     end
 
     # serialize to xml
-    def to_xml_string(str='')
-      str << ('<pageSetUpPr ' << serialized_attributes << '/>')
+    def to_xml_string(str = String.new)
+      str << "<pageSetUpPr #{serialized_attributes}/>"
     end
   end
 end

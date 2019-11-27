@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
   # The Protected Range class represents a set of cells in the worksheet
   # @note the recommended way to manage protected ranges with via Worksheet#protect_range
@@ -40,8 +41,8 @@ module Axlsx
     # @param [String] str if this string object is provided we append
     # our output to that object. Use this - it helps limit the number of
     # objects created during serialization
-    def to_xml_string(str="")
+    def to_xml_string(str = String.new)
       serialized_tag 'protectedRange', str
-    end 
+    end
   end
 end

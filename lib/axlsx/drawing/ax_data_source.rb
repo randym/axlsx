@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
 
   # An axis data source that can contain referenced or literal strings or numbers

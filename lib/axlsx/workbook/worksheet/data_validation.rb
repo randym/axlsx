@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
   # Data validation allows the validation of cell data
   #
@@ -171,7 +172,7 @@ module Axlsx
     def formula1=(v); Axlsx::validate_string(v); @formula1 = v end
 
     # @see formula2
-    def formula2=(v); Axlsx::validate_string(v); @formula2 = v end 
+    def formula2=(v); Axlsx::validate_string(v); @formula2 = v end
 
     # @see allowBlank
     def allowBlank=(v); Axlsx::validate_boolean(v); @allowBlank = v end
@@ -212,16 +213,16 @@ module Axlsx
     # Serializes the data validation
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       valid_attributes = get_valid_attributes
 
-      str << '<dataValidation '
-      str << instance_values.map do |key, value| 
-        '' << key << '="' << Axlsx.booleanize(value).to_s << '"' if (valid_attributes.include?(key.to_sym) && !CHILD_ELEMENTS.include?(key.to_sym)) 
-      end.join(' ')
+      str << '<dataValidation'
+      instance_values.each do |key, value|
+        str << " #{key}=\"#{Axlsx.booleanize(value)}\"" if (valid_attributes.include?(key.to_sym) && !CHILD_ELEMENTS.include?(key.to_sym))
+      end
       str << '>'
-      str << ('<formula1>' << self.formula1 << '</formula1>') if @formula1 and valid_attributes.include?(:formula1)
-      str << ('<formula2>' << self.formula2 << '</formula2>') if @formula2 and valid_attributes.include?(:formula2)
+      str << "<formula1>#{self.formula1}</formula1>" if @formula1 and valid_attributes.include?(:formula1)
+      str << "<formula2>#{self.formula2}</formula2>)" if @formula2 and valid_attributes.include?(:formula2)
       str << '</dataValidation>'
     end
 

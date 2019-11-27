@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
 
   # A self serializing collection of ranges that should be protected in
@@ -27,7 +28,7 @@ module Axlsx
     # Serializes the protected ranges
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       return if empty?
       str << '<protectedRanges>'
       each { |range| range.to_xml_string(str) }

@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
   # A single table style definition and is a collection for tableStyleElements
   # @note Table are not supported in this version and only the defaults required for a valid workbook are created.
@@ -42,7 +43,7 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       str << '<tableStyle '
       serialized_attributes str, {:count => self.size}
       str << '>'

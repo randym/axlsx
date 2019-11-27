@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
 
   # The SheetProtection object manages worksheet protection options per sheet.
@@ -75,7 +76,7 @@ module Axlsx
     # Serialize the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
+    def to_xml_string(str = String.new)
       serialized_tag('sheetProtection', str)
     end
 

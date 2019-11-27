@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
   require 'axlsx/drawing/d_lbls.rb'
   require 'axlsx/drawing/title.rb'
@@ -156,9 +157,9 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
-      str << '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
-      str << ('<xdr:wsDr xmlns:xdr="' << XML_NS_XDR << '" xmlns:a="' << XML_NS_A << '">')
+    def to_xml_string(str = String.new)
+      str << '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'\
+             "<xdr:wsDr xmlns:xdr=\"#{XML_NS_XDR}\" xmlns:a=\"#{XML_NS_A}\">"
       anchors.each { |anchor| anchor.to_xml_string(str) }
       str << '</xdr:wsDr>'
     end

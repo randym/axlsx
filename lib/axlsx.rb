@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 require 'htmlentities'
 require 'axlsx/version.rb'
 require 'mimemagic'
@@ -90,7 +91,7 @@ module Axlsx
   # @note This follows the standard spreadsheet convention of naming columns A to Z, followed by AA to AZ etc.
   # @return [String]
   def self.col_ref(index)
-    chars = ''
+    chars = String.new
     while index >= 26 do
       index, char = index.divmod(26)
       chars.prepend((char + 65).chr)
@@ -114,8 +115,8 @@ module Axlsx
     range.match(/^(\w+?\d+)\:(\w+?\d+)$/)
     start_col, start_row = name_to_indices($1)
     end_col,   end_row   = name_to_indices($2)
-    (start_row..end_row).to_a.map do |row_num|
-      (start_col..end_col).to_a.map do |col_num|
+    (start_row..end_row).map do |row_num|
+      (start_col..end_col).map do |col_num|
         cell_r(col_num, row_num)
       end
     end
@@ -125,9 +126,10 @@ module Axlsx
   # @param [String] s The snake case string to camelize
   # @return [String]
   def self.camel(s="", all_caps = true)
-    s = s.to_s
-    s = s.capitalize if all_caps
-    s.gsub(/_(.)/){ $1.upcase }
+    s_copy = s.to_s.dup
+    s_copy = s_copy.capitalize! if all_caps
+    s_copy.gsub!(/_(.)/){ $1.upcase }
+    s_copy
   end
 
   # returns the provided string with all invalid control charaters

@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
   # This class details the anchor points for drawings.
   # @note The recommended way to manage drawings and charts is Worksheet#add_chart. Anchors are specified by the :start_at and :end_at options to that method.
@@ -81,17 +82,17 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '')
-      str << '<xdr:twoCellAnchor>'
-      str << '<xdr:from>'
+    def to_xml_string(str = String.new)
+      str << '<xdr:twoCellAnchor>'\
+             '<xdr:from>'
       from.to_xml_string str
-      str << '</xdr:from>'
-      str << '<xdr:to>'
+      str << '</xdr:from>'\
+             '<xdr:to>'
       to.to_xml_string str
       str << '</xdr:to>'
       object.to_xml_string(str)
-      str << '<xdr:clientData/>'
-      str << '</xdr:twoCellAnchor>'
+      str << '<xdr:clientData/>'\
+             '</xdr:twoCellAnchor>'
     end
   end
 end

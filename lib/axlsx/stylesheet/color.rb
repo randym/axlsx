@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 module Axlsx
   # The color class represents a color used for borders, fills an fonts
   class Color
@@ -69,8 +70,8 @@ module Axlsx
     # Serializes the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str = '', tag_name = 'color')
-      serialized_tag('' + tag_name + '', str)
+    def to_xml_string(str = String.new, tag_name = 'color')
+      serialized_tag(tag_name, str)
     end
   end
 end

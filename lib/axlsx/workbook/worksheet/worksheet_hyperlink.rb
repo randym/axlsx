@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Axlsx
 
   # A worksheet hyperlink object. Note that this is not the same as a drawing hyperlink object.
@@ -57,7 +58,7 @@ module Axlsx
     # Seralize the object
     # @param [String] str
     # @return [String]
-    def to_xml_string(str='')
+    def to_xml_string(str = String.new)
       str << '<hyperlink '
       serialized_attributes str, location_or_id
       str << '/>'
