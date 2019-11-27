@@ -1,12 +1,10 @@
-Notice: Community Axlsx organization
+Notice: Moved to Community Axlsx Organization
 ===================================================
-All Axlsx related gems have been forked or moved to a community organization: http://github.com/caxlsx
-* Axlsx
-* acts_as_axlsx
-* axlsx_rails
-* activeadmin-axlsx
 
-Please consider helping develop and test these gems.
+To better maintain the Axlsx ecosystem, `axlsx`, `acts_as_axlsx`, `axlsx_rails`, and `activeadmin-axlsx` have been forked and moved to the `caxlsx` community organization: http://github.com/caxlsx
+
+You are viewing the original unmaintained `axlsx` project. Please visit the current community maintained version at https://github.com/caxlsx/caxlsx
+
 
 Axlsx: Office Open XML Spreadsheet Generation
 ====================================
