@@ -197,15 +197,6 @@ require 'axlsx/workbook/worksheet/selection.rb'
       @worksheets[index] if index
     end
 
-    # lets come back to this later when we are ready for parsing.
-    #def self.parse entry
-    #  io = entry.get_input_stream
-    #  w = self.new
-    #  w.parser_xml = Nokogiri::XML(io.read)
-    #  w.parse_string :date1904, "//xmlns:workbookPr/@date1904"
-    #  w
-    #end
-
     # Creates a new Workbook
     # The recomended way to work with workbooks is via Package#workbook
     # @option options [Boolean] date1904. If this is not specified, date1904 is set to false. Office 2011 for Mac defaults to false.

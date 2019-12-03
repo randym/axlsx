@@ -68,13 +68,6 @@ module Axlsx
       @workbook
     end
 
-    #def self.parse(input, confirm_valid = false)
-    #  p = Package.new
-    #  z = Zip::File.open(input)
-    #  p.workbook = Workbook.parse z.get_entry(WORKBOOK_PN)
-    #  p
-    #end
-
     # @see workbook
     def workbook=(workbook) DataTypeValidator.validate :Package_workbook, Workbook, workbook; @workbook = workbook; end
 
@@ -355,4 +348,3 @@ module Axlsx
     end
   end
 end
-
