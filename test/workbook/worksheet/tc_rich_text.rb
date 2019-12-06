@@ -24,7 +24,7 @@ class RichText < Test::Unit::TestCase
     row = @ws.add_row [rt_direct, rt_indirect]
     assert_equal(row[0].to_xml_string(0,0), row[1].to_xml_string(0,0))
   end
-  
+
   def test_textruns
     runs = @rt.runs
     assert_equal(runs.length, 27)
@@ -33,12 +33,30 @@ class RichText < Test::Unit::TestCase
     assert_equal(runs[1].b, true)
     assert_equal(runs[1].i, false)
   end
-  
+
   def test_implicit_richtext
     rt = Axlsx::RichText.new('a', :b => true)
     row_rt = @ws.add_row [rt]
     row_imp = @ws.add_row ['a']
     row_imp[0].b = true
     assert_equal(row_rt[0].to_xml_string(0,0), row_imp[0].to_xml_string(0,0))
+  end
+
+  def test_row_style_is_used_by_default_in_rich_text_run
+    rt = Axlsx::RichText.new('a', sz: 30)
+    row = @ws.add_row [rt], style: [add_style(:sz => 52)]
+    assert_equal(rt.runs.first.sz, 52)
+  end
+
+  def test_rich_text_options_is_more_relevant_than_row_style
+    rt = Axlsx::RichText.new('a', sz: 30)
+    row = @ws.add_row [rt], style: [add_style(:sz => 52)]
+    assert_equal(rt.runs.first.sz, 30)
+  end
+
+  private
+
+  def add_style(options={})
+    @c.row.worksheet.workbook.styles.add_style options
   end
 end
