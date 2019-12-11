@@ -12,7 +12,7 @@ module Axlsx
 
     # @param [Row] row The row this cell belongs to.
     # @param [Any] value The value associated with this cell.
-    # @option options [Symbol] type The intended data type for this cell. If not specified the data type will be determined internally based on the vlue provided.
+    # @option options [Symbol] type The intended data type for this cell. If not specified the data type will be determined internally based on the value provided.
     # @option options [Integer] style The index of the cellXfs item to be applied to this cell. If not specified, the default style (0) will be applied.
     # @option options [String] font_name
     # @option options [Integer] charset
