@@ -13,6 +13,14 @@ class TestRelationships < Test::Unit::TestCase
     instance = Axlsx::Relationship.new(source_obj, Axlsx::WORKSHEET_R, 'target')
     assert_equal instance.Id, Axlsx::Relationship.new(source_obj, Axlsx::WORKSHEET_R, 'target').Id
   end
+
+  def test_ids_cache_is_thread_safe
+    cache1, cache2 = nil
+    t1 = Thread.new { cache1 = Axlsx::Relationship.ids_cache }
+    t2 = Thread.new { cache2 = Axlsx::Relationship.ids_cache }
+    [t1, t2].each(&:join)
+    assert_not_same(cache1, cache2)
+  end
   
   def test_target_is_only_considered_for_same_attributes_check_if_target_mode_is_external
     source_obj = Object.new
