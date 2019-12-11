@@ -66,11 +66,11 @@ module Axlsx
       str << '<text>'
       unless author.to_s == ""
         str << '<r><rPr><b/><color indexed="81"/></rPr>'
-        str << ("<t>" << ::CGI.escapeHTML(author.to_s) << ":\n</t></r>")
+        str << ('<t>' << ::CGI.escapeHTML(author.to_s) << ":\n</t></r>")
       end
       str << '<r>'
       str << '<rPr><color indexed="81"/></rPr>'
-      str << ('<t>' << ::CGI.escapeHTML(text) << '</t></r></text>')
+      str << ('<t xml:space="preserve">' << ::CGI.escapeHTML(text) << '</t></r></text>')
       str << '</comment>'
     end
 
@@ -82,9 +82,9 @@ module Axlsx
       pos = Axlsx::name_to_indices(ref)
       @vml_shape = VmlShape.new(:row => pos[1], :column => pos[0], :visible => @visible) do |vml|
         vml.left_column = vml.column
-        vml.right_column = vml.column + 2 
+        vml.right_column = vml.column + 2
         vml.top_row = vml.row
-         vml.bottom_row = vml.row + 4
+        vml.bottom_row = vml.row + 4
       end
     end
   end

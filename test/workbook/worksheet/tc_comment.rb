@@ -55,6 +55,7 @@ class TestComment < Test::Unit::TestCase
     assert_equal(doc.xpath("//comment[@authorId='#{@c1.author_index.to_s}']").size, 1)
     assert_equal(doc.xpath("//t[text()='#{@c1.author}:\n']").size, 1)
     assert_equal(doc.xpath("//t[text()='#{@c1.text}']").size, 1)
+    assert_equal(doc.xpath("//t[text()='#{@c1.text}'][@xml:space='preserve']").size, 1)
   end
 
   def test_comment_text_contain_author_and_text

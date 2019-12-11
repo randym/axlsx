@@ -10,7 +10,7 @@
     schemaLocation="shared-relationshipReference.xsd"/>
   <xsd:import namespace="http://schemas.openxmlformats.org/officeDocument/2006/sharedTypes"
     schemaLocation="shared-commonSimpleTypes.xsd"/>
-  <xsd:import 
+  <xsd:import
     namespace="http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing"
     schemaLocation="dml-spreadsheetDrawing.xsd"/>
   <xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
@@ -1827,7 +1827,7 @@
   <xsd:complexType name="CT_RElt">
     <xsd:sequence>
       <xsd:element name="rPr" type="CT_RPrElt" minOccurs="0" maxOccurs="1"/>
-      <xsd:element name="t" type="s:ST_Xstring" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="t" type="CT_StringWithSpace" minOccurs="1" maxOccurs="1"/>
     </xsd:sequence>
   </xsd:complexType>
   <xsd:complexType name="CT_RPrElt">
@@ -1856,6 +1856,13 @@
       <xsd:element name="rPh" type="CT_PhoneticRun" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element name="phoneticPr" minOccurs="0" maxOccurs="1" type="CT_PhoneticPr"/>
     </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CT_StringWithSpace">
+    <xsd:simpleContent>
+      <xsd:extension base="s:ST_Xstring">
+        <xsd:attribute ref="xml:space"/>
+      </xsd:extension>
+    </xsd:simpleContent>
   </xsd:complexType>
   <xsd:complexType name="CT_PhoneticPr">
     <xsd:attribute name="fontId" type="ST_FontId" use="required"/>
