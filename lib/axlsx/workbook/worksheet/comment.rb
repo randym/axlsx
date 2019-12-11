@@ -47,7 +47,7 @@ module Axlsx
     # the comment.
     # @return [Integer]
     def author_index
-      @comments.authors.index(author)
+      @comments.author_index(author)
     end
 
     # @see ref
@@ -61,7 +61,6 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = "")
-      author = @comments.authors[author_index]
       str << ('<comment ref="' << ref << '" authorId="' << author_index.to_s << '">')
       str << '<text>'
       unless author.to_s == ""
