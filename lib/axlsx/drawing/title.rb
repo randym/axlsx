@@ -11,6 +11,10 @@ module Axlsx
     # @return [String]
     attr_reader :text_size
 
+    # Text color property
+    # @return [String]
+    attr_reader :text_color
+
     # The cell that holds the text for the title. Setting this property will automatically update the text attribute.
     # @return [Cell]
     attr_reader :cell
@@ -51,6 +55,13 @@ module Axlsx
       v
     end
 
+    # Assigns a text color to the title
+    # colors should be in 6 character rbg format
+    def text_color=(v)
+      DataTypeValidator.validate 'Title.text_color', String, v
+      @text_color = v
+    end
+
     # Not implemented at this time.
     #def layout=(v) DataTypeValidator.validate 'Title.layout', Layout, v; @layout = v; end
     #def overlay=(v) Axlsx::validate_boolean v; @overlay=v; end
@@ -79,7 +90,15 @@ module Axlsx
             str << '<a:lstStyle/>'
             str << '<a:p>'
               str << '<a:r>'
+              if @text_color.nil? then
                 str << ('<a:rPr sz="' << @text_size.to_s << '"/>')
+              else
+                str << ('<a:rPr sz="' << @text_size.to_s << '">')
+                  str << '<a:solidFill>'
+                    str << ('<a:srgbClr val="' << @text_color.to_s << '"/>')
+                  str << '</a:solidFill>'
+                str << '</a:rPr>'
+              end
                 str << ('<a:t>' << @text.to_s << '</a:t>')
               str << '</a:r>'
             str << '</a:p>'
