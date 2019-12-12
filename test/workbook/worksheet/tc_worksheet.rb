@@ -589,4 +589,15 @@ class TestWorksheet < Test::Unit::TestCase
     assert_equal(doc.xpath('//xmlns:worksheet/xmlns:sheetPr/xmlns:outlinePr').size, 1)
     assert_equal(doc.xpath('//xmlns:worksheet/xmlns:sheetPr/xmlns:outlinePr[@summaryBelow=0][@summaryRight=1]').size, 1)
   end
+
+  def test_escape_formulas_option
+    # defends against malicious cell values that begin with '= + - or @' when escape_formulas is true
+    row = ['=HYPERLINK("http://www.example.com", "CSV Payload")', '+Foo', '-Bar', '@Baz']
+    @ws.add_row row, escape_formulas: true
+
+    assert_equal @ws.rows.first.cells.first.value, "'=HYPERLINK(\"http://www.example.com\", \"CSV Payload\")"
+    assert_equal @ws.rows.first.cells[1].value, "'+Foo"
+    assert_equal @ws.rows.first.cells[2].value, "'-Bar"
+    assert_equal @ws.rows.first.cells[3].value, "'@Baz"
+  end
 end
