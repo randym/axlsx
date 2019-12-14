@@ -7,6 +7,10 @@ CHANGELOG
   - Fix Relationship.instances cache
   - Autoload fix for Rails
 
+- **October.4.19**: 2.0.2
+  - Released as caxlsx, fork of axlsx
+  - Update ruby-zip dependency (fixes https://github.com/randym/axlsx/issues/536)
+
 - **September.17.19**: 3.0.0
   - First release of caxlsx, fork of axlsx
 
