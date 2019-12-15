@@ -15,9 +15,8 @@ module Axlsx
     # @return [Array, SimpleTypedList]
     attr_reader :labels
 
-    # The shabe of the bars or columns
-    # must be one of  [:percentStacked, :clustered, :standard, :stacked]
-    # @return [Symbol]
+    # The shape of the bars or columns
+    # @return [Symbol] must be one of [:cone, :coneToMax, :box, :cylinder, :pyramid, :pyramidToMax]
     attr_reader :shape
 
     # An array of rgb colors to apply to your bar chart.
@@ -41,8 +40,7 @@ module Axlsx
     # @see colors
     def colors=(v) DataTypeValidator.validate "BarSeries.colors", [Array], v; @colors = v end
 
-    # The shabe of the bars or columns
-    # must be one of  [:cone, :coneToMax, :box, :cylinder, :pyramid, :pyramidToMax]
+    # @see shape
     def shape=(v)
       RestrictionValidator.validate "BarSeries.shape", [:cone, :coneToMax, :box, :cylinder, :pyramid, :pyramidToMax], v
       @shape = v
