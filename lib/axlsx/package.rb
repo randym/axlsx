@@ -132,7 +132,7 @@ module Axlsx
     #   dcterms and xml namespaces. Those remote schema are included in this gem, and the original files have been altered to
     #   refer to the local versions.
     #
-    #   If by chance you are able to creat a package that does not validate it indicates that the internal
+    #   If by chance you are able to create a package that does not validate it indicates that the internal
     #   validation is not robust enough and needs to be improved. Please report your errors to the gem author.
     # @see http://www.ecma-international.org/publications/standards/Ecma-376.htm
     # @example
