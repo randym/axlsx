@@ -58,7 +58,7 @@ CHANGELOG
     Please be sure that you will never have <, >, etc in your content or the XML will be invalid.
   - Rewrote cell serialization to improve performance
   - Added iso_8601 type to support text based date and time management.
-  - Bug fix for relationahip management in drawings when you add images
+  - Bug fix for relationship management in drawings when you add images
     and charts to the same worksheet drawing.
   - Added outline_level_rows and outline_level_columns to worksheet to simplify setting up outlining in the worksheet.
   - Added support for pivot tables
