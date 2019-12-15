@@ -114,7 +114,7 @@ Additional documentation is listed below:
 
 Feel free to add your question (including an answer!) to the FAQ if you think it is of general interest.
 
-## Plugins & Integrations
+## Plugins, Integrations, and Extensions
 
 Currently the following additional gems are available:
 
@@ -124,7 +124,8 @@ Currently the following additional gems are available:
   * Provides a `.axlsx` renderer to Rails so you can move all your spreadsheet code from your controller into view files.
 - [activeadmin-caxlsx](https://github.com/caxlsx/activeadmin-caxlsx)
   * An Active Admin plugin that includes DSL to create downloadable reports.
-
+- [axlsx_styler](https://github.com/axlsx-styler-gem/axlsx_styler)
+  * Allows you to build clean and maintainable styles for your axlsx spreadsheets. Build your spreadsheeet with data and then apply styles later.
 
 ## Known Software Interoperability Issues
 
