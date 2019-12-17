@@ -29,6 +29,10 @@ class TestWorksheet < Test::Unit::TestCase
     assert_raises(ArgumentError) { @ws.name = 'foo?bar' }
   end
 
+  def test_name_on_name_too_long
+    assert_raises(ArgumentError) { @ws.name = '123456789012345678901234567890¡' }
+  end
+
   def test_page_margins
     assert(@ws.page_margins.is_a? Axlsx::PageMargins)
   end
