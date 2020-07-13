@@ -4,6 +4,10 @@ module Axlsx
   # The Col class defines column attributes for columns in sheets.
   class Col
 
+    # Maximum column width limit in MS Excel is 255 characters
+    # https://support.microsoft.com/en-us/office/excel-specifications-and-limits-1672b34d-7043-467e-8e27-269d656771c3
+    MAX_WIDTH = 255
+
     include Axlsx::OptionsParser
     include Axlsx::SerializedAttributes
     # Create a new Col objects
@@ -111,10 +115,10 @@ module Axlsx
       # TODO!!!
       #Axlsx.validate_unsigned_numeric(v) unless v == nil
       @custom_width = @best_fit = v != nil
-      @width = v
+      @width = v.nil? ? v : [v, MAX_WIDTH].min
     end
 
-    # updates the width for this col based on the cells autowidth and 
+    # updates the width for this col based on the cells autowidth and
     # an optionally specified fixed width
     # @param [Cell] cell The cell to use in updating this col's width
     # @param [Integer] fixed_width If this is specified the width is set
@@ -127,8 +131,8 @@ module Axlsx
       elsif use_autowidth
        cell_width = cell.autowidth
        self.width = cell_width unless (width || 0) > (cell_width || 0)
-      end 
-    end 
+      end
+    end
 
     # Serialize this columns data to an xml string
     # @param [String] str

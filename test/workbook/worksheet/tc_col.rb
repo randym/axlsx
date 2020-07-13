@@ -7,7 +7,7 @@ class TestCol < Test::Unit::TestCase
   end
 
   def test_initialize
-    options = { :width => 12, :collapsed => true, :hidden => true, :outline_level => 1, :phonetic => true, :style => 1} 
+    options = { :width => 12, :collapsed => true, :hidden => true, :outline_level => 1, :phonetic => true, :style => 1}
 
     col = Axlsx::Col.new 0, 0, options
     options.each{ |key, value| assert_equal(col.send(key.to_sym), value) }
@@ -37,6 +37,21 @@ class TestCol < Test::Unit::TestCase
     @col.width = 3
     assert_raise(NoMethodError, 'customWidth is read only') { @col.customWidth = 3 }
     assert_equal(@col.customWidth, true, 'customWidth is true when width is set')
+  end
+
+  def test_widthUnderLimit
+    @col.width = 3
+    assert_equal(@col.width, 3, 'width is set to exact value')
+  end
+
+  def test_widthOverLimit
+    @col.width = 31337
+    assert_equal(@col.width, 255, 'width is set to maximum allowed value')
+  end
+
+  def test_widthSetToNil
+    @col.width = nil
+    assert_equal(@col.width, nil, 'width is set to unspecified value')
   end
 
   def test_hidden
