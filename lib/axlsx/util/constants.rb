@@ -259,6 +259,12 @@ module Axlsx
   # drawing validation schema
   DRAWING_XSD = (SCHEMA_BASE + "dml-spreadsheetDrawing.xsd").freeze
 
+  # Excel specific currency formats
+  NUM_FMT_CURRENCY_ROUNDED = 5
+  NUM_FMT_CURRENCY_ROUNDED_RED = 6
+  NUM_FMT_CURRENCY = 7
+  NUM_FMT_CURRENCY_RED = 8
+
   # number format id for pecentage formatting using the default formatting id.
   NUM_FMT_PERCENT = 9
 

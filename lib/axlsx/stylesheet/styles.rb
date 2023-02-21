@@ -376,6 +376,10 @@ module Axlsx
       @numFmts = SimpleTypedList.new NumFmt, 'numFmts'
       @numFmts << NumFmt.new(:numFmtId => NUM_FMT_YYYYMMDD, :formatCode=> "yyyy/mm/dd")
       @numFmts << NumFmt.new(:numFmtId => NUM_FMT_YYYYMMDDHHMMSS, :formatCode=> "yyyy/mm/dd hh:mm:ss")
+      @numFmts << NumFmt.new(:numFmtId => NUM_FMT_CURRENCY_ROUNDED, :formatCode=> "&quot;$&quot;#,##0__);\(&quot;$&quot;#,##0\)")
+      @numFmts << NumFmt.new(:numFmtId => NUM_FMT_CURRENCY_ROUNDED_RED, :formatCode=> "&quot;$&quot;#,##0__);[Red]\(&quot;$&quot;#,##0\)")
+      @numFmts << NumFmt.new(:numFmtId => NUM_FMT_CURRENCY, :formatCode=> "&quot;$&quot;#,##0.00__);\(&quot;$&quot;#,##0.00\)")
+      @numFmts << NumFmt.new(:numFmtId => NUM_FMT_CURRENCY_RED, :formatCode=> "&quot;$&quot;#,##0.00__);[Red]\(&quot;$&quot;#,##0.00\)")
 
       @numFmts.lock
 
